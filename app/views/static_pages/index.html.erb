@@ -104,7 +104,7 @@
                       <%= f.input :message, as: :text, required: false, input_html: {rows: 6}, placeholder: 'Message', class: 'form-control' %>
                     </div>
                   </div>
-                  <%= f.button :submit, 'Send Message', class: 'btn btn-success btn-lg' %>
+                  <%= f.button :submit, 'Send Message', class: 'btn btn-success btn-lg', id: 'ContactSubmit', data: { disable_with: "Sending..." } %>
                 <% end %>
                 <!-- <form name="sentMessage" id="contactForm" novalidate>
                     <div class="row control-group">
@@ -147,3 +147,9 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+$('form').on('ajax:success', function(event, data, status, xhr) {
+  $('#contact_message').val('Thanks for your message!')
+});
+</script>
