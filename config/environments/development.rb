@@ -8,6 +8,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'techrise.herokuapp.com' }
 
+  config.web_console.whitelisted_ips = '10.0.2.2'
+
   # Do not eager load code on boot.
   config.eager_load = false
 

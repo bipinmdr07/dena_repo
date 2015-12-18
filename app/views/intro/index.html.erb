@@ -1,0 +1,16 @@
+<h1>Intro to Web Development</h1>
+
+<% @lessons.each do |chapter| %>
+	<div class = "row">
+		<div class = "col-xs-12 col-md-4">
+			<h2 class = "underlined-header"><%= chapter[0] %></h2>
+			<ul class = "unindented_ul">
+
+			<% chapter[1].each do |lesson| %>
+				<li><%= link_to "Lesson #{lesson[0]} - #{lesson[1]}", intro_lesson_path(lesson[0]) %></li>
+			<% end %>
+
+		</div>
+	</div>
+
+<% end %>
