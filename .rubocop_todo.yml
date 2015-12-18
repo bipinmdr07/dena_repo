@@ -60,8 +60,7 @@ Style/IndentationConsistency:
 # Cop supports --auto-correct.
 # Configuration parameters: Width.
 Style/IndentationWidth:
-  Exclude:
-    - 'Gemfile'
+  Enabled: false
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -78,8 +77,7 @@ Style/StringLiterals:
 # Offense count: 2
 # Cop supports --auto-correct.
 Style/Tab:
-  Exclude:
-    - 'Gemfile'
+  Enabled: false
 
 # Offense count: 1
 # Cop supports --auto-correct.
