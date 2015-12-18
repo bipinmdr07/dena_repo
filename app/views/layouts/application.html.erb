@@ -25,22 +25,22 @@
 
 <body id="page-top" class="index">
 
-<%= render '/layouts/nav' %>
+  <%= render '/layouts/nav' %>
 
-<% if notice.present? %>
-  <p class="alert alert-info"><%= notice %></p>
-<% end %>
-<% if alert.present? %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
+  <% if notice.present? %>
+    <p class="alert alert-info"><%= notice %></p>
+  <% end %>
+  <% if alert.present? %>
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
 
-<div class="container">
-  <div class = "content">
-    <%= yield %>
+  <div class="container">
+    <div class = "content">
+      <%= yield %>
+    </div>
   </div>
-</div>
 
-<%= render '/layouts/footer' %>
+  <%= render '/layouts/footer' %>
 
 </body>
 </html>
