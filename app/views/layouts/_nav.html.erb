@@ -21,12 +21,15 @@
 <!--                 <li class="page-scroll">
                     <a href="#portfolio">Portfolio</a>
                 </li> -->
-                <li class="page-scroll">
+                <!-- <li class="page-scroll">
                     <a href="#about">About</a>
+                </li> -->
+                <li class="page-scroll">
+                  <%= link_to 'SETTINGS', edit_user_registration_path if user_signed_in? %>
                 </li>
                 <li class="page-scroll">
                     <%= link_to 'LOG IN', new_user_session_path unless user_signed_in? %>
-                    <%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %>      
+                    <%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %>         
                 </li>
             </ul>
         </div>

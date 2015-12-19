@@ -9,10 +9,10 @@
 	<%= link_to 'Ask Question', new_forum_comment_path(forum_for_lesson, lesson: lesson), class: 'btn btn-primary', locals: {lesson: lesson} %>
 
 	<br>
-
+	<br>
 
 		<% forum_for_lesson.comments.where(lesson: lesson).each do |comment| %>
-			<h4><%= link_to comment.title, forum_comment_path(comment.forum_id, comment.id) %></h4>
+			<h4><%= link_to comment.title, forum_comment_path(comment.forum_id, comment.id) %> <span style = "font-size:16px;">by <%= comment_owner(comment) %></span></h4>
 		<% end %>
 
 
