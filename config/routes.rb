@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :forums do
   	resources :comments do
-      post :replies
+      post :replies, :to => 'replies#create'
     end
   end
 

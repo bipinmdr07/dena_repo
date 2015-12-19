@@ -1,6 +1,7 @@
 class RepliesController < ApplicationController
 	def create
 		parent_comment.replies.create(reply_params)
+		redirect_to :back
 	end
 
 	private
