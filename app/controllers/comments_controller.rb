@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 	end
 
 	def create
-		@comment = current_forum.comments.create(comment_params)
+		@comment = current_user.comments.create(comment_params)
 		redirect_to forum_comment_path(@comment.forum_id, @comment)
 	end
 
@@ -17,10 +17,10 @@ class CommentsController < ApplicationController
 	private
 
 	def comment_params
-		params.require(:comment).permit(:title, :description)
+		params.require(:comment).permit(:title, :description, :lesson, :forum_id)
 	end
 
-	def current_forum
-		Forum.find(params[:forum_id])
-	end
+	# def current_forum
+	# 	Forum.find(params[:forum_id])
+	# end
 end

@@ -1,12 +1,19 @@
-<% forum_for_lesson = Forum.where(chapter: chapter, lesson: lesson) %>
+<div class = "forum_section">
 
-<%= link_to 'Ask Question', new_forum_comment_path(forum_for_lesson), class: 'btn btn-priamry' if forum_for_lesson.exists? %>
-<%= link_to 'Ask Question', forums_path(forum: {chapter: chapter, lesson: lesson}), method: :post, class: 'btn btn-priamry' if forum_for_lesson.empty? %>
 
-<br>
+<% forum_for_lesson = Forum.find_by(name: name) %>
 
-<% if forum_for_lesson.exists? %>
-	<% forum_for_lesson.comments.each do |comment| %>
-		<h4><%= link_to comment.title, comment_path(comment) %></h4>
-	<% end %>
-<% end %>
+<!-- 	<%= link_to 'Ask Question', forums_path(forum: {chapter: chapter, lesson: lesson}), method: :post, class: 'btn btn-primary' if forum_for_lesson.nil? %>
+ -->
+
+	<%= link_to 'Ask Question', new_forum_comment_path(forum_for_lesson, lesson: lesson), class: 'btn btn-primary', locals: {lesson: lesson} %>
+
+	<br>
+
+
+		<% forum_for_lesson.comments.where(lesson: lesson).each do |comment| %>
+			<h4><%= link_to comment.title, forum_comment_path(comment.forum_id, comment.id) %></h4>
+		<% end %>
+
+
+</div>

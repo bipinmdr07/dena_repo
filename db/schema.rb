@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219185633) do
+ActiveRecord::Schema.define(version: 20151219211542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,12 @@ ActiveRecord::Schema.define(version: 20151219185633) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "lesson"
+    t.integer  "user_id"
   end
 
   add_index "comments", ["forum_id"], name: "index_comments_on_forum_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -32,13 +35,10 @@ ActiveRecord::Schema.define(version: 20151219185633) do
   end
 
   create_table "forums", force: :cascade do |t|
-    t.string   "chapter"
-    t.integer  "lesson"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name"
   end
-
-  add_index "forums", ["chapter", "lesson"], name: "index_forums_on_chapter_and_lesson", using: :btree
 
   create_table "intros", force: :cascade do |t|
     t.datetime "created_at", null: false
