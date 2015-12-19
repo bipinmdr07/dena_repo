@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources 'contacts', only: [:new, :create]
 
   resources :forums do
-  	resources :comments
+  	resources :comments do
+      post :replies
+    end
   end
 
   get 'intro_lessons', :to => 'intro#index', :as => 'intro_lessons'

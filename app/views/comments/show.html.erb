@@ -2,3 +2,23 @@
 
 <h3><%= @comment.title %></h3>
 <p><%= @comment.description %></p>
+<p>by <%= comment_owner(@comment) %></p>
+
+<hr>
+
+<% @comment.replies.each do |reply| %>
+	<p class = "pull-right"><%= reply.content %></p>
+	<p>by <%= reply_owner(reply) %></p>
+	<br class = "clear">
+	<hr>
+<% end %>
+
+
+
+<%= simple_form_for :replies, url: forum_comment_replies_path(params[:forum_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
+	<%= f.cktext_area :content, label: 'Comment', required: true %>
+	<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+
+	<br>
+	<%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>

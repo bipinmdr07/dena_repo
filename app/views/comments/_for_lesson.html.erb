@@ -11,8 +11,8 @@
 	<br>
 	<br>
 
-		<% forum_for_lesson.comments.where(lesson: lesson).each do |comment| %>
-			<h4><%= link_to comment.title, forum_comment_path(comment.forum_id, comment.id) %> <span style = "font-size:16px;">by <%= comment_owner(comment) %></span></h4>
+		<% forum_for_lesson.comments.where(lesson: lesson).order("created_at DESC").each do |comment| %>
+			<h4><%= link_to comment.title, forum_comment_path(comment.forum_id, comment.id) %> <span class = "comment_list">by <%= comment_owner(comment) %></span> <span class = "pull-right comment_list">Replies: <%= comment.replies.count %></span></h4>
 		<% end %>
 
 
