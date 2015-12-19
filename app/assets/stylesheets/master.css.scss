@@ -20,3 +20,26 @@
 	padding: 0;
 	list-style-type:none;
 }
+
+.hidden_answer {
+	display: none;
+}
+
+.quiz_box {
+	height: 300px;
+}
+
+.lesson_nav_box {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.clear {
+	clear:both;
+}
+
+@media screen and (max-width: 720px) {
+	.lesson_nav_box {
+		width: 300px;
+	}
+}

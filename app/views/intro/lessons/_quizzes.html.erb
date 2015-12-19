@@ -1,0 +1,15 @@
+<div class = "col-sm-12 col-md-4 quiz_box">
+	<div class = "question_header">
+		<h4 class = "underlined-header"><%= question %></h4>
+		<button class = "display_answer_<%= number %> btn btn-danger btn-sm">Display Answer</button>
+	</div>
+	<div class = "hidden_answer hidden_answer_<%= number %>">
+		<p><%= answer %></p>
+	</div>
+</div>
+
+<script>
+	$(".display_answer_<%= number %>").click(function() {
+		$(".hidden_answer_<%= number %>").toggle();
+	}) 
+</script>
