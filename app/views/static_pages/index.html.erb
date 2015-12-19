@@ -37,7 +37,8 @@
         <div class="row">
           <% skills.each do |skill| %>
             <div class="col-sm-4 portfolio-item text-center">
-                <h4><%= skill[0] %></h4>
+                <%= image_tag skill[2], class: 'skill_logo' %>
+                <h3><%= skill[0] %></h3>
                 <p><%= skill[1] %></p>
             </div>
           <% end %>
@@ -56,7 +57,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2">
-              <h3>Have no prior coding experience? You can still learn how to build web applications in Ruby on Rails in just 3 months</h3>
+              <h3>Have no prior coding experience? You can still learn how to build web applications with Ruby on Rails in just 3 months</h3>
               <p>
                 Learning to code isn’t hard - if you have the right support. 
               </p>
@@ -64,7 +65,7 @@
                 Many resources are great at teaching coding, but some are aimed at being general, teaching you basic syntax and how the language works. Which is awesome, but it doesn’t teach you how to actually start building web apps.
               </p>
               <p>
-                There are also other resources aimed at giving you a full intensive workload that would take a lot of time and energy to complete. These are awesome too, but it honestly takes an incredible amount of self discipline and motivation to go through.
+                There are also other resources aimed at giving you a full intensive workload that would take a lot of time and energy to complete. These are awesome too, but it honestly takes an incredible amount of self discipline and motivation to go through all of the material.
               </p>
               
             </div>
@@ -82,7 +83,7 @@
                 By learning to code with us, we provide that support so that you can start building your ideas.
               </p>
               <p>
-                Click the button below, start coding, and change your life.
+                Click the button below and start your coding journey.
               </p>
             </div>
 

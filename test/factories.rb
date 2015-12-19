@@ -1,4 +1,10 @@
-FactoryGirl.define do  factory :contact do
+FactoryGirl.define do  factory :comment do
+    
+  end
+  factory :forum do
+    
+  end
+  factory :contact do
     
   end
   factory :intro do
