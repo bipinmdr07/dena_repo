@@ -3,8 +3,8 @@ class Intro < ActiveRecord::Base
 		["What is Web Development?", [
 			[1, "Congratulations!"],
 			[2, "What do web developers do?"],
-			[3, "What kind of things will I be able to build?"],
-			[4, "What language should I learn?"]
+			[3, "What language should I learn?"],
+			[4, "Overview of the languages and tools you will be using"]
 		]]
 	]
 end
