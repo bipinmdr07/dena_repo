@@ -30,8 +30,25 @@
 
 <h2>JavaScript</h2>
 <p>
-  Basically, JavaScript is a language that can interact with HTML to make your websites interactive. Interacting with the HTML means we can change the text on the page, the background color on the page, make things move around in pretty ways, and so many more different things with scripts using JavaScript. We can make a picture of a cat change to a picture of a dog when a user presses a button, we can change the text of a header of "Cats are Awesome!" to "Dogs are Better than Cats!" when a user clicks on an image of a dog, and we can do all of these cool things that allow users to interact with the browser dynamically. Beware - Java and JavaScript are two completely different languages!
+  Basically, JavaScript is a language that can interact with HTML to make your websites interactive. Interacting with the HTML means we can change the text on the page, the background color on the page, make things move around in pretty ways, and so many more different things with scripts using JavaScript. We can make a picture of a cat change to a picture of a dog when a user presses a button, and then in 3 seconds change the text of a header of "Cats are Awesome!" to "No, Dogs are Better than Cats!", and we can do all of these cool things that allow users to interact with the browser dynamically. Beware - Java and JavaScript are two completely different languages!
 </p>
+
+<h3 id = "BestAnimal">Cats are Awesome!</h3>
+<%= image_tag 'cat.jpg', id: 'AnimalPic', style: 'height:100px;' %>
+<button id = "ChangeAnimal" class = "btn btn-success">Press Me</button>
+
+<script>
+$('#ChangeAnimal').click(function() {
+	$('#AnimalPic').attr('src', '<%= image_path "dog.jpg" %>');
+	$(this).html('Wait 2 seconds...');
+	$(this).prop("disabled",true);
+	window.setTimeout(function () {
+	    $("#BestAnimal").html('No, Dogs are Better than Cats!');
+	    $("#ChangeAnimal").html('See? JavaScript is Cool');
+	}, 3000);
+})
+
+</script>
 
 <h2>jQuery</h2>
 <p>
