@@ -1,46 +1,46 @@
 <h1>Overview of the languages and tools you will be using</h1>
 
 <p>
-  Through out your time with Techrise, you'll be learning a bunch of stuff. The main languages and frameworks you will be learning will be Ruby, Ruby on Rails, HTML, CSS, JavaScript, jQuery, and Git/GitHub.
+  Throughout your time with Techrise, you'll be learning the main tools that will get you started to become a competent developer. The main languages and frameworks you will be learning will be Ruby, Ruby on Rails, HTML, CSS, JavaScript, jQuery, and Git/GitHub.
 </p>
 
 <p>
-	So what in the world does that mean and what does each language or tool do? Because we don't want to confuse you, we're going to keep everything <strong>SUPER</strong> simple. All you need to know at this point is the general gist of each term.
+	This all probably sounds super foreign to you - don't worry, that's normal! As you progress through the courses, you'll start to understand each term deeper, but for now because we don't want to confuse you, we're going to keep everything <strong>SUPER</strong> simple. All you need to know at this point is the general gist of each term.
 </p>
 
 <h2>Ruby</h2>
 <p>
-	As we covered in the last lesson, Ruby is a super beginner friendly programming language (doesn't mean that it's a "beginner's language", a lot of advanced programmers use it). 
+	As we covered in the last lesson, Ruby is a super beginner friendly programming language (doesn't mean that it's a "beginner's language"!). 
 </p>
 
 <h2>Ruby on Rails</h2>
 <p>
-	Ruby on Rails is a web framework that allows you to build dynamic apps using both front end and back end development. It uses Ruby as the language. In case you were wondering, yes, web frameworks are indeed different from programming languages. Web frameworks allows you to build full web applications easily using programming languages, while programming languages are just languages that simply communicate with the computer.
+	Ruby on Rails is a web framework that allows you to build dynamic apps using both front end and back end development. It uses Ruby as the language. In case you were wondering, web frameworks are indeed different from programming languages. Web frameworks allows you to build full web applications easily using programming languages, while programming languages are just languages that simply communicate with the computer.
 </p>
 
 <h2>HTML</h2>
 <p>
-  HTML is a language that describes the structure of the web page. Every web page has an HTML file and it's what dictates what you see on the browser.
+  HTML is a language that describes the structure of the web page. Every web page has an HTML file and it's what dictates what you see on the browser. With HTML, you can tell the web page to have a header with the name "I like Ice Cream", a paragraph saying "Ice cream is a sophisticated food. It comes in all flavors and colors, etc...", an image of ice cream on top of the paragraph, etc. You can basically tell the web page what you want to include in what format.
 </p>
 
 <h2>CSS</h2>
 <p>
-  CSS is a style sheet language that describes how the web page should be displayed. So basically with CSS, you can make the web page have a super pink background, make the fonts huge, or anything you wish it to look like.
+  CSS is a language that describes how the web page should be displayed. So basically with CSS, you can make the web page have a super pink background, make the fonts huge, or anything you want it to look like. Think of CSS like a blueprint for your design.
 </p>
 
 <h2>JavaScript</h2>
 <p>
-  Basically, JavaScript is a language that can interact with HTML to make your websites interactive. Interacting with the HTML means we can change the text on the page, the background color on the page, make things move around in pretty ways, and so many more different things with scripts using JavaScript. Beware - Java and JavaScript are two completelydifferent languages!
+  Basically, JavaScript is a language that can interact with HTML to make your websites interactive. Interacting with the HTML means we can change the text on the page, the background color on the page, make things move around in pretty ways, and so many more different things with scripts using JavaScript. We can make a picture of a cat change to a picture of a dog when a user presses a button, we can change the text of a header of "Cats are Awesome!" to "Dogs are Better than Cats!" when a user clicks on an image of a dog, and we can do all of these cool things that allow users to interact with the browser dynamically. Beware - Java and JavaScript are two completely different languages!
 </p>
 
 <h2>jQuery</h2>
 <p>
-  jQuery is a JavaScript library - it's a collection of useful scripts written by other smart people that you can use to make your life easier. JavaScript and jQuery use the same language, but jQuery uses a little different syntax. It's a little more complicated than that, but in general just remember jQuery is a tool that does the same things that JavaScript can do, but much easier.
+  jQuery is a JavaScript library - it's a collection of useful scripts in JavaScript written by other smart people that you can use to make your life easier. JavaScript and jQuery use the same language, but jQuery uses a little different syntax. jQuery and JavaScript is technically the same language, but jQuery is basically just an extension of JavaScript. It's a little more complicated than that, but in general just remember jQuery is a tool that does the same things that JavaScript can do, but much easier.
 </p>
 
 <h2>Git/GitHub</h2>
 <p>
-  Git allows a team to work together without much confusion. Imagine you have to write some kind of essay with 20 different people. How would you effectively know which person is writing which part and editing which part? Wouldn't it be easier if there was a tool that allowed the team to see where changes were made, who made those changes, and also kept the previous changes that you can always revert back to? That's what Git enables you to do.
+  Git is a tool that allows a team to work together seamlessly. Imagine you have to write some kind of huge essay with 20 different people. How would you effectively know which person is writing which part and editing which part? How would you know if the sentence you wrote still makes sense, given the changes the other teammates made? Wouldn't it be easier if there was a tool that allowed the team to see where changes were made, who made those changes, and also kept the previous changes that you can always revert back to? That's what Git enables you to do. With Git, you can collaborate in a team effectively by being able to see all of the changes that were made by whom, and being able to make comments on the code to suggest a better solution, or simply to tell them their code is awesome.
 </p>
 
 <br>
@@ -50,19 +50,25 @@
 
 <h1>Quiz Time!</h1>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is Ruby?', answer: "It's a beginner friendly language ;)", number: 1 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is Ruby?', answer: "It's an awesome beginner friendly programming language", number: 1 } %>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is Ruby on Rails?', answer: "Ruby on Rails is a web framework that allows you to build dynamic apps using both front end and back end development.", number: 2 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is Ruby on Rails?', answer: "Ruby on Rails is a web framework that allows you to build dynamic apps using both front end and back end development.", number: 2 } %>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is HTML?', answer: "HTML is a language that describes the structure of the web page.", number: 3 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is HTML?', answer: "HTML is a language that describes the structure of the web page. You can basically tell the web page what you want to include in what format.", number: 3 } %>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is CSS?', answer: "CSS is a style sheet language that describes how the web page should be displayed.", number: 4 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is CSS?', answer: "CSS is a language that describes how the web page should be displayed. CSS is like a blueprint for your design.", number: 4 } %>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is JavaScript?', answer: "JavaScript is a language that can interact with HTML to make your websites interactive.", number: 5 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is JavaScript?', answer: "JavaScript is a language that can interact with HTML to make your websites interactive.", number: 5 } %>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is jQuery?', answer: "jQuery is a JavaScript library - it's a collection of useful scripts written by other smart people that you can use to make your life easier.", number: 6 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is jQuery?', answer: "jQuery is a JavaScript library - it's a collection of useful scripts written by other smart people that you can use to make your life easier.", number: 6 } %>
 
-<%= render partial: '/intro/lessons/quizzes', locals: { question: 'What is Git?', answer: "Git allows a team to work together super efficiently, allows people to see the changes that were made, and allows developers to revert back to a previon version of the code.", number: 7 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'What is Git?', answer: "Git allows a team to work together super efficiently, allows people to see the changes that were made, and allows developers to revert back to a previon version of the code.", number: 7 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'What is the difference between a programming language and a web framework?', answer: "Web frameworks allows you to build full web applications easily using programming languages, while programming languages are just languages that simply communicate with the computer.", number: 8 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'Is Java and JavaScript the same language?', answer: "Nope! It's completely different!", number: 9 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'Is JavaScript and jQuery the same language? What are the differences between the two?', answer: "jQuery is a library of scripts written in JavaScript by smart people to make coder's lives easier. They use the same language but they have different syntax.", number: 10 } %>
 
 <br class = "clear">
 

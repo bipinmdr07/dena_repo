@@ -1,5 +1,9 @@
 .content {
 	padding: 150px 0px 100px 0px;
+	p {
+		font-size: 16px;
+    color: black;
+	}
 }
 
 .course_box {
@@ -34,7 +38,7 @@
 }
 
 .quiz_box {
-	height: 300px;
+	height: 250px;
 }
 
 .lesson_nav_box {
