@@ -1,10 +1,11 @@
 <div class = "forum_section">
 
+<h1>Have a Question?</h1>
+<p>
+	Don't leave your questions unanswered! Ask good questions to get good answers.
+</p>
 
 <% forum_for_lesson = Forum.find_by(name: name) %>
-
-<!-- 	<%= link_to 'Ask Question', forums_path(forum: {chapter: chapter, lesson: lesson}), method: :post, class: 'btn btn-primary' if forum_for_lesson.nil? %>
- -->
 
 	<%= link_to 'Ask Question', new_forum_comment_path(forum_for_lesson, lesson: lesson), class: 'btn btn-primary', locals: {lesson: lesson} %>
 
