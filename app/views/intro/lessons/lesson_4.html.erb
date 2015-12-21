@@ -37,19 +37,6 @@
 <%= image_tag 'cat.jpg', id: 'AnimalPic', style: 'height:100px;' %>
 <button id = "ChangeAnimal" class = "btn btn-success">Press Me</button>
 
-<script>
-$('#ChangeAnimal').click(function() {
-	$('#AnimalPic').attr('src', '<%= image_path "dog.jpg" %>');
-	$(this).html('Wait 2 seconds...');
-	$(this).prop("disabled",true);
-	window.setTimeout(function () {
-	    $("#BestAnimal").html('No, Dogs are Better than Cats!');
-	    $("#ChangeAnimal").html('See? JavaScript is Cool');
-	}, 3000);
-})
-
-</script>
-
 <h2>jQuery</h2>
 <p>
   jQuery is a JavaScript library - it's a collection of useful scripts in JavaScript written by other smart people that you can use to make your life easier. JavaScript and jQuery use the same language, but jQuery uses a little different syntax. jQuery and JavaScript is technically the same language, but jQuery is basically just an extension of JavaScript. It's a little more complicated than that, but in general just remember jQuery is a tool that does the same things that JavaScript can do, but much easier.
@@ -93,5 +80,17 @@ $('#ChangeAnimal').click(function() {
 
 <%= render partial: '/comments/for_lesson', locals: { name: 'Intro', lesson: 4} %>
 
+
+<script>
+$('#ChangeAnimal').click(function() {
+	$('#AnimalPic').attr('src', '<%= image_path "dog.jpg" %>');
+	$(this).html('Wait 2 seconds...');
+	$(this).prop("disabled",true);
+	window.setTimeout(function () {
+	    $("#BestAnimal").html('No, Dogs are Better than Cats!');
+	    $("#ChangeAnimal").html('See? JavaScript is Cool');
+	}, 3000);
+})
+</script>
 
 
