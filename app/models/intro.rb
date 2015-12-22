@@ -9,7 +9,7 @@ class Intro < ActiveRecord::Base
 		],
 		["Maximize your learning",
 			[
-				[5, "Guidelines maximize your learning experience"]
+				[5, "Guidelines to maximize your learning experience"]
 			]
 		]
 	]
