@@ -1,0 +1,86 @@
+<h1><%= title_for(Intro, 2, 1) %></h1>
+
+<p>
+	Awesome! You now know the basic gist of what web development is, what you can do with it, what tools and frameworks we are going to be learning, and what each thing does.
+</p>
+
+<p>
+  Over the next few weeks, things will get super exciting as you delve into the world of web development. On the other hand, you'll find yourself <strong>stuck, miserable, and doubting yourself.</strong> You will encounter countless error messages and code that doesn't work. You know it <i>should</i> work, but somehow it doesn't.
+</p>
+
+<p>
+  This is where a lot of people give up. The first time I tried programming, I gave up at this stage. I thought programming was <strong>super difficult, it was only for smart people, and I would never be good at it.</strong> Maybe some of you have already experienced this before.
+</p>
+
+<p>
+  We're not going to let that happen. <strong>We are passionate about supporting your journey in becoming a web developer.</strong> We just find it awesome to see the birth of another coder!
+</p>
+
+<p>
+  But in order to do so, you will need to do your part in working hard, trying to learn as much as you can, and pushing yourself to become a better coder.
+</p>
+
+<p>
+  Below we have outlined guidelines that have worked in maximizing learning for us and will probably do the same for you too.
+</p>
+
+<h3>Ask Questions</h3>
+<p>
+  Asking the right questions and asking lots of them is the key to learning. Letting your curiosity guide your learning is the best way to learn. When you have a question, ask it.
+</p>
+
+<h3>Ask Google First</h3>
+<p>
+  With that being said, it makes sense to ask questions to the smartest person. And Google is the smartest person in the world. Most of the time, your questions are questions that other people have had in the past. People ask these questions on sites like <a href = "http://stackoverflow.com/" target = "_blank">Stack Overflow</a>, which tend to show up high in Google searches. We'll teach you how to Google effectively throughout the course, but just keep in mind that most of your problems can be solved with a simple and quick Google search. <strong>Googling is an essential skill to becoming a competent web developer.</strong>
+</p>
+
+<h3>Utilize the Quiz Questions</h3>
+<p>
+	The quiz questions are designed so you retain the information you have just learned. We are trying to create connections in your brain so you can recall them later. Don't just skim through these quiz questions or look at the answers before pondering about the answer. Write the answers on a word doc, compare the answers, and if you didn't get it, look over the material again. If you still don't get it, <strong>Google it</strong>.
+</p>
+
+<h3>Code when you feel like it</h3>
+<p>
+  Coding should be a passion or a hobby, not a chore. Push yourself whenever you feel like it, but don't push yourself when you don't feel like coding at all. We believe in intrinsic motivation - doing things because you <i>want</i> to do it, not because <i>have</i> to do it. It is absolutely the key to learning.
+</p>
+
+<h3>Be patient</h3>
+<p>
+  Becoming comfortable with coding takes time. It takes 3 ~ 8 weeks of hardcore coding every day to reach a level of comfort where you can start building things without tutorials. <a href = "http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/" target = "_blank">This blog post</a> talks about this in depth. Until you reach this point, you'll be frustrated with a lot of things. <strong>Don't give up.</strong> It's just a matter of time you devote to programming. Be passionate about programming, open up a few hours each day for focused programming, and eventually you'll attain the skills to start building apps.
+</p>
+
+<hr>
+
+<p>
+	Awesome! After these lessons you'll dive into actual coding. Trust me, it's a <strong>lot</strong> of fun. And if you're not having fun, let us know! We'll talk to you about it and see how it can be more fun.
+</p>
+
+<p>
+  If you're ready, give us a high five.
+</p>
+
+<div id = "HighFive" style = "width:80%;height:300px;display:none;">
+	<i class="fa fa-hand-paper-o" style = "font-size:300px;display:block;">I'm pumped!!!</i>
+</div>
+
+<div id = "HideHighFive"style = "width:80%;height:300px;">
+	<i class="fa fa-hand-paper-o" style = "font-size:300px;margin:0 auto;width:50px;display:block;"></i>
+</div>
+
+<br>
+<br>
+<%= link_to "Alright, I'm ready!", "", class: 'btn btn-danger btn-lg btn-block' %>
+
+<br class = "clear">
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'Intro', lesson: 5} %>
+
+<script>
+$( '#HideHighFive' ).click(function() {
+	$( '#HideHighFive' ).hide();
+	$( " #HighFive " ).show();
+  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
+  $( '#HideHighFive' ).delay(2000).show(0);
+});
+</script>
+

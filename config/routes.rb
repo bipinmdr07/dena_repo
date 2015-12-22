@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'intro_lessons', :to => 'intro#index', :as => 'intro_lessons'
+  get 'intro', :to => 'intro#index', :as => 'intro'
   get 'intro/:id', :to => 'intro#show', :as => 'intro_lesson'
   get 'courses',   :to => 'static_pages#courses'
 end
