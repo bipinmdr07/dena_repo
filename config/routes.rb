@@ -14,7 +14,17 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :submissions do
+    resources :submission_comments do
+      post :submission_replies, :to => 'submission_replies#create',  as: 'replies'
+    end
+  end
+
   get 'intro', :to => 'intro#index', :as => 'intro'
   get 'intro/:id', :to => 'intro#show', :as => 'intro_lesson'
+
+  get 'html_css', :to => 'html_css#index', :as => 'html_css'
+  get 'html_css/:id', :to => 'html_css#show', :as => 'html_css_lesson'
+
   get 'courses',   :to => 'static_pages#courses'
 end

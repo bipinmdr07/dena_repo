@@ -6,3 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Forum.create(name: 'Intro')
+Forum.create(name: 'HtmlCss')
+Submission.create(name: 'Intro')
+Submission.create(name: 'HtmlCss')

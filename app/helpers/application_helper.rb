@@ -1,5 +1,5 @@
 module ApplicationHelper
-	# def lesson_link(course, lesson_number)
-
-	# end
+	def title_for(course, chapter, lesson)
+		course::LESSONS[chapter - 1][1][lesson - 1][1]
+	end
 end

@@ -1,4 +1,16 @@
-FactoryGirl.define do  factory :reply do
+FactoryGirl.define do  factory :submission_comment do
+    
+  end
+  factory :submission_reply do
+    
+  end
+  factory :submission do
+    
+  end
+  factory :html_css do
+    
+  end
+  factory :reply do
     
   end
   factory :comment do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219221630) do
+ActiveRecord::Schema.define(version: 20151223061054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,11 @@ ActiveRecord::Schema.define(version: 20151219221630) do
     t.string   "name"
   end
 
+  create_table "html_csses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "intros", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -54,6 +59,34 @@ ActiveRecord::Schema.define(version: 20151219221630) do
   end
 
   add_index "replies", ["user_id", "comment_id"], name: "index_replies_on_user_id_and_comment_id", using: :btree
+
+  create_table "submission_comments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "lesson"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "submission_id"
+  end
+
+  add_index "submission_comments", ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
+
+  create_table "submission_replies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "content"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "submission_comment_id"
+  end
+
+  add_index "submission_replies", ["user_id", "submission_comment_id"], name: "index_submission_replies_on_user_id_and_submission_comment_id", using: :btree
+
+  create_table "submissions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -70,6 +103,7 @@ ActiveRecord::Schema.define(version: 20151219221630) do
     t.datetime "updated_at",                          null: false
     t.string   "avatar"
     t.string   "name"
+    t.boolean  "admin"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

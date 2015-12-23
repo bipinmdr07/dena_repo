@@ -20,7 +20,4 @@ class CommentsController < ApplicationController
 		params.require(:comment).permit(:title, :description, :lesson, :forum_id)
 	end
 
-	# def current_forum
-	# 	Forum.find(params[:forum_id])
-	# end
 end
