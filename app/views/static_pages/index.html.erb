@@ -3,14 +3,17 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <% if notice.present? %>
-                  <p class="alert alert-info"><%= notice %></p>
-                <% end %>
-                <% if alert.present? %>
-                  <p class="alert alert-danger"><%= alert %></p>
-                <% end %>             
+                             
                 <!-- <img class="img-responsive" src="img/profile.png" alt=""> -->
                 <div class="intro-text">
+                  
+                    <% if notice.present? %>
+                      <p class="alert alert-info"><%= notice %></p>
+                    <% end %>
+                    <% if alert.present? %>
+                      <p class="alert alert-danger"><%= alert %></p>
+                    <% end %>
+
                     <span class="name">Start Coding</span>
                     <hr class="star-light">
                     <span class="skills">HTML/CSS - Ruby on Rails - JavaScript/jQuery - Git/Github</span>
