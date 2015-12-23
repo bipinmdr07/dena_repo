@@ -33,14 +33,14 @@
     <div class = "content">
 
       <% if notice.present? %>
-        <p class="alert alert-info"><%= notice %></p>
+        <p class="alert alert-info" style = "color:white;"><%= notice %></p>
       <% end %>
       <% if alert.present? %>
-        <p class="alert alert-danger"><%= alert %></p>
+        <p class="alert alert-danger" style = "color:white;"><%= alert %></p>
       <% end %>
 
       <%= yield %>
-      
+
     </div>
   </div>
 
