@@ -1,0 +1,40 @@
+<h1><%= title_for(HtmlCss, 3, 6) %></h1>
+
+<p>
+  Cool, let's add some more content to make the page look more legit.
+</p>
+
+<p>
+  Let's go back to Bootstrap's documentation and scroll through Components. By the way, this process of going through the documentation, seeing if it looks good, and implementing it is how you should go about tackling something new :)
+</p>
+
+<p>
+  If we scroll down, we see something called page header. It looks like something that might fit in with our page, so let's add that in. We're going to copy the code that the documentation has provided for us and paste it under the closing div for the row we created earlier. Let's replace the text in the page header appropriately so that it makes sense.
+</p>
+
+<p>
+  If we refresh the page, we see the page header and it looks nice, but now we want to add some content beneath this. Let's go look at what else Bootstrap has the we can use.
+</p>
+
+<p>
+  It turns out Bootstrap has this thing called wells. If we search for it in Components, you'll see what it looks like. I want the large well, so I'm going to copy the code and paste that into our code right under the page header that we just added. Let's then replace the text inside the well. If you don't know what to add, start typing "lorem ipsum" (without the quotes) and hit tab to create the lorem ipsum filler text.
+</p>
+
+<p>
+  Let's go back into our browser and refresh the page. It's starting to come together!
+</p>
+
+
+<p>
+  
+</p>
+
+<br>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/submission_comments/submission_for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>

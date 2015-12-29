@@ -1,0 +1,23 @@
+<h1><%= title_for(HtmlCss, 3, 8) %></h1>
+
+<p>
+  This is your final step! We've made a great website, let's now host it.
+</p>
+
+<p>
+  This is going to be your first challenge. We give these challenges so that you learn to figure things out by yourselves. We've emphasized the importance of Googling. Utilize your newfound Googling abilities to figure out how to host the website so that you can share it with your friends! (Hint: A good question to ask might be something like "How to host a static website")
+</p>
+
+<p>
+  Once you've figured it out, submit your work as a link below in the submissions section to get your code reviewed! :)
+</p>
+
+<br>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/submission_comments/submission_for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>

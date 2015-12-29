@@ -1,0 +1,41 @@
+<h1><%= title_for(HtmlCss, 3, 8) %></h1>
+
+<p>
+  Things look pretty awesome now! It still needs a little spice, so let's add those final touches to make the page look more professional.
+</p>
+
+<p>
+  Let's go to Bootstrap components and look for anything else we could add. If we scroll all the way up, we see that there are these things called glyphicons. They look like something we could add next to the text.
+</p>
+
+<p>
+  Inside our jumbotron, we have an h1 header. Let's go ahead and add a glyphicon there.
+</p>
+	
+<p>
+	We can add these glyphicons in by adding a span with a class of the glyphicon. Let's look for a nice glyphicon that we can add in. For me, I like the education glyphicon so I'm going to go ahead and copy the text under the glyphicon. It should look something like "glyphicon glyphicon-education". Now at the beginning of our h1 tag inside the Jumbotron, let's add in a span with a class of the glyphicon. So for me, it would look like <code><span class = "glyphicon glyphicon-education"></span></code>.
+</p>
+
+<p>
+  Let's go into our browser and refresh the page. You should see an icon next to the text. If you think the glyphicon is too close to the text, you can simply add a space after the closing span tag.
+</p>
+
+<p>
+  This looks pretty cool! Let's add some more glyphicons to our other headers that we have. Let's go back to the Bootstrap documentation and look for nice glyphicons and add them on to our site, just like we just did.
+</p>
+
+<hr>
+
+<p>
+  Great job! You've now made a basic landing page with Bootstrap, HTML, and CSS. Give yourself a high five!
+</p>
+
+<br>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/submission_comments/submission_for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>

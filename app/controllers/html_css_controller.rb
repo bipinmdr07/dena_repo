@@ -1,4 +1,5 @@
 class HtmlCssController < ApplicationController
+	before_filter :authenticate_user!
 
 	def index
 		@lessons = HtmlCss::LESSONS

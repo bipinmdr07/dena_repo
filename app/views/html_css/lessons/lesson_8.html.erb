@@ -1,0 +1,37 @@
+<h1><%= title_for(HtmlCss, 3, 4) %></h1>
+
+<p>
+  Now that we've got our navbar, let's add some content to our website.
+</p>
+
+<p>
+  Let's go back to the bootstrap website CSS page and see what else we have to do. If we scroll down, under "Containers" we can see that it's telling us that the content needs to be wrapped around in a 'container' or 'container-fluid' div. The page also tells us that <code>.container</code> have padding on the side while <code>.container-fluid</code> gives you a container that spans the entire width of your browser. But let's not worry too much about what that means and just go ahead and add a div with a class of 'container-fluid' into our body under our navbar section.
+</p>
+
+<p>
+  Now that that's done, let's go to the Components section of the bootstrap website and see what else they have. If we scroll all the way down, we see this thing called a Jumbotron. Not sure what it is, but it looks like the kind of thing we would want in our landing page. Looks good, let's add this in. Currently, we have a "Hello" within a h1 tag that we don't need, so let's get rid of that.
+</p>
+
+<p>
+  So again, let's copy the code that they've provided for us and paste it into our body inside our container-fluid div. When we do this, let's make sure we indent everything correctly so that the code is easy to read. Let's go back to our browser and refresh the page. It should now have the Jumbotron. Looks pretty cool!
+</p>
+
+<p>
+  Let's just add some text in here that tells users what our company does. Let's replace the text inside the h1 tag with our brand name. Let's then add some paragraphs about what we do. So in our case, I'm going to add an opening and closing p tag, and between those, I'm going to add some text like "Learn how to code with Techrise". And then I'm going to add another paragraph by adding an opening and closing p tag and inserting some text between those. So maybe something like "Learn HTML, CSS, JavaScript, Ruby, and Ruby on Rails". At this point, your code should look something similar to this.
+</p>
+
+<script src="https://gist.github.com/takehiromouri/e24bab044dc89b11faf3.js"></script>
+
+<p>
+  Let's go back to our browser and refresh the page. Cool, it's starting to look like a landing page!
+</p>
+
+<%= image_tag 'jumbotron.png' %>
+
+<br>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>

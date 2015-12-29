@@ -1,0 +1,46 @@
+<h1><%= title_for(HtmlCss, 3, 3) %></h1>
+
+<p>
+  Now that we've got bootstrap set up, let's see what we can do with it.
+</p>
+
+<p>
+  Let's go to the bootstrap website (quickly search "bootstrap" in your web browser) and let's click on "Components". We see a bunch of cool icons (this might be pretty nice to put in later!) we see some navbars, we see a bunch of cool stuff. Awesome! Let's begin by adding a navbar to our site.
+</p>
+
+<p>
+  If we click on "Navbar" on the navigation bar on the right hand side of the bootstrap website, it will take you to a section that explains how to implement the navbar. Let's just scroll down and copy the bunch of code at the first example they give us. It should look something like this:
+</p>
+
+<script src="https://gist.github.com/takehiromouri/0ddaf4962cae507b696e.js"></script>
+
+<p>
+  Let's go ahead and paste this into our body section of our HTML. Hop back into your browser and refresh the page, and boom, you see a navbar implemented just like that. Super awesome!
+</p>
+
+<p>
+  Since we don't need the search bar or those dropdown menus, let's just delete that from the navbar. Let's delete everything from <code>&lt;ul class="nav navbar-nav"&gt;</code> to <code>&lt;form&gt;</code>. Go back to our browser and refresh the page and now you should see a simpler looking navbar.
+</p>
+
+<%= image_tag 'simplebootstrapnav.png' %>
+
+<p>
+  Next, we want to change that text that says "Brand" into whatever our brand is. To change this, we can go into Sublime, simply hit Command + F and enter "Brand", and it will take us to the code where that text is contained. Let's replace this text with whatever you want. For me, I'm going to replace this with "Techrise". At this point, the code should look something like this:
+</p>
+
+<script src="https://gist.github.com/takehiromouri/310cc1030fec9128d691.js"></script>
+
+<p>
+  Awesome! Now we've got a navbar set up. Even though it doesn't really do anything right now, just like that, we already have a pretty clean looking navigation bar going.
+</p>
+
+<br>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/submission_comments/submission_for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
+

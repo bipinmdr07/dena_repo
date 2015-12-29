@@ -1,0 +1,71 @@
+<h1><%= title_for(HtmlCss, 3, 5) %></h1>
+
+<p>
+  If we take a look at some professional landing pages, we notice that a lot of them have several neatly aligned columns of content in a row. For example, take a look at ----- and -----. You can see that -----
+</p>
+
+<p>
+  With Bootstrap, we can make these neatly aligned columns and rows easily. This is one of the features of Bootstrap that makes it so great and useful. Introducing the Bootstrap Grid System.
+</p>
+
+<p>
+  Bootstrap's grid system takes some time to get used to, but once you learn it, it's a piece of cake. If we go to the Bootstrap website and go to CSS, there is a section called Grid System on the right hand. Let's click on that.
+</p>
+
+<p>
+  This will take you to the documentation on how the grid system exactly works. First, read through the documentation carefully to get the gist of it. It will probably still be confusing, so let's go through the basics and then implement it on our landing page.
+</p>
+
+<h3>Rows</h3>
+<p>
+  In order to use the grid system properly, we need to add a row. If we don't the content might be misaligned and will look broken. Let's not do that and add rows when trying to use the grid. 
+</p>
+
+<p>
+  We can add a row by adding a div with a class of "row". Let's go into Sublime and right underneath the jumbotron div that we created, let's add a div with a class or "row". Make sure to close the div ;)
+</p>
+
+<h3>Columns</h3>
+<p>
+  Once we have our row, we can add columns. Think of an excel spreadsheet. The spreadsheet has rows, and within those rows, it has columns. In bootstrap, each row has <b>12 columns</b>. Using these 12 columns, we can neatly align content.
+</p>
+
+<p>
+  Rather than explaining how it works, it probably is faster see how it works in action. Say I want 3 sections with the same width in my row. What I would do is create 3 divs with a column size of 4. This would give me a column size sum of 12 so it would work.
+</p>
+
+<p>
+  Let's say I want 4 sections with the same width in my row. I would then create 4 divs with a column size of 3. 4 x 3 = 12 so this would work. 
+</p>
+
+<p>
+  If I want to create 3 sections that has the width ratio of 1:2:3, I would create 1 section with a column size of 2, another with a column size of 4, and another with a column size of 6. 1 x 2 + 1 x 4 + 1 x 6 = 12, so this works. If I wanted two small sections and one large section, I could create 2 sections with a column size of 1, and 1 section with a column size of 10. 1 x 2 + 1 x 10 = 12, so this works. Kind of starting to understand how this all works?
+</p>
+
+<p>
+  Let's add some columns to our landing page. Let's say we want to display 3 main features of our product on our landing page. We would want 3 nicely aligned columns under our jumbotron.
+</p>
+
+<p>
+  Inside our div with a class of "row", let's add 3 divs with the class of "col-md-4". This class is basically saying, let's make a column with a size of 4, when the screen is medium size (md).
+</p>
+
+<p>
+  Right now if you refresh your landing page, nothing is going to change since we don't have anything inside our columns. To add something in here, let's go back into the bootstrap website and go to "Components". Let's find and go to the "Panels" section and take a look. This looks like a pretty cool thing to add into our newly created super neatly aligned columns.
+</p>
+
+<p>
+  Let's copy the code that has the panel with a header and paste it into all 3 of our divs with the class of "col-md-4". Let's try refreshing our page and see if it works.
+</p>
+
+<p>
+	Awesome! Now we have 3 columns with nice looking panels. This is starting to look awesome.
+</p>
+
+<br>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
