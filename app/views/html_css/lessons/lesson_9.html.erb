@@ -1,11 +1,11 @@
 <h1><%= title_for(HtmlCss, 3, 5) %></h1>
 
 <p>
-  If we take a look at some professional landing pages, we notice that a lot of them have several neatly aligned columns of content in a row. For example, take a look at ----- and -----. You can see that -----
+  In order to organize our main selling points on our website, we want to be able align content cleanly.
 </p>
 
 <p>
-  With Bootstrap, we can make these neatly aligned columns and rows easily. This is one of the features of Bootstrap that makes it so great and useful. Introducing the Bootstrap Grid System.
+  With Bootstrap, we can make neatly aligned columns and rows pretty easily. This is one of the features of Bootstrap that makes it so great and useful. Introducing the Bootstrap Grid System.
 </p>
 
 <p>
@@ -18,12 +18,14 @@
 
 <h3>Rows</h3>
 <p>
-  In order to use the grid system properly, we need to add a row. If we don't the content might be misaligned and will look broken. Let's not do that and add rows when trying to use the grid. 
+  In order to use the grid system properly, we need to add a row. If we don't, the content might be misaligned and will look broken. Let's not do that and add rows when trying to use the grid. 
 </p>
 
 <p>
   We can add a row by adding a div with a class of "row". Let's go into Sublime and right underneath the jumbotron div that we created, let's add a div with a class or "row". Make sure to close the div ;)
 </p>
+
+<div class = "gist" src="https://gist.github.com/takehiromouri/b8af77626487c6e20251.json"></div>
 
 <h3>Columns</h3>
 <p>
@@ -31,7 +33,7 @@
 </p>
 
 <p>
-  Rather than explaining how it works, it probably is faster see how it works in action. Say I want 3 sections with the same width in my row. What I would do is create 3 divs with a column size of 4. This would give me a column size sum of 12 so it would work.
+  Rather than explaining how it works, it is probably faster to just see how it works in action. Say I want 3 sections with the same width in my row. What I would do is create 3 divs with a column size of 4. This would give me a column size sum of 12 so it would work.
 </p>
 
 <p>
@@ -55,8 +57,12 @@
 </p>
 
 <p>
-  Let's copy the code that has the panel with a header and paste it into all 3 of our divs with the class of "col-md-4". Let's try refreshing our page and see if it works.
+  Let's copy the code that has the panel with a header and paste it into all 3 of our divs with the class of "col-md-4". Let's try refreshing our page and see if it works. The code should look something like below.
 </p>
+
+<div class = "gist" src="https://gist.github.com/takehiromouri/697479fe0661598a3b8e.json"></div>
+
+<%= image_tag 'bootstrappanels.png', class: 'screenshot' %>
 
 <p>
 	Awesome! Now we have 3 columns with nice looking panels. This is starting to look awesome.
