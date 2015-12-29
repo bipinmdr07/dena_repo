@@ -19,10 +19,10 @@
 </p>
 
 <p>
-  Since we don't need the search bar or those dropdown menus, let's just delete that from the navbar. Let's delete everything from <code>&lt;ul class="nav navbar-nav"&gt;</code> to <code>&lt;form&gt;</code>. Go back to our browser and refresh the page and now you should see a simpler looking navbar.
+  Since we don't need the search bar or those dropdown menus, let's just delete that from the navbar. Let's delete everything from <code>&lt;ul class="nav navbar-nav"&gt;</code> to <code>&lt;/form&gt;</code>. Go back to our browser and refresh the page and now you should see a simpler looking navbar.
 </p>
 
-<%= image_tag 'simplebootstrapnav.png' %>
+<%= image_tag 'simplebootstrapnav.png', class: 'screenshot' %>
 
 <p>
   Next, we want to change that text that says "Brand" into whatever our brand is. To change this, we can go into Sublime, simply hit Command + F and enter "Brand", and it will take us to the code where that text is contained. Let's replace this text with whatever you want. For me, I'm going to replace this with "Techrise". At this point, the code should look something like this:
@@ -39,8 +39,6 @@
 <br class = "clear">
 
 <%= render 'lesson_nav_section' %>
-
-<%= render partial: '/submission_comments/submission_for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
 
 <%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
 

@@ -10,6 +10,11 @@
 	height: 300px;
 }
 
+.screenshot_min {
+  height: 100px;
+  overflow: hidden;
+}
+
 .course_button {
 	position: absolute;
   bottom: 20px;
@@ -33,8 +38,7 @@
 }
 
 .screenshot {
-	width: 80%;
-	margin: 20px 0px;
+	width: 100%;
 }
 
 .unindented_ul {
