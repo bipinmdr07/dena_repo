@@ -18,30 +18,36 @@
 //= require turbolinks
 //= require_tree .
 
-$ ->
-  loadGists()
-  $(document).on 'page:load', loadGists
+var loadGist, loadGists;
 
-loadGists = ->
-  $('.gist').each ->
-    loadGist $(this)
+$(function() {
+  loadGists();
+  return $(document).on('page:load', loadGists);
+});
 
-loadGist = ($gist) ->
-  callbackName = 'c' + Math.random().toString(36).substring(7)
+loadGists = function() {
+  return $('.gist').each(function() {
+    return loadGist($(this));
+  });
+};
 
-  window[callbackName] = (gistData) ->
-    delete window[callbackName]
-    html = '<link rel="stylesheet" href="https://gist.github.com' + encodeURI(gistData.stylesheet) + '"></link>'
-    html += gistData.div
-    $gist.html html
-    script.parentNode.removeChild script
-
-  script = document.createElement 'script'
-  script.setAttribute 'src', [
-    $gist.data('src'), 
-    $.param(
-      callback: callbackName
+loadGist = function($gist) {
+  var callbackName, script;
+  callbackName = 'c' + Math.random().toString(36).substring(7);
+  window[callbackName] = function(gistData) {
+    var html;
+    delete window[callbackName];
+    html = '<link rel="stylesheet" href="' + encodeURI(gistData.stylesheet) + '"></link>';
+    html += gistData.div;
+    $gist.html(html);
+    return script.parentNode.removeChild(script);
+  };
+  script = document.createElement('script');
+  script.setAttribute('src', [
+    $gist.data('src'), $.param({
+      callback: callbackName,
       file: $gist.data('file') || ''
-    )
-  ].join '?'
-  document.body.appendChild script
+    })
+  ].join('?'));
+  return document.body.appendChild(script);
+};
