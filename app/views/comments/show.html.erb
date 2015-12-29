@@ -16,7 +16,9 @@
 
 
 <%= simple_form_for :reply, url: forum_comment_replies_path(params[:forum_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-	<%= f.cktext_area :content, label: 'Comment', required: true %>
+	<div data-no-turbolink>
+		<%= f.cktext_area :content, label: 'Comment', required: true %>
+	</div>
 	<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
 
 	<br>
