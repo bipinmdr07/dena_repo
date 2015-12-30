@@ -24,6 +24,11 @@ class HtmlCss < ActiveRecord::Base
 				[12, "Finishing Touches"],
 				[13, "CHALLENGE: Host Your Website"]
 			]
+		],
+		["Now it's Your Turn",
+			[
+				[14, "CHALLENGE: Create a Mock of A Website"]
+			]
 		]
 	]
 end
