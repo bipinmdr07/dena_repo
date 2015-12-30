@@ -13,16 +13,31 @@
 </p>
 	
 <p>
-	We can add these glyphicons in by adding a span with a class of the glyphicon. Let's look for a nice glyphicon that we can add in. For me, I like the education glyphicon so I'm going to go ahead and copy the text under the glyphicon. It should look something like "glyphicon glyphicon-education". Now at the beginning of our h1 tag inside the Jumbotron, let's add in a span with a class of the glyphicon. So for me, it would look like <code>&lt;span class = "glyphicon glyphicon-education"&gt;&lt;/span&gt;</code>.
+	We can add these glyphicons in by adding a span with a class of the glyphicon. Let's look for a nice glyphicon that we can add in. For me, I like the education glyphicon so I'm going to go ahead and copy the text under the glyphicon. It should look something like "glyphicon glyphicon-education". Now at the beginning of our h1 tag inside the Jumbotron, let's add in a span with a class of the glyphicon. So for me, it would look like <code>&lt;span class = "glyphicon glyphicon-education"&gt;&lt;/span&gt;</code>. 
 </p>
 
 <p>
   Let's go into our browser and refresh the page. You should see an icon next to the text. If you think the glyphicon is too close to the text, you can simply add a space after the closing span tag.
 </p>
 
+
+<h4>Common Gotcha!</h4>
+<p>
+  Make sure to close the <code>span</code> tags even though there isn't anything inside it! This could cause your HTML to look distored.
+</p>
+
 <p>
   This looks pretty cool! Let's add some more glyphicons to our other headers that we have. Let's go back to the Bootstrap documentation and look for nice glyphicons and add them on to our site, just like we just did.
 </p>
+
+<p>
+  After we've added some glyphicons, look for things you can improve to look the site look better. Your code should now look something like the code below.
+</p>
+
+<div data-src="https://gist.github.com/takehiromouri/fad68fb0aee1f6acaa60.json"></div>
+
+<%= image_tag 'bootstrapfinal1.png', class: 'screenshot' %>
+<%= image_tag 'bootstrapfinal2.png', class: 'screenshot' %>
 
 <hr>
 
@@ -30,12 +45,27 @@
   Great job! You've now made a basic landing page with Bootstrap, HTML, and CSS. Give yourself a high five!
 </p>
 
+<div id = "HighFive" style = "width:80%;height:300px;display:none;">
+	<i class="fa fa-hand-paper-o" style = "font-size:300px;display:block;">Woooooooo!!!</i>
+</div>
+
+<div id = "HideHighFive"style = "width:80%;height:300px;">
+	<i class="fa fa-hand-paper-o" style = "font-size:300px;margin:0 auto;width:50px;display:block;"></i>
+</div>
+
 <br>
 
 <br class = "clear">
 
 <%= render 'lesson_nav_section' %>
 
-<%= render partial: '/submission_comments/submission_for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
-
 <%= render partial: '/comments/for_lesson', locals: { name: 'HtmlCss', lesson: params[:id]} %>
+
+<script>
+$( '#HideHighFive' ).click(function() {
+	$( '#HideHighFive' ).hide();
+	$( " #HighFive " ).show();
+  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
+  $( '#HideHighFive' ).delay(2000).show(0);
+});
+</script>
