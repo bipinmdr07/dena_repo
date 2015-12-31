@@ -11,6 +11,9 @@ Rails.application.configure do
     :authentication => :plain,
   }
   ActionMailer::Base.delivery_method = :smtp
+
+    config.action_mailer.default_url_options = { :host => 'techrise.herokuapp.com' }
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
