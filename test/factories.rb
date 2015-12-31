@@ -14,7 +14,10 @@ FactoryGirl.define do  factory :submission_comment do
     
   end
   factory :comment do
-    
+    title "Wtf does this mean"
+    description "Idk wtf this means help me lol"
+    lesson 1
+    forum_id 1
   end
   factory :forum do
     
