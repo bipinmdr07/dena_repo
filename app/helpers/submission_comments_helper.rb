@@ -1,6 +1,7 @@
 module SubmissionCommentsHelper
 	
 	def submission_back_to_lesson
+		@submission_comment = SubmissionComment.find(params[:id])
 		'/html_css/' + @submission_comment.lesson.to_s
 	end
 

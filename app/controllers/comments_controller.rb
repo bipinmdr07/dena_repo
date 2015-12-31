@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = current_user.comments.create(comment_params)
+		UserMailer.new_question(@comment).deliver
 		redirect_to forum_comment_path(@comment.forum_id, @comment)
 	end
 
