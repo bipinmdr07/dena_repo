@@ -19,11 +19,10 @@ class UserMailer < ApplicationMailer
 		mail(to: email, subject: 'New Reply')
 	end
 
-	def new_submission_reply(forum, post)
-		recipients = ["techrisecoding@gmail.com", User.find(post.user_id).email]
+	def new_submission_reply(forum, post, email)
 		@forum = forum
 		@post = post
-		mail(to: recipients, subject: 'New Reply')
+		mail(to: email, subject: 'New Reply')
 	end
 
 
