@@ -1,6 +1,10 @@
 module CommentsHelper
 	def back_to_lesson
-		'/' + Forum.find(@comment.forum_id).name.downcase + '/' + @comment.lesson.to_s
+		 if Forum.find(@comment.forum_id).name.downcase == "htmlcss"
+		 	'/html_css/' + @comment.lesson.to_s
+		 else
+		 	'/' + Forum.find(@comment.forum_id).name.downcase + '/' + @comment.lesson.to_s
+		 end
 	end
 
 	def comment_owner(comment)
