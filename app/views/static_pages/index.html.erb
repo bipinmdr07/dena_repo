@@ -29,7 +29,7 @@
     </div>
 </header>
 
-<!-- Portfolio Grid Section -->
+<!-- Skills Grid Section -->
 <section id="portfolio">
     <div class="container">
         <div class="row">
@@ -50,6 +50,90 @@
     </div>
 </section>
 
+<!-- For Who Section -->
+<section class="success" id="for_who">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Who Is Techrise For?</h2>
+                <hr class="star-light">
+            </div>
+        </div>
+
+        <div class="row">
+
+          <div class = "col-sm-12 col-md-6 text-center">
+            <h3 class = "for_who_header">Aspiring Entrepreneurs</h3>
+
+            <p>
+              You have an awesome idea that you think could change the way people do things. You want to build a prototype or MVP that you can show to your potential investors and customers to get quick feedback. But you lack the money, don't want to spend the money, or don't know any developers.
+            </p>
+            <p style = "color: #2C3E50;">
+              Why not just learn just enough coding so you can start building your web applications? Techrise is perfect for those who want to start building your prototypes for your ideas. By building real world apps from day 1, you'll learn how to quickly build out your apps to ship fast.
+            </p>
+
+          </div>
+
+          <div class = "col-sm-12 col-md-6 text-center">
+            <h3 class = "for_who_header">Aspiring Developers</h3>
+
+            <p>
+              You might have tried coding before but it was too difficult and you quit. Or coding might be completely new to you. Either way, you think becoming a web developer is an awesome feat and you want to get started on a new journey.
+            </p>
+            <p style = "color: #2C3E50;">
+              Techrise teaches you how to start writing code like professional developers do in the real world. By learning how to use GitHub, Team Communication tools, and also how to solve difficult coding challenges, you will be prepared to start contributing in actual web development teams.
+            </p>
+
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 style = "font-weight: 600;margin:60px 0px 30px 0px;">DOES THIS SOUND LIKE YOU?</h4>
+              <div class="col-lg-8 col-lg-offset-2 text-center">
+                <%= link_to "YES, GET ME ONBOARD", new_user_registration_path, class: "btn btn-danger btn-lg", style: "color:white;" %>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+    </div>
+</section>
+
+
+<!-- Why Techrise Section -->
+<section id="portfolio">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Why Techrise?</h2>
+                <hr class="star-primary">
+            </div>
+        </div>
+        <div class="row">
+          <div class = "col-sm-12 col-md-4 text-center">
+            <h3>1-on-1 Mentor Sessions</h3>
+            <p>
+              Ask questions individually to your mentor and get the support you need. By having a mentor, you can learn quicker and more effectively.
+            </p>
+          </div>
+
+          <div class = "col-sm-12 col-md-4 text-center">
+            <h3>Build Real World Applications</h3>
+            <p>
+              Instead of going just learning syntax and theory, we believe you can learn faster by actually building websites and web applications from day 1.
+            </p>
+          </div>
+          <div class = "col-sm-12 col-md-4 text-center">
+            <h3>Learn from People Like You</h3>
+            <p>
+              Our mentors were people just like you - beginners with no experience in coding - just until recently. That's why they know exactly how to go from having no experience in coding to becoming a great developer.
+            </p>
+          </div>
+        </div>
+    </div>
+</section>
+
 <!-- About Section -->
 <section class="success" id="about">
     <div class="container">
@@ -61,7 +145,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-2">
-              <h3 style = "color:#2C3E50;">Have no prior coding experience? You can still learn how to build web applications with Ruby on Rails in just 3 months</h3>
+              <h3 style = "color:yellow;">Have no prior coding experience? You can still learn how to build web applications with Ruby on Rails in just 3 months</h3>
               <p>
                 Learning to code isn’t hard - if you have the right support. 
               </p>
@@ -91,8 +175,7 @@
               </p>
             </div>
 
-            <br>
-            <div class="col-lg-8 col-lg-offset-2 text-center">
+            <div class="col-lg-8 col-lg-offset-2 text-center" style = "padding:30px;">
                 <%= link_to 'START CODING NOW', new_user_registration_path, class: "btn btn-danger btn-lg", style: "color:white;" %>
             </div>
         </div>
