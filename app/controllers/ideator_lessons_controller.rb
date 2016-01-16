@@ -1,4 +1,4 @@
-class HtmlCssController < ApplicationController
+class IdeatorLessonsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index

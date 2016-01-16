@@ -7,5 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Forum.create(name: 'Intro')
 Forum.create(name: 'HtmlCss')
+Forum.create(name: 'IdeatorLessons')
 Submission.create(name: 'Intro')
 Submission.create(name: 'HtmlCss')
+Submission.create(name: 'IdeatorLessons')
