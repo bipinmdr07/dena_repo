@@ -1,4 +1,4 @@
-<h1>Ideator</h1>
+<h1>Ideator - an Idea Sharing App</h1>
 
 <div class = "row">
 
@@ -10,7 +10,7 @@
 			<ul class = "unindented_ul">
 
 			<% chapter[1].each do |lesson| %>
-				<li><%= link_to "Lesson #{lesson[0]} - #{lesson[1]}", ideator_lesson_path(lesson[0]) %></li>
+				<li><%= link_to "Lesson #{lesson[0]} - #{lesson[1]}", ideator_lessons_path(lesson[0]) %></li>
 			<% end %>
 
 		</div>

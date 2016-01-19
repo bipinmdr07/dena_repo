@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get 'html_css/:id', :to => 'html_css#show', :as => 'html_css_lesson'
 
   get 'ideator_lessons', :to => 'ideator_lessons#index', :as => 'ideator'
-  get 'ideator_lessons/:id', :to => 'ideator_lessons#show', :as => 'ideator'
+  get 'ideator_lessons/:id', :to => 'ideator_lessons#show', :as => 'ideator_lessons'
 
   get 'courses',   :to => 'static_pages#courses'
 end

@@ -1,0 +1,33 @@
+<h1><%= title_for(IdeatorLesson, 4, 2) %></h1>
+
+<p>
+  Our index page looks pretty ugly right now. Let's make this look nicer.
+</p>
+
+<p>
+  We're going to be using bootstrap again. Let's go to the bootstrap website again and look for panels. <a href = "http://getbootstrap.com/components/#panels" target = "_blank">This link</a> should take you to the right place in case you couldn't find it.
+</p>
+
+<p>
+  We're going to be using the basic example for our app. What we want to do is render one panel for each idea.
+</p>
+
+<p>
+  What we can do then put the panel inside our each loop, and inside the <code>panel-body</code> div, we cna add in the existing code.
+</p>
+
+<p>
+  In addition, let's make it so that the author is pulled to the right and says "by NameOfAuthor". We can do this by adding a <code>pull-right</code> class to the h4. Your code should look like this:
+</p>
+
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/0690dffc22e3f0048624.json"></div>
+
+<p>
+  Let's go back into the browser and refresh the page. Awesome! You should now see each idea wrapped around in a panel.
+</p>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>

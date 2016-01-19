@@ -2,7 +2,7 @@ class IdeatorLessonsController < ApplicationController
 	before_action :authenticate_user!
 
 	def index
-		@lessons = HtmlCss::LESSONS
+		@lessons = IdeatorLesson::LESSONS
 	end
 
 	def show

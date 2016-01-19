@@ -1,0 +1,89 @@
+<h1><%= title_for(IdeatorLesson, 4, 1) %></h1>
+
+<p>
+  Now that we've got a model and a controller for our Ideas, what can we do?
+</p>
+
+<p>
+  Let's experiment with what we can do. Let's go to our console and type in <code>rails console</code> (or rails c for short).
+</p>
+
+<p>
+  Here you can type in rails commands that you can send to your app. Let's add an Idea to our app through this console. Type in the following:
+</p>
+
+<code>
+Idea.create(description: "This is the greatest idea ever", author: "Me")
+</code>
+
+<p>
+  Here we are saying, create an idea with the following information (description: "This is the greatest idea ever", author: "Me").
+</p>
+
+<p>
+  Let's add some more ideas. Type in the following:
+</p>
+
+<code>
+Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
+</code>
+
+<p>
+  Think of some other brilliant ideas to add to your app and add a couple more.
+</p>
+
+<p>
+  We can see all of our ideas that we have posted by typing in <code>Idea.all</code>.
+</p>
+
+<p>
+  Awesome! You've created your first Ideas. Now let's try to show this on our website.
+</p>
+
+<p>
+  Let's go into our ideas controller and see what we can do.
+</p>
+
+<p>
+  In our index method, let's add the following:
+</p>
+
+<code>
+@ideas = Idea.all
+</code>
+
+<p>
+  In rails, the methods in the controller correspond to the view files with the same name. What that means is basically if you have a method called <code>index</code> in your <code>IdeasController</code> and you also have a file called <code>index.html.erb</code> under <code>/views/ideas/index.html.erb</code>, then you can tell how <code>index.html.erb</code> should behave in the <code>index</code> method of <code>IdeasController</code>.
+</p>
+
+<p>
+  So what we've done by adding <code>@ideas = Idea.all</code> is, we've given an instance variable that you can work with in <code>index.html.erb</code>.
+</p>
+
+<p>
+  To understand what that means, let's go into <code>index.html.erb</code> and make it look like the following.
+</p>
+
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/ba80110be734fc69a5cb.json"></div>
+
+<p>
+  Let's go back into our browser and refresh the page. You should now see all of your Ideas listed out.
+</p>
+
+<p>
+  What happened here is that in our index method in our controller, we said that @ideas should equal all of our Ideas. As we talked about earlier, we can use this in our index.html.erb, since the method name and file name are the same.
+</p>
+
+<p>
+  Then inside our index.html.erb, we are saying: We have <code>@ideas</code>, which are all of our Ideas. Now for each <code>idea</code>, print out the description and also print out the author.
+</p>
+
+<p>
+  Don't worry if this all doesn't make sense just yet. The main focus here is to keep on building to create that momentum for you to learn faster.
+</p>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>

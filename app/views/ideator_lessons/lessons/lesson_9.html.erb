@@ -1,0 +1,73 @@
+<h1><%= title_for(IdeatorLesson, 3, 5) %></h1>
+
+<p>
+  Now that we've got a nice front end, let's work on the backend and actually get the app to do something.
+</p>
+
+<p>
+  The first thing we are going to do is to create a <code>model</code>. The role of models are to interact with the database. 
+</p>
+
+<p>
+  We can create models by running this command:
+</p>
+
+<code>
+rails generate model ModelName
+</code>
+
+<p>
+  In our case, let's name our model Idea. Let's go ahead and create the Idea model:
+</p>
+
+<code>
+rails generate model Idea
+</code>
+
+<p>
+  This will create a file named something like this: <code>xxxxxxxxx_create_ideas.rb</code>. The "xxxx"s will be replaced by a time stamp of when the file was created. These files are called migration files because this file tells Rails what to "migrate" into our database.
+</p>
+
+<p>
+  Let's hop into sublime and open this file up. This file has the job of telling rails what columns to add to our Idea model.
+</p>
+
+<p>
+  If you remember back to when we built the wireframes, we also drew out what our database columns were going to consist of. We figured out that for each of our Ideas, we want a description which is going to be a string, and an author which is going to be text.
+</p>
+
+<p>
+  We can tell rails to add these in by making the file look like this:
+</p>
+
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/eec69bc655eaecde37f5.json"></div>
+
+<p>
+  Make your file look exactly like above and save the file.
+</p>
+
+<p>
+  Now that we have edited our migration file, we have to tell rails to migrate these columns. Run the following command:
+</p>
+
+<code>
+rake db:migrate
+</code>
+
+<p>
+  As a rule of thumb, every time you run a migration, you should restart your server. So let's go ahead and restart our server.
+</p>
+
+<p>
+  If done correctly, if you go into <code>schema.rb</code>, you should now see the columns add to the ideas table. The schema file basically lays out the tables and columns you have in your rails application.
+</p>
+
+<p>
+  Awesome! You've set up your first model! :) The fun will soon begin!
+</p>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>

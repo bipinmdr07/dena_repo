@@ -1,33 +1,30 @@
 class IdeatorLesson < ActiveRecord::Base
 	LESSONS = [
-		["Introduction to HTML/CSS", 
+		["Setting Up Your App", 
 			[
-				[1, "After this, there is no turning back"],
-				[2, "Building Your First Four HTML/CSS Projects"]
+				[1, "Setting up your Web Dev Environment"],
+				[2, "Setting Up Git"]
 			]
 		],
-		["Build a Personal Resume Page", 
+		["First Steps", 
 			[
-				[3, "Setting Up Your Environment"],
-				[4, "Building a Simple Personal Resume Page in 25 minutes"]
+				[3, "Creating Wireframes"],
+				[4, "Creating your First Page"]
 			]
 		],
-		["Create a Simple Landing Page",
+		["Developing your Front End",
 			[
-				[5, "Introducing Twitter Bootstrap"],
-				[6, "Adding Twitter Bootstrap to Your Site"],
-				[7, "Adding a Navbar"],
-				[8, "Adding Content"],
-				[9, "Working with the Grid System"],
-				[10, "Adding Some More Content"],
-				[11, "Adding a Footer"],
-				[12, "Finishing Touches"],
-				[13, "CHALLENGE: Host Your Website"]
+				[5, "Installing Bootstrap"],
+				[6, "Self Directed Lesson - Adding a Navbar"],
+				[7, "Styling the Navbar"],
+				[8, "Adding a Footer"],
+				[9, "Creating a Model"]
 			]
 		],
-		["Now it's Your Turn",
+		["Playing with the Database",
 			[
-				[14, "CHALLENGE: Create a Mock of A Website"]
+				[10, "Adding an Idea"],
+				[11, "Styling our Index Page"]
 			]
 		]
 	]

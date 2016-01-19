@@ -1,0 +1,49 @@
+<h1><%= title_for(IdeatorLesson, 1, 2) %></h1>
+
+<p>
+	Now that we’ve set up our project, let’s also set up GitHub so that we can save our project online and go back to previous versions when we want to.
+</p>
+
+<p>
+	First we have to set up our SSH keys. Follow <a href = "https://help.github.com/articles/generating-ssh-keys/" target = "_blank">this guide</a> to do so.
+</p>
+
+<p>After you've done everything in that link, in your console type in</p>
+
+<code>git init .</code><br>
+<code>git add .</code><br>
+<code>git commit -am “Initial commit”</code><br>
+
+<p>
+	Now let’s go into GitHub’s front page and create a new repository. On the left hand side, you should see a green button called “+ New repository”. Click on that button and just fill in the box that says “Repository name”.
+</p>
+
+<p>
+	Make sure you don’t check “Initialize this repository with a README”.
+</p>
+
+<p>
+	Now click Create repository. 
+</p>
+
+<p>
+	On the next page, go to where it says <strong>“…or push an existing repository from the command line”</strong>.
+</p>
+
+<p>
+	Now what you’re going to do is copy the code right beneath that and paste it into your terminal. It should look something like this:
+</p>
+
+<code>git remote add origin git@github.com:takehiromouri/test.git</code><br>
+<code>git push -u origin master</code><br>
+
+<p>
+	Once you’ve pasted and entered that into your terminal, you’re all set! GitHub is ready to go!
+</p>
+
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>

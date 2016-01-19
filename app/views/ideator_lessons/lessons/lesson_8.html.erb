@@ -1,4 +1,4 @@
-<h1><%= title_for(IdeatorLessons, 3, 4) %></h1>
+<h1><%= title_for(IdeatorLesson, 3, 4) %></h1>
 
 <p>
   Now that we've got a navbar going on, let's add a sticky footer.
@@ -8,7 +8,7 @@
   If we run a google search for "bootstrap sticky footer", we can find a StackOverflow post that addresses this issue <a href = "http://stackoverflow.com/a/19758234/5456016" target = "_blank">here</a>. What we're going to do is use parts of this post to make it look nice. Let's copy the code below into our <code>application.css.scss</code>(I changed the footer height to be 120px instead of 60px).
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/3b14aac6897e29b3207b.js"></div>
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/3b14aac6897e29b3207b.json"></div>
 
 <p>
   Then what we're going to do is wrap all of our content in a div with an id of "wrap". So right before the code for the navbar begins (right after the opening body tag and right before the opening nav), let's add &lt;div id = "wrap"&gt; and close the div right before the closing body tag.
@@ -18,7 +18,7 @@
   Right after the closing div that we just inserted, let's steal the footer code from the StackOverflow post above and paste it into our code. It should look something like this.
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/49dc11408667e67306aa.js"></div>
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/49dc11408667e67306aa.json"></div>
 
 <p>
 	Make sure to put the footer code right before the closing body tag and also right after the closing div tag for the div id = "wrap".
@@ -52,13 +52,13 @@
 	Let's add 2 more of these divs in the footer to make 3 rows on a medium screen. Let's also remember not to forget to wrap it in a row. So now it should look something like this.
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/92eebd0fd11cc8a3d4fb.js"></div>
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/92eebd0fd11cc8a3d4fb.json"></div>
 
 <p>
   Now we can add content inside of here. Feel free to add whatever you want inside of here. This is what I added to my app.
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/1db9562330648194efe9.js"></div>
+<div class = "gist" data-src="https://gist.github.com/takehiromouri/1db9562330648194efe9.json"></div>
 
 <p>
   Notice how I used font awesome icons to make the social logos look awesome. Browsing around font awesome's site to look for cool icons is fun! :)
