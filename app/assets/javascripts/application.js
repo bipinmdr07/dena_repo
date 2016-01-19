@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
@@ -18,12 +19,12 @@
 //= require turbolinks
 //= require_tree .
 
-ready = ->
-  hljs.initHighlightingOnLoad();
-
-$(document).ready(ready)
-$(document).on('page:load', ready)
-
+$(document).on('page:change',  function() {
+  $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+});
+$(document).on('page:restore', function() {
+  $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+});
 
 var loadGist, loadGists;
 
