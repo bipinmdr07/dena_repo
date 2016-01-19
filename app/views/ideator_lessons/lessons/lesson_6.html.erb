@@ -1,0 +1,37 @@
+<h1><%= title_for(IdeatorLesson, 3, 2) %></h1>
+
+<p>
+	This is going to be your first self directed lesson. The purpose of these lessons is so that you actually start learning how to implement things on your own based on what you’ve learned throughout these lessons.
+</p>
+
+<p>
+	In this self directed lesson, the goal is to implement a navbar using bootstrap according to our wireframe that we drew up before.
+</p>
+
+<p>
+	What we want is a brand on the left and 3 links aligned to the right.
+</p>
+
+<p>
+	If you need a hint, refer to this lesson.
+</p>
+
+<p>
+	Best of luck! I know you’ll get through this! :)
+</p>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>
+
+<script>
+$( '#HideHighFive' ).click(function() {
+	$( '#HideHighFive' ).hide();
+	$( " #HighFive " ).show();
+  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
+  $( '#HideHighFive' ).delay(2000).show(0);
+});
+</script>
+

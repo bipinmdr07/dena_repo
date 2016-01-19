@@ -1,0 +1,114 @@
+<h1><%= title_for(IdeatorLesson, 3, 3) %></h1>
+
+<p>
+	Now that we’ve got a navbar, let’s go ahead and make it sexy.
+</p>
+
+<p>
+	First, if you haven’t done so, let’s replace the “Brand” text in the navbar with “Ideator”.
+</p>
+
+<p>
+	In order to make this font sexy, we’re going to be using a custom font.
+</p>
+
+<p>
+	There are many websites that allow you to install fonts to your website. One of the easiest ways to implement a font is to use <strong>Google Fonts</strong>. So let’s go ahead and do that.
+</p>
+
+<p>
+	If we go to <a href = "https://www.google.com/fonts" target = "_blank">Google Fonts</a>, we can see that there are a bunch of fonts that we can use.I like the font “Pacifico” so I’m going to go ahead and search for “Pacifico” in the search bar.
+</p>
+
+<p>
+	Once we do that, we should be taken to a screen that looks like this. Click on the button with the arrow.
+</p>
+
+<p>
+	If we scroll down to “3. Add this code to your website:”, you can see that it gives us ways to import the font into the website.
+	We’re just going to copy and paste the code that they have here and put it in our <head> section in application.html.erb.
+</p>
+
+<p>
+	So let’s go ahead and go into sublime and open up application.html.erb. In your <head> section, add in the code. It should look something like this:
+</p>
+
+<pre><code class="html">&lt;link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'&gt;</code></pre>
+
+<p>
+	Great! Just like that, the font can now be used.
+</p>
+
+<p>
+	To use this font for the brand, if we go back to the bootstrap navbar we implemented and focus on where the brand text belongs to, we notice that it belongs to a navbar-brand class. This means that we can apply CSS styling to .navbar-brand to apply our new font.
+</p>
+
+<p>
+	In <code>application.css.scss</code>, let’s apply the font to our brand by adding this line:
+</p>
+
+<pre><code class = "css">
+.navbar-brand {
+  font-family: 'Pacifico'
+}
+</code></pre>
+ 
+<p>
+	Let’s go back into our browser and refresh our <code>localhost:3000</code>. Awesome! It looks great.
+</p>
+
+<p>
+	Now that we’ve got our brand name looking pretty awesome, I want to change the color of the navbar itself. If we go into Google Chrome and right click on the navbar and select inspect, it will open up Google Developer Tools.
+</p>
+
+<p>
+	Try to find the section where the navbar’s color is being determined.
+</p>
+
+<p>
+	If you found correctly, the .navbar-default class is responsible for the color of the navbar. Since I want a clean looking site, I’m going to change the background color of .navbar-default to white.
+</p>
+
+<p>So let’s go into our <code>application.css.scss</code> and add this in.</p>
+
+<pre><code class = "css">
+.navbar-default {
+  background-color: white;
+}
+</code></pre>
+
+<p>
+	Cool, now we’ve got a nice simple color. The other thing I want to do now is change how the font is styled in the navbar.
+</p>
+
+<p>
+	We can do this by adding this to our <code>application.css.scss</code>
+</p>
+
+<pre><code class = "css">
+.navbar-default .navbar-brand {
+  font-weight: 100;
+  letter-spacing: 8px;
+  font-size: 30px;
+}
+</code></pre>
+
+<p>
+	Feel free to play around with these in Google Developer Tools. You can achieve many different styles by playing around with font-weight and letter-spacing. Super fun stuff!
+</p>
+
+<br class = "clear">
+
+<%= render 'lesson_nav_section' %>
+
+<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>
+
+<script>
+$( '#HideHighFive' ).click(function() {
+	$( '#HideHighFive' ).hide();
+	$( " #HighFive " ).show();
+  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
+  $( '#HideHighFive' ).delay(2000).show(0);
+});
+</script>
+
