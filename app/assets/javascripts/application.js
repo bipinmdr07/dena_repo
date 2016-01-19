@@ -18,6 +18,13 @@
 //= require turbolinks
 //= require_tree .
 
+ready = ->
+  hljs.initHighlightingOnLoad();
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
+
+
 var loadGist, loadGists;
 
 $(function() {
