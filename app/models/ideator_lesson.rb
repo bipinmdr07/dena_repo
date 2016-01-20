@@ -28,6 +28,13 @@ class IdeatorLesson < ActiveRecord::Base
 				[12, "Creating a Form"],
 				[13, "Moving the Form into a Modal"]
 			]
+		],
+		["Updating and Deleting Ideas",
+			[
+				[14, "Editing and Updating Ideas"],
+				[15, "Validate User Input - Validations"],
+				[16, "Deleting Ideas and Adding Links"]
+			]
 		]
 	]
 end

@@ -1,0 +1,50 @@
+<h1><%= title_for(IdeatorLesson, 5, 2) %></h1>
+
+<p>
+  In our form, let's think about what we want to do if a user enters invalid data. For example, if a user tries to enter an idea without specifying an author, we should probably not accept that. We should also not accept an idea that doesn't have a description.
+</p>
+
+<p>
+  We can make sure that these kinds of invalid data do not get stored in the database by using <strong>validations</strong> in rails.
+</p>
+
+<p>
+  There are different kinds of validations that you can use in rails (read about them <a href="http://guides.rubyonrails.org/active_record_validations.html" target="_blank">here</a>). For now, we are just going to validate that a <code>description</code> and <code>author</code> exists for every Idea.
+</p>
+
+<p>
+  Go into <code>idea.rb</code>. This is where we can add our validation. Inside your <code>idea.rb</code>, let's add the following piece of code to look like this:
+</p>
+
+<pre><code class="ruby">
+class Idea &lt; ActiveRecord::Base
+  validates :description, :author, presence: true
+end
+</code></pre>
+
+<p>
+  So here we are saying that we want to validate that the <code>presence</code> is <code>true</code> for <code>:description</code> and <code>:author</code>.
+</p>
+
+<p>
+  Now if we look back to our <code>update</code> method, we can now see why we wanted to check if the idea was successfully updated.
+</p>
+
+<pre><code class="ruby">
+def update
+  @idea = Idea.find(params[:id])
+  if @idea.update(idea_params)
+    redirect_to root_path
+  else
+    redirect_to edit_idea_path(params[:id])
+  end
+end
+</code></pre>
+
+<p>
+  If a user passes in invalid data, in this case not filling in the author or description, then <code>@idea.update(idea_params)</code> will return false, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
+</p>
+
+<p>
+ Pretty simple right? :) Congrats on writing your first validation!
+</p>

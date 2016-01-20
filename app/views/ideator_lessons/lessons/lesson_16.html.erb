@@ -1,0 +1,101 @@
+<h1><%= title_for(IdeatorLesson, 5, 3) %></h1>
+
+<p>
+  Now that we have put in the update function, let's now add in functionality for deleting ideas.
+</p>
+
+<p>
+  Like we did for all of our other actions, let's add a method in <code>ideas_controller.rb</code>. Add the following right after the update method.
+</p>
+
+<pre><code class="ruby">
+def destroy
+  @idea = Idea.find(params[:id])
+  @idea.destroy
+  redirect_to :back
+end
+</code></pre>
+
+<p>
+  Let's walk through this. First, we are saying again to find the Idea with the <code>:id</code> specified in the URL and then to store that in <code>@idea</code>. Then we are saying <code>.destroy</code> that <code>@idea</code>. Lastly, we are telling it to redirect to <code>:back</code>, which is a useful piece of code that points to the previous page the user was on.
+</p>
+
+<p>
+  Now how do we trigger this destroy method? Let's create a link to destroy ideas. Go into <code>index.html.erb</code> and let's add a delete link.
+</p>
+
+<p>
+  First, if we go into console and type in <code>rake routes</code>, we can look for the link to the destroy method. It tells me that <code>idea_path</code> is the link. So we can make a link like below:
+</p>
+
+<pre><code class = "ruby">&lt;%= link_to 'Delete', idea_path(idea) %&gt;</code></pre>
+
+<p>
+  The <code>idea</code> in between the ()s after <code>idea_path</code> refer to the <code>idea</code> declared by the <code>each</code> loop. It is just another paramter that we need to pass through to let rails know which idea we are destroying.
+</p>
+
+<p>
+  With this link unfortunately, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as GET, PATCH, PUT. This means that we need to specify which verb we are going to trigger. In this case, this is DELETE. We can specify this by adding <code>method: :delete</code> like this:
+</p>
+
+<pre><code class = "ruby">&lt;%= link_to 'Delete', idea_path(idea), method: :delete %&gt;</code></pre>
+
+<p>
+  Now let's just add some design by giving it some bootstrap buttons and then pulling it all the way to the left:
+</p>
+
+<pre><code class = "ruby">&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-right' %&gt;</code></pre>
+
+<p>
+  Finally, we want to alert the user that they are deleting an idea. We want to display some sort of pop up. We can do this by adding <code>data: {confirm: "Are you sure?"}</code> like this:
+</p>
+
+<pre><code class="ruby">&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;</code></pre>
+
+<p>
+  Awesome! Let's now add that in to our HTML.
+</p>
+
+<pre><code class="html">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
+      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  While we're at it, let's also add a link to edit ideas. Right below the delete link, let's add a link to the edit page:
+</p>
+
+<pre><code class="html">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
+      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm pull-left' %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  If you haven't noticed, we can add links in rails like this:
+</p>
+
+<pre><code class="ruby">&lt;%= link_to 'Any text here', link_path_here, any_other_option_here %&gt;</code></pre>
+
+<p>
+  To figure out the link path, you simply type in <code>rake routes</code> and find the corresponding <code>prefix</code>, such as <code>edit_idea</code> or <code>idea</code>, and then add <code>_path</code> after that. For example <code>edit_idea_path</code> and <code>idea_path</code>. Sometimes, depending on the action, you need to pass in parameters to let rails know which thing to tamper with. For example for <code>edit_idea_path</code>, we need to tell rails which idea to edit, so we pass in a parameter like this: <code>edit_idea_path(some_idea_here)</code>. Got it? :)
+</p>
+
+
+

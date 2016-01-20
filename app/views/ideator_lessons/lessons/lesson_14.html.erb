@@ -1,0 +1,96 @@
+<h1><%= title_for(IdeatorLesson, 5, 1) %></h1>
+
+<p>
+  Now that we're able to create our ideas smoothly, let's go into telling rails how to edit and update the ideas that we've created.
+</p>
+
+<p>
+  To do this, we're going to go into our controller again and add an <code>edit</code> method. In <code>ideas_controller.rb</code>, add the follow code under your <code>create</code> method.
+</p>
+
+<pre><code class="ruby">
+def edit
+end
+</code></pre>
+
+<p>
+  Just a little refresher: methods in the controller correspond to the view files with the same name as the method. So in this case, let's create a <code>edit.html.erb</code> under <code>/app/views/ideas/edit.html.erb</code>.
+</p>
+
+<p>
+  This is where we want to put our form for editing ideas. Since we want to be able to pull the idea that we are editing, let's tell rails to find the idea that we are on and store that in an instance variable.
+</p>
+
+<pre><code class="ruby">
+def edit
+  @idea = Idea.find(params[:id])
+end
+</code></pre>
+
+<p>
+  This is a new concept. Here we are saying, let's <code>find</code> an Idea with <code>params[:id]</code> and then store that in an instance variable called idea. But wait, what is this <code>params[:id]</code>?
+</p>
+
+<p>
+  Here, we have another example of a parameter. If we go to our console and type <code>rake routes</code>, you will see a bunch of stuff. If you look at the URI pattern column, you will see that some have <code>/:id(.:format)</code> at the end of the URI. This <code>:id</code> is the key. Rails passes this <code>:id</code> down to the application so that you can use this as a paramater, like we are doing here.
+</p>
+
+<p>
+  In other words, from the URL, rails can tell which idea you are editing. For example, if you are editing an Idea with an id of 1, your url will look something like <code>www.urlhere.com/ideas/edit/1</code>. In this case, 1 is the <code>:id</code>. For an Idea with an id of 123, the url would look something like <code>www.urlhere.com/ideas/edit/123</code>. In this case, 123 is the <code>:id</code>. Then in your controller or views, you can grab this variable with <code>params[:id]</code>.
+</p>
+
+<p>
+  So again, basically we are telling rails here to find the <code>:id</code> from the URL and then finding an Idea with that id, and then we're storing it in <code>@idea</code>. Make sense?
+</p>
+
+<p>
+  Now let's hop into <code>edit.html.erb</code>. Here we can actually use similar code that we have used before for creating new ideas. Make the file look like this:
+</p>
+
+<pre><code class="ruby">
+&lt;h1>Revise Idea&lt;/h1&gt;
+
+&lt;%= simple_form_for @idea, method: :put do |f| %&gt;
+&lt;%= f.input :description %&gt;
+	&lt;%= f.input :author %>&gt;
+	&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+
+
+<p>
+  The only difference here is that on the first line of the simple form we are adding <code>method: :put</code>. This is just indicating that we are performing a PUT action, which indicates that the form's purpose is to perform an update. If we look at rake routes and look at the VERB, where it lists out "VERB"s like GET, PATCH, PUT, DELETE etc. we can see that it corresponds to a controller action. For example, for GET, we see that it corresponds to ideas#index. For PUT, it corresponds to ideas#update. This means that when we submit this form, it will trigger the update method in the ideas controller.
+</p>
+
+<p>
+  Right now we don't have an update method, so let's add that in our IdeasController.
+</p>
+
+<p>
+  Under our <code>edit</code> method, add the following code:
+</p>
+
+<pre><code class="ruby">
+def update
+  @idea = Idea.find(params[:id])
+  if @idea.update(idea_params)
+    redirect_to root_path
+  else
+    redirect_to edit_idea_path(params[:id])
+  end
+end
+</code></pre>
+
+<p>
+  Let's go through what this code is doing. We're first doing that thing we did in the edit method - finding the Idea using the <code>:id</code> in the URL, and then storing that in <code>@idea</code>. Then we are saying if @idea updates successfully using the idea_params information, then redirect to the root path (the home page). If it doesn't update succcessfully, then redirect to the edit page that we were just on so that you enter correct information.
+</p>
+
+<p>
+  Why do we need to check if the idea was updated successfully? We'll talk about <strong>validations</strong> and get into why in the next lesson.
+</p>
+
+
+
+
+
