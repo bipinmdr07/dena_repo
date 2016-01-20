@@ -12,7 +12,7 @@ class IdeatorLesson < ActiveRecord::Base
 				[4, "Creating your First Page"]
 			]
 		],
-		["Developing your Front End",
+		["Making the Site Look Good",
 			[
 				[5, "Installing Bootstrap"],
 				[6, "Self Directed Lesson - Adding a Navbar"],
@@ -20,12 +20,13 @@ class IdeatorLesson < ActiveRecord::Base
 				[8, "Adding a Footer"]
 			]
 		],
-		["Playing with the Database",
+		["Dynamically Adding Ideas",
 			[
 				[9, "Creating a Model"],
 				[10, "Adding an Idea"],
 				[11, "Styling our Index Page"],
-				[12, "Creating a Form"]
+				[12, "Creating a Form"],
+				[13, "Moving the Form into a Modal"]
 			]
 		]
 	]

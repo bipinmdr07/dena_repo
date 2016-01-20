@@ -1,3 +1,8 @@
 <div class = "col-sm-offset-1 col-sm-10">
 	<%= render :file => "app/views/ideator_lessons/lessons/lesson_#{@lesson}" %>
+	<br class = "clear">
+
+	<%= render 'lesson_nav_section' %>
+
+	<%= render partial: '/comments/for_lesson', locals: { name: 'IdeatorLessons', lesson: params[:id]} %>
 </div>
