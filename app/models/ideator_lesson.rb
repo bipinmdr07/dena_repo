@@ -35,6 +35,20 @@ class IdeatorLesson < ActiveRecord::Base
 				[15, "Validate User Input - Validations"],
 				[16, "Deleting Ideas and Adding Links"]
 			]
+		],
+		["Adding Other Pages",
+			[
+				[17, "Routing"],
+				[18, "Adding the About Page"],
+				[19, "Configuring the Random Page"]
+			]
+		],
+		["Final Touches",
+			[
+				[20, "Adding Pagination"],
+				[21, "Last Few Tweaks"],
+				[22, "Congratulations!"]
+			]
 		]
 	]
 end

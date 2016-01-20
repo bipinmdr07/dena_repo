@@ -1,0 +1,146 @@
+<h1><%= title_for(IdeatorLesson, 6, 2) %></h1>
+
+<p>
+  Now that we've got the "About" page, let's add the final page - the "Random" page. On this page, we want to somehow display one random idea from our database, and everytime a user refreshes the page, we want it to generate another random idea.
+</p>
+
+<p>
+  For the first few steps, let's do exactly what we did for the about page.
+</p>
+
+<p>
+  We're first going to create a file called <code>random.html.erb</code> under <code>/app/views/ideas/</code>.
+</p>
+
+<p>
+  Then we're going to go into our <code>ideas_controller.rb</code> and add the <code>random</code> method. In this method, we're going to try to store a random <code>Idea</code> into an instance variable so that we can use it in our <code>random.html.erb</code>.
+</p>
+
+<p>
+  It turns out that you can do this easily by doing this:
+</p>
+
+<pre><code class="ruby">
+@idea = Idea.order("RANDOM()").first
+</code></pre>
+
+<p>
+  What we are doing here is ordering all of our ideas and ordering them randomly. Then we are grabbing the first idea off the randomly ordered ideas, and then storing it into <code>@idea</code>.
+</p>
+
+<p>
+  <code>@idea</code> will now give us a random idea, so let's go into our <code>views</code> and display this.
+</p>
+
+<p>
+  Let's just list the random idea for now like this:
+</p>
+
+<pre><code class="html">
+&lt;%= @idea.description %&gt;
+&lt;%= @idea.author %&gt;
+</code></pre>
+
+<p>
+  If we go to <code>http://localhost:3000/random</code>, we see an idea and every time we refresh the page, a new idea comes up. Awesome!
+</p>
+
+<p>
+  Now we just want to put this in a panel, like we did on the index page. We're just going to pull the code from <code>index.html.erb</code> and tweak it a little bit:
+</p>
+
+<pre><code class="html">
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-body"&gt;
+    &lt;h3&gt;&lt;%= @idea.description %&gt;&lt;/h3&gt;
+    &lt;h4 class = "pull-right">by &lt;%= @idea.author %&gt;&lt;/h4&gt;
+    &lt;br&gt;
+    &lt;%= link_to 'Delete', idea_path(@idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+    &lt;%= link_to 'Revise', edit_idea_path(@idea), class: 'btn btn-sm pull-left' %&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>
+  If we refresh the page, we see that it's nicely dispayed now. Now let's add a button that will refresh the page for us.
+</p>
+
+<p>
+  On the top of <code>random.html.erb</code>, let's add a link to the random page and give it some bootstrap button classes.
+</p>
+
+<pre><code class="html">
+&lt;%= link_to 'Inspire Me', random_path, class: 'btn btn-primary btn-block' %&gt;
+</code></pre>
+
+<p>
+  If we refresh the page, we see the button! If we click on it, another idea is displayed. Awesome!
+</p>
+
+<p>
+  There's one little gotcha for this page though. The page wil actually give us an error the <code>@idea</code> is <code>nil</code> if we don't have any ideas. This isn't good and it means that we need to tinker with the code here.
+</p>
+
+<p>
+  What we can do is use an <code>if else</code> statement and say, if <code>@idea</code> is present, then we display the button and the random idea, else display some message saying there are no ideas.
+</p>
+
+<p>
+  We can actually do this pretty simply in our views.
+</p>
+
+<pre><code class="html">
+
+&lt;% if @idea %&gt;
+  &lt;%= link_to 'Inspire Me', random_path, class: 'btn btn-primary btn-block' %&gt;
+    
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;h3&gt;&lt;%= @idea.description %&gt;&lt;/h3&gt;
+      &lt;h4 class = "pull-right">by &lt;%= @idea.author %&gt;&lt;/h4&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(@idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(@idea), class: 'btn btn-sm pull-left' %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% else %&gt;
+  
+  &lt;h4&gt;No ideas have been shared. Add one &lt;%= link_to 'here' root_path %&gt;&lt;/h4&gt;
+
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  In case you were wondering, in Ruby, instead of writing something like <code>if something.present?</code> we can simpy say <code>if something</code> and it would return true if <code>something</code> existed. In our case we are checking if <code>@idea</code> is present simply by adding <code>if @idea</code>.
+</p>
+
+<p>
+  Sweet, you've now added all of the pages succesfully! The final step in this lesson is to add a link to the random page in the navbar.
+</p>
+
+<p>
+  Go to <code>application.html.erb</code> in Sublime and above the link to the "About" page, add the "Random" page link. I named my page the "Inspire Me" page, just because it sounds cooler :D
+</p>
+
+<p>
+  Again, let's try to generate this link yourself. A hint is to look into your <code>rake routes</code>!
+</p>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "\<%= link_to 'Inspire Me', random_path %\>", number: 1 } %>
+
+<br class="clear">
+
+
+<p>
+  Congratulations! You've now officially built a fully functional app! The next few steps will be the final touches to get your app fully in shape :)
+</p>
+
+
+
+
+
+
+
+
+
+

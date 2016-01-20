@@ -1,0 +1,63 @@
+<h1><%= title_for(IdeatorLesson, 6, 2) %></h1>
+
+<p>
+  Under <code>/app/views/ideas/</code> make a file called <code>about.html.erb</code>.
+</p>
+
+<p>
+  This is just going to be a static page, so you can put any kind of text here. For me, I just put in a bunch of filler text for now, but it looks like this:
+</p>
+
+<pre><code class="html">
+&lt;h1&gt;About&lt;/h1&gt;
+
+&lt;h4&gt;Share you ideas with the world and find others.&lt;/h4&gt;
+
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+</code></pre>
+
+<p>
+  By the way, you can trigger this "Lorem ipsum" filler text in Sublime by typing in "lorem" and then hitting tab. Nice trick to have :)
+</p>
+
+<p>
+  Now let's hook this up to the navigation bar so that people can go to the about page. Go to <code>application.html.erb</code>.
+</p>
+
+<p>
+  By now, you should have a grasp on how <code>link_to</code> works in rails. Try and see if you can generate the link yourself.
+</p>
+
+
+<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "\<%= link_to 'About', about_path %\>", number: 1 } %>
+
+<br class="clear">
+
+<p>
+  Awesome! Let's now move on to building the "Random" page.
+</p>
