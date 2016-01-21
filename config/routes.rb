@@ -30,4 +30,6 @@ Rails.application.routes.draw do
   get 'ideator_lessons/:id', :to => 'ideator_lessons#show', :as => 'ideator_lessons'
 
   get 'courses',   :to => 'static_pages#courses'
+
+  get 'pricing', :to => 'static_pages#pricing'
 end
