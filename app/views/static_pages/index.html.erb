@@ -38,7 +38,8 @@
 </header>
 
 <!-- Skills Grid Section -->
-<section id="portfolio">
+<section id="skills">
+  <a class = "anchor" id = "skills_you_will_learn"></a>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -59,7 +60,8 @@
 </section>
 
 <!-- For Who Section -->
-<section class="success" id="for_who">
+<section class = "success" id="for_who">
+  <a class = "anchor" id = "is_techrise_for_me"></a>
     <div class="container">
 
         <div class="row">
@@ -110,7 +112,8 @@
 
 
 <!-- Why Techrise Section -->
-<section id="portfolio">
+<section id="why_techrise">
+  <a class = "anchor" id = "why_us"></a>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -147,6 +150,7 @@
 
 <!-- About Section -->
 <section class="success" id="about">
+  <a class = "anchor" id = "about_us"></a>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -194,6 +198,7 @@
 
 <!-- Contact Section -->
 <section id="contact">
+  <a class = "anchor" id="contact_us"></a>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -232,4 +237,20 @@
 $('form').on('ajax:success', function(event, data, status, xhr) {
   $('#contact_message').val('Thanks for your message!')
 });
+
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+
 </script>
