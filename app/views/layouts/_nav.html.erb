@@ -28,6 +28,10 @@
                 <% if user_signed_in? %>
 
                     <li class="page-scroll">
+                      <%= link_to 'ADMIN DASHBOARD', admin_dashboard_path %>
+                    </li>
+
+                    <li class="page-scroll">
                       <%= link_to 'SETTINGS', edit_user_registration_path %>
                     </li>
 
