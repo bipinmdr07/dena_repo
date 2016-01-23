@@ -8,10 +8,10 @@
 	You can see all the files that rails generated for us. Now we’re going to generate some more. Let’s hop into our terminal and type in this command:
 </p>
 
-<code>rails generate controller ideas</code>
+<pre><code>rails generate controller ideas</code></pre>
 
 <p>
-	This will generate a lot of files again. Don’t worry too much about what this piece of code does yet. Things will start coming together as we progress, but for now we want you to start building an app first. This will keep you motivated from the start and help you overcome the first initial wall.
+	This command generates a <code>controller</code> called <code>ideas</code> for you and will also generate a lot of files again. Don’t worry too much about what this piece of code does yet. Things will start coming together as we progress, but for now we want you to start building an app first. This will keep you motivated from the start and help you overcome the first initial wall.
 </p>
 
 <p>
@@ -19,23 +19,29 @@
 </p>
 
 <p>
-	Inside the ideas_controller, let’s add an index method. 
+	Inside <code>ideas_controller.rb</code>, let’s add an <code>index</code> method like this. 
 </p>
 
-<gist>
+<pre><code class="ruby">
+class IdeasController &lt; ApplicationController
+  def index
+  end
+end
+</code></pre>
 
 <p>
 	Now when we ran <code>rails generate controller ideas</code>, we also generated an ideas folder in the views folder. Views are basically where all of the html files are stored (html files can be “view”ed, hence they are called Views”.
 </p>
 
 <p>
-	Let’s right click on that ideas folder and create a new file. Let’s save that file as index.html.erb.
+	Let’s right click on that ideas folder and create a new file. Let’s save that file as <code>index.html.erb</code>.
 </p>
 
 <p>
-	Inside index.html.erb, let’s add 
-	<code>&lt;h1&gt;This is my first app ever and I’m super excited to become a coder&lt;/h1&gt;</code>
+	Inside index.html.erb, let’s add this:
 </p>
+
+<pre><code class="html">&lt;h1&gt;This is my first app ever and I’m super excited to become a coder&lt;/h1&gt;</code></pre>
 
 <p>Awesome! Now let’s hop back into our browser and refresh <code>localhost:3000</code>.</p>
 
@@ -46,7 +52,7 @@
 </p>
 
 <p>
-	Inside sublime let’s open up routes.rb. This is the file where you can tell rails how you want to ‘route’ your pages.
+	Inside sublime let’s open up <code>routes.rb</code>. This is the file where you can tell rails how you want to ‘route’ your pages, meaning you can tell rails how to generate URLs.
 </p>
 
 <p>
@@ -79,15 +85,15 @@
 
 <p>We’re first going to add all the files that we just updated:</p>
 
-<code>git add .</code>
+<pre><code>git add .</code></pre>
 
 <p>Then we’re going to add a commit message describing what we just updated:</p>
 
-<code>git commit -am “Add ideas controller and set ideas#index as root”</code>
+<pre><code>git commit -am “Add ideas controller and set ideas#index as root”</code></pre>
 
 <p>And finally, push up to GitHub.</p>
 
-<code>git push origin master</code>
+<pre><code>git push origin master</code></pre>
 
 <p><strong>You’ll be doing this quite a lot and it will become second nature!</strong></p>
 

@@ -8,24 +8,22 @@
 </p>
 
 <p>
-	Open Postgre and keep it running. Let’s then open Tokaido and click Open Terminal.
+	Open Postgre and keep it running. Let’s then open Tokaido and click Open Terminal. Every time you work on this app, make sure to get these two things running.
 </p>
 
 <p>
-	In the terminal, let’s navigate to our desktop.
+	In the terminal, let’s navigate to our desktop by running the following command.
 </p>
 
 
-<code>cd ~/desktop</code>
+<pre><code class="bash">cd ~/desktop</code class="bash"></pre>
 
 <p>
 	This is where we’ll create our ideator app. In the terminal that we just opened up, let’s type in the following command.
 </p>
 
 
-<code>
-	rails new ideator --database=postgresql
-</code>
+<pre><code class="bash">rails new ideator --database=postgresql</code class="bash"></pre>
 
 <p>
 	This command magically creates a new rails application using the postgresql database. Awesome!
@@ -37,29 +35,29 @@
 
 
 <p>
-	Great, now that we’ve created our new rails app, let’s start this baby up. Let’s go into Tokaido and open up another terminal window and let’s navigate to our project folder.
+	Great, now that we’ve created our new rails app, let’s start this baby up. Let’s go into Tokaido and open up another terminal window. We want to have two terminal windows open since we want one for the server and one for typing in rails commands. In one of the terminal windows, let’s navigate to our project folder.
 </p>
 
-<code>cd ~/desktop/ideator</code>
+<code class="bash">cd ~/desktop/ideator</code class="bash">
 
 <p>
 	First we have to create our initial database. In the console enter
 </p>
 
-<code>rake db:create:all</code><br>
-<code>rake db:migrate</code><br>
+<pre><code class="bash">rake db:create:all</code class="bash"></pre>
+<pre><code class="bash">rake db:migrate</code class="bash"></pre>
 
 <p>
 	Now let’s fire up our rails server by entering this command.
 </p>
 
-<code>rails server</code>
+<pre><code class="bash">rails server</code class="bash"></pre>
 
 <p>
 	Give it a few seconds to load. Now go into your browser and go to
 </p>
 
-<code>http://localhost:3000/</code>
+<pre><code class="bash">http://localhost:3000/</code class="bash"></pre>
 
 <p>
 	You should see a nice welcome page from Ruby on Rails.

@@ -17,36 +17,73 @@
 </p>
 
 <p>So like the documentation tells us, inside our gemfile let’s add</p>
-<code>gem 'bootstrap-sass', '~> 3.3.6'</code>
+<pre><code>gem 'bootstrap-sass', '~> 3.3.6'</code></pre>
 
 <p>Next, inside our console let’s run</p>
-<code>bundle install</code>
+<pre><code>bundle install</code></pre>
 
 <p>
 	This will install the gems for us. Everytime we run bundle install, we have to restart the server. Let’s go back into the console where the server is running and restart it.
 </p>
 
-<p>To do this, hit Command + C. To restart the server, hit the up arrow and press enter, or type in rails server again.</p>
+<p>To do this, hit Command + C to stop the server. Then to restart the server, hit the up arrow and press enter, or type in rails server again.</p>
 
 <p>Awesome. Next, it tells us to copy and paste some code. It’s telling us to rename application.css to application.scss. We could manually rename it, but the documentation also gives us a command that we can run in the console that does just this.</p>
 
-<code>mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss</code>
+<pre><code>mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss</code></pre>
 
 <p>Let’s run that command to rename the file.</p>
 
-<p>Now inside application.scss, let’s copy and paste the follow code like this:</p>
+<p>Now inside <code>application.scss</code>, let’s copy and paste the follow code like this:</p>
+
+<pre><code>
+@import "bootstrap-sprockets";
+@import "bootstrap";
+</code></pre>
+
+<p>Your <code>application.scss</code> should now look like this.</p>
 
 
-<code>@import "bootstrap-sprockets";</code><br>
-<code>@import "bootstrap";</code>
-<gist>
+<pre><code>
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+</code></pre>
 
-<p>The documentation tells us to  remove all the *= require_self and *= require_tree . statements from the sass file but let’s not worry about this and ignore it.</p>
+<p>The documentation tells us to  remove all the <code>*= require_self</code> and <code>*= require_tree .</code> statements from the sass file but let’s not worry about this and ignore it.</p>
 
-<p>Next it tells us to copy and paste this into application.js</p>
+<p>Next it tells us to copy and paste this into <code>application.js</code></p>
 
-<code>//= require jquery</code><br>
-<code>//= require bootstrap-sprockets</code>
+<pre><code>
+//= require jquery
+//= require bootstrap-sprockets
+</code></pre>
+
+<p>Your <code>application.js</code> should now look like this:</p>
+
+<pre><code>
+//= require jquery
+//= require bootstrap-sprockets
+//= require jquery_ujs
+//= require turbolinks
+//= require_tree .
+</code></pre>
+
+<p>Make sure the order of everything is just like above.</p>
 
 <p>Awesome. You should now be set.</p>
 
@@ -56,9 +93,11 @@
 	Let’s now commit this to GitHub so we don’t lose any of the changes.
 </p>
 
-<code>git add .</code><br>
-<code>git commit -am “Add bootstrap”</code><br>
-<code>git push origin master</code>
+<pre><code>
+git add .
+git commit -am “Add bootstrap”
+git push origin master
+</code></pre>
 
 
 

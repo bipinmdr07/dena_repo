@@ -25,12 +25,12 @@
 </p>
 
 <p>
-	If we scroll down to “3. Add this code to your website:”, you can see that it gives us ways to import the font into the website.
-	We’re just going to copy and paste the code that they have here and put it in our <head> section in application.html.erb.
+	If we scroll down to <strong>“3. Add this code to your website:”</strong>, you can see that it gives us ways to import the font into the website.
+	We’re just going to copy and paste the code that they have here and put it in our &lt;head&gt; section in application.html.erb.
 </p>
 
 <p>
-	So let’s go ahead and go into sublime and open up application.html.erb. In your <head> section, add in the code. It should look something like this:
+	So let’s go ahead and go into sublime and open up application.html.erb. In your &lt;head&gt; section, add in the code. It should look something like this:
 </p>
 
 <pre><code class="html">&lt;link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'&gt;</code></pre>
@@ -40,7 +40,7 @@
 </p>
 
 <p>
-	To use this font for the brand, if we go back to the bootstrap navbar we implemented and focus on where the brand text belongs to, we notice that it belongs to a navbar-brand class. This means that we can apply CSS styling to .navbar-brand to apply our new font.
+	To use this font for the brand, if we go back to the bootstrap navbar we implemented and focus on where the brand text belongs to, we notice that it belongs to a <code>navbar-brand</code> class. This means that we can apply CSS styling to .navbar-brand to apply our new font.
 </p>
 
 <p>
@@ -66,7 +66,7 @@
 </p>
 
 <p>
-	If you found correctly, the .navbar-default class is responsible for the color of the navbar. Since I want a clean looking site, I’m going to change the background color of .navbar-default to white.
+	If you found correctly, the <code>.navbar-default</code> class is responsible for the color of the navbar. Since I want a clean looking site, I’m going to change the background color of <code>.navbar-default</code> to white.
 </p>
 
 <p>So let’s go into our <code>application.css.scss</code> and add this in.</p>
@@ -98,12 +98,14 @@
 </p>
 
 <p>
-  Let’s now commit this to GitHub so we don’t lose any of the changes. From now on, we'll call this the standard git workflow.
+  Let’s now commit this to GitHub so we don’t lose any of the changes. From now on, we'll call this the <strong>standard git workflow</strong>.
 </p>
 
-<code>git add .</code><br>
-<code>git commit -am “Style navbar”</code><br>
-<code>git push origin master</code>
+<pre><code>
+git add .
+git commit -am “Style navbar”
+git push origin master
+</code></pre>
 
 
 
