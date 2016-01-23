@@ -41,38 +41,15 @@
                 </p>
 
                 <p>
-                  Our mission at Techrise is to get people hooked into web development and to teach people how to build things in a fun way. In the best case scenario, we would like to offer everything for free. On the other hand, we also want to make this project sustainable in order to keep delivering high quality content. If you are interested in learning with Techrise, please fill out the form below and we'll keep you updated.
+                  Our mission at Techrise is to get people hooked into web development and to teach people how to build things in a fun way. In the best case scenario, we would like to offer everything for free. On the other hand, we also want to make this project sustainable in order to keep delivering fun and engaging content. If you are interested in learning with Techrise, please fill out the form below and we'll keep you updated.
                 </p>
 
                 <p>
-                  Techrise is currently in beta, meaning we are still in the process of creating and testing the curriculum from scratch. It would be greatly appreciated if you could also kindly leave some feedback on the courses about what you liked, what you didn't like, what you want in future lessons, or anything else that might come to your mind. We'll send you a personal thank you note and future updates.
+                  Techrise is currently in beta, meaning we are still in the process of creating and testing the curriculum from scratch. It would be greatly appreciated if you could also kindly leave some feedback on the courses about what you liked, what you didn't like, what you want in future lessons, or anything else that might come to your mind. We'll send you a personal thank you note and send you future updates :)
                 </p>
 
 
-                <div class="row">
-                  <div class="col-lg-8 col-lg-offset-2">
-                      <%= simple_form_for Contact.new(params[:contact]), html: {id: "contactForm"}, remote: true do |f| %>
-                        <div class="row control-group">
-                          <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <%= f.input :name, required: true, placeholder: 'Name', class: 'form-control' %>
-                          </div>
-                        </div>
-
-                        <div class="row control-group">
-                          <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <%= f.input :email, required: true, placeholder: 'Email', class: 'form-control' %>
-                          </div>
-                        </div>
-
-                        <div class="row control-group">
-                          <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <%= f.input :message, as: :text, required: false, input_html: {rows: 6}, placeholder: 'Message', class: 'form-control' %>
-                          </div>
-                        </div>
-                        <%= f.button :submit, 'Send Message', class: 'btn btn-success btn-lg', id: 'ContactSubmit', data: { disable_with: "Sending..." } %>
-                      <% end %>
-                  </div>
-              </div>
+                
 
                 <!-- <ul class = "unindented_ul pricing_box">
                   <li><i class="fa fa-check"></i> Lifetime Access to Course Materials</li>
@@ -93,9 +70,48 @@
               </div> -->
             </div>
           </div>
-          <!-- end of What's Next section -->
-
+          <!-- end of What's Next section -->          
           
         </div>
     </div>
 </header>
+
+<!-- Contact Section -->
+<section id="contact">
+  <a class = "anchor" id="contact_us"></a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2>Keep Me Updated</h2>
+          <p>
+            Let us know if you want to be updated on future releases of courses. If you have some quick feedback for us, we will love you as well :)
+          </p>
+          <hr class="star-primary">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <%= simple_form_for Contact.new(params[:contact]), html: {id: "contactForm"}, remote: true do |f| %>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <%= f.input :name, required: true, placeholder: 'Name', class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <%= f.input :email, required: true, placeholder: 'Email', class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <%= f.input :message, as: :text, required: false, input_html: {rows: 6}, placeholder: 'Message', class: 'form-control' %>
+              </div>
+            </div>
+            <%= f.button :submit, 'Send Message', class: 'btn btn-success btn-lg', id: 'ContactSubmit', data: { disable_with: "Sending..." } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</section>
