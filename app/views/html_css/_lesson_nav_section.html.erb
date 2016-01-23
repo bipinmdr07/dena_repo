@@ -3,5 +3,11 @@
   	Understand the gist? Cool, let's move on.
 	</p>
 	<%= link_to 'Previous Lesson', html_css_lesson_path(@prev_lesson), class: 'btn btn-warning btn-lg' if @prev_lesson > 0 %>
-	<%= link_to 'Next Lesson', html_css_lesson_path(@next_lesson), class: 'btn btn-success btn-lg' if @next_lesson %>
+
+  <% if @next_lesson < 15 %>
+	 <%= link_to 'Next Lesson', html_css_lesson_path(@next_lesson), class: 'btn btn-success btn-lg' %>
+  <% else %>
+    <%= link_to 'Next Step', congratulations_path, class: 'btn btn-success btn-lg' %>
+  <% end %>
+
 </div>

@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 	before_filter :authenticate_user!, only: [:courses]
+
   def index
-  	
   	if current_user.present?
 			redirect_to courses_path
 		else
@@ -10,6 +10,10 @@ class StaticPagesController < ApplicationController
   end
 
   def pricing
+    render layout: "landing_page"
+  end
+
+  def congratulations
     render layout: "landing_page"
   end
 
