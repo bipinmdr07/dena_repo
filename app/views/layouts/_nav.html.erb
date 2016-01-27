@@ -28,7 +28,7 @@
                 <% if user_signed_in? %>
 
                     <li class="page-scroll">
-                      <%= link_to 'ADMIN DASHBOARD', admin_dashboard_path %>
+                      <%= link_to 'ADMIN DASHBOARD', admin_dashboard_path if current_user.admin %>
                     </li>
 
                     <li class="page-scroll">
