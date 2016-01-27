@@ -12,9 +12,9 @@
   Here you can type in rails commands that you can send to your app. Let's add an Idea to our app through this console. Type in the following:
 </p>
 
-<code>
+<pre><code class="ruby">
 Idea.create(description: "This is the greatest idea ever", author: "Me")
-</code>
+</code></pre>
 
 <p>
   Here we are saying, create an idea with the following information (description: "This is the greatest idea ever", author: "Me").
@@ -48,9 +48,9 @@ Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
   In our index method, let's add the following:
 </p>
 
-<code>
+<pre><code class="ruby">
 @ideas = Idea.all
-</code>
+</code></pre>
 
 <p>
   In rails, the methods in the controller correspond to the view files with the same name. What that means is basically if you have a method called <code>index</code> in your <code>IdeasController</code> and you also have a file called <code>index.html.erb</code> under <code>/views/ideas/index.html.erb</code>, then you can tell how <code>index.html.erb</code> should behave in the <code>index</code> method of <code>IdeasController</code>.

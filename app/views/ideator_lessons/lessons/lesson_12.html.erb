@@ -20,7 +20,8 @@ class IdeasController &lt; ApplicationController
 
 	def create
 	end
-end</code></pre>
+end
+</code></pre>
 
 <p>
   Inside this <code>create</code> method, we're going to <code>.create</code> an <code>Idea</code>.
@@ -40,19 +41,19 @@ end</code></pre>
 
 <pre><code class = "ruby">
 class IdeasController &lt; ApplicationController
-	def index
-		@ideas = Idea.all
-	end
+  def index
+    @ideas = Idea.all
+  end
 
-	def create
-		@idea = Idea.create(idea_params)
-	end
+  def create
+    @idea = Idea.create(idea_params)
+  end
 
-	private
+  private
 
-	def idea_params
-		params.require(:idea).permit(:description, :author)
-	end
+  def idea_params
+    params.require(:idea).permit(:description, :author)
+  end
 end
 </code></pre>
 
@@ -62,20 +63,20 @@ end
 
 <pre><code class = "ruby">
 class IdeasController &lt; ApplicationController
-	def index
-		@ideas = Idea.all
-	end
+  def index
+    @ideas = Idea.all
+  end
 
-	def create
-		@idea = Idea.create(idea_params)
-		redirect_to root_path
-	end
+  def create
+    @idea = Idea.create(idea_params)
+    redirect_to root_path
+  end
 
-	private
+  private
 
-	def idea_params
-		params.require(:idea).permit(:description, :author)
-	end
+  def idea_params
+    params.require(:idea).permit(:description, :author)
+  end
 end
 </code></pre>
 
@@ -99,19 +100,25 @@ end
   The first thing it tells us to do is to add the gem to your Gemfile. So in your Gemfile, add this line:
 </p>
 
-<pre><code>gem 'simple_form'</code></pre>
+<pre><code>
+gem 'simple_form'
+</code></pre>
 
 <p>
   Then run the following command to install it:
 </p>
 
-<pre><code class="irb">bundle install</code></pre>
+<pre><code>
+bundle install
+</code></pre>
 
 <p>
   For the last step, we are going to run the generator that integrates simple form with bootstrap. So let's run this command.
 </p>
 
-<pre><code class="irb">rails generate simple_form:install --bootstrap</code></pre>
+<pre><code>
+rails generate simple_form:install --bootstrap
+</code></pre>
 
 <p>
   Awesome. Remember, every time we run <code>bundle install</code>, we should restart the server. So let's go ahead and do that.
@@ -123,9 +130,9 @@ end
 
 <pre><code class="ruby">
 &lt;%= simple_form_for Idea.new do |f| %&gt;
-	&lt;%= f.input :description %&gt;
-	&lt;%= f.input :author %&gt;
-	&lt;%= f.submit 'Submit' %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.input :author %&gt;
+  &lt;%= f.submit 'Submit' %&gt;
 &lt;% end %&gt;
 </code></pre>
 
@@ -139,9 +146,9 @@ end
 
 <pre><code class="ruby">
 &lt;%= simple_form_for Idea.new do |f| %&gt;
-	&lt;%= f.input :description %&gt;
-	&lt;%= f.input :author %&gt;
-	&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.input :author %&gt;
+  &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
 &lt;% end %&gt;
 </code></pre>
 
