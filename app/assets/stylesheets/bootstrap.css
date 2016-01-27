@@ -1560,7 +1560,7 @@ kbd kbd {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
-pre {
+/*pre {
   display: block;
   padding: 10px;
   margin: 0 0 10.5px;
@@ -1580,7 +1580,7 @@ pre code {
   white-space: pre-wrap;
   background-color: transparent;
   border-radius: 0;
-}
+}*/
 .pre-scrollable {
   max-height: 340px;
   overflow-y: scroll;

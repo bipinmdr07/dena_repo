@@ -5,21 +5,53 @@
 </p>
 
 <p>
-  Let's make a new project folder again. I'm going to create a new folder in my Documents called "Landing Page Mock" and that's where I'm going to save my file. You can call your folder whatever you like, but make sure you save everything in that folder.
+  Let's make a new project folder. I'm going to create a new folder in my Documents called <code>Landing Page Mock</code> and that's where I'm going to save my file. You can call your folder whatever you like, but make sure you save everything in that folder.
 </p>
 
 <p>
-  Let's then open up Sublime and open a new file (hit command + N for Mac, control + N for Windows) and save this file as "index.html". Let's also make sure to save this file in your folder that you just created, so for me I'm making sure I save it in the folder called "Landing Page Mock".
+  Let's then open up Sublime and open a new file (hit command + N for Mac, control + N for Windows) and save this file as <code>index.html</code>. Let's also make sure to save this file in your folder that you just created, so for me I'm making sure I save it in the folder called <code>Landing Page Mock</code>.
 </p>
 
 <p>
   Now that we've saved this file as an HTML file, we can go ahead and start writing HTML code in here. Let's start off by adding our standard HTML tags.
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/e39bf18ff7b85f836046.json"></div>
+<pre><code class="html">
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+
+</code></pre>
 
 <p>
-	Let's add an h1 to our body and add the text "Hello" to see if this actually works. Let's add it in and right click on the Sublime Text interface. Select "Open in Browser" and check if the page says "Hello".
+	Let's add an <code>h1</code> to our body and add the text <code>Hello</code> to see if this actually works. Make your <code>index.html</code> look like this:
+</p> 
+
+<pre><code class="html">
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Hello&lt;/h1&gt;
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+
+</code></pre>
+
+<p>
+  Save the file and right click in Sublime Text. Select "Open in Browser" and check to see if the page says "Hello".
 </p>
 
 <p>
@@ -27,10 +59,26 @@
 </p>
 
 <p>
-  If we scroll down on this page, the first thing it says is something about a Bootstrap CDN. CDN stands for Content Delivery Network, and it basically provides developers with a bunch of files without having to download them into your computer or server. So in our case, instead of manually downloading Bootstrap's CSS and JavaScript files and adding them into our site, we can simply just copy and paste this little code that they have for us to add it in, and we'd have access to the Bootstrap CSS/JavaScript files. Pretty awesome right? Let's go ahead and add the Bootstrap CDN files into our head section of our HTML.
+  If we scroll down on this page, the first thing it says is something about a Bootstrap CDN. <strong>CDN stands for Content Delivery Network, and it basically provides developers with a bunch of files without having to download them into your computer or server.</strong> So in our case, instead of manually downloading Bootstrap's CSS and JavaScript files and adding them into our site, <strong>we can simply just copy and paste this little code that they have for us</strong>, and we'd have access to the Bootstrap CSS/JavaScript files. Pretty awesome right? Let's go ahead and add the Bootstrap CDN files into our head section of our HTML.
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/cd3a438d277ff84a0ed1.json"></div>
+<pre><code class="html">
+&lt;html&gt;
+&lt;head&gt;
+  &lt;!-- Latest compiled and minified CSS --&gt;
+  &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"&gt;
+  &lt;!-- Latest compiled and minified JavaScript --&gt;
+  &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Hello&lt;/h1&gt;
+&lt;/body&gt;
+
+
+&lt;/html&gt;
+
+</code></pre>
 
 <p>
 	Now let's refresh the page and see what happens. Just like that, you should see the font of your "Hello" change to something much nicer. It should look something like this:
