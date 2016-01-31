@@ -21,16 +21,22 @@
 </p>
 
 <p>
-	Once we do that, we should be taken to a screen that looks like this. Click on the button with the arrow.
+	Once we do that, we should be taken to a screen that looks like the image below. Click on the button with the arrow in the bottom right hand corner.
 </p>
+
+<%= image_tag 'googlefonts.png', class: 'screenshot' %>
 
 <p>
 	If we scroll down to <strong>“3. Add this code to your website:”</strong>, you can see that it gives us ways to import the font into the website.
-	We’re just going to copy and paste the code that they have here and put it in our &lt;head&gt; section in application.html.erb.
+</p>
+
+<%= image_tag 'googlefonts2.png', class: "screenshot" %>
+<p>
+	We’re just going to copy and paste the code that they have here and put it in our &lt;head&gt; section in <code>application.html.erb</code>.
 </p>
 
 <p>
-	So let’s go ahead and go into sublime and open up application.html.erb. In your &lt;head&gt; section, add in the code. It should look something like this:
+	So let’s go ahead and go into sublime and open up <code>application.html.erb</code>. In your &lt;head&gt; section, add in the code. It should look something like this:
 </p>
 
 <pre><code class="html">
@@ -38,11 +44,11 @@
 </code></pre>
 
 <p>
-	Great! Just like that, the font can now be used.
+	Great! Just like that, the font can be used in our application.
 </p>
 
 <p>
-	To use this font for the brand, if we go back to the bootstrap navbar we implemented and focus on where the brand text belongs to, we notice that it belongs to a <code>navbar-brand</code> class. This means that we can apply CSS styling to .navbar-brand to apply our new font.
+	To use this font for the brand name in the navbar, we need to specify the font using CSS. If we go back to the bootstrap navbar we implemented and focus on which CSS class the brand text belongs to, we notice that it belongs to a <code>navbar-brand</code> class. This means that we can apply CSS styling to <code>.navbar-brand</code> to apply our new font.
 </p>
 
 <p>
@@ -84,7 +90,7 @@
 </p>
 
 <p>
-	We can do this by adding this to our <code>application.css.scss</code>
+	We can play around with the font styles by adding something like this to our <code>application.css.scss</code>
 </p>
 
 <pre><code class = "css">
@@ -95,9 +101,26 @@
 }
 </code></pre>
 
-<p>
-	Feel free to play around with these in Google Developer Tools. You can achieve many different styles by playing around with font-weight and letter-spacing. Super fun stuff!
-</p>
+<div class="well">
+  <h3>Font Styles</h3>
+
+  <p>
+    There are a number of different ways to style fonts. By applying different styles to fonts, you can drastically change the look and style of your website! Here are some of my favorites:
+  </p>
+
+  <p>
+    <code>font-weight</code>: This changes the "weight" of your font, or how skinny or fat your font is. It ranges from <code>100</code> (skinniest) to <code>600</code> (bold). Keep in mind that some fonts only have a few variations of font-weights so you won't be able to change the font-weights for those.
+  </p>
+
+  <p>
+    <code>letter-spacing</code>: This changes the amount of space between each letter. For example <span style="letter-spacing:3px;">a letter-spacing of 3px is applied to this text</span> and <span style="letter-spacing:10px;">a letter-spacing of 10px is applied to this text</span>. Pretty cool stuff :)
+  </p>
+
+  <p>
+    There a bunch more that you could use, but personally I like to play around with these two properties to achieve different styles.
+  </p>
+
+</div>
 
 <p>
   Let’s now commit this to GitHub so we don’t lose any of the changes. From now on, we'll call this the <strong>standard git workflow</strong>.
