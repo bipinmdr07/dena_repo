@@ -5,45 +5,48 @@
 </p>
 
 <p>
-	This time with rails, instead of using the CDN to use bootstrap, we are going to use a gem. Gems are basically super useful packages of code that solve common problems, for instance installing bootstrap in this case. There are gems for everything - forms, user log in/authentication, messagers, etc. Smart people have created these solutions for us already so it’s stupid to reinvent the wheel most of the time.
+	This time with rails, instead of using the CDN to use bootstrap, we are going to use a <strong>gem</strong>. <strong>Gems are basically super useful packages of code that solve common problems</strong>, for instance installing bootstrap in this case. There are gems for mostly every common problem - forms, user log in/authentication, messagers, etc. <strong>Smart people have created these solutions for us already so it’s stupid to reinvent the wheel most of the time.</strong>
 </p>
 
-<p>So let’s go ahead and install our first gem.</p>
+<p>Let’s go ahead and install our first gem.</p>
 
-<p>In sublime, let’s open up gemfile. You’ll see a bunch of gems inside this file.</p>
+<p>In sublime, let’s open up <code>gemfile</code>. You’ll see a bunch of gems inside this file.</p>
 
 <p>
-	Let’s add the bootstrap-sass gem here. The documentation can be found here https://github.com/twbs/bootstrap-sass. Typically, the instructions on how to install and use these gems are written inside.
+	In order to install bootstrap, we're going to add the <code>bootstrap-sass</code> gem here. The documentation can be found <a href="https://github.com/twbs/bootstrap-sass" target="_blank">here</a>. Typically, the instructions on how to install and use these gems are written inside the documentation. Let's look at the documentation and follow the instructions.
 </p>
 
-<p>So like the documentation tells us, inside our gemfile let’s add</p>
-<pre><code>
+<p>Like the documentation tells us, inside our <code>gemfile</code> let’s add</p>
+<pre><code class="bash">
 gem 'bootstrap-sass', '~> 3.3.6'
 </code></pre>
 
 <p>Next, inside our console let’s run</p>
 
-<pre><code>
+<pre><code class="bash">
 bundle install
 </code></pre>
 
 <p>
-	This will install the gems for us. Everytime we run bundle install, we have to restart the server. Let’s go back into the console where the server is running and restart it.
+	This will install the gems for us. <strong>Every time we run bundle install, we have to restart the server.</strong> Let’s go back into the console where the server is running and restart it.
 </p>
 
-<p>To do this, hit Command + C to stop the server. Then to restart the server, hit the up arrow and press enter, or type in rails server again.</p>
+<div class="well">
+  <h3>How to restart the server</h3>
+  <p>To restart the server, first hit <code>Command + C</code> to stop the server. Then to start the server again, hit the up arrow and press enter, or type in <code>rails server</code> again.</p>
+</div>
 
-<p>Awesome. Next, it tells us to copy and paste some code. It’s telling us to rename application.css to application.scss. We could manually rename it, but the documentation also gives us a command that we can run in the console that does just this.</p>
+<p>Awesome. Next, it’s telling us to rename <code>application.css</code> to <code>application.scss</code>. We could manually rename it, but the documentation also gives us a simple command that we can run in the console that does just this.</p>
 
-<pre><code>
+<pre><code class="bash">
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 </code></pre>
 
 <p>Let’s run that command to rename the file.</p>
 
-<p>Now inside <code>application.scss</code>, let’s copy and paste the follow code like this:</p>
+<p>Now inside <code>application.scss</code>, let’s copy and paste the following code like this:</p>
 
-<pre><code>
+<pre><code class="bash">
 @import "bootstrap-sprockets";
 @import "bootstrap";
 </code></pre>
@@ -51,7 +54,7 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 <p>Your <code>application.scss</code> should now look like this.</p>
 
 
-<pre><code>
+<pre><code class="bash">
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -71,18 +74,18 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 @import "bootstrap";
 </code></pre>
 
-<p>The documentation tells us to  remove all the <code>*= require_self</code> and <code>*= require_tree .</code> statements from the sass file but let’s not worry about this and ignore it.</p>
+<p>The documentation tells us to remove all the <code>*= require_self</code> and <code>*= require_tree .</code> statements from the sass file but <strong>let’s not worry about this and ignore it.</strong></p>
 
 <p>Next it tells us to copy and paste this into <code>application.js</code></p>
 
-<pre><code>
+<pre><code class="bash">
 //= require jquery
 //= require bootstrap-sprockets
 </code></pre>
 
 <p>Your <code>application.js</code> should now look like this:</p>
 
-<pre><code>
+<pre><code class="bash">
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
@@ -90,17 +93,24 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 //= require_tree .
 </code></pre>
 
-<p>Make sure the order of everything is just like above.</p>
+<p>In the documentation, it says to make sure that <code>//= require bootstrap-sprockets</code> doesn't come before <code>//= require jquery</code>. Let's make sure the order of everything is just like above so we don't get any errors.</p>
 
 <p>Awesome. You should now be set.</p>
 
 <p>Refresh <code>localhost:3000</code> and your font should have changed into a different font. That means your bootstrap has been installed! Great job!</p>
 
+<div class="well">
+  <h3>Not working?</h3>
+  <p>
+    Whenever your app is not behaving like it should be after installing a gem or changing something, you want to make sure that you <strong>restart the server</strong>. Make sure to restart the server and a lot of times the problems will be fixed :)
+  </p>
+</div>
+
 <p>
 	Let’s now commit this to GitHub so we don’t lose any of the changes.
 </p>
 
-<pre><code>
+<pre><code class="bash">
 git add .
 git commit -am “Add bootstrap”
 git push origin master
