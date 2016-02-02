@@ -5,11 +5,11 @@
 </p>
 
 <p>
-  The first thing we are going to do is to create a <code>model</code>. The role of models are to interact with the database. 
+  The first thing we are going to do is to create a <code>model</code>. In short, <strong>the role of models are to interact with the database</strong>. We'll go into the details of the role of models in future lessons. For now, let's focus on getting this app running.
 </p>
 
 <p>
-  We can create models by running this command:
+  We can create models by running a command like this:
 </p>
 
 <pre><code class="bash">
@@ -17,15 +17,28 @@ rails generate model ModelName
 </code></pre>
 
 <p>
-  In our case, let's name our model Idea. Let's go ahead and create the Idea model:
+  In our case, let's name our model <code>Idea</code>. Let's go ahead and create the Idea model:
 </p>
 
 <pre><code class="bash">
 rails generate model Idea
 </code></pre>
 
+<div class="well">
+  <h3>Naming Conventions</h3>
+
+  <p>
+    In general, the convention for naming <strong>models</strong> is to use the singular form. For example, instead of <strong>Ideas</strong>, we want to name the model <strong>Idea</strong>.
+  </p>
+
+  <p>
+    On the other hand, the convention for <strong>controllers</strong> is to use the plural form for controller names. For example, instead of naming the controller <code>idea</code>, we want to name it <code>ideas</code>.
+  </p>
+
+</div>
+
 <p>
-  This will create a file named something like this: <code>xxxxxxxxx_create_ideas.rb</code>. The "xxxx"s will be replaced by a time stamp of when the file was created. These files are called migration files because this file tells Rails what to "migrate" into our database.
+  This will create a file named something like this: <code>xxxxxxxxx_create_ideas.rb</code>. The "xxxx"s will be replaced by a time stamp of when the file was created. These files are called <strong>migration files</strong> because this file tells Rails what to "migrate" into our database.
 </p>
 
 <p>
@@ -33,17 +46,27 @@ rails generate model Idea
 </p>
 
 <p>
-  If you remember back to when we built the wireframes, we also drew out what our database columns were going to consist of. We figured out that for each of our Ideas, we want a description which is going to be a string, and an author which is going to be text.
+  If you remember back to when we built the wireframes, we also drew out what our database columns were going to consist of. We figured out that <strong>for each of our Ideas, we want to store the <code>description</code> and the <code>author</code> of the idea.
 </p>
 
 <p>
-  We can tell rails to add these in by making the file look like this:
+  In order to tell rails to create columns in the database for storing the <code>author</code> and <code>description</code> of the ideas, we have to tell it what kind of data they are going to be. <strong>Is the database column going to store numbers? Text? Booleans? We need to specify this when we create our migration files.</strong> Here we are going to tell rails that the <code>description</code> column should be the <code>text</code> datatype, and the <code>author</code> column is going to be a <code>string</code></strong>. We can add this by making the migration file look like the following. Go into Sublime and hit <code>Command + P</code> and type in "create ideas" and it should find your migration file that looks like <code>xxxxxxxxx_create_ideas.rb</code>. Open the file that looks like <code>xxxxxxxxx_create_ideas.rb</code> and make it look exactly like below.
 </p>
 
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/eec69bc655eaecde37f5.json"></div>
+<pre><code class="ruby">
+class CreateIdeas &lt; ActiveRecord::Migration
+  def change
+    create_table :ideas do |t|
+      t.text :ideas
+      t.string :author
+      t.timestamps null: false
+    end
+  end
+end
+</code></pre>
 
 <p>
-  Make your file look exactly like above and save the file.
+  Make your file look <strong>exactly</strong> like above and save the file.
 </p>
 
 <p>
@@ -54,12 +77,22 @@ rails generate model Idea
 rake db:migrate
 </code></pre>
 
+<div class="well">
+
+  <h3>Getting Errors?</h3>
+
+  <p>
+    Chances are you have a typo in the migration file. Double check your file to make sure you don't have any typos before you run your migrations. Make sure the file looks <strong>exactly</strong> like the code above.
+  </p>
+
+</div>
+
 <p>
-  As a rule of thumb, every time you run a migration, you should restart your server. So let's go ahead and restart our server.
+  As a rule of thumb, every time you run a migration, you should restart your server. So let's go ahead and restart our server (<code>Command + C</code> to stop the server and <code>rails s</code> to start the server again).
 </p>
 
 <p>
-  If done correctly, if you go into <code>schema.rb</code>, you should now see the columns add to the ideas table. The schema file basically lays out the tables and columns you have in your rails application.
+  If done correctly, if you go into <code>schema.rb</code>, you should now see the columns added to the ideas table. The <code>schema</code> file basically lays out the tables and columns you have in your rails application.
 </p>
 
 <p>
