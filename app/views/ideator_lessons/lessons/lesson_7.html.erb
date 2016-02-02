@@ -5,11 +5,23 @@
 </p>
 
 <p>
-	First, if you haven’t done so, let’s replace the “Brand” text in the navbar with “Ideator”.
+	First, if you haven’t done so, let’s change the Brand name in the navbar. To do this, let's replace the “Brand” text in the navbar with “Ideator”.
 </p>
 
+<pre><code class="html">
+&lt;div class="navbar-header"&gt;
+  &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"&gt;
+    &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;a class="navbar-brand" href="/"&gt;Ideator&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
 <p>
-	In order to make this font sexy, we’re going to be using a custom font.
+	Now that we have our new brand name in there, let's make it look nicer. We can do this by changing the font. In order to make this font sexy, we’re going to be using a custom font.
 </p>
 
 <p>
@@ -52,7 +64,7 @@
 </p>
 
 <p>
-	In <code>application.css.scss</code>, let’s apply the font to our brand by adding this line:
+	In <code>application.scss</code>, let’s apply the font to our brand by adding this line:
 </p>
 
 <pre><code class = "css">
@@ -73,11 +85,14 @@
 	Try to find the section where the navbar’s color is being determined.
 </p>
 
+
+<!-- Add video here -->
+
 <p>
 	If you found correctly, the <code>.navbar-default</code> class is responsible for the color of the navbar. Since I want a clean looking site, I’m going to change the background color of <code>.navbar-default</code> to white.
 </p>
 
-<p>So let’s go into our <code>application.css.scss</code> and add this in.</p>
+<p>So let’s go into our <code>application.scss</code> and add this in.</p>
 
 <pre><code class = "css">
 .navbar-default {
@@ -90,7 +105,7 @@
 </p>
 
 <p>
-	We can play around with the font styles by adding something like this to our <code>application.css.scss</code>
+	We can play around with the font styles by adding something like this to our <code>application.scss</code>
 </p>
 
 <pre><code class = "css">

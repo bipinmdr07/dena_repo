@@ -1,11 +1,11 @@
 <h1><%= title_for(IdeatorLesson, 3, 4) %></h1>
 
 <p>
-  Now that we've got a navbar going on, let's add a sticky footer.
+  Now that we've got a navbar going on, let's add a footer. What we want is a footer that sticks to the bottom of the screen no matter how much content you have. Sometimes when a website has no content, the footer will float above the bottom of the screen. What we want is a <i>sticky</i> footer. We're going to try and find a template that we can use to implement this sticky footer.
 </p>
 
 <p>
-  If we run a google search for "bootstrap sticky footer", we can find a StackOverflow post that addresses this issue <a href = "http://stackoverflow.com/a/19758234/5456016" target = "_blank">here</a>. What we're going to do is use parts of this post to make it look nice. Let's copy the code below into our <code>application.css.scss</code>(I changed the footer height to be 120px instead of 60px).
+  If we run a google search for "bootstrap sticky footer", we can find a StackOverflow post that talks this issue <a href = "http://stackoverflow.com/a/19758234/5456016" target = "_blank">here</a>. What we're going to do is use information contained in this post, use the solutions, and make it look nice. Let's copy the code below into our <code>application.scss</code> (Note that the footer height is changed to be 120px instead of 60px as it is shown in the StackOverflow post).
 </p>
 
 <pre><code class="css">
@@ -38,11 +38,11 @@ body {
 </code></pre>
 
 <p>
-  Then what we're going to do is wrap all of our content in a div with an id of "wrap". So right before the code for the navbar begins (right after the opening body tag and right before the opening nav), let's add &lt;div id = "wrap"&gt; and close the div right before the closing body tag.
+  Then what we're going to do is wrap all of our content in a div with an <code>id</code> of <code>wrap</code>. So right before the code for the navbar begins (right after the opening <code>body</code> tag and right before the opening nav), let's add <code>&lt;div id = "wrap"&gt;</code> and close the <code>div</code> right before the closing <code>body</code> tag.
 </p>
 
 <p>
-  Right after the closing div that we just inserted, let's steal the footer code from the StackOverflow post above and paste it into our code. It should look something like this.
+  Right after the closing <code>div</code> that we just inserted, let's steal the footer code from the StackOverflow post above and paste it into our code. It should look something like this.
 </p>
 
 <pre><code class="html">
@@ -60,35 +60,35 @@ body {
 </code></pre>
 
 <p>
-	Make sure to put the footer code right before the closing body tag and also right after the closing div tag for the div id = "wrap".
+	Make sure to put the footer code right before the closing <code>body</code> tag and also right after the closing div tag for the <code>&lt;div id = "wrap"&gt;</code>.
 </p>
 
 <p>
-  Awesome! Now that we've set up our footer to stick to the bottom of the page, let's start adding in some stuff into it.
+  Awesome! Now that we've set up our footer to stick to the bottom of the page, let's start adding in some content into it.
 </p>
 
 <p>
-  According to our wireframes, we want to have 3 columns inside our footer. Using the bootstrap grid system, let's implement this.
+  According to our wireframes, we want to have 3 columns inside our footer. Using the <strong>bootstrap grid system</strong>, let's implement this.
 </p>
 
 <p>
-  Before we do this though, we should think about what we want the site to look on mobile screens first. This is called a mobile-first approach.
+  Before we do this though, we should also think about what we want the site to look like on mobile screens before thinking about what it should look like on the desktop screen. This is called a <strong>mobile-first approach</strong>.
 </p>
 
 <p>
-  On mobile phones, instead of displaying 3 columns in a tiny smartphone screen, it would probably be better to display 1 column at a time.
+  On mobile phones, instead of trying to displaying 3 columns in one row on a tiny smartphone screen, it would probably be better to display 1 column in each row.
 </p>
 
 <p>
-  So on mobile phones, the content should show 1 column at a time, and on larger screens, it should have 3 columns.
+  So on mobile phones, the content should display a new row for each column, and on larger screens, it should display 3 columns all in one row.
 </p>
 
 <p>
-  We can do this by adding a <code>&lt;div class = "col-xs-12 col-md-4"&gt;</code>. What this is saying is this: On a super small screen, use the full width of 12 columns, and on a medium screen or larger, use 4 columns.
+  We can do this by adding a <code>&lt;div class = "col-xs-12 col-md-4"&gt;</code>. What this is saying is this: On a super small screen, use the full width of 12 in the row, and on a medium screen or larger, use 4 (out of 12 in each row). For a refresher on the bootstrap grid system, revisit this lesson <a href="/html_css/9" target="_blank">here</a>.
 </p>
 
 <p>
-	Let's add 2 more of these divs in the footer to make 3 rows on a medium screen. Let's also remember not to forget to wrap it in a row. So now it should look something like this.
+	Let's duplicate this and make 2 more of these <code>div</code>s in the footer to make 3 seperate columns in one row on a medium screen. Let's also remember not to forget to wrap it in a <code>row</code>. So now it should look something like this.
 </p>
 
 <pre><code class="html">
@@ -150,13 +150,24 @@ body {
 &lt;/html&gt;
 </code></pre>
 
-<p>
-  Notice how I used font awesome icons to make the social logos look awesome. Browsing around font awesome's site to look for cool icons is fun! :)
-</p>
+<div class="well">
 
-<p>
-  <strong>Note:</strong> If you are going to use Font Awesome, you need to make sure to include the CDN in the <code>head</code> section of <code>application.html.erb</code>. If you are up for the challenge, try to do that yourself. If you don't know how to do it, Google it :)
-</p>
+  <h3>Using Font Awesome Icons (Optional)</h3>
+
+  <p>
+    If you're up for a challenge, try implementing Font Awesome icons to add some social icons to your website. Visit the <a href="https://fortawesome.github.io/Font-Awesome/get-started/" target="_blank">font awesome documentation</a> here and follow the <strong>Getting Started</strong> documentation.
+  </p>
+
+  <h4>Some Hints :)</h4>
+
+  <ul class="unindented_ul">
+    <li>Make sure to add in the Font Awesome CDN in the <code>&lt;head&gt;</code> section of your <code>application.html.erb</code></li>
+    <li>You can browse for icons <a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blanK">here</a></li>
+    <li>You can change the size of these icons by changing the font size of the icons</li>
+    <li>When in doubt, Google :)</li>
+  </ul>
+
+</div>
 
 <p>
   Let's go through the standard git workflow.
