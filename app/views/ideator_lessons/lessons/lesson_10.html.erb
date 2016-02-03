@@ -1,15 +1,15 @@
 <h1><%= title_for(IdeatorLesson, 4, 2) %></h1>
 
 <p>
-  Now that we've got a model and a controller for our Ideas, what can we do?
+  Now that we've got a model and a controller for our Ideas, we can start interacting with the database. Get ready to do some web developerly things!
 </p>
 
 <p>
-  Let's experiment with what we can do. Let's go to our console and type in <code>rails console</code> (or rails c for short).
+  Let's go to our console and type in <code>rails console</code> (or <code>rails c</code> for short) to open up the rails console (pretty self explanatory). In the rails console, we can type in ruby commands to interact with our rails application.
 </p>
 
 <p>
-  Here you can type in rails commands that you can send to your app. Let's add an Idea to our app through this console. Type in the following:
+  First, let's add an Idea to our app through the console. Type in the following in the rails console:
 </p>
 
 <pre><code class="ruby">
@@ -17,7 +17,23 @@ Idea.create(description: "This is the greatest idea ever", author: "Me")
 </code></pre>
 
 <p>
-  Here we are saying, create an idea with the following information (description: "This is the greatest idea ever", author: "Me").
+  Press enter to add the idea. Here we are saying, create an idea with the following information <code>(description: "This is the greatest idea ever", author: "Me")</code>. Now let's try to display all of our ideas in the console. We can do this by typing the following:
+</p>
+
+<pre><code class="ruby">
+Idea.all
+</code></pre>
+
+<p>
+This is going to print out something like below:
+</p>
+
+<pre><code class="bash">
+=&gt; #&lt;ActiveRecord::Relation [#&lt;Idea id: 1, author: "Me", created_at: "2016-01-13 06:44:28", updated_at: "2016-01-13 06:44:28", description: "This is the greatest idea ever"&gt;]
+</code></pre>
+
+<p>
+  By typing in the <code>Idea.all</code> command, you can see all the instances of the <code>Idea</code>s stored in your database. As we add more ideas, we'll see that <code>Idea.all</code> will spit out more and more ideas.
 </p>
 
 <p>
@@ -29,57 +45,79 @@ Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
 </code>
 
 <p>
-  Think of some other brilliant ideas to add to your app and add a couple more.
+  Think of some other brilliant ideas to add to your app and add a couple more. Once you've done that, take a look at your ideas by typing in <code>Idea.all</code> once again.
 </p>
 
 <p>
-  We can see all of our ideas that we have posted by typing in <code>Idea.all</code>.
+  You can see that you've successfully added the ideas to your database.
 </p>
 
 <p>
-  Awesome! You've created your first Ideas. Now let's try to show this on our website.
+  Awesome! You've created your first ideas and stored them in the database. Not that complicated, right? :) Next, let's try to show everything we stored in the database on to our website.
 </p>
 
 <p>
-  Let's go into our ideas controller and see what we can do.
+  Let's go into our <code>ideas_controller.rb</code> and see what we can do.
 </p>
 
 <p>
-  In our index method, let's add the following:
+  In our <code>index</code> method, let's add the following:
 </p>
 
 <pre><code class="ruby">
-@ideas = Idea.all
+def index
+  @ideas = Idea.all
+end
 </code></pre>
 
 <p>
-  In rails, the methods in the controller correspond to the view files with the same name. What that means is basically if you have a method called <code>index</code> in your <code>IdeasController</code> and you also have a file called <code>index.html.erb</code> under <code>/views/ideas/index.html.erb</code>, then you can tell how <code>index.html.erb</code> should behave in the <code>index</code> method of <code>IdeasController</code>.
+  Here we are assigning all ideas stored in an instance variable called <code>ideas</code>.
+</p>
+
+<div class="well">
+  <h3>How Controllers and Views Work Together in Rails</h3>
+  <p>
+    In rails, the methods in the <code>controller</code> correspond to the files with the same name in the <code>view</code> folder. What that means is, if you have a method called <code>index</code> in your <code>ideas_controller.rb</code> and you also have a file called <code>index.html.erb</code> under <code>/views/ideas/index.html.erb</code>, then you can tell how <code>index.html.erb</code> should behave in the <code>index</code> method of <code>IdeasController</code>.
+  </p>
+
+  <p>
+    A lot of magic happens when the <code>view</code> is rendered. One of the more commonly used techniques is using instance variables (variables defined with <code>@</code>, for example <code>@instance_variable</code>). When you define an instance variable in the <code>controller</code>, Rails automatically picks it up and passes it to the view. This is what we are doing in this section.
+  </p>
+
+  <p>
+    You can read more about how <code>controller</code>s and <code>view</code>s interact with <a href="http://guides.rubyonrails.org/layouts_and_rendering.html" target="_blank">here</a>.
+  </p>
+</div>
+
+<p>
+  So what we've done by adding <code>@ideas = Idea.all</code> is, we've giving an instance variable that can be used in <code>index.html.erb</code>.
 </p>
 
 <p>
-  So what we've done by adding <code>@ideas = Idea.all</code> is, we've given an instance variable that you can work with in <code>index.html.erb</code>.
+  That probably doesn't make too much sense at this moment. To better understand what all this means let's implement and see what it does. Let's go into <code>index.html.erb</code> and change it to look like the following.
+</p>
+
+<pre><code class="html">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
+  &lt;h4&gt;&lt;%= idea.author %&gt;&lt;/h4&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's go back into our browser and refresh the page. You should now see all of your ideas stored in your database listed out. Let's go through what is occuring.
 </p>
 
 <p>
-  To understand what that means, let's go into <code>index.html.erb</code> and make it look like the following.
-</p>
-
-<div class = "gist" data-src="https://gist.github.com/takehiromouri/ba80110be734fc69a5cb.json"></div>
-
-<p>
-  Let's go back into our browser and refresh the page. You should now see all of your Ideas listed out.
+  What happened here is that in our <code>index</code> method in our controller, we said that <code>@ideas</code> should equal all of our ideas stored in the database. As we talked about earlier, we can use this instance variable <code>@ideas</code> in our <code>index.html.erb</code>, since the method name (<code>index</code>) and file name (<code>index.html.erb</code>) are the same.
 </p>
 
 <p>
-  What happened here is that in our index method in our controller, we said that @ideas should equal all of our Ideas. As we talked about earlier, we can use this in our index.html.erb, since the method name and file name are the same.
+  Then inside our <code>index.html.erb</code>, we are saying: We have <code>@ideas</code>, which is storing all of our ideas in the databse. Now for each <code>idea</code> in <code>@ideas</code>, print out the <code>description</code> and also print out the <code>author</code>.
 </p>
 
 <p>
-  Then inside our index.html.erb, we are saying: We have <code>@ideas</code>, which are all of our Ideas. Now for each <code>idea</code>, print out the description and also print out the author.
-</p>
-
-<p>
-  Don't worry if this all doesn't make sense just yet. The main focus here is to keep on building to create that momentum for you to learn faster.
+  Don't worry if this all doesn't make sense yet. The main focus here is to keep on building to create that momentum for you to learn faster. :)
 </p>
 
 <p>
