@@ -1,3 +1,0 @@
-class HtmlCssController < LessonsController
-
-end

@@ -1,0 +1,36 @@
+<h1><%= title_for(IntroLesson, 1, 2) %></h1>
+
+<p>
+	In short, web developers are awesome people who create dynamic web applications to solve problems and provide solutions. One example would be Facebook. It provided a way for people to connect online and stalk the photos of attractive friends. Another example would be AirBnB. It solved the problem of unused spaces in houses and created a solution to match people who wanted to host their houses to guests and travelers who wanted a cheaper option to expensive hotels.
+</p>
+
+<p>
+  Do you surf the web a lot? Guess what, web developers made those websites.
+</p>
+
+<p>
+	Web developers can take an idea and figure out an elegant solution for users on the web. In a time where everything is on the web, web developers are pretty darn useful.
+</p>
+
+<p>
+	Read more in-depth about what web developers do <a href="http://www.theodinproject.com/introduction-to-web-development/what-a-web-developer-does" target="_blank">in this awesome article</a> and make sure you understand the basics down below!
+</p>
+
+<br>
+
+<h1>Quiz Time!</h1>
+
+<br>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'What does "Front End" typically refer to?', answer: "The stuff that you see on your screen - the design, the navigation bar, stuff like that.", number: 1 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: "What languages do you need to understand to be a front end developer?", answer: "HTML, CSS, and Javascript, because they are languages that are alive in the browser. In general, these languages are manipulate what you see in your browser.", number: 2 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'What does "Back End" typically refer to?', answer: "It's basically stuff related to the server and making sure the data is dealt with correctly. In general, you cannot see the back end on the screen, and that's why it's called the back end. Kind of make sense? :)", number: 3 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'What is a "Full Stack" developer?', answer: "Full stack developers are people who can do both front end development and back end development.", number: 4 } %>
+
+<%= render partial: '/shared/quizzes', locals: { question: 'What is the difference between websites and web applications?', answer: "Websites only display static content that doesn't interact with a database. Web applications have content that interact with a database on a live server.", number: 5 } %>
+
+<br class = "clear">
+

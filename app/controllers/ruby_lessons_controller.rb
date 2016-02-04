@@ -1,0 +1,2 @@
+class RubyLessonsController < LessonsController
+end

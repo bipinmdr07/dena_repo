@@ -1,4 +1,6 @@
 class IdeatorLesson < ActiveRecord::Base
+	COURSE_TITLE = "Ideator - an Idea Sharing App"
+
 	LESSON_LENGTH = 22
 
 	LESSONS = [

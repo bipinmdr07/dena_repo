@@ -1,0 +1,10 @@
+<div class = "col-sm-offset-1 col-sm-10">
+  <%= render :file => "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
+  <br class = "clear">
+
+  <%= render 'lesson_nav_section' %>
+
+  <%= render partial: '/submission_comments/submission_for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} if @submissions == true %>
+
+  <%= render partial: '/comments/for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} %>
+</div>

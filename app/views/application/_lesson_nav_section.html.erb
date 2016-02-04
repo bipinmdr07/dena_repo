@@ -1,0 +1,7 @@
+<div class = "lesson_nav_box text-center">
+  <p>
+    Understand the gist? Cool, let's move on.
+  </p>
+  <%= link_to 'Previous Lesson', "#{@course_link}/#{@prev_lesson}", class: 'btn btn-warning btn-lg' if @prev_lesson > 0 %>
+  <%= link_to 'Next Lesson', "#{@course_link}/#{@next_lesson}", class: 'btn btn-success btn-lg' if @next_lesson <= @lesson_length %>
+</div>

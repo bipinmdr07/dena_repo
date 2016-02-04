@@ -24,18 +24,21 @@ Rails.application.routes.draw do
 
   get 'admin_dashboard', :to => 'admin_dashboard#index'
 
-  get 'intro', :to => 'intro#index', :as => 'intro'
-  get 'intro/:id', :to => 'intro#show', :as => 'intro_lesson'
+  get 'intro_lessons', :to => 'intro_lessons#index', :as => 'intro'
+  get 'intro_lessons/:id', :to => 'intro_lessons#show', :as => 'intro_lessons'
 
-  get 'html_css', :to => 'html_css#index', :as => 'html_css'
-  get 'html_css/:id', :to => 'html_css#show', :as => 'html_css_lesson'
+  get 'html_css_lessons', :to => 'html_css_lessons#index', :as => 'html_css'
+  get 'html_css_lessons/:id', :to => 'html_css_lessons#show', :as => 'html_css_lessons'
 
   get 'ideator_lessons', :to => 'ideator_lessons#index', :as => 'ideator'
   get 'ideator_lessons/:id', :to => 'ideator_lessons#show', :as => 'ideator_lessons'
 
+  get 'ruby_lessons', :to => 'ruby_lessons#index', :as => 'ruby'
+  get 'ruby_lessons/:id', :to => 'ruby_lessons#show', :as => 'ruby_lessons' 
+
   get 'courses',   :to => 'static_pages#courses'
 
-  get 'pricing', :to => 'static_pages#pricing'
+  # get 'pricing', :to => 'static_pages#pricing'
 
   get 'congratulations', :to => 'static_pages#congratulations'
 end
