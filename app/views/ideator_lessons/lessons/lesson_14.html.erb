@@ -1,11 +1,11 @@
 <h1><%= title_for(IdeatorLesson, 5, 1) %></h1>
 
 <p>
-  Now that we're able to create our ideas smoothly, let's go into telling rails how to edit and update the ideas that we've created.
+  Now that we're able to create our ideas smoothly, let's go ahead and tell rails how to <code>edit</code> and <code>update</code> the ideas that we've created.
 </p>
 
 <p>
-  To do this, we're going to go into our controller again and add an <code>edit</code> method. In <code>ideas_controller.rb</code>, add the follow code under your <code>create</code> method.
+  To do this, we're going to go into our controller again and add an <code>edit</code> method. In <code>ideas_controller.rb</code>, add the following code under your <code>create</code> method.
 </p>
 
 <pre><code class="ruby">
@@ -18,7 +18,7 @@ end
 </p>
 
 <p>
-  This is where we want to put our form for editing ideas. Since we want to be able to pull the idea that we are editing, let's tell rails to find the idea that we are on and store that in an instance variable.
+  This <code>edit.html.erb</code> is where we want to put our form for editing ideas. Since we want to be able to tell rails which idea we are editing, let's tell rails to <code>find</code> the idea that we are working on and store that in an instance variable like this:
 </p>
 
 <pre><code class="ruby">
@@ -27,21 +27,26 @@ def edit
 end
 </code></pre>
 
-<p>
-  This is a new concept. Here we are saying, let's <code>find</code> an Idea with <code>params[:id]</code> and then store that in an instance variable called idea. But wait, what is this <code>params[:id]</code>?
-</p>
+<div class="well">
+  <h3>What are we doing here?</h3>
 
-<p>
-  Here, we have another example of a parameter. If we go to our console and type <code>rake routes</code>, you will see a bunch of stuff. If you look at the URI pattern column, you will see that some have <code>/:id(.:format)</code> at the end of the URI. This <code>:id</code> is the key. Rails passes this <code>:id</code> down to the application so that you can use this as a paramater, like we are doing here.
-</p>
+  <p>
+    This is a new concept. Here we are saying, let's <code>find</code> an Idea with <code>params[:id]</code>, and then store that in an instance variable called <code>@idea</code>. But wait, what is this <code>params[:id]</code>?
+  </p>
 
-<p>
-  In other words, from the URL, rails can tell which idea you are editing. For example, if you are editing an Idea with an id of 1, your url will look something like <code>www.urlhere.com/ideas/edit/1</code>. In this case, 1 is the <code>:id</code>. For an Idea with an id of 123, the url would look something like <code>www.urlhere.com/ideas/edit/123</code>. In this case, 123 is the <code>:id</code>. Then in your controller or views, you can grab this variable with <code>params[:id]</code>.
-</p>
+  <p>
+    Here, we have another example of a parameter. If we go to our console and type <code>rake routes</code>, you will see a bunch of stuff. If you look at the <code>URI pattern</code> column, you will see that some have <code>/:id(.:format)</code> at the end of its URI. This <code>:id</code> is important. Rails passes this <code>:id</code> down to the application so that you can use this as a <i>parameter</i>, like we are doing here.
+  </p>
 
-<p>
-  So again, basically we are telling rails here to find the <code>:id</code> from the URL and then finding an Idea with that id, and then we're storing it in <code>@idea</code>. Make sense?
-</p>
+  <p>
+    In other words, from the URL, rails can tell which idea you are editing. For example, if you are editing an Idea with an <code>id</code> of <code>1</code>, your url will look something like <code>www.urlhere.com/ideas/edit/1</code>. In this case, <code>1</code> is the <code>:id</code>. For an Idea with an <code>id</code> of <code>123</code>, the URL would look something like <code>www.urlhere.com/ideas/edit/123</code>. In this case, <code>123</code> is the <code>:id</code>. Then in your controller or views, you can grab this variable with <code>params[:id]</code>.
+  </p>
+
+  <p>
+    So again, basically we are telling rails here to find the <code>:id</code> from the URL, then find an Idea with that <code>id</code>, and finally to store it in <code>@idea</code>. Make sense?
+  </p>
+
+</div>
 
 <p>
   Now let's hop into <code>edit.html.erb</code>. Here we can actually use similar code that we have used before for creating new ideas. Make the file look like this:
@@ -60,11 +65,11 @@ end
 
 
 <p>
-  The only difference here is that on the first line of the simple form we are adding <code>method: :put</code>. This is just indicating that we are performing a PUT action, which indicates that the form's purpose is to perform an update. If we look at rake routes and look at the VERB, where it lists out "VERB"s like GET, PATCH, PUT, DELETE etc. we can see that it corresponds to a controller action. For example, for GET, we see that it corresponds to ideas#index. For PUT, it corresponds to ideas#update. This means that when we submit this form, it will trigger the update method in the ideas controller.
+  The only difference here is that on the first line of the simple form we are adding <code>method: :put</code>. This is just indicating that we are performing a <code>PUT</code> action, which indicates that the form's purpose is to perform an <code>update</code>. If we type <code>rake routes</code> in the terminal and look at the <code>VERB</code> column, where it lists out "VERB"s like <code>GET</code>, <code>PATCH</code>, <code>PUT</code>, <code>DELETE</code> etc. we can see that it corresponds to a controller action. For example, for <code>GET</code>, we see that it corresponds to <code>ideas#index</code>. For <code>PUT</code>, it corresponds to <code>ideas#update</code>. This means that when we submit this form, it will trigger the <code>update</code> method in the ideas controller.
 </p>
 
 <p>
-  Right now we don't have an update method, so let's add that in our IdeasController.
+  Right now we don't have an <code>update</code> method, so let's add that in our <code>ideas_controller</code>.
 </p>
 
 <p>
@@ -83,7 +88,7 @@ end
 </code></pre>
 
 <p>
-  Let's go through what this code is doing. We're first doing that thing we did in the edit method - finding the Idea using the <code>:id</code> in the URL, and then storing that in <code>@idea</code>. Then we are saying if @idea updates successfully using the idea_params information, then redirect to the root path (the home page). If it doesn't update succcessfully, then redirect to the edit page that we were just on so that you enter correct information.
+  Let's go through what this code is doing. We're first doing the same thing we did in the <code>edit</code> method: finding the idea we are working on using the <code>:id</code> in the URL, and then storing that in <code>@idea</code>. Then we are saying if <code>@idea</code> updates successfully using the <code>idea_params</code> information, then <code>redirect_to</code> the <code>root_path</code> (the home page). If it doesn't update succcessfully, then <code>redirect_to</code> the <code>edit</code> page that we were just on so that you can enter the correct information.
 </p>
 
 <p>

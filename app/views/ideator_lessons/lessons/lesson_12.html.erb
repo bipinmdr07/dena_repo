@@ -1,25 +1,25 @@
 <h1><%= title_for(IdeatorLesson, 4, 4) %></h1>
 
 <p>
-  We've added our ideas through the <code>rails console</code>, but that's a little bit inconvenient. Instead, let's create a form to add more ideas.
+  Up until now we've added our ideas through the <code>rails console</code>, but that's a little bit inconvenient. Instead, why don't we create a form to add more ideas.
 </p>
 
 <p>
-  The first thing we need to do is add some methods to our controller. Specifically, we need to add a <code>create</code> action which will be responsible for creating our ideas and saving them to our database.
+  In order to add ideas through a form, we need to tell rails what to do when the form is submitted and tries to create an idea. What we need is a <code>create</code> method which will be responsible for creating our ideas and saving them to our database.
 </p>
 
 <p>
-  So in our idea controller, let's create a <code>create</code> method.
+  In our <code>ideas_controller</code>, let's make a <code>create</code> method.
 </p>
 
 <pre><code class = "ruby">
 class IdeasController &lt; ApplicationController
-	def index
-		@ideas = Idea.all
-	end
+  def index
+    @ideas = Idea.all
+  end
 
-	def create
-	end
+  def create
+  end
 end
 </code></pre>
 
@@ -28,15 +28,23 @@ end
 </p>
 
 <p>
-  When we <code>create</code> our <code>Idea</code>, we're also going to give it some information to work with. We call these <strong>parameters</strong>. In this case, when we tell rails to create our Idea, we also need to give rails some information about what the idea is all about. Without giving rails that information, or those <i>parameters</i>, rails is just going to say, "Okay, you want me to make an idea, but give me information on what kind of idea you want me to make." By giving rails those parameters, rails can say "Cool! You want me to make an idea using this information." You'll be able to pass in parameters to the create method through forms.
+  When we <code>create</code> our <code>Idea</code>, we're also going to give it some information to work with. We call these <strong>parameters</strong>. In this case, <strong>when we tell rails to create our idea, we also need to give rails some information about what the idea is all about.</strong> Without giving rails that information, or in other words, those <strong><i>parameters</i></strong>, rails is just going to say, <i>"Okay, you want me to make an idea, but you're not giving me any information on what kind of idea you want me to make."</i> By giving rails those parameters, rails can say <strong><i>"Cool! You want me to make an idea using this information that you've provided me."</i></strong> You'll be able to pass in parameters to the <code>create</code> method through forms.
 </p>
 
 <p>
-  We can pass in a parameter for <code>.create</code> by adding ()s after <code>.create()</code> and then passing in information between them. In rails, it is best practice to also use <strong>strong parameters</strong>, which you don't need to worry about right now. In short words, it is basically a security meausure to make sure bad people don't input bad things to do bad things. If you want to find out more, you can read more <a href="http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters" target ="_blank">here</a>.
+  We can pass in a parameter for <code>.create</code> by adding <code>()</code>s like <code>.create()</code> and then passing in information between them. In rails, it is best practice to also use <strong>strong parameters</strong>, which you don't need to worry about digesting right now. <strong>In short, strong params are basically a security meausure to make sure bad people don't input bad things to do bad things.</strong> If you want to find out more, you can read more <a href="http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters" target ="_blank">here</a>.
 </p>
 
 <p>
-  The way we do this is by creating a <code>private</code> method called <code>idea_params</code> and then saying <code>require</code> an <code>idea</code> and only permit the description and author for the ideas. What this does is, if a user tries to be clever and attempts to pass in a <code>:color</code> or something random like that, rails will not accept this. If you add to the list of whitelisted parameters (the things in the ()s after <code>.permit</code>), rails will accept <code>:color</code> as a parameter. So here we go, let's type this in your IdeasController.
+  We can implement strong params by creating a <code>private</code> method called <code>idea_params</code> and then saying, <code>require</code> an <code>idea</code> and only <code>permit</code> the <code>description</code> and <code>author</code> for the ideas. By doing this, if a user tries to be clever and attempts to pass in a <code>:color</code> or some random parameter like that, rails will not accept it. The code for doing this looks like below:
+</p>
+
+<pre><code class="ruby">
+params.require(:idea).permit(:description, :author)
+</code></pre>
+
+<p>
+  Again, we are saying here that we are only permitting <code>description</code>s and <code>author</code>s for each idea. Let's add put the above code in a method called <code>idea_params</code> like below:
 </p>
 
 <pre><code class = "ruby">
@@ -58,7 +66,7 @@ end
 </code></pre>
 
 <p>
-  Awesome! Now that we've got the params set up, we need to do something after we create the idea. What we need to do is redirect to some page (or else rails will give us an error.) So after creating the idea, let's tell rails to redirect to the home page. We can do this by adding <code>redirect_to root_path</code>.
+  Awesome! Now that we've got the params set up, we need to tell rails what to do after we create the idea. What we need to do is redirect to a page (or else rails will give us an error). So after creating the idea, let's tell rails to redirect to the home page. We can do this by adding <code>redirect_to root_path</code>.
 </p>
 
 <pre><code class = "ruby">
@@ -81,7 +89,7 @@ end
 </code></pre>
 
 <p>
-  So basically what we just did is this: we told rails that when we trigger the <code>create</code> method, we are going to create an idea using some information, or parameters, passed along to us, and then once that's done, we're going to redirect our browser to the root path, or the home page.
+  So basically what we just did is this: we told rails that when we trigger the <code>create</code> method, we are going to create an idea using some information, or in other words <strong>parameters</strong> passed along to us, and then once that's done, we're going to redirect our browser to the root of the website, or in otherwords, the home page.
 </p>
 
 <p>
@@ -89,7 +97,7 @@ end
 </p>
 
 <p>
-  We're going to use a gem called <code>simple_form</code> that makes making forms super easy for us.
+  We're going to use a <code>gem</code> called <code>simple_form</code> that makes making forms super easy for us.
 </p>
 
 <p>
@@ -97,10 +105,10 @@ end
 </p>
 
 <p>
-  The first thing it tells us to do is to add the gem to your Gemfile. So in your Gemfile, add this line:
+  The first thing it tells us to do is to add the gem to your <code>Gemfile</code>. So in your <code>Gemfile</code>, add this line:
 </p>
 
-<pre><code class="bash">
+<pre><code class="ruby">
 gem 'simple_form'
 </code></pre>
 
@@ -113,7 +121,7 @@ bundle install
 </code></pre>
 
 <p>
-  For the last step, we are going to run the generator that integrates simple form with bootstrap. So let's run this command.
+  If we look at the documentation, we see that there are several options on how to run the simple form generator. In our case, we are going to run the generator that integrates simple form with bootstrap. So let's run this command.
 </p>
 
 <pre><code class="bash">
@@ -121,7 +129,7 @@ rails generate simple_form:install --bootstrap
 </code></pre>
 
 <p>
-  Awesome. Remember, every time we run <code>bundle install</code>, we should restart the server. So let's go ahead and do that.
+  Awesome. Remember, every time we run <code>bundle install</code>, we should restart the server. Let's go ahead and do that.
 </p>
 
 <p>
@@ -141,7 +149,7 @@ rails generate simple_form:install --bootstrap
 </p>
 
 <p>
-  The buttons look really ugly, so let's add some bootstrap buttons on there to make them look nicer.
+  However, the buttons look really ugly, so let's add some bootstrap buttons on there to make them look nicer. What we can do is add a <code>btn btn-primary</code> class to the Submit button. We can do this by adding <code>class: 'btn btn-primary'</code> to the Submit button code like below (make sure to put the <code>,</code> between <code>'Submit'</code> and <code>class:</code>)
 </p>
 
 <pre><code class="ruby">
@@ -153,7 +161,11 @@ rails generate simple_form:install --bootstrap
 </code></pre>
 
 <p>
-  Now let's test this out. Enter an idea and author and press 'Submit'. Voila! You should see your idea on your page, just like that!
+  Save the file and refresh the browser. We now see prettier buttons! Awesome!
+</p>
+
+<p>
+   Now let's test this out. Enter an idea and an author and press 'Submit'. Voila! You should see your idea on your page, just like that!
 </p>
 
 <p>
