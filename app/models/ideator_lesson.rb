@@ -1,4 +1,6 @@
 class IdeatorLesson < ActiveRecord::Base
+	LESSON_LENGTH = 22
+
 	LESSONS = [
 		["Setting Up Your App", 
 			[
