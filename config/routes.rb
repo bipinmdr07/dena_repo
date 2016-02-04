@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   get 'courses',   :to => 'static_pages#courses'
 
-  # get 'pricing', :to => 'static_pages#pricing'
+  get 'pricing', :to => 'static_pages#pricing'
 
   get 'congratulations', :to => 'static_pages#congratulations'
 end
