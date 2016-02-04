@@ -97,7 +97,7 @@ end
   That probably doesn't make too much sense at this moment. To better understand what all this means let's implement and see what it does. Let's go into <code>index.html.erb</code> and change it to look like the following.
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;% @ideas.each do |idea| %&gt;
   &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
   &lt;h4&gt;&lt;%= idea.author %&gt;&lt;/h4&gt;

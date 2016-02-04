@@ -1,7 +1,7 @@
 <h1><%= title_for(IdeatorLesson, 7, 1) %></h1>
 
 <p>
-  The first thing we are going to add on to our app is <strong>pagination</strong>. Basically the gist is, when we display all of our ideas on the index page, when we have 100 ideas on there, users have to scroll forever to get to the footer. Instead, we probably want to divide them into seperate pages, or paginate them.
+  The first thing we are going to add on to our app is <strong>pagination</strong> to our <code>index</code> page. Basically the gist is, when we display all of our ideas on the <code>index</code> page, when we have 100 ideas on there, users have to scroll forever to get to the bottom of the page. Instead, we probably want to divide them into seperate pages, or paginate them.
 </p>
 
 <p>
@@ -16,13 +16,15 @@
   The first thing they tell us to do is to add this line in the Gemfile:
 </p>
 
-<pre><code class="bash">gem 'will_paginate', '~> 3.0.6'</code></pre>
+<pre><code class="ruby">
+gem 'will_paginate', '~> 3.0.6'
+</code></pre>
 
 <p>
-  Let's go ahead and add that into your Gemfile, then run <code>bundle install</code> to install it. After we do that, what should we do?
+  Let's go ahead and add that into your Gemfile, then run <code>bundle install</code> in the command line to install it. After we do that, what should we do?
 </p>
 
-<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "Restart the server", number: 1 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "Restart the server ;)", number: 1 } %>
 
 <br class="clear">
 
@@ -35,7 +37,9 @@
 </p>
 
 <pre><code class="ruby">
-@ideas = Idea.all.paginate(:page => params[:page], :per_page => 10)
+def index
+  @ideas = Idea.all.paginate(:page => params[:page], :per_page => 10)
+end
 </code></pre>
 
 <p>
@@ -43,14 +47,16 @@
 </p>
 
 <pre><code class="ruby">
-@ideas = Idea.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+def index
+  @ideas = Idea.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
+end
 </code></pre>
 
 <p>
   Awesome, now let's go back into the documentation. It also tells us how to render the page links in the view. Let's go ahead and add that in to our views. Go into <code>index.html.erb</code> and add this in to the very bottom of the page:
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;%= will_paginate @ideas %&gt;
 </code></pre>
 
@@ -59,14 +65,17 @@
 </p>
 
 <p>
-  You might notice that nothing shows up. This is probably because you don't have 10 ideas in the database right now. You can either add 10 ideas, or change the <code>:per_page</code> in your <code>ideas_controller.rb</code> to something smaller to something like 3.
+  You might notice that nothing shows up. This is probably because you don't have 10 ideas in the database right now. You can either add 10 ideas, or change the <code>:per_page</code> in your <code>ideas_controller.rb</code> to something smaller to a number like 3.
 </p>
 
 <p>
-  Once you do that, it should be fully working. Now we just want to center the page links to the middle, since it's just flushed to left right now. We can do this by using bootstrap's <code>text-center</code> class.
+  Once you do that, it should be fully working. Let's refresh the page.
+</p>
+<p>
+  We see now that the pagination links are there at the bottom of the page, but they aren't centered. Let's go ahead and center them. We can do this by using bootstrap's <code>text-center</code> class. Change your code to look like this:
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;div class = "text-center"&gt;
   &lt;%= will_paginate @ideas %&gt;
 &lt;/div&gt;

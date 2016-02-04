@@ -1,7 +1,7 @@
 <h1><%= title_for(IdeatorLesson, 5, 2) %></h1>
 
 <p>
-  In our form, let's think about what we want to do if a user enters invalid data. For example, if a user tries to enter an idea without specifying an author, we should probably not accept that. We should also not accept an idea that doesn't have a description.
+  In our form, let's think about what we want to do if a user enters invalid data. For example, if a user tries to enter an idea without specifying an <code>author</code>, we should probably not accept that. We should also not accept an idea that doesn't contain a <code>description</code>.
 </p>
 
 <p>
@@ -42,7 +42,7 @@ end
 </code></pre>
 
 <p>
-  If a user passes in invalid data, in this case not filling in the author or description, then <code>@idea.update(idea_params)</code> will return false, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
+  If a user passes in invalid data, in this case not filling in the <code>author</code> or <code>description</code>, then <code>@idea.update(idea_params)</code> will return <code>false</code>, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
 </p>
 
 <p>

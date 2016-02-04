@@ -8,7 +8,7 @@
   This is just going to be a static page, so you can put any kind of text here. For me, I just put in a bunch of filler text for now, but it looks like this:
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;h1&gt;About&lt;/h1&gt;
 
 &lt;h4&gt;Share you ideas with the world and find others.&lt;/h4&gt;
@@ -41,12 +41,18 @@
 &lt;/p&gt;
 </code></pre>
 
-<p>
-  By the way, you can trigger this "Lorem ipsum" filler text in Sublime by typing in "lorem" and then hitting tab. Nice trick to have :)
-</p>
+<div class="well">
+<h3>How to Add Filler Text</h3>
 
 <p>
-  Now let's hook this up to the navigation bar so that people can go to the about page. Go to <code>application.html.erb</code>.
+  Adding filler text can be incredibly useful when you want to put content in the HTML to see what it would look like with content. To generate the classic filler text "Lorem ipsum...", you can go into Sublime, start typing <code>lorem</code>, and then hit <code>tab</code>. Just like that, your "lorem ipsum" text should be generated.
+</p>
+
+</div>
+
+
+<p>
+  Now let's hook this up to the navigation bar so that people can navigate to the about page easily. Go to <code>application.html.erb</code>.
 </p>
 
 <p>
@@ -58,12 +64,23 @@
 
 <br class="clear">
 
-<p>
-  Make sure you go through the standard git workflow.
-</p>
+<p>Your navigation bar should now look like this:</p>
 
+<pre><code class="erb">
+&lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"&gt;
+  &lt;ul class="nav navbar-nav navbar-right"&gt;
+    &lt;li&gt;&lt;%= link_to 'All Ideas', root_path %&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;%= link_to 'About', about_path %&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+</code></pre>
 
 <p>
   Awesome! Let's now move on to building the "Random" page.
 </p>
+
+<p>
+  Go through the standard git workflow.
+</p>
+
 

@@ -16,7 +16,7 @@
   Let's go ahead and copy the entire code and then paste it into the very top of <code>index.html.erb</code>.
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 <!-- Button trigger modal -->
 &lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
   Launch demo modal
@@ -46,7 +46,7 @@
   Now let's configure it so that it works for our purposes. First let's change the button text "Launch demo modal" to something like "Add Idea". Next, let's copy and paste our entire simple form code right inside the <code>&lt;div&gt; class="modal-body"&gt;&lt;div&gt;</code>.
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 <!-- Button trigger modal -->
 &lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
   Add Idea
@@ -80,7 +80,7 @@
   Save the file and refresh the page. We can see now that the form has been added, but now we have two buttons, a "Submit" button and a "Save changes" button. We probably want to replace the "Submit" button with the "Save changes button". So let's go ahead and do that. Copy and paste <code>&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;</code> and replace this code: <code>&lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;</code>. But now the submit button is outside the form code (the <code>&lt;% end %&gt;</code> of the form is above the button). This will probably give us an error, so we need to make sure that the button is still inside the form code. We can do this by moving where the form starts and ends like below:
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 <!-- Button trigger modal -->
 &lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
   Add Idea

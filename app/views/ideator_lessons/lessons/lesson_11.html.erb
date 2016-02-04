@@ -12,7 +12,7 @@
   If we look at the bootstrap website, we see that there is a <strong>Basic example</strong> for the bootstrap panels. It looks like something we could use, so let's copy and paste this code at the top of <code>index.html.erb</code>.
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;div class="panel panel-default"&gt;
   &lt;div class="panel-body"&gt;
     Basic panel example
@@ -24,7 +24,7 @@
   Save the file and refresh the page. You'll see that one panel is now implemented, but there's no content inside of it. What we want to do is create a new panel for each of our ideas. We can do this by using an <code>each</code> loop to iterate through each idea in <code>@ideas</code>.Make your <code>index.html.erb</code> look like this:
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;% @ideas.each do |idea| %&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
@@ -43,7 +43,7 @@
   In addition, to make it look even nicer let's make it so that the <code>author</code> is pulled to the right and says "by NameOfAuthor" instead of just displaying their name. We can do this by adding a <code>pull-right</code> class to the <code>h4</code>. Your code should look like this:
 </p>
 
-<pre><code class="html">
+<pre><code class="erb">
 &lt;% @ideas.each do |idea| %&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
