@@ -1,4 +1,6 @@
 class HtmlCss < ActiveRecord::Base
+	LESSON_LEGNTH = 14
+
 	LESSONS = [
 		["Introduction to HTML/CSS", 
 			[

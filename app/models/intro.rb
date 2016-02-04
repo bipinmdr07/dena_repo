@@ -1,4 +1,6 @@
 class Intro < ActiveRecord::Base
+	LESSON_LENGTH = 5
+
 	LESSONS = [
 		["What is Web Development?", 
 			[
