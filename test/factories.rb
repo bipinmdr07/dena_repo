@@ -1,4 +1,7 @@
-FactoryGirl.define do  factory :ideator_lesson do
+FactoryGirl.define do  factory :admin_user do
+    
+  end
+  factory :ideator_lesson do
     
   end
   factory :submission_comment do
