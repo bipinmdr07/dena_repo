@@ -20,23 +20,26 @@ class LessonsController < ApplicationController
   private
 
   def check_access!
-    if controller_name.classify.constantize == "IntroLessons"
+    if controller_name.classify == "IntroLesson"
       return if current_user.intro_access?
       lesson_locked_redirect
-    elsif controller_name.classify.constantize == "HtmlCssLessons"
+    elsif controller_name.classify == "HtmlCssLesson"
       return if current_user.html_css_access?
       lesson_locked_redirect
-    elsif controller_name.classify.constantize == "RubyLessons"
+    elsif controller_name.classify == "RubyLesson"
       return if current_user.ruby_fundamentals_access?
       lesson_locked_redirect
-    elsif controller_name.classify.constantize == "IdeatorLessons"
+    elsif controller_name.classify == "IdeatorLesson"
       return if current_user.ideator_access?
+      lesson_locked_redirect
+    elsif controller_name.classify == "RubyCoreLesson"
+      return if current_user.ruby_core_access?
       lesson_locked_redirect
     end
   end
 
   def lesson_locked_redirect
-    flash[:alert] = "You don't have access to this course yet! :( Keep up the great coding! :)"
+    flash[:alert] = "You don't have access to this course yet! Keep up the great coding! :)"
     redirect_to courses_path
   end
 

@@ -34,7 +34,10 @@ Rails.application.routes.draw do
   get 'ideator_lessons/:id', :to => 'ideator_lessons#show', :as => 'ideator_lessons'
 
   get 'ruby_lessons', :to => 'ruby_lessons#index', :as => 'ruby'
-  get 'ruby_lessons/:id', :to => 'ruby_lessons#show', :as => 'ruby_lessons' 
+  get 'ruby_lessons/:id', :to => 'ruby_lessons#show', :as => 'ruby_lessons'
+
+  get 'ruby_core_lessons', :to => 'ruby_core_lessons#index', :as => 'ruby_core'
+  get 'ruby_core_lessons/:id', :to => 'ruby_core_lessons#show', :as => 'ruby_core_lessons' 
 
   get 'courses',   :to => 'static_pages#courses'
 
