@@ -15,4 +15,17 @@ ActiveAdmin.register User do
     actions
   end
 
+  form do |f|
+    f.inputs 'User' do
+      f.input :email
+      f.input :admin
+      f.input :intro_access
+      f.input :html_css_access
+      f.input :ruby_fundamentals_access
+      f.input :ideator_access
+      f.input :ruby_core_access
+    end
+    f.actions
+  end
+
 end
