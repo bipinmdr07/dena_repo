@@ -15,3 +15,9 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+$skinLogo: url("betalogo.png") no-repeat 0 0;
+@import "active_skin";
+
+#header h1.site_title {
+  background-size: 100%;
+}
