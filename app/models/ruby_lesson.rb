@@ -1,13 +1,14 @@
 class RubyLesson < ActiveRecord::Base
-  COURSE_TITLE = "Introduction to Ruby"
+  COURSE_TITLE = "Ruby Fundamentals"
 
-  LESSON_LENGTH = 10
+  LESSON_LENGTH = 3
 
   LESSONS = [
-    ["Welcome to the World of Ruby", 
+    ["Ruby Fundamentals", 
       [
         [1, "Introduction to Ruby"],
-        [2, "Get Started"]
+        [2, "Ruby Fundamentals"],
+        [3, "Foobar Problem"]
       ]
     ]
   ]

@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'admin_dashboard', :to => 'admin_dashboard#index'
+  # get 'admin_dashboard', :to => 'admin_dashboard#index', :as => 'dashboard'
 
   get 'intro_lessons', :to => 'intro_lessons#index', :as => 'intro'
   get 'intro_lessons/:id', :to => 'intro_lessons#show', :as => 'intro_lessons'

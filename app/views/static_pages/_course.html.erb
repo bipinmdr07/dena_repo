@@ -1,6 +1,7 @@
 <div class = "col-sm-12 col-md-4 course_box">
 	<h4 class = "underlined-header"><%= course %></h4>
 	<p><%= course_name %></p>
-	<%= link_to 'Learn', course_link, class: 'btn btn-danger course_button' if available %>
+	<%= link_to 'Learn', course_link, class: 'btn btn-danger course_button' if available && has_access?(course_access) %>
+  <%= link_to 'Locked :)', "", class: 'btn btn-default course_button' if available && !has_access?(course_access) %>
 	<%= link_to 'Coming Soon', "", class: 'btn btn-default course_button' if !available %>
 </div>
