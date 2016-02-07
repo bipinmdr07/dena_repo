@@ -1,13 +1,13 @@
 <%= link_to 'Back to lesson', submission_back_to_lesson %>
 
 <h3><%= @submission_comment.title %></h3>
-<%= raw(@submission_comment.description) %>
+<%= sanitize raw(@submission_comment.description) %>
 <p class = "pull-right" >by <%= submission_comment_owner(@submission_comment) %></p>
 <br class = "clear">
 <hr>
 
 <% @submission_comment.submission_replies.each do |reply| %>
-	<%= raw(reply.content) %>
+	<%= sanitize raw(reply.content) %>
 	<p class = "pull-right" >by <%= submission_reply_owner(reply) %></p>
 	<br class = "clear">
 	<hr>
