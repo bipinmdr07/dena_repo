@@ -2,19 +2,7 @@
   <!-- sidebar -->
   <div class="col-lg-2 visible-lg">
       
-      <ul id="sidebar" class="nav nav-stacked pre-scrollable affix" data-offset-bottom="80">
-            <%= link_to '< All Courses', courses_path %>
-            <h3><%= @course_title %></h3>
-            <% @lessons.each do |chapter| %>
-
-              <li><h5><%= chapter[0] %></h5></li>
-
-              <% chapter[1].each do |lesson| %>
-                <li><%= link_to "#{lesson[0]}. #{lesson[1]}", "/#{@lesson_link}/#{(lesson[0])}" %></li>
-              <% end %>
-
-            <% end %>
-      </ul>
+      <%= render 'sidebar' %>
 
   </div>
 
@@ -33,29 +21,24 @@
 </div>
 
 <script type="text/javascript">
-  var url = window.location;
-  // Will only work if string in href matches with location
-  $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+var url = window.location;
+var sidebar_url = "<%= session[:back_to_lesson] %>"
+// Will only work if string in href matches with location
+$('ul.nav a[href="'+ url +'"]').parent().addClass('active');
 
-  // Will also work for relative and absolute hrefs
-  $('ul.nav a').filter(function() {
-      return this.href == url;
-  }).parent().addClass('active');
+// Will also work for relative and absolute hrefs
+$('ul.nav a').filter(function() {
+    return this.href == url || this.href == sidebar_url;
+}).parent().addClass('active');
 
-  var ready;
-  ready = function() {
+var ready;
+ready = function() {
 
-    $(".active").get(0).scrollIntoView();
+  $(".active").get(0).scrollIntoView();
 
-  };
+};
 
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
-
-  
-
-  // $('html, body').animate({
-  //     scrollTop: $(".active").offset().top
-  // }, 2000);
+$(document).ready(ready);
+$(document).on('page:load', ready);
 
 </script>

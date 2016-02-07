@@ -1,26 +1,30 @@
-<%= link_to 'Back to lesson', back_to_lesson %>
+<div class="col-md-offset-1 col-md-10 col-xs-12">
 
-<h3><%= @comment.title %></h3>
-<%= sanitize raw(@comment.description) %>
-<p class = "pull-right" >by <%= comment_owner(@comment) %></p>
-<br class = "clear">
-<hr>
+		<%= link_to 'Back to lesson', session[:back_to_lesson] %>
 
-<% @comment.replies.each do |reply| %>
-	<%= sanitize raw(reply.content) %>
-	<p class = "pull-right" >by <%= reply_owner(reply) %></p>
-	<br class = "clear">
-	<hr>
-<% end %>
+		<h3><%= @comment.title %></h3>
+		<%= sanitize raw(@comment.description) %>
+		<p class = "pull-right" >by <%= comment_owner(@comment) %></p>
+		<br class = "clear">
+		<hr>
+
+		<% @comment.replies.each do |reply| %>
+			<%= sanitize raw(reply.content) %>
+			<p class = "pull-right" >by <%= reply_owner(reply) %></p>
+			<br class = "clear">
+			<hr>
+		<% end %>
 
 
 
-<%= simple_form_for :reply, url: forum_comment_replies_path(params[:forum_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-	<div data-no-turbolink>
-		<%= f.cktext_area :content, label: 'Comment', required: true %>
-	</div>
-	<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+		<%= simple_form_for :reply, url: forum_comment_replies_path(params[:forum_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
+			<div data-no-turbolink>
+				<%= f.cktext_area :content, label: 'Comment', required: true %>
+			</div>
+			<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
 
-	<br>
-	<%= f.submit 'Submit', class: 'btn btn-primary' %>
-<% end %>
+			<br>
+			<%= f.submit 'Submit', class: 'btn btn-primary' %>
+		<% end %>
+
+</div>

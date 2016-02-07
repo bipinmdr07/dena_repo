@@ -1,26 +1,30 @@
-<%= link_to 'Back to lesson', submission_back_to_lesson %>
+<div class="col-md-offset-1 col-md-10 col-xs-12">
 
-<h3><%= @submission_comment.title %></h3>
-<%= sanitize raw(@submission_comment.description) %>
-<p class = "pull-right" >by <%= submission_comment_owner(@submission_comment) %></p>
-<br class = "clear">
-<hr>
+		<%= link_to 'Back to lesson', session[:back_to_lesson] %>
 
-<% @submission_comment.submission_replies.each do |reply| %>
-	<%= sanitize raw(reply.content) %>
-	<p class = "pull-right" >by <%= submission_reply_owner(reply) %></p>
-	<br class = "clear">
-	<hr>
-<% end %>
+		<h3><%= @submission_comment.title %></h3>
+		<%= sanitize raw(@submission_comment.description) %>
+		<p class = "pull-right" >by <%= submission_comment_owner(@submission_comment) %></p>
+		<br class = "clear">
+		<hr>
+
+		<% @submission_comment.submission_replies.each do |reply| %>
+			<%= sanitize raw(reply.content) %>
+			<p class = "pull-right" >by <%= submission_reply_owner(reply) %></p>
+			<br class = "clear">
+			<hr>
+		<% end %>
 
 
 
-<%= simple_form_for :submission_reply, url: submission_submission_comment_replies_path(params[:submission_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-	<div data-no-turbolink>
-		<%= f.cktext_area :content, label: 'Comment', required: true %>
-	</div>
-	<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+		<%= simple_form_for :submission_reply, url: submission_submission_comment_replies_path(params[:submission_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
+			<div data-no-turbolink>
+				<%= f.cktext_area :content, label: 'Comment', required: true %>
+			</div>
+			<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
 
-	<br>
-	<%= f.submit 'Submit', class: 'btn btn-primary' %>
-<% end %>
+			<br>
+			<%= f.submit 'Submit', class: 'btn btn-primary' %>
+		<% end %>
+
+</div>
