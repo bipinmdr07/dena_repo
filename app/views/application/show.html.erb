@@ -42,7 +42,17 @@
       return this.href == url;
   }).parent().addClass('active');
 
-  $(".active").get(0).scrollIntoView();
+  var ready;
+  ready = function() {
+
+    $(".active").get(0).scrollIntoView();
+
+  };
+
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+
+  
 
   // $('html, body').animate({
   //     scrollTop: $(".active").offset().top
