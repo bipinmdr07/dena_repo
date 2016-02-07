@@ -32,21 +32,25 @@
 
 <body id="page-top" class="index">
 
-  <%= render '/layouts/nav' %>
+  <div id = "wrap">
 
-  <div class="container-fluid">
-    <div class = "content">
+    <%= render '/layouts/nav' %>
 
-      <% if notice.present? %>
-        <p class="alert alert-info" style = "color:white;"><%= notice %></p>
-      <% end %>
-      <% if alert.present? %>
-        <p class="alert alert-danger" style = "color:white;"><%= alert %></p>
-      <% end %>
+    <div class="container-fluid">
+      <div class = "content">
 
-      <%= yield %>
+        <% if notice.present? %>
+          <p class="alert alert-info" style = "color:white;"><%= notice %></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="alert alert-danger" style = "color:white;"><%= alert %></p>
+        <% end %>
 
+        <%= yield %>
+
+      </div>
     </div>
+
   </div>
 
   <%= render '/layouts/footer' %>
