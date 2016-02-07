@@ -9,6 +9,9 @@ class LessonsController < ApplicationController
   end
 
   def show
+    @lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
+    @course_title = controller_name.classify.constantize::COURSE_TITLE
+    @lessons = controller_name.classify.constantize::LESSONS
     @lesson = params[:id]
     @lesson_length = controller_name.classify.constantize::LESSON_LENGTH
     @next_lesson = @lesson.to_i + 1 

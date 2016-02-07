@@ -1,10 +1,51 @@
-<div class = "col-sm-offset-1 col-sm-10">
-  <%= render :file => "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
-  <br class = "clear">
+<div class="row row-offcanvas row-offcanvas-left">
+  <!-- sidebar -->
+  <div class="col-lg-2 visible-lg">
+      
+      <ul id="sidebar" class="nav nav-stacked pre-scrollable affix" data-offset-bottom="80">
+            <%= link_to '< All Courses', courses_path %>
+            <h3><%= @course_title %></h3>
+            <% @lessons.each do |chapter| %>
 
-  <%= render 'lesson_nav_section' %>
+              <li><h5><%= chapter[0] %></h5></li>
 
-  <%= render partial: '/submission_comments/submission_for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} if @submissions == true %>
+              <% chapter[1].each do |lesson| %>
+                <li><%= link_to "#{lesson[0]}. #{lesson[1]}", "/#{@lesson_link}/#{(lesson[0])}" %></li>
+              <% end %>
 
-  <%= render partial: '/comments/for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} %>
+            <% end %>
+      </ul>
+
+  </div>
+
+  <div class="col-lg-8 col-lg-offset-1 col-md-12">
+
+    <%= render :file => "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
+    <br class = "clear">
+
+    <%= render 'lesson_nav_section' %>
+
+    <%= render partial: '/submission_comments/submission_for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} if @submissions == true %>
+
+    <%= render partial: '/comments/for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} %>
+  </div>
+
 </div>
+
+<script type="text/javascript">
+  var url = window.location;
+  // Will only work if string in href matches with location
+  $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+
+  // Will also work for relative and absolute hrefs
+  $('ul.nav a').filter(function() {
+      return this.href == url;
+  }).parent().addClass('active');
+
+  $(".active").get(0).scrollIntoView();
+
+  // $('html, body').animate({
+  //     scrollTop: $(".active").offset().top
+  // }, 2000);
+
+</script>
