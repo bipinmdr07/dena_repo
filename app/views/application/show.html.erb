@@ -21,6 +21,8 @@
 </div>
 
 <script type="text/javascript">
+
+// add .active to current lesson
 var url = window.location;
 // Will only work if string in href matches with location
 $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
@@ -30,10 +32,12 @@ $('ul.nav a').filter(function() {
     return this.href == url
 }).parent().addClass('active');
 
+// scroll to current lesson
 var ready;
 ready = function() {
 
-  $(".active").get(0).scrollIntoView();
+  var target = document.getElementsByClassName("active");
+  target[0].parentNode.scrollTop = target[0].offsetTop; 
 
 };
 
