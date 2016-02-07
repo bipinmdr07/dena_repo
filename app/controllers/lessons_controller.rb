@@ -9,7 +9,7 @@ class LessonsController < ApplicationController
   end
 
   def show
-    session[:back_to_lesson] = request.referer
+    # session[:back_to_lesson] = request.referer
     @lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_title = controller_name.classify.constantize::COURSE_TITLE
     @lessons = controller_name.classify.constantize::LESSONS
