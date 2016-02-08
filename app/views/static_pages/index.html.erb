@@ -2,9 +2,60 @@
 <header style="height:100vh;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+
+          <div class="col-xs-12 col-md-6">
+            <h1 style="color:yellow;font-weight:600;">Have no prior coding experience?</h1>
+            <h4 style="letter-spacing:3px;">
+               With a personal mentor, you can still learn how to build web applications in just 3 months.
+            </h4>
+            <p>
+              The demand for web developers is increasing <strong>everywhere around the world</strong> and is predicted to keep on growing. In today's world, if you can code, you're considered a pretty awesome person.
+            </p>
+            <p>
+              Imagine what you could do if you could build web applications. You could <strong>start a new career</strong>. You could <strong>help out your company</strong>. You could help <strong>build your friend's dream product</strong>. You could <strong>build your <i>own</i> dream product</strong>. You could <strong>help out the community</strong>. <strong><i>The potential is endless</i></strong>.
+            </p>
+            <h4 style="letter-spacing:3px;">So...if you're ready to start coding, then join Techrise now by filling out the form on the right.</h4>
+          </div>
+
+          <div class="col-xs-12 col-md-6">
+            <h3 style="letter-spacing:3px;">Join now to get instant access to our course materials</h3>
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <%= devise_error_messages! %>
+
+                  <div class="field">
+                    <%= f.label :name %><br />
+                    <%= f.text_field :name, autofocus: true, required: true, class: 'form-control' %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, required: true, class: 'form-control' %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :password %>
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %><br />
+                    <%= f.password_field :password, autocomplete: "off", required: true, class: 'form-control' %>
+                  </div>
+
+                  <div class="field">
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+                  </div>
+                  
+                  <br>
+                  <div class="actions">
+                    <%= f.submit "Sign up", class: 'btn btn-danger btn-lg btn-block' %>
+                  </div>
+            <% end %>
+
+          </div>
+
+            <!-- <div class="col-lg-12">
                              
-                <!-- <img class="img-responsive" src="img/profile.png" alt=""> -->
                 <div class="intro-text">
                   
                     <% if notice.present? %>
@@ -14,25 +65,18 @@
                       <p class="alert alert-danger"><%= alert %></p>
                     <% end %>
 
-                    <span class="name">Learn How To Code</span>
+                    <span class="name scroll">Learn How To Code</span>
                     <hr class="star-light">
-                    <span class="skills">HTML/CSS - Ruby on Rails - JavaScript/jQuery - Git/Github</span>
-
-                    <!-- <div class="row">
-                      <div class = "col-xs-12 col-md-10 col-md-offset-1">
-                        <p style = "font-weight:100;margin:30px 0px;text-align:left;">
-                          <strong>We believe</strong> that a friendly and approachable learning environment is key to learning new skills. <strong>We believe</strong> in intrinsic motivation, where you just love what you are doing that you can't help but learn more and more. <strong>We believe</strong> in giving every student not only the technical support, but also the emotional support necessary to learn how to code.
-                        </p>
-                      </div>
-                    </div> -->
+                    <span class="skills scroll">HTML/CSS - Ruby on Rails - JavaScript/jQuery - Git/Github</span>
                     
-                    <div class = "join-buttons">
+                    <div class = "scroll join-buttons">
                       <%= link_to 'START CODING NOW', new_user_registration_path, class: "btn btn-danger btn-lg" %>
                       <%= link_to 'LOG IN', new_user_session_path, class: "btn btn-primary btn-lg" %>
                     </div>
                 </div>
                 
-            </div>
+            </div> -->
+
         </div>
     </div>
 </header>
@@ -42,7 +86,7 @@
   <a class = "anchor" id = "skills_you_will_learn"></a>
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 text-center skills_header">
+            <div class="col-lg-12 text-center scroll">
                 <h2>Skills You Will Learn</h2>
                 <hr class="star-primary">
             </div>
@@ -71,10 +115,10 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row scroll">
 
-          <div class = "col-sm-12 col-md-6 text-center">
-            <h3 class = "for_who_header">Aspiring Entrepreneurs</h3>
+          <div class = "col-sm-12 col-md-6">
+            <h3 class = "for_who_header text-center">Aspiring Entrepreneurs</h3>
 
             <p>
               You have an awesome idea that you think could change the way people do things. You want to build a prototype or MVP that you can show to your potential investors and customers to get quick feedback. But you lack the money, don't want to spend the money, or don't know any developers.
@@ -85,8 +129,8 @@
 
           </div>
 
-          <div class = "col-sm-12 col-md-6 text-center">
-            <h3 class = "for_who_header">Aspiring Developers</h3>
+          <div class = "col-sm-12 col-md-6">
+            <h3 class = "for_who_header text-center">Aspiring Developers</h3>
 
             <p>
               You might have tried coding before but it was too difficult and you quit. Or coding might be completely new to you. Either way, you think becoming a web developer is an awesome feat and you want to get started on a new journey.
@@ -173,7 +217,7 @@
               
             </div>
             <div class="col-lg-4">
-              <p>
+              <p style="margin-top: 21px;">
                 At Techrise, our goal is to give you fun and interactive lessons where you’ll learn how to build real world web applications with a devoted mentor so that you'll be able to start learning more advanced things on your own.
               </p>
               <p>
@@ -196,6 +240,50 @@
     </div>
 </section>
 
+<section class="success" style="padding-top: 50px;">
+  <a class = "anchor" id = "team"></a>
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+              <h2>Team</h2>
+              <hr class="star-light">
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-xs-12 col-md-6 scroll">
+
+            <%= image_tag 'natsuko.jpg', class: 'prof_pic', alt: 'Techrise Nepal Natsuko Robyn Shinozaki' %>
+            <br>
+            <h5 style="color:yellow;">Natsuko Robyn Shinozaki | Co-founder</h5>
+
+            <p style="font-size:16px;">
+              I'm passionate about serving the community and turning creative ideas into reality. I've worked with various non-profits in operations and communication. I want to help create environments where people can reach their full potential. Ice-cream and momo enthusiast :)
+            </p>
+
+            <a href="https://www.linkedin.com/in/robyn-natsuko-shinozaki-12883487" target="_blank" class="pull-right"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
+          </div>
+
+          <div class="col-xs-12 col-md-6 scroll">
+
+            <%= image_tag 'take.jpg', class: 'prof_pic', alt: 'Techrise Nepal Takehiro Mouri' %>
+            <br>
+            <h5 style="color:yellow;">Takehiro Mouri | Co-founder / Mentor</h5>
+
+            <p style="font-size:16px;">
+              Coding is awesome and my mission is to teach people how awesome it is. I work with a couple of start ups and help develop ideas into reality through web applications. I also won a few awards at a hackathon which was pretty fun. Other than coding, in my free time, I enjoy coding. :) I love momo.
+            </p>
+
+            <a href="https://www.linkedin.com/in/takehiro-mouri-a3083487" target="_blank" class="pull-right"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
+          </div>
+
+        </div>
+
+
+    </div>
+</section>
+
 <!-- Contact Section -->
 <section id="contact">
   <a class = "anchor" id="contact_us"></a>
@@ -207,7 +295,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div class="col-lg-8 col-lg-offset-2 scroll">
                 <%= simple_form_for Contact.new(params[:contact]), html: {id: "contactForm"}, remote: true do |f| %>
                   <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">

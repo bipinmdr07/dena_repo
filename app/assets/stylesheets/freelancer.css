@@ -80,7 +80,7 @@ hr.star-primary:after {
 }
 
 header {
-    text-align: center;
+    /*text-align: center;*/
     color: #fff;
     background: #18bc9c;
 }
@@ -110,7 +110,7 @@ header .intro-text .skills {
 
 @media(min-width:768px) {
     header .container {
-        padding-top: 200px;
+        padding-top: 150px;
         padding-bottom: 100px;
     }
 

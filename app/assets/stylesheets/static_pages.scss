@@ -8,10 +8,21 @@
 
 .for_who_header {
 	color: yellow;
-	margin: 50px 0px;
   font-size: 35px;
+  p {
+    text-align: justify !important;
+  }
 }
 
 .why_techrise_icons {
   font-size: 90px;
 }
+
+.prof_pic {
+  border-radius: 50%;
+  height: 200px;
+  margin: 0 auto;
+  width: 200px;
+  display: block;
+}
+
