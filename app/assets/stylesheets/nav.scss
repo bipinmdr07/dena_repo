@@ -1,3 +1,25 @@
+.header.scrolled_nav {
+  height: 80px;
+  top: 0;
+}
+.header.scrolled_nav .main-nav .nav .nav-item a {
+  color: #666666;
+  -webkit-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+.header.scrolled_nav .main-nav .nav .nav-item.nav-item-cta a.btn-cta-secondary {
+  background: #ec6952;
+  border-color: #ec6952;
+}
+.header.scrolled_nav .main-nav .nav .dropdown-menu a {
+  color: #fff;
+}
+
+
+
+
+
 .pre-scrollable{
   max-height: 100vh !important;
 }

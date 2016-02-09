@@ -26,36 +26,24 @@ $(document).on('page:restore', function() {
   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 });
 
-var loadGist, loadGists;
-
-$(function() {
-  loadGists();
-  return $(document).on('page:load', loadGists);
+/* ======= Header Background Slideshow - Flexslider ======= */    
+    /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */
+    
+$('.bg-slider').flexslider({  
+    animation: "fade",
+    directionNav: false, //remove the default direction-nav - https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties
+    controlNav: false, //remove the default control-nav
+    slideshowSpeed: 8000
 });
 
-loadGists = function() {
-  return $('.gist').each(function() {
-    return loadGist($(this));
-  });
-};
-
-loadGist = function($gist) {
-  var callbackName, script;
-  callbackName = 'c' + Math.random().toString(36).substring(7);
-  window[callbackName] = function(gistData) {
-    var html;
-    delete window[callbackName];
-    html = '<link rel="stylesheet" href="' + encodeURI(gistData.stylesheet) + '"></link>';
-    html += gistData.div;
-    $gist.html(html);
-    return script.parentNode.removeChild(script);
-  };
-  script = document.createElement('script');
-  script.setAttribute('src', [
-    $gist.data('src'), $.param({
-      callback: callbackName,
-      file: $gist.data('file') || ''
-    })
-  ].join('?'));
-  return document.body.appendChild(script);
-};
+/* ======= Fixed header when scrolled ======= */    
+$(window).on('scroll load', function() {
+     
+     if ($(window).scrollTop() > 0) {
+         $('#header').addClass('scrolled');
+     }
+     else {
+         $('#header').removeClass('scrolled');
+         
+     }
+});

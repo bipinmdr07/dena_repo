@@ -1,0 +1,69 @@
+<div class="container">       
+    <h1 class="logo" style="padding-top: 10px;">
+        <a href="/"><span class="text" style="font-size: 30px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
+    </h1><!--//logo-->
+    <nav class="main-nav navbar-right" role="navigation">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button><!--//nav-toggle-->
+        </div><!--//navbar-header-->
+        <div id="navbar-collapse" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <% if user_signed_in? %>
+
+                    <li class="nav-item page-scroll">
+                      <%= link_to 'ADMIN DASHBOARD', admin_root_path if current_user.admin %>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <%= link_to 'ALL COURSES', courses_path %>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <%= link_to 'SETTINGS', edit_user_registration_path %>
+                    </li>
+
+                <% else %>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/#skills_you_will_learn">Skills</a>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/#is_techrise_for_me">Goals</a>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/#our_story">Our Story</a>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/#why_us">Why Techrise</a>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/#team">Team</a>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/#contact_us">Contact Us</a>
+                    </li>
+
+                <% end %>          
+                <li class="nav-item">
+                    <%= link_to 'LOG IN', new_user_session_path unless user_signed_in? %>
+                    <%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %>
+                </li>
+                
+                <% unless user_signed_in? %>
+                    <li class="nav-item nav-item-cta last"><%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-cta btn-cta-secondary' %></li>
+                <% end %>
+
+            </ul><!--//nav-->
+        </div><!--//navabr-collapse-->
+    </nav><!--//main-nav-->                     
+</div><!--//container-->    

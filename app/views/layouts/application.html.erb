@@ -2,39 +2,19 @@
 <html>
 <head>
 
-  <title>Techrise Nepal - Learn to Code</title>
-
-  <meta name="description" content="Learn how to code with interactive lessons and personal mentors at TECHRISE. Learn how to create web applications with HTML/CSS, Ruby on Rails, JavaScript, and other essential skills for all aspiring web developers and entrepreneurs.">
-
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-
-  <!-- Custom Fonts -->
-  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <%= render '/layouts/meta' %>
 
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/railscasts.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/languages/erb.min.js"></script>
-
-  <meta name="google-site-verification" content="R3LOLk39gjNUL80jKUvXPImniRdCdohSRRHTG80B6gg" />
-
+  
 </head>
 
 <body id="page-top" class="index">
 
   <div id = "wrap">
 
-    <%= render '/layouts/nav' %>
+    <%= render '/layouts/nav_lessons' %>
 
     <div class="container-fluid">
       <div class = "content">
