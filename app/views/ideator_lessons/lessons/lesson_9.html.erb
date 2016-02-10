@@ -57,7 +57,7 @@ rails generate model Idea
 class CreateIdeas &lt; ActiveRecord::Migration
   def change
     create_table :ideas do |t|
-      t.text :ideas
+      t.text :description
       t.string :author
       t.timestamps null: false
     end
