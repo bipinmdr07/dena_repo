@@ -3231,8 +3231,9 @@ select {
     margin: inherit;
   }
   .promo {
-    height: 420px;
+    height: 100%;
     padding-top: 80px;
+    padding-bottom: 50px;
   }
   .promo.section .intro {
     margin-bottom: 30px;
@@ -3352,7 +3353,7 @@ select {
     float: right !important;
   }
   .promo {
-    height: 620px;
+    height: 100%;
     padding-top: 150px;
   }
   .promo.section .intro {
