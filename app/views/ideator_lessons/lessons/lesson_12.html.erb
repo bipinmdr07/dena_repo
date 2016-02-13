@@ -4,6 +4,65 @@
   Up until now we've added our ideas through the <code>rails console</code>, but that's a little bit inconvenient. Instead, why don't we create a form to add more ideas.
 </p>
 
+<h3>Setting Up Routes</h3>
+<p>
+  The first thing we need to do is set up our <code>routes</code>. What we write in <code>routes.rb</code> dictates how all of our pages are linked up.
+</p>
+
+<p>
+  If we go to the terminal and type in <code>rake routes</code>, we can see all of our routes that are set up. Right now, all you should see is this:
+</p>
+
+<pre><code>
+Prefix Verb URI Pattern Controller#Action
+  root GET  /           ideas#index
+</code></pre>
+
+<p>
+  What we want to do is set up routes for creating new ideas, deleting new ideas, editing new ideas, etc. Rails provides a super convenient way to do this. Here's what we need to do.
+</p>
+
+<p>
+  Let's go in to <code>routes.rb</code> and under <code>root 'ideas#index'</code>, let's put <code>resources :ideas</code> and make your file look like the following:
+</p>
+
+<pre><code class="ruby">
+Rails.application.routes.draw do
+
+  root 'ideas#index'
+
+  resources :ideas
+
+end
+</code></pre>
+
+<p>
+  Save the file and run <code>rake routes</code> in the terminal. Just like that, the output should now be this:
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         ideas#index
+    ideas GET    /ideas(.:format)          ideas#index
+          POST   /ideas(.:format)          ideas#create
+ new_idea GET    /ideas/new(.:format)      ideas#new
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+     idea GET    /ideas/:id(.:format)      ideas#show
+          PATCH  /ideas/:id(.:format)      ideas#update
+          PUT    /ideas/:id(.:format)      ideas#update
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+
+<p>
+  By putting in <code>resources :ideas</code>, rails generated all of these routes for us! Amazing! If we look at the <code>Controller#Action</code> on the right, we can see that it created routes for a lot of actions such as <code>create</code>, <code>edit</code>, <code>update</code>, and <code>destroy</code>. We'll get into what all of these actions mean in later lessons, but just remember now that <code>resources :ideas</code> automatically generated all of these routes for us.
+</p>
+
+<p>
+  Now that we've got our routes set up, let's move on.
+</p>
+
+<h3>Adding a Form</h3>
+
 <p>
   In order to add ideas through a form, we need to tell rails what to do when the form is submitted and tries to create an idea. What we need is a <code>create</code> method which will be responsible for creating our ideas and saving them to our database.
 </p>
