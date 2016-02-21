@@ -2,6 +2,7 @@ ActiveAdmin.register User do
   permit_params :email, :intro_access, :html_css_access, :ruby_fundamentals_access, :ideator_access, :ruby_core_access, :admin
 
   index do
+    column :name
     column :email
     column :sign_in_count
     column :current_sign_in_at
@@ -17,6 +18,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs 'User' do
+      f.input :name
       f.input :email
       f.input :admin
       f.input :intro_access

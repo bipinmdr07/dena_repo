@@ -13,11 +13,49 @@
 </p>
 
 <p>
-  Take a look at the completed app <a href="http://techrise-ideator.herokuapp.com/" target="_blank">here</a> for reference. Don't worry about actually implementing the links, just leave the URLs as blank (&lt;a&gt; href = "" &lt;/a&gt;). Also don't worry about the styling as we'll get to that in the next lesson. Just focus on implementing the bootstrap navbar into your web app for now.
+  Take a look at the completed app <a href="http://techrise-ideator.herokuapp.com/" target="_blank">here</a> for reference. Don't worry about actually implementing the links, just leave the URLs as blank (<code>&lt;a&gt; href = "" &lt;/a&gt;</code>). Also don't worry about the styling as we'll get to that in the next lesson. Just focus on implementing the bootstrap navbar into your web app for now.
 </p>
 
+<div class="well">
+  <h3>Where to insert your Navbar</h3>
+
+  <p>
+    First, go into your <code>application.html.erb</code>. This file is essentially a template for your entire app. The code that you put here will appear on all of the pages that you create in the app (unless you tell rails otherwise, but we're not going to get into that).
+  </p>
+
+  <p>
+    If we look in the file, we see a <code>&lt;%= yield %&gt;</code>. This piece of code is really important. <strong>Don't remove this piece of code</strong>! Remember how <code>application.html.erb</code> is a template for all of your pages? Well <code>&lt;%= yield %&gt;</code> is where the content of all of your pages will be inserted.
+  </p>
+
+  <p>
+    For example, let's say we have an <code>index.html.erb</code> and inside it, we have <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code>. When we navigate to <code>index.html.erb</code>, what's going to happen is this:
+  </p>
+
+  <ol>
+    <li><code>application.html.erb</code> gets loaded as the template</li>
+    <li><code>&lt;%= yield %&gt;</code> gets replaced by <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code></li>
+  </ol>
+
+  <p>
+    Now let's say we have another file called <code>about.html.erb</code> and inside it, we have <code>&lt;h1&gt;About <%= current_user.name %>&lt;/h1&gt;</code>. Now, when we navigate to <code>about.html.erb</code>, the <code>&lt;%= yield %&gt;</code> will get replaced by <code>&lt;h1&gt;About <%= current_user.name %>&lt;/h1&gt;</code>.
+  </p>
+
+  <p>
+    This might be a hard concept to grasp at first, so ask questions on Slack or to your mentor to figure it out! :)
+  </p>
+
+  <p>
+    Now that we've figured out how <code>application.html.erb</code> works, where should we put the navbar?
+  </p>
+
+  <p>
+    Since <code>&lt;%= yield %&gt;</code> is where our content is going to be, we want to put our navbar right above it. When you implement your navbar make sure you don't accidently delete <code>&lt;%= yield %&gt;</code>. If you delete it, your content won't be shown! 
+  </p>
+
+</div>
+
 <p>
-	If you need a hint, refer to <a href="/html_css/7" target="_blank">Lesson 7 of the HTML/CSS course</a>.
+	If you need a hint, refer to <a href="/html_css/7" target="_blank">Lesson 7 of the HTML/CSS course</a> <strong>(Make sure you don't include the Bootstrap CDNs, it will give you an error! We've already installed bootstrap into our app in the previous lesson.)</strong>.
 </p>
 
 <p>
