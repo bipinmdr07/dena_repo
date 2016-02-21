@@ -28,13 +28,59 @@
   </p>
 
   <p>
-    For example, let's say we have an <code>index.html.erb</code> and inside it, we have <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code>. When we navigate to <code>index.html.erb</code>, what's going to happen is this:
+    For example, let's say we have an <code>index.html.erb</code> and inside it, we have this:
+  </p>
+
+<pre><code class="html">
+&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;
+</code></pre>
+
+  <p>
+    When we navigate to <code>index.html.erb</code>, what's going to happen is this:
   </p>
 
   <ol>
     <li><code>application.html.erb</code> gets loaded as the template</li>
     <li><code>&lt;%= yield %&gt;</code> gets replaced by <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code></li>
   </ol>
+
+  <p>
+    So if <code>application.html.erb</code> originally looked like this:
+  </p>
+
+<pre><code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;%= yield %&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+  
+  <p>
+    since the <code>&lt;%= yield %&gt;</code> gets replaced with <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code>, it now would look like this:
+  </p>
+
+<pre><code class="html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
   <p>
     Now let's say we have another file called <code>about.html.erb</code> and inside it, we have <code>&lt;h1&gt;About <%= current_user.name %>&lt;/h1&gt;</code>. Now, when we navigate to <code>about.html.erb</code>, the <code>&lt;%= yield %&gt;</code> will get replaced by <code>&lt;h1&gt;About <%= current_user.name %>&lt;/h1&gt;</code>.
