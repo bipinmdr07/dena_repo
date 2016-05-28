@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206183250) do
+ActiveRecord::Schema.define(version: 20160528094337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,23 @@ ActiveRecord::Schema.define(version: 20160206183250) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "cards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "question"
+    t.text     "answer"
+    t.string   "topic"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.float    "prev_ef",             default: 2.5
+    t.float    "prev_interval",       default: 0.0
+    t.float    "quality_response"
+    t.float    "calculated_interval"
+    t.float    "calculated_ef"
+    t.datetime "repetition_date"
+  end
+
+  add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.integer  "forum_id"
@@ -157,6 +174,8 @@ ActiveRecord::Schema.define(version: 20160206183250) do
     t.boolean  "ruby_fundamentals_access", default: true
     t.boolean  "ideator_access",           default: false
     t.boolean  "ruby_core_access",         default: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
