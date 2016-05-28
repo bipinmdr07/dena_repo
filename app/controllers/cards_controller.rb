@@ -23,7 +23,7 @@ class CardsController < ApplicationController
   def update_interval
     @card = Card.find(params[:id])
     @card.update_interval!(card_params[:quality_response].to_i)
-    redirect_to cards_path
+    redirect_to study_path
   end
 
   private
