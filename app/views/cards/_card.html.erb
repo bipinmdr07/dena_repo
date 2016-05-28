@@ -4,9 +4,7 @@
     }
 </style>
 
-<div class="question">
-  <%= sanitize card.question %>
-</div>
+<%= sanitize card.question %>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -20,11 +18,9 @@
 <button type="button" class="btn btn-primary">Check Answer</button>
 
 <div class="check_answer">
-  <%= sanitize card.question %>
 
-  <pre><code class="ruby">
-    <%= card.answer %>
-  </code></pre>
+  <h2>Answer:</h2>
+  <%= sanitize card.answer %>
 
   <%= simple_form_for card, url: update_interval_path(card.id), method: :put do |f| %>
     <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
@@ -32,16 +28,20 @@
   <% end %>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
 
-<script src="assets/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     var editor = ace.edit("editor");
     editor.setOptions({
       maxLines: 100
     });
+    <% if card.question.include?("<code class='ruby'>") %>
+      editor.session.setMode("ace/mode/ruby");
+    <% elsif card.question.include?("<code class='javascript'>") %>
+      editor.session.setMode("ace/mode/javascript");
+    <% end %>
 
     $('button').on('click', function(){
-      $('.question').toggle();
       $('.check_answer').toggle();
       $('button').hide();
       var own_answer = document.getElementById("answer").value;

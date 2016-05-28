@@ -26,34 +26,29 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'simple_form'
-
 gem 'mail_form'
 
+# uploading stuff
 gem "figaro"
-
 gem 'carrierwave'
-
 gem "fog", '1.36.0'
 
 gem 'ckeditor'
 
-gem 'rails_12factor', group: :production
-
+# active admin
 gem 'activeadmin', github: 'activeadmin'
-
 gem 'active_skin'
 
 # code text editor
 gem 'ace-rails-ap'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Unicorn as the app server
-# gem 'unicorn'
+# tagging
+gem 'acts-as-taggable-on', '~> 3.4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
