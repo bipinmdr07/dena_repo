@@ -5,11 +5,7 @@
 </style>
 
 <div class="question">
-  <h1><%= card.question %></h1>
-    
-  <p><%= card.repetition_date %></p>
-
-    ​<!-- <textarea rows="10" cols="70" id="answer"></textarea><br> -->
+  <%= sanitize card.question %>
 </div>
 
 <div class="panel panel-default">
@@ -24,7 +20,7 @@
 <button type="button" class="btn btn-primary">Check Answer</button>
 
 <div class="check_answer">
-  <h1><%= card.question %></h1>
+  <%= sanitize card.question %>
 
   <pre><code class="ruby">
     <%= card.answer %>
