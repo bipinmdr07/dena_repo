@@ -3,6 +3,7 @@
     <h3 class="text-center">Congratulations! You have no cards left today!</h3>
     <h3 class="text-center"><%= link_to '>> Go to lessons', courses_path %></h3>
   <% else %>
+    <h3>TECHRISE Training Module</h3>
     <%= render partial: 'cards/card', locals: { card: @cards.first } %>
   <% end %>
 </div>

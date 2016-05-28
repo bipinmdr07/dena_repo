@@ -1,6 +1,8 @@
 class Card < ActiveRecord::Base
   belongs_to :user
 
+  scope :today, -> { where('repetition_date BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
+  
   def update_interval!(quality_response)
     @prev_ef = calculated_ef.nil? ? 0 : calculated_ef
     @prev_interval = calculated_interval.nil? ? 0 : calculated_interval

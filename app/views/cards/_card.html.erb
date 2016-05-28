@@ -1,29 +1,54 @@
+<style type="text/css" media="screen">
+    #editor { 
+      height: 300px;
+    }
+</style>
+
 <div class="question">
   <h1><%= card.question %></h1>
     
   <p><%= card.repetition_date %></p>
 
-  <form>
-    ​<textarea rows="10" cols="70" id="answer"></textarea><br>
-    <button type="button" class="btn btn-primary">Check Answer</button>
-  </form>
+    ​<!-- <textarea rows="10" cols="70" id="answer"></textarea><br> -->
 </div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+       <h3 class="panel-title">Code Editor</h3>
+  </div>
+  <div class="panel-body">
+      <div id="editor">
+      </div>
+  </div>
+</div>
+<button type="button" class="btn btn-primary">Check Answer</button>
 
 <div class="check_answer">
   <h1><%= card.question %></h1>
-  <p id="own_answer"></p>
-  <p><%= card.answer %></p>
+
+  <pre><code class="ruby">
+    <%= card.answer %>
+  </code></pre>
+
   <%= simple_form_for card, url: update_interval_path(card.id), method: :put do |f| %>
     <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
     <%= f.submit 'Submit', class: 'btn btn-primary' %>
   <% end %>
 </div>
 
+
+<script src="assets/ace.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-$('button').on('click', function(){
-  $('.question').toggle();
-  $('.check_answer').toggle();
-  var own_answer = document.getElementById("answer").value;
-  $('#own_answer').text("Your answer: " + own_answer);
-})
+    var editor = ace.edit("editor");
+    editor.setOptions({
+      maxLines: 100
+    });
+
+    $('button').on('click', function(){
+      $('.question').toggle();
+      $('.check_answer').toggle();
+      $('button').hide();
+      var own_answer = document.getElementById("answer").value;
+      $('#own_answer').text("Your answer: \n" + editor.getValue());
+    })
 </script>
