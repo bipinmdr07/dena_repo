@@ -1,9 +1,0 @@
-<% @cards.each do |card| %>
-  <h1><%= card.question %></h1>
-  <p><%= card.repetition_date %></p>
-  <%= simple_form_for card, url: update_interval_path(card.id), method: :put do |f| %>
-    <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false %> 
-    <%= f.input :id, as: :hidden, input_html: { value: card.id } %>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
-  <% end %>
-<% end %>

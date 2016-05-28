@@ -1,0 +1,22 @@
+<h1><%= card.question %></h1>
+  
+<p><%= card.repetition_date %></p>
+
+<form>
+  ​<textarea name="answer" rows="10" cols="70"></textarea><br>
+  <button type="button" class="btn btn-primary">Check Answer</button>
+</form>
+
+<div class="check_answer">
+  <p><%= card.answer %></p>
+  <%= simple_form_for card, url: update_interval_path(card.id), method: :put do |f| %>
+    <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false %> 
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+$('button').on('click', function(){
+  $('.check_answer').toggle();
+})
+</script>
