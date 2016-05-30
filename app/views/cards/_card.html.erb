@@ -5,6 +5,8 @@
 </style>
 
 <div class="devise_box">
+  <h3 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h3>
+  <hr class="clear">
   <%= sanitize card.question %>
 
   <div class="panel panel-default">
