@@ -32,7 +32,19 @@
         <%= f.submit 'Submit', class: 'btn btn-primary', style: 'margin: 0 auto; display: block;' %>
       <% end %>
     </div>
-  </div>
+
+    <h3>Related Resources</h3>
+    <ul>
+      <% card.tag_list.each do |tag| %>
+        <% links = Tags.get_links(tag) %>
+        <% links.each do |link| %>
+          <li><%= link_to link[1], '/' + link[0] %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    
+
+  </div><!-- check_answer -->
 
 </div><!-- devise_box -->
 
