@@ -1,19 +1,12 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
+# Forum.create([{name: "test"}, {name: "Another"}])
 # Examples:
-#
+# 
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Forum.create(name: 'IntroLessons')
-Forum.create(name: 'HtmlCssLessons')
-Forum.create(name: 'IdeatorLessons')
-Forum.create(name: 'RubyLessons')
-Forum.create(name: 'RubyCoreLessons')
-Submission.create(name: 'IntroLessons')
-Submission.create(name: 'HtmlCssLessons')
-Submission.create(name: 'IdeatorLessons')
-Submission.create(name: 'RubyLessons')
-Submission.create(name: 'RubyCoreLessons')
-AdminUser.create!(email: 'takehiromouri@gmail.com', password: 'tak22thegoat', password_confirmation: 'tak22thegoat')
-AdminUser.create!(email: 'naztshinozaki@gmail.com', password: 'oreos', password_confirmation: 'oreos')
+
+Forum.create!([{name: 'IntroLessons'}, {name: 'HtmlCssLessons'}, {name: 'IdeatorLessons'}, {name: 'RubyLessons'}, {name: 'RubyCoreLessons'}])
+Submission.create!([{name: 'IntroLessons'}, {name: 'HtmlCssLessons'}, {name: 'IdeatorLessons'}, {name: 'RubyLessons'}, {name: 'RubyCoreLessons'}])
+AdminUser.create!([{email: 'takehiromouri@gmail.com', password: 'tak22thegoat', password_confirmation: 'tak22thegoat'}, 
+  {email: 'naztshinozaki@gmail.com', password: 'oreocookies', password_confirmation: 'oreocookies'}])
