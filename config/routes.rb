@@ -44,6 +44,9 @@ Rails.application.routes.draw do
   get 'ruby_core_lessons', :to => 'ruby_core_lessons#index', :as => 'ruby_core'
   get 'ruby_core_lessons/:id', :to => 'ruby_core_lessons#show', :as => 'ruby_core_lessons' 
 
+  get 'instapost_lessons', :to => 'instapost_lessons#index', :as => 'instapost'
+  get 'instapost_lessons/:id', :to => 'instapost_lessons#show', :as => 'instapost_lessons'
+
   get 'courses',   :to => 'static_pages#courses'
 
   get 'pricing', :to => 'static_pages#pricing'

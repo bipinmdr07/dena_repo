@@ -1,0 +1,102 @@
+<h1><%= title_for(InstapostLesson, 1, 1) %></h1>
+
+<p>
+  Are you ready for your next app? We're going to whiz right through and teach you how to build a more complete app than before!
+</p>
+
+<p>
+  Together, we're going to build a clone of <strong>Instagram</strong>, which is now a billion dollar company. But you too, can make an app that is just like it!
+</p>
+
+<p>
+  First, let's open Tokaido and click Open Terminal.
+</p>
+
+<p>
+  In the terminal, let’s navigate to our desktop by running the following command.
+</p>
+
+
+<pre><code class="bash">
+cd ~/desktop
+</code></pre>
+
+<p>
+  This is where we’ll create our ideator app. In the terminal that we just opened up, let’s type in the following command.
+</p>
+
+
+<pre><code class="bash">
+rails new instapost
+</code></pre>
+
+<p>
+  This command creates a new rails application. Awesome!
+</p>
+
+<p>
+  It should create a bunch of files and you shouldn’t get any errors. If you do, make sure that everything is spelled out correctly.
+</p>
+
+
+<p>
+  Great, now that we’ve created our new rails app, let’s start up our server. Let’s go into Tokaido and open up another terminal window. Again, we want to have two terminal windows open since we want one for the server and one for typing in rails commands. In one of the terminal windows, let’s navigate to our project folder. We can do this by running the following command:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop/instapost
+</code></pre>
+
+<p>
+  First we have to create our initial database. In the console enter
+</p>
+
+<pre><code class="bash">
+rake db:create:all
+</code></pre>
+
+<pre><code class="bash">
+rake db:migrate
+</code></pre>
+
+<div class="well">
+  <h3>No Rakefile found?</h3>
+  <p>
+    If you get an error saying <code>No Rakefile found</code>, chances are you didn't navigate to your <code>instapost</code> folder before running the <code>rake</code> commands.
+  </p>
+
+  <p>
+    If you haven't done so, make sure to enter <code>cd ~/desktop/instapost</code> before entering the <code>rake</code> commands.
+  </p>
+
+</div>
+
+<p>
+  Now let’s fire up our rails server by entering this command.
+</p>
+
+<pre><code class="bash">
+rails server
+</code></pre>
+
+<p>
+  Give it a few seconds to load. Now go into your browser and go to
+</p>
+
+<pre><code class="bash">
+http://localhost:3000/
+</code></pre>
+
+<p>
+  You should see a nice welcome page from Ruby on Rails.
+</p>
+
+<p>
+  If you don’t see this, make sure you navigated to your project folder.
+</p>
+
+<p>
+  Awesome! We're all set!
+</p>
+
+

@@ -1,0 +1,150 @@
+<h1><%= title_for(InstapostLesson, 5, 5) %></h1>
+
+<p>
+  Let's start building out the front end and also the backend logic for creating posts. In this lesson, we're going to build out a form so that users can post pictures, and also build out the back end so that the posts are saved in the database correctly.
+</p>  
+
+<p>
+  The first thing we need to do is to create the routes for our posts. We can do this by adding the following line in our <code>routes.rb</code>.
+</p>
+
+<pre><code class="ruby">
+resources :posts
+</code></pre>
+
+<p>
+  As we've seen in earlier lessons, this will provide a bunch of routes that we can use for posts. It provides us with the routes for the <code>index</code>, <code>create</code>, <code>new</code>, <code>edit</code>, <code>show</code>, <code>update</code>, and <code>destroy</code> actions.
+</p>
+
+<p>
+  Let's go to our terminal and enter <code>rake routes</code> to make sure that we have all of our routes in place. 
+</p>
+
+<p>
+  Next, let's start building our form to create new posts. If we go back to our terminal where we did <code>rake routes</code>, we can see that next to where it says <code>new_posts GET</code>, we see the <code>/posts/new</code>. This means that if we go to <code>http://localhost:3000/posts/new</code>, we should be able to reach this page. Let's go ahead and go to <code>http://localhost:3000/posts/new</code>.
+</p>
+
+<p>
+  Woops! Rails is giving us an error saying that it can't find a template that corresponds to <code>new</code>. So let's go ahead and make it.
+</p>
+
+<p>
+  In <code>app/views/posts/</code>, let's create a new file called <code>new.html.erb</code>. In this file, let's add the following line:
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;New Post&lt;/h1&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see the text "New Post" on the page.
+</p>
+
+<p>
+  Awesome. In order to create our form, let's install a gem called 'Simple Form' that will make things easier for us.
+</p>
+
+<p>
+  Go to <%= link_to 'this link', 'https://github.com/plataformatec/simple_form' %> and browse the documentation for this gem. Installing this gem is pretty straight forward. Let's do this.
+</p>
+
+<p>
+  In your <code>Gemfile</code>, add the following:
+</p>
+
+<pre><code class="ruby">
+gem 'simple_form'
+</code></pre>
+
+<p>
+  Then run <code>bundle install</code> to install the gem.
+</p>
+
+<p>
+  Next, in your terminal, let's run this command:
+</p>
+
+<pre><code class="bash">
+rails generate simple_form:install --bootstrap
+</code></pre>
+
+<p>
+  ...and that's it! Awesome. Now we can move on to building out our form.
+</p>
+
+<p>
+  I'm going to guide you through each of the steps, then we'll walk through exactly what we did. The first thing we're going to do is go into our <code>posts_controller.rb</code> and create a method for our <code>new</code> action. Inside <code>posts_controller.rb</code>, let's put in the following:
+</p>
+
+<pre><code class="ruby">
+def new
+  @post = Post.new
+end
+</code></pre>
+
+<p>
+  Cool. Let's now hop back into our <code>new.html.erb</code> file and enter the following:
+</p>
+
+<pre><code class="erb">
+&lt;%= simple_form_for @post do |f| %&gt;
+  &lt;%= f.input :photo %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.submit 'Post' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. We now see a working form!
+</p>
+
+<p>
+  Since the buttons are super ugly, let's make them a little bit prettier by adding bootstrap button classes on the submit button.
+</p>
+
+<pre><code class="erb">
+&lt;%= simple_form_for @post do |f| %&gt;
+  &lt;%= f.input :photo %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.submit 'Post', class: 'btn btn-default btn-block' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Much better! Now let's walk through what we just did.
+</p>
+
+<p>
+  First, in our controller, we created a <code>new</code> method. If you remember, the methods in the controller correspond to the view file that has the same file name. In this case, the <code>new</code> method corresponds to <code>new.html.erb</code>.
+</p>
+
+<p>
+  Next, we assigned <code>Post.new</code> to <code>@post</code>. If you remember again, in Rails, instance variables that are defined in the controller can be used in the corresponding view file. In this case, since we define <code>@post</code> in the <code>new</code> method, we can use <code>@post</code> in <code>new.html.erb</code>.
+</p>
+
+<p>
+  Finally, we wrote a piece of code that created a form for us, using <code>simple_form_for</code>. The syntax is pretty straightforward, but if you don't really understand it, don't worry. You'll find that you can just copy and paste and reuse a lot of this stuff.
+</p>
+
+<p>
+  Awesome. Right now, the form doesn't really work. In the next lesson, we're going to set up the back end logic so to get the form to actually work.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

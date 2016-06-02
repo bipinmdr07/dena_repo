@@ -1,0 +1,105 @@
+<h1><%= title_for(InstapostLesson, 5, 3) %></h1>
+
+<p>
+  In this lesson, we're going to add links that will enable the user to sign up, log in, and log out of the application. Things will get fun from here!
+</p>
+
+<p>
+  When we want to add links, what is the first thing we should do? We should run <code>rake routes</code> to get our link path. Let's go ahead and run <code>rake routes</code>.
+</p>
+
+<p>
+  We can see that we have a bunch of routes related to devise:
+</p>
+
+<pre><code class="bash">
+new_user_session GET        /users/sign_in(.:format)                           devise/sessions#new
+user_session POST           /users/sign_in(.:format)                           devise/sessions#create
+destroy_user_session DELETE /users/sign_out(.:format)                          devise/sessions#destroy
+user_password POST          /users/password(.:format)                          devise/passwords#create
+new_user_password GET       /users/password/new(.:format)                      devise/passwords#new
+edit_user_password GET      /users/password/edit(.:format)                                                                      devise/passwords#edit
+                PATCH      /users/password(.:format)                          devise/passwords#update
+                PUT        /users/password(.:format)                          devise/passwords#update
+cancel_user_registration GET /users/cancel(.:format)                          devise/registrations#cancel
+user_registration POST       /users(.:format)                                 devise/registrations#create
+new_user_registration GET    /users/sign_up(.:format)                         devise/registrations#new
+edit_user_registration GET        /users/edit(.:format)                       devise/registrations#edit
+                PATCH      /users(.:format)                                   devise/registrations#update
+                PUT        /users(.:format)                                   devise/registrations#update
+                DELETE     /users(.:format)                                   devise/registrations#destroy
+</code></pre>
+
+<p>
+  Notice that there are routes for signing in, signing out, creating and editing passwords, canceling registration, creating new ones, editing users, updating them, and deleting them. This gives us everything that we need.
+</p>
+
+<p>
+  What we want is the route for logging in, logging out, and signing up. We can see that the routes are respectively <code>new_user_session</code>, <code>destroy_user_session</code>, and <code>new_user_registration</code>. Using these routes, we should be able to generate links to perform these actions.
+</p>
+
+<p>
+  In <code>application.html.erb</code>, let's go ahead and add these links. Add the following lines of code in your <code>application.html.erb</code> file under your <code>body</code> tag.
+</p>
+
+<pre><code class="ruby">
+&lt;nav&gt;
+  &lt;%= link_to 'Sign Up', new_user_registration_path %&gt;
+  &lt;%= link_to 'Log In', new_user_session_path %&gt;
+  &lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;
+&lt;/nav&gt;  
+</code></pre>
+
+<p>
+  Notice how I specified the method in the 'Log Out' link to be <code>:delete</code>. We need to specify that it is performing a <code>delete</code> action for it to work properly.
+</p>
+
+<p>
+  If you refresh the page, you'll see the links on the page. Try clicking on them, and they should work. Awesome!
+</p>
+
+<p>
+  One thing we need to do is to make sure that the 'Sign Up' and 'Log In' link isn't displayed when a user is logged in, and the 'Log Out' button isn't displayed when a user isn't logged in.
+</p>  
+
+<p>
+  Let's refactor our code to make this happen:
+</p>
+
+<pre><code class="ruby">
+&lt;nav&gt;
+  &lt;% if user_signed_in? %&gt;
+    &lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;
+  &lt;% else %&gt;
+    &lt;%= link_to 'Sign Up', new_user_registration_path %&gt;
+    &lt;%= link_to 'Log In', new_user_session_path %&gt;
+  &lt;% end %&gt;
+&lt;/nav&gt;  
+</code></pre>
+
+<p>
+  Notice this new <code>user_signed_in?</code> method we used right here. This is a devise helper method that returns <code>true</code> if a user is signed in and <code>false</code> if a user is not.
+</p>
+
+<p>
+  There are other devise helper methods that we'll be using throughout this app. If you want to, you can take a look at all of them <%= link_to 'here', 'https://github.com/plataformatec/devise#controller-filters-and-helpers' %>, but we'll go over them together when they do appear.
+</p>
+
+<p>
+  Let's test this out. Go to the browser and create  new account if you haven't already and log in. You should not see 'Log In' or 'Sign Up' on the page. When you log out, you should not see a 'Log Out' link.
+</p>
+
+<p>
+  Awesome! Our devise links are all set up!
+</p>
+
+
+
+
+
+
+
+
+
+
+

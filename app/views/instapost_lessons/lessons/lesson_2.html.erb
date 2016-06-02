@@ -1,0 +1,54 @@
+<h1><%= title_for(InstapostLesson, 1, 2) %></h1>
+
+<p>
+  Now that we’ve set up our project, let’s also set up GitHub so that we can save our project online and go back to previous versions when we want to.
+</p>
+
+<p>In your console type in the following:</p>
+
+<pre><code class="bash">
+git init .
+</code></pre>
+
+<pre><code class="bash">
+git add .
+</code></pre>
+
+<pre><code class="bash">
+git commit -am “Initial commit”
+</code></pre>
+
+<p>
+  Now let’s go into GitHub’s front page and create a new repository. On the left hand side, you should see a <strong>green button called “+ New repository”</strong>. Click on that button and just fill in the box that says <strong>“Repository name”</strong>.
+</p>
+
+<p>
+  <strong>Make sure you don’t check “Initialize this repository with a README”.</strong>
+</p>
+
+<p>
+  Now click <strong>Create repository</strong>. 
+</p>
+
+<p>
+  On the next page, go to where it says <strong>“…or push an existing repository from the command line”</strong>.
+</p>
+
+<p>
+  Now what you’re going to do is copy the code right beneath that and paste it into your terminal. It should look something like this:
+</p>
+
+<pre><code class="bash">
+git remote add origin git@github.com:yourUsernameHere/test.git
+</code></pre>
+
+<pre><code class="bash">
+git push -u origin master
+</code></pre>
+
+<p>
+  Once you’ve pasted and entered that into your terminal, you’re all set! GitHub is ready to go!
+</p>
+
+
+
