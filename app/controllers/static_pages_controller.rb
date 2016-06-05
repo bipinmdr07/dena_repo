@@ -9,6 +9,10 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def about
+    render layout: "landing_page"
+  end
+  
   def pricing
     render layout: "landing_page"
   end

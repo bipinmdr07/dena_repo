@@ -52,4 +52,5 @@ Rails.application.routes.draw do
   get 'pricing', :to => 'static_pages#pricing'
 
   get 'congratulations', :to => 'static_pages#congratulations'
+  get 'about', to: 'static_pages#about'
 end
