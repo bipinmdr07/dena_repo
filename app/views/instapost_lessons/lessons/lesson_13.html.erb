@@ -127,10 +127,28 @@ end
 </p>
 
 <p>
-  Awesome. Right now, the form doesn't really work. In the next lesson, we're going to set up the back end logic so to get the form to actually work.
+  Cool. If you notice in the form, the <code>photo</code> field looks like it is a blank string input. This is because even though it's named <code>photo</code>, if you look at <code>schema.rb</code>, you'll notice that the <code>photo</code> column is specified as a <code>string</code> type. Instead, we want this to be a file upload button.
 </p>
 
+<p>
+  All we have to do is set up file uploading for the <code>Post</code> object, like we did with the <code>User</code> object.
+</p>
 
+<p>
+  In your <code>post.rb</code>, add the following line of code under <code>class Post &lt; ActiveRecord::Base</code>:
+</p>
+
+<pre><code class="ruby">
+mount_uploader :photo, PhotoUploader
+</code></pre>
+
+<p>
+  Great! Notice that this is the same piece of code that we used for <code>User</code>. It turns out we can reuse the uploader that we created in the previous lesson with carrierwave.
+</p>
+
+<p>
+  Awesome. Right now, the form doesn't really work if we try to submit it. In the next lesson, we're going to set up the back end logic so to get the form to actually work.
+</p>
 
 
 

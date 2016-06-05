@@ -1,0 +1,183 @@
+<h1><%= title_for(InstapostLesson, 5, 7) %></h1>
+
+<p>
+  As a user, I should be able to not only create posts, but to update them, delete them, and view individual posts. Luckily, when we put <code>resources :posts</code> in our <code>routes.rb</code>, Rails automatically created routes that do exactly this.
+</p>
+
+<p>
+  Let's start off with adding functionality so that users can update their posts.
+</p>
+
+<p>
+  First, let's create an <code>edit</code> method in our <code>posts_controller.rb</code>.
+</p>
+
+<pre><code class="ruby">
+def edit
+  @post = Post.find(params[:id])
+end
+</code></pre>
+
+<p>
+  What <code>Post.find(params[:id])</code> is doing is, it's <code>find</code>ing a <code>Post</code> with an <code>id</code> that matches the <code>params[:id]</code>.
+</p>
+
+<p>
+  Although we went over this in the Ideator lessons, you're probably asking yourself what <code>params[:id]</code> is again :)
+</p>
+
+<div class="well">
+  <h3>What are params again?</h3>
+  <p>
+    <code>params</code> are basically user specified data to the rails application. When we go to the edit page for a post, we pass in the <code>id</code> of the <code>Post</code> as a paramter. For example, if we want to edit a <code>Post</code> with an <code>id</code> of <code>1</code>, the URL would look like this: <code>http://localhost:3000/posts/1/edit</code>). In this case, the <code>1</code> at the end of the URL is considered as a parameter by Rails. We know this because if we run <code>rake routes</code>, we see that the URI pattern is <code>/posts/:id/edit</code> where <code>:id</code> represents the parameter.
+  </p>
+</div>
+
+<p>
+  So let's zoom back into our code. We have <code>Post.find(params[:id])</code>. What this means is that it's trying to find the post with the <code>id</code> that's passed in as a parameter.
+</p>  
+
+<p>
+  Alright, let's move to the next step. Let's create an <code>edit.html.erb</code> file in <code>app/views/posts</code>. At the top of the file, let's add the text "Edit Post".
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;Edit Post&lt;/h1&gt;
+</code></pre>
+
+<p>
+  Before we move on, let's add a link to the edit page for each post. In our <code>index.html.erb</code> file, let's add in the following line of code to the loop we wrote in the previous lesson:
+</p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+</code></pre>
+
+<p>
+  Your loop should now look something like this:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see an edit link that works! However, we don't want to show this if the post isn't a post that was created by the <code>current_user</code>. Let's add a conditional to make sure that other users can't see this link.
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;% if post.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Cool. The next step is easy. All we have to do is copy the form that we created using <code>simple_form</code> in <code>new.html.erb</code> and paste it into our <code>edit.html.erb</code>.
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;Edit Post&lt;/h1&gt;
+
+&lt;%= simple_form_for @post do |f| %&gt;
+  &lt;%= f.input :photo %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.submit 'Post', class: 'btn btn-default btn-block' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  The submit button says "Post", but since that doesn't really make sense since we're updating the post, let's change the text to "Update".
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;Edit Post&lt;/h1&gt;
+
+&lt;%= simple_form_for @post do |f| %&gt;
+  &lt;%= f.input :photo %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.submit 'Update', class: 'btn btn-default btn-block' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page, and you should see the form. Awesome! However, if you try to submit the form, it will give you an error. This is because we haven't set up the <code>update</code> method yet. Let's go ahead and do that.
+</p>
+
+<p>
+  Back to our <code>posts_controller.rb</code>! Under our <code>edit</code> method, let's add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+def update
+  @post = Post.find(params[:id])
+  @post.update(post_params)
+  if @post.valid?
+    redirect_to root_path
+  else
+    render :edit, status: :unprocessable_entity
+  end
+end
+</code></pre>
+
+
+<p>
+  This is mostly the same as our create action and you should be able to understand most of what's going on right now. If you need a refresher, refer back to <%= link_to 'this lesson', '/instapost_lessons/13' %> :)
+</p>
+
+<p>
+  Awesome, now if we submit the form, it should update your post!
+</p>
+
+<p>
+  There's one last thing we need to do. Although we added a conditional in our loop in <code>index.html.erb</code> to make sure that other users can't see the link to edit the post, people could still go to a URL like <code>http://localhost:3000/posts/1/edit</code> and try to update the post. We need to make sure that we don't allow this to happen.
+</p>
+
+<p>
+  In the next lesson, we're going to implement our first filter to make this happen.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

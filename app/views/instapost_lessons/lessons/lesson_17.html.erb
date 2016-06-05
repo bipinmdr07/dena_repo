@@ -1,0 +1,85 @@
+<h1><%= title_for(InstapostLesson, 5, 8) %></h1>
+
+<p>
+  In the previous lesson, we created the backend logic for updating posts. The problem that we had is that although we hid the link to update the post on the front end, users could potentially type in their browser a URL like <code>http://localhost:3000/posts/1/edit</code> and access the edit page for a post that wasn't made by themselves.
+</p>
+
+<p>
+  In order to prevent this, we're going to use something called <strong>filters</strong>. Take 10 minutes to read <%= link_to 'this article', 'http://guides.rubyonrails.org/action_controller_overview.html#filters' %> on filters, as it explains the topic really well.
+</p>
+
+<p>
+  Let's go ahead and implement a <code>before_action</code> filter in our app. What we want to do is to check if the post is owned by the <code>current_user</code>, and if so, we want to redirect them to the <code>root_path</code> so they can't access the <code>edit</code> page.
+</p>
+
+<p>
+  In <code>posts_controller.rb</code> below our <code>before_action :authenticate_user!</code>, let's add the following line of code:
+</p>
+
+<pre><code class="ruby">
+before_action :is_owner?
+</code></pre>
+
+<p>
+  Below our <code>update</code> method, let's add the following code:
+</p>
+
+<pre><code class="ruby">
+
+private
+
+def is_owner?
+  if @post.user_id != current_user.id
+    redirect_to root_path
+  end
+end
+</code></pre>
+
+<p>
+  Let's first go over what we just did, and then let's go over what <code>private</code> means.
+</p>
+
+<p>
+  We first set a <code>before_action</code> filter in our <code>posts_controller.rb</code>. This means that before any of the actions (methods) are triggered, the method we specified will be run (in this case the <code>is_owner?</code> method).
+</p>
+
+<p>
+  The <code>is_owner?</code> method just checks if the post's <code>user_id</code> and the <code>current_user.id</code> do not match, and if so, it redirects the user to the <code>root_path</code>.
+</p>
+
+<p>
+  The <code>private</code> keyword is used to set private methods. In short, private methods are methods that can only be accessed by the same class. This is a topic of Object Oriented Programming, which we won't get too deeply into right now, but all you need to know right now is that for the most part, for controller methods other than <code>index, new, create, edit, update, destroy</code>, you should define them as <code>private</code> methods.
+</p>
+
+<p> 
+  The filter we just added is pretty cool, but we don't want to apply this for the <code>index</code>, <code>new</code>, or <code>create</code> actions. Let's specify this:
+</p>
+
+<pre><code class="ruby">
+before_action :is_owner?, only: [:edit, :update]
+</code></pre>
+
+<p>
+  Now if we try to visit an edit page that we aren't supposed to be able to visit, then we will be redirected automatically to the root page.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

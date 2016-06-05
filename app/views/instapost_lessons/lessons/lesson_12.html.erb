@@ -180,7 +180,16 @@
 </p>
 
 <pre><code class="erb">
-&lt;%= link_to 'Edit Settings', edit_user_registration_path %&gt;
+&lt;nav&gt;
+  &lt;% if user_signed_in? %&gt;
+    &lt;%= link_to 'Edit Settings', edit_user_registration_path %&gt;
+    &lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;
+  &lt;% else %&gt;
+    &lt;%= link_to 'Sign Up', new_user_registration_path %&gt;
+    &lt;%= link_to 'Log In', new_user_session_path %&gt;
+  &lt;% end %&gt;
+&lt;/nav&gt;  
+
 </code></pre>
 
 <p>

@@ -1,0 +1,72 @@
+<h1><%= title_for(InstapostLesson, 6, 2) %></h1>
+
+<p>
+  Here's the answer to the previous lesson:
+</p>
+
+<pre><code class="ruby">
+# in user.rb
+has_many :comments
+
+# in post.rb
+has_many :comments
+
+# in comment.rb
+belongs_to :user
+belongs_to :post
+</code></pre>
+
+<p>
+  Alright, let's keep on moving! What we're going to do first is set up our routes. Let's open up our <code>routes.rb</code> file.
+</p>
+
+<p>
+  And in this file, let's insert this line of code:
+</p>
+
+<pre><code class="ruby">
+resources :comments
+</code></pre>
+
+<p>
+  Then, let's run <code>rake routes</code>. Take a look at what it looks like. We're going to change it in a second.
+</p>
+
+<p>
+  Now, let's change this so that <code>resources :comments</code> is nested within <code>resources :posts</code>.
+</p>
+
+<pre><code class="ruby">
+resources :posts do
+  resources :comments
+end
+</code></pre>
+
+<p>
+  Save the file and run <code>rake routes</code>. Let's compare what we had before we nested the routes and after. We can see now that comments are now nested under a post!
+</p>
+
+<p>
+  Since comments belong to a single post, it makes sense to nest the routes this way so that we can pass in the <code>post_id</code> parameter. Don't worry if this doesn't make sense right now, hopefully throughout the next few lessons this will all come together. Read more about this topic <%= link_to 'here', 'http://guides.rubyonrails.org/routing.html#nested-resources' %>.
+</p>
+
+<p>
+  Awesome! Now we're ready to set up the backend for the comments.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

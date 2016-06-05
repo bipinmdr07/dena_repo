@@ -35,23 +35,38 @@ class InstapostLesson < ActiveRecord::Base
         [11, "Adding Log in/Log Out/Sign Up Links"],
         [12, "Setting Up User Forms"],
         [13, "Creating Posts"],
-        [14, "Editing and Updating Ideas"],
-        [15, "Validate User Input - Validations"],
-        [16, "Deleting Ideas and Adding Links"]
+        [14, "Writing the Post Backend"],
+        [15, "Displaying the Posts"],
+        [16, "Updating Posts"],
+        [17, "Using filters"],
+        [18, "Deleting Posts"],
+        [19, "Displaying Individual Posts"]
       ]
     ],
-    ["Adding Other Pages",
+    ["Adding Comments to Posts",
       [
-        [17, "Routing"],
-        [18, "Adding the About Page"],
-        [19, "Configuring the Random Page"]
+        [20, "Creating the models and controllers"],
+        [21, "Self-Directed Lesson: Setting up Database Relations"],
+        [22, "Setting up routes"],
+        [23, "Posting Comments"],
+        [24, "Creating the Comments Form"],
+        [25, "Self-Directed Lesson: Displaying the comments"],
+        [26, "Self-Directed Lesson: Deleting comments"],
+        [27, "Deleting Comments Part 2"]
       ]
     ],
-    ["Final Touches",
+    ["Adding a User Profile Page",
       [
-        [20, "Adding Pagination"],
-        [21, "Last Few Tweaks"],
-        [22, "Congratulations!"]
+        [28, "Displaying user info"]
+      ]
+    ],
+    ["Making everything look amazing",
+      [
+        [29, "Setting the basic styling"],
+        [30, "Self-Directed Lesson: Styling the navbar"],
+        [31, "Self-Directed Lesson: Styling Posts"],
+        [32, "Self-Directed Lesson: Styling the Profile Page"],
+        [33, "Final Touches"]
       ]
     ]
   ]
