@@ -1,0 +1,10 @@
+<div id='slider'>
+  <h3>Create Flashcard</h3>
+  <%= simple_form_for Card.new do |f| %>
+    <%= f.input :question %>
+    <%= f.input :answer %>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<div class="handle trigger"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:40px;"></i></span></div>

@@ -8,6 +8,8 @@
 
   <div class="col-lg-8 col-lg-offset-1 col-md-12">
 
+    <%= render partial: '/cards/widget' %>
+
     <%= render :file => "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
     <br class = "clear">
 
@@ -16,6 +18,7 @@
     <%= render partial: '/submission_comments/submission_for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} if @submissions == true %>
 
     <%= render partial: '/comments/for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} %>
+
   </div>
 
 </div>
@@ -38,6 +41,13 @@ ready = function() {
 
   var target = document.getElementsByClassName("active");
   target[0].parentNode.scrollTop = target[0].offsetTop; 
+
+  $("#slider").slideReveal({
+    trigger: $(".trigger"),
+    position: "right",
+    width: 350,
+    speed: 700
+  });
 
 };
 
