@@ -733,8 +733,15 @@ select {
   position: absolute;
   left: 0;
 }
+.testimonials .item .profile img {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+}
 .testimonials .item .content {
   padding-left: 210px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 .testimonials .item blockquote {
   font-size: 20px;
