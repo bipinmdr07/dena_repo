@@ -4,6 +4,8 @@
     <h3 class="text-center"><%= link_to '>> Go to lessons', courses_path %></h3>
   <% else %>
     <h1 class="text-center">TECHRISE Training Module</h1>
-    <%= render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>
+    <div id="card_container">
+      <%= render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>
+    </div>
   <% end %>
 </div>

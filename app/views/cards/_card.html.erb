@@ -11,7 +11,7 @@
 
   <div class="panel panel-default">
     <div class="panel-heading" style="background: #0F0F0F; color: white;">
-         <h3 class="panel-title">Code Editor</h3>
+        <h3 class="panel-title">Code Editor</h3>
     </div>
     <div class="panel-body" style="background-color: #0F0F0F;">
         <div id="editor">
@@ -27,7 +27,7 @@
     <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
 
     <div style="margin: 30px auto 30px;display: table;">
-      <%= simple_form_for card, url: update_interval_path(card.id), method: :put do |f| %>
+      <%= simple_form_for card, url: update_interval_path(card.id), method: :put, remote: true do |f| %>
         <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
         <%= f.submit 'Submit', class: 'btn btn-primary', style: 'margin: 0 auto; display: block;' %>
       <% end %>

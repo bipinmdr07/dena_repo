@@ -1,6 +1,9 @@
-FactoryGirl.define do  factory :card do
+FactoryGirl.define do  
+
+  factory :card do
     
   end
+
   factory :ruby_core_lesson do
     
   end

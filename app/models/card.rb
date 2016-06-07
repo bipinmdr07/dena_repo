@@ -1,8 +1,18 @@
 class Card < ActiveRecord::Base
   acts_as_taggable
   belongs_to :user
+  before_save :update_code_syntax
 
-  scope :today, -> { where('repetition_date BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
+  validates :user_id, :question, :answer, presence: true
+
+  scope :today, -> { where(["repetition_date <= ?", Date.today]).order("repetition_date ASC") }
+
+  def update_code_syntax
+    new_question = code_syntax(question)
+    question = new_question
+    new_answer = code_syntax(answer)
+    answer = new_answer
+  end  
 
   def update_interval!(quality_response)
     @prev_ef = calculated_ef.nil? ? 0 : calculated_ef
@@ -39,6 +49,14 @@ class Card < ActiveRecord::Base
   end
 
   private
+
+  def code_syntax(text)
+    language = text.match(/\`(.*?)\`/) # returns `ruby`
+    return text if language.nil?
+    text.gsub!(Regexp.new("#{language[0]}"), "<pre><code class='#{language[1]}'>")
+    text << "</code></pre>" if text.gsub!(/\`end\`/, "</code></pre>").nil?
+    return text
+  end
   
   def calculate_interval
     if @prev_interval == 0

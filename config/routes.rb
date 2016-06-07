@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   end
 
   resources :cards
+
+  
   put 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 
   get 'study', to: 'study#index', as: 'study'

@@ -1,6 +1,8 @@
 class CardsController < ApplicationController
   before_action :authenticate_user!
 
+  respond_to :js, :html, :json
+
   def index
     @cards = current_user.cards.all
   end
@@ -9,11 +11,16 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id])
   end
 
+  def new
+    @card = Card.new
+  end
+
   def create
     @card = current_user.cards.create(card_params)
-
-    flash[:success] = "New card added!"
-    redirect_to new_card_path
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
   end
 
   def update
@@ -23,7 +30,10 @@ class CardsController < ApplicationController
   def update_interval
     @card = Card.find(params[:id])
     @card.update_interval!(card_params[:quality_response].to_i)
-    redirect_to study_path
+    respond_to do |format|
+      format.html { redirect_to study_path }
+      format.js {}
+    end
   end
 
   private
