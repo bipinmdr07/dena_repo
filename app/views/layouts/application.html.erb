@@ -19,16 +19,22 @@
     <div class="container">
       <div class = "content">
 
-        <div id="flash">
-          <% if notice.present? %>
-            <p class="alert alert-info"><%= notice %></p>
-          <% end %>
-          <% if alert.present? %>
-            <p class="alert alert-danger"><%= alert %></p>
-          <% end %>
-        </div>
-        
-        <%= yield %>
+        <% if notice.present? %>
+          <p class="alert alert-info"><%= notice %></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+
+        <% if devise_controller? %>
+          <div class="col-xs-12 col-md-offset-2 col-md-8">
+            <div class="devise_box">
+              <%= yield %>
+            </div>
+          </div>
+        <% else %>
+          <%= yield %>
+        <% end %>
 
       </div>
     </div>
