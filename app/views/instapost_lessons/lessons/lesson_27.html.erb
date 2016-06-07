@@ -1,0 +1,90 @@
+<h1><%= title_for(InstapostLesson, 6, 7) %></h1>
+
+<p>
+  This is what your code from the previous challenge should look like:
+</p>
+
+<pre><code class="ruby">
+def destroy
+  @comment = Comment.find(params[:id])
+  @comment.destroy
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Let's add a link so that users can delete comments easily. Let's open our <code>index.html.erb</code>.
+</p>
+
+<p>
+  Let's add this link in our loop of comments for each post. We can see what the route should by doing <code>rake routes</code>. We can see that the <code>DELETE</code> action requires both the <code>post_id</code> and the <code>id</code> for the comment, so let's put both into our parameter of <code>post_comment_path</code> like this:
+</p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Delete', post_comment_path(post_id: post.id, id: comment.id), method: :delete %&gt;
+</code></pre>
+
+<p>
+  Our code should now look like this:
+</p>
+
+<pre><code class="erb">
+&lt;% post.comments.each do |comment| %&gt;
+  &lt;p&gt;&lt;%= User.find(comment.user_id).name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
+  &lt;%= link_to 'Delete', post_comment_path(post_id: post.id, id: comment.id), method: :delete %&gt;
+&lt;% end %&gt;
+
+&lt;% if user_signed_in? %&gt;
+  &lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post do |f| %&gt;
+    &lt;%= f.input :text, label: 'Comment', placeholder: 'Add a comment...' %&gt;
+    &lt;%= f.submit 'Post', class: 'btn btn-primary btn-block' %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+
+<p>
+  If we refresh the page, we should now see a link for deleting comments. However, we want to hide this link if the comment wasn't made by the <code>current_user</code>. We've done similar things before, so we should be able to implement this pretty quickly:
+</p>
+
+<pre><code class="erb">
+&lt;% post.comments.each do |comment| %&gt;
+  &lt;p&gt;&lt;%= User.find(comment.user_id).name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
+  &lt;% if comment.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Delete', post_comment_path(post_id: post.id, id: comment.id), method: :delete %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p> 
+  We also need to make sure people can't delete other user's posts manually through an HTTP request. (In reality, noone probably will try to do this, but it's still good practice.) In our <code>comments_controller.rb</code>, let's add a filter like we did with <code>posts_controller.rb</code> and check if the <code>user_id</code> of the comment and the <code>id</code> of <code>current_user</code> matches. If it doesn't match, it should redirect the user to the root_path.
+</p>
+
+<pre><code class="ruby">
+before_action :is_owner?, only: :destroy
+</code></pre>
+
+<pre><code class="ruby">
+def is_owner?
+  if @comment.user_id != current_user.id
+    redirect_to root_path
+  end
+end
+</code></pre>
+
+<p>
+  If you're shaky on what this piece of code means, refer back to <%= link_to 'this lesson', '/instapost_lessons/17' %> and go over it once more.
+</p>
+
+<p>
+  Awesome! Our comments should now be fully functional!
+</p>
+
+
+
+
+
+
+
+
+

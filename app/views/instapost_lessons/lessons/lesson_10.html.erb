@@ -1,0 +1,46 @@
+<h1><%= title_for(InstapostLesson, 5, 2) %></h1>
+
+<p>
+  Let's start hooking up the backend with the routes. To give you a refresher, the <code>routes.rb</code> file is where you can set up links to your various pages. In this lesson, we're going to set up some routes so that we can start displaying things on the web page.
+</p>
+
+<p>
+  The first thing we need to do is to set the <code>root</code> path. The <code>root</code> path is exactly what it sounds like, the default path that the user is directed to when the user goes to the home page (for example, <code>http://www.techrise.me/</code>).
+</p>
+
+<p>
+  In our web app, we want to set the <code>root</code> path to be pointed to the <code>index</code> page of <code>Post</code>. We can do this by adding the following to your <code>routes.rb</code> file.
+</p>
+
+<pre><code class="ruby">
+root 'posts#index'
+</code></pre>
+
+<p>
+  Now, if we go into our terminal and run <code>rake routes</code>, we should see that our root page is pointed to <code>posts#index</code>.
+</p>
+
+<p>
+  If you haven't already, start up your rails server and go to <code>http://localhost:3000/</code>, you should get an error saying that no template was found.
+</p>
+
+<p>
+  Let's go ahead and create <code>index.html.erb</code> in our <code>views/posts/</code> folder, and add a Hello World to test it out.
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;Hello World&lt;/h1&gt;
+</code></pre>
+
+<p>
+  Now let's navigate ourselves back to the browser and refresh the page. We should now see "Hello World" displayed on the page!
+</p>
+
+
+
+
+
+
+
+
+

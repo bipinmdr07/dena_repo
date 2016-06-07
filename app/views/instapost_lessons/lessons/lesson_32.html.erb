@@ -1,0 +1,121 @@
+<h1><%= title_for(InstapostLesson, 8, 4) %></h1>
+
+<p>
+  Let's now work on the profile page. How you should approach this should be same as the previous sections. Here is one example of how you could build it out:
+</p>
+
+<pre><code class="erb">
+&lt;!-- users/show.html.erb --&gt;  
+&lt;div class="prof_header"&gt;
+
+  &lt;div class="row"&gt;
+
+    &lt;div class="col-xs-4"&gt;
+      &lt;%= image_tag @user.photo, class: 'prof_pic' %&gt;
+    &lt;/div&gt;
+
+    &lt;div class="col-xs-8"&gt;
+
+      &lt;div class="user_header"&gt;
+
+        &lt;div class="row"&gt;
+          &lt;div class="col-xs-6"&gt;
+            &lt;h1 class = "username"&gt;&lt;%= @user.name %&gt;&lt;/h1&gt;
+          &lt;/div&gt;
+
+          &lt;div class="col-xs-6"&gt;
+            &lt;%= link_to 'EDIT PROFILE', edit_user_registration_path(@user), class: 'user_edit_button btn btn-default' if user_signed_in? && @user == current_user %&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;  
+      &lt;/div&gt;
+
+      &lt;span class="count"&gt;&lt;%= @user.posts.count %&gt;&lt;/span&gt; posts
+
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+&lt;div class="prof_post_box"&gt;
+
+  &lt;div class="row"&gt;
+
+    &lt;% @user.posts.each do |post| %&gt;
+
+        &lt;div class="col-xs-6"&gt;
+          &lt;%= image_tag post.photo, class: 'prof_show' %&gt;
+        &lt;/div&gt;
+
+    &lt;% end %&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<pre><code class="css">
+/* master.scss */  
+.prof_header{
+  height: 100%;
+  padding: 60px 20px 0px;
+  margin-bottom: 45px;
+}
+
+.username {
+  color: #4b4f54;
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 40px;
+}
+
+.count{
+  color: #34373b;
+  font-weight: 600;
+}
+
+.prof_show {
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.prof_post_box {
+  margin-bottom: 50px;
+}
+
+.user_edit_button {
+  margin-top: 25px;
+  border-color: #818488;
+  color: #818488;
+}
+
+.prof_pic {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+}
+
+.prof_pic_small {
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

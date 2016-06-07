@@ -1,0 +1,13 @@
+<div id='slider'>
+  <h3>Create Flashcard</h3>
+  <small style="margin-bottom: 20px;">To insert code syntax, start the code block with <code>`language_name`</code> and end it with <code>`end`</code>.</small>
+
+
+  <%= simple_form_for Card.new, url: cards_path, method: :post, html: {style: 'margin-top: 20px;'}, remote: true do |f| %>
+    <%= f.input :question, placeholder: 'Write your flashcard question here', input_html: {rows: 5} %>
+    <%= f.input :answer, placeholder: 'Write your flashcard answer here', input_html: {rows: 5} %>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+<div class="handle trigger"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:40px;"></i></span></div>

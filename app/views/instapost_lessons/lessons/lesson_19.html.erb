@@ -1,0 +1,102 @@
+<h1><%= title_for(InstapostLesson, 5, 10) %></h1>
+
+<p>
+  Right now, all of the posts are listed on one page. Let's make it so that users can click on a post and display only the individual post. We can do this with the <code>show</code> action.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code>, let's add our <code>show</code> method. In between our <code>index</code> and <code>new</code> method, let's add our <code>show</code> method. We put it in this order, just because of Rails convention. (We can put it in any order we want.)
+</p>
+
+<pre><code class="ruby">
+def show
+  @post = Post.find(params[:id])
+end
+</code></pre>
+
+<p>
+  We're going to use <code>@post</code>, which now contains one single <code>Post</code>, to display information about it.
+</p>
+
+<p>
+  Let's create a new file called <code>show.html.erb</code> in <code>app/views/posts</code>. Inside this file, what we're going to do is reuse some of the code that we use in the loop:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;% if post.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's pull out the code inside the loop:
+</p>
+
+<pre><code class="erb">
+&lt;% @user = User.find(post.user_id) %&gt;
+&lt;%= image_tag @user.photo %&gt;
+&lt;%= @user.name %&gt;
+&lt;%= image_tag post.photo %&gt;
+&lt;%= post.description %&gt;
+&lt;% if post.user_id == current_user.id %&gt;
+  &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  and instead of <code>post</code>, we're going to change that to <code>@post</code>.
+</p>
+
+<pre><code class="erb">
+&lt;% @user = User.find(@post.user_id) %&gt;
+&lt;%= image_tag @user.photo %&gt;
+&lt;%= @user.name %&gt;
+&lt;%= image_tag @post.photo %&gt;
+&lt;%= @post.description %&gt;
+&lt;% if @post.user_id == current_user.id %&gt;
+  &lt;%= link_to 'Edit Post', edit_post_path(@post.id) %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's add a link in <code>index.html.erb</code> for each of the posts:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;%= link_to 'View Post', post_path(post.id) %&gt;
+  &lt;% if post.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+    &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Since we don't need to hide this link even if the post isn't owned by the current user that is logged in, we can place it outside of the <code>if</code> block.
+</p>
+
+<p>
+  Let's save the file and go to our homepage. Let's click on the "View Post" link on one of your posts and see if it works.
+</p>
+
+<p>
+  If everything went correctly, it should display all of the information of the post.
+</p>
+
+
+
+
+

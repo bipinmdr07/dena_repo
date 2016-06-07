@@ -26,7 +26,15 @@
           <p class="alert alert-danger"><%= alert %></p>
         <% end %>
 
-        <%= yield %>
+        <% if devise_controller? %>
+          <div class="col-xs-12 col-md-offset-2 col-md-8">
+            <div class="devise_box">
+              <%= yield %>
+            </div>
+          </div>
+        <% else %>
+          <%= yield %>
+        <% end %>
 
       </div>
     </div>
@@ -34,6 +42,6 @@
   </div>
 
   <%= render '/layouts/footer' %>
-
+  
 </body>
 </html>

@@ -1,6 +1,54 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.shadow_screenshot {
+  width: 100%; 
+  border: 1px solid whitesmoke; 
+  border-radius: 3px; 
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.founders {
+  margin-bottom: 90px;
+}
+
+#how {
+  padding-top: 60px;
+}
+#how .title {
+  font-size: 26px;
+  color: rgb(74, 103, 129);
+}
+#how .intro {
+  color: #999999;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.portfolio-item .title {
+  font-size: 26px;
+  color: rgb(74, 103, 129);
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+.header_container {
+  h2 {
+    font-size: 36px;
+    font-weight: 300;
+    margin-top: 0;
+  }
+  margin-bottom: 90px;
+}
+
+.partnership_logo {
+  height: 60px;
+  margin: 20px;
+}
 
 .why_section {
   background:url("/assets/startup2.jpg") no-repeat center center fixed; 

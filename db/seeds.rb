@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Forum.create!([{name: 'IntroLessons'}, {name: 'HtmlCssLessons'}, {name: 'IdeatorLessons'}, {name: 'RubyLessons'}, {name: 'RubyCoreLessons'}])
-Submission.create!([{name: 'IntroLessons'}, {name: 'HtmlCssLessons'}, {name: 'IdeatorLessons'}, {name: 'RubyLessons'}, {name: 'RubyCoreLessons'}])
-AdminUser.create!([{email: 'takehiromouri@gmail.com', password: 'tak22thegoat', password_confirmation: 'tak22thegoat'}, 
+Forum.create([{name: 'IntroLessons'}, {name: 'HtmlCssLessons'}, {name: 'IdeatorLessons'}, {name: 'RubyLessons'}, {name: 'RubyCoreLessons'}, {name: 'InstapostLessons'}])
+Submission.create([{name: 'IntroLessons'}, {name: 'HtmlCssLessons'}, {name: 'IdeatorLessons'}, {name: 'RubyLessons'}, {name: 'RubyCoreLessons'}, {name: 'InstapostLessons'}])
+AdminUser.create([{email: 'takehiromouri@gmail.com', password: 'tak22thegoat', password_confirmation: 'tak22thegoat'}, 
   {email: 'naztshinozaki@gmail.com', password: 'oreocookies', password_confirmation: 'oreocookies'}])

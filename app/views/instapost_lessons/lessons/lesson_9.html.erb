@@ -1,0 +1,179 @@
+<h1><%= title_for(InstapostLesson, 5, 1) %></h1>
+
+<p>
+  For the next few lessons, we're going to be setting up the backend logic for user posts. We'll take it step by step, so you won't get lost.
+</p>
+
+<p>
+  The first thing we want to do is generate our controller and model for our <code>Post</code> object. We can name the object whatever we want, but in this case, let's name it <code>Post</code>.
+</p>
+
+<div class="well">
+  <h3>Naming Objects</h3>
+  <p>
+    When naming objects, make sure that the naming makes sense. For example, in our app, we need an object that will represent a post created by a user. Therefore, naming the object "Post" makes total sense.
+  </p>
+
+  <p>
+    However, if we name it something random like "Almond", it starts making no sense at all. (You'll be running commands like <code>Almond.new</code> or <code>Almond.all</code>, which really makes no sense in this case).
+  </p>
+</div>
+
+<p>
+  First, let's generate the controller. We can do this by running the following command:
+</p>
+
+<pre><code class="ruby">
+rails generate controller posts
+</code></pre>
+
+<p class="alert alert-danger">
+  <strong>Notice how we generated a "posts" controller and not a "post" controller.</strong> If we recall, by rails naming conventions, <strong>controller names must be plural</strong> in general, and <strong>model names must be singular</strong>. If you don't follow these rules, unexpected errors might pop up.
+</p>
+
+<p>
+  Next, let's go ahead and generate our model.
+</p>
+
+<pre><code class="ruby">
+rails generate model post
+</code></pre>
+
+<p>
+  This will generate a migration file where we can specify the database columns that we want to add to the <code>Post</code> object.
+</p>
+
+
+<p>
+  Navigate yourself to the migration file named something like <code>xxxxxxxxxxx_create_posts.rb</code>.
+</p>
+
+<p>
+  Let's see what database columns we need to add for the <code>Post</code> object.
+</p>
+
+<p>
+  If we look back at our wireframes, we see that <code>Post</code> will have a <code>photo</code> and a <code>description</code>. So we need to add these columns. Let's go ahead and add this to the migration file.
+</p>
+
+<pre><code class="ruby">
+class CreatePosts &lt; ActiveRecord::Migration
+  def change
+    create_table :posts do |t|
+      t.string :photo
+      t.text :description
+      t.timestamps null: false
+    end
+  end
+end
+</code></pre>
+
+<p>
+  Notice how <code>photo</code> is a <code>string</code> and <code>description</code> is a <code>text</code>. The difference is in the size, <strong>string should be used for shorter text, and text should be used for longer text</strong>. See <%= link_to 'this Stackoverflow post', 'http://stackoverflow.com/questions/3354330/difference-between-string-and-text-in-rails' %> for an in-depth explanation.
+</p>
+
+<p>
+  Next, we see that <code>Post</code> <code>belongs_to :user</code>, which means we need to add a database column to store the <code>user_id</code> so that we know which <code>User</code> the <code>Post</code> belongs to. Since the <code>User</code>'s <code>id</code> is an <code>integer</code>, we need to specify it as such.
+</p>
+
+<pre><code class="ruby">
+class CreatePosts &lt; ActiveRecord::Migration
+  def change
+    create_table :posts do |t|
+      t.string :photo
+      t.text :description
+      t.integer :user_id
+      t.timestamps null: false
+    end
+  end
+end
+</code></pre>
+
+<p>
+  We're almost there! The last thing we need to do is to set up an index for the <code>user_id</code> column. Let me explain what this means.
+</p>
+
+<div class="well">
+  <h3>Indexing</h3>
+  <p>
+    Indexing is super important in order to maintain your rails app performance. Here's an example of how it works.
+  </p>
+
+  <p>
+    Imagine you have a list of all the words in the English language, without any labels (A~Z)whatsoever. Then, you are given a word, for instance, "Cat". Your task is to find the word "Cat" from this list.
+  </p>
+
+  <p>
+    Obviously, this would be a huge task. You would have to look through each of the words to see if there is a match.
+  </p>
+
+  <p>
+    However, let's say you have a dictionary. A dictionary has labels which enable you to skip to the letter "C", and search through it. This significantly decreases the amount of words you have to go through.
+  </p>
+
+  <p>
+    This is essentially what indexing is all about. It makes looking up things much more efficent. So when should you use indexes?
+  </p>
+
+  <p>
+    As a rule of thumb, you should always use indexes when you have a foreign key. What is a foreign key? A foreign key is a value that belongs to another object. For instance, in this case, <code>user_id</code> is a foreign key, since it references the <code>id</code> of another <code>User</code> object from the <code>Post</code> object.
+  </p>
+
+  <p>
+    For a more in-depth look into indexing and how it improves performance, check out <%= link_to 'this blog post', 'https://tomafro.net/2009/08/using-indexes-in-rails-index-your-associations' %>.
+  </p>
+</div>
+
+<p>
+  That means we need to add an index for the <code>user_id</code> in our <code>Post</code>s. Fortunately, this is quite simple. All we need to do is add <code>add_index :posts, :user_id</code> after the <code>change</code> method.
+</p>
+
+<p>
+  Your <code>create_posts.rb</code> file should now look like this:
+</p>
+
+<pre><code class="ruby">
+class CreatePosts &lt; ActiveRecord::Migration
+  def change
+    create_table :posts do |t|
+      t.integer :user_id
+      t.string :photo
+      t.text :description
+      t.timestamps null: false
+    end
+    add_index :posts, :user_id
+  end
+end
+</code></pre>
+
+<p>
+  Finally, run <code>rake db:migrate</code> to migrate the columns.
+</p>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

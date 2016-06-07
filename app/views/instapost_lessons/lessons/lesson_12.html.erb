@@ -1,0 +1,208 @@
+<h1><%= title_for(InstapostLesson, 5, 4) %></h1>
+
+
+<p>
+  Since we have our log in links working, let's now make it so that the user can upload a profile picture and enter their name as well.
+</p>
+
+<p>
+  The sign up form is located at <code>app/views/devise/registrations/new.html.erb</code>. Let's navigate ourselves to this page.
+</p>
+
+<p>
+  Inside this page, we see that we have a form that takes in the user's <code>email</code>, <code>password</code>, and <code>password confirmation</code>. What we want to do is, we want to add a <code>name</code> and <code>photo</code> form field.
+</p>
+
+<p>
+  To do this, let's add the following lines of code right beneath the <code>devise_error_messages!</code>.
+</p>
+
+<pre><code class="erb">
+&lt;div class="field"&gt;
+  &lt;%= f.label :name %&gt;&lt;br /&gt;
+  &lt;%= f.text_field :name, autofocus: true %&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>
+  Refresh the page, and you should see a new form field for <code>name</code>. Notice how I moved the <code>autofocus: true</code> from the <code>email</code> field to the <code>name</code> field. What this <code>autofocus: true</code> does is, when the form is loaded, the form will automatically focus on the element where <code>autofocus</code> is set to <code>true</code>. We want this to be set on <code>name</code>, since it's the first form element on the page.
+</p>
+
+<p>
+  Let's now add the form field for <code>photo</code>.
+</p>
+
+<p>
+  We'll place this field right above the submit button. So above the submit form element, insert the following lines of text:
+</p>
+
+<pre><code class="erb">
+&lt;div class="field"&gt;
+  &lt;%= f.label 'Profile Picture' %&gt;&lt;br&gt;
+  &lt;%= f.file_field :photo %&gt;
+&lt;/div&gt;  
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You'll see you now have a button that you can click that prompts you to select a file from your computer. Awesome!
+</p>
+
+
+<p>
+  Your form should now look like this:
+</p>
+
+<pre><code class="erb">
+&lt;h2&gt;Sign up&lt;/h2&gt;
+
+&lt;%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %&gt;
+  &lt;%= devise_error_messages! %&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :name %&gt;&lt;br /&gt;
+    &lt;%= f.text_field :name, autofocus: true, required: true %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :email %&gt;&lt;br /&gt;
+    &lt;%= f.email_field :email, required: true %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :password %&gt;
+    &lt;% if @minimum_password_length %&gt;
+    &lt;em&gt;(&lt;%= @minimum_password_length %&gt; characters minimum)&lt;/em&gt;
+    &lt;% end %&gt;&lt;br /&gt;
+    &lt;%= f.password_field :password, autocomplete: "off", required: true %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :password_confirmation %&gt;&lt;br /&gt;
+    &lt;%= f.password_field :password_confirmation, autocomplete: "off" %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label 'Profile Picture' %&gt;&lt;br&gt;
+    &lt;%= f.file_field :photo %&gt;
+  &lt;/div&gt;  
+
+  &lt;div class="actions"&gt;
+    &lt;%= f.submit "Sign up" %&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+
+&lt;%= render "devise/shared/links" %&gt;
+</code></pre>
+
+<p>
+  It turns out that devise not only provides us with a Sign Up page, but it also provides us with an Edit User page as well! So now that we've got our sign up form sorted, let's go ahead update our Edit Users page. 
+</p>
+
+<p>
+  The edit page is located at <code>app/views/devise/registrations/edit.html.erb</code>. Let's navigate ourselves to this page.
+</p>
+
+<p>
+  You can see that it resembles the <code>new.html.erb</code> page we had earlier. All we have to do is insert the new items that we added to the Sign Up page, and we're all set.
+</p>
+
+<p>
+  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code>. Your new form in <code>edit.html.erb</code> should look like this:
+</p>
+
+<pre><code class="erb">
+&lt;h2&gt;Edit &lt;%= resource_name.to_s.humanize %&gt;&lt;/h2&gt;
+
+&lt;%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %&gt;
+  &lt;%= devise_error_messages! %&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :name %&gt;&lt;br /&gt;
+    &lt;%= f.text_field :name, autofocus: true %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :email %&gt;&lt;br /&gt;
+    &lt;%= f.email_field :email %&gt;
+  &lt;/div&gt;
+
+  &lt;% if devise_mapping.confirmable? && resource.pending_reconfirmation? %&gt;
+    &lt;div&gt;Currently waiting confirmation for: &lt;%= resource.unconfirmed_email %&gt;&lt;/div&gt;
+  &lt;% end %&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :password %&gt; &lt;i&gt;(leave blank if you don't want to change it)&lt;/i&gt;&lt;br /&gt;
+    &lt;%= f.password_field :password, autocomplete: "off" %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :password_confirmation %&gt;&lt;br /&gt;
+    &lt;%= f.password_field :password_confirmation, autocomplete: "off" %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label :current_password %&gt; &lt;i&gt;(we need your current password to confirm your changes)&lt;/i&gt;&lt;br /&gt;
+    &lt;%= f.password_field :current_password, autocomplete: "off" %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="field"&gt;
+    &lt;%= f.label 'Profile Picture' %&gt;&lt;br&gt;
+    &lt;%= f.file_field :photo %&gt;
+  &lt;/div&gt;
+
+  &lt;div class="actions"&gt;
+    &lt;%= f.submit "Update" %&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+
+&lt;h3&gt;Cancel my account&lt;/h3&gt;
+
+&lt;p&gt;Unhappy? &lt;%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %&gt;&lt;/p&gt;
+
+&lt;%= link_to "Back", :back %&gt;
+</code></pre>
+
+
+<p>
+  Save the file and log in if you haven't already, and go to <code>http://localhost:3000/users/edit</code>. You should now see the updated form with the <code>name</code> and <code>photo</code> field.
+</p>
+
+<p>
+  While we're at it, let's add a link to the user edit page so that users can edit their information easily. As always, let's run <code>rake routes</code> to find out the route for this page.
+</p>
+
+<p>
+  We see that it is located at <code>edit_user_registration</code>. Now that we know that route, let's add the link to the navbar.
+</p>
+
+<p>
+  In our <code>application.html.erb</code>, let's add the following before the Sign Out link. Make sure to put the link inside the <code>&lt;% if user_signed_in? %&gt;</code> block to make sure that users can't see the link when they aren't signed in.
+</p>
+
+<pre><code class="erb">
+&lt;nav&gt;
+  &lt;% if user_signed_in? %&gt;
+    &lt;%= link_to 'Edit Settings', edit_user_registration_path %&gt;
+    &lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;
+  &lt;% else %&gt;
+    &lt;%= link_to 'Sign Up', new_user_registration_path %&gt;
+    &lt;%= link_to 'Log In', new_user_session_path %&gt;
+  &lt;% end %&gt;
+&lt;/nav&gt;  
+
+</code></pre>
+
+<p>
+  Save the file and refresh the page. Voila, you now have a working edit page! Awesome!
+</p>
+
+
+
+
+
+
+
+
+
+
+

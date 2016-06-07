@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   end
 
   resources :cards
+
+  
   put 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 
   get 'study', to: 'study#index', as: 'study'
@@ -44,9 +46,15 @@ Rails.application.routes.draw do
   get 'ruby_core_lessons', :to => 'ruby_core_lessons#index', :as => 'ruby_core'
   get 'ruby_core_lessons/:id', :to => 'ruby_core_lessons#show', :as => 'ruby_core_lessons' 
 
+  get 'instapost_lessons', :to => 'instapost_lessons#index', :as => 'instapost'
+  get 'instapost_lessons/:id', :to => 'instapost_lessons#show', :as => 'instapost_lessons'
+
   get 'courses',   :to => 'static_pages#courses'
 
   get 'pricing', :to => 'static_pages#pricing'
 
   get 'congratulations', :to => 'static_pages#congratulations'
+  get 'about', to: 'static_pages#about'
+  get 'contact_us', to: 'static_pages#contact_us'
+  get 'learn', to: 'static_pages#learn'
 end

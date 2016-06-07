@@ -1,0 +1,141 @@
+<h1><%= title_for(InstapostLesson, 5, 7) %></h1>
+
+<p>
+  Now that we've hooked up our backend and we've got everything in place, let's create some posts!
+</p>
+
+<p>
+  First, while we're at it, let's add a link to the navbar so that users can navigate to the new posts page easily. In our <code>application.html.erb</code> within our <code>&lt;nav&gt;</code> section, let's add a link to the new posts page. You should already know how to do this by now :)
+</p>
+
+<p>
+  Just to make sure, your link should look something like this:
+</p>  
+
+<pre><code class="erb">
+&lt;%= link_to 'New Post', new_post_path %&gt;
+</code></pre>
+
+<p>
+  Check to see that the link is placed within the block that is only displayed when a user is signed in.
+</p>
+
+<pre><code class="erb">
+&lt;nav&gt;
+  &lt;% if user_signed_in? %&gt;
+    &lt;%= link_to 'New Post', new_post_path %&gt;
+    &lt;%= link_to 'Edit Settings', edit_user_registration_path %&gt;
+    &lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;
+  &lt;% else %&gt;
+    &lt;%= link_to 'Sign Up', new_user_registration_path %&gt;
+    &lt;%= link_to 'Log In', new_user_session_path %&gt;
+  &lt;% end %&gt;
+&lt;/nav&gt;  
+</code></pre>
+
+<p>
+  Awesome. Let's now navigate ourselves to this page and create some mock posts.
+</p>
+
+<p>
+  Right now, even if we create mock posts, they aren't displayed anywhere in our app. Let's make it so that all of our posts are posted in the homepage, which is pointed to the <code>index</code> action of the <code>PostsController</code>.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code>, let's add the following piece of code:
+</p>
+
+<pre><code class="ruby">
+@posts = Post.all
+</code></pre>
+
+<p>
+  Now, we can use <code>@posts</code> in our <code>index.html.erb</code>, which will give us all instances of the <code>Post</code> object.
+</p>
+
+<p>
+  Let's go into our <code>index.html.erb</code> file and try to display all of our posts. In order to do this, since we can use <code>@posts</code>, which gives us all instances of <code>Post</code>, we can create loop to iterate through each one to display the information of each <code>Post</code>.
+</p>
+
+<p>
+  In your <code>index.html.erb</code>, enter the following lines of code:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. It's really ugly, but you should now see all of your posts!
+</p>
+
+<p>
+  Let's also add information about who posted the picture. We can display the user's profile picture as well as the user's username.
+</p>
+
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user =  %&gt;
+  &lt;%= image_tag User.find(post.user_id).photo %&gt;
+  &lt;%= User.find(post.user_id).name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. We should now see our user's profile picture and name!
+</p>
+
+<p>
+  Let's refactor this code a little bit to make it more performant. We see that <code>User.find(post.user_id)</code> is repeated twice. This means that Rails will query (look for) a <code>User</code> with the post's <code>user_id</code> 2 times. Instead, we can store the user in an instance variable. This way, we're storing which user we're referring to, instead of querying for it twice.
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Awesome! If you notice though, the oldest post is shown first. In the original Instagram app, newest posts come first. Let's change our app so it behaves like this.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code>, let's change our <code>index</code> method to be like this:
+</p>
+
+<pre><code class="ruby">
+def index
+  @posts = Post.all.order('created_at DESC')
+end
+</code></pre>
+
+<p>
+  It turns out that we can change the order of our collection of <code>Post</code>s by attaching the <code>order</code> method and giving it the parameter <code>'created_at DESC'</code>. <code>.order('created_at DESC')</code> is saying, order it by the <code>created_at</code> attribute in descending order.
+</p>
+
+<p>
+  If we refresh the page, we see that our posts are ordered from newest to oldest.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -462,7 +462,7 @@ select {
   background-image: url('../images/background/bg-header-small-3.jpg');
 }
 .headline-bg.about-headline-bg {
-  background-image: url('../images/background/bg-header-small-4.jpg');
+  background-image: url('../images/landing_page/bg-header-small-4.jpg');
 }
 /* ======= Promo ======= */
 .promo {
@@ -733,8 +733,16 @@ select {
   position: absolute;
   left: 0;
 }
+.testimonials .item .profile img {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+}
 .testimonials .item .content {
   padding-left: 210px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 300px;
 }
 .testimonials .item blockquote {
   font-size: 20px;
@@ -3030,6 +3038,7 @@ select {
     text-align: center;
     margin-bottom: 30px;
   }
+
   .testimonials .item .content {
     padding-left: 60px;
   }

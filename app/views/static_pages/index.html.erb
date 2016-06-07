@@ -9,10 +9,15 @@
 </div><!--//bg-slider-wrapper-->     
 
 <section class="promo section section-on-bg">
-    <div class="container">                
-      <div class="row">
 
-        <div class="col-xs-12 col-md-7 scroll">
+    <div class="container text-center">                
+        <h1 class="title">Coding Bootcamp in Nepal<br/>Become a web developer in 3 months</h2>
+        <p class="intro">
+          We are currently accepting applications for 20 highly motivated students to join TECHRISE starting August 2016, completely free of charge. If you are interested, please sign up below.
+        </p>
+        <p><a class="btn btn-cta btn-cta-primary" href="">Sign Up for Pre-Screening</a></p>
+
+        <!-- <div class="col-xs-12 col-md-7 scroll">
           <h1 style="font-size: 36px; font-weight: 100; letter-spacing: 2px;">Have no prior coding experience?</h1>
           <h3 style="font-weight: 300;letter-spacing: 2px;">
              With a personal mentor, you can still learn how to build web applications in just 3 months.
@@ -62,21 +67,74 @@
           <% end %>
 
         </div>
+      </div>-->
 
-      </div>
     </div><!--//container-->
 </section><!--//promo-->
 
 <div class="sections-wrapper">   
 
+  <section id="how">
+    <div class="container">
+      <div class="header_container">
+        <h2 class="text-center">Your Learning Experience at TECHRISE</h2>
+        <p class="intro text-center">
+          We make sure that our methodology is effective and motivates students.
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-5">
+          <h2 class="title">Learn By Building</h2>
+          <p>
+            At TECHRISE, you'll build several projects and learn by building. We believe that in order to improve your technical skills, actually building real-world apps are the most effective way.
+          </p>
+        </div><!-- col-xs-12 col-md-6 -->
+        <div class="col-xs-12 col-md-6 col-md-offset-1">
+          <%= image_tag 'landing_page/imac_lesson.png' %>
+        </div>
+
+      </div><!-- row -->
+
+      <div class="row" style="margin-top: 120px;">
+        <div class="col-xs-12 col-md-6">
+          <%= image_tag 'landing_page/slack_screenshot.png', class: 'shadow_screenshot' %>
+        </div>
+
+        <div class="col-xs-12 col-md-5 col-md-offset-1">
+          <h2 class="title">Learn With Peers</h2>
+          <p>
+            By asking questions, sharing comments, and learning from each other, you can accelerate your learning. Your path towards becoming a developer is shortened by having an environment where you can learn from your peers.
+          </p>
+        </div><!-- col-xs-12 col-md-6 -->
+        
+
+      </div><!-- row -->
+
+      <div class="row" style="margin-top: 120px; margin-bottom: 100px;">
+        <div class="col-xs-12 col-md-5">
+          <h2 class="title">Learn With a Mentor</h2>
+          <p>
+            Speed up your learning with the help of a mentor. Ask questions individually to your mentor and get the support you need. Mentor sessions are held weekly and students ask questions and tackle problems with their mentor.
+          </p>
+        </div><!-- col-xs-12 col-md-6 -->
+
+        <div class="col-xs-12 col-md-6 col-md-offset-1">
+          <%= image_tag 'startup2.jpg', class: 'shadow_screenshot' %>
+        </div>
+
+      </div><!-- row -->
+
+    </div><!-- container -->
+  </section>
+
   <!-- Skills Grid Section -->
   <section id="skills" class = "section">
     <a class = "anchor" id = "skills_you_will_learn"></a>
       <div class="container">
-          <div class="row">
+          <div class="row" style="margin-bottom: 90px;">
               <div class="col-lg-12 text-center scroll">
-                  <h2 class = "section_header">Skills You Will Learn</h2>
-                  <hr class="star-primary">
+                  <h2 class = "title">Skills You Will Learn</h2>
               </div>
           </div>
           <div class="row">
@@ -92,60 +150,58 @@
   </section>
 
   <!-- For Who Section -->
-  <section class = "for_who_class section" id="for_who">
-    <div class = "for_who_class_wrapper">
-        <a class = "anchor" id = "is_techrise_for_me"></a>
-          <div class="container">
+  <!-- <section class = "section" id="for_who">
+    <a class = "anchor" id = "is_techrise_for_me"></a>
+      <div class="container">
 
-              <div class="row">
-                  <div class="col-lg-12 text-center">
-                      <h2 class="section_header">Is Techrise For Me?</h2>
-                      <hr>
-                  </div>
-              </div>
-
-              <div class="row scroll">
-
-                <div class = "col-sm-12 col-md-6">
-                  <h3 class = "for_who_header text-center">Aspiring Entrepreneurs</h3>
-
-                  <p>
-                    You have an awesome idea that you think could change the way people do things. You want to build a prototype or MVP that you can show to your potential investors and customers to get quick feedback. But you lack the money, don't want to spend the money, or don't know any developers.
-                  </p>
-                  <p>
-                    Why not just learn just enough coding so you can start building your web applications? Techrise is perfect for those who want to start building your prototypes for your ideas. By building real world apps from day 1, you'll learn how to quickly build out your apps to ship fast.
-                  </p>
-
-                </div>
-
-                <div class = "col-sm-12 col-md-6">
-                  <h3 class = "for_who_header text-center">Aspiring Developers</h3>
-
-                  <p>
-                    You might have tried coding before but it was too difficult and you quit. Or coding might be completely new to you. Either way, you think becoming a web developer is an awesome feat and you want to get started on a new journey.
-                  </p>
-                  <p>
-                    Techrise teaches you how to start writing code like professional developers do in the real world. By learning how to use GitHub, Team Communication tools, and also how to solve difficult coding challenges, you will be prepared to start contributing in actual web development teams.
-                  </p>
-
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-12 text-center">
-                    <h2 style = "font-weight: 600;margin:60px 0px 30px 0px;">DOES THIS SOUND LIKE YOU?</h2>
-                    <div class="col-lg-8 col-lg-offset-2 text-center">
-                      <%= link_to "YES, GET ME ONBOARD", new_user_registration_path, class: "btn btn-danger btn-cta-secondary bta-cta btn-lg btn-block", style: "color:white;" %>
-                    </div>
-                  </div>
-                </div>
-              
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 class="section_header">Is Techrise For Me?</h2>
+                  <hr>
               </div>
           </div>
-    </div>
-  </section>
+
+          <div class="row scroll">
+
+            <div class = "col-sm-12 col-md-6">
+              <h3 class = "for_who_header text-center">Aspiring Entrepreneurs</h3>
+
+              <p>
+                You have an awesome idea that you think could change the way people do things. You want to build a prototype or MVP that you can show to your potential investors and customers to get quick feedback. But you lack the money, don't want to spend the money, or don't know any developers.
+              </p>
+              <p>
+                Why not just learn just enough coding so you can start building your web applications? Techrise is perfect for those who want to start building your prototypes for your ideas. By building real world apps from day 1, you'll learn how to quickly build out your apps to ship fast.
+              </p>
+
+            </div>
+
+            <div class = "col-sm-12 col-md-6">
+              <h3 class = "for_who_header text-center">Aspiring Developers</h3>
+
+              <p>
+                You might have tried coding before but it was too difficult and you quit. Or coding might be completely new to you. Either way, you think becoming a web developer is an awesome feat and you want to get started on a new journey.
+              </p>
+              <p>
+                Techrise teaches you how to start writing code like professional developers do in the real world. By learning how to use GitHub, Team Communication tools, and also how to solve difficult coding challenges, you will be prepared to start contributing in actual web development teams.
+              </p>
+
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                <h2 style = "font-weight: 600;margin:60px 0px 30px 0px;">DOES THIS SOUND LIKE YOU?</h2>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                  <%= link_to "YES, GET ME ONBOARD", new_user_registration_path, class: "btn btn-danger btn-cta-secondary bta-cta btn-lg btn-block" %>
+                </div>
+              </div>
+            </div>
+          
+          </div>
+      </div>
+  </section> -->
 
   <!-- About Section -->
-  <section class="our_story_section section" id="our_story">
+  <!-- <section class="our_story_section section" id="our_story">
     <div class="our_story_section_wrapper">
         <a class = "anchor" id = "about_us"></a>
           <div class="container">
@@ -174,18 +230,18 @@
                     <p>- TECHRISE team</p>
                   </div>
 
-                  <!-- <div class="col-lg-8 col-lg-offset-2 text-center" style = "padding:30px;">
+                  <div class="col-lg-8 col-lg-offset-2 text-center" style = "padding:30px;">
                       <h3 style = "font-weight: 600;">Click the button below to</h3>
                       <h3 style = "font-weight: 600;margin:-5px 0px 30px 0px;">start your coding journey.</h3>
                       <%= link_to 'START CODING NOW', new_user_registration_path, class: "btn btn-danger btn-lg", style: "color:white;" %>
-                  </div> -->
+                  </div>
               </div>
           </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Why Techrise Section -->
-  <section id="why_techrise" class="why_section section">
+<!--   <section id="why_techrise" class="why_section section">
     <div class="why_section_wrapper">
         <a class = "anchor" id = "why_us"></a>
           <div class="container">
@@ -197,8 +253,6 @@
               </div>
               <div class="row">
                 <div class = "col-sm-12 col-md-4 text-center">
-<!--                   <div class = "why_techrise_icons"><i class="fa fa-graduation-cap"></i></div>
- -->              
                   <h1>1-on-1 Mentor Sessions</h1>
                   <p style="text-align:justify; font-size:20px !important;">
                     Ask questions individually to your mentor and get the support you need. By having a mentor, you can learn quicker and more effectively.
@@ -208,27 +262,70 @@
 
               <div class="row">
                 <div class = "col-sm-12 col-md-4 text-center">
-                  <!-- <div class = "why_techrise_icons"><i class="fa fa-globe"></i></div> -->
                   <h1>Build Real World Applications</h1>
                   <p style="text-align:justify; font-size:20px !important;">
                     Instead of just learning syntax and theory, we believe you can learn faster by actually building websites and web applications from day 1.
                   </p>
                 </div>
 
-                <!-- <div class = "col-sm-12 col-md-4  text-center">
-                  <h1>Learn from People Like You</h1>
-                  <p style="text-align:justify">
-                    Our mentors were people just like you - beginners with no experience in coding - just until recently. That's why they know exactly how to go from having no experience in coding to becoming a great developer.
-                  </p>
-                </div> -->
-
               </div>
 
           </div>
     </div>
+  </section>     -->    
+
+  <!-- ******Testimonials Section****** -->
+  <section class="section testimonials">
+      <div class="container">
+          <h2 class="title text-center">What are people saying about TECHRISE?</h2>
+          <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                  <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#testimonials-carousel" data-slide-to="1"></li>
+                  <!-- <li data-target="#testimonials-carousel" data-slide-to="2"></li> -->
+              </ol><!--//carousel-indicators-->
+              <div class="carousel-inner">
+                  <div class="item active">
+                      <figure class="profile"><%= image_tag 'landing_page/aadesh.jpg' %></figure>
+                      <div class="content">
+                          <blockquote>
+                          <i class="fa fa-quote-left"></i>
+                          <p>
+                            TECHRISE has been by far the best learning experience for me. My mentor, Takehiro, was very helpful during the course. He is very passionate when it comes to teaching, always willing to explain the concepts behind what we were doing. Having that understanding makes it possible to apply that knowledge in different places. These 3 months have been challenging but worth it.
+                          </p>
+                          </blockquote>
+                          <p class="source">Aadesh Shrestha<br /><span class="title">Software Engineer, äLuxuRē</span></p>
+                      </div><!--//content-->                         
+                  </div><!--//item-->         
+                  <div class="item">
+                      <figure class="profile"><%= image_tag 'landing_page/ganesh.jpg' %></figure>
+                      <div class="content">
+                          <blockquote>
+                          <i class="fa fa-quote-left"></i>
+                          <p>
+                            Its my great pleasure to know that TECHRISE is launching a special skill development IT program specially for Nepali youth. Definately it will help to develop the skill manpower and provide a great employment opportunity abroad. Since the education system of Nepal is being a theoretical base, even after graduation in concern faculty, could not fit for the international labour markets. As per present scenario, more than 6,000,000 Nepalese unskilled workers are working abroad as a labourer. If we could able to train them as skilled manpower, it will definitely help Nepal's national economy. I, therefore wish all the success of TECHRISE and would like to extend my sincere thanks to co-founders of TECHRISE.
+                          </p>
+
+                          </blockquote>
+                          <p class="source">Ganesh Man Lama<br /><span class="title">Air Asia X Nepal President | Managing Director Incentive Group of Companies</span></p>
+                      </div><!--//content-->                         
+                  </div><!--//item-->                        
+                  
+              </div><!--//carousel-inner-->
+              
+          </div><!--//carousel-->
+      </div><!--//container-->
+  </section><!--//testimonials--> 
+
+  <section class="section press">
+    <div class="container text-center">
+        <h2 class="title">Partnerships</h2>
+        <%= image_tag 'http://static1.squarespace.com/static/5390cc63e4b02566a5bb8bf0/t/539718f5e4b076c79e506193/1464376473863/?format=1500w', class: 'partnership_logo' %>
+        <%= image_tag 'https://www.aluxurelife.com/assets/logo-285af2f803977bcecf652fef1f6cb49aaf5cadee7c263ebe3108c41bf3805344.png', class: 'partnership_logo' %>
+    </div>
   </section>
 
-  <section class="success section" style="padding-top: 50px;">
+<!--   <section class="success section" style="padding-top: 50px;">
     <a class = "anchor" id = "team"></a>
       <div class="container">
           <div class="row">
@@ -272,10 +369,10 @@
 
 
       </div>
-  </section>
+  </section> -->
 
   <!-- Contact Section -->
-  <section id="contact" class="section">
+<!--   <section id="contact" class="section">
     <a class = "anchor" id="contact_us"></a>
       <div class="container">
           <div class="row">
@@ -308,13 +405,14 @@
               </div>
           </div>
       </div>
-  </section>
+  </section> -->
 
   <!-- ******CTA Section****** -->
   <section id="cta-section" class="section cta-section text-center home-cta-section">
       <div class="container">
-         <h2 class="title">Ready to start coding with Techrise?</h2>
-         <p class="intro">Sign up to get <span class="counting">instant access</span> to course materials and a personal mentor.</p>
+         <h2 class="title">Ready to start coding with TECHRISE?</h2>
+         <p class="intro">We are currently accepting applications for 20 highly motivated students to join TECHRISE starting August 2016, <span class="counting">completely free of charge</span>.</p>
+         <!-- <p class="intro">Sign up to get <span class="counting">instant access</span> to course materials and a personal mentor.</p> -->
          <p><a class="btn btn-cta btn-cta-primary" href="/users/sign_up" target="_blank">Sign Up Now</a></p>
       </div><!--//container-->
   </section><!--//cta-section-->
