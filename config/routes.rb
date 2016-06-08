@@ -24,6 +24,9 @@ Rails.application.routes.draw do
 
   resources :cards
 
+  resources :posts
+  get 'blog', to: 'blog#index', as: 'blog'
+
   
   put 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 

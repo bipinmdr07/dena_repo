@@ -2022,9 +2022,10 @@ select {
 /*  padding-top: 25px;*/
 }
 .blog-page .header-blog h1.logo a .sub {
-  font-family: "Roboto", arial, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   color: #253340;
-  font-weight: 300;
+  font-weight: 500;
+  font-size: 25px;
 }
 .blog-page .header-blog .main-nav .nav .nav-item.last {
   margin-right: 40px;

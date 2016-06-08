@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'http://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -38,12 +39,21 @@ gem 'ckeditor'
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
+# active admin text editor
+gem 'activeadmin-ckeditor'
+gem 'paperclip'
 
 # code text editor
 gem 'ace-rails-ap'
 
 # tagging
 gem 'acts-as-taggable-on', '~> 3.4'
+
+# social media buttons
+gem 'rails-assets-RRSSB'
+
+# nice urls
+gem 'friendly_id', '~> 5.1.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
