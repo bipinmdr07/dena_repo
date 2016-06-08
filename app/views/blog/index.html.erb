@@ -6,9 +6,9 @@
                     <% break if @posts[i].nil? %>
                     <li class="slide slide-<%= i %>" style="background: #253340 url(<%= @posts[i].featured_image %>) no-repeat 50% top;">
                         <div class="flex-caption container">
-                            <h3 class="title"><%= link_to @posts[i].title, post_path(@posts[i].id) %></h3>
+                            <h3 class="title"><%= link_to @posts[i].title, post_path(@posts[i].slug) %></h3>
                             <div class="meta"><%= display_date(@posts[i].created_at) %></div>
-                            <%= link_to 'Read more &rarr;'.html_safe, post_path(@posts[i].id), class: "more-link" %>
+                            <%= link_to 'Read more &rarr;'.html_safe, post_path(@posts[i].slug), class: "more-link" %>
                         </div><!--//flex-caption-->
                     </li>
                     
@@ -26,15 +26,15 @@
                     <article class="post col-md-4 col-sm-6 col-xs-12">
                         <div class="post-inner">
                             <figure class="post-thumb">
-                                <%= link_to post_path(post.id) do %>
+                                <%= link_to post_path(post.slug) do %>
                                   <%= image_tag post.featured_image, class: 'img-responsive' %>
                                 <% end %>                            
                             </figure><!--//post-thumb-->
                             <div class="content">
-                                <h3 class="post-title"><%= link_to post.title, post_path(post.id) %></h3>
+                                <h3 class="post-title"><%= link_to post.title, post_path(post.slug) %></h3>
                                 <div class="post-entry">
                                     <%= truncate(post.body, length: 120, escape: false) %>
-                                    <%= link_to post_path(post.id), class: 'read-more' do %>
+                                    <%= link_to post_path(post.slug), class: 'read-more' do %>
                                       Read More <i class="fa fa-long-arrow-right"></i>
                                     <% end %>
                                 </div>

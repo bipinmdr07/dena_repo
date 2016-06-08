@@ -52,6 +52,9 @@ gem 'acts-as-taggable-on', '~> 3.4'
 # social media buttons
 gem 'rails-assets-RRSSB'
 
+# nice urls
+gem 'friendly_id', '~> 5.1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
