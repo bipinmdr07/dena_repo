@@ -607,6 +607,28 @@ select {
   left: 80px;
   top: 25px;
 }
+
+.item .quote blockquote {
+  border-left: none;
+  font-style: italic;
+  color: #666666;
+  font-size: 16px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.source {
+  color: #999999;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.source a {
+  color: #999999;
+}
+.source a:hover {
+  color: #808080;
+}
+
+
 .why .item .quote blockquote {
   border-left: none;
   font-style: italic;

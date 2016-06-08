@@ -282,22 +282,8 @@
               <ol class="carousel-indicators">
                   <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
                   <li data-target="#testimonials-carousel" data-slide-to="1"></li>
-                  <li data-target="#testimonials-carousel" data-slide-to="2"></li>
               </ol><!--//carousel-indicators-->
               <div class="carousel-inner">
-                  <div class="item">
-                      <figure class="profile"><%= image_tag 'landing_page/ganesh.jpg' %></figure>
-                      <div class="content">
-                          <blockquote>
-                          <i class="fa fa-quote-left"></i>
-                          <p>
-                            Its my great pleasure to know that TECHRISE is launching a special skill development IT program specially for Nepali youth. Definately it will help to develop the skill manpower and provide a great employment opportunity abroad. Since the education system of Nepal is being a theoretical base, even after graduation in concern faculty, could not fit for the international labour markets. As per present scenario, more than 6,000,000 Nepalese unskilled workers are working abroad as a labourer. If we could able to train them as skilled manpower, it will definitely help Nepal's national economy. I, therefore wish all the success of TECHRISE and would like to extend my sincere thanks to co-founders of TECHRISE.
-                          </p>
-
-                          </blockquote>
-                          <p class="source">Ganesh Man Lama<br /><span class="title">Air Asia X Nepal President | Managing Director Incentive Group of Companies</span></p>
-                      </div><!--//content-->                         
-                  </div><!--//item-->
 
                   <div class="item active">
                       <figure class="profile"><%= image_tag 'landing_page/aadesh.jpg' %></figure>
@@ -331,8 +317,29 @@
       </div><!--//container-->
   </section><!--//testimonials--> 
 
+  <section class="section">
+    <div class="container text-center">
+        <div class="item">
+            <div class="col-xs-12 col-md-4">
+              <%= image_tag 'landing_page/ganesh.jpg', class: 'prof_pic' %>
+            </div>
+            <div class="col-xs-12 col-md-8">
+                <blockquote>
+                <i class="fa fa-quote-left" style="float: left; margin-right: 5px;"></i>
+                <p style="text-align: justify;">
+                  Its my great pleasure to know that TECHRISE is launching a special skill development IT program specially for Nepali youth. Definitely it will help to develop the skill manpower and provide a great employment opportunity abroad. Since the education system of Nepal is being a theoretical base, even after graduation in concern faculty, could not fit for the international labour markets. As per present scenario, more than 6,000,000 Nepalese unskilled workers are working abroad as a labourer. If we could able to train them as skilled manpower, it will definitely help Nepal's national economy. I, therefore wish all the success of TECHRISE and would like to extend my sincere thanks to co-founders of TECHRISE.
+                </p>
+
+                </blockquote>
+                <p class="source" style="color:#333;">Ganesh Man Lama<br /><small>President, Air Asia X Nepal | Managing Director, Incentive Group of Companies</small></p>
+            </div><!--col-xs-12 col-md-8-->                         
+        </div><!--//item-->
+    </div>
+  </section>
+
   <section class="section press">
     <div class="container text-center">
+
         <h2 class="title">Partnerships</h2>
         <%= image_tag 'http://static1.squarespace.com/static/5390cc63e4b02566a5bb8bf0/t/539718f5e4b076c79e506193/1464376473863/?format=1500w', class: 'partnership_logo' %>
         <%= image_tag 'https://www.aluxurelife.com/assets/logo-285af2f803977bcecf652fef1f6cb49aaf5cadee7c263ebe3108c41bf3805344.png', class: 'partnership_logo' %>
@@ -427,7 +434,7 @@
          <h2 class="title">Ready to start coding with TECHRISE?</h2>
          <p class="intro">We are currently accepting applications for 20 highly motivated students to join TECHRISE starting August 2016, <span class="counting">completely free of charge</span>.</p>
          <!-- <p class="intro">Sign up to get <span class="counting">instant access</span> to course materials and a personal mentor.</p> -->
-         <p><a class="btn btn-cta btn-cta-primary" href="/users/sign_up" target="_blank">Sign Up Now</a></p>
+         <p><a class="btn btn-cta btn-cta-primary" href="/" target="_blank">Sign Up Now</a></p>
       </div><!--//container-->
   </section><!--//cta-section-->
 
