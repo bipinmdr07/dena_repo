@@ -16,59 +16,6 @@
           We are currently accepting applications for 20 highly motivated students to join TECHRISE starting August 2016, completely free of charge. If you are interested, please sign up below.
         </p>
         <p><a class="btn btn-cta btn-cta-primary" href="">Sign Up for Pre-Screening</a></p>
-
-        <!-- <div class="col-xs-12 col-md-7 scroll">
-          <h1 style="font-size: 36px; font-weight: 100; letter-spacing: 2px;">Have no prior coding experience?</h1>
-          <h3 style="font-weight: 300;letter-spacing: 2px;">
-             With a personal mentor, you can still learn how to build web applications in just 3 months.
-          </h3>
-          <p>
-            The demand for web developers is increasing everywhere around the world and is predicted to keep on growing. In todays world, if you can code, there are unlimited opportunities out there for you.
-          </p>
-          <p>
-            Imagine what you could do if you could build web applications. You could start a new career. You could help out your company. You could help build your friend's dream product. You could build your <i>own</i> dream product. You could help out the community. <i>The potential is endless</i>.
-          </p>
-          <h3 style="font-weight: 300;letter-spacing: 2px;">If you're ready to start unleashing your inner potential, join Techrise now by signing up.</h3>
-        </div>
-
-        <div class="col-md-5 scroll">
-          <h3 style="letter-spacing:3px;font-weight: 600;">Sign up now to get instant access to our course materials</h3>
-
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                <%= devise_error_messages! %>
-
-                <div class="field">
-                  <%= f.label :name %><br />
-                  <%= f.text_field :name, autofocus: true, required: true, class: 'form-control' %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :email %><br />
-                  <%= f.email_field :email, required: true, class: 'form-control' %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :password %>
-                  <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
-                  <% end %><br />
-                  <%= f.password_field :password, autocomplete: "off", required: true, class: 'form-control' %>
-                </div>
-
-                <div class="field">
-                  <%= f.label :password_confirmation %><br />
-                  <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-                </div>
-                
-                <br>
-                <div class="actions">
-                  <%= f.submit "SIGN UP", class: 'btn btn-danger btn-cta-secondary bta-cta btn-lg btn-block' %>
-                </div>
-          <% end %>
-
-        </div>
-      </div>-->
-
     </div><!--//container-->
 </section><!--//promo-->
 
@@ -91,24 +38,24 @@
           </p>
         </div><!-- col-xs-12 col-md-6 -->
         <div class="col-xs-12 col-md-6 col-md-offset-1">
-          <%= image_tag 'landing_page/imac_lesson.png' %>
+          <%= image_tag 'landing_page/imac_lesson.png', class: 'img-responsive' %>
         </div>
 
       </div><!-- row -->
 
       <div class="row" style="margin-top: 120px;">
-        <div class="col-xs-12 col-md-6">
-          <%= image_tag 'landing_page/slack_screenshot.png', class: 'shadow_screenshot' %>
-        </div>
 
-        <div class="col-xs-12 col-md-5 col-md-offset-1">
+        <div class="col-xs-12 col-md-5 col-md-offset-1 col-md-push-6">
           <h2 class="title">Learn With Peers</h2>
           <p>
             By asking questions, sharing comments, and learning from each other, you can accelerate your learning. Your path towards becoming a developer is shortened by having an environment where you can learn from your peers.
           </p>
         </div><!-- col-xs-12 col-md-6 -->
-        
 
+        <div class="col-xs-12 col-md-6 col-md-pull-6">
+          <%= image_tag 'landing_page/slack_screenshot.png', class: 'img-responsive shadow_screenshot' %>
+        </div>
+ 
       </div><!-- row -->
 
       <div class="row" style="margin-top: 120px; margin-bottom: 100px;">
@@ -120,7 +67,7 @@
         </div><!-- col-xs-12 col-md-6 -->
 
         <div class="col-xs-12 col-md-6 col-md-offset-1">
-          <%= image_tag 'startup2.jpg', class: 'shadow_screenshot' %>
+          <%= image_tag 'startup2.jpg', class: 'img-responsive shadow_screenshot' %>
         </div>
 
       </div><!-- row -->
@@ -345,88 +292,6 @@
         <%= image_tag 'https://www.aluxurelife.com/assets/logo-285af2f803977bcecf652fef1f6cb49aaf5cadee7c263ebe3108c41bf3805344.png', class: 'partnership_logo' %>
     </div>
   </section>
-
-<!--   <section class="success section" style="padding-top: 50px;">
-    <a class = "anchor" id = "team"></a>
-      <div class="container">
-          <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class = "section_header">Team</h2>
-                <hr class="star-light">
-            </div>
-          </div>
-
-          <div class="row">
-
-            <div class="col-xs-12 col-md-6 scroll">
-
-              <%= image_tag 'natsuko.jpg', class: 'prof_pic', alt: 'Techrise Nepal Natsuko Robyn Shinozaki' %>
-              <br>
-              <h5>Natsuko Robyn Shinozaki | Co-founder</h5>
-
-              <p style="font-size:16px;text-align:justify;">
-                I'm passionate about serving the community and turning creative ideas into reality. I've worked with various non-profits in operations and communication. I want to help create environments where people can reach their full potential. Ice-cream and momo enthusiast :)
-              </p>
-
-              <a href="https://www.linkedin.com/in/robyn-natsuko-shinozaki-12883487" target="_blank" class="pull-right"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
-            </div>
-
-            <div class="col-xs-12 col-md-6 scroll">
-
-              <%= image_tag 'take.jpg', class: 'prof_pic', alt: 'Techrise Nepal Takehiro Mouri' %>
-              <br>
-              <h5>Takehiro Mouri | Co-founder / Mentor</h5>
-
-              <p style="font-size:16px;text-align:justify;">
-                Coding is awesome and my mission is to teach people how much fun it can be. I've worked with multiple start ups as a lead developer have helped turn ideas into reality through software engineering. I'm super passionate about learning how to code and teaching others that are just beginning to do the same.
-              </p>
-
-              <a href="https://www.linkedin.com/in/takehiro-mouri-a3083487" target="_blank" class="pull-right"><i class="fa fa-linkedin-square"></i> LinkedIn</a>
-
-              <a href="http://www.takehiromouri.com" target="_blank"><i class="fa fa-globe"></i> Personal Website</a>
-            </div>
-
-          </div>
-
-
-      </div>
-  </section> -->
-
-  <!-- Contact Section -->
-<!--   <section id="contact" class="section">
-    <a class = "anchor" id="contact_us"></a>
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class = "section_header">Contact Us</h2>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 scroll">
-                  <%= simple_form_for Contact.new(params[:contact]), html: {id: "contactForm"}, remote: true do |f| %>
-                    <div class="row control-group">
-                      <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <%= f.input :name, required: true, placeholder: 'Name', class: 'form-control' %>
-                      </div>
-                    </div>
-
-                    <div class="row control-group">
-                      <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <%= f.input :email, required: true, placeholder: 'Email', class: 'form-control' %>
-                      </div>
-                    </div>
-
-                    <div class="row control-group">
-                      <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <%= f.input :message, as: :text, required: false, input_html: {rows: 6}, placeholder: 'Message', class: 'form-control' %>
-                      </div>
-                    </div>
-                    <%= f.button :submit, 'Send Message', class: 'btn btn-success btn-lg', id: 'ContactSubmit', data: { disable_with: "Sending..." } %>
-                  <% end %>
-              </div>
-          </div>
-      </div>
-  </section> -->
 
   <!-- ******CTA Section****** -->
   <section id="cta-section" class="section cta-section text-center home-cta-section">

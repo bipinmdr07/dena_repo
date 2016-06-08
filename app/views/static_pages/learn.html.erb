@@ -4,10 +4,10 @@
 <section class="features-video section section-on-bg">
     <div class="container text-center">          
         <h2 class="title">How It Works</h2>
-        <div class="video-container" style="width: 705px; height: 250px; background-color: #ffffff; text-align:left;">
+        <div class="video-container" style="background-color: #ffffff; text-align:left;">
             <div class="container-fluid">
                 <h3>Details</h3>
-                <div class="table-responsive">  
+                <div class="table-responsive hidden-sm hidden-xs">  
                     <table class="table table-striped">
                         <tbody>
                             <tr>
@@ -38,6 +38,26 @@
                     </table>
                 </div><!--//table-responsive-->
                 
+                <div class="hidden-lg hidden-md">
+                    <h4>Place</h4>
+                    <p>
+                        Work from home or at the TECHRISE workspace. Come in to the workspace once a week for mentor sessions. Most of our material is on our online platform, so you can work anytime, anywhere, as long as you finish your work.
+                    </p>    
+                    <h4>Duration</h4>
+                    <p>
+                        The entire course will take 3 months. We expect all students to put in atleast 15 hours a week for coding.
+                    </p>
+
+                    <h4>Price</h5>
+                    <p>
+                        We are offering 20 free scholarships for the first 3 months. Students enrolled during this period will not have to pay for tuition fees.
+                    </p>
+                    <h4>Requirements</h4>
+
+                    <p>
+                        We require that you are able to work atleast 15 hours a week with internet connectivity and a PC. If this is difficult, our workspace is free to use for all students. Prior coding experience is not required, but the motivation to learn at a fast pace is a must.
+                    </p>
+                </div>
             </div>
         </div><!--//video-container--> 
     </div><!--//container-->
@@ -107,6 +127,13 @@
                             <figcaption class="figure-caption">(Screenshot source: Coral - App &amp; website startup kit)</figcaption>
                         </figure> -->
                         <div class="desc text-left">
+                            <blockquote>
+                                <p> 
+                                    [...] under tutorial instruction, the average student is above 98% of the students
+                                </p>
+                                <p class="source">Benjamin S. Bloom in The 2 Sigma Problem - MIT</p>
+                            </blockquote>
+
                             <p>
                                 If you're just starting out, coding can be frustrating and sometimes you don't know how to move forward. Mentors will provide you the guidance you need in order to succeed in becoming a web developer.
                             </p>
@@ -120,20 +147,25 @@
                             <p>
                                 One on one mentoring has been proven by research to be one of the most effective methods of teaching. Through research and experience, we believe that our 1 on 1 mentor sessions will enable you to overcome obstacles and learn at an accelerated pace.
                             </p>
-                            <blockquote>
-                                <p> 
-                                    [...] under tutorial instruction, the average student is above 98% of the students
-                                </p>
-                                <small>Benjamin S. Bloom in The 2 Sigma Problem - MIT</small>
-                            </blockquote>
-                            
+
+                            <div class="quote" style="position: relative;"> 
+                                <div class="quote-profile" style="position: absolute;left: 0;">
+                                    <%= image_tag 'landing_page/lakshman_2.jpg', class: "img-responsive img-circle", style: 'height:70px; width: 70px;' %>
+                                </div><!--//profile-->
+                                <div class="quote-content">
+                                    <blockquote><p>Asking a lot of questions to my mentor, and discussing with other members in Slack enhanced fast understanding.</p></blockquote>
+                                    <p class="source">Lakshman Basnet</p>
+                                </div><!--//quote-content-->                                     
+                            </div><!--//quote--> 
+
+
                         </div><!--//desc-->
                     </div><!--//tab-pane-->
                     <div class="tab-pane" id="feature-3">
                         <h3 class="title sr-only">TECHRISE Training Flashcards</h3>
                         <figure class="figure text-center">
-                            <img class="img-responsive" src="assets/images/features/screenshot-3.png" alt="" />
-                            <figcaption class="figure-caption">(Screenshot source: Coral - App &amp; website startup kit)</figcaption>
+                            <%= image_tag 'landing_page/flashcards.png', class: 'img-responsive' %>
+                            <figcaption class="figure-caption">You can create training flashcards within the lesson. Syntax highlighting is supported.</figcaption>
                         </figure>
                         <div class="desc text-left">
                             <p>
@@ -148,16 +180,18 @@
                     <div class="tab-pane" id="feature-4">
                         <h3 class="title sr-only">Peer Learning & Community</h3>                                    
                         <figure class="figure text-center">
-                            <img class="img-responsive" src="assets/images/features/screenshot-4.png" alt="" />
-                            <figcaption class="figure-caption">(Screenshot source: Coral - App &amp; website startup kit)</figcaption>
+                            <%= image_tag 'landing_page/slack_screenshot.png', class: 'img-responsive' %>
+                            <figcaption class="figure-caption">Students interact on Slack and ask each other questions.</figcaption>
                         </figure>
                         <div class="desc text-left">
                             <p>
                                 One of the most valuable when learning something is the people you meet. You'll make lifelong friends here at TECHRISE who will help you learn and achieve your goals.
                             </p>
-                            <!-- <p class="box">
-                                
-                            </p> -->
+
+                            <p>
+                                Students ask each other questions, share resources, and solve each other's problems in our online community. We also provide an offline community where similar minded developers gather and chat about technology.
+                            </p>
+
                         </div><!--//desc-->
                     </div><!--//tab-pane-->
                 </div><!--//tab-content-->
