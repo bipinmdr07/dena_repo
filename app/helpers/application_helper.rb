@@ -11,6 +11,10 @@ module ApplicationHelper
     true
   end
 
+  def display_date(datetime)
+    datetime.strftime("%m/%d/%Y")
+  end
+
 
   def resource_name
     :user

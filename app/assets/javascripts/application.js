@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
+//= require RRSSB
 //= require ckeditor/init
 //= require ace-rails-ap
 //= require turbolinks

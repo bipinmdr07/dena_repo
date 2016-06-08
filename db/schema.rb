@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531050652) do
+ActiveRecord::Schema.define(version: 20160608050410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,6 +110,17 @@ ActiveRecord::Schema.define(version: 20160531050652) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "body"
+    t.string   "featured_image"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "comment_id"
@@ -119,6 +130,19 @@ ActiveRecord::Schema.define(version: 20160531050652) do
   end
 
   add_index "replies", ["user_id", "comment_id"], name: "index_replies_on_user_id_and_comment_id", using: :btree
+
+  create_table "rich_rich_files", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "rich_file_file_name"
+    t.string   "rich_file_content_type"
+    t.integer  "rich_file_file_size"
+    t.datetime "rich_file_updated_at"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.text     "uri_cache"
+    t.string   "simplified_type",        default: "file"
+  end
 
   create_table "ruby_core_lessons", force: :cascade do |t|
     t.datetime "created_at", null: false

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <%= render '/layouts/meta' %>
+
+</head>
+
+<body class="blog-page">
+    <div class="wrapper">
+        <!-- ******HEADER****** --> 
+        <header class="header header-blog">  
+            <div class="container">       
+                <h1 class="logo" style="padding-top: 22px;">
+                    <a href="/"><span class="text" style="font-size: 25px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span> <span class="sub">Blog</span> </a>
+                </h1><!--//logo-->
+                <nav class="main-nav navbar-right" role="navigation">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button><!--//nav-toggle-->
+                    </div><!--//navbar-header-->
+                    <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                          
+                            <li class="nav-item nav-item-main-site last"><a href="/"><i class="fa fa-home"></i> Back to main site</a></li>
+                        </ul><!--//nav-->
+                                                          
+                    </div><!--//navabr-collapse-->
+                </nav><!--//main-nav-->         
+            </div><!--//container-->
+        </header><!--//header--> 
+
+
+<%= yield %>
+
+<script type="text/javascript">
+function ready() {
+  $('.flexslider').flexslider();
+}
+  
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
+</script>
+
+<%= render '/layouts/footer' %>
+
+</body>
+</html>
