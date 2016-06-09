@@ -1,6 +1,32 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.support_ul li {
+  font-size: 18px;
+  font-weight: 600; 
+}
+
+.support_ul {
+  text-align: left;
+}
+
+.skills_ul li {
+  margin-top: 15px;
+  padding-left: 1em; 
+  text-indent: -.7em;
+}
+
+.skills_ul {
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+
+.skills_ul li:before {
+  content: "• ";
+  color: #EC6952; /* or whatever color you prefer */
+}
+
 .shadow_screenshot {
   width: 100%; 
   border: 1px solid whitesmoke; 

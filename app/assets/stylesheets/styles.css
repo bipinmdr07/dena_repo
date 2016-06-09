@@ -977,6 +977,13 @@ select {
   padding: 30px;
   font-size: 14px;
 }
+
+.box {
+  background: #f5f5f5;
+  padding: 30px;
+  font-size: 14px;
+}
+
 .features-tabbed .tab-content .figure {
   margin-bottom: 60px;
 }
