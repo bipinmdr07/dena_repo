@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <%= render '/layouts/meta' %>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/railscasts.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/languages/erb.min.js"></script>
+  
+</head>
+
+<body class="login-page access-page has-full-screen-bg">
+    <div class="upper-wrapper">
+        <!-- ******HEADER****** -->
+        <header class="header">  
+            <div class="container">       
+                <h1 class="logo" style="padding-top: 13px;">
+                    <a href="/"><span class="text" style="font-size: 40px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
+                </h1><!--//logo-->     
+                                     
+            </div><!--//container-->
+        </header><!--//header-->
+        
+        <!-- ******Login Section****** --> 
+        <section class="login-section access-section section">
+            <div class="container">
+                <div class="row">
+                    <div class="form-box col-md-8 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 xs-offset-0">     
+                        <div class="form-box-inner">
+
+                          <%= yield %>
+                            
+                        </div><!--//form-box-inner-->
+                    </div><!--//form-box-->
+                </div><!--//row-->
+            </div><!--//container-->
+        </section><!--//contact-section-->
+    </div><!--//upper-wrapper-->
+
+  <%= render '/layouts/footer' %>
+  
+</body>
+</html>

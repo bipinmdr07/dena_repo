@@ -449,7 +449,7 @@ select {
   top: 0;
   left: 0;
   height: 500px;
-  background: #253340 url('../images/background/bg-header-small-1.jpg') no-repeat 50% top;
+  background: #253340 url('/assets/landing_page/bg-header-small-5.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -459,7 +459,7 @@ select {
   background-image: url('../images/background/bg-header-small-2.jpg');
 }
 .headline-bg.contact-headline-bg {
-  background-image: url('../images/background/bg-header-small-3.jpg');
+  background-image: url('/assets/landing_page/bg-footer-3.jpg');
 }
 .headline-bg.about-headline-bg {
   background-image: url('../images/landing_page/bg-header-small-4.jpg');
@@ -874,7 +874,7 @@ select {
   background-image: url('background/bg-footer-2.jpg');
 }
 .cta-section.contact-cta-section {
-  background-image: url('background/bg-footer-3.jpg');
+  background-image: url('background/bg-footer-1.jpg');
 }
 .cta-section .title {
   font-size: 36px;
@@ -2356,14 +2356,14 @@ select {
 }
 /* ======= Login Page ======= */
 .has-full-screen-bg .upper-wrapper {
-  background: #253340 url('../images/background/bg-screen-1.jpg') no-repeat 50% top;
+  background: #253340 url('/assets/landing_page/bg-screen-2.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 .has-full-screen-bg.signup-page .upper-wrapper {
-  background: #253340 url('../images/background/bg-screen-2.jpg') no-repeat 50% top;
+  background: #253340 url('/assets/landing_page/bg-screen-2.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

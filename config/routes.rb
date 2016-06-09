@@ -60,4 +60,5 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about'
   get 'contact_us', to: 'static_pages#contact_us'
   get 'learn', to: 'static_pages#learn'
+  get 'preregistration', to: 'static_pages#preregistration'
 end

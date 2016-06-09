@@ -1,6 +1,22 @@
 // Place all the styles related to the static_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#mc_embed_signup .mc-field-group label {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 400;
+}
+
+#mc_embed_signup {
+  font-family: 'Titillium Web', sans-serif !important;
+  font-size: 16px !important;
+}
+
+#mc_embed_signup .mc-field-group input {
+  margin-right: 10px;
+}
+
 .support_ul li {
   font-size: 18px;
   font-weight: 600; 

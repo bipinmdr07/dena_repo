@@ -29,4 +29,8 @@ class StaticPagesController < ApplicationController
     render layout: "landing_page"
   end
 
+  def preregistration
+    render layout: 'preregistration'
+  end
+
 end
