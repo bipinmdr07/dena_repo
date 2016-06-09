@@ -834,6 +834,7 @@ select {
   font-weight: 300;
   margin-top: 0;
   margin-bottom: 60px;
+  padding-top: 80px;
 }
 .press .press-list {
   margin-bottom: 15px;
@@ -2206,10 +2207,10 @@ select {
   color: #666666;
 }
 .story-section .press-kit {
-  padding-top: 60px;
   padding-bottom: 60px;
 }
 .story-section .press-kit .title {
+
   color: #444444;
   font-size: 28px;
 }
