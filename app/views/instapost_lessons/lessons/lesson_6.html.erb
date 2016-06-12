@@ -43,7 +43,6 @@ devise_for :users
 
 <pre><code class="ruby">
 t.string :name
-t.string :photo
 </code></pre>
 
 <p>
@@ -83,7 +82,7 @@ class DeviseCreateUsers &lt; ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-      # You should have these 2 lines in this file now:
+      # You should have this line in this file now:
       t.string :name
 
       t.timestamps null: false

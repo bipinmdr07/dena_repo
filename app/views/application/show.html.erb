@@ -8,16 +8,20 @@
 
   <div class="col-lg-8 col-lg-offset-1 col-md-12">
 
-    <%= render partial: '/cards/widget' %>
+    <section class="lesson_content">
 
-    <%= render :file => "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
-    <br class = "clear">
+      <%= render partial: '/cards/widget' %>
 
-    <%= render 'lesson_nav_section' %>
+      <%= render :file => "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
+      <br class = "clear">
 
-    <%= render partial: '/submission_comments/submission_for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} if @submissions == true %>
+      <%= render 'lesson_nav_section' %>
 
-    <%= render partial: '/comments/for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} %>
+      <%= render partial: '/submission_comments/submission_for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} if @submissions == true %>
+
+      <%= render partial: '/comments/for_lesson', locals: { name: "#{@course_name}", lesson: params[:id]} %>
+
+    </section>
 
   </div>
 
@@ -46,8 +50,21 @@ ready = function() {
     trigger: $(".trigger"),
     position: "right",
     width: 350,
-    speed: 700
+    speed: 700,
+    top: 70
   });
+
+  // $(document).scroll(function() {
+  //     checkOffset();
+  // });
+
+  // function checkOffset() {
+  //   if($('#slider').offset().top + $('#slider').height() 
+  //                                          >= $('.footer').offset().top - 10)
+  //       $('#slider').css('position', 'absolute');
+  //   if($(document).scrollTop() + window.innerHeight < $('.footer').offset().top)
+  //       $('#slider').css('position', 'fixed'); // restore when you scroll up
+  // }
 
 };
 
