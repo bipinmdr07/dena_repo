@@ -35,7 +35,7 @@ end
 </p>  
 
 <p>
-  Well, if we do a <code>rake routes</code> and look at all the routes related to comments, we see <code>post_id</code> in the URI. This means that <code>post_id</code> is passed in as a parameter.
+  Well, if we do a <code>rake routes</code> and look at all the routes related to comments, we see <code>post_id</code> in the URI. This means that <code>post_id</code> is passed in as a parameter. <code>post_id</code> is in the URI because we nested comments under posts in our <code>routes.rb</code> file.
 </p>
 
 <p>
@@ -50,6 +50,8 @@ Post.find(params[:post_id]).comments.create(comment_params)
   adding the <code>user_id</code> would become complex. However, we can use this <code>merge</code> method to merge in the <code>user_id</code> and set it to <code>current_user.id</code>. That's what <code>.merge(user_id: current_user.id)</code> is doing right here.
 </p>
 
+<%= create_flashcard %>
+
 <p>
   Let's also add authentication to make sure that users who aren't signed in aren't allowed to access the <code>create</code> action. As we've done before, we can use Devise's <code>before_action :authenticate_user!</code> filter.
 </p>
@@ -63,6 +65,8 @@ class CommentsController &lt; Application Controller
   Awesome! Now that we've set up the logic for creating posts, let's create a form to actually add comments to post in the next lesson.
 </p>
 
+
+<%= standard_git_workflow %>
 
 
 

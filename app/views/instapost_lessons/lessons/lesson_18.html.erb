@@ -1,4 +1,4 @@
-<h1><%= title_for(InstapostLesson, 5, 9) %></h1>
+<h1><%= title_for(InstapostLesson, 5, 10) %></h1>
 
 <p>
   Let's move on to enabling the user to destroy their posts. The steps in order to do this is quite similar to what we did with the edit posts functionality that we just created.
@@ -17,7 +17,7 @@ end
 </code></pre>
 
 <p>
-  The first line, we should already understand. <code>@post</code> is assigned to the <code>Post</code> with an <code>id</code> of the <code>params[:id]</code>. The next line is simply saying that we want to destroy that post. Finally, the last line redirects the user to the <code>root_path</code>.
+  The first line, we should already understand. <code>@post</code> is assigned to the <code>Post</code> with an <code>id</code> of the <code>params[:id]</code> (refer back to <%= link_to 'What are params again?', 'http://localhost:3000/instapost_lessons/16' %>. The next line is simply saying that we want to destroy that post. Finally, the last line redirects the user to the <code>root_path</code>.
 </p>
 
 <p>
@@ -48,6 +48,8 @@ end
 <p class="alert alert-warning">
   Notice how we added <code>method: :delete</code>. This specifies that we want to perform a <code>DELETE</code> request rather than a <code>GET</code> or <code>POST</code> request. (An example of a <code>GET</code> request is the <code>index</code> page, where we <code>GET</code> all instances of the <code>Post</code> object. An example of a <code>POST</code> request is the <code>create</code> action, where we <code>POST</code> information about the <code>Post</code> we want to create.)
 </p>
+
+<%= create_flashcard %>
 
 <p>
   Your loop should now look like this:
@@ -83,6 +85,7 @@ before_action :is_owner?, only: [:edit, :update, :destroy]
   ...and that's it! Let's keep going :)
 </p>
 
+<%= standard_git_workflow %>
 
 
 

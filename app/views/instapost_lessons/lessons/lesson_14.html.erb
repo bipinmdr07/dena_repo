@@ -34,23 +34,27 @@ end
 </p>
 
 <p>
-  First, we're creating an instance variable <code>@post</code> and assigning it <code>current_user.posts.create(post_params)</code>. There are several parts to this code that probably don't make sense to you right now. Let's try to clear this up.
+  <strong>First, we're creating an instance variable <code>@post</code> and assigning it <code>current_user.posts.create(post_params)</code>.</strong> There are several parts to this code that probably don't make sense to you right now. Let's try to clear this up.
 </p>
 
 <p>
-  Let's take a look at <code>current_user</code>. <code>current_user</code> is a Devise helper method that gives us the current user that is logged in. You'll be using this a lot throughout your Rails development. (<%= link_to 'View the Devise documentation', 'write show, update, and delete actions for posts' %> for more Devise helpers that you can use.)
+  Let's take a look at <code>current_user</code>. <strong><code>current_user</code> is a Devise helper method that gives us the current user that is logged in.</strong> You'll be using this a lot throughout your Rails development. (<%= link_to 'View the Devise documentation', 'write show, update, and delete actions for posts' %> for more Devise helpers that you can use.)
 </p>
 
+<%= create_flashcard %>
+
 <p>
-  Next, we're doing this <code>current_user.posts</code> thing. What this is saying is, <code>create</code> a <code>post</code> by <code>current_user</code>. This automatically hooks up and connects the <code>current_user</code> and the created <code>post</code>. Specifically, the <code>user_id</code> of <code>current_user</code> is stored inside the newly created <code>Post</code>, so that we know who posted it.
+  Next, we're doing this <code>current_user.posts</code> thing. What this is saying is, <code>create</code> a <code>post</code> by <code>current_user</code>. <strong>This automatically hooks up and connects the <code>current_user</code> and the created <code>post</code>.</strong> Specifically, the <code>user_id</code> of <code>current_user</code> is stored inside the newly created <code>Post</code>, so that we know who posted it.
 </p>
+
+<%= create_flashcard %>
 
 <p>
   Lastly, we can see that we're passing in <code>post_params</code> as a parameter to <code>create</code>. We've done the same for the Ideator app, but the purpose of <code>post_params</code> is to make sure bad inputs aren't saved in the database. This is related to the topic of <strong>Strong Parameters</strong>.
 </p>
 
 <p>
-  Since it's a super important topic that you need to know, take 10 minutes to read more about it <%= link_to 'here', 'https://www.sitepoint.com/rails-4-quick-look-strong-parameters/' %>.
+  Since it's a super important topic that you need to know, take 10 minutes to read more about it <%= link_to 'here', 'https://www.sitepoint.com/rails-4-quick-look-strong-parameters/' %>. This topic was also covered in <%= link_to 'lesson 7', '/instapost_lessons/7' %> as well.
 </p>
 
 <p>
@@ -144,7 +148,7 @@ my_bank.double_balance
   <h3>So why and when do we use private methods?</h3>
 
   <p>
-    In Ruby on Rails, private methods can be seen usually in controllers, like we just saw in our <code>posts_controller.rb</code>. We do this when we don't want other users from accessing the method for security reasons.
+    In Ruby on Rails, private methods can be seen usually in controllers, like we just saw in our <code>posts_controller.rb</code>. <strong>We do this when we don't want other users from accessing the method for security reasons.</strong>
   </p>
 
   <p>
@@ -152,7 +156,7 @@ my_bank.double_balance
   </p>
 
   <p>
-    Instead, we want this to be a method that can only be called internally inside our program. That's why in this we want to make the method <code>private</code> and prevent normal users from accessing it.
+    Instead, we want this to be a method that can <strong>only be called internally inside our program</strong>. That's why in this we want to make the method <code>private</code> and prevent normal users from accessing it.
   </p>
 
   <%= create_flashcard %>
@@ -167,11 +171,11 @@ my_bank.double_balance
 </p>
 
 <p>
-  Our controller is looking good. Now we need to configure our models. In the section above, I mentioned that <code>current_user.posts.create()</code> connects the <code>current_user</code> and the new <code>post</code>. However, we also need to specify the relationship between the <code>User</code> model and the <code>Post</code> model.
+  Our controller is looking good. Now we need to configure our models. In the section above, I mentioned that <code>current_user.posts.create()</code> connects the <code>current_user</code> and the new <code>post</code>. However, before this code will work, <strong>we also need to specify the relationship between the <code>User</code> model and the <code>Post</code> model.</strong>
 </p>
 
 <p>
-  Specifically, we need to tell Rails that <code>User</code> <code>has_many</code> <code>Post</code>s, and <code>Post</code> <code>belongs_to</code> <code>User</code>. These database relations are pretty straightforward, if you think of it simply.
+  Specifically, we need to tell Rails that <Strong><code>User</code> <code>has_many</code> <code>Post</code>s, and <code>Post</code> <code>belongs_to</code> <code>User</code></strong>. These database relations are pretty straightforward, if you think of it simply.
 </p>
 
 <p>
@@ -198,16 +202,18 @@ has_many :posts
   Great. And that's it! Just like that, we have our database relations setup.
 </p>
 
+<%= create_flashcard %>
+
 <p>
-  Let's go back to our browsers and go to <code>http://localhost:3000/posts/new</code> to try the form out. It works...or maybe it doesn't depending on whether you're logged in or not.
+  Let's go back to our browsers and go to <code>http://localhost:3000/posts/new</code> to try the form out. It works...or it might not have for you depending on whether you're logged in or not.
 </p>
 
 <p>
-  If you're logged in, you won't get an error. If you are logged out though, you'll get an error telling you that there's a problem with <code>current_user</code>.
+  What I mean is, if you're logged in, you won't get an error. If you are logged out though, you'll get an error telling you that there's a problem with <code>current_user</code>.
 </p>
 
 <p>
-  Let's fix this. Rails provides us with yet another convenient helper method to achieve what we want to do: make sure the user is logged in. All it takes is one line of code!
+  Let's fix this. <strong>Devise provides us with yet another convenient helper method to achieve what we want to do: make sure the user is logged in.</strong> All it takes is one line of code!
 </p>
 
 <p>
@@ -219,7 +225,7 @@ before_action :authenticate_user!
 </code></pre>
 
 <p>
-  This line of code will make sure that the user is logged in before it can access the pages related to the <code>PostsController</code>. However, this also includes the <code>index</code> page, which we don't want, since that's a page we want all users to be able to see. Let's change the code to this:
+  This line of code will make sure that the user is logged in before it can access the pages related to the <code>PostsController</code>. However, that also means that users won't be able to access the <code>index</code> page unless they are logged in, which we don't want, since that's a page we want all users to be able to see. Let's change the code to be this:
 </p> 
 
 <pre><code class="ruby">
@@ -238,4 +244,5 @@ before_action :authenticate_user!, only: [:new, :create]
   Awesome! Let's keep on going.
 </p>
 
+<%= standard_git_workflow %>
 

@@ -50,16 +50,20 @@ edit_user_registration GET        /users/edit(.:format)                       de
 &lt;/nav&gt;  
 </code></pre>
 
-<p>
-  Notice how I specified the method in the 'Log Out' link to be <code>:delete</code>. We need to specify that it is performing a <code>delete</code> action for it to work properly.
+<p class="alert alert-warning">
+  Notice how I specified the method in the 'Log Out' link to be <code>:delete</code>. We need to specify that it is performing a <code>DELETE</code> action for it to work properly. Otherwise, it will perform a <code>GET</code> request and it will give you an error.
 </p>
+
+<%= create_flashcard %>
 
 <p>
   If you refresh the page, you'll see the links on the page. Try clicking on them, and they should work. Awesome!
 </p>
 
+<h3>Hiding Links</h3>
+
 <p>
-  One thing we need to do is to make sure that the 'Sign Up' and 'Log In' link isn't displayed when a user is logged in, and the 'Log Out' button isn't displayed when a user isn't logged in.
+  One thing we need to do is to <strong>make sure that the 'Sign Up' and 'Log In' link isn't displayed when a user is logged in, and the 'Log Out' button isn't displayed when a user isn't logged in.</strong>
 </p>  
 
 <p>
@@ -77,9 +81,11 @@ edit_user_registration GET        /users/edit(.:format)                       de
 &lt;/nav&gt;  
 </code></pre>
 
-<p>
-  Notice this new <code>user_signed_in?</code> method we used right here. This is a devise helper method that returns <code>true</code> if a user is signed in and <code>false</code> if a user is not.
+<p class="alert alert-warning">
+  Notice this new <code>user_signed_in?</code> method we used right here. This is a devise helper method that returns <code>true</code> if a user is signed in and <code>false</code> if a user is not signed in.
 </p>
+
+<%= create_flashcard %>
 
 <p>
   There are other devise helper methods that we'll be using throughout this app. If you want to, you can take a look at all of them <%= link_to 'here', 'https://github.com/plataformatec/devise#controller-filters-and-helpers' %>, but we'll go over them together when they do appear.
@@ -93,7 +99,7 @@ edit_user_registration GET        /users/edit(.:format)                       de
   Awesome! Our devise links are all set up!
 </p>
 
-
+<%= standard_git_workflow %>
 
 
 

@@ -69,7 +69,7 @@ nav {
   Let's also steal the height of the navbar. If we hover over the <code>nav</code> element, we can get the height and width:
 </p>
 
-<%= image_tag 'instapost/nav-height.png', class: 'screenshot' %>
+<%= image_tag 'instapost/nav_height.png', class: 'screenshot' %>
 
 <p>
   We can see that the height is <code>76px</code>. Let's also add this to our CSS:
@@ -102,11 +102,17 @@ nav {
 </code></pre>
 
 <p>
-  <code>pull-right</code> will literally pull the <code>span</code> to the right. In our <code>master.scss</code>, let's define our <code>brand</code> class.
+  The <code>pull-right</code> class that we added to the first <code>span</code> is a handy Bootstrap class that will literally pull the <code>span</code> to the right.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  In our <code>master.scss</code>, let's define our <code>brand</code> class.
 </p>
 
 <p>
-  Let's try to find a font that looks like Instagram's brand logo. I searched on Google fonts for a nice font and found "Satisfy". You can include the font in your app by adding the following code to the <code>head</code> section of your <code>application.html.erb</code>:
+  Let's try to find a font that looks like Instagram's brand logo. I searched on Google fonts for a nice font and found <%= link_to "Satisfy", 'https://www.google.com/fonts#UsePlace:use/Collection:Satisfy' %>. You can include the font in your app by adding the following code to the <code>head</code> section of your <code>application.html.erb</code>:
 </p>
 
 <pre><code class="erb">
@@ -133,13 +139,7 @@ nav {
   In the next lesson, your job is to try to make the navbar look like Instagram's!
 </p>
 
-
-
-
-
-
-
-
+<%= standard_git_workflow %>
 
 
 

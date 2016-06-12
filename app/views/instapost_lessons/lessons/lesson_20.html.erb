@@ -54,8 +54,18 @@ end
 </p>
 
 <p>
-  We need <code>post_id</code> because each comment will belong to a single photo. We also need <code>user_id</code> because each comment belongs to one single user. Lastly, we need <code>text</code> because we need to store the contents of the comment.
+  We need <code>post_id</code> because each comment will belong to a single photo. What I mean by this is that, let's say you post a comment to someone's post. That comment will only be shown for that particular post, and not any other post. Therefore, we need to store the <code>post_id</code> in the database to store which <code>Post</code> the <code>Comment</code> belongs to.
 </p>
+
+<p>
+ Similarly, we also need <code>user_id</code> because each comment belongs to one single user.
+</p>
+
+<p>
+  Lastly, we need <code>text</code> because we need to store the contents of the comment.
+</p>
+
+<%= create_flashcard %>
 
 <p>
   We're still missing something in the migration. Take a second to try and see if you can figure out what it is. 
@@ -83,8 +93,18 @@ current_user.comments.where(post_id: 322)
 </code></pre>
 
 <p>
-  the lookup will be faster. We also need the second line because we might want to do something like this:
+  the lookup will be faster. This is because in this case, we are querying the database for <code>Comment</code>s with the <code>user_id</code> of the <code>current_user</code>, where the <code>post_id</code> is <code>322</code>. In other words, we are looking <code>Comment</code>s with a particular set of <code>user_id</code> and <code>post_id</code>, so creating an index of <code>:comments, [:user_id, :post_id]</code> makes the lookup super fast.
 </p>  
+
+<p class="alert alert-warning">
+  In case you might be wondering, <code>current_user.comments</code> automatically queries for <code>Comment</code>s with the <code>user_id</code> of <code>current_user</code>.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  We also need the second line because we might want to do something like this:
+</p>
 
 <pre><code class="ruby">
 @post = Post.find(params[:id])
@@ -92,7 +112,15 @@ current_user.comments.where(post_id: 322)
 </code></pre>
 
 <p>
-  In this case, Rails would look for <code>comments</code> with the <code>post_id</code> of <code>@post</code>. <code>add_index :comments, [:user_id, :post_id]</code> can't lookup just <code>post_id</code> alone, so we need to add that in as well.
+  In this case, Rails would look for <code>comments</code> with the <code>post_id</code> of <code>@post</code>. Notice here that we aren't querying for <code>user_id</code>, but rather only for <code>post_id</code>. 
+</p>
+
+<p class="alert alert-warning">
+  Again, as a side note, <code>@post.comments</code> automatically queries for <code>Comment</code>s with the <code>post_id</code> of <code>@post</code>.
+</p>
+
+<p>
+  Unfortunately, <code>add_index :comments, [:user_id, :post_id]</code> will work for looking up a pair of <code>user_id</code> and <code>post_id</code>, but it can't lookup just the <code>post_id</code> alone without the <code>user_id</code>. That's why we need to add in <code>add_index :comments, :post_id</code> as well.
 </p>
 
 <p>
@@ -103,6 +131,7 @@ current_user.comments.where(post_id: 322)
 rake db:migrate
 </code></pre>
 
+<%= standard_git_workflow %>
 
 
 

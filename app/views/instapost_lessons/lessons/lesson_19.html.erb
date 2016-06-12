@@ -1,4 +1,4 @@
-<h1><%= title_for(InstapostLesson, 5, 10) %></h1>
+<h1><%= title_for(InstapostLesson, 5, 11) %></h1>
 
 <p>
   Right now, all of the posts are listed on one page. Let's make it so that users can click on a post and display only the individual post. We can do this with the <code>show</code> action.
@@ -19,7 +19,7 @@ end
 </p>
 
 <p>
-  Let's create a new file called <code>show.html.erb</code> in <code>app/views/posts</code>. Inside this file, what we're going to do is reuse some of the code that we use in the loop:
+  Let's create a new file called <code>show.html.erb</code> in <code>app/views/posts</code>. Inside this file, what we're going to do is reuse some of the code that we used in this loop that we created in <code>index.html.erb</code>:
 </p>
 
 <pre><code class="erb">
@@ -31,12 +31,13 @@ end
   &lt;%= post.description %&gt;
   &lt;% if post.user_id == current_user.id %&gt;
     &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+    &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
   &lt;% end %&gt;
 &lt;% end %&gt;
 </code></pre>
 
 <p>
-  Let's pull out the code inside the loop:
+  Let's pull out some of the code inside the loop:
 </p>
 
 <pre><code class="erb">
@@ -47,6 +48,7 @@ end
 &lt;%= post.description %&gt;
 &lt;% if post.user_id == current_user.id %&gt;
   &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+  &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
 &lt;% end %&gt;
 </code></pre>
 
@@ -62,6 +64,7 @@ end
 &lt;%= @post.description %&gt;
 &lt;% if @post.user_id == current_user.id %&gt;
   &lt;%= link_to 'Edit Post', edit_post_path(@post.id) %&gt;
+  &lt;%= link_to 'Delete Post', post_path(@post.id), method: :delete %&gt;
 &lt;% end %&gt;
 </code></pre>
 
@@ -76,6 +79,7 @@ end
   &lt;%= @user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
+  &lt;!-- add this line below --&gt;
   &lt;%= link_to 'View Post', post_path(post.id) %&gt;
   &lt;% if post.user_id == current_user.id %&gt;
     &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
@@ -96,7 +100,7 @@ end
   If everything went correctly, it should display all of the information of the post.
 </p>
 
-
+<%= standard_git_workflow %>
 
 
 

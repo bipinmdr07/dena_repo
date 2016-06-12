@@ -49,7 +49,7 @@ end
 </code></pre>
 
 <p>
-  Next, let's loop through the user's posts and siplay it on the page:
+  Next, let's loop through the user's posts and display it on the page:
 </p>
 
 <pre><code class="erb">
@@ -73,6 +73,8 @@ end
   This is one example of a super handy Rails helper method. It pluralizes "post" to "posts" if <code>@user.posts.count</code> is plural, and displays "post" if <code>@user.posts.count</code> is singular.
 </p>
 
+<%= create_flashcard %>
+
 <pre><code class="erb">
 &lt;%= image_tag @user.photo %&gt;
 &lt;%= @user.name %&gt;
@@ -88,13 +90,7 @@ end
   Awesome! In the next section, we're going to style everything all at once so that it looks exactly like Instagram!
 </p>
 
-
-
-
-
-
-
-
+<%= standard_git_workflow %>
 
 
 

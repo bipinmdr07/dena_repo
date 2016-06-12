@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  First, while we're at it, let's add a link to the navbar so that users can navigate to the new posts page easily. In our <code>application.html.erb</code> within our <code>&lt;nav&gt;</code> section, let's add a link to the new posts page. You should already know how to do this by now :)
+  First, while we're at it, let's add a link to the navbar so that users can navigate to the New Posts page easily. In our <code>application.html.erb</code> within our <code>&lt;nav&gt;</code> section, let's add a link to the New Posts page. You should already know how to do this by now :)
 </p>
 
 <p>
@@ -34,11 +34,11 @@
 </code></pre>
 
 <p>
-  Awesome. Let's now navigate ourselves to this page and create some mock posts.
+  Awesome. Let's now navigate ourselves to the New Posts page (<code>http://localhost:3000/posts/new</code>) and create some mock posts.
 </p>
 
 <p>
-  Right now, even if we create mock posts, they aren't displayed anywhere in our app. Let's make it so that all of our posts are posted in the homepage, which is pointed to the <code>index</code> action of the <code>PostsController</code>.
+  Right now, even if we create mock posts, they aren't displayed anywhere in our app. Let's make it so that all of our posts are posted in the homepage (the root page), which is pointed to the <code>index</code> action of the <code>PostsController</code> in <code>routes.rb</code>.
 </p>
 
 <p>
@@ -46,15 +46,23 @@
 </p>
 
 <pre><code class="ruby">
-@posts = Post.all
+def index
+  @posts = Post.all
+end
 </code></pre>
+
+<p class="alert alert-warning">
+  <code>Post.all</code> will give us all of the posts in the database. In Rails, you can attach <code>.all</code> to a model to get all instances of the object.
+</p>
+
+<%= create_flashcard %>
 
 <p>
   Now, we can use <code>@posts</code> in our <code>index.html.erb</code>, which will give us all instances of the <code>Post</code> object.
 </p>
 
 <p>
-  Let's go into our <code>index.html.erb</code> file and try to display all of our posts. In order to do this, since we can use <code>@posts</code>, which gives us all instances of <code>Post</code>, we can create loop to iterate through each one to display the information of each <code>Post</code>.
+  Let's go into our <code>index.html.erb</code> file and try to display all of our posts. In order to do this, since we can use <code>@posts</code> which gives us all instances of <code>Post</code>, we can create a loop to iterate through the Posts to display the information of each <code>Post</code>.
 </p>
 
 <p>
@@ -79,7 +87,6 @@
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;% @user =  %&gt;
   &lt;%= image_tag User.find(post.user_id).photo %&gt;
   &lt;%= User.find(post.user_id).name %&gt;
   &lt;%= image_tag post.photo %&gt;
@@ -92,7 +99,7 @@
 </p>
 
 <p>
-  Let's refactor this code a little bit to make it more performant. We see that <code>User.find(post.user_id)</code> is repeated twice. This means that Rails will query (look for) a <code>User</code> with the post's <code>user_id</code> 2 times. Instead, we can store the user in an instance variable. This way, we're storing which user we're referring to, instead of querying for it twice.
+  Let's refactor this code a little bit to make it more performant. We see that <code>User.find(post.user_id)</code> is repeated twice. This means that Rails will query (look for) a <code>User</code> with the post's <code>user_id</code> 2 times. Instead, we can store the user in an instance variable. This way, we're storing which user we're referring to, instead of querying for it twice. Let's change the code to be this:
 </p>
 
 <pre><code class="erb">
@@ -104,6 +111,8 @@
   &lt;%= post.description %&gt;
 &lt;% end %&gt;
 </code></pre>
+
+<%= create_flashcard %>
 
 <p>
   Awesome! If you notice though, the oldest post is shown first. In the original Instagram app, newest posts come first. Let's change our app so it behaves like this.
@@ -123,10 +132,17 @@ end
   It turns out that we can change the order of our collection of <code>Post</code>s by attaching the <code>order</code> method and giving it the parameter <code>'created_at DESC'</code>. <code>.order('created_at DESC')</code> is saying, order it by the <code>created_at</code> attribute in descending order.
 </p>
 
+<p class="alert alert-success">
+  We can also do the opposite by adding <code>.order('created_at ASC')</code> instead as well.
+</p>
+
+<%= create_flashcard %>
+
 <p>
   If we refresh the page, we see that our posts are ordered from newest to oldest.
 </p>
 
+<%= standard_git_workflow %>
 
 
 

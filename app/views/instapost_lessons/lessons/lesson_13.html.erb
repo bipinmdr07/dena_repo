@@ -40,6 +40,8 @@ resources :posts
   Save the file and refresh the page. You should now see the text "New Post" on the page.
 </p>
 
+<h3>Simple Form</h3>
+
 <p>
   Awesome. In order to create our form, let's install a gem called 'Simple Form' that will make things easier for us.
 </p>
@@ -126,8 +128,12 @@ end
   Finally, we wrote a piece of code that created a form for us, using <code>simple_form_for</code>. The syntax is pretty straightforward, but if you don't really understand it, don't worry. You'll find that you can just copy and paste and reuse a lot of this stuff.
 </p>
 
+<%= create_flashcard %>
+
+<h3>Photo Uploading</h3>
+
 <p>
-  Cool. If you notice in the form, the <code>photo</code> field looks like it is a blank string input. This is because even though it's named <code>photo</code>, if you look at <code>schema.rb</code>, you'll notice that the <code>photo</code> column is specified as a <code>string</code> type. Instead, we want this to be a file upload button.
+  Cool. If you notice in the form, the <code>photo</code> field looks like it is a blank string input. This is because if you look at <code>schema.rb</code>, you'll notice that the <code>photo</code> column is specified as a <code>string</code> type. Instead, we want this to be a file upload button. How do we do this?
 </p>
 
 <p>
@@ -150,7 +156,7 @@ mount_uploader :photo, PhotoUploader
   Awesome. Right now, the form doesn't really work if we try to submit it. In the next lesson, we're going to set up the back end logic so to get the form to actually work.
 </p>
 
-
+<%= standard_git_workflow %>
 
 
 

@@ -6,11 +6,11 @@
 </p>
 
 <p>
-  The sign up form is located at <code>app/views/devise/registrations/new.html.erb</code>. Let's navigate ourselves to this page.
+  When we ran <code>rails generate devise:views</code>, the sign up form was automatically generated. The sign up form is located at <code>app/views/devise/registrations/new.html.erb</code>. Let's navigate ourselves to this page.
 </p>
 
 <p>
-  Inside this page, we see that we have a form that takes in the user's <code>email</code>, <code>password</code>, and <code>password confirmation</code>. What we want to do is, we want to add a <code>name</code> and <code>photo</code> form field.
+  Inside this page, we see that we have a form that takes in the user's <code>email</code>, <code>password</code>, and <code>password confirmation</code>. What we want to do is add a <code>name</code> and <code>photo</code> form field.
 </p>
 
 <p>
@@ -94,6 +94,8 @@
 &lt;%= render "devise/shared/links" %&gt;
 </code></pre>
 
+<h3>The Edit User Page</h3>
+
 <p>
   It turns out that devise not only provides us with a Sign Up page, but it also provides us with an Edit User page as well! So now that we've got our sign up form sorted, let's go ahead update our Edit Users page. 
 </p>
@@ -103,11 +105,11 @@
 </p>
 
 <p>
-  You can see that it resembles the <code>new.html.erb</code> page we had earlier. All we have to do is insert the new items that we added to the Sign Up page, and we're all set.
+  You can see that it resembles the <code>new.html.erb</code> page we had earlier. <strong>The form is almost the same, except it specifies the form to perform a <code>PUT</code> action.</strong> That means all we have to do is insert the new items that we added to the Sign Up page, and we're all set.
 </p>
 
 <p>
-  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code>. Your new form in <code>edit.html.erb</code> should look like this:
+  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code>. <strong>Make sure you don't replace the <code>form_for</code> line.</strong> Without the <code>html: { method: :put }</code>, the form will fail to update your <code>User</code>. Your new form in <code>edit.html.erb</code> should look like this:
 </p>
 
 <pre><code class="erb">
@@ -196,6 +198,7 @@
   Save the file and refresh the page. Voila, you now have a working edit page! Awesome!
 </p>
 
+<%= standard_git_workflow %>
 
 
 

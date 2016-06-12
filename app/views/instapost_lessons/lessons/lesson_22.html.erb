@@ -1,4 +1,4 @@
-<h1><%= title_for(InstapostLesson, 6, 2) %></h1>
+<h1><%= title_for(InstapostLesson, 6, 3) %></h1>
 
 <p>
   Here's the answer to the previous lesson:
@@ -29,11 +29,11 @@ resources :comments
 </code></pre>
 
 <p>
-  Then, let's run <code>rake routes</code>. Take a look at what it looks like. We're going to change it in a second.
+  Then, let's run <code>rake routes</code>. Take a look at what the routes looks like. We're going to change the routing in a second and see how it changes the routes.
 </p>
 
 <p>
-  Now, let's change this so that <code>resources :comments</code> is nested within <code>resources :posts</code>.
+  Now, let's change the <code>routes.rb</code> file so that <code>resources :comments</code> is nested within <code>resources :posts</code>.
 </p>
 
 <pre><code class="ruby">
