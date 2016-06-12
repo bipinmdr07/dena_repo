@@ -52,6 +52,9 @@ Rails.application.routes.draw do
   get 'instapost_lessons', :to => 'instapost_lessons#index', :as => 'instapost'
   get 'instapost_lessons/:id', :to => 'instapost_lessons#show', :as => 'instapost_lessons'
 
+  get 'github_lessons', :to => 'github_lessons#index', :as => 'github'
+  get 'github_lessons/:id', :to => 'github_lessons#show', :as => 'github_lessons'
+
   get 'courses',   :to => 'static_pages#courses'
 
   get 'pricing', :to => 'static_pages#pricing'
