@@ -55,6 +55,9 @@ Rails.application.routes.draw do
   get 'github_lessons', :to => 'github_lessons#index', :as => 'github'
   get 'github_lessons/:id', :to => 'github_lessons#show', :as => 'github_lessons'
 
+  get 'javascript_lessons', :to => 'javascript_lessons#index', :as => 'javascript'
+  get 'javascript_lessons/:id', :to => 'javascript_lessons#show', :as => 'javascript_lessons'
+
   get 'courses',   :to => 'static_pages#courses'
 
   get 'pricing', :to => 'static_pages#pricing'
