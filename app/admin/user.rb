@@ -13,6 +13,8 @@ ActiveAdmin.register User do
     column :ruby_fundamentals_access
     column :ideator_access
     column :ruby_core_access
+    column :instapost_access
+    column :github_access
     actions
   end
 
@@ -26,6 +28,8 @@ ActiveAdmin.register User do
       f.input :ruby_fundamentals_access
       f.input :ideator_access
       f.input :ruby_core_access
+      f.input :instapost_access
+      f.input :github_access
     end
     f.actions
   end
