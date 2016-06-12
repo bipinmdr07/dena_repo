@@ -1,8 +1,6 @@
 <div class="col-md-offset-1 col-md-10 col-xs-12">
 
-		<!--
-		<%= link_to 'Back to lesson', session[:back_to_lesson] %>
-		-->
+		<%= back_to_lesson %>
 
 		<h3><%= @submission_comment.title %></h3>
 		<%= sanitize raw(@submission_comment.description) %>
@@ -21,9 +19,9 @@
 
 		<%= simple_form_for :submission_reply, url: submission_submission_comment_replies_path(params[:submission_id], params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
 			<div data-no-turbolink>
-				<%= f.cktext_area :content, label: 'Comment', required: true %>
+				<%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true %>
 			</div>
-			<%= f.input :user_id, :as => :hidden, :input_html => { :value => current_user.id } %>
+			<%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 
 			<br>
 			<%= f.submit 'Submit', class: 'btn btn-primary' %>

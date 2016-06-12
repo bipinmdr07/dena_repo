@@ -7,7 +7,7 @@ class SubmissionCommentsController < ApplicationController
 
 	def create
 		@submission_comment = current_user.submission_comments.create(comment_params)
-		UserMailer.new_submission(Forum.find(params[:submission_id]), @submission_comment).deliver
+		UserMailer.new_submission(Submission.find(params[:submission_id]), @submission_comment).deliver
 		redirect_to submission_submission_comment_path(@submission_comment.submission_id, @submission_comment)
 	end
 

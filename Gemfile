@@ -34,13 +34,13 @@ gem "figaro"
 gem 'carrierwave'
 gem "fog", '1.36.0'
 
-gem 'ckeditor'
+gem 'ckeditor', github: 'galetahub/ckeditor'
 
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
 # active admin text editor
-gem 'activeadmin-ckeditor'
+# gem 'activeadmin-ckeditor'
 gem 'paperclip'
 
 # code text editor
