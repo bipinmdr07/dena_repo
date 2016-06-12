@@ -1,0 +1,51 @@
+<h1><%= title_for(JavascriptLesson, 1, 2) %></h1>
+
+<p>
+  Now that you've got a pretty good grasp on basic Javascript, let's dive into <strong>jQuery</strong>.
+</p>
+
+<p>
+  <strong>jQuery is a Javascript library</strong>. This means that jQuery uses the Javascript language to create new syntax. It's easier to write code in jQuery in general, and a lot of the common tasks in Javascript can be done with jQuery with fewer lines of code.
+</p>
+
+<p>
+  For example, you can make an element fade-in with Javascript with the following code:
+</p>
+
+<pre><code class="javascript">
+function fadeIn(el) {
+  el.style.opacity = 0;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+    last = +new Date();
+
+    if (+el.style.opacity &lt; 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+
+  tick();
+}
+
+fadeIn(el);
+</code></pre>
+
+<p>
+  With jQuery, this is all it takes:
+</p>
+
+<pre><code class="javascript">
+$(el).fadeIn();
+</code></pre>
+
+<p>
+  With Javascript, this operation took 17 lines of code. With jQuery, it took just 1 line of code. Knowing jQuery is convenient in a lot of situations; you can write code easier with jQuery.
+</p>
+
+<p>
+  Let's take some time to learn some jQuery. Again, we'll use Codecademy's lessons, since they are great for learning the basic syntax. Go to <%= link_to 'this link', 'https://www.codecademy.com/learn/jquery' %> to get started. Finish the entire course before proceeding.
+</p>
+
+

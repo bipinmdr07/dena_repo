@@ -1,0 +1,2 @@
+class JavascriptLessonsController < LessonsController
+end

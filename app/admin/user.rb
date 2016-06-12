@@ -15,6 +15,7 @@ ActiveAdmin.register User do
     column :ruby_core_access
     column :instapost_access
     column :github_access
+    column :javascript_access
     actions
   end
 
@@ -30,6 +31,7 @@ ActiveAdmin.register User do
       f.input :ruby_core_access
       f.input :instapost_access
       f.input :github_access
+      f.input :javascript_access
     end
     f.actions
   end

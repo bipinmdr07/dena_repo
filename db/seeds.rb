@@ -13,7 +13,8 @@ Forum.create([
   {name: 'RubyLessons'}, 
   {name: 'RubyCoreLessons'}, 
   {name: 'InstapostLessons'},
-  {name: 'GithubLessons'}
+  {name: 'GithubLessons'},
+  {name: 'JavascriptLessons'}
 ])
 
 Submission.create([
@@ -22,7 +23,8 @@ Submission.create([
   {name: 'IdeatorLessons'}, 
   {name: 'RubyLessons'}, 
   {name: 'RubyCoreLessons'}, 
-  {name: 'GithubLessons'}
+  {name: 'GithubLessons'},
+  {name: 'JavascriptLessons'}
 ])
 
 AdminUser.create([
