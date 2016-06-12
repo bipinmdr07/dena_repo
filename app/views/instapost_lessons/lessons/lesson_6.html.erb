@@ -14,11 +14,7 @@ rails generate devise User
 </code></pre>
 
 <p>
-  This will generate a bunch of files for you and create a <code>User</code> model. It also configures your <code>routes.rb</code> file to point to the Devise controller.
-</p>
-
-<p>
-  If you go to your <code>routes.rb</code> file, you'll see something like this:
+  This will generate a bunch of files for you and create a <code>User</code> model. It also configures your <code>routes.rb</code> so that your Devise routes will be set up. If you go to your <code>routes.rb</code> file, you'll see something like this:
 </p>
 
 <pre><code class="ruby">
@@ -34,7 +30,7 @@ devise_for :users
 </p>  
 
 <p>
-  Press <code>Command + P</code> in sublime and type in <code>create users</code> and you should be able to find the migration file. The file name should be something that looks like <code>xxxxxxxxxxxxxx_devise_create_users.rb</code>.
+  Press <code>Control + P (Command + P for Mac)</code> in sublime to bring up the search bar and type in <code>create users</code> and you should be able to find the migration file. The file name should be something that looks like <code>xxxxxxxxxxxxxx_devise_create_users.rb</code>.
 </p>
 
 <p>
@@ -112,5 +108,6 @@ rake db:migrate
   Awesome! If you go to <code>schema.rb</code>, you should see that the <code>User</code> table has been added in.
 </p>
 
+<%= standard_git_workflow %>
 
 

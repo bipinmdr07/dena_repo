@@ -11,11 +11,11 @@
 <div class="well">
   <h3>Naming Objects</h3>
   <p>
-    When naming objects, make sure that the naming makes sense. For example, in our app, we need an object that will represent a post created by a user. Therefore, naming the object "Post" makes total sense.
+    <strong>When naming objects, make sure that the naming makes sense.</strong> For example, in our app, we need an object that will represent a post created by a user. Therefore, naming the object "Post" makes total sense.
   </p>
 
   <p>
-    However, if we name it something random like "Almond", it starts making no sense at all. (You'll be running commands like <code>Almond.new</code> or <code>Almond.all</code>, which really makes no sense in this case).
+    However, if we name it something random like "Almond", it starts making no sense at all. You'll be running commands like <code>Almond.new</code> or <code>Almond.all</code> for trying to create or show user posts, which really makes no sense in this case. Instead, <code>Post.new</code> or <code>Post.all</code> would make much more sense
   </p>
 </div>
 
@@ -73,7 +73,7 @@ end
 </p>
 
 <p>
-  Next, we see that <code>Post</code> <code>belongs_to :user</code>, which means we need to add a database column to store the <code>user_id</code> so that we know which <code>User</code> the <code>Post</code> belongs to. Since the <code>User</code>'s <code>id</code> is an <code>integer</code>, we need to specify it as such.
+  Next, we see that <code>Post</code> <code>belongs_to :user</code>, which means we need to add a database column to store the <code>user_id</code> so that we know which <code>User</code> the <code>Post</code> belongs to. Since the <code>User</code>'s <code>id</code> is an Integer, we need to specify it as such.
 </p>
 
 <pre><code class="ruby">
@@ -100,7 +100,7 @@ end
   </p>
 
   <p>
-    Imagine you have a list of all the words in the English language, without any labels (A~Z)whatsoever. Then, you are given a word, for instance, "Cat". Your task is to find the word "Cat" from this list.
+    Imagine you have a list of all the words in the English language, without any labels (A~Z) whatsoever. Then, you are given a word, for instance, "Cat". Your task is to find the word "Cat" from this list.
   </p>
 
   <p>
@@ -108,16 +108,25 @@ end
   </p>
 
   <p>
-    However, let's say you have a dictionary. A dictionary has labels which enable you to skip to the letter "C", and search through it. This significantly decreases the amount of words you have to go through.
+    However, let's say you have a dictionary. A dictionary has labels which allows you to skip to the letter "C", and search for the word "Cat" within that range. This significantly decreases the amount of words you have to go through.
   </p>
 
   <p>
-    This is essentially what indexing is all about. It makes looking up things much more efficent. So when should you use indexes?
+    This is essentially what indexing is all about. It makes looking up things much more efficient. So when should you use indexes?
   </p>
 
+  <%= create_flashcard %>
+
   <p>
-    As a rule of thumb, you should always use indexes when you have a foreign key. What is a foreign key? A foreign key is a value that belongs to another object. For instance, in this case, <code>user_id</code> is a foreign key, since it references the <code>id</code> of another <code>User</code> object from the <code>Post</code> object.
+    <strong>As a rule of thumb, you should always use indexes when you have a foreign key.</strong>
   </p>
+
+  <h3>What is a foreign key?</h3>
+  <p>
+    <strong>A foreign key is a value that belongs to another object.</strong> For instance, in this case, <code>user_id</code> is a foreign key, since it references the <code>id</code> of another <code>User</code> object from the <code>Post</code> object.
+  </p>
+
+  <%= create_flashcard %>
 
   <p>
     For a more in-depth look into indexing and how it improves performance, check out <%= link_to 'this blog post', 'https://tomafro.net/2009/08/using-indexes-in-rails-index-your-associations' %>.
@@ -150,26 +159,7 @@ end
   Finally, run <code>rake db:migrate</code> to migrate the columns.
 </p>  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<%= standard_git_workflow %>
 
 
 

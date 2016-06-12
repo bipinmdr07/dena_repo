@@ -74,8 +74,22 @@ end
 <div class="well">
   <h3>Strong Parameters</h3>
   <p>
-    Right now, even if you try to save <code>name</code> or <code>photo</code> with something, devise won't allow it to save. Instead, it will just save as a nil value. This is a security measure so that other people can't input false information that will mess up the database. <strong>Unless we whitelist the database columns <code>name</code> and <code>photo</code>, it won't allow us to save it.</strong> You can read more on this topic <%= link_to 'here', 'http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters' %>.
+    Right now, even if you try to save <code>name</code> or <code>photo</code> with something, devise won't allow it to save. For example, if you go to your rails console and try the following:
   </p>
+
+<pre><code class="bash">
+user = User.create
+user.name = "Bob"
+user.photo = "photo url"
+user.save
+puts user
+</code></pre>
+
+  <p>
+    you will notice that the user does not have the <code>name</code> or <code>photo</code>. Instead, it will just save as a <code>nil</code> value. This is a security measure so that other people can't input false information that will mess up the database. <strong>Unless we whitelist the database columns <code>name</code> and <code>photo</code>, it won't allow us to save it.</strong> You can read more on this topic <%= link_to 'here', 'http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters' %>.
+  </p>
+
+  <%= create_flashcard %>
 </div>
 
 <p>
@@ -130,4 +144,5 @@ class ApplicationController &lt; ActionController::Base
 end
 </code></pre>
 
+<%= standard_git_workflow %>
 
