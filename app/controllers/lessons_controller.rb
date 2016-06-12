@@ -9,7 +9,6 @@ class LessonsController < ApplicationController
   end
 
   def show
-    # session[:back_to_lesson] = request.referer
     @lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_title = controller_name.classify.constantize::COURSE_TITLE
     @lessons = controller_name.classify.constantize::LESSONS
@@ -38,6 +37,9 @@ class LessonsController < ApplicationController
       lesson_locked_redirect
     elsif controller_name.classify == "RubyCoreLesson"
       return if current_user.ruby_core_access?
+      lesson_locked_redirect
+    elsif controller_name.classify == "GithubLesson"
+      return if current_user.github_access?
       lesson_locked_redirect
     end
   end

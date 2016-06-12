@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608065926) do
+ActiveRecord::Schema.define(version: 20160612032025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,11 @@ ActiveRecord::Schema.define(version: 20160608065926) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "github_lessons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "html_css_lessons", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -241,6 +246,7 @@ ActiveRecord::Schema.define(version: 20160608065926) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "instapost_access",         default: false
+    t.boolean  "github_access",            default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
