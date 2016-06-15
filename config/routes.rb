@@ -61,10 +61,11 @@ Rails.application.routes.draw do
   get 'courses',   :to => 'static_pages#courses'
 
   get 'pricing', :to => 'static_pages#pricing'
-
   get 'congratulations', :to => 'static_pages#congratulations'
   get 'about', to: 'static_pages#about'
   get 'contact_us', to: 'static_pages#contact_us'
   get 'learn', to: 'static_pages#learn'
   get 'preregistration', to: 'static_pages#preregistration'
+  get 'support', to: 'static_pages#support'
+  
 end
