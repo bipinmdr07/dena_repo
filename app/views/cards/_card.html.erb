@@ -5,7 +5,8 @@
 </style>
 
 <div class="devise_box">
-  <h3 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h3>
+  <h4 class="pull-left"><%= link_to '<< Back to Lessons', courses_path %></h4>
+  <h4 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h4>
   <hr class="clear">
   <%= sanitize card.question %>
 

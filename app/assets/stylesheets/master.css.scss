@@ -1,3 +1,12 @@
+.nav-badge {
+  margin-top: -3px;
+  margin-left: 5px;
+}
+
+.badge {
+  background-color: #d9534f;
+}
+
 #cke_1_floatingtools {
   display: none;
 }
@@ -76,6 +85,7 @@ pre {
 
 .course_box {
 	height: 300px;
+  border: 1px solid whitesmoke;
 }
 
 .screenshot_min {
@@ -98,7 +108,7 @@ pre {
 }
 
 .underlined-header {
-	border-bottom: 1px solid #e74c3c;
+	border-bottom: 4px solid #e74c3c;
 }
 
 .skill_logo {

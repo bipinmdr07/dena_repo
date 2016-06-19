@@ -2,4 +2,5 @@
 <% @cards += current_user.cards.today %>
 
 $("#card_container").html("<%= escape_javascript render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>");
+$('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@cards => @cards } %>")
 $('pre code').each(function(i, e) {hljs.highlightBlock(e)});

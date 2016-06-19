@@ -24,7 +24,7 @@
                     </li>
 
                     <li class="nav-item page-scroll">
-                      <%= link_to 'STUDY CARDS', study_path %>
+                      <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@cards.count}</span>".html_safe, study_path %>
                     </li>
 
                     <li class="nav-item page-scroll">

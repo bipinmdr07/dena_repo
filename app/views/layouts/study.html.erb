@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <%= render '/layouts/meta' %>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/railscasts.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/languages/erb.min.js"></script>
+  
+</head>
+
+<body>
+        <!-- ******HEADER****** -->
+        <header class="header">  
+            <div class="container">       
+                <h1 class="logo" style="padding-top: 13px; float:none;">
+                    <a href="/"><span class="text" style="font-size: 40px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
+                </h1><!--//logo-->     
+                                     
+            </div><!--//container-->
+        </header><!--//header-->
+
+        <%= yield %>
+                            
+
+  
+</body>
+</html>
