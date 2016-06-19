@@ -107,6 +107,9 @@ pre {
 
 .screenshot {
 	width: 100%;
+  border: 1px solid whitesmoke; 
+  border-radius: 3px; 
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .unindented_ul {

@@ -1,14 +1,22 @@
 <h1><%= title_for(IdeatorLesson, 1, 1) %></h1>
 
 <p>
-	Download Tokaido <a href = "https://github.com/tokaido/tokaidoapp/releases" target = "_blank">Here</a>
+	Get ready to embark on a new journey in your web development career! From this lesson, we'll be creating rails applications together, where you'll learn how to create full featured applications.
+</p>
+
+<p>
+	Let's get started!
+</p>
+
+<p>
+	<strong>First, download Tokaido <a href = "https://github.com/tokaido/tokaidoapp/releases" target = "_blank">Here</a>.</strong> This will enable you to use Ruby on Rails instantly.
 </p>
 <!-- <p>
 	Download Postgre <a href = "http://postgresapp.com/" target = "_blank">Here</a>
 </p> -->
 
 <p>
-	Let's open Tokaido and click Open Terminal.
+	<strong>Let's open Tokaido and click Open Terminal.</strong>
 </p>
 
 <p>
@@ -39,7 +47,15 @@ rails new ideator
 
 
 <p>
-	Great, now that we’ve created our new rails app, let’s start this baby up. Let’s go into Tokaido and open up another terminal window. We want to have two terminal windows open since we want one for the server and one for typing in rails commands. In one of the terminal windows, let’s navigate to our project folder.
+	Great, now that we’ve created our new rails app, let’s start this baby up. Let’s go into Tokaido and <strong>open up another terminal window</strong>.
+</p>
+
+<p class="alert alert-warning">
+	We want to have two terminal windows open since we want <strong>one for running the server and one for typing in rails commands</strong>. You'll notice that the terminal window that is running the server (the terminal window where you typed in rails server) will not respond to anything that you type in. <strong>You can only execute commands in terminal windows that doesn't have a server running on it.</strong>
+</p>
+
+<p>
+	In one of the terminal windows, let’s navigate to our project folder.
 </p>
 
 <pre><code class="bash">
@@ -47,7 +63,7 @@ cd ~/desktop/ideator
 </code></pre>
 
 <p>
-	First we have to create our initial database. In the console enter
+	First we have to create our initial database. In the terminal enter
 </p>
 
 <pre><code class="bash">
@@ -66,6 +82,10 @@ rake db:migrate
 
 	<p>
 		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering the <code>rake</code> commands.
+	</p>
+
+	<p>	
+		If that doesn't work, make sure you are running the terminal from Tokaido. If you haven't done so, <strong>open Tokaido and click "Open Terminal"</strong>.
 	</p>
 
 </div>
@@ -90,9 +110,21 @@ http://localhost:3000/
 	You should see a nice welcome page from Ruby on Rails.
 </p>
 
-<p>
-	If you don’t see this, make sure you navigated to your project folder.
-</p>
+<div class="well">
+	<h3>Don't see a nice welcome page?</h3>
+	<p>
+		If the <code>rails server</code> command is giving you errors, chances are you didn't navigate to your <code>ideator</code> folder.
+	</p>
+
+	<p>
+		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering <code>rails server</code>.
+	</p>
+
+	<p>	
+		If that doesn't work, make sure you are running the terminal from Tokaido. If you haven't done so, <strong>open Tokaido and click "Open Terminal"</strong>.
+	</p>
+
+</div>
 
 <p>
   Awesome! You're one step closer to finishing your first rails app!

@@ -5,7 +5,7 @@
 </p>
 
 <p>
-	First we have to set up our SSH keys. Follow <a href = "https://help.github.com/articles/generating-ssh-keys/" target = "_blank">this guide</a> to do so. Make sure you follow each step in the guides from "Checking for existing SSH keys" to "Testing your SSH connection".
+	First we have to set up our SSH keys. Follow <a href = "https://help.github.com/articles/generating-ssh-keys/" target = "_blank">this guide</a> to do so. <strong>Follow each step in the guide from "Checking for existing SSH keys" to "Testing your SSH connection".</strong>
 </p>
 
 <p>After you've done everything in that link, in your console type in</p>
@@ -26,7 +26,7 @@ git commit -am “Initial commit”
 	Now let’s go into GitHub’s front page and create a new repository. On the left hand side, you should see a <strong>green button called “+ New repository”</strong>. Click on that button and just fill in the box that says <strong>“Repository name”</strong>.
 </p>
 
-<p>
+<p class="alert alert-warning">
 	<strong>Make sure you don’t check “Initialize this repository with a README”.</strong>
 </p>
 
@@ -39,7 +39,7 @@ git commit -am “Initial commit”
 </p>
 
 <p>
-	Now what you’re going to do is copy the code right beneath that and paste it into your terminal. It should look something like this:
+	Copy the code right beneath that and paste it into your terminal. It should look something like this:
 </p>
 
 <pre><code class="bash">
@@ -49,6 +49,10 @@ git remote add origin git@github.com:yourUsernameHere/test.git
 <pre><code class="bash">
 git push -u origin master
 </code></pre>
+
+<p class="alert alert-danger">
+  Make sure you replace <code>git@github.com:yourUsernameHere/test.git</code> with your username.
+</p>
 
 <p>
 	Once you’ve pasted and entered that into your terminal, you’re all set! GitHub is ready to go!
