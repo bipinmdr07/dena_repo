@@ -9,11 +9,6 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def courses
-    @cards = current_user.cards.where(repetition_date: nil)
-    @cards += current_user.cards.today
-  end
-
   def about
     render layout: "landing_page"
   end
