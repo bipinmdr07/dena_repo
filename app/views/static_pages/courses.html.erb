@@ -1,5 +1,17 @@
+<div class="row">
+	<div class="col-xs-12 col-md-6 col-md-offset-6">
+		<div class="devise_box">
+			<%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
+			<h3>You have <%= pluralize(@cards.count, 'card') %> left today - <%= link_to 'Study Flashcards', study_path %></h3>
+			<blockquote>
+				<%= Quote::ARRAY.sample[0] %>
+				<small><%= Quote::ARRAY.sample[1] %></small>
+			</blockquote>
+		</div>
+	</div>
+</div>
+
 <div class = "row">
-	<!-- <h1 class="text-center">Start Your Coding Journey</h1> -->
 
 	<%= render partial: 'course', locals: {course: 'Intro', course_name: "An introduction to web development and why it's so cool.", available: true, course_link: intro_path, course_access: 'intro'} %>
 
