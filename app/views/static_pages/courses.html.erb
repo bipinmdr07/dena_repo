@@ -2,7 +2,7 @@
 	<div class="col-xs-12 col-md-6 col-md-offset-6">
 		<div class="devise_box">
 			<%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
-			<h3>You have <%= pluralize(@cards.count, 'card') %> left today - <%= link_to 'Study Flashcards', study_path %></h3>
+			<h3>You have <%= pluralize(@cards.count, 'card') %> to review today - <%= link_to 'Study Flashcards', study_path %></h3>
 			<blockquote>
 				<%= Quote::ARRAY.sample[0] %>
 				<small><%= Quote::ARRAY.sample[1] %></small>
