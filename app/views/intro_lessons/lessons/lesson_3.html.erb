@@ -1,7 +1,7 @@
 <h1><%= title_for(IntroLesson, 1, 3) %></h1>
 
 <p>
-	The answer is - it depends. But to give an opinionated opinion, we are going to say Ruby is a language that is a great first language. The reason why is because <strong>after you learn one programming language, it's easier to learn another one.</strong> Overcoming the initial step in learning your first programming language is the key to getting started in coding.
+	The answer is - it depends. But we think that Ruby is a great first language. The reason why is because <strong>after you learn one programming language, it's easier to learn another one.</strong> Overcoming the initial step in learning your first programming language is the key to getting started in coding.
 </p>
 
 <p>
@@ -13,8 +13,18 @@
 </p>
 
 <p>
-	It's also the language for the popular web framework <strong>Ruby on Rails</strong>. A <strong>web framework</strong> is different from a programming language. A web framework is a library or a collection of code that makes a coder's life easier when building web applications. A programming language is just a language, like English or Spanish. A web framework uses a programming language to create a collection of code that other coders can use to create web applications much easier.
+	It's also the language for the popular web framework <strong>Ruby on Rails</strong>. A <strong>web framework</strong> is different from a programming language.
 </p>
+
+<p>
+  <strong>A web framework is a library or a collection of code that makes a coder's life easier when building web applications.</strong>
+</p>
+
+<p>
+  <strong>A programming language is just a language, like English or Spanish.</strong> A web framework uses a programming language to create a collection of code that other coders can use to create web applications much easier.
+</p>
+
+<%= create_flashcard %>
 
 <p><strong>Which framework should I learn?</strong></p>
 
@@ -39,7 +49,7 @@
 
 <%= render partial: '/shared/quizzes', locals: { question: 'Why is Ruby a good first programming language?', answer: "It's a beginner friendly language and increases the chances of beginners to stick with learning how to code.", number: 1 } %>
 
-<%= render partial: '/shared/quizzes', locals: { question: 'Why is Ruby on Rails a good first web framework to learn?', answer: "Basically it's beginner friendly, it's in demand, and lot's of awesome people are in the community :)", number: 2 } %>
+<%= render partial: '/shared/quizzes', locals: { question: 'Why is Ruby on Rails a good first web framework to learn?', answer: "It's beginner friendly, it's in demand, and lot's of awesome people are in the community :)", number: 2 } %>
 
 <br class = "clear">
 
