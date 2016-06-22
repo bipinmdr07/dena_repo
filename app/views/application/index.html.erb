@@ -12,7 +12,7 @@
       <ul class = "unindented_ul">
 
       <% chapter[1].each do |lesson| %>
-        <li><%= link_to "Lesson #{lesson[0]} - #{lesson[1]}", "#{@lesson_link}/#{(lesson[0])}" %></li>
+        <li><%= link_to "Lesson #{lesson[0]} - #{lesson[1]} #{lesson_completed(lesson[0])}".html_safe, "#{@lesson_link}/#{(lesson[0])}" %></li>
       <% end %>
     </div>
     

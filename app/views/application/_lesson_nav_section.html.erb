@@ -2,6 +2,24 @@
   <p>
     Understand the gist? Cool, let's move on.
   </p>
+
+  <% if current_user.progressions.where(course_name: controller_name.classify.constantize, lesson_id: params[:id]).count > 0 %>
+    <button class="btn btn-success" style="margin: 20px;"> <i class="fa fa-check-circle" aria-hidden="true"></i> Completed!</button>
+  <% else %>
+    <%= simple_form_for :progression, url: progressions_path, html: {id: 'progression_form'}, method: :post, remote: true do |f| %>
+      <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id] } %>
+      <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify.constantize } %>
+
+      <%= button_tag(type: 'submit', class: "btn btn-warning", id: "progression_form_button") do %>
+        <i class="fa fa-check-circle" aria-hidden="true"></i> Mark as Completed
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <button id="completed_button" class="btn btn-success"> <i class="fa fa-check-circle" aria-hidden="true"></i> Completed!</button>
+
+  <br>
+
   <%= link_to 'Previous Lesson', "/#{@course_link}/#{@prev_lesson}", class: 'btn btn-warning btn-lg' if @prev_lesson > 0 %>
   <%= link_to 'Next Lesson', "/#{@course_link}/#{@next_lesson}", class: 'btn btn-success btn-lg' if @next_lesson <= @lesson_length %>
 </div>

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :posts
   get 'blog', to: 'blog#index', as: 'blog'
 
+  resources :progressions, only: [:create, :destroy]
+
   
   put 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 

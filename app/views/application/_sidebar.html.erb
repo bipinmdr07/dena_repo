@@ -6,7 +6,11 @@
         <li><h5><%= chapter[0] %></h5></li>
 
         <% chapter[1].each do |lesson| %>
-          <li><%= link_to "#{lesson[0]}. #{lesson[1]}", "/#{@lesson_link}/#{(lesson[0])}" %></li>
+          <% if controller_name.classify == "Progression" %>
+            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0], params[:progression][:course_name])}".html_safe, "/#{@lesson_link}/#{(lesson[0])}" %></li>
+          <% else %>
+            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0])}".html_safe, "/#{@lesson_link}/#{(lesson[0])}" %></li>
+          <% end %>
         <% end %>
 
       <% end %>

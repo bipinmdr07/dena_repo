@@ -8,5 +8,6 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :submission_comments, dependent: :destroy
   has_many :cards
+  has_many :progressions
 
 end

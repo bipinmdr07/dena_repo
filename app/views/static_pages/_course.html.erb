@@ -1,7 +1,31 @@
 <div class = "col-sm-12 col-md-4 course_box">
-	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= course %></h3>
-	<p><%= course_name %></p>
-	<%= link_to 'Learn', course_link, class: 'btn btn-danger course_button' if available && has_access?(course_access) %>
-  <%= link_to 'Locked :)', "", class: 'btn btn-default course_button' if available && !has_access?(course_access) %>
-	<%= link_to 'Coming Soon', "", class: 'btn btn-default course_button' if !available %>
+  <%= link_to course_link.empty? ? '' : course_link do %>
+  	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= course %></h3>
+
+    <div class="course_description">
+  	 <p><%= course_name %></p>  
+    </div>
+
+    <div class="course_status">
+      <% if available && !has_access?(course_access) %>
+        <span class="label label-default">Locked :)</span>
+      <% end %>
+      <% if !available %>
+        <span class="label label-default">Coming Soon</span>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="progress_bar">
+          <div class="progress">
+            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(controller_name) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(controller_name) %>%; min-width: 2em;">
+              <%= progress(controller_name) %>% completed
+            </div>
+          </div>
+        </div><!-- progress_bar -->
+      </div><!-- col-xs-12 -->
+    </div><!-- row -->
+  <% end %>
+
 </div>
