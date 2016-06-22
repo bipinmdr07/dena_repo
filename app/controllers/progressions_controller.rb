@@ -6,7 +6,11 @@ class ProgressionsController < ApplicationController
   def create
     respond_to do |format|
       format.html {}
-      format.js { current_user.progressions.create(progression_params) }
+      format.js { 
+        progression = current_user.progressions.create(progression_params) 
+        progression.create_activity key: 'progression.create', owner: current_user, 
+        parameters: {lesson_id: params[:progression][:lesson_id], course_name: params[:progression][:course_name]}
+      }
     end
   end
 

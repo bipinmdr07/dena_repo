@@ -38,8 +38,14 @@ class LessonsController < ApplicationController
     elsif controller_name.classify == "RubyCoreLesson"
       return if current_user.ruby_core_access?
       lesson_locked_redirect
+    elsif controller_name.classify == "InstapostLesson"
+      return if current_user.instapost_access?
+      lesson_locked_redirect
     elsif controller_name.classify == "GithubLesson"
       return if current_user.github_access?
+      lesson_locked_redirect
+    elsif controller_name.classify == "JavascriptLesson"
+      return if current_user.javascript_access?
       lesson_locked_redirect
     end
   end

@@ -61,6 +61,7 @@ Rails.application.routes.draw do
   get 'javascript_lessons/:id', :to => 'javascript_lessons#show', :as => 'javascript_lessons'
 
   get 'courses',   :to => 'static_pages#courses'
+  get 'activity_log',   :to => 'static_pages#activity_log'
 
   get 'pricing', :to => 'static_pages#pricing'
   get 'congratulations', :to => 'static_pages#congratulations'
