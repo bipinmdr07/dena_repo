@@ -1,4 +1,19 @@
 module ApplicationHelper
+
+  def progress(controller_name)
+    if controller_name.empty?
+      0
+    else
+      ((current_user.progressions.where(course_name: controller_name).count.to_f / controller_name.constantize::LESSON_LENGTH.to_f) * 100).to_i
+    end
+  end
+
+  def lesson_completed(lesson_id, course_name=controller_name.classify.constantize)
+    if current_user.progressions.where(course_name: course_name, lesson_id: lesson_id).count > 0
+      '<i class="fa fa-check-circle progression_check" aria-hidden="true"></i>'.html_safe
+    end
+  end
+
 	def title_for(course, chapter, lesson)
 		course::LESSONS[chapter - 1][1][lesson - 1][1]
 	end

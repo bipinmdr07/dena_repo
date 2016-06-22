@@ -1,3 +1,28 @@
+.course_description {
+  height: 130px;
+}
+
+.course_status {
+  height: 20px;
+}
+
+.progress_bar {
+  border-top: 1px solid whitesmoke;
+  margin-top: 20px;
+  height: 10px;
+  padding: 10px 0px;
+}
+
+.progression_check {
+  color: #5cb85c;
+  margin-left: 5px;
+}
+
+#completed_button {
+  display: none;
+  margin: 20px;
+}
+
 .prof_pic_sm {
   border-radius: 50%;
   height: 100px;
@@ -95,7 +120,11 @@ pre {
 .course_box {
 	height: 300px;
   border: 1px solid whitesmoke;
+  a:hover {
+    text-decoration: none;
+  }
 }
+
 
 .screenshot_min {
   height: 100px;
@@ -103,9 +132,10 @@ pre {
 }
 
 .course_button {
-	position: absolute;
-  bottom: 20px;
-  right: 10px;
+	// position: absolute;
+ //  bottom: 20px;
+ //  right: 10px;
+  float: right;
 }
 
 .embed_video {
