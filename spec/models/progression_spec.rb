@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Progression, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "shouldn't allow duplicate progression items" do
+  end
 end
