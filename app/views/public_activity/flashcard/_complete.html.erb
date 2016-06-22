@@ -1,0 +1,15 @@
+<% display_name = "You" %>
+
+<!-- for later use <% activity_user_name = User.find(activity.owner_id).name %> -->
+
+<div class="row">
+  <div class="col-xs-1">
+    <i class="fa fa-check activity_icon" aria-hidden="true"></i> 
+  </div>
+
+  <div class="col-xs-11">
+    <span class="activity_time"><small><%= time_ago_in_words(activity.created_at) %> ago</small></span><br>
+    <strong><%= display_name %> completed a flashcard</strong><br>
+    <%= image_tag User.find(activity.owner_id).avatar, class: 'prof_pic_xs' %><span class="activity_description"></span>
+  </div>
+</div>

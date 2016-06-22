@@ -1,3 +1,39 @@
+.course_html {
+  background: #eeeeee;
+}
+
+.panel-heading-stats {
+  padding: 10px 15px;
+  border-bottom: 2px solid #eee;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background: #fdfdfd;
+}
+
+.stat_box {
+  padding: 20px;
+  border: 1px solid whitesmoke;
+}
+
+.activity_description {
+  margin-left: 10px;
+}
+
+.activity_time {
+  color: #999999;
+  font-weight: 600;
+}
+
+.activity_icon {
+  font-size: 15px !important;
+  color: #ec6952;
+}
+
+.activity {
+  border-bottom: 1px solid whitesmoke;
+  padding: 10px;
+}
+
 .course_description {
   height: 130px;
 }
@@ -21,6 +57,12 @@
 #completed_button {
   display: none;
   margin: 20px;
+}
+
+.prof_pic_xs {
+  border-radius: 10%;
+  height: 25px;
+  width: 25px;
 }
 
 .prof_pic_sm {
@@ -68,6 +110,7 @@ span.radio.inline {
   border-radius: 3px;
   box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
   margin-bottom: 50px;
+  background: white;
 }
 
 #wrap {
@@ -120,6 +163,7 @@ pre {
 .course_box {
 	height: 300px;
   border: 1px solid whitesmoke;
+  background: white;
   a:hover {
     text-decoration: none;
   }

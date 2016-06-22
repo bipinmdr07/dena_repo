@@ -30,6 +30,7 @@ class CardsController < ApplicationController
   def update_interval
     @card = Card.find(params[:id])
     @card.update_interval!(card_params[:quality_response].to_i)
+    @card.create_activity key: 'flashcard.complete', owner: current_user, parameters: {card_id: @card.id}
     respond_to do |format|
       format.html { redirect_to study_path }
       format.js {}

@@ -1,5 +1,7 @@
 class Card < ActiveRecord::Base
   acts_as_taggable
+  include PublicActivity::Model
+
   belongs_to :user
   before_save :update_code_syntax
 
@@ -32,6 +34,7 @@ class Card < ActiveRecord::Base
       calculate_easiness_factor
       calculate_interval
     end
+
     calculate_date
     update(calculated_interval: @calculated_interval, calculated_ef: @calculated_ef, repetition_date: @repetition_date)
   end
