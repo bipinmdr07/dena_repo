@@ -1,5 +1,16 @@
 <div class = "col-sm-12 col-md-4 course_box">
-  <%= link_to course_link.empty? ? '' : course_link do %>
+  <%
+  if course_link.empty?
+   link = ''
+  elsif available && !has_access?(course_access)
+   link = ''
+  elsif !available
+   link = ''
+  else
+  link = course_link
+  end %>
+
+  <%= link_to link do %>
   	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= course %></h3>
 
     <div class="course_description">
