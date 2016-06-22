@@ -12,6 +12,7 @@ ActiveAdmin.register AdminUser do
       f.input :password
       f.input :password_confirmation
     end
-    f.actions
   end
+
+  actions :all, except: [:destroy]
 end

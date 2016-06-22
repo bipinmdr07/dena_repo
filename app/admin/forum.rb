@@ -5,8 +5,7 @@ ActiveAdmin.register Forum do
     f.inputs 'Forum' do
       f.input :name
     end
-    f.actions
   end
 
-
+  actions :all, except: [:destroy]
 end

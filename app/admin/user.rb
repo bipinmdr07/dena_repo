@@ -33,7 +33,9 @@ ActiveAdmin.register User do
       f.input :github_access
       f.input :javascript_access
     end
-    f.actions
+
   end
+
+  actions :all, except: [:destroy]
 
 end

@@ -15,5 +15,7 @@ form do |f|
   f.actions
 end
 
+actions :all, except: [:destroy]
+
 
 end
