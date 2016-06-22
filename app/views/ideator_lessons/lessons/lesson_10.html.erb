@@ -5,7 +5,11 @@
 </p>
 
 <p>
-  Let's go to our console and type in <code>rails console</code> (or <code>rails c</code> for short) to open up the rails console (pretty self explanatory). In the rails console, we can type in ruby commands to interact with our rails application.
+  Let's go to our console and type in <code>rails console</code> (or <code>rails c</code> for short) to open up the rails console. In the rails console, we can type in ruby code to interact with our rails application.
+</p>
+
+<p class="alert alert-danger">
+  You can not type in regular commands such as <code>git add .</code> or <code>rake routes</code> inside the rails console. Make sure to type <code>exit</code> in the terminal to exit out of the rails console before trying to execute other commands.
 </p>
 
 <p>
@@ -57,7 +61,15 @@ Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
 </p>
 
 <p>
-  Let's go into our <code>ideas_controller.rb</code> and see what we can do.
+  First, let's make sure we exit from the rails console. Type the following in the terminal to exit out of the rails console:
+</p>
+
+<pre class="bash"><code>
+exit
+</code></pre>
+
+<p>
+  Next, let's go into our <code>ideas_controller.rb</code> and see what we can do.
 </p>
 
 <p>
