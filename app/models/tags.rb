@@ -69,7 +69,7 @@ class Tags < ActiveRecord::Base
       [1, "Setting up your Web Dev Environment"] => %w(),
       [2, "Setting Up Git"] => %w(),
       [3, "Creating Wireframes"] => %w(),
-      [4, "Self-Directed Lesson: Installing Bootstrap"] => %w()
+      [4, "Self-Directed Lesson: Installing Bootstrap"] => %w(),
       [5, "Installing Devise"] => %w(),
       [6, "Creating the User Model"] => %w(),
       [7, "Installing Carrierwave"] => %w(),
@@ -99,6 +99,15 @@ class Tags < ActiveRecord::Base
       [31, "Self-Directed Lesson: Styling Posts"] => %w(),
       [32, "Self-Directed Lesson: Styling the Profile Page"] => %w(),
       [33, "Final Touches"] => %w()
+    },
+    "javascript_lessons" => {
+      [1, "Learning the Basics"] => %w(),
+      [2, "jQuery"] => %w()
+    },
+    "github_lessons" => {
+      [1, "Git Real"] => %w(),
+      [2, "Try Git"] => %w(),
+      [3, "Git - the simple guide"] => %w()
     }
   }
 
