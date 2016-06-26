@@ -33,7 +33,7 @@ gem 'will_paginate', '~> 3.0.6'
 </p>
 
 <p>
-  Basically, we can just stick <code>.paginate(:page => params[:page], :per_page => 30)</code> after <code>@idea = Idea.all</code> and it would work perfectly. We can also adjust the <code>:per_page</code> to let's say 10, and it would only display 10 ideas per page. Your code should now look like this:
+  Basically, we can just stick <code>.paginate(:page => params[:page], :per_page => 30)</code> after <code>@ideas = Idea.all</code> in our <code>ideas_controller.rb</code>and it would work perfectly. We can also adjust the <code>:per_page</code> to let's say 10, and it would only display 10 ideas per page. Your code should now look like this:
 </p>
 
 <pre><code class="ruby">
