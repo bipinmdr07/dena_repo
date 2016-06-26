@@ -97,7 +97,7 @@ end
 
 <pre><code class="erb">
 
-&lt;% if @idea %&gt;
+&lt;% if @idea.present? %&gt;
   &lt;%= link_to 'Inspire Me', random_path, class: 'btn btn-primary btn-block' %&gt;
     
   &lt;div class="panel panel-default"&gt;
@@ -116,13 +116,13 @@ end
 &lt;% end %&gt;
 </code></pre>
 
-<div class="well">
+<!-- <div class="well">
   <h3>Shortcut for checking if something exists</h3>
 
   <p>
     In case you were wondering, in Ruby, instead of writing something like <code>if something.present?</code> we can simpy say <code>if something</code> and it would return true if <code>something</code> existed. In our case we are checking if <code>@idea</code> is present simply by adding <code>if @idea</code>, instead of <code>if @idea.present?</code> or <code>if @idea.exists?</code>.
   </p>
-</div>
+</div> -->
 
 <p>
   Sweet, you've now added all of the pages succesfully! The final step in this lesson is to add a link to the random page in the navbar.
