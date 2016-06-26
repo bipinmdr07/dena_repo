@@ -2,6 +2,8 @@ $('#progression_form').hide();
 
 $('#completed_button').show();
 
+var audio = new Audio('/sounds/success.wav');
+audio.play();
 
 <%
 @lesson_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
@@ -39,8 +41,5 @@ ready = function() {
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
-
-var audio = new Audio('/sounds/OK.wav');
-audio.play();
 
 

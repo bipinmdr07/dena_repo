@@ -219,6 +219,11 @@ pre {
 	display: none;
 }
 
+.hidden_answer p {
+  margin-top: 0px;
+  font-size: 14px !important;
+}
+
 .quiz_box {
 	height: 250px;
 }
