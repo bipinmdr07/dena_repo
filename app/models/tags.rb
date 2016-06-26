@@ -16,6 +16,13 @@ class Tags < ActiveRecord::Base
   # generate links by using the self.get_links(tag) method
 
   LESSONS = {
+    "intro_lessons" => {
+      [1, "Congratulations!"] => %w(),
+      [2, "What do web developers do?"] => %w(),
+      [3, "What language should I learn?"] => %w(),
+      [4, "Overview of languages and tools"] => %w(),
+      [5, "Guidelines to maximize your learning experience"] => %w()
+    },
     "html_css_lessons" => {
       [1, "After this, there is no turning back"] => %w(),
       [2, "Building Your First Four HTML/CSS Projects"] => %w(),
