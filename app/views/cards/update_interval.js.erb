@@ -2,11 +2,9 @@
 <% @cards += current_user.cards.today %>
 
 <% if @cards.empty? %>
-  var audio = new Audio('/sounds/completed.wav');
-  audio.play();
+  completed.play();
 <% else %>
-  var audio = new Audio('/sounds/success.wav');
-  audio.play();
+  success_sound.play();
 <% end %>
 
 $("#card_container").html("<%= escape_javascript render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>");

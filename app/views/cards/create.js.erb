@@ -1,3 +1,5 @@
+ok_sound.play();
+
 // empty flashcard form
 $("#card_question").val('');
 $("#card_answer").val('');
@@ -7,11 +9,6 @@ $("#card_tag_list").val('');
 <% @cards += current_user.cards.today %>
 
 $('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@cards => @cards } %>")
-
-
-
-var audio = new Audio('/sounds/OK.wav');
-audio.play();
 
 // hide flashcard form
 $('#slider').slideReveal("toggle");

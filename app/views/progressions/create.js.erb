@@ -1,9 +1,8 @@
+success_sound.play();
+
 $('#progression_form').hide();
 
 $('#completed_button').show();
-
-var audio = new Audio('/sounds/success.wav');
-audio.play();
 
 <%
 @lesson_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
