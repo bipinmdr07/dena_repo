@@ -2,7 +2,7 @@
 <% @cards += current_user.cards.today %>
 
 <% if @cards.empty? %>
-  completed.play();
+  completed_sound.play();
 <% else %>
   success_sound.play();
 <% end %>
