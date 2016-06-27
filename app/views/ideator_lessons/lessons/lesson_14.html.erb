@@ -14,11 +14,11 @@ end
 </code></pre>
 
 <p>
-  Just a little refresher: methods in the controller correspond to the view files with the same name as the method. So in this case, let's create a <code>edit.html.erb</code> under <code>/app/views/ideas/edit.html.erb</code>.
+  Just a little refresher: methods in the controller correspond to the view files with the same name as the method. So in this case, let's create a file called <code>edit.html.erb</code> in the <code>/app/views/ideas</code> folder.
 </p>
 
 <p>
-  This <code>edit.html.erb</code> is where we want to put our form for editing ideas. Since we want to be able to tell rails which idea we are editing, let's tell rails to <code>find</code> the idea that we are working on and store that in an instance variable like this:
+  This <code>edit.html.erb</code> is where we want to put our form for editing ideas. Since we want to be able to tell rails which idea we are editing, let's tell rails to <code>find</code> the idea that we are working on and store that in an instance variable. Let's go back to the <code>ideas_controller.rb</code> and add a line of code to the <code>edit</code> method.
 </p>
 
 <pre><code class="ruby">
