@@ -1,8 +1,13 @@
 <% @cards = current_user.cards.where(repetition_date: nil) %>
 <% @cards += current_user.cards.today %>
 
-var audio = new Audio('/sounds/success.wav');
-audio.play();
+<% if @cards.empty? %>
+  var audio = new Audio('/sounds/completed.wav');
+  audio.play();
+<% else %>
+  var audio = new Audio('/sounds/success.wav');
+  audio.play();
+<% end %>
 
 $("#card_container").html("<%= escape_javascript render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>");
 $('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@cards => @cards } %>")

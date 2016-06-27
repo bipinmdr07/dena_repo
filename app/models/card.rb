@@ -11,9 +11,9 @@ class Card < ActiveRecord::Base
 
   def update_code_syntax
     new_question = code_syntax(question)
-    question = new_question
     new_answer = code_syntax(answer)
-    answer = new_answer
+    self.question = new_question
+    self.answer = new_answer
   end  
 
   def update_interval!(quality_response)
@@ -56,6 +56,7 @@ class Card < ActiveRecord::Base
   def code_syntax(text)
     language = text.match(/\`(.*?)\`/) # returns `ruby`
     return text if language.nil?
+    text = CGI.escapeHTML(text)
     text.gsub!(Regexp.new("#{language[0]}"), "<pre><code class='#{language[1]}'>")
     text << "</code></pre>" if text.gsub!(/\`end\`/, "</code></pre>").nil?
     return text

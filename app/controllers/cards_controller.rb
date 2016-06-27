@@ -42,7 +42,7 @@ class CardsController < ApplicationController
 
   def card_params
     params.require(:card).permit(:id, :user_id, :question, :answer, :topic, :prev_ef, :prev_interval, 
-                        :quality_response, :calculated_interval, :calculated_ef, :repetition_date, :tag_list)
+                        :quality_response, :calculated_interval, :calculated_ef, :repetition_date, :tag_list, :lesson_url)
   end
   
 end

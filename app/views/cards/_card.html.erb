@@ -5,69 +5,86 @@
 </style>
 
 <div class="devise_box">
-  <h4 class="pull-left"><%= link_to '<< Back to Lessons', courses_path %></h4>
-  <h4 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h4>
-  <hr class="clear">
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-6">
-      <%= sanitize card.question %>
-    </div>
+  <% if @cards.empty? %>
+    <h3 class="text-center">Congratulations! You have no cards left today!</h3>
+    <h3 class="text-center"><%= link_to '>> Go to lessons', courses_path %></h3>
+  <% else %>
 
-    <div class="col-xs-12 col-sm-6">
-      <div class="panel panel-default">
-        <div class="panel-heading" style="background: #0F0F0F; color: white;">
-            <h3 class="panel-title">Type your answer below:</h3>
-        </div>
-        <div class="panel-body" style="background-color: #0F0F0F;">
-            <div id="editor">
-            </div>
-        </div>
-      </div><!-- panel panel-default -->
-    </div><!-- col-xs-12 col-sm-6 -->
-  </div><!-- row -->
+    <h4 class="pull-left"><%= link_to '<< Back to Lessons', courses_path %></h4>
+    <h4 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h4>
+    <hr class="clear">
 
-  
-  <button type="button" class="btn btn-primary">Check Answer</button>
-
-  <div class="check_answer">
-    <h2>Answer:</h2>
-
-    <div class="col-xs-12 col-sm-6">
-      <%= sanitize card.answer %>
-    </div>
-
-    <div class="col-xs-12 col-sm-6">
-      <div class="well">
-        <h3>Related Resources</h3>
-        <ul>
-          <% card.tag_list.each do |tag| %>
-            <% links = Tags.get_links(tag) %>
-            <% links.each do |link| %>
-              <li><%= link_to link[1], '/' + link[0] %></li>
-            <% end %>
-          <% end %>
-        </ul>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <%= sanitize card.question %>
       </div>
-    </div>
 
-    <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
+      <div class="col-xs-12 col-sm-6">
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background: #0F0F0F; color: white;">
+              <h3 class="panel-title">Type your answer below:</h3>
+          </div>
+          <div class="panel-body" style="background-color: #0F0F0F;">
+              <div id="editor">
+              </div>
+          </div>
+        </div><!-- panel panel-default -->
+      </div><!-- col-xs-12 col-sm-6 -->
+    </div><!-- row -->
 
-    <div style="margin: 30px auto 30px;display: table;">
-      <%= simple_form_for card, url: update_interval_path(card.id), method: :put, remote: true do |f| %>
-        <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
-        <%= f.submit 'Submit', class: 'btn btn-primary', style: 'margin: 0 auto; display: block;' %>
-      <% end %>
-    </div>
     
+    <button type="button" class="btn btn-primary">Check Answer</button>
 
-  </div><!-- check_answer -->
+    <div class="check_answer">
+      <div class="row">
+        <h2>Answer:</h2>
+        <div class="col-xs-12 col-sm-6">
+          <%= sanitize card.answer %>
+        </div>
 
+        <div class="col-xs-12 col-sm-6">
+          <div class="well">
+            <h3>Related Resources</h3>
+            <ul>
+
+              <% if card.lesson_url %>
+
+                <% url = URI.parse(card.lesson_url).path.split("/") %>
+                <% controller_name = url[1] %>
+                <% lesson_number = url[2] %>
+                <% course_name = Tags::LESSONS[controller_name].keys[lesson_number.to_i - 1][1] %>
+
+                <li><%= link_to course_name, card.lesson_url %></li>
+              <% end %>
+
+              <% card.tag_list.each do |tag| %>
+                <% links = Tags.get_links(tag) %>
+                <% links.each do |link| %>
+                  <li><%= link_to link[1], '/' + link[0] %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div><!-- well -->
+        </div><!-- col-xs-12 col-sm-6 -->
+      </div><!-- row -->
+
+      <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
+
+      <div style="margin: 30px auto 30px;display: table;">
+        <%= simple_form_for card, url: update_interval_path(card.id), method: :put, remote: true do |f| %>
+          <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
+          <%= f.submit 'Submit', class: 'btn btn-primary', style: 'margin: 0 auto; display: block;' %>
+        <% end %>
+      </div>
+    </div><!-- check_answer -->
+  <% end %>
 </div><!-- devise_box -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
+  <% unless @cards.empty? %>
     var editor = ace.edit("editor");
     editor.setOptions({
       maxLines: 100,
@@ -89,4 +106,5 @@
       var own_answer = document.getElementById("answer").value;
       $('#own_answer').text("Your answer: \n" + editor.getValue());
     })
+  <% end %>
 </script>

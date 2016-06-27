@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622083444) do
+ActiveRecord::Schema.define(version: 20160627025204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20160622083444) do
     t.float    "calculated_interval"
     t.float    "calculated_ef"
     t.datetime "repetition_date"
+    t.string   "lesson_url"
   end
 
   add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
