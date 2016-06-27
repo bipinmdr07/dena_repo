@@ -8,22 +8,48 @@
   <h4 class="pull-left"><%= link_to '<< Back to Lessons', courses_path %></h4>
   <h4 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h4>
   <hr class="clear">
-  <%= sanitize card.question %>
 
-  <div class="panel panel-default">
-    <div class="panel-heading" style="background: #0F0F0F; color: white;">
-        <h3 class="panel-title">Code Editor</h3>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <%= sanitize card.question %>
     </div>
-    <div class="panel-body" style="background-color: #0F0F0F;">
-        <div id="editor">
+
+    <div class="col-xs-12 col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading" style="background: #0F0F0F; color: white;">
+            <h3 class="panel-title">Type your answer below:</h3>
         </div>
-    </div>
-  </div>
+        <div class="panel-body" style="background-color: #0F0F0F;">
+            <div id="editor">
+            </div>
+        </div>
+      </div><!-- panel panel-default -->
+    </div><!-- col-xs-12 col-sm-6 -->
+  </div><!-- row -->
+
+  
   <button type="button" class="btn btn-primary">Check Answer</button>
 
   <div class="check_answer">
     <h2>Answer:</h2>
-    <%= sanitize card.answer %>
+
+    <div class="col-xs-12 col-sm-6">
+      <%= sanitize card.answer %>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+      <div class="well">
+        <h3>Related Resources</h3>
+        <ul>
+          <% card.tag_list.each do |tag| %>
+            <% links = Tags.get_links(tag) %>
+            <% links.each do |link| %>
+              <li><%= link_to link[1], '/' + link[0] %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 
     <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
 
@@ -33,16 +59,6 @@
         <%= f.submit 'Submit', class: 'btn btn-primary', style: 'margin: 0 auto; display: block;' %>
       <% end %>
     </div>
-
-    <h3>Related Resources</h3>
-    <ul>
-      <% card.tag_list.each do |tag| %>
-        <% links = Tags.get_links(tag) %>
-        <% links.each do |link| %>
-          <li><%= link_to link[1], '/' + link[0] %></li>
-        <% end %>
-      <% end %>
-    </ul>
     
 
   </div><!-- check_answer -->
