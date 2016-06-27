@@ -17,6 +17,7 @@ class CardsController < ApplicationController
 
   def create
     @card = current_user.cards.create(card_params)
+    @card.tag_list.add(card_params[:tag_list])
     respond_to do |format|
       format.html {}
       format.js {}
@@ -41,7 +42,7 @@ class CardsController < ApplicationController
 
   def card_params
     params.require(:card).permit(:id, :user_id, :question, :answer, :topic, :prev_ef, :prev_interval, 
-                        :quality_response, :calculated_interval, :calculated_ef, :repetition_date)
+                        :quality_response, :calculated_interval, :calculated_ef, :repetition_date, :tag_list)
   end
   
 end
