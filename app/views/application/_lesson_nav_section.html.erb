@@ -30,7 +30,7 @@
     <% end %>
   <% end %>
 
-  <!-- hidden forms -->
+  <!-- hidden forms for using with create.js.erb and destroy.js.erb -->
   <%= simple_form_for :progression, url: progression_path, html: {id: 'hidden_delete_progression_form'}, method: :delete, remote: true do |f| %>
     <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id] } %>
     <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify.constantize } %>
