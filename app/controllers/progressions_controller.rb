@@ -14,6 +14,16 @@ class ProgressionsController < ApplicationController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      format.html {}
+      format.js { 
+        progression = current_user.progressions.find_by(progression_params) 
+        progression.destroy
+      }
+    end
+  end
+
   private
 
   def progression_params

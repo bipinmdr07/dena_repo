@@ -1,9 +1,9 @@
-success_sound.play();
+ok_sound.play();
 
-$('#progression_form').hide();
-$('#hidden_progression_form').hide();
+$('#delete_progression_form').hide();
+$('#hidden_delete_progression_form').hide();
 
-$('#hidden_delete_progression_form').show();
+$('#hidden_progression_form').show();
 
 <%
 @lesson_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
