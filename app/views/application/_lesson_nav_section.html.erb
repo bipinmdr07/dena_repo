@@ -1,7 +1,14 @@
 <div class = "lesson_nav_box text-center">
-  <p>
-    Understand the gist? Cool, let's move on.
-  </p>
+
+  <% if @next_lesson > @lesson_length %>
+    <p>
+      Congratulations! You've reached the end of this course.
+    </p>
+  <% else %>
+    <p>
+      Understand the gist? Cool, let's move on.
+    </p>
+  <% end %>
 
   <% if current_user.progressions.where(course_name: controller_name.classify.constantize, lesson_id: params[:id]).count > 0 %>
     <button class="btn btn-success" style="margin: 20px;"> <i class="fa fa-check-circle" aria-hidden="true"></i> Completed!</button>

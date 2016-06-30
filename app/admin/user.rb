@@ -32,8 +32,9 @@ ActiveAdmin.register User do
       f.input :instapost_access
       f.input :github_access
       f.input :javascript_access
+      
     end
-
+    f.actions
   end
 
   actions :all, except: [:destroy]

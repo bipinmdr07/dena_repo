@@ -29,9 +29,9 @@ class HtmlCssLesson < ActiveRecord::Base
 				[13, "CHALLENGE: Host Your Website"]
 			]
 		],
-		["Now it's Your Turn",
+		["Next Steps",
 			[
-				[14, "CHALLENGE: Create a Mock of A Website"]
+				[14, "Congratulations"]
 			]
 		]
 	]
