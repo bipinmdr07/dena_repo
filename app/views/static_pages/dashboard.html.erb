@@ -82,33 +82,7 @@
       </blockquote>
     </div><!-- devise_box -->
 
-    <div class="panel">
-
-      <div class="panel-heading-stats">
-        <h3><i class="fa fa-list" aria-hidden="true"></i> Rankings</h3>        
-      </div>
-
-      <div class="panel-body">
-
-        <% if @lesson_ranking_ids %>
-          <table class="table">
-            <tr>
-              <th>Name</th>
-              <th>Lessons Completed Today</th>
-            </tr>
-            <% @lesson_ranking_ids.each do |id| %>
-              <tr>
-                <td><%= User.find(id).name %></td>
-                <td><%= @all_lesson_rankings.count(id) %></td>
-              </tr>
-            <% end %>
-          </table> 
-        <% else %>
-          <h5>No rankings for today yet!</h5>
-        <% end %>
-
-      </div><!-- panel-heading-stats -->
-    </div><!-- panel -->
+    
 
   </div><!-- col-xs-12 col-md-6 -->
 </div><!-- row -->

@@ -61,7 +61,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'public_activity'
 
 # rankings
-gem 'ranked-model'
+gem 'ranked-model', :git => 'https://github.com/mixonic/ranked-model.git'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

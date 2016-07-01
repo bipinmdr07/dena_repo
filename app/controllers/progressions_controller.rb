@@ -7,9 +7,11 @@ class ProgressionsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js { 
-        progression = current_user.progressions.create(progression_params) 
-        progression.create_activity key: 'progression.create', owner: current_user, 
-        parameters: {lesson_id: params[:progression][:lesson_id], course_name: params[:progression][:course_name]}
+        progression = Progression.create(progression_params) 
+        if progression.valid?
+          progression.create_activity key: 'progression.create', owner: current_user, 
+          parameters: {lesson_id: params[:progression][:lesson_id], course_name: params[:progression][:course_name]}
+        end
       }
     end
   end
@@ -18,7 +20,7 @@ class ProgressionsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js { 
-        progression = current_user.progressions.find_by(progression_params) 
+        progression = Progression.find_by(progression_params) 
         progression.destroy
       }
     end
@@ -27,6 +29,6 @@ class ProgressionsController < ApplicationController
   private
 
   def progression_params
-    params.require(:progression).permit(:user_id, :lesson_id, :course_name)
+    params.require(:progression).permit(:lesson_id, :course_name).merge(user_id: current_user.id) # I don't know why this + 0 works but it prevents a bug with RankedModel
   end
 end
