@@ -16,6 +16,9 @@ class StaticPagesController < ApplicationController
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
+    @all_lesson_rankings = Progression.today.rank(:user_id).pluck(:user_id)
+    @lesson_rankings = @all_lesson_rankings.take(10)
+    @lesson_ranking_ids = @all_lesson_rankings.uniq
   end
 
   def courses
