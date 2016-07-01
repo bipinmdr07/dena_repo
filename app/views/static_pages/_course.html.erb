@@ -1,42 +1,63 @@
-<div class = "col-sm-12 col-md-4 course_box">
-  <%
-  if course_link.empty?
-   link = ''
-  elsif available && !has_access?(course_access)
-   link = ''
-  elsif !available
-   link = ''
-  else
-  link = course_link
-  end %>
+<div class = "col-sm-12 col-md-4">
+  <div class="course_box">
+    <%
+      if course_link.empty?
+       link = ''
+      elsif available && !has_access?(course_access)
+       link = ''
+      elsif !available
+       link = ''
+      else
+      link = course_link
+      end 
 
-  <%= link_to link do %>
-  	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= course %></h3>
+      unless controller_name.empty?
+        lessons = controller_name.classify.constantize::LESSONS
+        course_title = controller_name.classify.constantize::COURSE_TITLE
+        lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
+      end
 
-    <div class="course_description">
-  	 <p><%= course_name %></p>  
-    </div>
+    %>
 
-    <div class="course_status">
-      <% if available && !has_access?(course_access) %>
-        <span class="label label-default">Locked :)</span>
-      <% end %>
-      <% if !available %>
-        <span class="label label-default">Coming Soon</span>
-      <% end %>
-    </div>
+    	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= link_to course, link %></h3>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="progress_bar">
-          <div class="progress">
-            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(controller_name) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(controller_name) %>%; min-width: 4em;">
-              <%= progress(controller_name) %>% completed
+      <div class="course_description">
+    	 
+        <% if controller_name.empty? %>
+          <p><%= course_name %></p>
+        <% else %>
+          <ul class="unindented_ul">
+            <% lessons.each do |chapter| %>
+                <% if link.empty? %>
+                  <li><%= chapter[0] %></li>
+                <% else %>
+                  <%= link_to "<li>#{chapter[0]}</li>".html_safe, link + "/" + chapter[1][0][0].to_s %>
+                <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="course_status">
+        <% if available && !has_access?(course_access) %>
+          <span class="label label-default">Locked :)</span>
+        <% end %>
+        <% if !available %>
+          <span class="label label-default">Coming Soon</span>
+        <% end %>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="progress_bar">
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(controller_name) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(controller_name) %>%; min-width: 4em;">
+                <%= progress(controller_name) %>% completed
+              </div>
             </div>
-          </div>
-        </div><!-- progress_bar -->
-      </div><!-- col-xs-12 -->
-    </div><!-- row -->
-  <% end %>
+          </div><!-- progress_bar -->
+        </div><!-- col-xs-12 -->
+      </div><!-- row -->
 
+  </div>
 </div>

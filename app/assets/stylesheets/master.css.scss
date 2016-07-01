@@ -1,3 +1,8 @@
+.curriculum_title {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
 #hidden_delete_progression_form {
   display: none;
 }
@@ -53,7 +58,31 @@ span.radio.inline {
 }
 
 .course_description {
-  height: 130px;
+  min-height: 220px;
+  a {
+    color: #333;
+  }
+  li {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 5px 20px 20px;
+  }
+  li:hover {
+    background-color: whitesmoke;
+    a {
+      color: #ec6952;
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #e74124;
+    }
+    a:focus {
+      text-decoration: none;
+    }
+  }
 }
 
 .course_status {
@@ -183,7 +212,10 @@ pre {
 }
 
 .course_box {
-	height: 300px;
+	min-height: 300px;
+  padding: 20px;
+  padding-top: 0px;
+  margin-bottom: 10px;
   border: 1px solid whitesmoke;
   background: white;
   a:hover {

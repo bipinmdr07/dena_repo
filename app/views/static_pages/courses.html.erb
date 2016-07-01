@@ -1,88 +1,58 @@
-<div class="row">
-	<div class="col-xs-12 col-md-6">
-		<% if @last_lesson %>
+<% if @last_lesson %>
 
-			<% lesson_name = Tags::LESSONS[@last_lesson.parameters[:course_name].underscore + "s"].keys[@last_lesson.parameters[:lesson_id].to_i - 1][1] %>
-			
-			<div class="panel">
-				<div class="panel-body text-center">
-					<div class="row">
-						<div class="col-xs-12">
-							<h5>Day <%= (DateTime.now.to_date - current_user.created_at.to_date).to_i %></h5>
-							<h3 style="margin-bottom: 40px; text-decoration: underline;">Current Course in Progress</h3>
+  <% lesson_name = Tags::LESSONS[@last_lesson.parameters[:course_name].underscore + "s"].keys[@last_lesson.parameters[:lesson_id].to_i - 1][1] %>
 
-							<div class="row">
-								<div class="col-sm-4 col-xs-12">
-									<div class="lesson_well">
-										<small>Lesson <%= @last_lesson.parameters[:lesson_id] %></small>
-										<h4 style="margin-top: 0px;"><%= @last_lesson.parameters[:course_name].split(/(?=[A-Z])/).join(" ").chomp("Lesson") %></h4>
-									</div>
-								</div>
+  <div class="row">
+		  <div class="col-xs-12">
+		  <div class="panel">
+		    <div class="panel-body text-center">
+		      <div class="row">
+		        <div class="col-xs-12">
+		          <h5>Day <%= (DateTime.now.to_date - current_user.created_at.to_date).to_i %></h5>
+		          <h3 style="margin-bottom: 40px; text-decoration: underline;">Current Course in Progress</h3>
 
-								<div class="col-sm-8 col-xs-12">
-										<h3 style="text-align: left;"><i class="fa fa-code" style="color: #f29a8b;" aria-hidden="true"></i> <%= lesson_name %></h3>
-								</div>
-							</div><!-- row -->
+		          <div class="row">
+		            <div class="col-sm-4 col-xs-12">
+		              <div class="lesson_well">
+		                <small>Lesson <%= @last_lesson.parameters[:lesson_id] %></small>
+		                <h4 style="margin-top: 0px;"><%= @last_lesson.parameters[:course_name].split(/(?=[A-Z])/).join(" ").chomp("Lesson") %></h4>
+		              </div>
+		            </div>
 
-
-							<div class="row">
-					      <div class="col-xs-12">
-					        <div class="progress_bar" style="border-top: none;">
-					          <div class="progress">
-					            <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(@last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(@last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
-					              <%= progress(@last_lesson.parameters[:course_name]) %>% completed
-					            </div>
-					          </div>
-					        </div><!-- progress_bar -->
-					      </div><!-- col-xs-12 -->
-					    </div><!-- row -->
+		            <div class="col-sm-8 col-xs-12">
+		                <h3 style="text-align: left;"><i class="fa fa-code" style="color: #f29a8b;" aria-hidden="true"></i> <%= lesson_name %></h3>
+		            </div>
+		          </div><!-- row -->
 
 
-							<div class="row" style="margin-top:20px;">
-								<div class="col-xs-12">
-									<h3><%= link_to 'Continue Lesson <i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i>'.html_safe, '/' + @last_lesson.parameters[:course_name].underscore + "s/" + @last_lesson.parameters[:lesson_id], class: 'btn btn-danger' %></h3>
-								</div>
-							</div><!-- row -->
-						</div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
-					</div><!-- row -->
+		          <div class="row">
+		            <div class="col-xs-12">
+		              <div class="progress_bar" style="border-top: none;">
+		                <div class="progress">
+		                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(@last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(@last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
+		                    <%= progress(@last_lesson.parameters[:course_name]) %>% completed
+		                  </div>
+		                </div>
+		              </div><!-- progress_bar -->
+		            </div><!-- col-xs-12 -->
+		          </div><!-- row -->
 
-				</div><!-- panel-body -->
-			</div><!-- panel -->
-		<% end %>
 
-		<div class="panel">
-			<div class="panel-heading-stats">
-				<h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Your Stats</h3>				
-			</div>
-			<div class="panel-body">
-				<h5 class="pull-right">View your <%= link_to 'Activity Log', activity_log_path %></h5>
-				
-				<h4><strong>Today</strong></h4>
-				<ul class="unindented_ul">
-					<li><small><i class="fa fa-check" aria-hidden="true"></i> <%= @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day).count %></small> Lessons Completed</li>
-					<li><small><i class="fa fa-pencil" aria-hidden="true"></i> <%= @flashcards.where("created_at >= ?", Time.zone.now.beginning_of_day).count %></small> Flashcards Completed</li>
-				</ul>
-				<h4><strong>This Week</strong></h4>
-				<ul class="unindented_ul">
-					<li><small><i class="fa fa-check" aria-hidden="true"></i> <%= @lessons.where("created_at >= ?", 1.week.ago).count %></small> Lessons Completed</li>
-					<li><small><i class="fa fa-pencil" aria-hidden="true"></i> <%= @flashcards.where("created_at >= ?", 1.week.ago).count %></small> Flashcards Completed</li>
-				</ul>
-				
-			</div><!-- panel-heading-stats -->
-		</div><!-- panel -->
-	</div><!-- col-xs-12 col-md-4 -->
+		          <div class="row" style="margin-top:20px;">
+		            <div class="col-xs-12">
+		              <h3><%= link_to 'Continue Lesson <i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i>'.html_safe, '/' + @last_lesson.parameters[:course_name].underscore + "s/" + @last_lesson.parameters[:lesson_id], class: 'btn btn-danger' %></h3>
+		            </div>
+		          </div><!-- row -->
+		        </div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
+		      </div><!-- row -->
 
-	<div class="col-xs-12 col-md-6">
-		<div class="devise_box">
-			<%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
-			<h3>You have <%= pluralize(@cards.count, 'card') %> to review today - <%= link_to 'Study Flashcards', study_path %></h3>
-			<blockquote>
-				<%= Quote::ARRAY.sample[0] %>
-				<small><%= Quote::ARRAY.sample[1] %></small>
-			</blockquote>
-		</div><!-- devise_box -->
-	</div><!-- col-xs-12 col-md-6 -->
-</div><!-- row -->
+		    </div><!-- panel-body -->
+		  </div><!-- panel -->
+		</div><!-- col-xs-12 -->
+	</div><!-- row -->
+<% end %>
+
+<h2 class="curriculum_title">Main Curriculum</h2>
 
 <div class = "row">
 
@@ -92,6 +62,10 @@
 	<!-- , lessons: HTMLCSS::LESSONS -->
 	<%= render partial: 'course', locals: {course: 'Ruby Fundamentals', course_name: 'Ruby is a beautiful programming language that makes programming so much easier for beginners. Master the fundamentals of programming while learning Ruby.', available: true, course_link: ruby_path, course_access: 'ruby_fundamentals', controller_name: 'RubyLesson'} %>
 
+</div>
+
+<div class = "row">
+
 	<%= render partial: 'course', locals: {course: 'Ideator - An idea sharing app', course_name: 'Create your first Ruby on Rails application. You\'ll be building an idea sharing/discovery app where anyone can post their ideas and share them with the world.', available: true, course_link: ideator_path, course_access: 'ideator', controller_name: 'IdeatorLesson'} %>
 	<!-- , lessons: RubyOnRails::LESSONS -->
 
@@ -99,9 +73,18 @@
 
 	<%= render partial: 'course', locals: {course: 'Instapost - Share your photos', course_name: 'Create a clone of the popular Instagram application. You are going to be creating a more complex app than before! Get excited!', available: true, course_link: instapost_path, course_access: 'instapost', controller_name: 'InstapostLesson' } %>
 
+</div>
+
+<div class = "row">
+
+	<%= render partial: 'course', locals: {course: 'RSpec', course_name: 'If you want to become a valuable software developer, you need to learn how to test your applications.', available: false, course_link: '', course_access: 'rspec_blog', controller_name: 'RspecBlogLesson' } %>
+
 	<%= render partial: 'course', locals: {course: 'JavaScript/jQuery', course_name: 'Manipulate the DOM by using JavaScript. Learn the basics of JavaScript and jQuery.', available: true, course_link: javascript_path, course_access: 'javascript', controller_name: 'JavascriptLesson'} %>
 
 	<%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
 
+</div>
+
+<div class = "row">
 	<%= render partial: 'course', locals: {course: 'Algorithms', course_name: 'Learning how to solve algorithms challenges will help you think logically and solve difficult problems in programming.', available: false, controller_name: '', course_link: '' } %>
 </div>
