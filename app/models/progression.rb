@@ -9,7 +9,7 @@ class Progression < ActiveRecord::Base
   def delete_tag_activity
     activity = PublicActivity::Activity.where('trackable_type = ? AND trackable_id = ?',  
                                             'Progression',self.id).first
-    activity.destroy
+    activity.destroy if activity
   end
   
 end
