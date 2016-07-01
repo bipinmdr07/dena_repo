@@ -109,7 +109,7 @@ class Tags < ActiveRecord::Base
     },
     "javascript_lessons" => {
       [1, "Learning the Basics"] => %w(),
-      [2, "jQuery"] => %w()
+      [2, "Using jQuery"] => %w()
     },
     "github_lessons" => {
       [1, "Git Real"] => %w(),

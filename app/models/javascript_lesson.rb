@@ -6,8 +6,13 @@ class JavascriptLesson < ActiveRecord::Base
   LESSONS = [
     ["Basic JavaScript", 
       [
-        [1, "Learning the Basics"],
-        [2, "jQuery"]
+        [1, "Learning the Basics"]
+        
+      ]
+    ],
+    ["Basic jQuery",
+      [
+        [2, "Using jQuery"]
       ]
     ]
   ]
