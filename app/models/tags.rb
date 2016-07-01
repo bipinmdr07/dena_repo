@@ -21,7 +21,9 @@ class Tags < ActiveRecord::Base
       [2, "What do web developers do?"] => %w(),
       [3, "What language should I learn?"] => %w(),
       [4, "Overview of languages and tools"] => %w(ruby html javascript git github),
-      [5, "Guidelines to maximize your learning experience"] => %w()
+      [5, "Why use the TECHRISE Flashcard System?"] => %w(),
+      [6, "How to Embed Code with TECHRISE Flashcards"] => %w(),
+      [7, "Guidelines to maximize your learning experience"] => %w()
     },
     "html_css_lessons" => {
       [1, "After this, there is no turning back"] => %w(),

@@ -1,7 +1,7 @@
 class IntroLesson < ActiveRecord::Base
 	COURSE_TITLE = "Intro to Web Development"
 
-	LESSON_LENGTH = 5
+	LESSON_LENGTH = 7
 
 	LESSONS = [
 		["What is Web Development?", 
@@ -14,7 +14,9 @@ class IntroLesson < ActiveRecord::Base
 		],
 		["Maximize your learning",
 			[
-				[5, "Guidelines to maximize your learning experience"]
+				[5, "Why use the TECHRISE Flashcard System?"],
+				[6, "How to Embed Code with TECHRISE Flashcards"],
+				[7, "Guidelines to maximize your learning experience"]
 			]
 		]
 	]
