@@ -59,6 +59,10 @@ gem 'friendly_id', '~> 5.1.0'
 
 # activity log
 gem 'public_activity'
+
+# rankings
+gem 'ranked-model'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
