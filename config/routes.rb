@@ -60,6 +60,9 @@ Rails.application.routes.draw do
   get 'javascript_lessons', :to => 'javascript_lessons#index', :as => 'javascript'
   get 'javascript_lessons/:id', :to => 'javascript_lessons#show', :as => 'javascript_lessons'
 
+  get 'rspec_blog_lessons', :to => 'rspec_blog_lessons#index', :as => 'rspec_blog'
+  get 'rspec_blog_lessons/:id', :to => 'rspec_blog_lessons#show', :as => 'rspec_blog_lessons'
+
   get 'algorithm_lessons', :to => 'algorithm_lessons#index', :as => 'algorithm'
   get 'algorithm_lessons/:id', :to => 'algorithm_lessons#show', :as => 'algorithm_lessons'
 
