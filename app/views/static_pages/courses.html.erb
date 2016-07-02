@@ -67,24 +67,28 @@
 <div class = "row">
 
 	<%= render partial: 'course', locals: {course: 'Ideator - An idea sharing app', course_name: 'Create your first Ruby on Rails application. You\'ll be building an idea sharing/discovery app where anyone can post their ideas and share them with the world.', available: true, course_link: ideator_path, course_access: 'ideator', controller_name: 'IdeatorLesson'} %>
-	<!-- , lessons: RubyOnRails::LESSONS -->
+
+	<%= render partial: 'course', locals: {course: 'MVC and REST', course_name: '', available: false, course_link: mvc_path, course_access: 'mvc', controller_name: 'MvcLesson'} %>
+
 
 	<%= render partial: 'course', locals: {course: 'Ruby Core Training', course_name: 'Strengthen your Ruby skills by going through various coding challenges. Sharpen your thinking skills and become a more proficient web developer.', available: true, course_link: ruby_core_path, course_access: 'ruby_core', controller_name: 'RubyCoreLesson'} %>
 
-	<%= render partial: 'course', locals: {course: 'Instapost - Share your photos', course_name: 'Create a clone of the popular Instagram application. You are going to be creating a more complex app than before! Get excited!', available: true, course_link: instapost_path, course_access: 'instapost', controller_name: 'InstapostLesson' } %>
 
 </div>
 
 <div class = "row">
+
+	<%= render partial: 'course', locals: {course: 'Instapost - Share your photos', course_name: 'Create a clone of the popular Instagram application. You are going to be creating a more complex app than before! Get excited!', available: true, course_link: instapost_path, course_access: 'instapost', controller_name: 'InstapostLesson' } %>
 
 	<%= render partial: 'course', locals: {course: 'RSpec and Testing', course_name: 'If you want to become a valuable software developer, you need to learn how to test your applications.', available: false, course_link: '', course_access: 'rspec_blog', controller_name: 'RspecBlogLesson' } %>
 
 	<%= render partial: 'course', locals: {course: 'JavaScript/jQuery', course_name: 'Manipulate the DOM by using JavaScript. Learn the basics of JavaScript and jQuery.', available: true, course_link: javascript_path, course_access: 'javascript', controller_name: 'JavascriptLesson'} %>
 
-	<%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
 
 </div>
 
 <div class = "row">
+	<%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
+
 	<%= render partial: 'course', locals: {course: 'Algorithms', course_name: 'Learning how to solve algorithms challenges will help you think logically and solve difficult problems in programming.', available: false, controller_name: 'AlgorithmLesson', course_link: 'algorithm_path', course_access: 'algorithm' } %>
 </div>

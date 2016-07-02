@@ -25,9 +25,5 @@ class IntroLesson < ActiveRecord::Base
 		]
 	]
 
-	LESSONS_HASH = {
-		"Congratulations" => '',
-		"What do web developers do?" => 'test'
-	}
 
 end

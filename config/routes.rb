@@ -63,6 +63,9 @@ Rails.application.routes.draw do
   get 'algorithm_lessons', :to => 'algorithm_lessons#index', :as => 'algorithm'
   get 'algorithm_lessons/:id', :to => 'algorithm_lessons#show', :as => 'algorithm_lessons'
 
+  get 'mvc_lessons', :to => 'mvc_lessons#index', :as => 'mvc'
+  get 'mvc_lessons/:id', :to => 'mvc_lessons#show', :as => 'mvc_lessons'
+
   get 'dashboard',   :to => 'static_pages#dashboard'
   get 'courses',   :to => 'static_pages#courses'
   get 'activity_log',   :to => 'static_pages#activity_log'

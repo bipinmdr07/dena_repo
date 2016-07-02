@@ -36,7 +36,11 @@ class RspecBlogLesson < ActiveRecord::Base
     ],
     ["TDD - Test Driven Development",
       [
-        [15, "Why TDD?"],
+        [15, "Why TDD?"]
+      ]
+    ],
+    ["Writing Tests",
+      [
         [16, "Testing the index action"],
         [17, "Creating New Posts"],
         [18, "Individual Post Pages"],
