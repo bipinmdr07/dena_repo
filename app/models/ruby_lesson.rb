@@ -8,7 +8,7 @@ class RubyLesson < ActiveRecord::Base
   PERIOD = "1"
 
   LESSONS = [
-    ["Ruby Fundamentals", 
+    ["Learning the Basics of Ruby", 
       [
         [1, "Introduction to Ruby"],
         [2, "Ruby Fundamentals"],
