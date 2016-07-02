@@ -1,8 +1,28 @@
 <h1><%= title_for(InstapostLesson, 4, 2) %></h1>
 
+<h3>
+  This is a completely optional lesson! Only attempt this lesson if you fit in the following:
+</h3>
+
+<ul>
+  <li>You have a credit card that you can use</li>
+  <li>You are curious to integrate with AWS</li>
+</ul>
+
 <p>
-  This is a completely optional lesson. Instead of saving the uploaded photos locally, we can integrate it with the AWS S3 service and automatically upload the photos to the cloud.
+  Instead of saving the uploaded photos locally, we can integrate it with AWS S3 (Simple Storage Service) and automatically upload the photos to the cloud.
 </p>
+
+<div class="well">
+  <h3>Why do we want to do this?</h3>
+  <p>
+    By saving the uploaded photos on the cloud instead of locally, we can save disk space on our web application. This will allow us to scale the application for more people to use, so it's good practice.
+  </p>
+
+  <p>
+    Read <%= link_to 'this article', 'http://www.ezs3.com/public/92.cfm' %> for more information.
+  </p>
+</div>
 
 <p class="alert alert-danger">
   You need a credit card for this step. If you don't have a credit card, feel free to skip this step and move on. 
