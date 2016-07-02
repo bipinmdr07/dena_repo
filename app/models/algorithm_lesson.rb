@@ -1,21 +1,21 @@
-class RspecBlogLesson < ActiveRecord::Base
+class AlgorithmLesson < ActiveRecord::Base
 
-  COURSE_TITLE = "Testing Rails Applications with RSpec"
+  COURSE_TITLE = "Understanding Data Structures and Algorithms"
 
-  LESSON_LENGTH = 20
+  LESSON_LENGTH = 2
 
   DURATION = 30
 
-  PERIOD = "5 ~ 6"
+  PERIOD = "8 ~ 10"
 
   LESSONS = [
-    ["Introduction to RSpec", 
+    ["Introduction to Data Structures and Algorithms", 
       [
         [1, "Why test?"],
         [2, "What is RSpec?"]
       ]
     ],
-    ["Setting up Your App", 
+    ["Arrays and Linked Lists", 
       [
         [3, "Setting up your Web Dev Environment"],
         [4, "Setting Up Git"],
@@ -26,7 +26,7 @@ class RspecBlogLesson < ActiveRecord::Base
         [10, "Self Directed Lesson - Adding a Navbar"]
       ]
     ],
-    ["Setting up Posts",
+    ["Stacks and Queues",
       [ 
         [11, "Creating the Posts Controller and Model"],
         [12, "Setting Up Validations"],
@@ -34,7 +34,15 @@ class RspecBlogLesson < ActiveRecord::Base
         [14, "Setting up CRUD Actions"]
       ]
     ],
-    ["TDD - Test Driven Development",
+    ["Hashes",
+      [ 
+        [11, "Creating the Posts Controller and Model"],
+        [12, "Setting Up Validations"],
+        [13, "Setting Up Routes"],
+        [14, "Setting up CRUD Actions"]
+      ]
+    ],
+    ["Trees",
       [
         [15, "Why TDD?"],
         [16, "Testing the index action"],
@@ -45,5 +53,4 @@ class RspecBlogLesson < ActiveRecord::Base
       ]
     ]
   ]
-
 end
