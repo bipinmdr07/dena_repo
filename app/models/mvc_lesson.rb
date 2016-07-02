@@ -4,7 +4,7 @@ class MvcLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 7
 
-  DURATION = 1
+  DURATION = 5
 
   PERIOD = "3 ~ 4"
 
