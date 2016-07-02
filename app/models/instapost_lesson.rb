@@ -3,6 +3,10 @@ class InstapostLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 33
 
+  DURATION = 30
+
+  PERIOD = "4 ~ 5"
+
   LESSONS = [
     ["Setting Up Your App", 
       [

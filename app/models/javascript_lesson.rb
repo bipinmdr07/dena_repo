@@ -3,6 +3,10 @@ class JavascriptLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 2
 
+  DURATION = 10
+
+  PERIOD = "7"
+
   LESSONS = [
     ["Basic JavaScript", 
       [

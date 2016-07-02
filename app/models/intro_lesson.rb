@@ -3,6 +3,10 @@ class IntroLesson < ActiveRecord::Base
 
 	LESSON_LENGTH = 7
 
+	DURATION = 1
+
+	PERIOD = "PREWORK"
+
 	LESSONS = [
 		["What is Web Development?", 
 			[

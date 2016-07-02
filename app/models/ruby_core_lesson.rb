@@ -3,6 +3,10 @@ class RubyCoreLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 2
 
+  DURATION = 15
+
+  PERIOD = "3 ~ 4"
+
   LESSONS = [
     ["Ruby Core Training", 
       [

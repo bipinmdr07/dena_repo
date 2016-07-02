@@ -3,6 +3,10 @@ class GithubLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 4
 
+  DURATION = 8
+
+  PERIOD = "7"
+
   LESSONS = [
     ["Basic Git", 
       [

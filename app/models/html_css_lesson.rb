@@ -3,6 +3,10 @@ class HtmlCssLesson < ActiveRecord::Base
 
 	LESSON_LENGTH = 14
 
+	DURATION = 15
+
+	PERIOD = "PREWORK"
+
 	LESSONS = [
 		["Introduction to HTML/CSS", 
 			[

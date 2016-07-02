@@ -39,12 +39,22 @@
       </div>
 
       <div class="course_status">
+        <% unless controller_name.empty? %>
+          <span class="label label-default"><%= pluralize controller_name.classify.constantize::DURATION, "hour" %></span>
+        <% end %>
+
+        <% unless controller_name.empty? %>
+          <% period = controller_name.classify.constantize::PERIOD %>
+          <span class="label label-default"><%= "Week " if period != "PREWORK" %><%= period %></span>
+        <% end %>
+        
         <% if available && !has_access?(course_access) %>
           <span class="label label-default">Locked :)</span>
         <% end %>
         <% if !available %>
           <span class="label label-default">Coming Soon</span>
         <% end %>
+        
       </div>
 
       <div class="row">

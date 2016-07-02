@@ -3,6 +3,10 @@ class RubyLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 3
 
+  DURATION = 15
+
+  PERIOD = "1"
+
   LESSONS = [
     ["Ruby Fundamentals", 
       [

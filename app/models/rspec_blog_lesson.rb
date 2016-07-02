@@ -4,6 +4,10 @@ class RspecBlogLesson < ActiveRecord::Base
 
   LESSON_LENGTH = 2
 
+  DURATION = 30
+
+  PERIOD = "5 ~ 6"
+
   LESSONS = [
     ["Introduction to RSpec", 
       [

@@ -3,6 +3,10 @@ class IdeatorLesson < ActiveRecord::Base
 
 	LESSON_LENGTH = 22
 
+	DURATION = 25
+
+	PERIOD = "2 ~ 3"
+
 	LESSONS = [
 		["Setting Up Your App", 
 			[
