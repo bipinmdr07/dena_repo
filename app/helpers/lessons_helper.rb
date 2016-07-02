@@ -4,6 +4,8 @@ module LessonsHelper
   end
 
   def standard_git_workflow
-    content_tag(:p, 'Make sure to go through the standard git workflow.')
+    content_tag(:p, 
+      '<i class="fa fa-github" aria-hidden="true"></i> Make sure to go through the <a href="#" data-toggle="modal" data-target="#git_workflow">standard git workflow</a>.'.html_safe, 
+      class: 'standard_git_workflow')
   end
 end
