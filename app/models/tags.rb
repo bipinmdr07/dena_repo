@@ -46,6 +46,9 @@ class Tags < ActiveRecord::Base
       [2, "Ruby Fundamentals"] => %w(ruby),
       [3, "Foobar Problem"] => %w(foobar)
     },
+    "command_line_lessons" => {
+      [1, "Learn the Command Line"] => %w(ruby)
+    },
     "ruby_core_lessons" => {
       [1, "Practice, Practice, Practice"] => %w(ruby),
       [2, "Codewars"] => %w(ruby)

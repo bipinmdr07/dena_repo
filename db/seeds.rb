@@ -14,7 +14,11 @@ Forum.create([
   {name: 'RubyCoreLessons'}, 
   {name: 'InstapostLessons'},
   {name: 'GithubLessons'},
-  {name: 'JavascriptLessons'}
+  {name: 'JavascriptLessons'},
+  {name: 'MvcLessons'},
+  {name: 'AlgorithmLessons'},
+  {name: 'RspecBlogLessons'},
+  {name: 'CommandLineLessons'}
 ])
 
 Submission.create([
@@ -24,7 +28,11 @@ Submission.create([
   {name: 'RubyLessons'}, 
   {name: 'RubyCoreLessons'}, 
   {name: 'GithubLessons'},
-  {name: 'JavascriptLessons'}
+  {name: 'JavascriptLessons'},
+  {name: 'MvcLessons'},
+  {name: 'AlgorithmLessons'},
+  {name: 'RspecBlogLessons'},
+  {name: 'CommandLineLessons'}
 ])
 
 AdminUser.create([

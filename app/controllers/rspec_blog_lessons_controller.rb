@@ -1,2 +1,2 @@
-class RspecBlogLessonsController < ApplicationController
+class RspecBlogLessonsController < LessonsController
 end

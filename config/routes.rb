@@ -63,6 +63,9 @@ Rails.application.routes.draw do
   get 'algorithm_lessons', :to => 'algorithm_lessons#index', :as => 'algorithm'
   get 'algorithm_lessons/:id', :to => 'algorithm_lessons#show', :as => 'algorithm_lessons'
 
+  get 'command_line_lessons', :to => 'command_line_lessons#index', :as => 'command_line'
+  get 'command_line_lessons/:id', :to => 'command_line_lessons#show', :as => 'command_line_lessons'
+
   get 'mvc_lessons', :to => 'mvc_lessons#index', :as => 'mvc'
   get 'mvc_lessons/:id', :to => 'mvc_lessons#show', :as => 'mvc_lessons'
 

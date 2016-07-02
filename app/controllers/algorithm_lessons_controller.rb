@@ -1,2 +1,2 @@
-class AlgorithmLessonsController < ApplicationController
+class AlgorithmLessonsController < LessonsController
 end

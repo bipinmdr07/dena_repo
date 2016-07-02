@@ -1,2 +1,2 @@
-class MvcLessonsController < ApplicationController
+class MvcLessonsController < LessonsController
 end
