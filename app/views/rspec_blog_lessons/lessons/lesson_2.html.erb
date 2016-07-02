@@ -1,0 +1,34 @@
+<h1><%= title_for(RspecBlogLesson, 1, 2) %></h1>
+
+<p>
+   In the last lesson, you learned what testing is, why we need to test, and what it means to write a test.
+</p>
+
+<p>
+  You also saw some actual tests written in ruby-ish code:
+</p>
+
+<pre><code class="ruby">
+@cat = Cat.create(name: "Fish")
+expect(@cat.name).to eq("Fish") # this test will pass
+</code></pre>
+
+<pre><code class="ruby">
+@cat = Cat.create(name: "Fish")
+expect(@cat.name).to eq("Dog") # this test will fail
+</code></pre>
+
+
+<p>
+  The <code>expect(@cat.name).to eq("Fish")</code> and <code>expect(@cat.name).to eq("Dog")</code> portion is written in RSpec. Notice how it's very similar to Ruby, but also similar to English at the same time. <strong>It's straightforward and very easy to read:</strong> expect the cat's name to equal Dog.
+</p>
+
+<p>
+  RSpec is a testing framework that allows us to write tests in a very human-readable way, and is the most popular testing framework among Ruby on Rails developers.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  We will be building out a simple blog application while learning how to test Rails applications using RSpec. Get ready!
+</p>

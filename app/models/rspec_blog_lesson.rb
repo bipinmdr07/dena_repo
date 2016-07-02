@@ -17,10 +17,10 @@ class RspecBlogLesson < ActiveRecord::Base
     ],
     ["Setting up Your App", 
       [
-        [3, "Setting up your Web Dev Environment"],
-        [4, "Setting Up Git"],
-        [5, "Self-Navigated Lesson: Installing Bootstrap"],
-        [6, "Self-Navigated Lesson: Installing Simple Form"],
+        [3, "Self-Directed Lesson: Setting up your Web Dev Environment"],
+        [4, "Self-Directed Lesson: Setting Up Git"],
+        [5, "Self-Directed Lesson: Installing Bootstrap"],
+        [6, "Self-Directed Lesson: Installing Simple Form"],
         [8, "Installing RSpec"],
         [9, "Installing Factory Girl"],
         [10, "Self Directed Lesson - Adding a Navbar"]
