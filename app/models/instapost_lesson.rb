@@ -29,7 +29,7 @@ class InstapostLesson < ActiveRecord::Base
     ["Setting Up Photo Uploading",
       [
         [7, "Installing Carrierwave"],
-        [8, "Integrating Amazon S3 with Carrierwave"],
+        [8, "(Optional) Integrating Amazon S3 with Carrierwave"],
       ]
     ],
     ["Setting up Posts",
