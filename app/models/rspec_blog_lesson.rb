@@ -2,7 +2,7 @@ class RspecBlogLesson < ActiveRecord::Base
 
   COURSE_TITLE = "Testing Rails Applications with RSpec"
 
-  LESSON_LENGTH = 20
+  LESSON_LENGTH = 18
 
   DURATION = 30
 
@@ -21,31 +21,30 @@ class RspecBlogLesson < ActiveRecord::Base
         [4, "Self-Directed Lesson: Setting Up Git"],
         [5, "Self-Directed Lesson: Installing Bootstrap"],
         [6, "Self-Directed Lesson: Installing Simple Form"],
-        [8, "Installing RSpec"],
-        [9, "Installing Factory Girl"],
-        [10, "Self Directed Lesson - Adding a Navbar"]
+        [7, "Self Directed Lesson - Adding a Navbar"],
+        [8, "Installing RSpec"]
       ]
     ],
     ["Setting up Posts",
       [ 
-        [11, "Creating the Posts Controller and Model"],
-        [12, "Setting Up Validations"],
-        [13, "Setting Up Routes"],
-        [14, "Setting up CRUD Actions"]
+        [9, "Creating the Posts Controller and Model"],
+        [10, "Setting Up Routes"],
+        [11, "Setting up CRUD Actions"]
       ]
     ],
     ["TDD - Test Driven Development",
       [
-        [15, "Why TDD?"]
+        [12, "Why TDD?"]
       ]
     ],
-    ["Writing Tests",
+    ["Testing our Rails Application",
       [
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [13, "Testing the index action"],
+        [14, "Creating New Posts"],
+        [15, "Setting Up Validations"],
+        [16, "Showing Posts"],
+        [17, "Editing Posts"],
+        [18, "Deleting Posts"]
       ]
     ]
   ]
