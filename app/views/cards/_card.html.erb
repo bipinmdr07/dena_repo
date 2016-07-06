@@ -74,7 +74,6 @@
       <div style="margin: 30px auto 30px;display: table;">
         <%= simple_form_for card, url: update_interval_path(card.id), method: :put, remote: true do |f| %>
           <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
-          <%= f.submit 'Submit', class: 'btn btn-primary', style: 'margin: 0 auto; display: block;' %>
         <% end %>
       </div>
     </div><!-- check_answer -->
@@ -84,6 +83,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
+  $('input[type=radio]').on('change', function() {
+      $(this).closest("form").submit();
+  });
+
   <% unless @cards.empty? %>
     var editor = ace.edit("editor");
     editor.setOptions({

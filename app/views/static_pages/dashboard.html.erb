@@ -1,3 +1,40 @@
+<% if current_user.admin %>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading">
+              <h3><%= @questions.count %> Unanswered Questions</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @questions.each do |question| %>
+                  <li><%= link_to question.title, forum_comment_path(question.forum_id, question.id) %> by <%= User.find(question.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading">
+              <h3><%= pluralize @submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @submissions.each do |submission| %>
+                  <li><%= link_to submission.title, forum_comment_path(submission.forum_id, submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+      </div>
+      
+<% end %>
+
+
 <div class="row">
   <div class="col-xs-12 col-md-6">
     <% if @last_lesson %>
