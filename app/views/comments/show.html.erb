@@ -6,6 +6,13 @@
 		<%= sanitize raw(@comment.description) %>
 		<p class = "pull-right" ><small>by <%= comment_owner(@comment) %></small></p>
 		<br class = "clear">
+
+		<% if current_user.admin || @comment.user_id == current_user %>
+			<div id="comment_solved_form_container">
+				<%= render partial: 'comment_solved_form' %>
+			</div>
+		<% end %>
+
 		<hr>
 
 		<% @comment.replies.each do |reply| %>

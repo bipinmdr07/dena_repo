@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   post 'submission_approvals/:id(.:format)', to: 'submission_approvals#create', as: 'submission_approvals'
 
+  put 'comment_statuses/:id(.:format)', to: 'comment_statuses#create', as: 'comment_statuses'
+
   get 'study', to: 'study#index', as: 'study'
 
   # get 'admin_dashboard', :to => 'admin_dashboard#index', :as => 'dashboard'
