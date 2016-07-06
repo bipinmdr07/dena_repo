@@ -1,0 +1,9 @@
+<%= simple_form_for :submission_comment, url: submission_approvals_path(params[:id]), remote: true do |f| %>
+  <% if @submission_comment.approved %>
+    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
+    <i class="fa fa-check-circle" aria-hidden="true"></i> Approved
+    <% end %>
+  <% else %>
+    <%= f.submit "Pending", class: 'btn' %>
+  <% end %>
+<% end %>

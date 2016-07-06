@@ -1,16 +1,26 @@
 <div class="col-md-offset-1 col-md-10 col-xs-12">
-
+	<div class="devise_box forum_container">
 		<%= back_to_lesson %>
 
 		<h3><%= @submission_comment.title %></h3>
 		<%= sanitize raw(@submission_comment.description) %>
-		<p class = "pull-right" >by <%= submission_comment_owner(@submission_comment) %></p>
+		<p class = "pull-right" ><small>by <%= submission_comment_owner(@submission_comment) %></small></p>
+
+		
+
 		<br class = "clear">
+
+		<% if current_user.admin %>
+			<div id="approval_form_container">
+				<%= render partial: 'approval_form' %>
+			</div>
+		<% end %>
+
 		<hr>
 
 		<% @submission_comment.submission_replies.each do |reply| %>
 			<%= sanitize raw(reply.content) %>
-			<p class = "pull-right" >by <%= submission_reply_owner(reply) %></p>
+			<p class = "pull-right" ><small>by <%= submission_reply_owner(reply) %></small></p>
 			<br class = "clear">
 			<hr>
 		<% end %>
@@ -26,5 +36,5 @@
 			<br>
 			<%= f.submit 'Submit', class: 'btn btn-primary' %>
 		<% end %>
-
+	</div>
 </div>
