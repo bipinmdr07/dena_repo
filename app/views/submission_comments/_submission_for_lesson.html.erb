@@ -13,7 +13,7 @@
 	<br>
 
 		<% submission.submission_comments.where(lesson: lesson).order("created_at DESC").each do |comment| %>
-			<h4><%= link_to comment.title, submission_submission_comment_path(comment.submission_id, comment.id) %> <span class = "comment_list">by <%= submission_comment_owner(comment) %></span></h4>
+			<h4><%= link_to comment.title, submission_submission_comment_path(comment.submission_id, comment.id) %> <span class = "comment_list">by <%= submission_comment_owner(comment) %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if comment.approved %></h4>
 		<% end %>
 
 

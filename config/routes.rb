@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   
   put 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 
+  post 'submission_approvals/:id(.:format)', to: 'submission_approvals#create', as: 'submission_approvals'
+
   get 'study', to: 'study#index', as: 'study'
 
   # get 'admin_dashboard', :to => 'admin_dashboard#index', :as => 'dashboard'
