@@ -1,0 +1,42 @@
+<h1><%= title_for(RspecBlogLesson, 2, 6) %></h1>
+
+<p>
+  We're getting ready to learn how to start testing our applications!
+</p>
+
+<p>
+  Let's begin by installing RSpec, the testing framework we will be using for testing our applications.
+</p>
+
+<p>
+  First, let's visit the documentation link <%= link_to 'here', 'https://github.com/rspec/rspec-rails' %>. We can see that installation is pretty straightforward.
+</p>
+
+<p>
+  In your gemfile, add the following:
+</p>
+
+<pre><code class="ruby">
+group :development, :test do
+  gem 'rspec-rails', '~> 3.4'
+end
+</code></pre>
+
+<p>
+  Then in your terminal, run <code>bundle install</code>. Next, run the following command in the terminal: 
+</p>
+
+<pre><code class="bash">
+rails generate rspec:install
+</code></pre>
+
+<p>
+  Make sure running this command generates 3 files: <code>.rspec</code>, <code>spec/spec_helper.rb</code>, <code>spec/rails_helper.rb</code>.
+</p>
+
+<p>
+  That's it! We're ready to start writing tests!
+</p>
+
+
+<%= standard_git_workflow %>
