@@ -1,5 +1,17 @@
 module ApplicationHelper
 
+  def display_date(datetime)
+    datetime.strftime("%m/%d/%Y")
+  end
+
+  def display_datetime(datetime)
+    begin
+      datetime.strftime("%m/%d/%Y %l:%M %p")
+    rescue
+      # display nothing
+    end
+  end
+
   def progress(controller_name)
     if controller_name.empty?
       0.0

@@ -16,6 +16,10 @@ ActiveAdmin.register User do
     column :instapost_access
     column :github_access
     column :javascript_access
+    column :command_line_access
+    column :rspec_blog_access
+    column :mvc_access
+    column :mentor
     actions
   end
 
@@ -32,7 +36,10 @@ ActiveAdmin.register User do
       f.input :instapost_access
       f.input :github_access
       f.input :javascript_access
-      
+      f.input :command_line_access
+      f.input :rspec_blog_access
+      f.input :mvc_access
+      f.input :mentor
     end
     f.actions
   end

@@ -1,3 +1,19 @@
+.prof_badge {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.prof_name {
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.back_to_lesson {
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
 .btn-flashcard {
   background: none;
   border: 1px solid #5cb85c;
@@ -154,6 +170,16 @@ span.radio.inline {
 #completed_button {
   display: none;
   margin-bottom: 20px;
+}
+
+.prof_pic_forum {
+  border-radius: 50%;
+  height: 100px;
+  margin: 0 auto;
+  width: 100px;
+  display: block;
+  border: 3px solid #ec6952;
+  margin-top: 25px;
 }
 
 .prof_pic_xs {
