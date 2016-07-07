@@ -29,7 +29,7 @@ class RspecBlogLesson < ActiveRecord::Base
       [ 
         [9, "Self-Directed Lesson: Creating the Posts Controller and Model"],
         [10, "Self-Directed Lesson: Setting Up Routes"],
-        [11, "Setting up CRUD Actions"]
+        [11, "Self-Directed Lesson: Setting up CRUD Actions"]
       ]
     ],
     ["TDD - Test Driven Development",
