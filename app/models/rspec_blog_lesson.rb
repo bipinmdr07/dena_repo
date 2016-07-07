@@ -27,8 +27,8 @@ class RspecBlogLesson < ActiveRecord::Base
     ],
     ["Setting up Posts",
       [ 
-        [9, "Creating the Posts Controller and Model"],
-        [10, "Setting Up Routes"],
+        [9, "Self-Directed Lesson: Creating the Posts Controller and Model"],
+        [10, "Self-Directed Lesson: Setting Up Routes"],
         [11, "Setting up CRUD Actions"]
       ]
     ],
