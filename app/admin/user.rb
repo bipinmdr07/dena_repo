@@ -1,5 +1,7 @@
 ActiveAdmin.register User do
-  permit_params :email, :intro_access, :html_css_access, :ruby_fundamentals_access, :ideator_access, :ruby_core_access, :instapost_access, :github_access, :javascript_access, :admin
+  permit_params :email, :intro_access, :html_css_access, :ruby_fundamentals_access, :ideator_access, 
+  :ruby_core_access, :instapost_access, :github_access, :javascript_access, :admin, :command_line_access,
+  :rspec_blog_access, :mvc_access, :mentor
 
   index do
     column :name
