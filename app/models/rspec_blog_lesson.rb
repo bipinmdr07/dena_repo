@@ -34,7 +34,7 @@ class RspecBlogLesson < ActiveRecord::Base
     ],
     ["TDD - Test Driven Development",
       [
-        [12, "Why TDD?"]
+        [12, "What is TDD?"]
       ]
     ],
     ["Testing our Rails Application",
