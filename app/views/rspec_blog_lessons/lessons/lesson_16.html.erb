@@ -1,0 +1,99 @@
+<h1><%= title_for(RspecBlogLesson, 5, 4) %></h1>
+
+<p>
+  Next, let's write the <code>create</code> action.
+</p>
+
+<p>
+  First, we want to write tests for the <code>create</code> action. In our <code>posts_controller.rb</code>, under the test we wrote for the <code>new</code> action, let's start writing code for our <code>create</code> action.
+</p>
+
+<p>
+  First, we need to describe what we are testing:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+
+end
+</code></pre>
+
+<p>
+  Then we need to write what it should do. For the <code>create</code> action, the first thing it should do is create a new post. Let's add this in:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+  it "creates a new post" do
+
+  end
+end
+</code></pre>
+
+<p>
+  Another thing we should test is that after the post is created, it should redirect the user to the home page. However, it should only do this when the attributes sent in for the post is valid. If the attributes aren't valid, it should render the <code>new</code> page so that the user can fix the invalid field.
+</p>
+
+<h3>Context Blocks in RSpec</h3>
+
+<p>
+  In this case, we have two situations:
+</p>
+
+<ul>
+  <li>Attributes are valid</li>
+  <li>Attributes are invalid</li>
+</ul>
+
+<p>
+  We need to create tests for both of these situations. RSpec provides the <code>context</code> block that helps developers when there are multiple situations.
+</p>
+
+<p>
+  We can write our specs like this:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+  it "creates a new post" do
+
+  end
+
+  context "with valid attributes" do
+    it "redirects to root_path" do
+
+    end
+  end
+
+  context "with invalid attributes" do
+    it "renders the new template" do
+
+    end
+  end
+end
+</code></pre>
+
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe src="https://player.vimeo.com/video/173886491" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+<p>
+  So in short, context blocks allow us to:
+</p>
+
+<ul>
+  <li>Write easier to read tests</li>
+  <li>Write DRYer code</li>
+  <li>Seperate tests by the context</li>
+</ul>
+
+<p>
+  Let's continue with writing our tests.
+</p>
+
+
+
+
+

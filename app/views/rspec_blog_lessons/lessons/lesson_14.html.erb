@@ -1,149 +1,71 @@
 <h1><%= title_for(RspecBlogLesson, 5, 2) %></h1>
 
 <p>
-  In this lesson, let's write and create tests for the <code>new</code> action.
-</p>
-
-<h3>Testing and writing the new action</h3>
-
-<p>
-  First, we are going to test the <code>new</code> action. This is going to be almost the same as the <code>index</code> action, since the <code>new</code> action is also a <code>GET</code> request.
+  Next, let's write tests for the <code>show</code> action. In the <code>show</code> action, we want to show an individual <code>Post</code>.
 </p>
 
 <p>
-  Let's open the <code>posts_controller_spec.rb</code> file. Underneath the test for the <code>index</code> action, let's write our test for the <code>new</code> action.
-</p>
-
-<p>
-  As we did before, we first describe what we are testing (make sure you wrap it with a <code>do</code> and <code>end</code>):
+  Let's start by describing what we are testing:
 </p>
 
 <pre><code class="ruby">
-describe "GET #new" do
+describe "GET #show" do
 
 end
 </code></pre>
 
 <p>
-  Inside it, let's describe what it should do:
+  Then let's write what it should do. In this case, it should render the <code>show</code> template:
 </p>
 
 <pre><code class="ruby">
-describe "GET #new" do
-  it "renders the new template" do
+describe "GET #show" do
+  it "renders the show template" do
 
   end
 end
 </code></pre>
 
 <p>
-  The inside of that block, let's write code to test this out. We first perform a <code>GET</code> request to the <code>new</code> action:
+  Inside of the <code>it</code> block, we need to do the following this:
+</p>
+
+<ol>
+  <li>Create a <code>Post</code></li>
+  <li>Make a <code>GET</code> request to the <code>show</code> action with the <code>id</code> parameter</li>
+  <li>Expect the response to render the <code>show</code> template</li>
+</ol> 
+
+<p>
+  Let's go ahead and create a <code>Post</code>:
 </p>
 
 <pre><code class="ruby">
-describe "GET #new" do
-  it "renders the new template" do
-    get :new
+describe "GET #show" do
+  it "renders the show template" do
+    post = Post.create(title: "Post Title", author: 'Momo Taro', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
   end
 end
 </code></pre>
 
 <p>
-  Then we test if it renders the <code>new</code> template:
+  Even though this works, there are some problems:
 </p>
 
-<pre><code class="ruby">
-describe "GET #new" do
-  it "renders the new template" do
-    get :new
-    expect(response).to render_template :new
-  end
-end
-</code></pre>
+<ul>
+  <li>It's a bit messy and hard to read</li>
+  <li>We need to create <code>Post</code>s like this in many of our tests</li>
+  <ul>
+    <li>This would be hard to maintain</li>
+    <li>It is not DRY</li>
+  </ul>
+</ul>
 
 <p>
-  Let's run this test:
-</p>
-
-<pre><code class="bash">
-bundle exec rspec
-</code></pre>
-
-<p>
-  It should give you a failing test with a missing template error, which means that we need to add a file called <code>new.html.erb</code>. In our <code>app/view/posts</code> file, let's create a file called <code>new.html.erb</code>. 
-</p>
-
-<p>
-  Let's run the test again:
-</p>
-
-<pre><code class="bash">
-bundle exec rspec
-</code></pre>
-
-<P>
-  This time it should pass. Awesome! Let's go into our <code>posts_controller.rb</code> file and write some code.
-</P>
-
-<h3>Writing the Posts Form</h3>
-
-<p>
-  Inside the <code>new</code> method, we want to assign a variable to a new instance of <code>Post</code>. We can do so by adding this line of code:
-</p>
-
-<pre><code class="ruby">
-@post = Post.new
-</code></pre>
-
-<p>
-  Then in our <code>new.html.erb</code>, we can use this instance variable to create a form that will let users create their own <code>Post</code>s.
-</p>
-
-<p>
-  Let's open the <code>new.html.erb</code> file. Let's create a <code>simple_form</code> to create new posts. Inside the file, let's add the following lines of code:
+  Fortunately, there's a gem called Factory Girl that fixes all of these problems.
 </p>  
 
-<pre><code class="erb">
-&lt;h1&gt;New Post&lt;/h1&gt;
-
-&lt;%= simple_form_for @post do |f| %&gt;
-  &lt;%= f.input :title %&gt;
-  &lt;%= f.input :author %&gt;
-  &lt;%= f.input :content %&gt;
-  &lt;%= f.submit %&gt;
-&lt;% end %&gt;
-</code></pre>
-
-<p>
-  Awesome, we now have a form that users can use to create new posts.
-</p>
-
-<%= standard_git_workflow %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h3>Introducing Factory Girl</h3>
 
 
 

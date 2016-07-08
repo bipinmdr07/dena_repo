@@ -40,12 +40,13 @@ class RspecBlogLesson < ActiveRecord::Base
     ["Testing our Rails Application",
       [
         [13, "Testing the index action"],
-        [14, "Testing the new action"],
-        [15, "Testing the create action"],
-        [16, "Setting Up Validations"],
-        [17, "Showing Posts"],
-        [18, "Editing Posts"],
-        [19, "Deleting Posts"]
+        [14, "Testing the show action"],
+        [15, "Testing the new action"],
+        [16, "Testing the create action"],
+        [17, "Setting Up Validations"],
+        [18, "Showing Posts"],
+        [19, "Editing Posts"],
+        [20, "Deleting Posts"]
       ]
     ]
   ]
