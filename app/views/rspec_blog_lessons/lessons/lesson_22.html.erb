@@ -1,0 +1,243 @@
+<h1><%= title_for(RspecBlogLesson, 5, 10) %></h1>
+
+<p>
+  We are on the final controller action to test! Congratulations! Hopefully by now, you are getting used to writing tests with RSpec.
+</p>  
+
+<p>
+  As always, let's start by describing what we want to test:
+</p>
+
+<pre><code class="ruby">
+describe "DELETE #destroy" do
+
+end
+</code></pre>
+
+<p>
+  Then let's think about what we want to test. We want to see that it:
+</p>
+
+<ul>
+  <li>Deletes the post</li>
+  <li>Redirects the user to the <code>root_path</code></li>
+</ul>
+
+<p>
+  Awesome. Let's put this into code:
+</p>
+
+<pre><code class="ruby">
+describe "DELETE #destroy" do
+  it "deletes the post" do
+
+  end
+
+  it "redirects to root_path" do
+
+  end
+end
+</code></pre>
+
+<p>
+  Let's get right in to it. For the first <code>it</code> block, let's think about what we need to do.
+</p>
+
+<p>
+  We want to test that the <code>destroy</code> action deletes a post. We can test this by making sure that making a <code>DELETE</code> request to the <code>destroy</code> action changes the <code>Post</code> count by <code>-1</code>.
+</p> 
+
+<p>
+  In code, this looks like the following:
+</p>
+
+<pre><code class="ruby">
+it "deletes the post" do
+  post = FactoryGirl.create(:post)
+  expect {
+    delete :destroy, id: post.id
+  }.to change(Post, :count).by(-1)
+end
+</code></pre>
+
+<p>
+  Next, let's write code for <code>it "redirects to root_path"</code>. 
+</p>
+
+<p>
+  This is pretty simple. all we need to do is create a <code>delete</code> request and write an expectation that the <code>response</code> will redirect the user to the <code>root_path</code>. Let's add the following lines of code in your tests:
+</p>
+
+<pre><code class="ruby">
+it "redirects to root_path" do
+  post = FactoryGirl.create(:post)
+  delete :destroy, id: post.id
+  expect(response).to redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Your <code>destroy</code> tests should now look like this:
+</p>
+
+<pre><code class="ruby">
+describe "DELETE #destroy" do
+  it "deletes the post" do
+    post = FactoryGirl.create(:post)
+    expect {
+      delete :destroy, id: post.id
+    }.to change(Post, :count).by(-1)
+  end
+
+  it "redirects to root_path" do
+    post = FactoryGirl.create(:post)
+    delete :destroy, id: post.id
+    expect(response).to redirect_to root_path
+  end
+end
+</code></pre>
+
+<p>
+  Notice how we repeat <code>post  = FactoryGirl.create(:post)</code>. In the last lesson, we introduced <code>let</code>. Unfortunately, using <code>let</code> in this case won't work.
+</p>
+
+<div class="well">
+  <h3>Using let</h3>
+
+  <p>
+    When using RSpec, you'll encounter <code>let</code> many times. However, if you don't understand how it works, you might encounter some weird bugs.
+  </p>
+
+  <p>
+    <code>let</code> is <strong>lazy-evaluated.</strong> This means that <code>let</code> is not executed until it is called.
+  </p>
+
+  <p>
+    For example, in our tests above, we could have something like this:
+  </p>
+
+<pre><code class="ruby">
+describe "DELETE #destroy" do
+  let(:post) { FactoryGirl.create(:post) }
+
+  it "deletes the post" do
+    expect {
+      delete :destroy, id: post.id
+    }.to change(Post, :count).by(-1)
+  end
+
+  it "redirects to root_path" do
+    delete :destroy, id: post.id
+    expect(response).to redirect_to root_path
+  end
+end
+</code></pre>
+  
+  <p>
+    However, this will not work. For example, take a look at the following:
+  </p>
+
+<pre><code class="ruby">
+it "deletes the post" do
+  expect {
+    delete :destroy, id: post.id
+  }.to change(Post, :count).by(-1)
+end
+</code></pre>
+
+  <p>
+    Notice how <code>post</code> appears first as a parameter (<code>id: post.id</code>). At this point, <code>post</code> is called and created. Before this point, no <code>Post</code> has been created. Therefore, the <code>Post</code> count before the <code>DELETE</code> request is <code>0</code>. 
+  </p>
+
+  <p>
+    We then delete this post immediately with the <code>DELETE</code> request. Since <code>expect().to change().by()</code> measures it before the code in the <code>expect</code> block runs and after it runs, the <code>Post</code> count actually went from <code>0</code> to <code>0</code>, since before <code>id: post.id</code>, <code>post</code> had not been called, so no <code>Post</code> had been created at all.
+  </p>
+
+<pre><code class="ruby">
+it "deletes the post" do
+  # At this point, Post.count == 0
+  expect {
+    delete :destroy, id: post.id # Here, Post.count becomes 1, but immediately returns to 0 since it is deleted
+  }.to change(Post, :count).by(-1)
+  # This test will fail, since the Post count went from 0 before the expect block to 0 after everything in the expect block ran
+end
+</code></pre>
+
+
+</div>
+
+<h3>Using let!</h3>
+
+<p>
+  Instead of <code>let</code>, we can use <code>let!</code>, which will force it to execute right away. In otherwords, the number of posts will be <code>1</code> before the <code>DELETE</code> request, and the number of posts will be <code>0</code> after it, making the <code>Post</code> count change by <code>-1</code>.
+</p>
+
+<p>
+  Let's refactor our code:
+</p>
+
+<pre><code class="ruby">
+describe "DELETE #destroy" do
+  let!(:post) { FactoryGirl.create(:post) }
+
+  it "deletes the post" do
+    expect {
+      delete :destroy, id: post.id
+    }.to change(Post, :count).by(-1)
+  end
+
+  it "redirects to root_path" do
+    delete :destroy, id: post.id
+    expect(response).to redirect_to root_path
+  end
+end
+</code></pre>
+
+<p>
+  Let's now run our tests:
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  It will give us two failing tests. Let's write our <code>destroy</code> method to make this test pass.
+</p>
+
+<p>
+  What we want to do is pretty simple: delete the post and redirect the user to the <code>root_path</code>.
+</p>
+
+<p>
+  Let's open the <code>posts_controller.rb</code> file and write this in code:
+</p>
+
+<pre><code class="ruby">
+def destroy
+  @post = Post.find(params[:id])
+  @post.destroy
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Let's run the tests again.
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This time, the tests should all pass. Awesome!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+

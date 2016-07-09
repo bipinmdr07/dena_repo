@@ -2,7 +2,7 @@ class RspecBlogLesson < ActiveRecord::Base
 
   COURSE_TITLE = "Testing Rails Applications with RSpec"
 
-  LESSON_LENGTH = 21
+  LESSON_LENGTH = 24
 
   DURATION = 30
 
@@ -49,7 +49,17 @@ class RspecBlogLesson < ActiveRecord::Base
         [20, "Self-Directed Lesson: Testing the edit action"],
         [21, "Testing the update action"],
         [22, "Testing the destroy action"],
-
+        [23, "Model Tests"]
+      ]
+    ],
+    ["Final Touches",
+      [
+        [24, "Self-Directed Lesson: Tidying things up"]
+      ]
+    ],
+    ["Wrapping Up",
+      [
+        [25, "TDD: Final Thoughts"]
       ]
     ]
   ]
