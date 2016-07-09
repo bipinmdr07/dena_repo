@@ -67,6 +67,226 @@ end
 
 <h3>Introducing Factory Girl</h3>
 
+<p>
+  Factory Girl is a tool that allows us to create dummy data in the database easily. You'll see how Factory Girl makes things easier in a second.
+</p>
+
+<p>
+  The documentation for Factory Girl is <%= link_to 'here', 'https://github.com/thoughtbot/factory_girl_rails' %>. Open the documentation and take a second to read through it.
+</p>
+
+<p> 
+  To install the gem, add the following line to your <code>Gemfile</code>:
+</p>
+
+<pre><code class="ruby">
+gem 'factory_girl_rails'
+</code></pre>
+
+<p>
+  Then run <code>bundle install</code>.
+</p>
+
+<p>
+  In the documentation, it says the following:
+</p>
+
+<blockquote>
+  Default factories directory is test/factories, or spec/factories
+</blockquote>
+
+<p>
+  Therefore, we need to make a <code>factories</code> folder in the <code>spec</code> directory. Let's go into our text editor and create this.
+</p>
+
+<p>
+  Inside of our new <code>factories</code> folder, let's create a <code>factories.rb</code> file.
+</p>
+
+<p>
+  Inside of the new <code>factories.rb</code> file, let's insert the following, and we'll explain what we are doing later:
+</p>
+
+<pre><code class="ruby">
+FactoryGirl.define do
+  factory :post do
+    title "Post Title"
+    author  "Momo Taro"
+    content "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  end
+end
+</code></pre>
+
+<p>
+  Then let's replace this:
+</p>
+
+<pre><code class="ruby">
+describe "GET #show" do
+  it "renders the show template" do
+    post = Post.create(title: "Post Title", author: 'Momo Taro', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+  end
+end
+</code></pre>
+
+<p>
+  with this:
+</p>
+
+<pre><code class="ruby">
+describe "GET #show" do
+  it "renders the show template" do
+    post = FactoryGirl.create(:post)
+  end
+end
+</code></pre>
+
+<p>
+  Here
+</p>
+
+<pre><code class="ruby">
+FactoryGirl.create(:post)
+</code></pre>
+
+<p>and</p>
+
+<pre><code class="ruby">
+Post.create(title: "Post Title", author: 'Momo Taro', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+</code></pre>
+
+<p>
+  do the same thing.
+</p>
+
+<p>
+  Let's go through what we just did.
+</p>
+
+<p>
+  What we did was, we defined a <strong>factory</strong>, which is basically a template of the dummy data. In our example, we created a factory called <code>:post</code>. We can create the dummy data by calling <code>FactoryGirl.create(:post)</code>.
+</p>
+
+<p>
+  So instead of writing something like 
+</p>
+
+<pre><code class="ruby">
+Post.create(title: "Post Title", author: 'Momo Taro', content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
+</code></pre>
+
+<p>
+  every time, you can simple define a factory in the <code>factories.rb</code> file and create the dummy data using FactoryGirl.
+</p>
+
+<p>
+  Take a look at some examples of factories <%= link_to 'here', 'https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#defining-factories' %> and <%= link_to 'here', 'https://github.com/thoughtbot/factory_girl/wiki/Example-factories.rb-file' %>.
+</p>
+
+<h3>Continuing with testing the show action</h3>
+
+
+<p>
+  Let's continue with testing our <code>show</code> action.
+</p>
+
+<p>
+  Now that we've created a post, the second step is to create a <code>get</code> request to the <code>show</code> action, passing in the <code>id</code> of the <code>Post</code> we have just created as a parameter. 
+</p>  
+
+<p>
+  In your <code>posts_controller_spec.rb</code>, let's add the following:
+</p>  
+
+<pre><code class="ruby">
+describe "GET #show" do
+  it "renders the show template" do
+    post = FactoryGirl.create(:post)
+    get :show, id: post.id
+  end
+end
+</code></pre>
+
+<p>
+  Next, we need to write an expectation that the <code>response</code> will render the <code>show</code> template.
+</p>
+
+<p>
+  Let's change the code to look like this:
+</p>
+
+
+<pre><code class="ruby">
+describe "GET #show" do
+  it "renders the show template" do
+    post = FactoryGirl.create(:post)
+    get :show, id: post.id
+    expect(response).to render_template :show
+  end
+end
+</code></pre>
+
+<p>
+  Let's now run the tests! In our terminal, let's run the following:
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This should give you an error like this:
+</p>
+
+<pre><code class="bash">
+Failures:
+
+  1) PostsController GET #show renders the show template
+     Failure/Error: get :show, id: post.id
+
+     ActionView::MissingTemplate:
+       Missing template posts/show, application/show with {:locale=>[:en], :formats=>[:html], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}.
+</code></pre>
+
+<p>
+  It's telling us that we are missing the template for the <code>show</code> page, so let's create it.
+</p>
+
+<p>
+  In the <code>app/views/posts</code> folder, let's create a new file called <code>show.html.erb</code>.
+</p>
+
+<p>
+  Let's run the tests again:
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This time, the tests should pass. Awesome!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

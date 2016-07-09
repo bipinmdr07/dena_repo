@@ -1,97 +1,148 @@
 <h1><%= title_for(RspecBlogLesson, 5, 4) %></h1>
 
 <p>
-  Next, let's write the <code>create</code> action.
+  In this lesson, let's write and create tests for the <code>new</code> action.
+</p>
+
+<h3>Testing and writing the new action</h3>
+
+<p>
+  First, we are going to test the <code>new</code> action. This is going to be almost the same as the <code>index</code> action, since the <code>new</code> action is also a <code>GET</code> request.
 </p>
 
 <p>
-  First, we want to write tests for the <code>create</code> action. In our <code>posts_controller.rb</code>, under the test we wrote for the <code>new</code> action, let's start writing code for our <code>create</code> action.
+  Let's open the <code>posts_controller_spec.rb</code> file. Underneath the test for the <code>index</code> action, let's write our test for the <code>new</code> action.
 </p>
 
 <p>
-  First, we need to describe what we are testing:
+  As we did before, we first describe what we are testing (make sure you wrap it with a <code>do</code> and <code>end</code>):
 </p>
 
 <pre><code class="ruby">
-describe "POST #create" do
+describe "GET #new" do
 
 end
 </code></pre>
 
 <p>
-  Then we need to write what it should do. For the <code>create</code> action, the first thing it should do is create a new post. Let's add this in:
+  Inside it, let's describe what it should do:
 </p>
 
 <pre><code class="ruby">
-describe "POST #create" do
-  it "creates a new post" do
+describe "GET #new" do
+  it "renders the new template" do
 
   end
 end
 </code></pre>
 
 <p>
-  Another thing we should test is that after the post is created, it should redirect the user to the home page. However, it should only do this when the attributes sent in for the post is valid. If the attributes aren't valid, it should render the <code>new</code> page so that the user can fix the invalid field.
-</p>
-
-<h3>Context Blocks in RSpec</h3>
-
-<p>
-  In this case, we have two situations:
-</p>
-
-<ul>
-  <li>Attributes are valid</li>
-  <li>Attributes are invalid</li>
-</ul>
-
-<p>
-  We need to create tests for both of these situations. RSpec provides the <code>context</code> block that helps developers when there are multiple situations.
-</p>
-
-<p>
-  We can write our specs like this:
+  The inside of that block, let's write code to test this out. We first perform a <code>GET</code> request to the <code>new</code> action:
 </p>
 
 <pre><code class="ruby">
-describe "POST #create" do
-  it "creates a new post" do
-
-  end
-
-  context "with valid attributes" do
-    it "redirects to root_path" do
-
-    end
-  end
-
-  context "with invalid attributes" do
-    it "renders the new template" do
-
-    end
+describe "GET #new" do
+  it "renders the new template" do
+    get :new
   end
 end
 </code></pre>
 
-
-<!-- 16:9 aspect ratio -->
-<div class="embed-responsive embed-responsive-16by9 embed_video">
-  <iframe src="https://player.vimeo.com/video/173886491" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-</div>
-
 <p>
-  So in short, context blocks allow us to:
+  Then we test if it renders the <code>new</code> template:
 </p>
 
-<ul>
-  <li>Write easier to read tests</li>
-  <li>Write DRYer code</li>
-  <li>Seperate tests by the context</li>
-</ul>
+<pre><code class="ruby">
+describe "GET #new" do
+  it "renders the new template" do
+    get :new
+    expect(response).to render_template :new
+  end
+end
+</code></pre>
 
 <p>
-  Let's continue with writing our tests.
+  Let's run this test:
 </p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  It should give you a failing test with a missing template error, which means that we need to add a file called <code>new.html.erb</code>. In our <code>app/view/posts</code> file, let's create a file called <code>new.html.erb</code>. 
+</p>
+
+<p>
+  Let's run the test again:
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<P>
+  This time it should pass. Awesome! Let's go into our <code>posts_controller.rb</code> file and write some code.
+</P>
+
+<h3>Writing the Posts Form</h3>
+
+<p>
+  Inside the <code>new</code> method, we want to assign a variable to a new instance of <code>Post</code>. We can do so by adding this line of code:
+</p>
+
+<pre><code class="ruby">
+@post = Post.new
+</code></pre>
+
+<p>
+  Then in our <code>new.html.erb</code>, we can use this instance variable to create a form that will let users create their own <code>Post</code>s.
+</p>
+
+<p>
+  Let's open the <code>new.html.erb</code> file. Let's create a <code>simple_form</code> to create new posts. Inside the file, let's add the following lines of code:
+</p>  
+
+<pre><code class="erb">
+&lt;h1&gt;New Post&lt;/h1&gt;
+
+&lt;%= simple_form_for @post do |f| %&gt;
+  &lt;%= f.input :title %&gt;
+  &lt;%= f.input :author %&gt;
+  &lt;%= f.input :content %&gt;
+  &lt;%= f.submit %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Awesome, we now have a form that users can use to create new posts.
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

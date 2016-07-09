@@ -1,0 +1,250 @@
+<h1><%= title_for(RspecBlogLesson, 5, 5) %></h1>
+
+<p>
+  Next, let's write the <code>create</code> action.
+</p>
+
+<p>
+  First, we want to write tests for the <code>create</code> action. In our <code>posts_controller.rb</code>, under the test we wrote for the <code>new</code> action, let's start writing code for our <code>create</code> action.
+</p>
+
+<p>
+  First, we need to describe what we are testing:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+
+end
+</code></pre>
+
+<p>
+  Then we need to write what it should do. For the <code>create</code> action, the first thing it should do is create a new post. Let's add this in:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+  it "creates a new post" do
+
+  end
+end
+</code></pre>
+
+<p>
+  Another thing we should test is that after the post is created, it should redirect the user to the home page. However, it should only do this when the attributes sent in for the post is valid. If the attributes aren't valid, it should render the <code>new</code> page so that the user can fix the invalid field.
+</p>
+
+<h3>Context Blocks in RSpec</h3>
+
+<p>
+  In this case, we have two situations:
+</p>
+
+<ul>
+  <li>Attributes are valid</li>
+  <li>Attributes are invalid</li>
+</ul>
+
+<p>
+  We need to create tests for both of these situations. RSpec provides the <code>context</code> block that helps developers when there are multiple situations.
+</p>
+
+<p>
+  We can write our specs like this:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+  it "creates a new post" do
+
+  end
+
+  context "with valid attributes" do
+    it "redirects to root_path" do
+
+    end
+  end
+
+  context "with invalid attributes" do
+    it "renders the new template" do
+
+    end
+  end
+end
+</code></pre>
+
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe src="https://player.vimeo.com/video/173886491" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+<p>
+  So in short, context blocks allow us to:
+</p>
+
+<ul>
+  <li>Write easier to read tests</li>
+  <li>Write DRYer code</li>
+  <li>Seperate tests by the context</li>
+</ul>
+
+<p>
+  Let's continue with writing our tests.
+</p>
+
+<p>
+  Let's start with the <code>it "creates a new post"</code>.
+</p>
+
+<p>
+  We can test this by writing an expectation that <strong>if a post is created, it will increase the number of <code>Post</code>s by 1.</strong>
+</p>
+
+<p>
+  We can write this like this (we will go over what everything means in a second):
+</p>
+
+<pre><code class="ruby">
+it "creates a new post" do
+  expect {
+    post :create, post: FactoryGirl.attributes_for(:post)
+  }.to change(Post, :count).by(1)
+end
+</code></pre>
+
+<p>
+  Reading this test is pretty simple:  <em>Expect creating a <code>POST</code> request to the <code>create</code> action with the attributes for a <code>:post</code> factory to change the <code>Post</code> count by 1.</em>
+</p>
+
+<p>
+  Let's try to clear up some new terminology we see in this code:
+</p>
+
+<ul>
+  <li><code>FactoryGirl.attributes_for(:post)</code></li>
+  <ul>
+    <li>This returns the attributes for the <code>post</code> factory as a hash</li>
+  </ul>
+  <li>
+    <code>.to change().by()</code>
+  </li>
+  <ul>
+    <li>This tests if an attribute changed by a certain number</li>
+    <li>In our case, <code>.to change(Post, :count).by(1)</code> tests if it changes <code>Post.count</code> by <code>1</code></li>
+  </ul>
+</ul>
+
+<p>
+  Let's run the test:
+</p>
+
+<pre><code class="ruby">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This is going to give you a <code>Missing Template</code> error. Because we want to redirect the user after a post is created, we don't want to create a template for the <code>create</code> action.
+</p>
+
+<p>
+  In your <code>posts_controller.rb</code>, let's change the <code>create</code> method:
+</p>
+
+<pre><code class="ruby">
+def create
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Run the tests again:
+</p>  
+
+<pre><code class="ruby">
+bundle exec rspec
+</code></pre>
+
+
+<p>
+  Now, it should give you an error like this:
+</p>
+
+<pre><code class="bash">
+PostsController POST #create creates a new post
+     Failure/Error:
+       expect {
+         post :create, post: FactoryGirl.attributes_for(:post)
+       }.to change(Post, :count).by(1)
+
+       expected #count to have changed by 1, but was changed by 0
+</code></pre>
+
+<p>
+  Why did the <code>Post</code> count not change at all? This is because we haven't written code that actually creates a <code>Post</code>, so let's go ahead and do that.
+</p>
+
+<pre><code class="ruby">
+def create
+  @post = Post.create(post_params)
+  redirect_to root_path
+end
+
+
+# after all of the methods (edit, update, destroy, etc)
+
+private
+
+def post_params
+  params.require(:post).permit(:title, :author, :content)
+end
+</code></pre>
+
+<p>
+  Save the file and run the tests again:
+</p>
+
+<pre><code class="ruby">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This time, the test should pass. Awesome!
+</p>
+
+<p>
+  <strong>Notice again how we went from failing the test, writing code to make the test pass, and then making sure the test passes. This is how TDD is performed.</strong>
+</p>
+
+<p>
+  Next, let's write our tests for <code>when attributes are valid</code> and <code>when attributes are invalid</code>. You might be wondering, what are <em>valid</em> attributes and what are <em>invalid</em> attributes anyways?
+</p>
+
+<p>
+  In Rails, you can set up various model validations, such as validating that the <code>title</code> of the blog post is always present (if it isn't present, it isn't saved into the database), or making sure that the <code>content</code> field is longer than a certain length.
+</p>
+
+<p>
+  Valid attributes means that all of the model validations pass, and invalid attributes means that at least one of the model validations failed.
+</p>
+
+<p>
+  Let's set up model validations in the next lesson.
+</p>  
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
