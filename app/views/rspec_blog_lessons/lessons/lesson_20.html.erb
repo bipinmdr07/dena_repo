@@ -1,0 +1,21 @@
+<h1><%= title_for(RspecBlogLesson, 5, 8) %></h1>
+
+<p>
+  Since testing the <code>edit</code> action is pretty simple, let's see if you can do this yourselves! If you're confused on anything though, you can always ask a mentor help!
+</p>
+
+<h2>Instructions</h2>
+
+<ul>
+  <li>Follow the <code>describe "VERB #action</code>, <code>it "does something"</code> format</li>
+  <li>Create a post using a factory</li>
+  <li>Make a <code>GET</code> request to the <code>edit</code> action and pass in the post's <code>id</code> as the parameter</li>
+  <li>Expect the response to render the <code>edit</code> template</li>
+  <li>Follow TDD principles (create a failing test, refactor the code, make the test pass, refactor if necessary)</li>
+  <li>Create an "Edit Posts" form using <code>simple_form</code></li>
+  <ul>
+    <li>HINT: You should be able to use the same code as the form in the <code>new</code> page</li>
+  </ul>
+</ul>
+
+<%= standard_git_workflow %>

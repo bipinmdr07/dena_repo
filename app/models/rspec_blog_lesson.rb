@@ -46,8 +46,10 @@ class RspecBlogLesson < ActiveRecord::Base
         [17, "Testing the create action - Part 1"],
         [18, "Self-Directed Lesson: Setting Up Validations"],
         [19, "Testing the create action - Part 2"],
-        [20, "Editing Posts"],
-        [21, "Deleting Posts"]
+        [20, "Self-Directed Lesson: Testing the edit action"],
+        [21, "Testing the update action"],
+        [22, "Testing the destroy action"],
+
       ]
     ]
   ]
