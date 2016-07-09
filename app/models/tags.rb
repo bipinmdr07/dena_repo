@@ -120,6 +120,33 @@ class Tags < ActiveRecord::Base
       [1, "Git Real"] => %w(),
       [2, "Try Git"] => %w(),
       [3, "Git - the simple guide"] => %w()
+    },
+    "rspec_blog_lessons" => {
+      [1, "Why test?"] => %w(),
+      [2, "What is RSpec?"] => %w(),
+      [3, "Self-Directed Lesson: Setting up your Web Dev Environment"] => %w(),
+      [4, "Self-Directed Lesson: Setting Up Git"] => %w(),
+      [5, "Self-Directed Lesson: Installing Bootstrap"] => %w(),
+      [6, "Self-Directed Lesson: Installing Simple Form"] => %w(),
+      [7, "Self Directed Lesson - Adding a Navbar"] => %w(),
+      [8, "Installing RSpec"] => %w(),
+      [9, "Self-Directed Lesson: Creating the Posts Controller and Model"] => %w(),
+      [10, "Self-Directed Lesson: Setting Up Routes"] => %w(),
+      [11, "Self-Directed Lesson: Setting up CRUD Actions"] => %w(),
+      [12, "What is TDD?"] => %w(),
+      [13, "Testing the index action"] => %w(),
+      [14, "Testing the show action"] => %w(),
+      [15, "Self-Directed Lesson: Writing the show action"] => %w(),
+      [16, "Testing the new action"] => %w(),
+      [17, "Testing the create action - Part 1"] => %w(),
+      [18, "Self-Directed Lesson: Setting Up Validations"] => %w(),
+      [19, "Testing the create action - Part 2"] => %w(),
+      [20, "Self-Directed Lesson: Testing the edit action"] => %w(),
+      [21, "Testing the update action"] => %w(),
+      [22, "Testing the destroy action"] => %w(),
+      [23, "Model Tests"] => %w(),
+      [24, "Self-Directed Lesson: Tidying things up"] => %w(),
+      [25, "TDD: Final Thoughts"] => %w()
     }
   }
 
