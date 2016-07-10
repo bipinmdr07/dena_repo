@@ -63,6 +63,10 @@ gem 'public_activity'
 # rankings
 gem 'ranked-model', :git => 'https://github.com/mixonic/ranked-model.git'
 
+# inline CSS for emails
+gem 'premailer-rails'
+gem 'nokogiri' # dependency for above
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
