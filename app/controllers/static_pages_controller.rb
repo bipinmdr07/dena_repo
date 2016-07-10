@@ -31,7 +31,11 @@ class StaticPagesController < ApplicationController
   end
 
   def activity_log
-    @activities = PublicActivity::Activity.where(owner_id: current_user.id).order('created_at DESC').limit(20)
+    if current_user.admin
+      @activities = PublicActivity::Activity.all.order('created_at DESC').limit(20)
+    else
+      @activities = PublicActivity::Activity.where(owner_id: current_user.id).order('created_at DESC').limit(20)
+    end
   end
 
   def about
