@@ -7,12 +7,12 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'techrise.heroku.com',
+    :domain         => 'www.techrise.me',
     :authentication => :plain,
   }
   ActionMailer::Base.delivery_method = :smtp
 
-    config.action_mailer.default_url_options = { :host => 'techrise.me' }
+    config.action_mailer.default_url_options = { :host => 'www.techrise.me' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true

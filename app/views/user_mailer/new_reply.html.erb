@@ -4,7 +4,17 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-  	<p>New reply at <%= forum_comment_url(@forum, @post) %></p>
+    <p>
+      You've got a new reply on one of your forum questions!
+    </p>
+  	<p>View the reply <%= link_to 'here.', forum_comment_url(@forum, @post) %></p>
+
+    <p>
+      Happy coding!
+    </p>
+    <p>
+      -TECHRISE Team
+    </p>
   </body>
 
   </html>
