@@ -35,7 +35,7 @@ class MvcLesson < ActiveRecord::Base
       [
         [5, "Common Model Methods"]
       ]
-    ]
+    ],
     ["Migrations", 
       [
         [1, "What is schema.rb?"],
