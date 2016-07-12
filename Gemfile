@@ -67,6 +67,9 @@ gem 'ranked-model', :git => 'https://github.com/mixonic/ranked-model.git'
 gem 'premailer-rails'
 gem 'nokogiri' # dependency for above
 
+# slack api calls
+gem 'slack-api'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

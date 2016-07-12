@@ -7,7 +7,12 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = current_user.comments.create(comment_params)
-		UserMailer.new_question(Forum.find(params[:forum_id]), @comment).deliver
+		@forum = Forum.find(params[:forum_id])
+		user = User.find(@comment.user_id)
+
+		UserMailer.new_question(@forum, @comment).deliver
+
+		Slack.chat_postMessage(text: 'New question: <' + forum_comment_url(@forum, @comment) + '|' + @comment.title + '> by ' + user.name, username: 'TECHRISE Bot', channel: "#forum_questions", icon_emoji: ":smile_cat:")
 		redirect_to forum_comment_path(@comment.forum_id, @comment)
 	end
 
