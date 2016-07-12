@@ -14,7 +14,7 @@ class MvcLesson < ActiveRecord::Base
         [1, "What is MVC?"],
         [2, "The Model"],
         [3, "The View"],
-        [4, "The Controller"],
+        [4, "The Controller"]
       ]
     ],
     ["Routes", 
