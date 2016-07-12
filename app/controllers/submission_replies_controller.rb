@@ -4,8 +4,8 @@ class SubmissionRepliesController < ApplicationController
 		@submission = Submission.find(params[:submission_id])
 		user = User.find(reply.user_id)
 
-		UserMailer.new_reply(@submission, parent_comment, User.find(parent_comment.user_id).email).deliver
-		UserMailer.new_reply(@submission, parent_comment, "techrisecoding@gmail.com").deliver
+		UserMailer.new_submission_reply(@submission, parent_comment, User.find(parent_comment.user_id).email).deliver
+		UserMailer.new_submission_reply(@submission, parent_comment, "techrisecoding@gmail.com").deliver
 
 		Slack.chat_postMessage(text: 'New reply by ' + user.name + '! View it <' + submission_submission_comment_url(@submission, parent_comment) + '|here>.', username: 'TECHRISE Bot', channel: "#forum_questions", icon_emoji: ":smile_cat:")
 		redirect_to :back

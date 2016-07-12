@@ -1,5 +1,77 @@
 <h1><%= title_for(MvcLesson, 1, 1) %></h1>
 
 <p>
-  Congratulations on finishing your first web application! You're probably both excited and worried at the same time
+  In this series of lessons, we are going to take a deeper look into how Rails applications work together.
 </p>
+
+<p>
+  When we were building your Ideator app, we came across words and files that have <strong>models</strong>, <strong>views</strong>, and <strong>controllers</strong>. These three things are extremely important in Rails applications.
+</p>
+
+<p>
+  Ruby on Rails is an MVC Framework. <strong>MVC stands for Model View Controller.</strong> The Model, View, and Controller each has seperate responsibilities:
+</p>
+
+<h3>The Model</h3>
+
+<p>
+  The model manages behaviors and data of the application.
+</p>
+
+<ul>
+  <li><strong>It can respond to requests for information</strong></li>
+  <ul>
+    <li>For example, in our Ideator app, if we wanted to find information about a certain <code>Idea</code>, the model is responsible for taking care of this task</li>
+  </ul>
+  <li><strong>It can respond to instructions to change the information</strong></li>
+  <ul>
+    <li>For example in our Ideator app, if we wanted to change the contents of one of our <code>Idea</code>s, the model is responsible for taking care of this task</li>
+  </ul>
+</ul>
+
+<p>
+  Think of the model as the reliable guy who is responsible for fetching information and changing information.
+</p>
+
+<h3>The View</h3>
+
+<p>
+  The view is responsible for displaying the user interface. It can show data from the model and display it on the screen for users to see.
+</p>
+
+<p>
+  In your Ideator application, we wrote a lot of HTML code (in files such as <code>index.html.erb</code>). Notice how <code>index.html.erb</code> is located within the <code>views</code> folder. The <code>views</code> folder typically contains HTML files that contain content for users to see.
+</p>
+
+<h3>The Controller</h3>
+
+<p>
+  The controller is the middleman between the model and the view. It is responsible for handling user requests and logic.
+</p>
+
+<hr>
+
+<H3>Why MVC?</H3>
+
+<p>
+  To recap, the Model, View, and Controller each has its own different responsibilities, but work together inside the application. The main benefit of the MVC framework is that since everything has different responsibilities, each component can work independently.
+</p>  
+
+<p>
+  In software engineering, writing code that isn't dependent on other code is an important concept. When we have code that is dependent on another piece of code, then breaking one piece of the code could cause another part of the application to break. We somtimes call code that is independent and reusable "modular code". When engineers talk about "modularity", or keeping the code "modular", they are talking about how code shouldn't be dependent on another piece of code so that it can be reused in other parts of the program.
+</p>
+
+<p>
+  The purpose of the MVC framework is to keep each component seperate and reusable.
+</p>
+
+
+
+
+
+
+
+
+
+
+
