@@ -5,10 +5,10 @@ module ForumsHelper
       if params[:id]
         comment = Comment.find(params[:id]) 
         lesson_name = Tags::LESSONS[forum.name.underscore].keys[comment.lesson - 1][1]
-        link_to '< ' + lesson_name, "/" + forum.name.underscore + "/" + comment.lesson.to_s
+        link_to 'Back to ' + lesson_name, "/" + forum.name.underscore + "/" + comment.lesson.to_s
       else
         lesson_name = Tags::LESSONS[forum.name.underscore].keys[params[:lesson].to_i - 1][1]
-        link_to '< ' + lesson_name, "/" + forum.name.underscore + "/" + params[:lesson].to_s
+        link_to 'Back to ' + lesson_name, "/" + forum.name.underscore + "/" + params[:lesson].to_s
       end
     elsif params[:submission_id]
       submission = Submission.find(params[:submission_id])

@@ -16,6 +16,7 @@ class SubmissionCommentsController < ApplicationController
 
 	def show
 		@submission_comment = SubmissionComment.find(params[:id])
+		@user = User.find(@submission_comment.user_id)
 	end
 
 	private
