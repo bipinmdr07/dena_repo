@@ -20,6 +20,7 @@
 		<div class="col-xs-10">
 			<h3><%= @submission_comment.title %></h3>
 			<small><%= display_date(@submission_comment.created_at) %></small>
+			<br>
 			<%= sanitize raw(@submission_comment.description) %>
 			<p class = "pull-right" ></p>
 			<br class = "clear">
@@ -52,6 +53,7 @@
 
 			<div class="col-xs-10">
 				<small><%= display_date(reply.created_at) %></small>
+				<br>
 				<%= sanitize raw(reply.content) %>
 			</div>
 		</div>
