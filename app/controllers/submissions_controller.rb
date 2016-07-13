@@ -1,6 +1,10 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @submission = current_user.submissions.all
+  end
+
   def new
     @submission = Submission.new
   end

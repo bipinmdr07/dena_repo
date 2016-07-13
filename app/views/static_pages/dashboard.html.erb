@@ -4,11 +4,11 @@
         <div class="col-xs-12 col-md-6">
           <div class="panel">
             <div class="panel-heading text-center">
-              <h3><%= @questions.count %> Unanswered Questions</h3>
+              <h3><%= @unresolved_questions.count %> Unanswered Questions</h3>
             </div>
             <div class="panel-body">
               <ul class="unindented_ul">
-                <% @questions.each do |question| %>
+                <% @unresolved_questions.each do |question| %>
                   <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
                 <% end %>
               </ul>
@@ -19,11 +19,11 @@
         <div class="col-xs-12 col-md-6">
           <div class="panel">
             <div class="panel-heading text-center">
-              <h3><%= pluralize @submissions.count, "Submission" %> to Review</h3>
+              <h3><%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
             </div>
             <div class="panel-body">
               <ul class="unindented_ul">
-                <% @submissions.each do |submission| %>
+                <% @unapproved_submissions.each do |submission| %>
                   <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
                 <% end %>
               </ul>
@@ -118,6 +118,52 @@
         <small><%= Quote::ARRAY.sample[1] %></small>
       </blockquote>
     </div><!-- devise_box -->
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3><i class="fa fa-question-circle" aria-hidden="true"></i> Your Questions</h3>        
+      </div>
+      <div class="panel-body">
+
+        <ul class="unindented_ul">
+          <% @questions.each do |question| %>
+            <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+            <li><%= link_to question.title, question_path(question) %> in <strong><%= course_name %></strong> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
+          <% end %>
+        </ul>
+
+        <% if @questions.empty? %>
+          <h3>You haven't asked any questions yet.</h3>
+        <% else %>
+          <h5 class="pull-right"><%= link_to 'View all', questions_path %></h5>
+        <% end %>
+
+
+        
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3><i class="fa fa-check-circle" aria-hidden="true"></i> Your Submissions</h3>        
+      </div>
+      <div class="panel-body">
+        
+        <ul class="unindented_ul">
+          <% @submissions.each do |submission| %>
+            <% course_name = Tags::LESSONS[submission.course_name.underscore + "s"].keys[submission.lesson_id - 1][1] %>
+            <li><%= link_to submission.title, submission_path(submission) %> in <strong><%= course_name %></strong> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %></li>
+          <% end %>
+        </ul>
+
+        <% if @submissions.empty? %>
+          <h3>You don't have any submissions yet.</h3>
+        <% else %>
+          <h5 class="pull-right"><%= link_to 'View all', submissions_path %></h5>
+        <% end %>
+        
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
 
     
 

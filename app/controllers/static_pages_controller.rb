@@ -17,8 +17,13 @@ class StaticPagesController < ApplicationController
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
 
-    @questions = Question.where(resolved: false) if current_user.admin
-    @submissions = Submission.where(approved: false) if current_user.admin
+    @questions = current_user.questions.all.order("created_at DESC").limit(5)
+    @submissions = current_user.submissions.all.order("created_at DESC").limit(5)
+
+    if current_user.admin
+      @unresolved_questions = Question.where(resolved: false) 
+      @unapproved_submissions = Submission.where(approved: false)
+    end
   end
 
   def courses

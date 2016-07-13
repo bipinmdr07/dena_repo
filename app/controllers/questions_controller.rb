@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @question = current_user.questions.all
+  end
+
   def new
     @question = Question.new
   end
