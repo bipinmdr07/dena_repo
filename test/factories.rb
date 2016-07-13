@@ -7,11 +7,6 @@ FactoryGirl.define do
   factory :admin_user do
     
   end
-  
-  factory :comment do
-    title "Submission Comment Title"
-    content "content"
-  end
 
   factory :reply do
     content "content"
@@ -19,11 +14,6 @@ FactoryGirl.define do
 
   factory :invalid_reply, class: 'Reply' do
     content nil
-  end
-
-  factory :submission_comment do
-    title "Submission Comment Title"
-    content "content"
   end
 
   factory :submission_reply do

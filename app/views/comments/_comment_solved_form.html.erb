@@ -1,9 +1,0 @@
-<%= simple_form_for :question, url: question_statuses_path(params[:id]), method: :put, remote: true do |f| %>
-  <% if @question.resolved %>
-    <%= button_tag(type: 'submit', class: "btn btn-success") do %>
-    <i class="fa fa-check-circle" aria-hidden="true"></i> Resolved
-    <% end %>
-  <% else %>
-    <%= f.submit "Unresolved", class: 'btn' %>
-  <% end %>
-<% end %>
