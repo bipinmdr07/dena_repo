@@ -14,7 +14,7 @@
   <h3>All Questions</h3>
 
   <% @questions.order("created_at DESC").each do |question| %>
-    <h4><%= link_to question.title, question_path(question.id) %> <span class = "comment_list">by <%= User.find(question.id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %>
+    <h4><%= link_to question.title, question_path(question.id) %> <span class = "comment_list">by <%= User.find(question.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %>
       <span class = "pull-right comment_list">Replies: <%= question.replies.count %><%= link_to ' Delete', question_path(question.id), method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin %></span></h4>
   <% end %>
 
