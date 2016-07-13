@@ -17,7 +17,7 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
-  config.action_mailer.default_url_options = { host: 'www.techrise.me' }
+  config.action_mailer.default_url_options = { host: "localhost:3000" }
 
   config.web_console.whitelisted_ips = '10.0.2.2'
 

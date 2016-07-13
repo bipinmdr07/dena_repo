@@ -1,24 +1,29 @@
 class RepliesController < ApplicationController
+	before_action :authenticate_user!
+
 	def create
-		comment = parent_comment.replies.create(reply_params)
+		question = Question.find(params[:question_id])
+		comment = current_user.replies.create(reply_params)
 
-		forum = Forum.find(params[:forum_id])
-		user = User.find(comment.user_id)
+		if comment.valid?
+			user = User.find(comment.user_id)
 
-		UserMailer.new_reply(forum, parent_comment, User.find(parent_comment.user_id).email).deliver
-		UserMailer.new_reply(forum, parent_comment, "techrisecoding@gmail.com").deliver
+			UserMailer.new_reply(question, User.find(question.user_id).email).deliver_now
+			UserMailer.new_reply(question, "techrisecoding@gmail.com").deliver
 
-		Slack.chat_postMessage(text: 'New reply by ' + user.name + '. View it <' + forum_comment_url(forum, parent_comment) + '|here >.', username: 'TECHRISE Bot', channel: "#forum_questions", icon_emoji: ":smile_cat:")
-		redirect_to :back
+			Slack.chat_postMessage(text: 'New reply by ' + user.name + '. View it <' + question_url(question.id) + '|here >.', 
+				username: 'TECHRISE Bot', 
+				channel: "#forum_questions", 
+				icon_emoji: ":smile_cat:") if Rails.env.production?
+		else
+			flash[:alert] = "Invalid attributes, please try again."
+		end
+		redirect_to question_path(question.id)
 	end
 
 	private
 
-	def parent_comment
-		Comment.find(params[:comment_id])
-	end
-
 	def reply_params
-		params.require(:reply).permit(:content, :user_id)
+		params.require(:reply).permit(:content, :user_id).merge(question_id: params[:question_id])
 	end
 end

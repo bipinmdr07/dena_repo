@@ -1,0 +1,22 @@
+<div class = "forum_section">
+
+<h1>Have a Question?</h1>
+<p>
+  Don't leave your questions unanswered! Ask good questions to get good answers.
+</p>
+
+
+<%= link_to '<i class="fa fa-question-circle" aria-hidden="true"></i> Ask Question'.html_safe, new_question_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-primary' %>
+
+<br>
+<br>
+
+  <h3>All Questions</h3>
+
+  <% @questions.order("created_at DESC").each do |question| %>
+    <h4><%= link_to question.title, question_path(question.id) %> <span class = "comment_list">by <%= User.find(question.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %>
+      <span class = "pull-right comment_list">Replies: <%= question.replies.count %><%= link_to ' Delete', question_path(question.id), method: :delete, data: { confirm: 'Are you sure?' } if current_user && current_user.admin %></span></h4>
+  <% end %>
+
+
+</div>

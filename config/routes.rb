@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   resources 'contacts', only: [:new, :create]
 
+  resources :questions do
+    resources :replies, only: :create
+  end
+  
   resources :forums do
   	resources :comments do
       post :replies, :to => 'replies#create'
@@ -17,9 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :submissions do
-    resources :submission_comments do
-      post :submission_replies, :to => 'submission_replies#create',  as: 'replies'
-    end
+    resources :submission_replies, only: :create
   end
 
   resources :cards
@@ -35,6 +37,8 @@ Rails.application.routes.draw do
   post 'submission_approvals/:id(.:format)', to: 'submission_approvals#create', as: 'submission_approvals'
 
   put 'comment_statuses/:id(.:format)', to: 'comment_statuses#create', as: 'comment_statuses'
+
+  put 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
 
   get 'study', to: 'study#index', as: 'study'
 

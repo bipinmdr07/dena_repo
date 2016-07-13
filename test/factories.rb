@@ -4,62 +4,62 @@ FactoryGirl.define do
     
   end
 
-  factory :ruby_core_lesson do
-    
-  end
-  factory :ruby_lesson do
-    
-  end
   factory :admin_user do
     
   end
-  factory :ideator_lesson do
-    
-  end
-
+  
   factory :comment do
     title "Submission Comment Title"
-    description "description"
+    content "content"
   end
 
   factory :reply do
     content "content"
+  end
+
+  factory :invalid_reply, class: 'Reply' do
+    content nil
   end
 
   factory :submission_comment do
     title "Submission Comment Title"
-    description "description"
-    factory :invalid_submission_comment do
-      title nil
-      description nil
-    end
+    content "content"
   end
+
   factory :submission_reply do
     content "content"
   end
+
+  factory :invalid_submission_reply, class: "SubmissionReply" do
+    content nil
+  end
+
   factory :submission do
-    
+    title "Submission Comment Title"
+    content "content"
+    lesson_id 1
+    course_name "HtmlCssLesson"
   end
-  factory :html_css do
-    
+  
+  factory :invalid_submission, class: 'Submission' do
+    title nil
+    content nil
+    lesson_id 1
+    course_name "HtmlCssLesson"
   end
-  factory :reply do
-    
+
+  factory :question do
+    title "Question Title"
+    content "content"
+    lesson_id 1
+    course_name "HtmlCssLesson"
   end
-  factory :comment do
-    title "Wtf does this mean"
-    description "Idk wtf this means help me lol"
-    lesson 1
-    forum_id 1
-  end
-  factory :forum do
-    
-  end
-  factory :contact do
-    
-  end
-  factory :intro do
-    
+  
+  factory :invalid_question, class: 'Question' do
+    title nil
+    content nil
+    lesson_id 1
+    course_name "HtmlCssLesson"
   end
 
 	factory :user do
@@ -68,6 +68,7 @@ FactoryGirl.define do
     end
     password "codingiscool"
     password_confirmation "codingiscool"
+    name "Coder Taro"
   end
 
 end

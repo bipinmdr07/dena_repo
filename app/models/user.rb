@@ -5,9 +5,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :avatar, AvatarUploader
 
-  has_many :comments, dependent: :destroy
-  has_many :submission_comments, dependent: :destroy
-  has_many :cards
-  has_many :progressions
+  has_many :cards, dependent: :destroy
+  has_many :progressions, dependent: :destroy
+  has_many :submissions, dependent: :destroy
+  has_many :submission_replies, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :replies, dependent: :destroy
 
+  validates :name, presence: true
 end
