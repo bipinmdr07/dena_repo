@@ -7,13 +7,17 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = current_user.comments.create(comment_params)
-		@forum = Forum.find(params[:forum_id])
-		user = User.find(@comment.user_id)
 
-		UserMailer.new_question(@forum, @comment).deliver
-
-		Slack.chat_postMessage(text: 'New question: <' + forum_comment_url(@forum, @comment) + '|' + @comment.title + '> by ' + user.name, username: 'TECHRISE Bot', channel: "#forum_questions", icon_emoji: ":smile_cat:")
-		redirect_to forum_comment_path(@comment.forum_id, @comment)
+		if @comment.valid?
+			@forum = Forum.find(params[:forum_id])
+			user = User.find(@comment.user_id)
+			UserMailer.new_question(@forum, @comment).deliver
+			Slack.chat_postMessage(text: 'New question: <' + forum_comment_url(@forum, @comment) + '|' + @comment.title + '> by ' + user.name, username: 'TECHRISE Bot', channel: "#forum_questions", icon_emoji: ":smile_cat:")
+			redirect_to forum_comment_path(@comment.forum_id, @comment)
+		else
+			flash[:alert] = "Invalid attributes, please try again."
+			redirect_to new_forum_comment_path(forum_id: comment_params[:forum_id], lesson: comment_params[:lesson])
+		end
 	end
 
 	def show

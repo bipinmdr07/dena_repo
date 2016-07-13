@@ -16,11 +16,26 @@ FactoryGirl.define do
   factory :ideator_lesson do
     
   end
+
+  factory :comment do
+    title "Submission Comment Title"
+    description "description"
+  end
+
+  factory :reply do
+    content "content"
+  end
+
   factory :submission_comment do
-    
+    title "Submission Comment Title"
+    description "description"
+    factory :invalid_submission_comment do
+      title nil
+      description nil
+    end
   end
   factory :submission_reply do
-    
+    content "content"
   end
   factory :submission do
     
