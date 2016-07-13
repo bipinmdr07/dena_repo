@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707064155) do
+ActiveRecord::Schema.define(version: 20160713095831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20160707064155) do
     t.integer  "lesson"
     t.integer  "user_id"
     t.boolean  "resolved",    default: false
+    t.string   "course_name"
   end
 
   add_index "comments", ["forum_id"], name: "index_comments_on_forum_id", using: :btree
@@ -192,15 +193,31 @@ ActiveRecord::Schema.define(version: 20160707064155) do
   add_index "progressions", ["user_id", "course_name"], name: "index_progressions_on_user_id_and_course_name", using: :btree
   add_index "progressions", ["user_id"], name: "index_progressions_on_user_id", using: :btree
 
-  create_table "replies", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "course_name"
+    t.integer  "lesson_id"
     t.integer  "user_id"
-    t.integer  "comment_id"
-    t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "resolved",    default: false
   end
 
-  add_index "replies", ["user_id", "comment_id"], name: "index_replies_on_user_id_and_comment_id", using: :btree
+  add_index "questions", ["course_name", "lesson_id"], name: "index_questions_on_course_name_and_lesson_id", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
+
+  create_table "replies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.string   "content"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "replies", ["question_id", "user_id"], name: "index_replies_on_question_id_and_user_id", using: :btree
+  add_index "replies", ["user_id", "question_id"], name: "index_replies_on_user_id_and_question_id", using: :btree
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "rich_rich_files", force: :cascade do |t|
     t.datetime "created_at"
@@ -246,18 +263,29 @@ ActiveRecord::Schema.define(version: 20160707064155) do
   create_table "submission_replies", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "content"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "submission_comment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "submission_id"
   end
 
-  add_index "submission_replies", ["user_id", "submission_comment_id"], name: "index_submission_replies_on_user_id_and_submission_comment_id", using: :btree
+  add_index "submission_replies", ["submission_id"], name: "index_submission_replies_on_submission_id", using: :btree
+  add_index "submission_replies", ["user_id", "submission_id"], name: "index_submission_replies_on_user_id_and_submission_id", using: :btree
 
   create_table "submissions", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "course_name"
+    t.string   "title"
+    t.string   "content"
+    t.integer  "lesson_id"
+    t.integer  "user_id"
+    t.boolean  "approved",    default: false
   end
+
+  add_index "submissions", ["course_name", "lesson_id"], name: "index_submissions_on_course_name_and_lesson_id", using: :btree
+  add_index "submissions", ["course_name"], name: "index_submissions_on_course_name", using: :btree
+  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"

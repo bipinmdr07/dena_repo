@@ -5,11 +5,11 @@ class SubmissionApprovalsController < ApplicationController
   respond_to :js, :html, :json
 
   def create
-    @submission_comment = SubmissionComment.find(params[:id])
-    if @submission_comment.approved
-      @submission_comment.update(approved: false)
+    @submission = Submission.find(params[:id])
+    if @submission.approved
+      @submission.update(approved: false)
     else
-      @submission_comment.update(approved: true)
+      @submission.update(approved: true)
     end
 
     respond_to do |format|

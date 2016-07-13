@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-  	<p>New submission at <%= submission_submission_comment_url(@forum, @post) %></p>
+  	<p>New submission <%= link_to 'here', submission_url(@submission.id) %>!</p>
   </body>
 
   </html>

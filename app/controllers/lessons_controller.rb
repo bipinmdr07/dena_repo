@@ -9,15 +9,18 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
-    @course_title = controller_name.classify.constantize::COURSE_TITLE
-    @lessons = controller_name.classify.constantize::LESSONS
+    controller = controller_name.classify
+    @lesson_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
+    @course_title = controller.constantize::COURSE_TITLE
+    @lessons = controller.constantize::LESSONS
     @lesson = params[:id]
-    @lesson_length = controller_name.classify.constantize::LESSON_LENGTH
+    @lesson_length = controller.constantize::LESSON_LENGTH
     @next_lesson = @lesson.to_i + 1 
     @lesson == 1 ? @prev_lesson = 0 : @prev_lesson = @lesson.to_i - 1
-    @course_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
-    @course_name = controller_name.classify + "s"
+    @course_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
+    @course_name = controller + "s"
+    @questions = Question.where(course_name: controller, lesson_id: params[:id])
+    @submissions = Submission.where(course_name: controller, lesson_id: params[:id])
   end
 
   private

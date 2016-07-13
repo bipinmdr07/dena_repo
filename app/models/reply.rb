@@ -1,5 +1,6 @@
 class Reply < ActiveRecord::Base
-	belongs_to :comment
+	belongs_to :question
+  belongs_to :user
 
-  validates :comment_id, :user_id, :content, presence: true
+  validates :question_id, :user_id, :content, presence: true
 end

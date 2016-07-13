@@ -17,8 +17,8 @@ class StaticPagesController < ApplicationController
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
 
-    @questions = Comment.where(resolved: false) if current_user.admin
-    @submissions = SubmissionComment.where(approved: false) if current_user.admin
+    @questions = Question.where(resolved: false) if current_user.admin
+    @submissions = Submission.where(approved: false) if current_user.admin
   end
 
   def courses
