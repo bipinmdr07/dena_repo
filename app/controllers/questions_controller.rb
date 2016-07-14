@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @question = current_user.questions.all
+    @questions = current_user.questions.all.order("created_at DESC")
   end
 
   def new

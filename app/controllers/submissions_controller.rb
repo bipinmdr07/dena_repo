@@ -2,7 +2,7 @@ class SubmissionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @submission = current_user.submissions.all
+    @submissions = current_user.submissions.all.order("created_at DESC")
   end
 
   def new

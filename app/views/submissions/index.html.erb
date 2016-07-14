@@ -1,0 +1,26 @@
+<div class="devise_box">
+  <h1 class="text-center" style="margin-bottom: 50px;">My Submisions</h1>
+  <div class="row">
+    <div id="blog-mansonry" class="blog-list">
+      <% @submissions.each do |submission| %>
+        <% course_name = Tags::LESSONS[submission.course_name.underscore + "s"].keys[submission.lesson_id - 1][1] %>
+        <article class="post col-md-4 col-sm-6 col-xs-12">
+          <div class="post-inner">
+            <div class="content">
+              <h2 class="post-title"><%= link_to submission.title, submission_path(submission) %></h2>
+              <div class="post-entry">
+                  <%= sanitize submission.content %>
+              </div>
+              <div class="meta">
+                  <ul class="meta-list list-inline">                                       
+                    <li class="post-time post_date date updated"><%= display_date(submission.created_at) %></li>
+                    <li class="post-author"><%= link_to course_name, '/' + submission.course_name.underscore + "s/" + submission.lesson_id.to_s %></a></li>
+                </ul><!--//meta-list-->                             
+              </div><!--meta-->
+            </div><!--//content-->
+          </div><!--//post-inner-->
+        </article><!--//post-->
+      <% end %>
+    </div><!--//blog-list--> 
+  </div>
+</div>
