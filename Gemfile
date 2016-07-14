@@ -34,6 +34,7 @@ gem 'mail_form'
 # uploading stuff
 gem "figaro"
 gem 'carrierwave'
+gem 'mini_magick'
 gem "fog", '1.36.0'
 
 gem 'ckeditor', github: 'galetahub/ckeditor'
@@ -41,9 +42,6 @@ gem 'ckeditor', github: 'galetahub/ckeditor'
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
-# active admin text editor
-# gem 'activeadmin-ckeditor'
-gem 'paperclip'
 
 # code text editor
 gem 'ace-rails-ap'
