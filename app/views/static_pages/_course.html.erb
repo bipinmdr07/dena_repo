@@ -40,19 +40,19 @@
 
       <div class="course_status">
         <% unless controller_name.empty? %>
-          <span class="label label-default"><%= pluralize controller_name.classify.constantize::DURATION, "hour" %></span>
+          <span class="label label-default"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= pluralize controller_name.classify.constantize::DURATION, "hour" %></span>
         <% end %>
 
         <% unless controller_name.empty? %>
           <% period = controller_name.classify.constantize::PERIOD %>
-          <span class="label label-default"><%= "Week " if period != "PREWORK" %><%= period %></span>
+          <span class="label label-default"><i class="fa fa-calendar" aria-hidden="true"></i> <%= "Week " if period != "PREWORK" %><%= period %></span>
         <% end %>
         
         <% if available && !has_access?(course_access) %>
-          <span class="label label-default">Locked :)</span>
+          <span class="label label-default"><i class="fa fa-lock" aria-hidden="true"></i> Locked :)</span>
         <% end %>
         <% if !available %>
-          <span class="label label-default">Coming Soon</span>
+          <span class="label label-default"><i class="fa fa-heart" aria-hidden="true"></i> Coming Soon</span>
         <% end %>
         
       </div>
