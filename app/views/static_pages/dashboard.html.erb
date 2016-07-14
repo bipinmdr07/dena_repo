@@ -1,40 +1,3 @@
-<% if current_user.admin %>
-
-      <div class="row">
-        <div class="col-xs-12 col-md-6">
-          <div class="panel">
-            <div class="panel-heading text-center">
-              <h3><%= @unresolved_questions.count %> Unanswered Questions</h3>
-            </div>
-            <div class="panel-body">
-              <ul class="unindented_ul">
-                <% @unresolved_questions.each do |question| %>
-                  <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div><!-- panel-body text-center -->
-        </div><!-- panel -->
-
-        <div class="col-xs-12 col-md-6">
-          <div class="panel">
-            <div class="panel-heading text-center">
-              <h3><%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
-            </div>
-            <div class="panel-body">
-              <ul class="unindented_ul">
-                <% @unapproved_submissions.each do |submission| %>
-                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div><!-- panel-body text-center -->
-        </div><!-- panel -->
-      </div>
-      
-<% end %>
-
-
 <div class="row">
   <div class="col-xs-12 col-md-6">
     <% if @last_lesson %>
@@ -45,8 +8,7 @@
         <div class="panel-body text-center">
           <div class="row">
             <div class="col-xs-12">
-              <h5>Day <%= (DateTime.now.to_date - current_user.created_at.to_date).to_i %></h5>
-              <h3 style="margin-bottom: 40px; text-decoration: underline;">Current Course in Progress</h3>
+              <h5>In Progress</h5>
 
               <div class="row">
                 <div class="col-sm-4 col-xs-12">
@@ -110,33 +72,35 @@
   </div><!-- col-xs-12 col-md-4 -->
 
   <div class="col-xs-12 col-md-6">
-    <div class="devise_box">
-      <%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
-      <h3>You have <%= pluralize(@cards.count, 'card') %> to review today - <%= link_to 'Study Flashcards', study_path %></h3>
-      <blockquote>
-        <%= Quote::ARRAY.sample[0] %>
-        <small><%= Quote::ARRAY.sample[1] %></small>
-      </blockquote>
-    </div><!-- devise_box -->
-
     <div class="panel">
-      <div class="panel-heading-stats">
-        <h3><i class="fa fa-question-circle" aria-hidden="true"></i> Your Questions</h3>        
-      </div>
       <div class="panel-body">
+        <%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
+        <h3>You have <%= pluralize(@cards.count, 'card') %> to review today - <%= link_to 'Study Flashcards', study_path %></h3>
+        <blockquote>
+          <%= @quote[0] %>
+          <small><%= @quote[1] %></small>
+        </blockquote>
+      </div><!-- panel-body -->
+    </div>
 
-        <ul class="unindented_ul">
-          <% @questions.each do |question| %>
-            <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
-            <li><%= link_to question.title, question_path(question) %> in <strong><%= course_name %></strong> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
+      <div class="panel">
+        <div class="panel-heading-stats">
+          <h3><i class="fa fa-question-circle" aria-hidden="true"></i> Your Questions</h3>        
+        </div>
+        <div class="panel-body">
+
+          <ul class="unindented_ul">
+            <% @questions.each do |question| %>
+              <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+              <li><%= link_to question.title, question_path(question) %> in <strong><%= course_name %></strong> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
+            <% end %>
+          </ul>
+
+          <% if @questions.empty? %>
+            <h3>You haven't asked any questions yet.</h3>
+          <% else %>
+            <h5 class="pull-right"><%= link_to 'View all', questions_path %></h5>
           <% end %>
-        </ul>
-
-        <% if @questions.empty? %>
-          <h3>You haven't asked any questions yet.</h3>
-        <% else %>
-          <h5 class="pull-right"><%= link_to 'View all', questions_path %></h5>
-        <% end %>
 
 
         
@@ -169,3 +133,39 @@
 
   </div><!-- col-xs-12 col-md-6 -->
 </div><!-- row -->
+
+<% if current_user.admin %>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3><%= @unresolved_questions.count %> Unanswered Questions</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unresolved_questions.each do |question| %>
+                  <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3><%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unapproved_submissions.each do |submission| %>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+      </div>
+      
+<% end %>

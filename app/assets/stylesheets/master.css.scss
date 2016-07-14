@@ -1,5 +1,7 @@
 .panel {
   border: none;
+  border-top: 5px solid #ec6952 !important;
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .prof_badge {
@@ -102,7 +104,6 @@ span.radio.inline {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   background: #fdfdfd;
-  border-top: 5px solid #ec6952;
   h3 {
     font-weight: 300;
   }
