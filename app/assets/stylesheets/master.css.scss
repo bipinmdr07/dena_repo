@@ -1,3 +1,6 @@
+.panel {
+  border: none;
+}
 
 .prof_badge {
   margin-top: 10px;
@@ -99,6 +102,10 @@ span.radio.inline {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   background: #fdfdfd;
+  border-top: 5px solid #ec6952;
+  h3 {
+    font-weight: 300;
+  }
 }
 
 .stat_box {
