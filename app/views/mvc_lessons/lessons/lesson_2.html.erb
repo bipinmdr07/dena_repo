@@ -18,15 +18,30 @@
   <li><strong>A user makes an HTTP request</strong></li>
   <ul>
     <li>An HTTP request is basically a user saying, "Hey, I'm going to try to access this URL."</li>
+    <li>In other words, when you vist a web page, you are making an HTTP request</li>
   </ul>
   <li><strong>The request passes through the Rails Router</strong></li>
   <ul>
     <li>The Rails Router identifies which controller to use</li>
-    <li>For example in our Ideator app, if the URL is <code>/idea/1</code>, the Rails Router will choose to use the <code>IdeasController</code>'s <code>show</code> method, since it is defined as such in the <code>routes.rb</code> file.</li>
+    <li>For example in our Ideator app, if we are trying to access the URL <code>/ideas/1</code> through a <code>GET</code> request, the Rails Router will choose to use the <code>IdeasController</code>'s <code>show</code> method, since it is defined as such in the <code>routes.rb</code> file:</li>
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         ideas#index
+    ideas GET    /ideas(.:format)          ideas#index
+          POST   /ideas(.:format)          ideas#create
+ new_idea GET    /ideas/new(.:format)      ideas#new
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+     idea GET    /ideas/:id(.:format)      ideas#show
+          PATCH  /ideas/:id(.:format)      ideas#update
+          PUT    /ideas/:id(.:format)      ideas#update
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+    <li>Notice how the <code>GET</code> request for the URI pattern <code>/ideas/:id</code> is mapped to <code>ideas#show</code> (the <code>show</code> action in the <code>ideas</code> controller).</li>
   </ul>
   <li><strong>The controller receives the request</strong></li>
   <ul>
-    <li>Often times parameters are passed into the controller. We can access these parameters with <code>params</code> (such as <code>params[:id]</code></li>
+    <li>Often times parameters are passed into the controller. We can access these parameters using <code>params</code> .</li>
+    <li>For example, you can use <code>params[:id]</code> to access the <code>id</code> parameter.</li>
   </ul>
   <li><strong>If the controller has some code that makes a call to the model, the model receives the request to do the job</strong></li>
   <ul>
