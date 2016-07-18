@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources 'contacts', only: [:new, :create]
 
   resources :questions do
-    resources :replies, only: :create
+    resources :replies, only: [:create, :edit, :update, :destroy]
   end
   
   resources :forums do
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :submissions do
-    resources :submission_replies, only: :create
+    resources :submission_replies, only: [:create, :edit, :update, :destroy]
   end
 
   resources :cards

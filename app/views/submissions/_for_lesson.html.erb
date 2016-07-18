@@ -11,7 +11,9 @@
 <br>
 
 <% @submissions.order("created_at DESC").each do |submission| %>
-  <h4><%= link_to submission.title, submission_path(submission.id) %> <span class = "comment_list">by <%= User.find(submission.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %></h4>
+  <h4><%= link_to submission.title, submission_path(submission.id) %> <span class = "comment_list">by <%= User.find(submission.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %>
+  <span class="pull-right"><%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_path(submission.id), method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin) %></span></span>
+  </h4>
 <% end %>
 
 

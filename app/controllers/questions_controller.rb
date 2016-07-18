@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
     @questions = current_user.questions.all.order("created_at DESC")
@@ -31,13 +32,37 @@ class QuestionsController < ApplicationController
     @user = User.find(@question.user_id)
   end
 
+  def edit
+
+  end
+
+  def update
+    if @question.update(question_params)
+      flash[:success] = "Updated!"
+      redirect_to question_path(@question.id)
+    else
+      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+      render :edit
+    end
+  end
+
   def destroy
-    @question = Question.find(params[:id])
+    course_name = @question.course_name.underscore + "s"
+    lesson_name = Tags::LESSONS[course_name].keys[@question.lesson_id - 1][1]
+    back_to_lesson_url = "/" + course_name + "/" + @question.lesson_id.to_s
+
     @question.destroy
-    redirect_to :back
+    redirect_to back_to_lesson_url
   end
 
   private
+
+  def check_permissions
+    @question = Question.find(params[:id])
+    return if current_user.admin || (@question.user_id == current_user.id)
+    flash[:alert] = "Unauthorized!"
+    redirect_to question_path(@question) 
+  end
 
   def question_params
     params.require(:question).permit(:title, :content, :lesson_id, :course_name, :user_id)

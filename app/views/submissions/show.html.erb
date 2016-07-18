@@ -1,11 +1,22 @@
 <div class="devise_box forum_container">
 
+  <% flash.each do |message_type, message| %>
+    <% if message_type == "notice" %>
+      <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></p>
+    <% elsif message_type == "alert" %>
+      <p class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %></p>
+    <% else %>
+      <div class="alert alert-<%= message_type %> alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= message %></div>
+    <% end %>
+  <% end %>
+
+
   <div class="back_to_lesson">
     <%= back_to_lesson %>
   </div>
 
   <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-12 col-sm-2">
       <%= image_tag @user.avatar, class: 'prof_pic_forum' %>
       <div class="prof_name">
         <%= @user.name %>
@@ -15,12 +26,19 @@
           <label class="label label-default">TECHRISE Mentor</label>
         <% end %>
       </div>
+      <div class="edit_post_links">
+        <% if current_user.id == @submission.user_id %>
+          <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_path(@submission), class: 'btn btn-sm btn-warning' %>
+          <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_path(@submission.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
+        <% end %>
+      </div>
     </div>
 
-    <div class="col-xs-10">
+    <div class="col-xs-12 col-sm-10">
       <h3><%= @submission.title %></h3>
       <small><%= display_date(@submission.created_at) %></small>
       <br>
+      
       <%= sanitize raw(@submission.content) %>
       <p class = "pull-right" ></p>
       <br class = "clear">
@@ -49,6 +67,12 @@
             <label class="label label-default">TECHRISE Mentor</label>
           <% end %>
         </div>
+        <div class="edit_post_links">
+          <% if current_user.id == reply.user_id %>
+            <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_submission_reply_path(@submission.id, reply.id), class: 'btn btn-sm btn-warning' %>
+            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_submission_reply_path(@submission.id, reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
+          <% end %>
+        </div>
       </div>
 
       <div class="col-xs-10">
@@ -63,7 +87,7 @@
 
   <%= simple_form_for :submission_reply, url: submission_submission_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
-      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true %>
+      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
     </div>
     <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 

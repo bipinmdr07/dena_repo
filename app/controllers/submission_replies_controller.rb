@@ -1,5 +1,7 @@
 class SubmissionRepliesController < ApplicationController
 	before_action :authenticate_user!
+	before_action :check_permissions, only: [:edit, :update, :destroy]
+
 
 	def create
 		@submission = Submission.find(params[:submission_id])
@@ -19,7 +21,34 @@ class SubmissionRepliesController < ApplicationController
 		redirect_to submission_path(@submission)
 	end
 
+	def edit
+	end
+
+	def update
+    if @submission_reply.update(reply_params)
+      flash[:success] = "Updated!"
+      redirect_to submission_path(@submission)
+    else
+      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+      render :edit
+    end
+  end
+
+  def destroy
+    @submission_reply.destroy
+    redirect_to submission_path(@submission)
+  end
+
 	private
+
+	def check_permissions
+    @submission_reply = SubmissionReply.find(params[:id])
+    @submission = Submission.find(@submission_reply.submission_id)
+    return if current_user.admin || (@submission_reply.user_id == current_user.id)
+    flash[:alert] = "Unauthorized!"
+    redirect_to submission_path(@submission) 
+  end
+
 
 	def reply_params
 		params.require(:submission_reply).permit(:content, :user_id).merge(submission_id: params[:submission_id])

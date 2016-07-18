@@ -12,22 +12,13 @@
 
 <%= back_to_lesson %>
 
-<h3>Submit your work</h3>
-<p>
-  Awesome work! Follow the directions on the lesson and submit your work. We'll get back to you soon and give you feedback or code review.
-</p>
+<h3>Edit</h3>
 
-<p>
-  (P.S Give it an awesome title name just for fun :D )
-</p>
-
-<%= simple_form_for :submission, url: submissions_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
+<%= simple_form_for @submission, method: :put, input_html: {class: 'form-horizontal'} do |f| %>
   <%= f.input :title, required: true %>
   <div data-no-turbolink>
     <%= f.cktext_area :content, as: :text, input_html: {rows: 6}, ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
   </div>
-  <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:lesson_id]} %>
-  <%= f.input :course_name, as: :hidden, input_html: { value: params[:course_name]} %>
   <%= f.submit 'Submit', class: 'btn btn-primary' %>
 <% end %>
 

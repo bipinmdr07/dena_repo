@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
     @submissions = current_user.submissions.all.order("created_at DESC")
@@ -30,7 +31,37 @@ class SubmissionsController < ApplicationController
     @user = User.find(@submission.user_id)
   end
 
+  def edit
+  end
+
+  def update
+    if @submission.update(submission_params)
+      flash[:success] = "Updated!"
+      redirect_to submission_path(@submission.id)
+    else
+      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+      render :edit
+    end
+  end
+
+  def destroy
+    course_name = @submission.course_name.underscore + "s"
+    lesson_name = Tags::LESSONS[course_name].keys[@submission.lesson_id - 1][1]
+    back_to_lesson_url = "/" + course_name + "/" + @submission.lesson_id.to_s
+
+    @submission.destroy if @submission.user_id == current_user.id
+    
+    redirect_to back_to_lesson_url
+  end
+
   private
+
+  def check_permissions
+    @submission = Submission.find(params[:id])
+    return if current_user.admin || (@submission.user_id == current_user.id)
+    flash[:alert] = "Unauthorized!"
+    redirect_to submission_path(@submission) 
+  end
 
   def submission_params
     params.require(:submission).permit(:title, :content, :lesson_id, :course_name, :user_id)

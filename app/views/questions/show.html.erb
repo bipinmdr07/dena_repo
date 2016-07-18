@@ -1,5 +1,16 @@
 <div class="devise_box forum_container">
 
+  <% flash.each do |message_type, message| %>
+    <% if message_type == "notice" %>
+      <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></p>
+    <% elsif message_type == "alert" %>
+      <p class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %></p>
+    <% else %>
+      <div class="alert alert-<%= message_type %> alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= message %></div>
+    <% end %>
+  <% end %>
+
+
   <div class="back_to_lesson">
     <%= back_to_lesson %>
   </div>
@@ -13,6 +24,12 @@
       <div class="prof_badge">
         <% if @user.mentor %>
           <label class="label label-default">TECHRISE Mentor</label>
+        <% end %>
+      </div>
+      <div class="edit_post_links">
+        <% if current_user.id == @question.user_id %>
+          <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_question_path(@question.id), class: 'btn btn-sm btn-warning'  %>
+          <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, question_path(@question.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
         <% end %>
       </div>
     </div>
@@ -49,6 +66,12 @@
             <label class="label label-default">TECHRISE Mentor</label>
           <% end %>
         </div>
+        <div class="edit_post_links">
+          <% if current_user.id == reply.user_id %>
+            <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_question_reply_path(@question.id, reply.id), class: 'btn btn-sm btn-warning' %>
+            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, question_reply_path(@question.id, reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
+          <% end %>
+        </div>
       </div>
 
       <div class="col-xs-10">
@@ -64,7 +87,7 @@
 
   <%= simple_form_for :reply, url: question_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
-      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true %>
+      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
     </div>
     <%= f.input :user_id, as: :hidden, input_html:{ value: current_user.id } %>
 
