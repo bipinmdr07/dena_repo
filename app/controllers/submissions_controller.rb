@@ -49,7 +49,7 @@ class SubmissionsController < ApplicationController
     lesson_name = Tags::LESSONS[course_name].keys[@submission.lesson_id - 1][1]
     back_to_lesson_url = "/" + course_name + "/" + @submission.lesson_id.to_s
 
-    @submission.destroy if @submission.user_id == current_user.id
+    @submission.destroy
     
     redirect_to back_to_lesson_url
   end

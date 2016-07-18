@@ -27,7 +27,7 @@
         <% end %>
       </div>
       <div class="edit_post_links">
-        <% if current_user.id == @submission.user_id %>
+        <% if current_user.id == @submission.user_id || current_user.admin %>
           <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_path(@submission), class: 'btn btn-sm btn-warning' %>
           <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_path(@submission.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
         <% end %>
@@ -68,7 +68,7 @@
           <% end %>
         </div>
         <div class="edit_post_links">
-          <% if current_user.id == reply.user_id %>
+          <% if current_user.id == reply.user_id || current_user.admin %>
             <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_submission_reply_path(@submission.id, reply.id), class: 'btn btn-sm btn-warning' %>
             <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_submission_reply_path(@submission.id, reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
           <% end %>
