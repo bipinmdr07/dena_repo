@@ -9,6 +9,8 @@ class Progression < ActiveRecord::Base
   scope :today, -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
   # ranks :user_id
 
+  private
+
   def delete_tag_activity
     activity = PublicActivity::Activity.where('trackable_type = ? AND trackable_id = ?',  
                                             'Progression',self.id).first
