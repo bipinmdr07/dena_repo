@@ -53,7 +53,7 @@
   <hr>
 
         
-  <% @question.replies.order("created_at DESC").each do |reply| %>
+  <% @question.replies.order("created_at ASC").each do |reply| %>
     <% user = User.find(reply.user_id) %>
     <div class="row">
       <div class="col-xs-2">
