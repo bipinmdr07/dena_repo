@@ -73,6 +73,11 @@ gem 'slack-api'
 
 gem 'rails_12factor', group: :production
 
+group :test do
+  gem 'selenium-webdriver'
+  gem 'capybara'
+end
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.4'
   gem 'shoulda-matchers', '~> 3.1'

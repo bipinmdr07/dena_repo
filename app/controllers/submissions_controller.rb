@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_permissions, only: [:edit, :update, :destroy]
+  before_action :check_duplicate, only: :create
 
   def index
     @submissions = current_user.submissions.all.order("created_at DESC")
@@ -55,6 +56,12 @@ class SubmissionsController < ApplicationController
   end
 
   private
+
+  def check_duplicate
+    return unless current_user.submissions.find_by(lesson_id: submission_params[:lesson_id],
+                                        course_name: submission_params[:course_name])
+    flash[:alert] = "You have already made a submission for this lesson. Please re-submit on your existing submission page."
+  end
 
   def check_permissions
     @submission = Submission.find(params[:id])

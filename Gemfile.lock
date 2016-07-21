@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: 0ac35b7ff05246c3bc143c74fab38c4fdc0e875b
+  revision: 85ab3f5961e1fab5d5c864ba9170b5e0fd1f6548
   specs:
-    activeadmin (1.0.0.pre2)
+    activeadmin (1.0.0.pre4)
       arbre (~> 1.0, >= 1.0.2)
       bourbon
       coffee-rails
@@ -12,16 +12,16 @@ GIT
       jquery-rails
       jquery-ui-rails
       kaminari (~> 0.15)
-      rails (>= 3.2, < 5.0)
+      rails (>= 3.2, < 5.1)
       ransack (~> 1.3)
       sass-rails
-      sprockets (< 4)
+      sprockets (< 4.1)
 
 GIT
   remote: git://github.com/galetahub/ckeditor.git
-  revision: 548c065e209ed3c6e504b6cd277b6ffc635682da
+  revision: 189d3c2bc9ec177947aec6932da03eb5a03f6879
   specs:
-    ckeditor (4.1.6)
+    ckeditor (4.2.0)
       cocaine
       orm_adapter (~> 0.5.0)
 
@@ -77,10 +77,10 @@ GEM
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
     addressable (2.4.0)
-    arbre (1.0.3)
+    arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (6.0.3)
-    autoprefixer-rails (6.3.6.2)
+    autoprefixer-rails (6.3.7)
       execjs
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
@@ -93,12 +93,21 @@ GEM
       thor (~> 0.19)
     builder (3.2.2)
     byebug (9.0.5)
+    capybara (2.7.1)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     carrierwave (0.11.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -112,10 +121,10 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
-    css_parser (1.4.1)
+    css_parser (1.4.5)
       addressable
     debug_inspector (0.0.2)
-    devise (4.1.1)
+    devise (4.2.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0, < 5.1)
@@ -124,7 +133,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.2.0.1)
-    excon (0.49.0)
+    excon (0.51.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -138,6 +147,7 @@ GEM
     faye-websocket (0.9.2)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
+    ffi (1.9.14)
     figaro (1.1.1)
       thor (~> 0.14)
     fission (0.5.0)
@@ -176,16 +186,16 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.9.2)
-      fog-core (~> 1.27)
+    fog-aws (0.10.0)
+      fog-core (~> 1.38)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
       ipaddress (~> 0.8)
-    fog-brightbox (0.10.1)
+    fog-brightbox (0.11.0)
       fog-core (~> 1.22)
       fog-json
       inflecto (~> 0.0.2)
-    fog-core (1.40.0)
+    fog-core (1.42.0)
       builder
       excon (~> 0.49)
       formatador (~> 0.2)
@@ -227,7 +237,7 @@ GEM
     fog-serverlove (0.1.2)
       fog-core
       fog-json
-    fog-softlayer (1.1.1)
+    fog-softlayer (1.1.3)
       fog-core
       fog-json
     fog-storm_on_demand (0.1.1)
@@ -268,7 +278,7 @@ GEM
       railties (>= 3.2, < 5)
       responders
     ipaddress (0.8.3)
-    jbuilder (2.5.0)
+    jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     jquery-rails (4.1.1)
@@ -299,7 +309,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.0)
+    mimemagic (0.3.1)
     mini_magick (4.5.1)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
@@ -311,15 +321,15 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.4)
     pkg-config (1.1.7)
-    polyamorous (1.3.0)
+    polyamorous (1.3.1)
       activerecord (>= 3.0)
-    premailer (1.8.6)
-      css_parser (>= 1.3.6)
+    premailer (1.8.7)
+      css_parser (>= 1.4.5)
       htmlentities (>= 4.0.0)
-    premailer-rails (1.9.2)
+    premailer-rails (1.9.4)
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
-    pry (0.10.3)
+    pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
@@ -330,7 +340,7 @@ GEM
       activerecord (>= 3.0)
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
-    puma (3.4.0)
+    puma (3.5.2)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -365,36 +375,37 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (11.2.2)
-    ransack (1.7.0)
+    ransack (1.8.0)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       i18n
-      polyamorous (~> 1.2)
+      polyamorous (~> 1.3)
     rdoc (4.2.2)
       json (~> 1.4)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
-    rspec-core (3.4.4)
-      rspec-support (~> 3.4.0)
-    rspec-expectations (3.4.0)
+    rspec-core (3.5.1)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.4.0)
-    rspec-mocks (3.4.1)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.4.0)
-    rspec-rails (3.4.2)
-      actionpack (>= 3.0, < 4.3)
-      activesupport (>= 3.0, < 4.3)
-      railties (>= 3.0, < 4.3)
-      rspec-core (~> 3.4.0)
-      rspec-expectations (~> 3.4.0)
-      rspec-mocks (~> 3.4.0)
-      rspec-support (~> 3.4.0)
-    rspec-support (3.4.1)
+      rspec-support (~> 3.5.0)
+    rspec-rails (3.5.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
+    rubyzip (1.2.0)
     sass (3.4.22)
-    sass-rails (5.0.4)
-      railties (>= 4.0.0, < 5.0)
+    sass-rails (5.0.5)
+      railties (>= 4.0.0, < 6)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
@@ -402,6 +413,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (2.53.4)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     simple_form (3.2.1)
@@ -413,19 +428,20 @@ GEM
       faye-websocket (~> 0.9.2)
       multi_json (~> 1.0, >= 1.0.3)
     slop (3.6.0)
-    spring (1.7.1)
-    sprockets (3.6.0)
+    spring (1.7.2)
+    sprockets (3.6.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.0.4)
+    sprockets-rails (3.1.1)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    turbolinks (2.5.3)
-      coffee-rails
+    turbolinks (5.0.0)
+      turbolinks-source (~> 5)
+    turbolinks-source (5.0.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.0)
@@ -437,10 +453,13 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket (1.2.3)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     xml-simple (1.1.5)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -452,6 +471,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
   bootstrap-sass (~> 3.3.6)
   byebug
+  capybara
   carrierwave
   ckeditor!
   coffee-rails (~> 4.1.0)
@@ -480,6 +500,7 @@ DEPENDENCIES
   rspec-rails (~> 3.4)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  selenium-webdriver
   shoulda-matchers (~> 3.1)
   simple_form
   slack-api

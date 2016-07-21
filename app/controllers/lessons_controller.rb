@@ -20,7 +20,9 @@ class LessonsController < ApplicationController
     @course_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_name = controller + "s"
     @questions = Question.where(course_name: controller, lesson_id: params[:id])
-    @submissions = Submission.where(course_name: controller, lesson_id: params[:id])
+    @submissions = Submission.where(course_name: controller, lesson_id: params[:id], approved: true)
+    @user_submission = current_user.submissions.find_by(lesson_id: params[:id], course_name: controller_name.classify)
+    @submission_user_ids = @submissions.pluck(:user_id).uniq.first(10)
   end
 
   private
