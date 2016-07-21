@@ -31,7 +31,7 @@ feature "Submission links" do
       user_id: another_user.id, 
       approved: true,
       title: "Submission by Another User")
-    submission_by_another_user = FactoryGirl.create(:submission, 
+    submission_by_another_user_2 = FactoryGirl.create(:submission, 
       lesson_id: 4, 
       user_id: another_user_2.id, 
       approved: true,
@@ -62,19 +62,31 @@ feature "Submission links" do
 
     another_user = FactoryGirl.create(:user)
     another_user_2 = FactoryGirl.create(:user)
+    another_user_3 = FactoryGirl.create(:user)
     submission_by_another_user = FactoryGirl.create(:submission, 
       lesson_id: 4, 
       user_id: another_user.id, 
       approved: true,
       title: "Submission by Another User")
-    submission_by_another_user = FactoryGirl.create(:submission, 
+    submission_by_another_user_2 = FactoryGirl.create(:submission, 
       lesson_id: 4, 
       user_id: another_user_2.id, 
       approved: true,
       title: "Submission by Another User 2")
+    submission_by_another_user_3 = FactoryGirl.create(:submission, 
+      lesson_id: 4, 
+      user_id: another_user_3.id, 
+      approved: false,
+      title: "Submission by Another User 3")
     visit '/html_css_lessons/4'
     expect(page).to have_content "Submission by Another User"
     expect(page).to have_content "Submission by Another User 2"
+    expect(page).to have_content "Submission by Another User 3"
     expect(page).to have_content "2 students including #{another_user.name} #{another_user_2.name} have passed this assignment."
+  end
+
+  scenario "There are no submissions yet" do
+    visit '/html_css_lessons/4'
+    expect(page).to have_content "No submissions have been made for this assignment yet."
   end
 end

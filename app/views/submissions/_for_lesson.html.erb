@@ -14,7 +14,14 @@
 <br>
 <br>
 
-<% if (@user_submission && @user_submission.approved) || current_user.admin %>
+<% if current_user.admin %>
+  <%= render 'submissions/student_submissions' %>
+  <hr>
+  <% @all_submissions.order("created_at DESC").each do |submission| %>
+    <h4><%= link_to submission.title, submission_path(submission.id) %> <span class = "comment_list">by <%= User.find(submission.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %>
+    </h4>
+  <% end %>
+<% elsif (@user_submission && @user_submission.approved) %>
   <%= render 'submissions/student_submissions' %>
   <hr>
   <% @submissions.order("created_at DESC").each do |submission| %>
