@@ -1,4 +1,4 @@
-<h5><%= pluralize @submissions.count, "student" %> including
+<h5 style="line-height: 2 !important;"><%= pluralize @submissions.count, "student" %> including
   <% @submission_user_ids.each do |i| %>
     <label class="label label-default"><%= User.find(i).name %></label>
   <% end %>
