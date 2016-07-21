@@ -14,7 +14,7 @@
 <br>
 <br>
 
-<% if @user_submission && @user_submission.approved %>
+<% if (@user_submission && @user_submission.approved) || current_user.admin %>
   <%= render 'submissions/student_submissions' %>
   <hr>
   <% @submissions.order("created_at DESC").each do |submission| %>
