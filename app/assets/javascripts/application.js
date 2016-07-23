@@ -28,6 +28,10 @@ $(document).on('page:restore', function() {
   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 });
 
+$(document).ready(function() {
+   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+});
+
 /* ======= Header Background Slideshow - Flexslider ======= */    
     /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */
     

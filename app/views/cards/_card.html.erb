@@ -72,7 +72,7 @@
       <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
 
       <div style="margin: 30px auto 30px;display: table;">
-        <%= simple_form_for card, url: update_interval_path(card.id), method: :put, remote: true do |f| %>
+        <%= simple_form_for card, url: update_interval_path(card.id), method: :patch, remote: true do |f| %>
           <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
         <% end %>
       </div>

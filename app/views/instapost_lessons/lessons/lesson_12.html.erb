@@ -109,13 +109,13 @@
 </p>
 
 <p>
-  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code>. <strong>Make sure you don't replace the <code>form_for</code> line.</strong> Without the <code>html: { method: :put }</code>, the form will fail to update your <code>User</code>. Your new form in <code>edit.html.erb</code> should look like this:
+  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code>. <strong>Make sure you don't replace the <code>form_for</code> line.</strong> Without the <code>html: { method: :patch }</code>, the form will fail to update your <code>User</code>. Your new form in <code>edit.html.erb</code> should look like this:
 </p>
 
 <pre><code class="erb">
 &lt;h2&gt;Edit &lt;%= resource_name.to_s.humanize %&gt;&lt;/h2&gt;
 
-&lt;%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %&gt;
+&lt;%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch }) do |f| %&gt;
   &lt;%= devise_error_messages! %&gt;
 
   &lt;div class="field"&gt;

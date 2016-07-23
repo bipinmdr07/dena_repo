@@ -57,7 +57,7 @@ end
 <pre><code class="erb">
 &lt;h1>Revise Idea&lt;/h1&gt;
 
-&lt;%= simple_form_for @idea, method: :put do |f| %&gt;
+&lt;%= simple_form_for @idea, method: :patch do |f| %&gt;
 &lt;%= f.input :description %&gt;
   &lt;%= f.input :author %&gt;
   &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
@@ -67,11 +67,11 @@ end
 
 
 <p>
-  The only difference here is that on the first line of the simple form we are adding <code>method: :put</code>. This is just indicating that we are performing a <code>PUT</code> action, which indicates that the form's purpose is to perform an <code>update</code>. If we type <code>rake routes</code> in the terminal and look at the <code>VERB</code> column, where it lists out "VERB"s like <code>GET</code>, <code>PATCH</code>, <code>PUT</code>, <code>DELETE</code> etc. we can see that it corresponds to a controller action. For example, for <code>GET</code>, we see that it corresponds to <code>ideas#index</code>. For <code>PUT</code>, it corresponds to <code>ideas#update</code>. This means that when we submit this form, it will trigger the <code>update</code> method in the ideas controller.
+  The only difference here is that on the first line of the simple form we are adding <code>method: :patch</code>. This is just indicating that we are performing a <code>PATCH</code> request, which indicates that the form's purpose is to perform an <code>update</code>. If we type <code>rake routes</code> in the terminal and look at the <code>VERB</code> column, where it lists out "VERB"s like <code>GET</code>, <code>PATCH</code>, <code>PUT</code>, <code>DELETE</code> etc. we can see that it corresponds to a controller action. For example, for <code>GET</code>, we see that it corresponds to <code>ideas#index</code>. For <code>PATCH</code>, it corresponds to <code>ideas#update</code>. This means that when we submit this form, it will trigger the <code>update</code> method in the ideas controller.
 </p>
 
 <p>
-  Right now we don't have an <code>update</code> method, so let's add that in our <code>ideas_controller</code>.
+  Right now we don't have an <code>update</code> method, so let's add that in our <code>ideas_controller.rb</code>.
 </p>
 
 <p>

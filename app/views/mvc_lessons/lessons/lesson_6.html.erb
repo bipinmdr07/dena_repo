@@ -1,0 +1,95 @@
+<h1><%= title_for(MvcLesson, 4, 2) %></h1>
+
+
+<p>
+  Let's go back to our problem of adding a new <code>priority</code> column. Here are the steps we need to achieve this:
+</p>
+
+<ol>
+  <li>Create a migration file</li>
+  <li>Write what needs to be changed in the database in the migration file</li>
+  <li>Run <code>rake db:migrate</code> to update the database</li>
+</ol>
+
+<h3>Creating a migration file</h3>
+
+<p>
+  You can easily create a new migration file by running the following command (you can replace <code>AddPriorityToIdeas</code> with an appropriate name. It can be anything but it should make sense):
+</p>  
+
+<pre><code class="bash">
+rails generate migration AddPriorityToIdeas
+</code></pre>
+
+<p>
+  This will create a migration file in the <code>db/migrate</code> folder.
+</p>
+
+<h3>Write what needs to be changed in the database in the migration file</h3>
+
+<p>
+  Next, we need to edit this file like this:
+</p>
+
+<pre><code class="ruby">
+class AddPriorityToIdeas &lt; ActiveRecord::Migration
+  def change
+    add_column :ideas, :priority, :integer
+  end
+end
+</code></pre>
+
+<p>
+  Here we are saying, let's add a column called <code>priority</code>, which is an <code>integer</code> field to the <code>ideas</code> table.
+</p>
+
+<div class="well">
+  <h3>How to Change or Rename Database Columns</h3>
+  <p>
+    You can also change or rename database columns in migration files.
+  </p>
+
+  <ul>
+    <li>To rename database columns</li>
+    <ul>
+      <li><code>rename_column :table_name, :old_column_name, :new_column_name</code></li>
+      <li>For example, renaming the <code>description</code> column to <code>contents</code>: <code>rename_column :ideas, :description, :contents</code></li>
+    </ul>
+    <li>To change database columns (for example, changing the field type from <code>integer</code> to <code>string</code>)</li>
+    <ul>
+      <li><code>change_column :table_name, :column_name, :new_column_field_type</code></li>
+      <li>For example, changing the <code>priority</code> column from <code>integer</code> to <code>string</code>: <code>change_column :ideas, :priority, :string</code></li>
+    </ul>
+  </ul> 
+</div>
+
+<h3>Run rake db:migrate to update the database</h3>
+
+<p>
+  Finally, to make these changes, you can run <code>rake db:migrate</code>. The <code>schema.rb</code> file will be automatically updated. 
+</p>
+
+<p>
+  <strong>The key takeaway is to never edit the <code>schema.rb</code> file. Instead, create a migration file, edit the file, and run <code>rake db:migrate</code>.</strong>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

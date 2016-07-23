@@ -12,28 +12,23 @@ class MvcLesson < ActiveRecord::Base
     ["Introduction to MVC", 
       [
         [1, "What is MVC?"],
-        [2, "Overview of how everything works together"],
-        [3, "Routes"],
-        [4, "The Controller"]
+        [2, "Overview of how everything works together"]
       ]
     ],
-    ["Routes", 
+    ["HTTP Methods", 
       [
-        [5, "rake routes"],
-        [6, "routes.rb"]
+        [3, "Overview of HTTP Methods"]
       ]
     ],
-    ["Controllers and Views", 
+    ["Model Methods", 
       [
-        [7, "Instance Variables in the Controller"],
-        [8, "What do web developers do?"],
-        [9, "What language should I learn?"],
-        [10, "Overview of languages and tools"]
+        [4, "Rails for Zombies"]
       ]
     ],
-    ["The Model",
+    ["Migrations",
       [
-        [11, "Common Model Methods"]
+        [5, "What is schema.rb?"],
+        [6, "Adding and Updating Database Columns"]
       ]
     ],
     ["Migrations", 
