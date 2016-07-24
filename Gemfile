@@ -68,6 +68,10 @@ gem 'nokogiri' # dependency for above
 # slack api calls
 gem 'slack-api'
 
+# pagination
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

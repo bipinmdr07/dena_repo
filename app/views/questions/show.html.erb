@@ -7,7 +7,7 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-12 col-sm-2">
       <%= image_tag @user.avatar, class: 'prof_pic_forum' %>
       <div class="prof_name">
         <%= @user.name %>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div class="col-xs-10">
+    <div class="col-xs-12 col-sm-10">
       <h3><%= @question.title %></h3>
       <small><%= display_date(@question.created_at) %></small>
       <br>
