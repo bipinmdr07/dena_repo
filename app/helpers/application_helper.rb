@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def og_image(image)
+    content_for(:og_image) { image }
+  end
+
+  def og_title(page_title)
+    content_for(:og_title) { page_title }
+  end
+
   def title(page_title)
     content_for(:title) { page_title }
   end

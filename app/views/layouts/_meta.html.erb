@@ -26,7 +26,17 @@
 
 <!-- facebook Open Graph -->
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="Coding Bootcamp in Nepal | TECHRISE"/>
+<% if content_for?(:og_title) %>
+  <meta property="og:title" content="<%= content_for(:og_title) %>"/>
+<% else %>
+  <meta property="og:title" content="Coding Bootcamp in Nepal | TECHRISE"/>
+<% end %>
 <meta property="og:url" content = "http://www.techrise.me/">
-<meta property="og:image" content="http://www.techrise.me<%= asset_path 'startup2.jpg' %>"/>
+
+<% unless @post.nil? %>
+  <meta property="og:image" content="<%= asset_path @post.featured_image %>"/>
+<% else %>
+  <meta property="og:image" content="http://www.techrise.me<%= asset_path 'startup2.jpg' %>"/>
+<% end %>
+
 <meta property="og:description" content="Learn how to code with interactive lessons and personal mentors at TECHRISE. Learn how to create web applications with HTML/CSS, Ruby on Rails, JavaScript, and other essential skills for all aspiring web developers and entrepreneurs."/>
