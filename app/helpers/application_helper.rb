@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def title(page_title)
+    content_for(:title) { page_title }
+  end
+
   def display_date(datetime)
     datetime.strftime("%m/%d/%Y")
   end
