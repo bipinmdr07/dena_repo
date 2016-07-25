@@ -22,17 +22,6 @@
 //= require_tree .
 
 
-
-// ready = function() {
-//   hljs.initHighlighting.called = false;
-//   hljs.initHighlighting();
-// }
-// $(document).ready(ready);
-// $(document).on('page:load', ready);
-
-
-
-
 /* ======= Header Background Slideshow - Flexslider ======= */    
     /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */
     
