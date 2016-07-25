@@ -8,9 +8,14 @@ class CommandLineLesson < ActiveRecord::Base
   PERIOD = "1"
 
   LESSONS = [
-    ["Become a Command Line Ninja", 
+    ["Command Line Basics", 
       [
-        [1, "Learn the Command Line"]
+        [1, "4 Commands You Need to Know"]
+      ]
+    ],
+    ["Become a Command Line Ninja (Optional)", 
+      [
+        [2, "Learn the Command Line"]
       ]
     ]
   ]

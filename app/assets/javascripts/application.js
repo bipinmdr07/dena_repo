@@ -21,6 +21,14 @@
 //= require turbolinks
 //= require_tree .
 
+function ready() {
+  $('pre code').each(function(i, e) {hljs.highlightBlock(e)}); 
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
+
+
 $(document).on('page:change',  function() {
   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 });
@@ -28,9 +36,6 @@ $(document).on('page:restore', function() {
   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
 });
 
-$(document).ready(function() {
-   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-});
 
 /* ======= Header Background Slideshow - Flexslider ======= */    
     /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */

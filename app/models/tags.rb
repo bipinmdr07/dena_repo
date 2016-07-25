@@ -47,7 +47,8 @@ class Tags < ActiveRecord::Base
       [3, "Foobar Problem"] => %w(foobar)
     },
     "command_line_lessons" => {
-      [1, "Learn the Command Line"] => %w(ruby)
+      [1, "4 Commands You Need to Know"] => %w(command line),
+      [2, "Learn the Command Line"] => %w(command line)
     },
     "ruby_core_lessons" => {
       [1, "Practice, Practice, Practice"] => %w(ruby),
@@ -119,7 +120,8 @@ class Tags < ActiveRecord::Base
     "github_lessons" => {
       [1, "Git Real"] => %w(),
       [2, "Try Git"] => %w(),
-      [3, "Git - the simple guide"] => %w()
+      [3, "Git - the simple guide"] => %w(),
+      [4, "Going Deeper"] => %w()
     },
     "rspec_blog_lessons" => {
       [1, "Why test?"] => %w(),

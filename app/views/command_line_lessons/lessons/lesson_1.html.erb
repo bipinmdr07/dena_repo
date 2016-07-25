@@ -8,11 +8,148 @@
   As we get ready to build out our rails application, we need to learn how to use the command line. Using the command line effectively will enable us to develop our web applications much more efficiently.
 </p>
 
-<h3>Assignment</h3>
+<p>
+  Let's get ready to learn some commands! :) This lesson is going to be an overview of the most used commands when doing web development. It won't cover all of the commands, but only the necessary ones to get you started.
+</p>
+
+<p>
+  Here is a list of the commands we will be convering:
+</p>
+
 <ul>
-  <li>Go to <%= link_to 'this link', 'https://www.codecademy.com/learn/learn-the-command-line' %></li>
-  <li>Finish All Lessons That Aren't Labeled Pro</li>
-  <li>Paste a screenshot of your Codecademy screen to show that you have completed all of the lessons</li>
+  <li><code>cd</code> - change directory</li>
+  <li><code>pwd</code> - print working directory (print the directory you are working in)</li>
+  <li><code>ls</code> - list directory contents (list the contents of the directory)</li>
+  <li><code>mkdir</code> - make directory (create a file)</li>
 </ul>
 
-<% @submission_form = true %>
+<p>
+  First, let's open up our terminal so that we can practice some commands.
+</p>
+
+<h3>cd</h3>
+
+<p>
+  The <code>cd</code> command is perhaps the command that you will use most. <code>cd</code> stands for <strong>Change Directory</strong>. We use it when we want to navigate to different directories in the terminal.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  We've used it numerous times in our lessons before, for example running commands like this:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop/ideator
+</code></pre>
+
+<p>
+  This command is saying, let's change the directory (<code>cd</code>) to the <code>~/desktop/ideator</code> directory.
+</p>
+
+<p class="alert alert-info"> 
+  The <code>~</code> means the home directory of the logged on user.
+</p>
+
+<p>
+  Let's go into our terminal and run the following command:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop/ideator
+</code></pre>
+
+<p>
+  We are now in our Ideator project folder. Let's type the following:
+</p>
+
+<pre><code class="bash">
+pwd
+</code></pre>
+
+<p>
+  This should print out something like this:
+</p>
+
+<pre><code class="bash">
+/Users/YourUsername/desktop/ideator
+</code></pre>
+
+<h3>pwd</h3>
+
+<p>
+  <code>pwd</code> stands for <strong>Print Working directory</strong>. You can use wheneever you need to know which directory you are in.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+Right now we are in the <code>~/desktop/ideator</code> directory. What if we want to navigate to our <code>desktop</code> directory? One option would be to run this command:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop
+</code></pre>
+
+<p>
+  However, instead you could also do this:
+</p>
+
+<pre><code class="bash">
+cd ..
+</code></pre>
+
+<p>
+  Typing <code>..</code> will direct you to the directory above the current directory. In other words, if we are in the <code>~/desktop/ideator</code> directory, the directory above it is <code>~/desktop</code>.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  You can even do this:
+</p>
+
+<pre><code class="bash">
+cd ../..
+</code></pre>
+
+<p>
+  This will navigate 2 directories up. In our terminal, let's run the following:
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
