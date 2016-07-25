@@ -1,3 +1,5 @@
+<% title("All Courses | TECHRISE") %>
+
 <% if @last_lesson %>
 
   <% lesson_name = Tags::LESSONS[@last_lesson.parameters[:course_name].underscore + "s"].keys[@last_lesson.parameters[:lesson_id].to_i - 1][1] %>
