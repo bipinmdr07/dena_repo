@@ -15,11 +15,7 @@ Rails.application.routes.draw do
     resources :replies, only: [:create, :edit, :update, :destroy]
   end
   
-  resources :forums do
-  	resources :comments do
-      post :replies, :to => 'replies#create'
-    end
-  end
+  resources :community, only: :index
 
   resources :submissions do
     resources :submission_replies, only: [:create, :edit, :update, :destroy]

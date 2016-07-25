@@ -68,6 +68,15 @@ gem 'nokogiri' # dependency for above
 # slack api calls
 gem 'slack-api'
 
+# pagination
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
+
+# elasticsearch
+gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
+gem 'bonsai-elasticsearch-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

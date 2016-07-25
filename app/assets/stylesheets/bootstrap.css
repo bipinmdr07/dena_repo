@@ -4728,7 +4728,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   color: #337ab7;
   text-decoration: none;
   background-color: #fff;
-  border: 1px solid #ddd;
+/*  border: 1px solid #ddd;*/
 }
 .pagination > li:first-child > a,
 .pagination > li:first-child > span {

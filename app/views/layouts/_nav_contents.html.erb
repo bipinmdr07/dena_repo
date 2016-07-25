@@ -28,6 +28,10 @@
                     </li>
 
                     <li class="nav-item page-scroll">
+                      <%= link_to 'COMMUNITY', community_index_path %>
+                    </li>
+
+                    <li class="nav-item page-scroll">
                       <% 
                         @cards = current_user.cards.where(repetition_date: nil)
                         @cards += current_user.cards.today
