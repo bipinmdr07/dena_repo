@@ -149,7 +149,15 @@ class Tags < ActiveRecord::Base
       [23, "Model Tests"] => %w(),
       [24, "Self-Directed Lesson: Tidying things up"] => %w(),
       [25, "TDD: Final Thoughts"] => %w()
-    }
+    },
+    "mvc_lessons" => {
+      [1, "What is MVC?"] => %w(),
+      [2, "Overview of how everything works together"] => %w(),
+      [3, "Overview of HTTP Methods"] => %w(),
+      [4, "Rails for Zombies"] => %w(),
+      [5, "What is schema.rb?"] => %w(),
+      [6, "Adding and Updating Database Columns"] => %w()
+    },
   }
 
 end
