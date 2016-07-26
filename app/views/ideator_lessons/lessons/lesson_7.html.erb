@@ -29,7 +29,7 @@
 </p>
 
 <p>
-	If we go to <a href = "https://www.google.com/fonts" target = "_blank">Google Fonts</a>, we can see that there are a bunch of fonts that we can use.I like the font “Pacifico” so I’m going to go ahead and search for “Pacifico” in the search bar.
+	If we go to <a href = "https://www.google.com/fonts" target = "_blank">Google Fonts</a>, we can see that there are a bunch of fonts that we can use. I like the font “Pacifico” so I’m going to go ahead and search for “Pacifico” in the search bar.
 </p>
 
 <p>
@@ -44,7 +44,7 @@
 
 <%= image_tag 'googlefonts2.png', class: "screenshot" %>
 <p>
-	We’re just going to copy and paste the code that they have here and put it in our &lt;head&gt; section in <code>application.html.erb</code>.
+	We’re just going to copy and paste the code that they have here and put it in our <code>&lt;head&gt;</code> section in <code>application.html.erb</code>.
 </p>
 
 <p>
@@ -60,11 +60,32 @@
 </p>
 
 <p>
-	To use this font for the brand name in the navbar, we need to specify the font using CSS. If we go back to the bootstrap navbar we implemented and focus on which CSS class the brand text belongs to, we notice that it belongs to a <code>navbar-brand</code> class. This means that we can apply CSS styling to <code>.navbar-brand</code> to apply our new font.
+	To use this font for the brand name in the navbar, we need to specify the font using CSS. If we go back to the bootstrap navbar we implemented and look at which CSS class the brand text belongs to, we notice that it belongs to a <code>navbar-brand</code> class. This means that we can apply CSS styling to <code>.navbar-brand</code> to apply our new font.
 </p>
 
 <p>
-	In <code>application.scss</code>, let’s apply the font to our brand by adding this line:
+  Let's create a new <code>SCSS</code> file to store our styling. In sublime, create a new file in <code>app/assets/stylesheets</code> called <code>master.scss</code>. We will put all of our CSS styling in this folder.
+</p>
+
+<div class="well">
+  <h3>What is SCSS?</h3>
+
+  <p>
+    SCSS files are CSS files that with super powers. SCSS stands for <strong>Sassy CSS</strong>. Rails uses SCSS by default. You can use the normal CSS syntax in these SCSS files as you would with CSS files.
+  </p>
+
+  <p>
+    We won't get into how you can use SCSS here (we'll do that in another lesson), but if you want to learn about SCSS, here are a few resources to get you started:
+  </p>  
+
+  <ul>
+    <li><%= link_to 'http://sass-lang.com/guide' %></li>
+    <li><%= link_to 'https://css-tricks.com/sass-style-guide/' %></li>
+  </ul>
+</div>
+
+<p>
+	In <code>master.scss</code>, let’s apply the font to our brand by adding this line:
 </p>
 
 <pre><code class = "css">
@@ -92,7 +113,7 @@
 	If you found correctly, the <code>.navbar-default</code> class is responsible for the color of the navbar. Since I want a clean looking site, I’m going to change the background color of <code>.navbar-default</code> to white.
 </p>
 
-<p>So let’s go into our <code>application.scss</code> and add this in.</p>
+<p>Let’s go into our <code>application.scss</code> and add this in.</p>
 
 <pre><code class = "css">
 .navbar-default {
@@ -105,7 +126,7 @@
 </p>
 
 <p>
-	We can play around with the font styles by adding something like this to our <code>application.scss</code>
+	We can play around with the font styles by adding something like this to our <code>master.scss</code>
 </p>
 
 <pre><code class = "css">

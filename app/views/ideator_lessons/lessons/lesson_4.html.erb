@@ -1,11 +1,11 @@
 <h1><%= title_for(IdeatorLesson, 2, 2) %></h1>
 
 <p>
-	Okay cool. Now let’s open up Sublime Text and open the folder called “Ideator” located in the desktop that contains our rails application.
+	Now let’s open up Sublime Text and open the folder called “Ideator” located in the desktop that contains our rails application.
 </p>
 
 <p>
-	You can see all the files that rails generated for us. Now we’re going to generate some more. Let’s hop into our terminal and type in this command:
+	Let’s hop into our terminal (the terminal window that isn't running the rails server) and run the following command:
 </p>
 
 <pre><code class="bash">
@@ -13,7 +13,7 @@ rails generate controller ideas
 </code></pre>
 
 <p>
-	This command generates a <code>controller</code> called <code>ideas</code> for you and will also generate a lot of files again. Don’t worry too much about what this piece of code does yet. Things will start coming together as we progress, but for now we want you to start building an app first. This will keep you motivated from the start and help you overcome the first initial wall.
+	This command generates a <code>controller</code> called <code>ideas</code> for you and will also generate a lot of files. Don’t worry too much about what this piece of code does yet. Things will start coming together as we progress, but for now we want you to start building an app first. This will keep you motivated from the start and help you overcome the first initial wall.
 </p>
 
 <p>
@@ -32,15 +32,15 @@ end
 </code></pre>
 
 <p>
-	Now when we ran <code>rails generate controller ideas</code>, we also generated an ideas folder in the views folder. Views are basically where all of the html files are stored (html files can be “view”ed, hence they are called Views”.
+	When we ran <code>rails generate controller ideas</code>, a folder called <code>ideas</code> was generated in the <code>app/views</code> folder.
 </p>
 
 <p>
-	Let’s right click on that ideas folder and create a new file. Let’s save that file as <code>index.html.erb</code>.
+	In Sublime, let’s right click on the <code>ideas</code> folder and create a new file. Let’s save that file as <code>index.html.erb</code>.
 </p>
 
 <p>
-	Inside index.html.erb, let’s add this:
+	Inside <code>index.html.erb</code>, let’s add this:
 </p>
 
 <pre><code class="erb">
@@ -49,23 +49,44 @@ end
 
 <p>Awesome! Now let’s hop back into our browser and refresh <code>localhost:3000</code>.</p>
 
-<p>...nothing has changed. Hmm.</p>
+<p>...nothing has changed. It's still on the Ruby on Rails Welcome Page. Hmm.</p>
 
 <p>
-	Well it turns out that you have tell rails where your homepage should be. The way we do that is by changing the routing of the pages.
+	It turns out that you have tell rails where your default homepage should be. It looks like we need to configure some things.
+</p>
+
+
+<p>
+	Inside sublime let’s open up <code>routes.rb</code>. This file defines how the internals of the web application is hooked up when a user goes to a specific URL. For example, it defines which pages should show up when a user goes to a URL.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+	Inside this file, let’s delete <code># root 'welcome#index'</code> and instead replace it with <code>root ‘ideas#index’</code>.
 </p>
 
 <p>
-	Inside sublime let’s open up <code>routes.rb</code>. This is the file where you can tell rails how you want to ‘route’ your pages, meaning you can tell rails how to generate URLs.
+	Here, we are telling rails that when the user accesses the 'root' of the application (the homepage), it will trigger the <code>index</code> action (another word for method) in the <code>ideas_controller.rb</code>. 
 </p>
 
 <p>
-	Inside this file, let’s delete <code>root 'welcome#index'</code> and instead replace it with <code>root ‘ideas#index’</code>.
+	By default, when a method is triggered in the controller (in this case, the <code>index</code> method is triggered), then Rails will try to find an <code>html</code> file that has the same name as the method (in this case <code>index</code>) to display to the user in the <code>views</code> directory under the controller name's folder.
 </p>
 
+<%= create_flashcard %>
+
 <p>
-	So what we’re telling rails here is that we want to have the ‘root’, or the homepage of the application as index in the ideas controller, which we just set up.
+	To clear things up, this is what happens:
 </p>
+
+<ul>
+	<li>A user accesses the root page (the homepage)</li>
+	<li>The <code>index</code> action in <code>ideas_controller.rb</code> is triggered</li>
+	<li>Rails tries to find an <code>html</code> file that is named <code>index</code> in the <code>views/ideas</code> directory</li>
+	<li>Rails finds the <code>idea.html.erb</code> file</li>
+	<li>Rails displays the file</li>
+</ul>
 
 <p>
 	Now let’s hop back into <code>localhost:3000</code> and let’s see what happens.
@@ -84,8 +105,10 @@ end
 </div>
 
 <p>
-	Let’s now commit this to GitHub. Committing to Github is another way of saying, uploading our code up to Github.
+	Let’s now commit this to GitHub. "Committing to Github" is another way of saying, "uploading our code up to Github".
 </p>
+
+<%= create_flashcard %>
 
 <p>We’re first going to add all the files that we just updated:</p>
 

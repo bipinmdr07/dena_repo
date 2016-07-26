@@ -5,46 +5,87 @@
 </p>
 
 <p>
-	This time with rails, instead of using the CDN to use bootstrap, we are going to use a <strong>gem</strong>. <strong>Gems are basically super useful packages of code that solve common problems</strong>, for instance installing bootstrap in this case. There are gems for mostly every common problem - forms, user log in/authentication, messagers, etc. <strong>Smart people have created these solutions for us already so it’s stupid to reinvent the wheel most of the time.</strong>
+	This time with rails, <strong>instead of using the CDN to use bootstrap, we are going to use a thing called a gem</strong>. 
 </p>
+
+<div class="well">
+  <h3>What are gems?</h3>
+  <p>
+    <strong>Gems are basically super useful packages of code that solve common problems</strong>, for instance installing bootstrap in this case. 
+  </p>
+
+  <p>
+    There are gems for mostly every common problem - forms, user log in/authentication, messagers, etc. <strong>Smart people have created these solutions for us already so it’s stupid to reinvent the wheel most of the time.</strong>
+  </p>
+
+  <%= create_flashcard %>
+</div>
 
 <p>Let’s go ahead and install our first gem.</p>
 
-<p>In sublime, let’s open up <code>gemfile</code>. You’ll see a bunch of gems inside this file.</p>
+<p>In sublime, let’s open up <code>gemfile</code>. You’ll see a list of gems already included in the application inside this file.</p>
 
 <p>
-	In order to install bootstrap, we're going to add the <code>bootstrap-sass</code> gem here. The documentation can be found <a href="https://github.com/twbs/bootstrap-sass" target="_blank">here</a>. Typically, the instructions on how to install and use these gems are written inside the documentation. Let's look at the documentation and follow the instructions.
+	In order to install bootstrap, we're going to use a gem called the <code>bootstrap-sass</code> gem. The documentation can be found <a href="https://github.com/twbs/bootstrap-sass" target="_blank">here</a>. Typically, the instructions on how to install and use these gems are written inside the documentation. Let's look at the documentation and follow the instructions.
 </p>
 
-<p>Like the documentation tells us, inside our <code>gemfile</code> let’s add</p>
+<div class="well">
+  <h3>Documentation</h3>
+
+  <p>
+    Many tools that are developed for software engineers come with documentation. Documentation provides a manual for how to use the tool and are useful in figuring out exactly how to use the tool.
+  </p>
+
+  <p>
+    As a web developer, you will spend a lot of time reading documentation to try to figure out how to use various tools. That's why it's super important to get used to reading documentation.
+  </p>
+</div>
+
+<p>The documentation tells us that inside our <code>Gemfile</code> we need to add the following lines of code in the <code>Gemfile</code>. Let's go ahead and add the code into our <code>Gemfile</code>.</p>
 <pre><code class="bash">
 gem 'bootstrap-sass', '~> 3.3.6'
 </code></pre>
 
-<p>Next, inside our console let’s run</p>
+<p>Next, inside our terminal, let’s run the following command:</p>
 
 <pre><code class="bash">
 bundle install
 </code></pre>
 
+<div class="well">
+  <h3>The bundle install command</h3>
+
+  <p>
+    Whenever you add a new gem to the <code>Gemfile</code>, you need to install it into the application. You can install the gem into your application by running the <code>bundle install</code> command.
+  </p>  
+
+  <p>
+    Running <code>bundle install</code> will install all of your new gems at once, and you will be using this command a lot as a Rails developer.
+  </p>
+
+  <%= create_flashcard %>
+</div>
+
 <p>
-	This will install the gems for us. <strong>Every time we run bundle install, we have to restart the server.</strong> Let’s go back into the console where the server is running and restart it.
+	<strong>Every time we run bundle install, we should restart the server.</strong> Let’s go back into the console where the server is running and restart it.
 </p>
 
 <div class="well">
   <h3>How to restart the server</h3>
   <p>To restart the server, first hit <code>Control + C</code> to stop the server. Then to start the server again, hit the up arrow and press enter, or type in <code>rails server</code> again.</p>
+
+  <%= create_flashcard %>
 </div>
 
-<p>Awesome. Next, it’s telling us to rename <code>application.css</code> to <code>application.scss</code>. We could manually rename it, but the documentation also gives us a simple command that we can run in the console that does just this.</p>
+<p>Awesome. Next, the documentation is telling us to rename <code>application.css</code> to <code>application.scss</code>. We could manually rename it, but the documentation also gives us a simple command that we can run in the console that does just this. Let's run the following command in the terminal:</p>
 
 <pre><code class="bash">
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 </code></pre>
 
-<p>Let’s run the command above to rename the file.</p>
+<p>The commmand above will rename the <code>application.css</code> file to <code>application.scss</code>.</p>
 
-<p>Now inside <code>application.scss</code>, let’s copy and paste the following code like this:</p>
+<p>Next, inside <code>application.scss</code>, let’s copy and paste the following code like this:</p>
 
 <pre><code class="bash">
 @import "bootstrap-sprockets";
@@ -76,6 +117,30 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 
 <p>The documentation tells us to remove all the <code>*= require_self</code> and <code>*= require_tree .</code> statements from the sass file but <strong>let’s not worry about this and ignore it.</strong></p>
 
+<p>
+  In order to get rid of some weird bugs later on, let's switch the order of <code>*= require_self</code> and <code>*= require_tree .</code>. Your <code>application.scss</code> should now look like this:
+</p>  
+
+<pre><code class="bash">
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+</code></pre>
+
 <p>Next it tells us to copy and paste this into <code>application.js</code></p>
 
 <pre><code class="bash">
@@ -102,7 +167,7 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 <div class="well">
   <h3>Not working?</h3>
   <p>
-    Whenever your app is not behaving like it should be after installing a gem or changing something, you want to make sure that you <strong>restart the server</strong>. Make sure to restart the server and a lot of times the problems will be fixed :)
+    Whenever your app is not behaving like it should be after installing a gem or changing something, you want to make sure that you <strong>restart the server</strong>. Restarting the server will fix a lot of problems when dealing with Rails.
   </p>
 </div>
 
@@ -117,14 +182,4 @@ git push origin master
 </code></pre>
 
 
-
-
-<script>
-$( '#HideHighFive' ).click(function() {
-	$( '#HideHighFive' ).hide();
-	$( " #HighFive " ).show();
-  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
-  $( '#HideHighFive' ).delay(2000).show(0);
-});
-</script>
 

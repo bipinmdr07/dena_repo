@@ -9,11 +9,13 @@
 </p>
 
 <p>
-	What we want is a brand name on the left and 3 links aligned to the right.
+	What we want is a brand name on the left and 3 links aligned to the right, like this:
 </p>
 
+<%= image_tag 'ideator/navbar.png', class: 'img-responsive screenshot' %>
+
 <p>
-  Take a look at the completed app <a href="http://techrise-ideator.herokuapp.com/" target="_blank">here</a> for reference. Don't worry about actually implementing the links, just leave the URLs as blank (<code>&lt;a&gt; href = "" &lt;/a&gt;</code>). Also don't worry about the styling as we'll get to that in the next lesson. Just focus on implementing the bootstrap navbar into your web app for now.
+  Don't worry about actually implementing the links, just leave the URLs as blank (<code>&lt;a&gt; href = "" &lt;/a&gt;</code>). Also don't worry about the styling since we'll get to that in the next lesson. Just focus on implementing the bootstrap navbar into your web app for now.
 </p>
 
 <div class="well">
@@ -24,7 +26,19 @@
   </p>
 
   <p>
-    If we look in the file, we see a <code>&lt;%= yield %&gt;</code>. This piece of code is really important. <strong>Don't remove this piece of code</strong>! Remember how <code>application.html.erb</code> is a template for all of your pages? Well <code>&lt;%= yield %&gt;</code> is where the content of all of your pages will be inserted.
+    If we look in the file, we see a <code>&lt;%= yield %&gt;</code>. This piece of code is really important. <strong>Don't remove this piece of code</strong>!
+  </p>
+
+  <p>
+    <code>application.html.erb</code> serves as a template for all of your pages by default. This means that in general, anything we put inside <code>application.html.erb</code> will show up for all of our pages.
+  </p>
+
+  <p>
+    For example, things like the navigation bar and the footer are elements that we need for every one of our web pages. Putting these elements in <code>application.html.erb</code> is a good idea, since it will show up for all of our web pages.
+  </p>  
+
+  <p>
+    <code>&lt;%= yield %&gt;</code> on the other hand, will display the information of the specific web page that you are currently on right now.
   </p>
 
   <p>
@@ -40,8 +54,8 @@
   </p>
 
   <ol>
-    <li><code>application.html.erb</code> gets loaded as the template</li>
-    <li><code>&lt;%= yield %&gt;</code> gets replaced by <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code></li>
+    <li><code>application.html.erb</code> is loaded</li>
+    <li><code>&lt;%= yield %&gt;</code> is replaced by <code>&lt;h1&gt;Hello <%= current_user.name %>&lt;/h1&gt;</code></li>
   </ol>
 
   <p>
@@ -87,7 +101,7 @@
   </p>
 
   <p>
-    This might be a hard concept to grasp at first, so ask questions on Slack or to your mentor to figure it out! :)
+    This might be a hard concept to grasp at first, so make sure to ask questions until you figure this out.
   </p>
 
   <p>
@@ -105,17 +119,6 @@
 </p>
 
 <p>
-	Best of luck! I know you’ll get through this! :)
+	Good luck on your first self-directed lesson! 
 </p>
-
-
-
-<script>
-$( '#HideHighFive' ).click(function() {
-	$( '#HideHighFive' ).hide();
-	$( " #HighFive " ).show();
-  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
-  $( '#HideHighFive' ).delay(2000).show(0);
-});
-</script>
 

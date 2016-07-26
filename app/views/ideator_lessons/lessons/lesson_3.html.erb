@@ -12,7 +12,7 @@
 	So here’s what I did for this app. I took out a piece of paper and just drew up some rough sketches for the app like this:
 </p>
 
-<%= image_tag 'ideator_wireframes.jpg', class: 'screenshot' %>
+<%= image_tag 'ideator/ideator_wireframes.jpg', class: 'img-responsive screenshot' %>
 
 <p>
 	As you can see, the wireframes don't have to be perfect, it just needs to get the job done! The key here is to visualize what features you want on your web application so that it's easier to think through how to build your web application.
@@ -25,24 +25,45 @@
 </p>
 
 <p>
-	In our app, we want the <strong>ability to post ideas</strong>. In order to build the ability to post ideas in the app, <strong>we need to store the ideas in a database</strong>.
+	In our app, we want to be able to <strong>post ideas</strong> on to the application. In order to do that, we need to store the ideas into a database.
 </p>
 
 <p>
-	Let’s think about what pieces of information we want to store for this app. We want one piece of information which would be a <strong>description</strong> of what the idea is, and another which would be the <strong>author</strong> of the idea.
+	Let’s think about what pieces of information we want to store for this app. 
+</p>
+
+<ul>
+	<li>One piece of information we need is a <strong>description</strong> of what the idea is</li>
+	<li>Another piece of information we need is the <strong>author</strong> of the idea</li>
+</ul>
+
+<p>
+	In other words, each idea will have two pieces of information attached to it, a <code>description</code> and an <code>author</code>. So when we save our ideas into the database, we are saving the author of the idea and the description of the idea. We can then retreive the idea and show who thought of the idea and what the idea is all about.
 </p>
 
 <p>
-	In other words, each idea will have two pieces of information attached to it, a <code>description</code> and an <code>author</code>. 
+	Whenever you are creating an application, it is useful to think about what kind of information you need to store. In this case, we want to store ideas into the database, and for each idea, we want to store the description and author of the idea.
 </p>
 
-<!-- <p>
-  Think of this as if you were to save information into an excel file. You would have columns in the excel file for each piece of information you want to store.
-</p> -->
+<div class="well">
+	<h3>How to Progress Through the Lessons</h3>
 
-<p>
-	This will become useful later on, so <strong>don't worry if you feel like what we just did is confusing</strong>. Let’s just keep this in mind for now and move on.
-</p>
+	<p>
+		Many things in this course will not make sense to you right now. Don't worry this is by design :)
+	</p>
+
+	<p>
+		For this first application we are making, we want to give you the experience of actually building a web application. You don't need to understand 100% of the things covered in the lessons right now. <strong>It usually takes around 3 ~ 8 weeks, or even mor</strong> to start understanding everything we are going to do in the following lessons.
+	</p>
+
+	<p>
+		You will probably feel like you kind of understand the material, but if you were to do it yourself, it would be impossible. <strong>This is OK, there is no need to worry :)</strong> As you build applications throughout the TECHRISE curriculum and as you ask more and more questions, you will slowly start to understand how everything works.
+	</p>
+
+	<p>
+		For the first application, let's focus on having fun and building an actual application.
+	</p>
+</div>
 
 
 
