@@ -5,15 +5,27 @@
 </p>
 
 <p>
-  Let's go to our console and type in <code>rails console</code> (or <code>rails c</code> for short) to open up the rails console. In the rails console, we can type in ruby code to interact with our rails application.
+  Let's go to our terminal (the one that is not running the rails server) and type in <code>rails console</code> (or <code>rails c</code> for short) to open up the rails console. In the rails console, we can type in ruby code to interact with our rails application.
 </p>
 
-<p class="alert alert-danger">
-  You can not type in regular commands such as <code>git add .</code> or <code>rake routes</code> inside the rails console. Make sure to type <code>exit</code> in the terminal to exit out of the rails console before trying to execute other commands.
-</p>
+<div class="well">
+  <h3>Rails Console</h3>
+
+  <p>
+    The rails console is used to execute ruby commands. However, you can not run commands such as <code>git add .</code> or <code>rake routes</code> since they are not commands written in the ruby language.
+  </p>
+
+  <p>
+    When you want to run commands that are not in the ruby language, make sure to exit out of the rails console. You can do that by typing in the following command:
+  </p>
+
+<pre><code class="bash">
+exit
+</code></pre>
+</div>
 
 <p>
-  First, let's add an Idea to our app through the console. Type in the following in the rails console:
+  First, let's create an Idea in our app through the console. Type in the following in the rails console:
 </p>
 
 <pre><code class="ruby">
@@ -21,12 +33,75 @@ Idea.create(description: "This is the greatest idea ever", author: "Me")
 </code></pre>
 
 <p>
-  Press enter to add the idea. Here we are saying, create an idea with the following information <code>(description: "This is the greatest idea ever", author: "Me")</code>. Now let's try to display all of our ideas in the console. We can do this by typing the following:
+  Press enter to create the idea and save it into the database. Here we are saying, create an idea with the following information <code>(description: "This is the greatest idea ever", author: "Me")</code>.
+</p>
+
+<div class="well">
+  <h3>create</h3>
+
+  <p>
+    In previous lessons, we created database migrations and added in the ideas table to our database. Now that we've got a table to store our information in, how can we actually save our ideas into the database?
+  </p>
+
+  <p>
+    Rails offers a method called <code>create</code>. The <code>create</code> method will create a new instance of the object and save it into the database.
+  </p>
+
+  <%= create_flashcard %>
+
+  <p>
+    For instance, if we want to create a new idea, we can run the following command:
+  </p>  
+
+<pre><code class="ruby">
+Idea.create
+</code></pre>
+
+  <p>
+    However, this will create an <code>Idea</code> object that is empty.<strong> Since we made a database migration to create a column for <code>description</code> and <code>author</code> for each idea, we need to tell Rails what we should store for each of the columns. In order to specify the information for the idea we need to pass in the information as parameters.</strong> Take a look at the following code we just executed above:
+  </p>
+
+<pre><code class="ruby">
+Idea.create(description: "This is the greatest idea ever", author: "Me")
+</code></pre>
+
+  <p>
+    In this case, we are passing in <code>description: "This is the greatest idea ever", author: "Me"</code> as the parameters. By passing these values as parameters, we are telling Rails what the description should be and who the author should be for the idea.
+  </p>
+
+  <%= create_flashcard %>
+
+  <p>
+    In short, you can create an instance of an object with the following format:
+  </p>
+
+<pre><code class="ruby">
+ModelName.create(column_name_1: value, column_name_2: value, ...)
+</code></pre>
+
+</div>
+
+<p>
+   Now let's try to display all of our ideas in the console. We can do this by typing the following:
 </p>
 
 <pre><code class="ruby">
 Idea.all
 </code></pre>
+
+<div class="well">
+  <h3>all</h3>
+
+  <p>
+    You can display all instances of an object in the rails console with the <code>all</code> method. For example, let's say we have 10 ideas stored in our database. We can display all 10 of these ideas in the rails console by running this command:
+  </p>
+
+<pre><code class="ruby">
+Idea.all
+</code></pre>
+
+  <%= create_flashcard %>
+</div>
 
 <p>
 This is going to print out something like below:
@@ -37,16 +112,12 @@ This is going to print out something like below:
 </code></pre>
 
 <p>
-  By typing in the <code>Idea.all</code> command, you can see all the instances of the <code>Idea</code>s stored in your database. As we add more ideas, we'll see that <code>Idea.all</code> will spit out more and more ideas.
+  Let's add some more ideas. Type in the following command in the rails console:
 </p>
 
-<p>
-  Let's add some more ideas. Type in the following:
-</p>
-
-<code>
+<pre><code class="bash">
 Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
-</code>
+</code></pre>
 
 <p>
   Think of some other brilliant ideas to add to your app and add a couple more. Once you've done that, take a look at your ideas by typing in <code>Idea.all</code> once again.
@@ -57,7 +128,7 @@ Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
 </p>
 
 <p>
-  Awesome! You've created your first ideas and stored them in the database. Not that complicated, right? :) Next, let's try to show everything we stored in the database on to our website.
+  Awesome! You've created your first ideas and stored them in the database. Next, let's try to show everything we stored in the database on to our website.
 </p>
 
 <p>
@@ -93,20 +164,33 @@ end
   </p>
 
   <p>
-    A lot of magic happens when the <code>view</code> is rendered. One of the more commonly used techniques is using instance variables (variables defined with <code>@</code>, for example <code>@instance_variable</code>). When you define an instance variable in the <code>controller</code>, Rails automatically picks it up and passes it to the view. This is what we are doing in this section.
+    When you define an instance variable in the controller, you can use that instance variable in the corresponsing view file.
   </p>
 
   <p>
-    You can read more about how <code>controller</code>s and <code>view</code>s interact <a href="http://guides.rubyonrails.org/layouts_and_rendering.html" target="_blank">here</a>.
+    Let's take a look at our case:
+  </p>
+
+  <ul>
+    <li>We are defining an instance variable in the the <code>index</code> method of <code>ideas_controller.rb</code></li>
+    <li>The corresponding view file is located in <code>app/views/ideas/index.html.erb</code></li>
+    <ul>
+      <li>Notice how the <code>index</code> method and <code>index.html.erb</code> both have the same name</li>
+    </ul>
+    <li>We can use the instance variable in <code>index.html.erb</code></li>
+  </ul>
+
+  <p>
+    You can read more about how controllers and views interact <a href="http://guides.rubyonrails.org/layouts_and_rendering.html" target="_blank">here</a>.
   </p>
 </div>
 
 <p>
-  So what we've done by adding <code>@ideas = Idea.all</code> is, we've giving an instance variable that can be used in <code>index.html.erb</code>.
+  So what we've done by adding <code>@ideas = Idea.all</code> is, we've created an instance variable that can be used inside <code>index.html.erb</code>.
 </p>
 
 <p>
-  That probably doesn't make too much sense at this moment. To better understand what all this means let's implement and see what it does. Let's go into <code>index.html.erb</code> and change it to look like the following.
+  To better understand what all this means let's implement and see what it does. Let's go into <code>index.html.erb</code> and change it to look like the following.
 </p>
 
 <pre><code class="erb">
@@ -117,16 +201,19 @@ end
 </code></pre>
 
 <p>
-  Let's go back into our browser and refresh the page. You should now see all of your ideas stored in your database listed out. Let's go through what is occuring.
+  Let's go back into our browser and refresh the page. You should now see all of your ideas listed out. Let's go through what is happening.
 </p>
 
-<p>
-  What happened here is that in our <code>index</code> method in our controller, we said that <code>@ideas</code> should equal all of our ideas stored in the database. As we talked about earlier, we can use this instance variable <code>@ideas</code> in our <code>index.html.erb</code>, since the method name (<code>index</code>) and file name (<code>index.html.erb</code>) are the same.
-</p>
+<ul>
+  <li>We defined an instance variable called <code>@ideas</code> which stores a collection of all of our ideas in <code>ideas_controller.rb</code></li>
+  <li>Inside <code>index.html.erb</code></li>
+  <ul>
+    <li>We can use <code>@ideas</code> defined in the controller</li>
+    <li>We can iterate through each idea in <code>@ideas</code></li>
+    <li>For each idea, print out the <code>description</code> and <code>author</code></li>
+  </ul>
+</ul>
 
-<p>
-  Then inside our <code>index.html.erb</code>, we are saying: We have <code>@ideas</code>, which is storing all of our ideas in the databse. Now for each <code>idea</code> in <code>@ideas</code>, print out the <code>description</code> and also print out the <code>author</code>.
-</p>
 
 <p>
   Don't worry if this all doesn't make sense yet. The main focus here is to keep on building to create that momentum for you to learn faster. :)
