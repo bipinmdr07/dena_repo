@@ -29,13 +29,13 @@ Rails.application.routes.draw do
   resources :progressions, only: [:create, :destroy]
 
   
-  put 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
+  patch 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 
   post 'submission_approvals/:id(.:format)', to: 'submission_approvals#create', as: 'submission_approvals'
 
-  put 'comment_statuses/:id(.:format)', to: 'comment_statuses#create', as: 'comment_statuses'
+  patch 'comment_statuses/:id(.:format)', to: 'comment_statuses#create', as: 'comment_statuses'
 
-  put 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
+  patch 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
 
   get 'study', to: 'study#index', as: 'study'
 
