@@ -1,11 +1,11 @@
 <h1><%= title_for(IdeatorLesson, 5, 1) %></h1>
 
 <p>
-  Now that we're able to create our ideas smoothly, let's go ahead and tell rails how to <code>edit</code> and <code>update</code> the ideas that we've created.
+  Now that we're able to create our ideas smoothly, let's work on writing code so that users can <code>edit</code> and <code>update</code> the ideas.
 </p>
 
 <p>
-  To do this, we're going to go into our controller again and add an <code>edit</code> method. In <code>ideas_controller.rb</code>, add the following code under your <code>create</code> method.
+  First, let's go into <code>ideas_controller.rb</code>. Inside the file, let's add an <code>edit</code> method. In <code>ideas_controller.rb</code>, add the following code under your <code>create</code> method.
 </p>
 
 <pre><code class="ruby">
@@ -13,8 +13,22 @@ def edit
 end
 </code></pre>
 
+<div class="well">
+  <h3>Review on Controller and Views Files</h3>
+
+  <p>
+    By default, once a controller action is triggered, Rails will try to find a file with the name of the controller action in <code>app/views/controller_name</code>.
+  </p>
+
+  <p>
+    For example, when the <code>edit</code> method in <code>ideas_controller.rb</code> is triggered, Rails will try to find a file called <code>edit.html.erb</code> inside <code>app/views/ideas</code>. Review <%= link_to 'this lesson', '/ideator_lessons/12#controller_action' %> for more information.
+  </p>
+
+  <%= create_flashcard %>
+</div>
+
 <p>
-  Just a little refresher: methods in the controller correspond to the view files with the same name as the method. So in this case, let's create a file called <code>edit.html.erb</code> in the <code>/app/views/ideas</code> folder.
+  Let's create a file called <code>edit.html.erb</code> in the <code>/app/views/ideas</code> folder.
 </p>
 
 <p>
@@ -28,25 +42,231 @@ end
 </code></pre>
 
 <div class="well">
-  <h3>What are we doing here?</h3>
+  <h3>find</h3>
 
   <p>
-    This is a new concept. Here we are saying, let's <code>find</code> an Idea with <code>params[:id]</code>, and then store that in an instance variable called <code>@idea</code>. But wait, what is this <code>params[:id]</code>?
+    What is this <code>Idea.find(params[:id])?</code>? This is a new concept, but let's try to break it down into little pieces.
   </p>
 
   <p>
-    Here, we have another example of a parameter. If we go to our console and type <code>rake routes</code>, you will see a bunch of stuff. If you look at the <code>URI pattern</code> column, you will see that some have <code>/:id(.:format)</code> at the end of its URI. This <code>:id</code> is important. Rails passes this <code>:id</code> down to the application so that you can use this as a <i>parameter</i>, like we are doing here.
+    First, let's open up our rails console. In the terminal, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+rails console 
+</code></pre>
+
+  <p>
+    Once it's open, let's type in the following command to display all of our ideas that are stored in the database.
+  </p>
+
+<pre><code class="bash">
+Idea.all
+</code></pre>
+
+  <p>
+    All of your ideas should be displayed in the terminal now. <strong>Notice how each idea has it's own </strong><code>id</code>. 
   </p>
 
   <p>
-    In other words, from the URL, rails can tell which idea you are editing. For example, if you are editing an Idea with an <code>id</code> of <code>1</code>, your url will look something like <code>www.urlhere.com/ideas/edit/1</code>. In this case, <code>1</code> is the <code>:id</code>. For an Idea with an <code>id</code> of <code>123</code>, the URL would look something like <code>www.urlhere.com/ideas/edit/123</code>. In this case, <code>123</code> is the <code>:id</code>. Then in your controller or views, you can grab this variable with <code>params[:id]</code>.
+    <strong>When you create an object in Rails, it will give the object a unique <code>id</code> automatically.</strong> These <code>id</code>s can be used to retreive objects.
   </p>
 
   <p>
-    So again, basically we are telling rails here to find the <code>:id</code> from the URL, then find an Idea with that <code>id</code>, and finally to store it in <code>@idea</code>. Make sense?
+    For example, let's say we want to get an <code>Idea</code> with an <code>id</code> of <code>1</code>. We can do this with the following command. In the rails console, type in the following command and press enter:
   </p>
 
-  <a class="trigger">Create Flashcard</a>
+<pre><code class="ruby">
+Idea.find(1)
+</code></pre>
+
+  <p>
+    The code above means: <strong><em>Find an Idea with an id of 1</em></strong>. 
+  </p>
+
+  <p>
+    The <code>find</code> method can be used to retreive an object that has the <code>id</code> passed in as a parameter:
+  </p>
+
+<pre><code class="ruby">
+Modelname.find(id)
+</code></pre>
+
+  <%= create_flashcard %>
+
+  <p>
+    Let's go back to this piece of code:
+  </p>
+
+<pre><code class="ruby">
+def edit
+  @idea = Idea.find(params[:id])
+end
+</code></pre>
+
+  <p>
+    Here we see code that we've never seen before: <code>params[:id]</code>. Let's break down what params are.
+  </p>    
+
+  <h3>params</h3>
+
+  <p>
+    You will see <code>params</code> used in mainly 3 situations.
+  </p>  
+
+  <ul>
+    <li>GET requests</li>
+    <li>POST requests</li>
+    <li>Routing parameters</li>
+  </ul>
+
+  <p>
+    Let's go through each one.
+  </p>
+
+  <h2>GET Requests</h2>
+
+  <p>
+    When a user makes a request to a server such as a <code>GET</code> request (refresher on HTTP methods in <%= link_to 'this lesson', '/ideator_lessons/12' %>), information gets sent to the browser.
+  </p>
+
+  <p>
+    Many times, the params are encoded in the URL, like this:
+  </p>
+
+<pre><code class="bash">
+http://www.example.com/?foo=1&boo=octopus
+</code></pre>
+
+  <p>
+    In this example, we have two pieces of data, <code>foo</code> and <code>boo</code>. <code>foo</code> is assigned a variable of <code>1</code> and <code>boo</code> is assigned a variable of <code>octopus</code>.
+  </p>
+
+  <p>
+    In Rails, we can get the values for each piece of data like this inside the controller action that is triggered:
+  </p>
+
+<pre><code class="ruby">
+params[:foo] # returns 1
+params[:boo] # returns octopus
+</code></pre>
+
+  <%= create_flashcard %>
+
+  <h2>POST requests</h2>
+  
+  <p>
+    When making a <code>POST</code> request (for example, when you write a Facebook post and hit the submit button), the information will not be encoded in the URL like it did with the <code>GET</code> request example above. For example, in our application, we have the following form:
+  </p>
+
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Add Idea
+&lt;/button&gt;
+
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;%= simple_form_for Idea.new do |f| %&gt;
+        &lt;div class="modal-body"&gt;
+          &lt;%= f.input :description %&gt;
+          &lt;%= f.input :author %&gt;
+        &lt;/div&gt;      
+        &lt;div class="modal-footer"&gt;
+          &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+          &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+        &lt;/div&gt;
+      &lt;% end %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+  <p>
+    Let's say you fill out the form like this:
+  </p>
+
+  <%= image_tag 'ideator/ideator_form.png', class: 'screenshot img-responsive' %>
+
+
+  <p>
+    When a user clicks "Submit", a bunch of data is sent to the server. In your terminal window that is running the rails server, you will see something like this:
+  </p>
+
+  <%= image_tag 'ideator/post_params.png', class: 'screenshot img-responsive' %>
+
+  <p>
+    Notice how the information we filled out in the form is shown here:
+  </p>
+
+<pre><code class="bash">
+"idea"=>{"description"=>"TECHRISE is a great idea :)", "author"=>"Takehiro Mouri"}
+</code></pre>
+
+  <p>
+    <strong>These are parameters being sent to the server, which can be used inside the controller action that is being triggered.</strong> We can access these attributes in the controller like this:
+  </p>
+
+<pre><code class="ruby">
+params[:idea][:description] # returns "TECHRISE is a great idea :)"
+params[:idea][:author] # returns "Takehiro Mouri"
+</code></pre>
+
+  <%= create_flashcard %>
+
+  <h2>Routing Parameters</h2>
+  <p>
+    If we go to our terminal and type <code>rake routes</code>, you will see a list of routes (review <%= link_to 'this lesson', '/ideator_lessons/12' %> for more on routes). If you look at the <code>URI pattern</code> column, you will see that some have <code>/:id(.:format)</code> at the end of its URI. This <code>:id</code> is important. Rails sends this <code>:id</code> to the server as a parameter.
+  </p>
+
+  <p>
+    Let's look at an example of the edit action. When we ran rake routes, we see a line like this:
+  </p>
+
+<pre><code class="bash">
+     Prefix Verb   URI Pattern               Controller#Action
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+</code></pre>
+
+  <p> 
+    Let's take a look at the URI Pattern. Notice the <code>:id</code> portion of <code>/ideas/:id/edit(.:format)</code>. This <code>:id</code> represents an <code>id</code> that is passed in as a parameter in the URL.
+  </p> 
+
+  <p>
+    For example, when a user makes a <code>GET</code> request to a URL like <code>http://localhost:3000/ideas/1/edit</code>, not only does the <code>edit</code> action of the <code>ideas</code> controller get triggered, the <code>id</code> is sent to the server as a parameter as well.
+  </p>
+
+  <p>
+    We can access the <code>id</code> in the <code>edit</code> method inside the <code>ideas</code> controller like this:
+  </p>
+
+<pre><code class="ruby">
+params[:id]
+</code></pre>
+
+  <h3>Overview</h3>
+
+  <p>
+    Let's take a look at the following code again:
+  </p>  
+
+<pre><code class="ruby">
+def edit
+  @idea = Idea.find(params[:id])
+end
+</code></pre>
+
+  <p>
+    Now we know what this means. We are telling Rails to <code>find</code> the <code>Idea</code> with the <code>id</code> of <code>params[:id]</code>, which is a value that is passed in as a parameter, and store it in <code>@idea</code>.
+  </p>
+
+  <%= create_flashcard %>
 
 </div>
 
@@ -67,7 +287,7 @@ end
 
 
 <p>
-  The only difference here is that on the first line of the simple form we are adding <code>method: :patch</code>. This is just indicating that we are performing a <code>PATCH</code> request, which indicates that the form's purpose is to perform an <code>update</code>. If we type <code>rake routes</code> in the terminal and look at the <code>VERB</code> column, where it lists out "VERB"s like <code>GET</code>, <code>PATCH</code>, <code>PUT</code>, <code>DELETE</code> etc. we can see that it corresponds to a controller action. For example, for <code>GET</code>, we see that it corresponds to <code>ideas#index</code>. For <code>PATCH</code>, it corresponds to <code>ideas#update</code>. This means that when we submit this form, it will trigger the <code>update</code> method in the ideas controller.
+  The only difference here is that on the first line of the simple form we are adding <code>method: :patch</code>. This piece of code indicates that we are performing a <code>PATCH</code> request. If we type <code>rake routes</code> in the terminal and look at the <code>VERB</code> column, we can see that it corresponds to a controller action. For <code>PATCH</code>, it corresponds to <code>ideas#update</code>. This means that when we submit this form, it will trigger the <code>update</code> method in the <code>ideas</code> controller.
 </p>
 
 <p>
@@ -90,11 +310,15 @@ end
 </code></pre>
 
 <p>
-  Let's go through what this code is doing. We're first doing the same thing we did in the <code>edit</code> method: finding the idea we are working on using the <code>:id</code> in the URL, and then storing that in <code>@idea</code>. Then we are saying if <code>@idea</code> updates successfully using the <code>idea_params</code> information, then <code>redirect_to</code> the <code>root_path</code> (the home page). If it doesn't update succcessfully, then <code>redirect_to</code> the <code>edit</code> page that we were just on so that you can enter the correct information.
+  Let's go through what this code is doing. We're first doing the same thing we did in the <code>edit</code> method: finding the idea we are working on using <code>params[:id]</code>, and then storing that in <code>@idea</code>. 
 </p>
 
 <p>
-  Why do we need to check if the idea was updated successfully? We'll talk about <strong>validations</strong> and get into why in the next lesson.
+  Then we are saying if <code>@idea</code> updates successfully, then <code>redirect_to</code> the <code>root_path</code> (the home page). If it doesn't update succcessfully, then <code>redirect_to</code> the <code>edit</code> page that we were just on so that you can enter the correct information.
+</p>
+
+<p>
+  Why do we need to check if the idea was updated successfully? In the next lesson, we'll talk about <strong>validations</strong> and get into why we need to do this.
 </p>
 
 <%= standard_git_workflow %>
