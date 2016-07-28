@@ -77,7 +77,49 @@
 </code></pre>
 
 <p>
-  Save the file and refresh the page. We can see now that the form has been added, but now we have two buttons, a "Submit" button and a "Save changes" button. We probably want to replace the "Submit" button with the "Save changes button". So let's go ahead and do that. Copy and paste <code>&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;</code> and replace this code: <code>&lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;</code>. But now the submit button is outside the form code (the <code>&lt;% end %&gt;</code> of the form is above the button). This will probably give us an error, so we need to make sure that the button is still inside the form code. We can do this by moving where the form starts and ends like below:
+  Save the file and refresh the page.
+</p>
+
+<p>
+  We can see now that the form has been added, but now we have two buttons, a "Submit" button and a "Save changes" button. We probably want to replace the "Submit" button with the "Save changes button". So let's go ahead and do that.
+</p>
+
+<p>
+  Copy and paste <code>&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;</code> and replace this code: <code>&lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;</code>.
+</p>
+
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Add Idea
+&lt;/button&gt;
+
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;
+        &lt;%= simple_form_for Idea.new do |f| %&gt;
+          &lt;%= f.input :description %&gt;
+          &lt;%= f.input :author %&gt;
+          
+        &lt;% end %&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+        &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>
+  However, <code>&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;</code> is outside of <code>&lt;%= simple_form_for Idea.new do |f| %&gt;</code> and <code>&lt;% end %&gt;</code>. This will give us an error since we need to write all of our code for the form before the <code>&lt;% end %&gt;</code>. We can fix the code by changing where we put <code>&lt;%= simple_form_for Idea.new do |f| %&gt;</code> and <code>&lt;% end %&gt;</code>.
 </p>
 
 <pre><code class="erb">
@@ -98,13 +140,12 @@
         &lt;div class="modal-body"&gt;
           &lt;%= f.input :description %&gt;
           &lt;%= f.input :author %&gt;
+        &lt;/div&gt;      
+        &lt;div class="modal-footer"&gt;
+          &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
           &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
         &lt;/div&gt;
       &lt;% end %&gt;
-      &lt;div class="modal-footer"&gt;
-        &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
-        &lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;
-      &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
