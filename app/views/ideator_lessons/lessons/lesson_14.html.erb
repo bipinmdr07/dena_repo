@@ -89,6 +89,169 @@ Idea.find(1)
   </p>
 
 <pre><code class="ruby">
+Idea.find(1)
+</code></pre>
+
+
+  <p>
+    The code above means: <strong><em>Find an Idea with an id of 1</em></strong>. 
+  </p>
+
+  <p>
+    The <code>find</code> method can be used to retreive an object that has the <code>id</code> passed in as a parameter:
+  </p>
+
+<pre><code class="ruby">
+Modelname.find(id)
+</code></pre>
+
+  <%= create_flashcard %>
+
+  <p>
+    Let's go back to this piece of code:
+  </p>
+
+<pre><code class="ruby">
+def edit
+  @idea = Idea.find(params[:id])
+end
+</code></pre>
+
+  <p>
+    Here we see code that we've never seen before: <code>params[:id]</code>. Let's break down what params are.
+  </p>    
+
+  <h3>params</h3>
+
+  <p>
+    You will see <code>params</code> used in mainly 3 situations.
+  </p>  
+
+  <ul>
+    <li>GET requests</li>
+    <li>POST requests</li>
+    <li>Routing parameters</li>
+  </ul>
+
+  <p>
+    Let's go through each one.
+  </p>
+
+  <h2>GET Requests</h2>
+
+  <p>
+    When a user makes a request to a server such as a <code>GET</code> request (refresher on HTTP methods in <%= link_to 'this lesson', '/ideator_lessons/12' %>), information gets sent to the browser.
+  </p>
+
+  <p>
+    Many times, the params are encoded in the URL, like this:
+  </p>
+
+<pre><code class="bash">
+http://www.example.com/?foo=1&boo=octopus
+</code></pre>
+
+  <p>
+    In this example, we have two pieces of data, <code>foo</code> and <code>boo</code>. <code>foo</code> is assigned a variable of <code>1</code> and <code>boo</code> is assigned a variable of <code>octopus</code>.
+  </p>
+
+  <p>
+    In Rails, we can get the values for each piece of data like this:
+  </p>
+
+<pre><code class="ruby">
+params[:foo] # returns 1
+params[:boo] # returns octopus
+</code></pre>
+
+  <h2>POST requests</h2>
+  
+  <p>
+    When making a <code>POST</code> request (for example, when you write a Facebook post and hit the submit button), the information will not be encoded in the URL like it did with the <code>GET</code> request example above. For example, in our application, we have the following form:
+  </p>
+
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Add Idea
+&lt;/button&gt;
+
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;%= simple_form_for Idea.new do |f| %&gt;
+        &lt;div class="modal-body"&gt;
+          &lt;%= f.input :description %&gt;
+          &lt;%= f.input :author %&gt;
+        &lt;/div&gt;      
+        &lt;div class="modal-footer"&gt;
+          &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+          &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+        &lt;/div&gt;
+      &lt;% end %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+  <p>
+    Let's say you fill out the form like this:
+  </p>
+
+  <%= image_tag 'ideator/ideator_form.png', class: 'screenshot img-responsive' %>
+
+
+  <p>
+    When a user clicks "Submit", a bunch of data is sent to the server. In your terminal window that is running the rails server, you will see something like this:
+  </p>
+
+  <%= image_tag 'ideator/post_params.png', class: 'screenshot img-responsive' %>
+
+  <p>
+    Notice how the information we filled out in the form is shown here:
+  </p>
+
+<pre><code class="bash">
+"idea"=>{"description"=>"TECHRISE is a great idea :)", "author"=>"Takehiro Mouri"}
+</code></pre>
+
+  <p>
+    <strong>These are parameters being sent to the server.</strong> We can access these attributes like this:
+  </p>
+
+<pre><code class="ruby">
+params[:idea][:description] # returns "TECHRISE is a great idea :)"
+params[:idea][:author] # returns "Takehiro Mouri"
+</code></pre>
+
+  <h2>Routing Parameters</h2>
+  <p>
+    If we go to our terminal and type <code>rake routes</code>, you will see a list of routes (review <%= link_to 'this lesson', '/ideator_lessons/12' %> for more on routes). If you look at the <code>URI pattern</code> column, you will see that some have <code>/:id(.:format)</code> at the end of its URI. This <code>:id</code> is important. Rails sends this <code>:id</code> to the server as a parameter.
+  </p>
+
+  <p>
+    Let's look at an example of the edit action. When we ran rake routes, we see a line like this:
+  </p>
+
+<pre><code class="bash">
+     Prefix Verb   URI Pattern               Controller#Action
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+</code></pre>
+
+  <p> 
+    Let's take a look at the URI Pattern. Notice the <code>:id</code> portion of <code>/ideas/:id/edit(.:format)</code>. This <code>:id</code> represents an <code>id</code> that is passed in as a parameter in the URL.
+  </p> 
+
+  <p>
+    For example, when a user makes a <code>GET</code> request to a URL like <code>http://localhost:3000/ideas/1/edit</code>, the <code>edit</code> action of the <code>ideas</code> controller is triggered. <code>id</code> is sent to the server as a paramter as well.
+  </p>
+
+<pre><code class="ruby">
 Modelname.find(id)
 </code></pre>
 
