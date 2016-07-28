@@ -1,0 +1,73 @@
+<div class = "col-sm-12 col-md-4">
+  <div class="course_box">
+    <%
+      if course_link.empty?
+       link = ''
+      elsif available && !has_access?(course_access)
+       link = ''
+      elsif !available
+       link = ''
+      else
+      link = course_link
+      end 
+
+      unless controller_name.empty?
+        lessons = controller_name.classify.constantize::LESSONS
+        course_title = controller_name.classify.constantize::COURSE_TITLE
+        lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
+      end
+
+    %>
+
+    	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= link_to course, link %></h3>
+
+      <div class="course_description">
+    	 
+        <% if controller_name.empty? %>
+          <p><%= course_name %></p>
+        <% else %>
+          <ul class="unindented_ul">
+            <% lessons.each do |chapter| %>
+                <% if link.empty? %>
+                  <li><%= chapter[0] %></li>
+                <% else %>
+                  <%= link_to "<li>#{chapter[0]}</li>".html_safe, link + "/" + chapter[1][0][0].to_s %>
+                <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="course_status">
+        <% unless controller_name.empty? %>
+          <span class="label label-default"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= pluralize controller_name.classify.constantize::DURATION, "hour" %></span>
+        <% end %>
+
+        <% unless controller_name.empty? %>
+          <% period = controller_name.classify.constantize::PERIOD %>
+          <span class="label label-default"><i class="fa fa-calendar" aria-hidden="true"></i> <%= "Week " if period != "PREWORK" %><%= period %></span>
+        <% end %>
+        
+        <% if available && !has_access?(course_access) %>
+          <span class="label label-default"><i class="fa fa-lock" aria-hidden="true"></i> Locked :)</span>
+        <% end %>
+        <% if !available %>
+          <span class="label label-default"><i class="fa fa-heart" aria-hidden="true"></i> Coming Soon</span>
+        <% end %>
+        
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="progress_bar">
+            <div class="progress">
+              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(controller_name) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(controller_name) %>%; min-width: 4em;">
+                <%= progress(controller_name) %>% completed
+              </div>
+            </div>
+          </div><!-- progress_bar -->
+        </div><!-- col-xs-12 -->
+      </div><!-- row -->
+
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<% if @submissions.pluck(:user_id).uniq.count == 0 %>
+  <h5>No submissions have been made for this assignment yet.</h5>
+<% else %>
+  <h5 style="line-height: 2 !important;"><%= pluralize @submissions.pluck(:user_id).uniq.count, "student" %> including
+    <% @submission_user_ids.each do |i| %>
+      <label class="label label-default" style="margin: 0px 2px;"><%= User.find(i).name %></label>
+    <% end %>
+    have passed this assignment.
+  </h5>
+<% end %>

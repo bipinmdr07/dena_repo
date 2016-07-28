@@ -1,0 +1,105 @@
+<h1><%= title_for(InstapostLesson, 6, 5) %></h1>
+
+<p>
+  In this lesson, we're going to write out our form so that users can post comments to photos.
+</p>
+
+<p>
+  Instead of creating a new page for the form like we've done in the past, we're going to directly put the form inside our <code>index.html.erb</code> so that users can post comments directly under the photos, just like Instagram.
+</p>
+
+<p>
+  Let's open up <code>index.html.erb</code>. Inside our loop, let's create a form for each instance of a post. The form will look like this:
+</p>
+
+<pre><code class="erb">
+&lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post do |f| %&gt;
+  &lt;%= f.input :text %&gt;
+  &lt;%= f.submit 'Post' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's add this form in the loop inside <code>index.html.erb</code>:
+</p>  
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;% if post.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+  &lt;% end %&gt;
+
+  &lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post do |f| %&gt;
+    &lt;%= f.input :text %&gt;
+    &lt;%= f.submit 'Post' %&gt;
+  &lt;% end %&gt;
+
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You'll see that a form for comments is rendered for each post!
+</p>
+
+<p>
+  In this form, we're specifying the <code>url</code> that we're submitting this form to, and then saying that we want to perform a <code>POST</code> request. Let's save the file and refresh the page.
+</p>
+
+<p>
+  You'll see that the form is kind of ugly. First, the label "Text" isn't really what we want. We probably want something like "Comment" instead. We can do this by adding <code>label: 'Comment'</code> like this:
+</p>
+
+<pre><code class="erb">
+&lt;%= f.input :text, label: 'Comment' %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You can see now that the label has changed to "Comment". Let's also change the submit button styling. Let's use bootstrap buttons again:
+</p>
+
+<pre><code class="erb">
+&lt;%= f.submit 'Post', class: 'btn btn-primary btn-block' %&gt;
+</code></pre>
+
+<p>
+  It's starting to look a little bit better. Let's also add placeholder text. Change the code to look like this:
+</p>
+
+<pre><code class="erb">
+&lt;%= f.input :text, label: 'Comment', placeholder: 'Add a comment...' %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. Cool! We now have a good looking placeholder text!
+</p>
+
+<p>
+  We don't want this comments form to show for users that aren't logged in. Let's add a conditional to make sure we do that. We can use one of Devise's helper methods again to do so:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+  &lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post do |f| %&gt;
+    &lt;%= f.input :text, label: 'Comment', placeholder: 'Add a comment...' %&gt;
+    &lt;%= f.submit 'Post', class: 'btn btn-primary btn-block' %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Now that we've got the form, we need to display the comments that users post. In the next lesson, you'll be on your own to try to solve this! Good luck!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+

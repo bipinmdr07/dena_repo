@@ -1,0 +1,3 @@
+class IntroLessonsController < LessonsController
+
+end

@@ -1,0 +1,2 @@
+class CommandLineLessonsController < LessonsController
+end

@@ -1,0 +1,74 @@
+<h1><%= title_for(MvcLesson, 1, 2) %></h1>
+
+<p>
+  Now that we understand how each individual component works in MVC, let's look at how everything works together.
+</p>  
+
+<p>
+  The following diagram describes what happens behind the scenes in a Rails application:
+</p>
+
+<%= image_tag 'mvc/mvc.png', class: 'screenshot' %>
+
+<p>
+  Let's go through each step.
+</p>
+
+<ol>
+  <li><strong>A user makes an HTTP request</strong></li>
+  <ul>
+    <li>An HTTP request is basically a user saying, "Hey, I'm going to try to access this URL."</li>
+    <li>In other words, when you vist a web page, you are making an HTTP request</li>
+  </ul>
+  <li><strong>The request passes through the Rails Router</strong></li>
+  <ul>
+    <li>The Rails Router identifies which controller to use</li>
+    <li>For example in our Ideator app, if we are trying to access the URL <code>/ideas/1</code> through a <code>GET</code> request, the Rails Router will choose to use the <code>IdeasController</code>'s <code>show</code> method, since it is defined as such in the <code>routes.rb</code> file:</li>
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         ideas#index
+    ideas GET    /ideas(.:format)          ideas#index
+          POST   /ideas(.:format)          ideas#create
+ new_idea GET    /ideas/new(.:format)      ideas#new
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+     idea GET    /ideas/:id(.:format)      ideas#show
+          PATCH  /ideas/:id(.:format)      ideas#update
+          PUT    /ideas/:id(.:format)      ideas#update
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+    <li>Notice how the <code>GET</code> request for the URI pattern <code>/ideas/:id</code> is mapped to <code>ideas#show</code> (the <code>show</code> action in the <code>ideas</code> controller).</li>
+  </ul>
+  <li><strong>The controller receives the request</strong></li>
+  <ul>
+    <li>Often times parameters are passed into the controller. We can access these parameters using <code>params</code> .</li>
+    <li>For example, you can use <code>params[:id]</code> to access the <code>id</code> parameter.</li>
+  </ul>
+  <li><strong>If the controller has some code that makes a call to the model, the model receives the request to do the job</strong></li>
+  <ul>
+    <li>For example in our Ideator app, <code>@idea = Idea.find(params[:id])</code> in the <code>show</code> method in the controller will request the model to fetch an <code>Idea</code> with the <code>id</code> of <code>params[:id]</code></li>
+  </ul>
+  <li><strong>The database is accessed if the model makes a request. The data is then sent back to the model.</strong></li>
+  <ul>
+    <li>For example, the <code>Idea.find(params[:id])</code> code would go into the database and do the work of finding the <code>Idea</code> with the <code>id</code> of <code>params[:id]</code></li>
+  </ul> 
+  <li><strong>The changes in the model will be sent to the controller so that it has the latest information</strong></li>
+  <li><strong>The view then displays the information</strong></li>
+  <li><strong>Instance variables defined in a controller method can be used in the corresponding view file</strong></li>
+  <ul>
+    <li>For example in our Ideator app, <code>@ideas</code> defined in the <code>index</code> method of <code>ideas_controller.rb</code> can be used in the view file, <code>index.html.erb</code></li>
+  </ul>
+  <li><strong>The controller then returns the response body (HTML, XML, etc.) and metadata (caching headers, redirects) to the server. The server combines the raw data into a proper HTTP response and sends it to the user.</strong></li>  
+</ol>
+
+<%= create_flashcard %>
+
+<p>
+  While you build your apps, always have this flow in mind. Once you become familiar with how the application works together, you'll have an easier time debugging and writing code.
+</p>
+
+
+
+
+
+
+

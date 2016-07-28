@@ -1,0 +1,34 @@
+<div class="devise_box forum_container">
+
+<% flash.each do |message_type, message| %>
+  <% if message_type == "notice" %>
+    <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></p>
+  <% elsif message_type == "alert" %>
+    <p class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %></p>
+  <% else %>
+    <div class="alert alert-<%= message_type %> alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= message %></div>
+  <% end %>
+<% end %>
+
+<%= back_to_lesson %>
+
+<h3>Submit your work</h3>
+<p>
+  Awesome work! Follow the directions on the lesson and submit your work. We'll get back to you soon and give you feedback or code review.
+</p>
+
+<p>
+  (P.S Give it an awesome title name just for fun :D )
+</p>
+
+<%= simple_form_for :submission, url: submissions_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
+  <%= f.input :title, required: true %>
+  <div data-no-turbolink>
+    <%= f.cktext_area :content, as: :text, input_html: {rows: 6}, ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
+  </div>
+  <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:lesson_id]} %>
+  <%= f.input :course_name, as: :hidden, input_html: { value: params[:course_name]} %>
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
+
+</div>

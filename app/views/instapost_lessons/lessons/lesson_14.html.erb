@@ -1,0 +1,248 @@
+<h1><%= title_for(InstapostLesson, 5, 6) %></h1>
+
+<p>
+  Now that we've set up our form, let's write the backend for it to make sure that everything works correctly.
+</p>
+
+<p>
+  Let's start off by writing our <code>create</code> action in our <code>posts_controller.rb</code>. When we hit submit on our form, it will then trigger the <code>create</code> action. Right now we haven't set this up, so it will give us an error.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code> under our <code>new</code> action, let's add the following lines of code, and then we'll go over what it's doing.
+</p>
+
+<pre><code class="ruby">
+def create
+  @post = current_user.posts.create(post_params)
+  if @post.valid?
+    redirect_to root_path
+  else
+    render :new, status: :unprocessable_entity
+  end
+end
+
+private
+
+def post_params
+  params.require(:post).permit(:user_id, :photo, :description)
+end
+</code></pre>
+
+<p>
+  Alright awesome, let's go over what this is all doing.
+</p>
+
+<p>
+  <strong>First, we're creating an instance variable <code>@post</code> and assigning it <code>current_user.posts.create(post_params)</code>.</strong> There are several parts to this code that probably don't make sense to you right now. Let's try to clear this up.
+</p>
+
+<p>
+  Let's take a look at <code>current_user</code>. <strong><code>current_user</code> is a Devise helper method that gives us the current user that is logged in.</strong> You'll be using this a lot throughout your Rails development. (<%= link_to 'View the Devise documentation', 'write show, update, and delete actions for posts' %> for more Devise helpers that you can use.)
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Next, we're doing this <code>current_user.posts</code> thing. What this is saying is, <code>create</code> a <code>post</code> by <code>current_user</code>. <strong>This automatically hooks up and connects the <code>current_user</code> and the created <code>post</code>.</strong> Specifically, the <code>user_id</code> of <code>current_user</code> is stored inside the newly created <code>Post</code>, so that we know who posted it.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Lastly, we can see that we're passing in <code>post_params</code> as a parameter to <code>create</code>. We've done the same for the Ideator app, but the purpose of <code>post_params</code> is to make sure bad inputs aren't saved in the database. This is related to the topic of <strong>Strong Parameters</strong>.
+</p>
+
+<p>
+  Since it's a super important topic that you need to know, take 10 minutes to read more about it <%= link_to 'here', 'https://www.sitepoint.com/rails-4-quick-look-strong-parameters/' %>. This topic was also covered in <%= link_to 'lesson 7', '/instapost_lessons/7' %> as well.
+</p>
+
+<p>
+  Notice how <code>post_params</code> is under <code>private</code>. Putting this <code>private</code> keyword means that the code below it is a <strong>private method</strong>.
+</p>
+
+<div class="well">
+  <h3>What's a private method?</h3>
+
+  <p>
+    <strong>Private methods</strong> are methods that can only be accessed inside the class. For example, let's say we have a <code>BankAccount</code> class.
+  </p>
+
+<pre><code class="ruby">
+# bankaccount.rb
+class BankAccount
+  attr_reader :amount
+
+  def initialize(amount)
+    @amount = amount
+  end
+
+  def balance
+    puts @amount
+  end
+
+  private
+
+  def double_balance
+    @amount *= 2
+  end
+end
+</code></pre>
+
+  <p>
+    We can see that we can initialize the <code>BankAccount</code> with an initial amount. We have a <code>balance</code> method that <code>puts</code> the <code>amount</code> that the <code>BankAccount</code> holds. Then, we have a <code>double_balance</code> method that is <code>private</code>. This method doubles the amount in the bank account. Let's try this out:
+  </p>
+
+<pre><code class="ruby">
+my_bank = BankAccount.new(2000)
+my_bank.balance
+=> 2000
+my_bank.double_balance
+=> NoMethodError: private method `double_balance' called for #&lt;BankAccount:0xxxxxxxxxx @amount=2000&gt;
+</code></pre>
+
+  <p>
+    Notice how calling the <code>double_balance</code> gave us an error. This is because <code>private</code> methods can only be called inside of the class. Let's see how we can actually call the <code>double_balance</code> method:
+  </p>
+
+<pre><code class="ruby">
+# bankaccount.rb
+class BankAccount
+  attr_reader :amount
+
+  def initialize(amount)
+    @amount = amount
+  end
+
+  def balance
+    puts @amount
+    double_balance
+    puts @amount
+  end
+
+  private
+
+  def double_balance
+    @amount *= 2
+  end
+end
+</code></pre>
+
+  <p>
+    What we did here is call the <code>double_balance</code> method inside the <code>balance</code> method. We also <code>puts</code> the <code>amount</code> before and after calling <code>double_balance</code> to see how calling it affected the <code>amount</code>. Let's try this out:
+  </p>
+
+<pre><code class="ruby">
+my_bank = BankAccount.new(2000)
+my_bank.balance
+=> 2000
+4000
+my_bank.double_balance
+=> NoMethodError: private method `double_balance' called for #&lt;BankAccount:0xxxxxxxxxx @amount=2000&gt;
+</code></pre>
+  
+  <p>
+    As you can see, the <code>amount</code> was indeed doubled when we called the <code>balance</code> method! However, when we tried calling <code>double_balance</code> method outside the class in the terminal, it didn't work.
+  </p>
+
+  <h3>So why and when do we use private methods?</h3>
+
+  <p>
+    In Ruby on Rails, private methods can be seen usually in controllers, like we just saw in our <code>posts_controller.rb</code>. <strong>We do this when we don't want other users from accessing the method for security reasons.</strong>
+  </p>
+
+  <p>
+    For example, in our <code>BankAccount</code> example, we probably don't want users to be able to access the <code>double_balance</code> method. If they were able to, everyone would be doubling their balance! 
+  </p>
+
+  <p>
+    Instead, we want this to be a method that can <strong>only be called internally inside our program</strong>. That's why in this we want to make the method <code>private</code> and prevent normal users from accessing it.
+  </p>
+
+  <%= create_flashcard %>
+
+</div>
+
+  
+
+
+<p>
+  The code after that is pretty straightforward. If <code>@posts</code> is valid (meaning it passes all validations), then it redirects to the <code>root_path</code>, otherwise it renders the <code>new</code> template again with an error message.
+</p>
+
+<p>
+  Our controller is looking good. Now we need to configure our models. In the section above, I mentioned that <code>current_user.posts.create()</code> connects the <code>current_user</code> and the new <code>post</code>. However, before this code will work, <strong>we also need to specify the relationship between the <code>User</code> model and the <code>Post</code> model.</strong>
+</p>
+
+<p>
+  Specifically, we need to tell Rails that <Strong><code>User</code> <code>has_many</code> <code>Post</code>s, and <code>Post</code> <code>belongs_to</code> <code>User</code></strong>. These database relations are pretty straightforward, if you think of it simply.
+</p>
+
+<p>
+  For example, <code>Post</code> <code>has_many</code> <code>User</code>s in this case doesn't really make sense. Instead, the <code>User</code> creates and owns the <code>Post</code>, so it should be the other way around.
+</p>
+
+<p>
+  So in our <code>post.rb</code> file, let's tell rails that it belongs to <code>User</code>. We can do this by adding the following line:
+</p>
+
+<pre><code class="ruby">
+belongs_to :user
+</code></pre>
+
+<p>
+  Awesome. Now let's go into our <code>user.rb</code> file and add in the following:
+</p>
+
+<pre><code class="ruby">
+has_many :posts
+</code></pre>
+
+<p>
+  Great. And that's it! Just like that, we have our database relations setup.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Let's go back to our browsers and go to <code>http://localhost:3000/posts/new</code> to try the form out. It works...or it might not have for you depending on whether you're logged in or not.
+</p>
+
+<p>
+  What I mean is, if you're logged in, you won't get an error. If you are logged out though, you'll get an error telling you that there's a problem with <code>current_user</code>.
+</p>
+
+<p>
+  Let's fix this. <strong>Devise provides us with yet another convenient helper method to achieve what we want to do: make sure the user is logged in.</strong> All it takes is one line of code!
+</p>
+
+<p>
+  In your <code>posts_controller.rb</code>, add the following line of code right under <code>class PostsController &lt; ApplicationController</code>.
+</p>
+
+<pre><code class="ruby">
+before_action :authenticate_user!
+</code></pre>
+
+<p>
+  This line of code will make sure that the user is logged in before it can access the pages related to the <code>PostsController</code>. However, that also means that users won't be able to access the <code>index</code> page unless they are logged in, which we don't want, since that's a page we want all users to be able to see. Let's change the code to be this:
+</p> 
+
+<pre><code class="ruby">
+before_action :authenticate_user!, only: [:new, :create]
+</code></pre>
+
+<p>
+  By adding the <code>only: [:new, :create]</code>, we have told Rails to make sure the user is logged in, only for the <code>new</code> and <code>create</code> pages.
+</p>
+
+<p>
+  Let's test this out. Let's first log out of our application, and then try going to <code>http://localhost:3000/posts/new</code>. It should redirect you to the sign in page.
+</p>
+
+<p>
+  Awesome! Let's keep on going.
+</p>
+
+<%= standard_git_workflow %>
+

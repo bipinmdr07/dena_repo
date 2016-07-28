@@ -1,0 +1,154 @@
+// Place all the styles related to the static_pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#mc_embed_signup .mc-field-group label {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 400;
+}
+
+#mc_embed_signup {
+  font-family: 'Titillium Web', sans-serif !important;
+  font-size: 16px !important;
+}
+
+#mc_embed_signup .mc-field-group input {
+  margin-right: 10px;
+}
+
+.support_ul li {
+  font-size: 18px;
+  font-weight: 600; 
+}
+
+.support_ul {
+  text-align: left;
+}
+
+.skills_ul li {
+  margin-top: 15px;
+  padding-left: 1em; 
+  text-indent: -.7em;
+}
+
+.skills_ul {
+  list-style: none;
+  padding:0;
+  margin:0;
+}
+
+.skills_ul li:before {
+  content: "• ";
+  color: #EC6952; /* or whatever color you prefer */
+}
+
+.shadow_screenshot {
+  width: 100%; 
+  border: 1px solid whitesmoke; 
+  border-radius: 3px; 
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.founders {
+  margin-bottom: 90px;
+}
+
+#how {
+  padding-top: 60px;
+}
+#how .title {
+  font-size: 26px;
+  color: rgb(74, 103, 129);
+}
+#how .intro {
+  color: #999999;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.portfolio-item .title {
+  font-size: 26px;
+  color: rgb(74, 103, 129);
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 300;
+  margin-top: 0;
+}
+
+.header_container {
+  h2 {
+    font-size: 36px;
+    font-weight: 300;
+    margin-top: 0;
+  }
+  margin-bottom: 90px;
+}
+
+.partnership_logo {
+  height: 60px;
+  margin: 20px;
+}
+
+.why_section {
+  background:url("/assets/startup2.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+}
+
+.why_section_wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-bottom: 60px;
+}
+
+.section_header {
+  color: #EC6952;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 40px;
+}
+
+.for_who_class {
+  background:url("/assets/startup.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: white;
+}
+
+.for_who_class_wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-bottom: 60px;
+}
+
+.join-buttons {
+	margin-top: 20px;
+}
+
+.for_who_header {
+  color: #EC6952;
+  font-weight: 300;
+  font-size: 40px;
+  p {
+    text-align: justify !important;
+  }
+}
+
+.why_techrise_icons {
+  font-size: 90px;
+}
+
+.prof_pic {
+  border-radius: 50%;
+  height: 200px;
+  margin: 0 auto;
+  width: 200px;
+  display: block;
+}
+

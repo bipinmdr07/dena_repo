@@ -1,0 +1,106 @@
+<h1><%= title_for(InstapostLesson, 7, 1) %></h1>
+
+<p>
+  We're almost towards the end of creating this app! In our last part, we're going to build out a user profile page, just like Instagram does.
+</p>
+
+<p>
+  The first thing we need to do is to generate a controller:
+</p>
+
+<pre><code class="bash">
+rails g controller users
+</code></pre>
+
+<p>
+  Then let's go into our <code>routes.rb</code> and set up our routes. We only need the <code>show</code> action, so we can specify it like this:
+</p>
+
+<pre><code class="ruby">
+routes :users, only: :show
+</code></pre>
+
+<p>
+  Let's go ahead and create our <code>show.html.erb</code> in our <code>app/views/posts</code>. This is going to be our profile page for users.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code>, let's add in the <code>show</code> method:
+</p>
+
+<pre><code class="ruby">
+def show
+  @user = User.find(params[:id])
+end
+</code></pre>
+
+<p>
+  We can now use <code>@user</code> to display information about the user in our <code>show.html.erb</code> that we just created.
+</p>
+
+<p>
+  In our <code>show.html.erb</code>, let's just list out the user's profile picture and name.
+</p>
+
+
+<pre><code class="erb">
+&lt;%= image_tag @user.photo %&gt;
+&lt;%= @user.name %&gt;
+</code></pre>
+
+<p>
+  Next, let's loop through the user's posts and display it on the page:
+</p>
+
+<pre><code class="erb">
+&lt;%= image_tag @user.photo %&gt;
+&lt;%= @user.name %&gt;
+
+&lt;% @user.posts.each do |post| %&gt;
+    &lt;%= image_tag post.photo %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's also add the number of posts the user has. We can do something fancy like this:
+</p>
+
+<pre><code class="erb">
+&lt;%= pluralize(@user.posts.count, 'post') %&gt;
+</code></pre>
+
+<p>
+  This is one example of a super handy Rails helper method. It pluralizes "post" to "posts" if <code>@user.posts.count</code> is plural, and displays "post" if <code>@user.posts.count</code> is singular.
+</p>
+
+<%= create_flashcard %>
+
+<pre><code class="erb">
+&lt;%= image_tag @user.photo %&gt;
+&lt;%= @user.name %&gt;
+
+&lt;%= pluralize(@user.posts.count, 'post') %&gt;
+
+&lt;% @user.posts.each do |post| %&gt;
+    &lt;%= image_tag post.photo %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Awesome! In the next section, we're going to style everything all at once so that it looks exactly like Instagram!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
+
+
+
+

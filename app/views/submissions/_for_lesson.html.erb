@@ -1,0 +1,45 @@
+<div class = "forum_section submissions">
+
+<h1>Submissions</h1>
+<p>
+  Submit your work here and get feedback!
+</p>
+
+<% if @user_submission %>
+  <%= link_to 'My Submission', submission_path(@user_submission.id), class: 'btn btn-danger' %>
+<% else %>
+  <%= link_to 'Submit Your Work', new_submission_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-danger' %>
+<% end %>
+
+<br>
+<br>
+
+<% if current_user.admin %>
+  <%= render 'submissions/student_submissions' %>
+  <hr>
+  <% @all_submissions.order("created_at DESC").each do |submission| %>
+    <h4><%= link_to submission.title, submission_path(submission.id) %> <span class = "comment_list">by <%= User.find(submission.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %>
+    </h4>
+  <% end %>
+<% elsif (@user_submission && @user_submission.approved) %>
+  <%= render 'submissions/student_submissions' %>
+  <hr>
+  <% @submissions.order("created_at DESC").each do |submission| %>
+    <h4><%= link_to submission.title, submission_path(submission.id) %> <span class = "comment_list">by <%= User.find(submission.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %>
+    </h4>
+  <% end %>
+<% elsif @user_submission %>
+  <%= render 'submissions/student_submissions' %>
+  <hr>
+  <h4><%= link_to @user_submission.title, submission_path(@user_submission.id) %> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe %>
+  </h4>
+  
+  <p class="alert alert-success">To view submissions by other students, have your submission approved by a mentor.</p>
+<% else %>
+  <%= render 'submissions/student_submissions' %>
+  <hr>
+  <p class="alert alert-success">To view submissions by other students, have your submission approved by a mentor.</p>
+<% end %>
+
+
+</div>

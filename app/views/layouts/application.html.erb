@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <%= render '/layouts/meta' %>
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/railscasts.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/languages/erb.min.js"></script>
+  
+</head>
+
+<body id="page-top" class="index course_html">
+
+  <div id = "wrap">
+
+    <%= render '/layouts/nav_lessons' %>
+
+    <div class="container">
+      <div class = "content">
+
+        <% if devise_controller? %>
+          <div class="col-xs-12 col-md-offset-2 col-md-8">
+            <div class="devise_box">
+              <%= yield %>
+            </div>
+          </div>
+        <% else %>
+          <%= yield %>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+
+  <%= render '/layouts/lesson_footer' %>
+  
+  <%= render '/layouts/audio' %>
+
+  <script type="text/javascript">
+  ready = function() {
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  }
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+  $(document).on('page:change',  function() {
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  });
+  $(document).on('page:restore', function() {
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  });
+  </script>
+</body>
+</html>

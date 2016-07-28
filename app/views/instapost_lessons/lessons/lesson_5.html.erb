@@ -1,0 +1,74 @@
+<h1><%= title_for(InstapostLesson, 3, 1) %></h1>
+
+<p>
+  For our app that we're trying to develop, we need the ability for users to be able to sign up, log in, and log out. This is called <strong>user authentication</strong>.
+</p>
+
+<p>
+  Thankfully, as with many things, Rails has a gem that does all this for us. The gem is called <strong>devise</strong>, and it's used by most rails apps that need user authentication.
+</p>
+
+<p>
+  It provides us with sign up, log in, log out, "Forgot Your Password?", confirmation emails, and other useful features, right out of the box.
+</p>
+
+<div class="well">
+  <h3>Are there any other options besides devise?</h3>
+  <p>
+    You could try to implement user authentication yourself, but it would be a little bit complex. If you're just looking for out of the box functionality, then devise is the way to go.
+  </p>
+
+  <p>
+    If you are looking for a challenge and want to try creating it yourself, <%= link_to "Michael Hartl's Ruby on Rails Tutorial", 'https://www.railstutorial.org/book' %> or <%= link_to 'this railscast episode', 'http://railscasts.com/episodes/250-authentication-from-scratch?autoplay=true' %> are excellent resources.
+  </p>
+</div>
+
+
+<p>
+  Installing devise is super simple! Let's get started.
+</p>
+
+<p>
+  Go to <%= link_to 'this link', 'https://github.com/plataformatec/devise#getting-started' %> to go to the devise getting started page.
+</p>
+
+<p>
+  The first thing it tells us to do is to add devise to the gem file. Add the following line in your <code>Gemfile</code>.
+</p>
+
+<pre><code class="ruby">
+gem 'devise'
+</code></pre>
+
+<p>
+  Once you've done that, go into your terminal and run <code>bundle install</code>. (Pro-tip: To save time, you can also just run <code>bundle</code>, it is the same thing as running <code>bundle install</code>.)
+</p>
+
+<p>
+  The next thing the documentation tells us to do is to run the generator. In your terminal, put in the following and hit enter:
+</p>
+
+<pre><code class="bash">
+rails generate devise:install
+</code></pre>
+
+<p>
+  This will install all of the devise files and configurations. Next, let's install the view files for devise. Run the following command:
+</p>  
+
+<pre><code class="bash">
+rails generate devise:views
+</code></pre>
+
+<p>
+  This will generate all the files you need for registration, sign in, forgot your password, etc.
+</p>
+
+<p>
+  Awesome! Just like that, you've successfully installed devise.
+</p>
+
+<%= standard_git_workflow %>
+
+
+

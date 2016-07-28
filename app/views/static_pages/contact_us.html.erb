@@ -1,0 +1,78 @@
+<% title("Contact Us | TECHRISE - Coding Bootcamp in Nepal") %>
+
+<div class="headline-bg contact-headline-bg">
+</div><!--//headline-bg-->
+
+
+<!-- ******Contact Section****** --> 
+<section class="contact-section section section-on-bg">
+    <div class="container">
+        <h2 class="title text-center">Contact Us</h2>
+        <p class="intro text-center">We’d love to hear from you. Let us know if you have any questions, concerns, or if you just want to say hi.</p>
+        <form id="contact-form" class="contact-form" method="post" action="">                    
+            <div class="row text-center">
+                <div class="contact-form-inner col-md-8 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 xs-offset-0">
+                    <div class="row">  
+
+                        <%= simple_form_for Contact.new(params[:contact]), html: {id: "contactForm"}, remote: true do |f| %>                                  
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <label class="sr-only" for="cname">Your name</label>
+                                <%= f.input :name, required: true, placeholder: 'Your Name', class: 'form-control', label: false %>
+
+                            </div>                    
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <label class="sr-only" for="cemail">Email address</label>
+                                <%= f.input :email, required: true, placeholder: 'Your Email', class: 'form-control', label: false %>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                <label class="sr-only" for="cmessage">Your message</label>
+                                <%= f.input :message, as: :text, required: false, input_html: {rows: 12}, placeholder: 'Enter your message here', class: 'form-control', label: false %>
+                            </div>
+                             <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                <%= f.button :submit, 'Send Message', class: 'btn btn-block btn-cta btn-cta-primary', id: 'ContactSubmit', data: { disable_with: "Sending..." } %>
+                            </div>  
+                        <% end %>                         
+                    </div><!--//row-->
+                </div>
+            </div><!--//row-->
+            <div id="form-messages"></div>
+        </form><!--//contact-form-->
+    </div><!--//container-->
+</section><!--//contact-section-->
+
+<!-- ******Other Contact Section****** --> 
+<section class="contact-other-section section">
+    <div class="container text-center">
+        <h2 class="title">Other ways to reach us</h2>
+        <p class="intro">You can also get in touch with us here.</p>
+        <div class="row">
+            <ul class="other-info list-unstyled col-md-6 col-sm-10 col-xs-12 col-md-offset-3 col-sm-offset-1 xs-offset-0" >
+                <li><i class="fa fa-envelope-o"></i><a href="mailto:contact@techrise.com">natsuko@techrise.me</a></li>
+                <li><i class="fa fa-facebook"></i><a href="https://www.facebook.com/TECHRISE-200095187051747/?fref=ts" target="_blank">TECHRISE Facebook Page</a></li>
+                <li><i class="fa fa-phone"></i><a href="tel:+818061747394">9808378374</a></li>
+                <!-- <li><i class="fa fa-map-marker"></i>Queen Square <br /> 56 College Green Road<br />BS1 XR18<br />Bristol<br />UK</li> -->
+            </ul>
+        </div><!--//row-->
+    </div><!--//container-->
+</section><!--//contact-other-section-->
+
+<!-- ******Map Section****** --> 
+<!-- 
+<section class="map-section section">
+    <div class="container text-center">
+        <h2 class="title">How to find us</h2>
+        <p class="intro">Pellentesque efficitur lobortis massa eu sodales. Morbi eu ipsum euismod felis commodo porttitor quis sit amet leo. Sed lacinia eu ipsum sit amet tempus.</p>
+        <div class="gmap-wrapper">
+            <div class="gmap" id="map"></div>
+        </div>
+    </div>
+</section>
+-->
+
+<!-- ******CTA Section****** -->
+<section id="cta-section" class="section cta-section text-center contact-cta-section">
+    <div class="container">
+       <%= render partial: 'cta_content' %>
+    </div><!--//container-->
+</section><!--//cta-section-->
+

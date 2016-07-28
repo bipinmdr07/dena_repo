@@ -1,0 +1,84 @@
+<h1><%= title_for(IdeatorLesson, 6, 2) %></h1>
+
+<p>
+  Under <code>/app/views/ideas/</code> make a file called <code>about.html.erb</code>.
+</p>
+
+<p>
+  This is just going to be a static page, so you can put any kind of text here. For me, I just put in a bunch of filler text for now, but it looks like this:
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;About&lt;/h1&gt;
+
+&lt;h4&gt;Share you ideas with the world and find others.&lt;/h4&gt;
+
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+&lt;/p&gt;
+</code></pre>
+
+<div class="well">
+<h3>How to Add Filler Text</h3>
+
+<p>
+  Adding filler text can be incredibly useful when you want to put content in the HTML to see what it would look like with content. To generate the classic filler text "Lorem ipsum...", you can go into Sublime, start typing <code>lorem</code>, and then hit <code>tab</code>. Just like that, your "lorem ipsum" text should be generated.
+</p>
+
+</div>
+
+
+<p>
+  Now let's hook this up to the navigation bar so that people can navigate to the about page easily. Go to <code>application.html.erb</code>.
+</p>
+
+<p>
+  By now, you should have a grasp on how <code>link_to</code> works in rails. Try and see if you can generate the link yourself.
+</p>
+
+
+<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "\<%= link_to 'About', about_path %\>", number: 1 } %>
+
+<br class="clear">
+
+<p>Your navigation bar should now look like this:</p>
+
+<pre><code class="erb">
+&lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"&gt;
+  &lt;ul class="nav navbar-nav navbar-right"&gt;
+    &lt;li&gt;&lt;%= link_to 'All Ideas', root_path %&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;%= link_to 'About', about_path %&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+</code></pre>
+
+<p>
+  Awesome! Let's now move on to building the "Random" page.
+</p>
+
+<%= standard_git_workflow %>
+
+

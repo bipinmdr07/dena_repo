@@ -1,0 +1,73 @@
+<h1><%= title_for(InstapostLesson, 6, 4) %></h1>
+
+<p>
+  In this lesson, let's set up the backend logic so that users can post comments to photos.
+</p>
+
+<p>
+  Let's open our <code>comments_controller.rb</code> file. Let's add in a <code>create</code> method and a <code>comment_params</code>:
+</p>
+
+<pre><code class="ruby">
+def create
+  @comment = Post.find(params[:post_id]).comments.create(comment_params.merge(user_id: current_user.id))
+  if @comment.valid?
+    redirect_to root_path
+  else
+    flash[:alert] = "Invalid attributes."
+    redirect_to root_path
+  end
+end
+
+private 
+
+def comment_params
+  params.require(:comment).permit(:text, :post_id)
+end
+</code></pre>
+
+<p>
+  This is very similar to what we wrote for our <code>posts_controller.rb</code>, so you should be able to understand most of what is going on here.
+</p>
+
+<p>
+  What is new though, is the <code>Post.find(params[:post_id])</code> aspect. Where does this <code>post_id</code> come from?
+</p>  
+
+<p>
+  Well, if we do a <code>rake routes</code> and look at all the routes related to comments, we see <code>post_id</code> in the URI. This means that <code>post_id</code> is passed in as a parameter. <code>post_id</code> is in the URI because we nested comments under posts in our <code>routes.rb</code> file.
+</p>
+
+<p>
+  Another thing that is new is the <code>.merge(user_id: current_user.id)</code> thing. Before, we did things like <code>current_user.posts.create(post_params)</code> which hooked up the post and the <code>current_user</code>. But in this case, if we did something like this:
+</p>
+
+<pre><code class="ruby">
+Post.find(params[:post_id]).comments.create(comment_params)
+</code></pre>
+
+<p>
+  adding the <code>user_id</code> would become complex. However, we can use this <code>merge</code> method to merge in the <code>user_id</code> and set it to <code>current_user.id</code>. That's what <code>.merge(user_id: current_user.id)</code> is doing right here.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Let's also add authentication to make sure that users who aren't signed in aren't allowed to access the <code>create</code> action. As we've done before, we can use Devise's <code>before_action :authenticate_user!</code> filter.
+</p>
+
+<pre><code class="ruby">
+class CommentsController &lt; Application Controller
+  before_action :authenticate_user!, only: :create
+</code></pre>
+
+<p>
+  Awesome! Now that we've set up the logic for creating posts, let's create a form to actually add comments to post in the next lesson.
+</p>
+
+
+<%= standard_git_workflow %>
+
+
+
+

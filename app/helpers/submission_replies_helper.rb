@@ -1,0 +1,2 @@
+module SubmissionRepliesHelper
+end

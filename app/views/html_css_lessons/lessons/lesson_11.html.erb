@@ -1,0 +1,176 @@
+<h1><%= title_for(HtmlCssLesson, 3, 7) %></h1>
+
+<p>
+  Now that we've got our basic stuff up, let's add a footer onto our landing page.
+</p>
+
+<p>
+  Let's take a moment to think about this.
+</p>
+
+<div class = "row">
+	<%= render partial: '/shared/quizzes', locals: { question: 'How might we possibly find out how to add a footer using bootstrap?', answer: 'Just Google "bootstrap footer", or experiment with Bootstrap yourself :) ', number: 1 } %>
+</div>
+
+<br class = "clear">
+
+<p>
+  In this case, we're going to do it the easy way. We're going to - as always - Google it.
+</p>
+
+<p>
+  So let's ask Google "bootstrap footer" and see what we can find. I see a link that says "Sticky Footer Template for Bootstrap". This seems like something we could use. Let's click on the link and check it out. Just in case <a href = "https://getbootstrap.com/examples/sticky-footer/" target = "_blank">this is the link</a> the I am talking about here.
+</p>
+
+<p>
+  The website is pretty plain and simple, but we can implement their footer and customize it. In Google Chrome, let's use our Developer Tools to see how they do this. Watch the video below to see how I use Developer Tools to rip the footer on the bootstrap website.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/xKbnp2lgjNw"></iframe>
+</div>
+
+<p>
+  Now that we have our footer, let's make it look a little bit nicer and add some content into it.
+</p>
+
+<p>
+  First, I want 4 columns inside of my footer. Let's take a moment to think about how we could do this. Before opening the answer, write down what you think the answer would be. <strong>If you really want to learn, take the time to recall your knowledge - that's how you learn!</strong>
+</p>
+
+<div class = "row">
+	<%= render partial: '/shared/quizzes', locals: { question: 'Using the Bootstrap grid system, how can we make 4 columns in our footer?', answer: 'Create a row and inside that row, create 4 columns with a size of 3.', number: 2 } %>
+</div>
+
+<br class = "clear">
+
+<p>
+  So let's go ahead and do this. Inside our <code>.container</code>, let's delete the <code>p</code> tag and replace it with a row. Inside the <code>row</code>, let's make 4 <coe>col</code>umns with the size of <code>3</code>. Your code should look something like this.
+</p>
+
+<pre><code class="erb">
+&lt;footer class="footer"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class = "row"&gt;
+
+      &lt;div class = "col-md-3"&gt;
+      &lt;/div&gt;
+
+      &lt;div class = "col-md-3"&gt;
+      &lt;/div&gt;
+
+      &lt;div class = "col-md-3"&gt;
+      &lt;/div&gt;
+
+      &lt;div class = "col-md-3"&gt;
+      &lt;/div&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+</code></pre>
+
+<p>
+  Refresh the page and you should see nothing there. That's because we haven't added any content yet. First, let's add an <code>h4</code> header in each of our <code>col</code>umns. So maybe adding "About", "Contact Us", "Join", and "Contribute" columns might make sense. Refresh the page, and you should see the footer again.
+</p>
+
+<p>
+  Now let's make a list of links under each of our headers. If you can recall, we can do this by using <code>ul</code> tags (unordered lists) and <code>li</code> tags (list elements). Inside each <code>li</code>, let's create a link.
+</p>
+
+<pre><code class="erb">
+&lt;footer class="footer"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class = "row"&gt;
+      &lt;div class = "col-md-3"&gt;
+        &lt;h4&gt;About&lt;/h4&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+  
+      &lt;div class = "col-md-3"&gt;
+        &lt;h4&gt;Contact&lt;/h4&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+  
+      &lt;div class = "col-md-3"&gt;
+        &lt;h4&gt;Join Us&lt;/h4&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+  
+      &lt;div class = "col-md-3"&gt;
+        &lt;h4&gt;Contribute&lt;/h4&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href = "#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+</code></pre>
+
+<p>
+  We refresh the page and now we see all the list elements. There's one problem - the list contains bullet points which kind of look ugly. Let's get rid of those.
+</p>
+
+<p>
+  To find out how we can achieve this, what should we do? That's right, <strong>google it</strong>. Let's google something like "li no bullet point" and see what comes up.
+</p>
+
+<p>
+  If you searched correctly, the answer is to apply a <code>style</code> of <code>list-style-type:none;</code> to the <code>li</code> elements. So let's go ahead and add that <code>style</code> to each of our <code>li</code>s. In the video below, I introduce a <strong>useful trick in Sublime Text that can maximize your productivity when writing code.</strong>
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-paR5m6m-Nw"></iframe>
+</div>
+
+<p>
+  We refresh the page and we see that there we don't see any bullet points anymore. Cool! But now we see that the <code>h4</code>s seem to be unaligned. We can fix this by centering the text within the <code>div</code>. Bootstrap gives us a useful class called <code>.text-center</code> that centers the text. So let's add that class to each of our column <code>div</code>s. Note that you can use multi-line editing for this task as well! :)
+</p>
+
+<p>
+  Awesome, let's refresh the page. It's starting to look good. The final thing we want to do is add some color to the footer. Inside our folder where our HTML lives, so in my case "Landing Page Mock" in my Documents folder, let's create a folder called "css".
+</p>
+
+<p>
+  In Sublime, let's create a new file and save it as <code>master.css</code> inside our newly created <code>css</code> folder. Then let's link the <code>css</code> file to the <code>HTML</code> file. If you're not sure how to do that, you know what you have to do when you don't know how to do something ;)
+</p>
+
+<p>
+  Now let's work on adding a background color to the footer. I show you how to use Developer Tools in Chrome to do this easily.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/dyepfZManqM"></iframe>
+</div>
+
+<p>
+  Cool! The footer looks pretty good! Congrats on finishing this semi-long lesson!
+</p>
+
+<br>
+
+<br class = "clear">
+
+
+
+

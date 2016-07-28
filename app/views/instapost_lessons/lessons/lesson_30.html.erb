@@ -1,0 +1,50 @@
+<h1><%= title_for(InstapostLesson, 8, 2) %></h1>
+
+<p>
+  In this challenge, your job is to figure out how to make the navbar look nice. Below is an example of how you could approach this:
+</p>
+
+<pre><code class="erb">
+&lt;!-- application.html.erb --&gt;
+&lt;nav&gt;
+  &lt;div class="row"&gt;
+    &lt;div class = "col-lg-6 col-lg-offset-3"&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="nav_wrapper"&gt;
+
+          &lt;div class="col-xs-6"&gt;
+            &lt;span class="pull-left brand"&gt;&lt;%= link_to 'Instapost', root_path %&gt;&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div class="col-xs-6"&gt;
+            &lt;% if user_signed_in? %&gt;
+              &lt;span class="nav_links pull-right"&gt;&lt;%= link_to 'New Post', new_post_path %&gt;&lt;/span&gt;
+              &lt;span class="nav_links pull-right"&gt;&lt;%= link_to 'Edit Settings', edit_user_registration_path %&gt;&lt;/span&gt;
+              &lt;span class="nav_links pull-right"&gt;&lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;&lt;/span&gt;
+            &lt;% else %&gt;
+              &lt;span class="nav_links pull-right"&gt;&lt;%= link_to 'Sign Up', new_user_registration_path %&gt;&lt;/span&gt;
+              &lt;span class="nav_links pull-right"&gt;&lt;%= link_to 'Log In', new_user_session_path %&gt;&lt;/span&gt;
+            &lt;% end %&gt;
+          &lt;/div&gt;
+
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;
+</code></pre>
+
+<pre><code class="css">
+/* master.scss */
+.nav_links {
+  vertical-align: middle;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 20px;
+}
+
+.nav_wrapper {
+  line-height: 78px;
+}
+</code></pre>
+

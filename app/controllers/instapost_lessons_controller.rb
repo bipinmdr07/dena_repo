@@ -1,0 +1,3 @@
+class InstapostLessonsController < LessonsController
+
+end

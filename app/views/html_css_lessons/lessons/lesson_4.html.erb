@@ -1,0 +1,57 @@
+<h1><%= title_for(HtmlCssLesson, 2, 2) %></h1>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XMykJm_3Njw"></iframe>
+</div>
+
+<p>
+  In this lesson, we're going to walk you through the steps of building a simple personal resume website. The point of this video is not really to teach you how HTML and CSS work, but to <strong>teach you the thought process of a web developer.</strong>
+</p>
+
+<p>
+  You'll notice how when faced with a problem, <strong>I quickly Google the question I have to get the answers I want.</strong> You'll also notice that you don't really have to memorize anything if you take this approach. You'll start to see that <strong>coding isn't scary</strong> if all you have to do when you get stuck is look for answers on Google.
+</p>
+
+<p>
+  While watching this video and building out the website yourself, <strong>try to imitate the thought process that I go through.</strong> I really want you to see how I approach solving problems when I am stuck.
+</p>
+
+<p>
+  Once you've completed your resume website, let's go to GitHub and go to a page called "Gist". 
+</p>
+
+<p>
+  For me, if I look on the top navigation bar, I see a link that says "Gist". So let's find that link and click on it. If you can't find it, try hitting Command + F (Mac) or Control + F (Windows) that spawns up a search box, and enter "Gist". It will find it and jump to the word on the website for you.
+</p>
+
+<p>
+  On this page, we can upload code snippets to show other people. We're going to use this for code submissions. Give it some kind of description in the box where it says "Gist description", and add a filename with the extension. What this means is if you want to save it as an HTML file, your file name should be "YourFileName.html" instead of just "YourFileName". Underneath where you typed in your file name, copy and paste your code. 
+</p>
+
+<p>
+  Since we have two files for this project, we're going to want to add another file. To do that, we click the "Add File" button underneath where you just copied and pasted your code. This will add another set of fields.
+</p>
+
+<%= image_tag 'gist.png', class: 'screenshot' %>
+
+<p>
+  Once you're all done, click the button that says "Create public gist" and you're all done! Once you've done that, click on the tab that says "Embed" which will bring down a drop down menu. Select "Share", then copy and paste the URL that is shown.
+</p>
+
+<%= image_tag 'gist_share.png', class: 'screenshot' %>
+
+<p>
+  Finally to submit, <span style="color:red;">go to the submissions page below and paste in that URL :)</span>
+</p>
+
+<p>
+  Awesome work! You're starting to get the hang of HTML and CSS. Let's keep moving.
+</p>
+
+<br>
+
+<br class = "clear">
+
+<% @submission_form = true %>
+

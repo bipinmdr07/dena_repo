@@ -1,0 +1,18 @@
+{:uriI"áfile:///Users/Takehiro/.rvm/gems/ruby-2.3.0/bundler/gems/ckeditor-548c065e209e/vendor/assets/javascripts/ckeditor/plugins/preview/preview.html?type=text/html&id=d6674d882ca54019cb8fc3e08390796484af5f707e58fef5b0939fb519ca9e0c:ET:load_pathI"f/Users/Takehiro/.rvm/gems/ruby-2.3.0/bundler/gems/ckeditor-548c065e209e/vendor/assets/javascripts;T:filenameI"‡/Users/Takehiro/.rvm/gems/ruby-2.3.0/bundler/gems/ckeditor-548c065e209e/vendor/assets/javascripts/ckeditor/plugins/preview/preview.html;T:	nameI"%ckeditor/plugins/preview/preview;T:logical_pathI"*ckeditor/plugins/preview/preview.html;T:content_typeI"text/html;T:sourceI"ö<script>
+
+// Prevent from DOM clobbering.
+if ( typeof window.opener._cke_htmlToLoad == 'string' ) {
+	var doc = document;
+	doc.open();
+	doc.write( window.opener._cke_htmlToLoad );
+	doc.close();
+
+	delete window.opener._cke_htmlToLoad;
+}
+
+</script>
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"•file-digest:///Users/Takehiro/.rvm/gems/ruby-2.3.0/bundler/gems/ckeditor-548c065e209e/vendor/assets/javascripts/ckeditor/plugins/preview/preview.html;TTF:charsetI"
+utf-8;F:digest"%Ø½Ëœßy™†ì¢€;jF>îç`¨Ø—hvêf…:lengthiö:dependencies_digest"%UoŒã² ¥'íg)W^KÊ'MJ-F¯é°s.DÊ:idI"Ed6674d882ca54019cb8fc3e08390796484af5f707e58fef5b0939fb519ca9e0c;F:
+mtimel+ÂK]W

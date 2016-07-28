@@ -1,0 +1,2 @@
+class MvcLessonsController < LessonsController
+end

@@ -1,0 +1,219 @@
+<h1><%= title_for(IdeatorLesson, 1, 1) %></h1>
+
+<p>
+	Get ready to embark on a new journey in your web development career! From this lesson, we'll be creating rails applications together, where you'll learn how to create full featured applications.
+</p>
+
+<div class="well">
+	<h3>How to gain the most out of the lessons</h3>
+
+	<ul>
+		<li><strong>Don't copy and paste</strong> - it is always better to actually type the code yourself. <strong>Msucle memory</strong> is really important when learning how to code!</li>
+		<li><strong>Ask Questions</strong> - whenever something doesn't make sense to you, first google, then ask for help! We are always here to help out.</li>
+		<li><strong>Don't be frustrated</strong> - some of these lessons might be difficult for you, but don't be frustrated, it's part of learning and it is important to relax and keep on going.</li>
+	</ul>
+</div>
+
+<p>
+	Let's get started!
+</p>
+
+<p>
+	<strong>First, download Tokaido <a href = "https://github.com/tokaido/tokaidoapp/releases" target = "_blank">Here</a>.</strong> This will enable you to use Ruby on Rails instantly.
+</p>
+
+<p>
+	<strong>Let's open Tokaido and click "Open Terminal".</strong>
+</p>
+
+<div class="well">
+	<h3>Using Tokaido</h3>
+
+	<p>
+		Tokaido makes installing Ruby on Rails super easy. Setting up Rails can take a lot of time for people just starting out, so we are using Tokaido to create our Rails applications.
+	</p>
+
+	<p>
+		<strong>Whenever we work with Ruby on Rails, make sure that you open the terminal from Tokaido, by pressing "Open Terminal":</strong>
+	</p>
+
+	<%= image_tag 'ideator/tokaido.png', class: 'img-responsive screenshot' %>
+</div>
+
+<div class="well">
+	<h3>Command Line Crash Course</h3>
+
+	<p>
+		<code>cd</code> <strong>stands for <em>change directory</em>.</strong> We can use the <code>cd</code> command to navigate to different folders in the terminal.
+	</p>
+
+	<%= create_flashcard %>
+
+	<p>
+		By default, the directory will be at the root directory of the user that is signed in (typically it is <code>/Users/YourNameHere</code>). We can move to different folders within our computer inside the terminal.
+	</p>
+
+	<p>
+		For example, let's go to the <code>desktop</code> directory. In the terminal, let's type in the following command and press enter:
+	</p>
+
+<pre><code class="bash">
+cd ~/desktop
+</code></pre>
+
+	<p>
+		The <code>~</code> means the root directory. We can display all of our folders in our desktop. To do so, let's go into the terminal and type the following command press enter:
+	</p>
+
+<pre><code class="bash">
+ls
+</code></pre>	
+	<p>
+		This should print out all of your files in your desktop. We can also navigate to other folders as well. For example, let's navigate to the <code>Documents</code> folder. In your terminal, type in the following and press enter:
+	</p>	
+
+<pre><code class="bash">
+cd ~/documents
+</code></pre>
+
+	<p>
+		Once again, let's view all of our folders inside our <code>Documents</code>. In your terminal, type in the following and press enter:
+	</p>
+
+<pre><code class="bash">
+ls
+</code></pre>
+	<p>
+		You should now see all of your folders displayed in your terminal. Awesome!
+	</p>	
+</div>
+
+<p>
+	In the terminal, let’s navigate to our desktop. In your terminal, type in the following and press enter:
+</p>
+
+
+<pre><code class="bash">
+cd ~/desktop
+</code></pre>
+
+<p>
+	This is where we’ll create our ideator app. In the terminal that we just opened up, let’s type in the following command and press enter:
+</p>
+
+
+<pre><code class="bash">
+rails new ideator
+</code></pre>
+
+<p>
+	This command magically creates a new rails application. Awesome!
+</p>
+
+<div class="well">
+	<h3>How to create a new Rails application</h3>
+
+	<p>
+		First, make sure that you have opened your terminal from Tokaido. Then, navigate yourself to the folder where you want to create your Rails application using the <code>cd</code> command. 
+	</p>
+
+	<p>
+		The command to create a new Rails application is this:
+	</p>
+
+<pre><code class="bash">
+rails new app_name
+</code></pre>
+
+	<p>
+		You can replace <code>app_name</code> with any name that you want to give your app. Running this command will automatically generate many files for you so that you can get started on building your application instantly.
+	</p>
+
+	<%= create_flashcard %>
+
+</div>
+
+<p>
+	Running the command should create a bunch of files and you shouldn’t get any errors. If you do get an error, make sure that everything is spelled out correctly and that you have opened the terminal from Tokaido.
+</p>
+
+
+<p>
+	Great, now that we’ve created our new rails app, let’s start this baby up.
+</p>
+
+<p>
+	In the terminal, let’s navigate to our project folder. Let's type the following in the terminal and press enter:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop/ideator
+</code></pre>
+
+<p>
+	Next we have to create our initial database. In the terminal enter the following commands:
+</p>
+
+<pre><code class="bash">
+rake db:create:all
+</code></pre>
+
+<div class="well">
+	<h3>No Rakefile found?</h3>
+	<p>
+		If you get an error saying <code>No Rakefile found</code>, chances are you didn't navigate to your <code>ideator</code> folder before running the <code>rake</code> commands.
+	</p>
+
+	<p>
+		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering the <code>rake</code> commands.
+	</p>
+
+	<p>	
+		If that doesn't work, make sure you are running the terminal from Tokaido. If you haven't done so, <strong>open Tokaido and click "Open Terminal"</strong>.
+	</p>
+
+</div>
+
+<p>
+	Now let’s fire up our rails server by entering this command.
+</p>
+
+<pre><code class="bash">
+rails server
+</code></pre>
+
+<p>
+	Give it a few seconds to load. Now go into your browser and go to the following address:
+</p>
+
+<pre><code class="bash">
+http://localhost:3000/
+</code></pre>
+
+<p>
+	You should see a nice welcome page from Ruby on Rails.
+</p>
+
+<%= image_tag 'ideator/welcome_page.png', class: 'img-responsive screenshot', style: 'margin-bottom: 30px' %>
+
+<div class="well">
+	<h3>Don't see a nice welcome page?</h3>
+	<p>
+		If the <code>rails server</code> command is giving you errors, chances are you didn't navigate to your <code>ideator</code> folder.
+	</p>
+
+	<p>
+		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering <code>rails server</code>.
+	</p>
+
+	<p>	
+		If that doesn't work, make sure you are running the terminal from Tokaido. If you haven't done so, <strong>open Tokaido and click "Open Terminal"</strong>.
+	</p>
+
+</div>
+
+<p>
+  Awesome! You're one step closer to finishing your first rails app!
+</p>
+
+

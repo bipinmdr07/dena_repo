@@ -1,0 +1,2 @@
+class AlgorithmLessonsController < LessonsController
+end
