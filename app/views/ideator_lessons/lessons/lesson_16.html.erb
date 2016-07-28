@@ -12,12 +12,16 @@
 def destroy
   @idea = Idea.find(params[:id])
   @idea.destroy
-  redirect_to :back
+  redirect_to root_path
 end
 </code></pre>
 
 <p>
-  Let's walk through this. First, we are saying again to find the idea with the <code>:id</code> specified in the URL and then to store that idea in <code>@idea</code>. Then we are saying <code>.destroy</code> that <code>@idea</code>. Lastly, we are telling it to redirect to <code>:back</code>, which is a useful piece of code that points to the previous page the user was on.
+  Let's walk through this. First, we are saying again to find the idea with the <code>id</code> of <code>params[:id]</code> and then to store that idea in <code>@idea</code>.
+</p>
+
+<p>
+  Then we are saying <code>.destroy</code> that <code>@idea</code>. Lastly, we are telling it to redirect to <code>root_path</code>.
 </p>
 
 <p>
@@ -45,7 +49,7 @@ end
       </p>
 
 <pre><code class="erb">
-&lt;%= link_to 'Name of Idea Index Page Here', ideas_path %&gt;
+&lt;%= link_to 'Link Title', ideas_path %&gt;
 </code></pre>
 
       <p>
@@ -53,17 +57,38 @@ end
       </p>
 
 <pre><code class="erb">
-&lt;%= link_to 'Name of Idea Index Page Here', ideas_path, class: 'my_class_here, class_2', style: 'my_style_here, style_2' %&gt;
+&lt;%= link_to 'Link Title', ideas_path, class: 'my_class_here class_2', style: 'my_style_here style_2' %&gt;
 </code></pre>
-
-      <p>
-        Got it? :)
-      </p>
 
 </div>
 
 <p>
-  First, if we go into console and type in <code>rake routes</code>, we can look for the link to the <code>destroy</code> method. It tells me that <code>idea_path</code> is the link. So we can make a link like below:
+  First, if let's go into terminal and type in <code>rake routes</code>.
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         ideas#index
+    ideas GET    /ideas(.:format)          ideas#index
+          POST   /ideas(.:format)          ideas#create
+ new_idea GET    /ideas/new(.:format)      ideas#new
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+     idea GET    /ideas/:id(.:format)      ideas#show
+          PATCH  /ideas/:id(.:format)      ideas#update
+          PUT    /ideas/:id(.:format)      ideas#update
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+
+<p>
+  Let's look for the link to the <code>destroy</code> method. Let's look for the <code>destroy</code> method.
+</p>
+
+<pre><code>
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+
+<p>
+
 </p>
 
 <pre><code class = "erb">

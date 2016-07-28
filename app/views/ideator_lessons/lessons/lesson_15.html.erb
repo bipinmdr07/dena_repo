@@ -5,15 +5,21 @@
 </p>
 
 <p>
-  We can make sure that these kinds of invalid data do not get stored in the database by using <strong>validations</strong> in rails.
+  In Ruby on Rails, we can make sure that these kinds of invalid data do not get stored in the database by using <strong>validations</strong>.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  There are different kinds of validations that you can use in rails (read about them <a href="http://guides.rubyonrails.org/active_record_validations.html" target="_blank">here</a>).
 </p>
 
 <p>
-  There are different kinds of validations that you can use in rails (read about them <a href="http://guides.rubyonrails.org/active_record_validations.html" target="_blank">here</a>). For now, we are just going to validate that a <code>description</code> and <code>author</code> exists for every Idea.
+  For now, let's write a validatation to make sure that the <code>description</code> and <code>author</code> exists for every <code>Idea</code>.
 </p>
 
 <p>
-  Go into <code>idea.rb</code>. This is where we can add our validation. Inside your <code>idea.rb</code>, let's add the following piece of code to look like this:
+  <strong>Validations are added inside the model file.</strong> Open <code>idea.rb</code>. This is the model file for <code>idea</code>, since it is located inside the <code>app/models</code> directory. This is where we can add our validation. Inside your <code>idea.rb</code>, let's add the following piece of code to look like this:
 </p>
 
 <pre><code class="ruby">
@@ -27,7 +33,7 @@ end
 </p>
 
 <p>
-  Now if we look back to our <code>update</code> method, we can now see why we wanted to check if the idea was successfully updated.
+  Let's take another look at the <code>update</code> method:
 </p>
 
 <pre><code class="ruby">
@@ -42,11 +48,15 @@ end
 </code></pre>
 
 <p>
-  If a user passes in invalid data, in this case not filling in the <code>author</code> or <code>description</code>, then <code>@idea.update(idea_params)</code> will return <code>false</code>, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
+  When a validation fails, the data is not saved into the database and will return a value of <code>false</code>.
 </p>
 
 <p>
- Pretty simple right? :) Congrats on writing your first validation!
+  If a user passes in invalid data, (in this case not filling in the <code>author</code> or <code>description</code>), then the validation we just added will cause <code>@idea.update(idea_params)</code> to return <code>false</code>, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
+</p>
+
+<p>
+ Awesome. Congratulations on writing your first validation!
 </p>
 
 <%= standard_git_workflow %>
