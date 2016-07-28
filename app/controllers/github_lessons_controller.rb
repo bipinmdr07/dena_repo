@@ -1,0 +1,2 @@
+class GithubLessonsController < LessonsController
+end

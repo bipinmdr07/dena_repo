@@ -1,0 +1,3 @@
+class IdeatorLessonsController < LessonsController
+
+end

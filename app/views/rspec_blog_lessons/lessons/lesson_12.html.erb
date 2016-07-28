@@ -1,0 +1,66 @@
+<h1><%= title_for(RspecBlogLesson, 4, 1) %></h1>
+
+<p>
+  Test Driven Development, or TDD is a concept you will hear a lot, especially in the Ruby on Rails community. Many teams use this methodology to ensure high quality code across the team. Watch the video below to get an overview of how TDD works.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/uGaNkTahrIw" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<h3>Write tests first, then write your code</h3>
+
+<p>
+  As you saw in the video, TDD is all about writing tests before you even start writing your code. The TDD flow looks like this:
+</p>
+
+<ul>
+  <li>Write failing tests</li>
+  <li>Write code that make the tests pass</li>
+  <li>Refactor the code</li>
+</ul>
+
+<%= create_flashcard %>
+
+<p>
+  <strong>Here are some benefits of practicing TDD:</strong>
+</p>
+
+<ul>
+  <li>You can have immediate feedback on if your code is working, so you can find bugs faster</li>
+  <li>You can also see the test go from failing to passing, which gives you confidence that both the tests and the code works.</li>
+  <li>By writing tests first, you have an outline of what you want the code to do before you write the code</li>
+</ul>
+
+<%= create_flashcard %>
+
+<h3>Unit Testing vs Test Driven Development</h3>
+
+<p>
+  In <%= link_to 'Lesson 1', '/rspec_blog_lessons/1' %>, we talked about <strong>unit tests</strong>. At this point, you're probably wondering what the difference is between unit testing and test driven development. It's actually quite simple.
+</p>
+
+<p>
+  <strong>Unit tests</strong> refer to the individual tests (which are often automated), while Test Driven Development refers to the practice of writing these unit tests before you write the actual code.
+</p>
+
+<p>
+  To give you a quick review, <strong>here are some benefits of writing unit tests:</strong>
+</p>
+
+<ul>
+  <li>Allows developer to immediately know when the code breaks</li>
+  <li>As the application grows bigger, it's faster to have automated tests compared to clicking around the app to see if everything works</li>
+</ul>
+
+<%= create_flashcard %>
+
+
+
+
+
+
+
+
+

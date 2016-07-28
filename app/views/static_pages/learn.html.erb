@@ -1,0 +1,177 @@
+<% title("Learn | TECHRISE - Coding Bootcamp in Nepal") %>
+
+<div class="headline-bg">
+</div><!--//headline-bg-->         
+
+<section class="features-video section section-on-bg">
+    <div class="container text-center">          
+        <h2 class="title">How It Works</h2>
+        <div class="video-container" style="background-color: #ffffff; text-align:left;">
+            <div class="container-fluid">
+                <h3>Details</h3>
+                <%= render 'details' %>
+            </div>
+        </div><!--//video-container--> 
+    </div><!--//container-->
+</section><!--//feature-video-->
+
+<!-- ******Features Section****** -->       
+<section class="features-tabbed section">
+    <div class="container">
+        <h2 class="title text-center">What You'll Get</h2>
+        <div class="row">
+            <div class=" text-center col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs text-center" role="tablist">
+                    <li class="active"><a href="#feature-1" role="tab" data-toggle="tab"><i class="fa fa-cloud-upload"></i><br /><span class="hidden-sm hidden-xs">Project Based Learning</span></a></li>
+                    <li><a href="#feature-2" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i><br /><span class="hidden-sm hidden-xs">1 on 1 Mentor Sessions</span></a></li>
+                    <li><a href="#feature-3" role="tab" data-toggle="tab"><i class="fa fa-photo"></i><br /><span class="hidden-sm hidden-xs">TECHRISE Training Flashcards</span></a></li>
+                    <li class="last"><a href="#feature-4" role="tab" data-toggle="tab"><i class="fa fa-users"></i><br /><span class="hidden-sm hidden-xs">Peer Learning & Community</span></a></li>
+                </ul><!--//nav-tabs-->
+                
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="feature-1">
+                        <h3 class="title sr-only">Project Based Learning</h3>                                    
+                        <figure class="figure text-center">
+                            <%= image_tag 'landing_page/lesson_screen.png', class: 'img-responsive' %>
+                            <figcaption class="figure-caption">Learn by doing - build multiple projects to build your portfolio.</figcaption>
+                        </figure>
+                        <div class="desc text-left">
+                            <p>
+                                During your time at TECHRISE, you'll build three real-world web applications. By building out projects, you'll constantly be learning new things while reviewing concepts that you've learned before. We take it step by step so that you don't get confused, and provided a Q&A forum in case you ever get stuck.
+                            </p>
+
+                            <!-- <div class="col-xs-12 ">
+                                <%= image_tag 'landing_page/ideator.png', class: 'img-responsive shadow_screenshot', style: 'width: 100%;' %>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <p>
+                                    The first app you will be building will be a simple idea posting app where people can add new ideas onto the website.
+                                </p>
+                            </div>
+                            
+
+                            <div class="col-xs-12">
+                                <%= image_tag 'landing_page/instapost.png', class: 'img-responsive shadow_screenshot', style: 'width: 100%;' %>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <p>
+                                    You'll be building an Instagram clone for your next project, where you'll learn how to authenticate users, upload images, and more.
+                                </p>
+                            </div> -->
+
+                                
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-star"></i>Ideator - an Idea Sharing App</li>
+                                <li><i class="fa fa-star"></i>Instapost - Share your photos online (Instagram Clone)</li>
+                                <li><i class="fa fa-star"></i>Q&A Forum</li>
+                            </ul>
+                            
+                        </div><!--//desc-->
+                    </div><!--//tab-pane-->
+                    <div class="tab-pane" id="feature-2">
+                        <h3 class="title sr-only">1 on 1 Mentor Sessions</h3>                                    
+                       <!--  <figure class="figure text-center">
+                            <img class="img-responsive" src="assets/images/features/screenshot-2.png" alt="" />
+                            <figcaption class="figure-caption">(Screenshot source: Coral - App &amp; website startup kit)</figcaption>
+                        </figure> -->
+                        <div class="desc text-left">
+                            <blockquote>
+                                <p> 
+                                    [...] under tutorial instruction, the average student is above 98% of the students
+                                </p>
+                                <p class="source">Benjamin S. Bloom in The 2 Sigma Problem - MIT</p>
+                            </blockquote>
+
+                            <p>
+                                If you're just starting out, coding can be frustrating and sometimes you don't know how to move forward. Mentors will provide you the guidance you need in order to succeed in becoming a web developer.
+                            </p>
+
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-star"></i>Weekly 30 minute Mentor Sessions</li>
+                                <li><i class="fa fa-star"></i>Total of 12 Mentor Sessions</li>
+                                <li><i class="fa fa-star"></i>Tackle problems together</li>
+                            </ul>
+
+                            <p>
+                                One on one mentoring has been proven by research to be one of the most effective methods of teaching. Through research and experience, we believe that our 1 on 1 mentor sessions will enable you to overcome obstacles and learn at an accelerated pace.
+                            </p>
+
+                            <div class="quote" style="position: relative;"> 
+                                <div class="quote-profile" style="position: absolute;left: 0;">
+                                    <%= image_tag 'landing_page/lakshman_2.jpg', class: "img-responsive img-circle", style: 'height:70px; width: 70px;' %>
+                                </div><!--//profile-->
+                                <div class="quote-content">
+                                    <blockquote><p>Asking a lot of questions to my mentor, and discussing with other members in Slack enhanced fast understanding.</p></blockquote>
+                                    <p class="source">Lakshman Basnet</p>
+                                </div><!--//quote-content-->                                     
+                            </div><!--//quote--> 
+
+
+                        </div><!--//desc-->
+                    </div><!--//tab-pane-->
+                    <div class="tab-pane" id="feature-3">
+                        <h3 class="title sr-only">TECHRISE Training Flashcards</h3>
+                        <figure class="figure text-center">
+                            <%= image_tag 'landing_page/flashcards.png', class: 'img-responsive' %>
+                            <figcaption class="figure-caption">You can create training flashcards within the lesson. Syntax highlighting is supported.</figcaption>
+                        </figure>
+                        <div class="desc text-left">
+                            <p>
+                                We find that the problem with a lot of coding education platforms is that although they are great at teaching the content, there is no system for reviewing and retaining the newly learned information.
+                            </p>
+
+                            <p>
+                                In our platform, <strong>we provide an intelligent flashcard system that feeds you flashcards every day only in topics you are weak in</strong>, so you don't have to waste time going through all of your flashcards. You can add cards inside the lessons at any time for you to review later on. Students will be able to retain information at a much higher rate by using the TECHRISE Training Flashcard System.
+                            </p>
+                        </div><!--//desc-->                                    
+                    </div><!--//tab-pane-->
+                    <div class="tab-pane" id="feature-4">
+                        <h3 class="title sr-only">Peer Learning & Community</h3>                                    
+                        <figure class="figure text-center">
+                            <%= image_tag 'landing_page/slack_screenshot.png', class: 'img-responsive' %>
+                            <figcaption class="figure-caption">Students interact on Slack and ask each other questions.</figcaption>
+                        </figure>
+                        <div class="desc text-left">
+                            <p>
+                                One of the most valuable when learning something is the people you meet. You'll make lifelong friends here at TECHRISE who will help you learn and achieve your goals.
+                            </p>
+
+                            <p>
+                                Students ask each other questions, share resources, and solve each other's problems in our online community. We also provide an offline community where similar minded developers gather and chat about technology.
+                            </p>
+
+                        </div><!--//desc-->
+                    </div><!--//tab-pane-->
+                </div><!--//tab-content-->
+            </div><!--//col-md-x-->
+        </div><!--//row-->
+    </div><!--//container-->
+</section><!--//features-tabbed-->
+
+<!-- ******Steps Section****** --> 
+<section class="steps section">
+    <div class="container">
+        <h2 class="title text-center">3 Simple Steps to Get you started with TECHRISE</h2>
+        <div class="row">
+             <div class="step text-center col-md-4 col-sm-4 col-xs-12">
+                 <h3 class="title"><span class="number">1</span><br /><span class="text">Sign up for Prescreening</span></h3>
+                 <p>We are currently accepting applications for highly motivated students to join TECHRISE. If you are interested, please sign up below.</p>
+             </div><!--//step-->
+             <div class="step text-center col-md-4 col-sm-4 col-xs-12">
+                 <h3 class="title"><span class="number">2</span><br /><span class="text">Complete Prework</span></h3>
+                 <p>If you are chosen as a potential student, you will go through a series of interviews. After that process, you will be sent assignments that you must complete in order to enroll in TECHRISE.</p>
+             </div><!--//step-->
+             <div class="step text-center col-md-4 col-sm-4 col-xs-12">
+                 <h3 class="title"><span class="number">3</span><br /><span class="text">Start Your Coding Career</span></h3>
+                 <p>From here, you'll be skyrocketing. Build projects, have a personal mentor, learn from peers, and become a successful web developer.</p>
+             </div><!--//step-->
+        </div><!--//row-->
+        
+        <div class="text-center"><a class="btn btn-cta btn-cta-primary" href="/preregistration">Sign Up to Enroll in Future TECHRISE Cohorts</a></div>
+        
+    </div><!--//container-->        
+</section><!--//steps-->

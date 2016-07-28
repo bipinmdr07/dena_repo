@@ -1,0 +1,55 @@
+<% title("Community | TECHRISE") %>
+
+<div class="panel">
+  <div class="panel-head">
+    <%= form_tag community_index_path, method: :get, class: 'form-inline' do %>
+        <%= text_field_tag :query, params[:query], placeholder: 'Search for an answer', class: 'form-control' %>
+        <%= submit_tag "Search", name: nil, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+  <div class="panel-body">
+
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+
+
+    <% @questions.each do |question| %>
+      <ul class="question_list">
+        <% user = User.find(question.user_id) %>
+
+        <li class="question_container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-2">
+              <%= image_tag user.avatar, class: 'community_prof_pic' %>
+            </div><!-- col-xs-12 col-sm-4 -->
+
+            <div class="col-xs-12 col-sm-8">
+              <h5 class="question_container_title"><%= link_to question.title, question_path(question) %></h5>
+              <div class="question_container_information">
+                <span class="question_container_time"><%= time_ago_in_words(question.created_at) %> ago</span> by <span class="question_container_user"><%= user.name %></span>
+              </div><!-- question_container_information -->
+
+              <div class="question_tags">
+                <a href="/<%= question.course_name.underscore %>s"><label class="tag_label"><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></label></a>
+                <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id.to_i - 1][1] %></label></a>
+              </div><!-- question_tags -->
+            </div><!-- col-xs-12 col-sm-2 -->
+
+            <div class="col-xs-12 col-sm-2">
+              <div class="reply_count"><%= question.replies.count %></div>
+              <div class="reply_count_label">Replies</div>
+              <% if question.resolved %>
+                <div class="reply_resolved text-center">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </div><!-- reply_resolved -->
+              <% end %>
+            </div><!-- col-xs-12 col-sm-2 -->
+          </div><!-- row -->
+          
+        </li><!-- question_container -->
+      </ul><!-- question_list -->
+    <% end %>
+
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+   
+  </div><!-- panel-body -->
+</div><!-- panel -->

@@ -1,0 +1,2 @@
+module InstapostLessonsHelper
+end

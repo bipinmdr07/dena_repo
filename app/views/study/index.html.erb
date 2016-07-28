@@ -1,0 +1,7 @@
+<% title("Study Cards | TECHRISE") %>
+
+<div class="col-xs-12 col-md-8 col-md-offset-2">
+  <div id="card_container">
+    <%= render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>
+  </div>
+</div>

@@ -1,0 +1,188 @@
+<h1><%= title_for(RspecBlogLesson, 5, 7) %></h1>
+
+<p>
+  Now that we've got our model validations set up, let's continue with writing our test for the <code>create</code> action.
+</p>  
+
+<p>
+  First, let's create a factory for an <em>invalid <code>Post</code></em>, or a <code>Post</code> where the validation will not pass.
+</p>
+
+<p>
+  Let's open the <code>factories.rb</code> file. It should currently look like this:
+</p>
+
+<pre><code class="ruby">
+FactoryGirl.define do
+  factory :post do
+    title "Post Title"
+    author  "Momo Taro"
+    content "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  end
+end
+</code></pre>
+
+<p>
+  Let's change it to look like this:
+</p>
+
+<pre><code class="ruby">
+FactoryGirl.define do
+  factory :post do
+    title "Post Title"
+    author  "Momo Taro"
+    content "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    factory :invalid_post do
+      content "Short content"
+    end
+  end
+end
+</code></pre>
+
+<p>
+  Here, we add a nested factory called <code>invalid_post</code>, where the <code>content</code> is set to something that is less than <code>50</code> characters, which will make the validation fail.
+</p>
+
+<p>
+  Next, let's open our <code>posts_controller_spec.rb</code>. Let's start with the <code>when attributes are valid</code> context. Let's make it so that it looks like this:
+</p>
+
+<pre><code class="ruby">
+context "when attributes are valid" do
+  it "redirects to root_path" do
+    post :create, post: FactoryGirl.attributes_for(:post)
+    expect(response).to redirect_to root_path
+  end
+end
+</code></pre>
+
+
+<p>
+  We are creating a <code>POST</code> request to the <code>create</code> action, sending in the attributes for the <code>post</code> factory. We then expect the <code>response</code> to redirect to the <code>root_path</code>.
+</p>
+
+<p>
+  Let's run the tests:
+</p>
+
+<pre><code class="ruby">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This is actually going to pass, since we already added in the <code>redirect_to root_path</code> code in <code>posts_controller.rb</code>. So we don't need to do any refactoring for now.
+</p>
+
+<p>
+  Let's now work on the <code>when attributes are invalid</code> context.
+</p>
+
+<p>
+  Let's make it so that it looks like this:
+</p>
+
+<pre><code class="ruby">
+context "when attributes are invalid" do
+  it "renders the new template" do
+    post :create, post: FactoryGirl.attributes_for(:invalid_post)
+    expect(response).to render_template :new
+  end
+end
+</code></pre>
+
+<p>
+  Here instead of <code>FactoryGirl.attributes_for(:post)</code>, we replaced it with <code>FactoryGirl.attributes_for(:invalid_post)</code>, which is what we defined earlier in this lesson. We also expect the <code>response</code> to render the <code>new</code> template instead as well.
+</p>
+
+<p>
+  Let's run the tests:
+</p>
+
+<pre><code class="ruby">
+bundle exec rspec
+</code></pre>
+
+<p>
+  This is going to give you an error like this:
+</p>  
+
+<pre><code class="bash">
+Failure/Error: expect(response).to render_template :new
+       expecting &lt;"new"&gt; but was a redirect to &lt;http://test.host/&gt;
+</code></pre>
+
+<p>
+  The error is telling us that it didn't redirect to the <code>new</code> template. This is because we haven't specified it to do so on an invalid post in the <code>create</code> action of the <code>posts_controller.rb</code> file.
+</p>
+
+<p>
+  Let's open the <code>posts_controller.rb</code> file. Let's refactor the <code>create</code> method to make the tests path.
+</p>  
+
+<p>
+  This is what we want the code to do:
+</p>   
+
+<ul>
+  <li>Create a post</li>
+  <li>If the post is valid</li>
+  <ul>
+    <li>Redirect to <code>root_path</code></li>
+  </ul>
+  <li>If the post is not valid</li>
+  <ul>
+    <li>Render the new template</li>
+  </ul>
+</ul>
+
+<p>
+  Let's put this into code. Change your <code>create</code> method to look like this:
+</p>
+
+<pre><code class="ruby">
+def create
+  @post = Post.create(post_params)
+  if @post.valid?
+    redirect_to root_path
+  else
+    render :new
+  end
+end
+</code></pre>
+
+<div class="well">
+  <h3>The .valid? method</h3>
+  <p>
+    The <code>.valid?</code> method returns <code>true</code> if all validations pass and returns <code>false</code> if any of the validations do not pass.
+  </p>
+</div>
+
+<p> 
+  Let's run the tests:
+</p>
+
+<pre><code class="ruby">
+bundle exec rspec
+</code></pre>
+
+<p>
+  All of the tests should now be passing. Awesome!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+

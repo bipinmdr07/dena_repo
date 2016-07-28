@@ -1,0 +1,2 @@
+class RspecBlogLessonsController < LessonsController
+end

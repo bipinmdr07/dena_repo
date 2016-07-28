@@ -1,0 +1,18 @@
+<div class = "container" >
+  <div class = "row">
+
+    <h4>Total Users: <%= @users.count %></h4>
+    
+    <% @users.each do |user| %>
+      <ul class="unindented_ul">
+        <li>Name: <%= user.name %></li>
+        <li>Email: <%= user.email %></li>
+        <li>Admin: <%= user.admin %></li>
+        <li>Last Logged In: <%= user.last_sign_in_at %></li>
+        <li>Sign In Count: <%= user.sign_in_count %></li>
+      </ul>
+    <% end %>
+
+
+  </div>
+</div>

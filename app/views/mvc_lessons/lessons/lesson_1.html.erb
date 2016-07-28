@@ -1,0 +1,107 @@
+<h1><%= title_for(MvcLesson, 1, 1) %></h1>
+
+<p>
+  In this series of lessons, we are going to take a deeper look into how Rails applications work together.
+</p>
+
+<p>
+  When we were building your Ideator app, we came across words and files that have <strong>models</strong>, <strong>views</strong>, and <strong>controllers</strong>. These three things are extremely important in Rails applications.
+</p>
+
+<p>
+  Ruby on Rails is an MVC Framework. <strong>MVC stands for Model View Controller.</strong> <strong>The Model, View, and Controller each has seperate responsibilities, but work together in the application:</strong>
+</p>
+
+<h3>The Model</h3>
+
+<p>
+  <strong>The model manages behaviors and data of the application.</strong>
+</p>
+
+<ul>
+  <li><strong>It can respond to requests for information</strong></li>
+  <ul>
+    <li>For example, in our Ideator app, if we wanted to find information about a certain <code>Idea</code>, the model is responsible for taking care of this task</li>
+    <li><code>Idea.find(params[:id])</code> achieves this task. <code>find</code> is a method that tells the model to find the object with the <code>id</code> of the integer passed inside the parenthesis.</li>
+    <ul>  
+      <li><code>Idea.find(4)</code> tells the model to find the <code>Idea</code> with the <code>id</code> of <code>4</code>.</li>
+    </ul>
+  </ul>
+  <li><strong>It can respond to instructions to change the information</strong></li>
+  <ul>
+    <li>For example in our Ideator app, if we wanted to change the contents of one of our <code>Idea</code>s, the model is responsible for taking care of this task</li>
+  </ul>
+</ul>
+
+<p>
+  Think of the model as the reliable guy who is responsible for fetching information and changing information.
+</p>
+
+<%= create_flashcard %>
+
+<h3>The View</h3>
+
+<p>
+  <strong>The view is responsible for displaying the user interface.</strong> It can show data from the model and display it on the screen for users to see.
+</p>
+
+<p>
+  In your Ideator application, we wrote a lot of HTML code (in files such as <code>index.html.erb</code>). Notice how <code>index.html.erb</code> is located within the <code>views</code> folder. The <code>views</code> folder typically contains HTML files that contain content for users to see.
+</p>
+
+<%= create_flashcard %>
+
+<h3>The Controller</h3>
+
+<p>
+  <strong>The controller is the middleman between the model and the view.</strong> It is responsible for handling user requests and logic.
+</p>
+
+<ul>
+  <li><strong>Interact with model</strong></li>
+  <ul>
+    <li>For example in our Ideator app, we have <code>Idea.find(params[:id])</code> in our controller. <code>Idea.find(params[:id])</code> is a call to the model to fetch an <code>Idea</code>. Like this, the controller can interact with the model.</li>
+  </ul>
+  <li><strong>Receive events from the outside world (usually through views)</strong></li>
+  <ul>
+    <li>For example in our Ideator app, whenever we send a form to create a new <code>Idea</code>, we are sending the form information to the <code>create</code> method in the <code>ideas_controller.rb</code>.</li>
+    <li>The controller then handles the information and makes a call to the model to create a new <code>Idea</code>.</li>
+  </ul>
+  <li><strong>Interacts with the view</strong></li>
+  <ul>
+    <li>Instance variables defined in a controller method can be used in the corresponding view file</li>
+    <ul>
+      <li>For example in our Ideator app, <code>@ideas</code> defined in the <code>index</code> method of <code>ideas_controller.rb</code> can be used in the view file, <code>index.html.erb</code></li>
+    </ul>
+  </ul>
+</ul>
+
+<%= create_flashcard %>
+
+<hr>
+
+<H3>Why MVC?</H3>
+
+<p>
+  To recap, the Model, View, and Controller each has its own different responsibilities, but work together inside the application. The main benefit of the MVC framework is that since everything has different responsibilities, each component can work independently.
+</p>  
+
+<p>
+  In software engineering, writing code that isn't dependent on other code is an important concept. <strong>When we have code that is dependent on another piece of code, then breaking one piece of the code could cause another part of the application to break.</strong> Software engineers call code that is independent and reusable "modular code". When engineers talk about "modularity", or keeping the code "modular", they are talking about how code shouldn't be dependent on another piece of code so that it can be reused in other parts of the program.
+</p>
+
+<p>
+  The purpose of the MVC framework is to keep each component seperate and reusable.
+</p>
+
+<%= create_flashcard %>
+
+
+
+
+
+
+
+
+
+

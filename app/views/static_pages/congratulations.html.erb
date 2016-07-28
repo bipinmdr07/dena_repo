@@ -1,0 +1,98 @@
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+          <div class="col-lg-12" style="margin-bottom:50px;">
+                           
+              <!-- <img class="img-responsive" src="img/profile.png" alt=""> -->
+              <div class="intro-text">
+                
+                  <% if notice.present? %>
+                    <p class="alert alert-info"><%= notice %></p>
+                  <% end %>
+                  <% if alert.present? %>
+                    <p class="alert alert-danger"><%= alert %></p>
+                  <% end %>
+
+                  <span class="name">Congratulations!</span>
+                  <hr class="star-light">
+                  <span class="skills">You've completed the HTML/CSS course and you can now build static websites from scratch.</span>
+
+              </div>
+              
+          </div>
+          <!-- start of What's Next section -->
+          <div class = "col-xs-12">
+
+            <div class="row">
+              <div class="col-lg-12 text-center">
+                  <h2 style = "color:yellow;">What's the next step?</h2>
+                  <hr class="star-light">
+
+              </div>
+            </div>
+
+            <div class = "row">
+
+              <div class = "col-lg-8 col-lg-offset-2" style = "text-align:left;">
+
+                <p>
+                  Congratulations on staying with the course and finishing the first step in your coding journey! We hope you had a great time through out the lessons. We focused on getting you started on actually building things rather than being focused on learning every single detail.
+                </p>
+
+                <p>
+                  Our mission at Techrise is to get people hooked into web development and to teach people how to build things in a fun way. If you are interested in continuing to learn with Techrise, please fill out the form below and we'll keep you updated.
+                </p>
+
+                <p>
+                  Techrise is currently in beta, meaning we are still in the process of creating and testing the curriculum from scratch. It would be greatly appreciated if you could also kindly leave some feedback on the courses about what you liked, what you didn't like, what you want in future lessons, or anything else that might come to your mind. We'll send you a personal thank you note and send you future updates :)
+                </p>
+
+              </div>
+            </div>
+          </div>
+          <!-- end of What's Next section -->          
+          
+        </div>
+    </div>
+</header>
+
+<!-- Contact Section -->
+<section id="contact">
+  <a class = "anchor" id="contact_us"></a>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2>Keep Me Updated</h2>
+          <p>
+            Let us know if you want to be updated on future releases of courses. If you have some quick feedback for us, we will love you as well :)
+          </p>
+          <hr class="star-primary">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          <%= simple_form_for Contact.new(params[:contact]), html: {id: "contactForm"}, remote: true do |f| %>
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <%= f.input :name, required: true, placeholder: 'Name', class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <%= f.input :email, required: true, placeholder: 'Email', class: 'form-control' %>
+              </div>
+            </div>
+
+            <div class="row control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <%= f.input :message, as: :text, required: false, input_html: {rows: 6}, placeholder: 'Message', class: 'form-control' %>
+              </div>
+            </div>
+            <%= f.button :submit, 'Send Message', class: 'btn btn-success btn-lg', id: 'ContactSubmit', data: { disable_with: "Sending..." } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+</section>

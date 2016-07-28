@@ -1,0 +1,187 @@
+<% title("Dashboard | TECHRISE") %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <% flash.each do |message_type, message| %>
+      <% if message_type == "notice" %>
+        <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></p>
+      <% elsif message_type == "alert" %>
+        <p class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %></p>
+      <% else %>
+        <div class="alert alert-<%= message_type %> alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= message %></div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <% if @last_lesson %>
+
+      <% lesson_name = Tags::LESSONS[@last_lesson.parameters[:course_name].underscore + "s"].keys[@last_lesson.parameters[:lesson_id].to_i - 1][1] %>
+      
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="row">
+            <div class="col-xs-12">
+              <h5>In Progress</h5>
+
+              <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                  <div class="lesson_well">
+                    <small>Lesson <%= @last_lesson.parameters[:lesson_id] %></small>
+                    <h4 style="margin-top: 0px;"><%= @last_lesson.parameters[:course_name].split(/(?=[A-Z])/).join(" ").chomp("Lesson") %></h4>
+                  </div>
+                </div>
+
+                <div class="col-sm-8 col-xs-12">
+                    <h3 style="text-align: left;"><i class="fa fa-code" style="color: #f29a8b;" aria-hidden="true"></i> <%= lesson_name %></h3>
+                </div>
+              </div><!-- row -->
+
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="progress_bar" style="border-top: none;">
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(@last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(@last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
+                        <%= progress(@last_lesson.parameters[:course_name]) %>% completed
+                      </div>
+                    </div>
+                  </div><!-- progress_bar -->
+                </div><!-- col-xs-12 -->
+              </div><!-- row -->
+
+
+              <div class="row" style="margin-top:20px;">
+                <div class="col-xs-12">
+                  <h3><%= link_to 'Continue Lesson <i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i>'.html_safe, '/' + @last_lesson.parameters[:course_name].underscore + "s/" + @last_lesson.parameters[:lesson_id], class: 'btn btn-danger' %></h3>
+                </div>
+              </div><!-- row -->
+            </div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
+          </div><!-- row -->
+
+        </div><!-- panel-body -->
+      </div><!-- panel -->
+    <% end %>
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Your Stats</h3>        
+      </div>
+      <div class="panel-body">
+        <h5 class="pull-right">View your <%= link_to 'Activity Log', activity_log_path %></h5>
+        
+        <h4><strong>Today</strong></h4>
+        <ul class="unindented_ul">
+          <li><small><i class="fa fa-check" aria-hidden="true"></i> <%= @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day).count %></small> Lessons Completed</li>
+          <li><small><i class="fa fa-pencil" aria-hidden="true"></i> <%= @flashcards.where("created_at >= ?", Time.zone.now.beginning_of_day).count %></small> Flashcards Completed</li>
+        </ul>
+        <h4><strong>This Week</strong></h4>
+        <ul class="unindented_ul">
+          <li><small><i class="fa fa-check" aria-hidden="true"></i> <%= @lessons.where("created_at >= ?", 1.week.ago).count %></small> Lessons Completed</li>
+          <li><small><i class="fa fa-pencil" aria-hidden="true"></i> <%= @flashcards.where("created_at >= ?", 1.week.ago).count %></small> Flashcards Completed</li>
+        </ul>
+        
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
+  </div><!-- col-xs-12 col-md-4 -->
+
+  <div class="col-xs-12 col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
+        <h3>You have <%= pluralize(@cards.count, 'card') %> to review today - <%= link_to 'Study Flashcards', study_path %></h3>
+        <blockquote>
+          <%= @quote[0] %>
+          <small><%= @quote[1] %></small>
+        </blockquote>
+      </div><!-- panel-body -->
+    </div>
+
+      <div class="panel">
+        <div class="panel-heading-stats">
+          <h3><i class="fa fa-question-circle" aria-hidden="true"></i> Your Questions</h3>        
+        </div>
+        <div class="panel-body">
+
+          <ul class="unindented_ul">
+            <% @questions.each do |question| %>
+              <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+              <li><%= link_to question.title, question_path(question) %> in <strong><%= course_name %></strong> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
+            <% end %>
+          </ul>
+
+          <% if @questions.empty? %>
+            <h3>You haven't asked any questions yet.</h3>
+          <% else %>
+            <h5 class="pull-right"><%= link_to 'View all', questions_path %></h5>
+          <% end %>
+
+
+        
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3><i class="fa fa-check-circle" aria-hidden="true"></i> Your Submissions</h3>        
+      </div>
+      <div class="panel-body">
+        
+        <ul class="unindented_ul">
+          <% @submissions.each do |submission| %>
+            <% course_name = Tags::LESSONS[submission.course_name.underscore + "s"].keys[submission.lesson_id - 1][1] %>
+            <li><%= link_to submission.title, submission_path(submission) %> in <strong><%= course_name %></strong> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %></li>
+          <% end %>
+        </ul>
+
+        <% if @submissions.empty? %>
+          <h3>You don't have any submissions yet.</h3>
+        <% else %>
+          <h5 class="pull-right"><%= link_to 'View all', submissions_path %></h5>
+        <% end %>
+        
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
+
+    
+
+  </div><!-- col-xs-12 col-md-6 -->
+</div><!-- row -->
+
+<% if current_user.admin %>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3><%= @unresolved_questions.count %> Unanswered Questions</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unresolved_questions.each do |question| %>
+                  <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3><%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unapproved_submissions.each do |submission| %>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+      </div>
+      
+<% end %>

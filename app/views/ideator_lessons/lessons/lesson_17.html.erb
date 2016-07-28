@@ -1,0 +1,40 @@
+<h1><%= title_for(IdeatorLesson, 6, 1) %></h1>
+
+<p>
+  If we look back at our wireframes, we see that we still have to build out the "About" and "Random" page. That means we have to set up some <code>routes</code> for these pages.
+</p>
+
+<p>
+  Let's go into our console and type <code>rake routes</code> to display our routing. We see that we don't have any paths that we can use for the "About" and "Random" pages. Let's go ahead and set these up.
+</p>
+
+<p>
+  Let's go into our <code>routes.rb</code>, which is where we can specify how the pages are routed, to hook up our new pages.
+
+<p>
+  Right now, we only have two lines, <code>root 'ideas#index'</code> and <code>resources :ideas</code>. If we recall, <code>root 'ideas#index'</code> sets the root page, or the home page, to the index action of ideas. Additionally, <code>resources :ideas</code> automatically provided us with a bunch of useful links that we could use.
+</p>
+
+<p>
+  For the "About" and "Random" pages, we need to add these routes in manually. To do this, under <code>resources :ideas</code>, add the following lines:
+</p>
+
+<pre><code class="ruby">
+get 'about' =&gt; 'ideas#about'
+get 'random' =&gt; 'ideas#random'
+</code></pre>
+
+<p>
+  If we go back into our console and type in <code>rake routes</code>, just like that we have generated two routes that we can use in our app.
+</p>
+
+<p>
+  The first line we just added basically means create a route with a <code>GET</code> verb routed to <code>about</code> that triggers the <code>about</code> action in the <code>ideas controller</code>.
+</p>
+
+<p>
+  Now that we've set up these routes, let's go into our controller and set up the view for these two routes in the next lesson.
+</p>
+
+<%= standard_git_workflow %>
+

@@ -1,0 +1,91 @@
+<h1><%= title_for(InstapostLesson, 5, 10) %></h1>
+
+<p>
+  Let's move on to enabling the user to destroy their posts. The steps in order to do this is quite similar to what we did with the edit posts functionality that we just created.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code>, let's create a <code>destroy</code> method.
+</p>
+
+<pre><code class="ruby">
+def destroy
+  @post = Post.find(params[:id])
+  @post.destroy
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  The first line, we should already understand. <code>@post</code> is assigned to the <code>Post</code> with an <code>id</code> of the <code>params[:id]</code> (refer back to <%= link_to 'What are params again?', 'http://localhost:3000/instapost_lessons/16' %>. The next line is simply saying that we want to destroy that post. Finally, the last line redirects the user to the <code>root_path</code>.
+</p>
+
+<p>
+  Let's go ahead and add the link so that we can test this out. Right now, our <code>index.html.erb</code> contains this loop:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;% if post.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's go in our <code>index.html.erb</code> file and add a link to delete the post, if you are the owner of the post. Let's add the following line of code:
+</p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
+</code></pre>
+
+<p class="alert alert-warning">
+  Notice how we added <code>method: :delete</code>. This specifies that we want to perform a <code>DELETE</code> request rather than a <code>GET</code> or <code>POST</code> request. (An example of a <code>GET</code> request is the <code>index</code> page, where we <code>GET</code> all instances of the <code>Post</code> object. An example of a <code>POST</code> request is the <code>create</code> action, where we <code>POST</code> information about the <code>Post</code> we want to create.)
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Your loop should now look like this:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;% @user = User.find(post.user_id) %&gt;
+  &lt;%= image_tag @user.photo %&gt;
+  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;% if post.user_id == current_user.id %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+    &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see the delete link for each post. Awesome!
+</p>
+
+<p>
+  The last thing we need to do is make sure on the backend that users who don't own the post can't delete the post. We already did this for the <code>edit</code> and <code>update</code> actions, so we just need to change it a little bit:
+</p>
+
+<pre><code class="ruby">
+before_action :is_owner?, only: [:edit, :update, :destroy]
+</code></pre>
+
+<p>
+  ...and that's it! Let's keep going :)
+</p>
+
+<%= standard_git_workflow %>
+
+
+

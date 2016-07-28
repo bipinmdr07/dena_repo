@@ -1,0 +1,294 @@
+<h1><%= title_for(RspecBlogLesson, 5, 9) %></h1>
+
+<p> 
+  Let's now go ahead write the tests for the <code>update</code> action.
+</p>
+
+<p>
+  First, as always, let's describe what we are testing. Let's open <code>posts_controller_spec.rb</code> and add the following under the tests for the <code>edit</code> action.
+</p>
+
+<pre><code class="ruby">
+describe "PUT #update" do
+
+end
+</code></pre>
+
+<p>
+  Next, let's think about what the <code>update</code> action should do. It should do the following things:
+</p>  
+
+<ul>
+  <li>When the attributes are valid</li>
+  <ul>
+    <li>it should update the post</li>
+    <li>it should redirect the user to the <code>root_path</code></li>
+  </ul>
+  <li>When the attributes are invalid</li>
+  <ul>
+    <li>it shouldn't update the post</li>
+    <li>it should render the <code>edit</code> template</li>
+  </ul>
+</ul>
+
+<p>
+  Let's put this into code. We see that we have two situations, one where the attributes are valid and the other where the attributes are invalid. This means we need to use <strong>context</strong> blocks:
+</p>
+
+<pre><code class="ruby">
+describe "PUT #update" do
+  context "when attributes are valid" do
+
+  end
+
+  context "when attributes are invalid" do
+
+  end
+end
+</code></pre>
+
+<p>
+  Let's next put the <code>it</code> blocks for each <code>context</code> block.
+</p>
+
+<pre><code class="ruby">
+describe "PUT #update" do
+  context "when attributes are valid" do
+    it "updates the post" do
+
+    end
+
+    it "redirects to root_path" do
+
+    end
+  end
+
+  context "when attributes are invalid" do
+    it "doesn't updates the post" do
+
+    end
+
+    it "renders the edit template" do
+
+    end
+  end
+end
+</code></pre>
+
+<p>
+  Next, let's think about how we are going to test the <code>update</code> action.
+</p>
+
+<p>
+  In order to update a post, we need to have a post to update. Therefore, we first need to create a <code>Post</code> that we can update:
+</p>
+
+<pre><code class="ruby">
+describe "PUT #update" do
+  context "when attributes are valid" do
+    it "updates the post" do
+      post = FactoryGirl.create(:post)
+    end
+
+    it "redirects to root_path" do
+      post = FactoryGirl.create(:post)
+    end
+  end
+
+  context "when attributes are invalid" do
+    it "doesn't updates the post" do
+      post = FactoryGirl.create(:post)
+    end
+
+    it "renders the edit template" do
+      post = FactoryGirl.create(:post)
+    end
+  end
+end
+</code></pre>
+
+<p>
+  Let's write the specs for each of the <code>it</code>s.
+</p>
+
+<p>
+  First, let's start with the <code>it "updates the post"</code>. Here, we need to make sure that the attributes are correctly updated.
+</p>
+
+<ul>  
+  <li>Create a <code>PUT</code> request to the <code>update</code> action</li>
+  <li>Send in the following parameters:</li>
+  <ul>
+    <li>The post's <code>id</code></li>
+    <li>Modified post attributes</li>
+  </ul>
+  <li>Expect the post's attributes to be updated</li>
+</ul>
+
+<p>
+  We can do this with code like this:
+</p>
+
+<pre><code class="ruby">
+it "updates the post" do
+  put :update, id: post.id, post: FactoryGirl.attributes_for(:post, title: 'New Title', author: 'Larry')
+  post.reload
+  expect(post.title).to eq("New Title")
+  expect(post.author).to eq("Larry")
+end
+</code></pre>
+
+<p>
+  Let's go over some new concepts here.
+</p>
+
+<p>
+  First, <code>FactoryGirl.attributes_for(:post, title: 'New Title', author: 'Larry')</code> is a little bit new. But this is fairly easy to understand. This is just going to return the attributes for the <code>post</code> factory, but with the <code>title</code> as <code>'New Title'</code> and <code>author</code> as <code>'Larry'</code>.
+</p>
+
+<p>
+  Second, <code>post.reload</code> is also new as well. <strong>The <code>reload</code> method updates the attributes of the object in the database.</strong> If we don't do this, our <code>post</code> will still have the old attributes from before.
+</p>
+
+<p>
+  Lastly, <code>expect().to eq()</code> means what it looks like: expect something to equal something.
+</p>  
+
+<%= create_flashcard %>
+
+<p>
+  We can write tests for the next <code>it "redirects to root_path"</code> block in a similar way as well:
+</p>
+
+<pre><code class="ruby">
+it "redirects to root_path" do
+  put :update, id: post.id, post: FactoryGirl.attributes_for(:post, title: 'New Title', author: 'Larry')
+  expect(response).to redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Next, let's work on the <code>when attributes are invalid</code> context block. 
+</p>  
+
+<p>
+  <code>it "doesn't update the post"</code> is pretty much the same as <code>it "updates the post"</code>, except <strong>we need to pass in an invalid attribute as a parameter</strong>:
+</p>
+
+<pre><code class="ruby">
+it "doesn't update the post" do
+  put :update, id: post.id, post: FactoryGirl.attributes_for(:post, title: 'New Title', author: 'Larry', content: 'Hi')
+  post.reload
+  expect(post.title).to_not eq("New Title")
+  expect(post.author).to_not eq("Larry")
+end
+</code></pre>
+
+<p>
+  Here, the <code>content</code> is less than <code>50</code> characters, so the validation will fail. 
+</p>
+
+<p>
+  Note also how we are expecting the post's title to <strong>not</strong> equal <code>"New Title"</code>. This is because we don't want the object to update if the attributes are invalid.
+</p>
+
+<p>
+  Lastly, let's take a look a the <code>it "renders the edit template"</code> block. This is pretty straightforward:
+</p>
+
+<pre><code class="ruby">
+it "renders the edit template" do
+  put :update, id: post.id, post: FactoryGirl.attributes_for(:post, title: 'New Title', author: 'Larry', content: 'Hi')
+  expect(response).to render_template :edit
+end
+</code></pre>
+
+<p>
+  Here we are passing in an invalid attribute and expecting it to render the <code>edit</code> template.
+</p>
+
+<p>
+  Since we don't need to test if the attributes were updated or not in this particular <code>it</code> block, we can refactor the code a little bit:
+</p>
+
+<pre><code class="ruby">
+it "renders the edit template" do
+  put :update, id: post.id, post: FactoryGirl.attributes_for(:invalid_post)
+  expect(response).to render_template :edit
+end
+</code></pre>
+
+<p>
+  Instead of writing out the modified attributes, we can simply use the attributes for the <code>invalid_post</code> factory. This is much cleaner, so we should go with this.
+</p>
+
+<p>
+  Now that we have all of our specs written out, let's run the tests:
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+
+<p>
+  We see now that we have a bunch of failing tests. Let's write the <code>update</code> method in our <code>posts_controller.rb</code> to try to make the tests pass.
+</p>
+
+<p>
+  Let's open our <code>posts_controller.rb</code>. Let's write code that does the following:
+</p>
+
+<ul>
+  <li>Update the post</li>
+  <li>If the post is valid</li>
+  <ul>
+    <li>Redirect the user to the <code>root_path</code></li>
+  </ul>
+  <li>If the post is invalid</li>
+  <ul>
+    <li>Render the <code>edit</code> template</li>
+  </ul>
+</ul>
+
+<p>
+  Let's put this into code:
+</p>
+
+<pre><code class="ruby">
+def update
+  @post = Post.find(params[:id])
+  @post.update(post_params)
+  if @post.valid?
+    redirect_to root_path
+  else
+    render :edit
+  end
+end
+</code></pre>
+
+<p>
+  This should be pretty straight forward for you by now :)
+</p>
+
+<p>
+  Let's run the tests again:
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  Our tests should now be all passing. Awesome!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+

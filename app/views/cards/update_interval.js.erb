@@ -1,0 +1,12 @@
+<% @cards = current_user.cards.where(repetition_date: nil) %>
+<% @cards += current_user.cards.today %>
+
+<% if @cards.empty? %>
+  completed_sound.play();
+<% else %>
+  success_sound.play();
+<% end %>
+
+$("#card_container").html("<%= escape_javascript render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>");
+$('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@cards => @cards } %>")
+$('pre code').each(function(i, e) {hljs.highlightBlock(e)});

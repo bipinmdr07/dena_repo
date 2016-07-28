@@ -1,0 +1,55 @@
+<h1><%= title_for(InstapostLesson, 6, 7) %></h1>
+
+<p>
+  Here's the answer for the last lesson:
+</p>
+
+<pre><code class="erb">
+&lt;% post.comments.each do |comment| %&gt;
+  &lt;p&gt;&lt;%= User.find(comment.user_id).name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
+&lt;% end %&gt;
+
+&lt;% if user_signed_in? %&gt;
+  &lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post do |f| %&gt;
+    &lt;%= f.input :text, label: 'Comment', placeholder: 'Add a comment...' %&gt;
+    &lt;%= f.submit 'Post', class: 'btn btn-primary btn-block' %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+
+<p>
+  Did you get it right? :) If you need to fix some things, take a few seconds to quickly fix them up.
+</p>  
+
+
+<p>
+  In this challenge, we're going to set up the backend logic for deleting comments. It's very similar to what we did for posts.
+</p>
+
+<p>
+  In our <code>comments_controller.rb</code>, let's add a <code>destroy</code> method that will delete a comment and then redirect the user to the <code>root_path</code>.
+</p>
+
+<p class="alert alert-warning">
+  HINT: The code will be very much the same as the code in <code>posts_controller.rb</code>! Refer back to <%= link_to 'this lesson', '/instapost_lessons/18' %> for help.
+</p>
+
+<p>
+  Good luck!
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

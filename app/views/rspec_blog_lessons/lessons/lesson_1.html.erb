@@ -1,0 +1,102 @@
+<h1><%= title_for(RspecBlogLesson, 1, 1) %></h1>
+
+<p>
+  If you want to become a valuable software developer, <strong>learning how to write unit tests is very important,</strong> and hopefully through the next few lessons, you'll learn and understand why you need to start writing tests.
+</p>
+
+<h2>What are Unit Tests?</h2>
+
+<p>
+  Unit tests in the web development world refers to <strong>automated checks</strong> that ensure that everything in the code is working correctly.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Imagine a spaceship that is getting ready to launch. Before the spaceship actually launches, tens of hundreds of workers make sure that everything is working correctly so that the spaceship doesn't blow up in midair.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/8vQCeBdJq60" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<p>
+  In web development, we also need to make sure that everything is working correctly, especially when there are people using the website daily. Imagine you are developing a web application that has over 10,000 users daily, and you push up buggy code live. Suddenly, 10,000 people can't use the website.
+</p>
+
+<p>
+  We don't want this to happen. Instead, we want to check to see that the code is working properly before we push anything up live.
+</p>
+
+<p>
+  When we write code, a lot of times one piece of buggy code can effect multiple areas in the web application. For example, in our Instapost application, rewriting the <code>comments_controller.rb</code> file might affect the <code>posts_controller.rb</code>
+</p>
+
+<p>
+  <strong>This is where unit tests come in.</strong> Unit tests enable us to automate the checking process. As software developers, part of our job is to write these tests so that we know when ourselves or someone on the team has broken the code.
+</p>
+
+<%= create_flashcard %>
+
+<h2>What does it mean to write a test?</h2>
+
+<p>
+  Writing tests typically means you write code that means something like this:
+</p>
+
+<pre><code class="html">
+Expect something to do this.
+</code></pre>
+
+<p>
+  Then, when you run the test, the test will either pass or fail.
+</p>
+
+<p>
+  Here's an example of a passing test in English:
+</p>
+
+<pre><code class="html">
+I named my cat Fish.
+I expect my cat's name to be Fish. &lt;!-- this will pass --&gt;
+</code></pre>
+
+<p>
+  Here's an example of a failing test in English:
+</p>
+
+<pre><code class="html">
+I named my cat Fish.
+I expect my cat's name to be Dog. &lt;!-- this will fail --&gt;
+</code></pre>
+
+<p> 
+  In code these tests will look something like this:
+</p>
+
+<pre><code class="ruby">
+@cat = Cat.create(name: "Fish")
+expect(@cat.name).to eq("Fish") # this test will pass
+</code></pre>
+
+<pre><code class="ruby">
+@cat = Cat.create(name: "Fish")
+expect(@cat.name).to eq("Dog") # this test will fail
+</code></pre>
+
+<p>
+  In actual web applications, you will have tens of hundreds, possibly thousands of these tests. Before deploying your code live, you can run all of these tests to see if all of tests pass. If they all pass, you can be confident that there are no bugs in the code.
+</p>
+
+<p>
+  As you can see, writing tests in code is not that scary. In this course, you'll learn how to write these tests so that you can start testing your rails applications like a professional.
+</p>
+
+
+
+
+
+
+
+

@@ -1,0 +1,144 @@
+<h1><%= title_for(MvcLesson, 4, 1) %></h1>
+
+<p>
+  Let's talk about <strong>database migrations</strong>.
+</p>
+
+<p>
+  In web applications, we store information in the database. We store the information like in a Excel spreadsheet.
+</p>
+
+<p>
+  For example, ideas in the Ideator app are stored in the database like this:
+</p>
+
+<%= image_tag 'mvc/ideator_excel.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's say we wanted to also store information about the priority of the idea. For example, it would be nice to be able to tell if the idea is very important or not so important.
+</p>
+
+<p>
+  We basically want to add a column to the spreadsheet so that we can store information about the priority of the idea like this:
+</p>
+
+<%= image_tag 'mvc/ideator_excel_2.png', class: 'img-responsive screenshot' %>
+
+<p>
+  In our rails application, how do we add a new column to the database? We will get back to solving this problem in a bit.
+</p>
+
+<h3>schema.rb</h3>
+
+<p>
+  In every Rails application, there is a file called <code>schema.rb</code>. This file contains information about the all of the database columns in the application.
+</p>
+
+<p>
+  In your Ideator app, your <code>schema.rb</code> file should look something like this:
+</p>
+
+<pre><code class="ruby">
+ActiveRecord::Schema.define(version: 20160113000616) do
+
+  create_table "ideas", force: :cascade do |t|
+    t.text     "description"
+    t.string   "author"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+end
+
+</code></pre>
+
+<p>
+  As you can see, this file contains all of the information about what kind of information we are storing in the application.
+</p>
+
+<p>
+  For example, if we look at the following:
+</p>  
+
+<pre><code class="ruby">
+t.text     "description"
+t.string   "author"
+</code></pre>
+
+<p>
+  we can see that there is a <code>description</code> column that is a <code>text</code> field and an <code>author</code> column that is a <code>string</code> field.
+</p>
+
+<div class="well">
+  <h3>Never edit the schema.rb file manually</h3>
+
+  <p>
+    Since <code>schema.rb</code> contains all of the information about the database, it might be tempting to try to edit the <code>schema.rb</code> file manually when trying to add or change a database column. <strong>However, you should never edit the <code>schema.rb</code> file manually. It won't work and it may cause some bugs.</strong>
+  </p>  
+</div>
+
+<h3>Database Migrations</h3>
+
+<p>
+  In order to add or change a database column, you need to <em>run a migration</em>.
+</p>
+
+<p> 
+  For example, in our Ideator app, after we generated the <code>Idea</code> model, a <strong>migration file</strong> was also generated as well (<%= link_to 'Ideator Lesson 9', '/ideator_lessons/9' %>). <strong>Migration files are files where you enter information about how you want to update the database.</strong> The file looked like this:
+</p>
+
+<pre><code class="ruby">
+class CreateIdeas &lt; ActiveRecord::Migration
+  def change
+    create_table :ideas do |t|
+      t.text :description
+      t.string :author
+      t.timestamps null: false
+    end
+  end
+end
+</code></pre>
+
+<%= create_flashcard %>
+
+<p>
+  To recap, we manually added the following lines into the migration file:
+</p>
+
+<pre><code class="ruby">
+t.text :description
+t.string :author
+</code></pre>
+
+<p>
+  After we created and saved this file, we can run a command called <code>rake db:migrate</code>, which uses the migration files to update the database columns. It also automatically updates <code>schema.rb</code> to reflect the new changes, so we don't have to worry about editing <code>schema.rb</code>.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

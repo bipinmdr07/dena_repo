@@ -1,0 +1,148 @@
+<h1><%= title_for(InstapostLesson, 8, 1) %></h1>
+
+<p>
+  We are almost at the end of these lessons! We built out all of logic, now it's time to put everything together and work on the design!
+</p>
+
+<p>
+  Let's first go to <%= link_to 'Instagram.com', 'http://instagram.com/' %> and take a look at what everything looks like.
+</p>
+
+<p>
+  Our goal is to imitate how this website looks. Let's do this!
+</p>
+
+<p>
+  Let's start with setting the background color for the entire website. We can do this by going to <%= link_to 'Instagram.com', 'http://instagram.com/' %> in Google Chrome and right clicking on the page, and selecting Inspect Element.
+</p>
+
+<%= image_tag 'instapost/inspect_element.png' %>
+
+<p>
+  Next, we need to look around for the background color that they are using. Usually, you can do this by clicking around on the <code>html</code> or <code>body</code> tag. In this case, I had to click around and look further. I found the background-color in the <code>main</code> section:
+</p>
+
+<%= image_tag 'instapost/background-color.png', class: 'screenshot' %>
+
+<p>
+  We can see the background-color is <code>#fafafa</code>. In order to start writing our CSS, let's create a new css file called <code>master.scss</code> in our <code>app/assets/stylesheets</code> folder.
+</p>
+
+<p>
+  Let's set the <code>body</code>'s <code>background-color</code> to <code>#fafafa</code>:
+</p>
+
+<pre><code class="css">
+body {
+  background-color: #FAFAFA;
+}
+</code></pre>
+
+<p>
+  Let's try styling our top navbar now. Let's go into Google Chrome again and find the <code>nav</code> section:
+</p>
+
+<%= image_tag 'instapost/nav.png', class: 'screenshot' %>
+
+<p>
+  We can see the <code>border-bottom</code> is set to <code>1px solid #dbdbdb</code>. Let's add this to our <code>master.scss</code>:
+</p>
+
+<pre><code class="css">
+nav {
+  border-bottom: 1px solid #dbdbdb;
+}
+</code></pre>
+
+<p>
+  Let's also set the <code>background-color</code> to <code>#ffffff</code>, since we can see that it is white on the actual Instagram website:
+</p>
+
+<pre><code class="css">
+nav {
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #ffffff;
+}
+</code></pre>
+
+<p>
+  Let's also steal the height of the navbar. If we hover over the <code>nav</code> element, we can get the height and width:
+</p>
+
+<%= image_tag 'instapost/nav_height.png', class: 'screenshot' %>
+
+<p>
+  We can see that the height is <code>76px</code>. Let's also add this to our CSS:
+</p>
+
+<pre><code class="css">
+nav {
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #ffffff;
+  height: 76px;
+}
+</code></pre>
+
+<p>
+  Let's now work on the content of the <code>nav</code>. Let's make the brand name look like Instagram's. Edit your <code>nav</code> section in <code>application.html.erb</code> so that it looks like this:
+</p>
+
+<pre><code class="erb">
+&lt;nav&gt;
+  &lt;span class="pull-right brand"&gt;Instapost&lt;/span&gt;
+  &lt;% if user_signed_in? %&gt;
+    &lt;%= link_to 'New Post', new_post_path %&gt;
+    &lt;%= link_to 'Edit Settings', edit_user_registration_path %&gt;
+    &lt;%= link_to 'Log Out', destroy_user_session_path, method: :delete %&gt;
+  &lt;% else %&gt;
+    &lt;%= link_to 'Sign Up', new_user_registration_path %&gt;
+    &lt;%= link_to 'Log In', new_user_session_path %&gt;
+  &lt;% end %&gt;
+&lt;/nav&gt;  
+</code></pre>
+
+<p>
+  The <code>pull-right</code> class that we added to the first <code>span</code> is a handy Bootstrap class that will literally pull the <code>span</code> to the right.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  In our <code>master.scss</code>, let's define our <code>brand</code> class.
+</p>
+
+<p>
+  Let's try to find a font that looks like Instagram's brand logo. I searched on Google fonts for a nice font and found <%= link_to "Satisfy", 'https://www.google.com/fonts#UsePlace:use/Collection:Satisfy' %>. You can include the font in your app by adding the following code to the <code>head</code> section of your <code>application.html.erb</code>:
+</p>
+
+<pre><code class="erb">
+&lt;link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'&gt;
+</code></pre>
+
+<p>
+  In our CSS, let's use this font and style our brand logo:
+</p>
+
+<pre><code class="css">
+.brand {
+  font-family: 'Satisfy', cursive;
+  font-size: 26px;
+  vertical-align: middle;
+}
+</code></pre>
+
+<p>
+  Save the file and reload the page. You'll see that the logo looks kind of like Instagram's!
+</p>
+
+<p>
+  In the next lesson, your job is to try to make the navbar look like Instagram's!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+

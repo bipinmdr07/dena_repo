@@ -1,0 +1,14 @@
+ok_sound.play();
+
+// empty flashcard form
+$("#card_question").val('');
+$("#card_answer").val('');
+$("#card_tag_list").val('');
+
+<% @cards = current_user.cards.where(repetition_date: nil) %>
+<% @cards += current_user.cards.today %>
+
+$('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@cards => @cards } %>")
+
+// hide flashcard form
+$('#slider').slideReveal("toggle");

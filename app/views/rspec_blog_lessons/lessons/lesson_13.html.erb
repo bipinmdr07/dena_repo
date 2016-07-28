@@ -1,0 +1,163 @@
+<h1><%= title_for(RspecBlogLesson, 5, 1) %></h1>
+
+<p>
+  In this lesson, we are going to write our first test with TDD! We are going to start with the <code>index</code> action of the <code>posts_controller.rb</code>.
+</p>
+
+<h3>Writing a Failing Test</h3>
+
+<p>
+  The first thing we need to do in Test Driven Development is to write a failing test. And to write a failing test, you need to know what you want the code to do.
+</p>  
+
+<p>
+  For the <code>index</code> action, we want to make sure that when a user visits the <code>index</code> page, the <code>index</code> template (<code>index.html.erb</code>) is rendered.
+</p>
+
+<p>
+  Let's go ahead and write a test that tests this. In sublime, open <code>posts_controller_spec.rb</code>. 
+</p>
+
+<p>
+  This is the file where you will be writing all of your tests for the <code>PostsController</code>.
+</p>
+
+<p>
+  All of your tests will go between <code>RSpec.describe PostsController, type: :controller do</code> and the <code>end</code>. So underneath <code>RSpec.describe PostsController, type: :controller do</code>, let's add the following line of code:
+</p>
+
+<pre><code class="ruby">
+describe "GET #index" do
+
+end
+</code></pre>
+
+<p>
+  In RSpec, we first <code>describe</code> what we are testing. In this case, we are testing the <code>index</code> action which is a <code>GET</code> verb.
+</p>
+
+<%= create_flashcard %>
+
+<div class="well">
+  <h3>RSpec Conventions</h3>
+  <p>
+    The format of "{verb} #{action}" (for example, <code>GET #index</code>) is a convention that many Rails developers that use RSpec follow. You'll see this format many times in the upcoming lessons.
+  </p>  
+
+  <%= create_flashcard %>
+</div>
+
+<p>
+  Inside the block of code we just wrote between <code>do</code> and <code>end</code>, let's add the following piece of code:
+</p>
+
+<pre><code class="ruby">
+it "renders the index template" do
+
+end
+</code></pre>
+
+<p>
+  Your code should now look like this:
+</p>
+
+<pre><code class="ruby">
+describe "GET #index" do
+  it "renders the index template" do
+
+  end
+end
+</code></pre>
+
+<p>
+  After you <code>describe</code> what you are testing, you then write what it should do. In this case, we are saying that it should render the <code>index</code> template.
+</p>
+
+<p>
+  Inside the <code>do</code> and <code>end</code> of the <code>it</code> block, let's add the following line of code:
+</p>
+
+<pre><code class="ruby">
+get :index
+</code></pre>
+
+<p>
+  This simulates a <code>GET</code> request to the <code>index</code> action. Underneath this line, let's add the following:
+</p> 
+
+<pre><code class="ruby">
+expect(response).to render_template :index
+</code></pre>
+
+<p>
+  This line of code means exactly what it reads: Expect the response to render the index template.
+</p>
+
+<p>
+  Your code should now look like this:
+</p>
+
+<pre><code class="ruby">
+describe "GET #index" do
+  it "renders the index template" do
+    get :index
+    expect(response).to render_template :index
+  end
+end
+</code></pre>
+
+<p>
+  Let's go over what this test is saying. First we are <strong>describing</strong> the <code>GET</code> action to the <code>index</code> method. Next, we are saying it should render the <code>index</code> template when it does so. Then, we write some code that actually executes this. We perform a <code>GET</code> request to the <code>index</code> action. We then <code>expect</code> the <code>response</code> to render the <code>index</code> template. If it does render the <code>index</code>, the test will pass, otherwise the test will fail.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9 embed_video">
+  <iframe src="https://player.vimeo.com/video/173854892" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+
+<h3>Configuring the index method</h3>
+
+<p>
+  Now that we've got our tests passing, let's add some functionality to our <code>index</code> action in our <code>posts_controller.rb</code>. 
+</p>
+
+<p>
+  Let's open up our <code>posts_controller.rb</code> in the text editor. In the <code>index</code> page, we want to display all of our posts. As we've done with our previous applications that we've built out, we can assign an instance variable to all instances of <code>Post</code>, like this:
+</p>
+
+<pre><code class="ruby">
+def index
+  @posts = Post.all
+end
+</code></pre>
+
+<p>
+  Then in our <code>index.html.erb</code>, we can use the <code>@posts</code> variable to display all of the posts.
+</p>
+
+<p>
+  Let's open up <code>index.html.erb</code> in our text editor. Underneath where we added <code>&lt;h1&gt;Blog Posts&lt;/h1&gt;</code>, let's add the following code:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;h2&gt;&lt;%= post.title %&gt; by &lt;%= post.author %&gt;&lt;/h2&gt;
+  &lt;p&gt;
+    &lt;%= post.content %&gt;
+  &lt;/p&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  This will iterate through all of the posts and display the <code>title</code>, <code>author</code>, and <code>content</code> for each <code>Post</code>. We haven't created any posts yet, but once we do, all of the posts will displayed on this page!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+

@@ -1,0 +1,421 @@
+#comment-area {
+  margin-bottom: 100px;
+}
+
+.edit_post_links {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.panel {
+  border: none;
+  border-top: 5px solid #ec6952 !important;
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.prof_badge {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.prof_name {
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.back_to_lesson {
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.btn-flashcard {
+  background: none;
+  border: 1px solid #5cb85c;
+  color: #5cb85c;
+  font-weight: 400 !important;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  .fa {
+    color: #5cb85c !important;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+  }
+}
+
+.btn-flashcard:hover {
+  background: #5cb85c;
+  color: #fff;
+  .fa {
+    color: #fff !important;
+  }
+}
+
+.forum_container {
+  h3 {
+    border-left: 3px solid #ec6952;
+    padding-left: 10px;
+  }
+}
+
+.modal-body {
+  p {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+  }
+}
+
+.standard_git_workflow {
+  border-left: 5px solid #ec6952;
+  padding-left: 10px;
+  background: whitesmoke;
+  padding: 10px;
+}
+
+.well {
+  h3 {
+    border-bottom: 2px solid #ec6952;
+  }
+}
+
+.curriculum_title {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#hidden_delete_progression_form {
+  display: none;
+}
+
+#hidden_progression_form {
+  display: none;
+}
+
+span.radio.inline {
+  margin-right: 15px;
+}
+
+.lesson_well {
+  background-color: #f5f5f5;
+  padding: 10px;
+  min-height: 20px;
+}
+
+.course_html {
+  background: #eeeeee;
+}
+
+.panel-heading-stats {
+  padding: 10px 15px;
+  border-bottom: 2px solid #eee;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background: #fdfdfd;
+  h3 {
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+}
+
+.stat_box {
+  padding: 20px;
+  border: 1px solid whitesmoke;
+}
+
+.activity_description {
+  margin-left: 10px;
+}
+
+.activity_time {
+  color: #999999;
+  font-weight: 600;
+}
+
+.activity_icon {
+  font-size: 15px !important;
+  color: #ec6952;
+}
+
+.activity {
+  border-bottom: 1px solid whitesmoke;
+  padding: 10px;
+}
+
+.course_description {
+  min-height: 220px;
+  a {
+    color: #333;
+  }
+  li {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 5px 20px 20px;
+  }
+  li:hover {
+    background-color: whitesmoke;
+    a {
+      color: #ec6952;
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -ms-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+    }
+    a:hover {
+      text-decoration: underline;
+      color: #e74124;
+    }
+    a:focus {
+      text-decoration: none;
+    }
+  }
+}
+
+.course_status {
+  height: 20px;
+}
+
+.progress_bar {
+  border-top: 1px solid whitesmoke;
+  margin-top: 20px;
+  height: 10px;
+  padding: 10px 0px;
+}
+
+.progression_check {
+  color: #5cb85c;
+  margin-left: 5px;
+}
+
+#completed_button {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.prof_pic_forum {
+  border-radius: 50%;
+  height: 100px;
+  margin: 0 auto;
+  width: 100px;
+  display: block;
+  border: 3px solid #ec6952;
+  margin-top: 25px;
+}
+
+.prof_pic_xs {
+  border-radius: 10%;
+  height: 25px;
+  width: 25px;
+}
+
+.prof_pic_sm {
+  border-radius: 50%;
+  height: 100px;
+  margin: 0 auto;
+  width: 100px;
+  display: block;
+  border: 2px solid #ec6952;
+  padding: 2px;
+}
+
+.nav-badge {
+  margin-top: -3px;
+  margin-left: 5px;
+}
+
+.badge {
+  background-color: #d9534f;
+}
+
+#cke_1_floatingtools {
+  display: none;
+}
+
+#slider {
+  padding: 20px;
+  padding-bottom: 50px;
+  box-shadow: 5px 0 15px -6px #585858 inset;
+  overflow-y: scroll;
+}
+
+
+.lesson_content {
+  background-color: white;
+  h1 {
+    border-left: 6px solid #ec6952;
+    padding-left: 10px;
+  }
+  h2 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  h3 {
+    border-left: 5px solid #ec6952;
+    border-bottom: 2px solid #ec6952;
+    padding-left: 10px;
+  }
+  li {
+    font-size: 18px;
+    margin: 5px 0px;
+  }
+}
+
+.item .content p {
+  margin: 0 0 10px;
+}
+
+span.radio.inline {
+  display: inline;
+}
+
+.devise_box {
+  padding: 50px;
+  border-radius: 3px;
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  background: white;
+}
+
+#wrap {
+  margin-bottom: 200px;
+}
+
+p {
+  font-weight: 300;
+  font-size: 18px !important;
+}
+
+// label {
+//   font-weight: 300 !important;
+//   letter-spacing: 3px;
+// }
+
+section {
+  margin: 60px 0px;
+}
+
+a.anchor {
+  display: block;
+  position: relative;
+  top: -170px;
+  visibility: hidden;
+}
+
+footer {
+  text-align: center;
+}
+
+.hljs {
+  padding: 0px 20px 20px !important;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+.content {
+	padding: 100px 0px 150px 0px;
+	p {
+		font-size: 18px;
+    color: black;
+    margin-top: 2em;
+    margin-bottom: 2em;
+	}
+}
+
+.course_box {
+	min-height: 300px;
+  padding: 20px;
+  padding-top: 0px;
+  margin-bottom: 10px;
+  border: 1px solid whitesmoke;
+  background: white;
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+
+.screenshot_min {
+  height: 100px;
+  overflow: hidden;
+}
+
+.course_button {
+  float: right;
+}
+
+.embed_video {
+	margin: 50px 0px;
+}
+
+.forum_section {
+	margin: 50px 0px;
+}
+
+.underlined-header {
+	border-bottom: 4px solid #e74c3c;
+}
+
+.skill_logo {
+	height: 50px;
+}
+
+.screenshot {
+	width: 100%;
+  border: 1px solid whitesmoke; 
+  border-radius: 3px; 
+  box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.unindented_ul {
+	padding: 0;
+	list-style-type:none;
+}
+
+.hidden_answer {
+	display: none;
+}
+
+.hidden_answer p {
+  margin-top: 0px;
+  font-size: 14px !important;
+}
+
+.quiz_box {
+	height: 250px;
+}
+
+.lesson_nav_box {
+	width: 500px;
+	margin: 0 auto;
+}
+
+.pricing_box {
+  height: 200px;
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: left;
+  font-weight: 100;
+  margin-bottom: 20px;
+}
+
+.row {
+  margin-right:0px;
+  margin-left:0px;
+}
+
+.clear {
+	clear:both;
+}
+
+@media screen and (max-width: 720px) {
+	.lesson_nav_box {
+		width: 300px;
+	}
+  .pricing_box {
+    height: 100%;
+  }
+}

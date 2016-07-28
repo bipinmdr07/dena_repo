@@ -1,0 +1,148 @@
+<h1><%= title_for(InstapostLesson, 4, 1) %></h1>
+
+<p>
+  Now that we've got our <code>User</code> model set up, let's go ahead and add a feature that will allow us to upload profile pictures.
+</p>
+
+<p>
+  Go to the <%= link_to 'Carrierwave Github Page', 'https://github.com/carrierwaveuploader/carrierwave' %> to get started. Skim through it and try to understand the overall flow.
+</p>
+
+<p>
+  In the documentation, they have named the uploader <code>Avatar</code>. Instead of <code>Avatar</code>, we're going to name it <code>Photo</code> in our web app.
+</p>
+
+<p>
+  The first thing we need to do is install the Carrierwave gem. In your terminal, run the following command:
+</p>
+
+<pre><code class="bash">
+gem install carrierwave
+</code></pre>
+
+<p>
+  Then, in your <code>Gemfile</code>, add the following:
+</p>
+
+<pre><code class="bash">
+gem 'carrierwave'
+</code></pre>
+
+<p>
+  Run the <code>bundle</code> command in terminal and restart the server.
+</p>
+
+<p>
+  Next, we'll generate an uploader. In your terminal, run the following command:
+</p>  
+
+<pre><code class="bash">
+rails generate uploader Photo
+</code></pre>
+
+<p>
+  Next, let's add a column to our <code>User</code> model to store our photo. Run the following command:
+</p>
+
+<pre><code class="bash">
+rails g migration add_photo_to_users photo:string
+rake db:migrate
+</code></pre>
+
+<p>
+  Next, go into your <code>user.rb</code> file and add the following line to mount the uploader:
+</p>
+
+<pre><code class="ruby">
+mount_uploader :photo, PhotoUploader
+</code></pre>
+
+<p>
+  Your <code>user.rb</code> file should now look like this:
+</p>
+
+<pre><code class="ruby">
+class User &lt; ActiveRecord::Base
+  mount_uploader :photo, PhotoUploader
+end
+</code></pre>
+
+<p>
+  We've now set up what is needed to upload profile pictures! The last thing we need to do is to configure devise so that it accepts the newly added <code>photo</code> column, and also the <code>name</code> column from the previous lesson.
+</p>
+
+<div class="well">
+  <h3>Strong Parameters</h3>
+  <p>
+    Right now, even if you try to save <code>name</code> or <code>photo</code> with something, devise won't allow it to save. For example, if you go to your rails console and try the following:
+  </p>
+
+<pre><code class="bash">
+user = User.create
+user.name = "Bob"
+user.photo = "photo url"
+user.save
+puts user
+</code></pre>
+
+  <p>
+    you will notice that the user does not have the <code>name</code> or <code>photo</code>. Instead, it will just save as a <code>nil</code> value. This is a security measure so that other people can't input false information that will mess up the database. <strong>Unless we whitelist the database columns <code>name</code> and <code>photo</code>, it won't allow us to save it.</strong> You can read more on this topic <%= link_to 'here', 'http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters' %>.
+  </p>
+
+  <%= create_flashcard %>
+</div>
+
+<p>
+  So let's go ahead and configure the strong parameters for devise. Go to your <code>application_controller.rb</code>.
+</p>
+
+<p>
+  Near the top under <code>class ApplicationController &lt; ActionController::Base</code>, add the following line of code:
+</p>
+
+<pre><code class="ruby">
+before_action :configure_permitted_parameters, if: :devise_controller?
+</code></pre>
+
+<p>
+  Underneath it, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+protected
+
+def configure_permitted_parameters
+  devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :name, :photo) }
+  devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
+  devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :name, :photo) }
+end
+</code></pre>
+
+<p>
+  This piece of code will whitelist <code>name</code> and <code>photo</code>, allowing us to save them into the database. The documentation on how to set strong parameters in Devise is <%= link_to 'here', 'https://github.com/plataformatec/devise#strong-parameters' %>.
+</p>
+
+<p>
+  Your <code>application_controller.rb</code> should now look something like this:
+</p>
+
+<pre><code class="ruby">
+class ApplicationController &lt; ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :name, :photo) }
+    devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
+    devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :name, :photo) }
+  end
+end
+</code></pre>
+
+<%= standard_git_workflow %>
+

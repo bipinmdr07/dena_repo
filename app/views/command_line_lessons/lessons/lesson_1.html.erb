@@ -1,0 +1,287 @@
+<h1><%= title_for(CommandLineLesson, 1, 1) %></h1>
+
+<p>
+  Congratulations on finishing Ruby Fundamentals!
+</p>
+
+<p>
+  As we get ready to build out our rails application, we need to learn how to use the command line. Using the command line effectively will enable us to develop our web applications much more efficiently.
+</p>
+
+<p>
+  Let's get ready to learn some commands! :) This lesson is going to be an overview of the most used commands when doing web development. It won't cover all of the commands, but only the necessary ones to get you started.
+</p>
+
+<p>
+  Here is a list of the commands we will be convering:
+</p>
+
+<ul>
+  <li><code>cd</code> - change directory</li>
+  <li><code>pwd</code> - print working directory (print the directory you are working in)</li>
+  <li><code>ls</code> - list directory contents (list the contents of the directory)</li>
+  <li><code>mkdir</code> - make directory (create a file)</li>
+</ul>
+
+<p>
+  First, let's open up our terminal so that we can practice some commands.
+</p>
+
+<h3>cd</h3>
+
+<p>
+  The <code>cd</code> command is perhaps the command that you will use most. <code>cd</code> stands for <strong>Change Directory</strong>. We use it when we want to navigate to different directories in the terminal.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  We've used it numerous times in our lessons before, for example running commands like this:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop/ideator
+</code></pre>
+
+<p>
+  This command is saying, let's change the directory (<code>cd</code>) to the <code>~/desktop/ideator</code> directory.
+</p>
+
+<p class="alert alert-info"> 
+  The <code>~</code> means the home directory of the logged on user.
+</p>
+
+<p>
+  Let's go into our terminal and run the following command:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop/ideator
+</code></pre>
+
+<p>
+  We are now in our Ideator project folder. Let's type the following:
+</p>
+
+<pre><code class="bash">
+pwd
+</code></pre>
+
+<p>
+  This should print out something like this:
+</p>
+
+<pre><code class="bash">
+/Users/YourUsername/desktop/ideator
+</code></pre>
+
+<h3>pwd</h3>
+
+<p>
+  <code>pwd</code> stands for <strong>Print Working directory</strong>. You can use wheneever you need to know which directory you are in.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+Right now we are in the <code>~/desktop/ideator</code> directory. What if we want to navigate to our <code>desktop</code> directory? One option would be to run this command:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop
+</code></pre>
+
+<p>
+  However, instead you could also do this:
+</p>
+
+<pre><code class="bash">
+cd ..
+</code></pre>
+
+<p>
+  Typing <code>..</code> will direct you to the directory above the current directory. In other words, if we are in the <code>~/desktop/ideator</code> directory, the directory above it is <code>~/desktop</code>.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  You can even do this:
+</p>
+
+<pre><code class="bash">
+cd ../..
+</code></pre>
+
+<p>
+  This will navigate 2 directories up. Let's practice this. In our terminal, let's run the following:
+</p>
+
+
+<pre><code class="bash">
+cd ~/desktop/ideator
+</code></pre>
+
+<p>
+  Let's make sure where we are in the correct directory. To do that, let's run the following command:
+</p>  
+
+<pre><code class="bash">
+pwd
+</code></pre>
+
+<p>
+  This should print the working directory (<code>pwd</code> stands for print working directory).
+</p>  
+
+<p>
+  Let's navigate one directory up. Type in the following command and press enter:
+</p>
+
+<pre><code class="bash">
+cd ..
+</code></pre>
+
+<p>
+  Let's make sure we are in the right directory:
+</p>
+
+<pre><code class="bash">
+pwd
+</code></pre>
+
+<p>
+   If you are in the <code>desktop</code> directory, then you are on the right track.
+</p>
+
+<p>
+  Let's navigate to the <code>ideator</code> directory again. Type in the following command and press enter:
+</p>
+
+<pre><code class="bash">
+cd ideator
+</code></pre>
+
+<p>
+  Let's print the current directory:
+</p>
+
+<pre><code class="bash">
+pwd
+</code></pre>
+
+<p>
+  Let's now navigate 2 directories up:
+</p>
+
+<pre><code class="bash">
+cd ../..
+</code></pre>
+
+<p>Let's make sure we are in the home directory:</p>
+
+<pre><code class="bash">
+pwd
+</code></pre>
+
+<p>
+  Awesome. Navigating through files in your terminal should now be a piece of cake :)
+</p>
+
+<h3>mkdir</h3>
+
+<p>
+  Let's navigate ourselves to the desktop directory. In the terminal, type in the following and press enter:
+</p>
+
+<pre><code class="bash">
+cd ~/desktop
+</code></pre>
+
+<p>
+  Let's create a new folder on our desktop. We can do this with the <code>mkdir</code> command. <code>mkdir</code> stands for <strong>make directory</strong>. Developers use this command when they want to make a new folder in the urrent directory.
+
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Let's create a folder called <code>techrise_folder</code>. In the terminal, type in the following and press enter:
+</p>
+
+<pre><code class="bash">
+mkdir techrise_folder
+</code></pre>
+
+<h3>ls</h3>
+
+<p>
+  Let's make sure that the <code>techrise_folder</code> was actually created. We can do this with the <code>ls</code> command. <code>ls</code> stands for <strong>list directory contents</strong>. Developers use the <code>ls</code> command whenever they want a quick look at the folders in the current directory.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  In the terminal, let's type in the following and press enter:
+</p>
+
+<pre><code class="bash">
+ls
+</code></pre>
+
+<p>
+  This command will print out all of your folders in your <code>desktop</code>. Make sure that <code>techrise_folder</code> is listed in there as well.
+</p>
+
+<p>
+  Let's navigate to the <code>techrise_folder</code>. In the terminal, type in the following and press enter:
+</p>
+
+<pre><code class="bash">
+cd techrise_folder
+</code></pre>
+
+<p>
+  Let's make a new folder called <strong>folder_1</strong>. In the terminal, type in tthe following and press enter:
+</p>
+
+<pre><code class="bash">
+mkdir folder_1
+</code></pre>
+
+<p>
+  Let's make sure the folder was created correctly. In the terminal, type in tthe following and press enter:
+</p>
+
+<pre><code class="bash">
+ls
+</code></pre>
+
+<p>
+  It should display <code>folder_1</code>. Let's create another folder called <code>folder_2</code>. In the terminal, type in tthe following and press enter:
+</p>  
+
+<pre><code class="bash">
+mkdir folder_2
+</code></pre>
+
+<p>
+  It should now display <code>folder_1 folder_2</code>.
+</p>
+
+<h3>Wrap Up</h3>
+
+<p>
+  In this lesson, we have briefly introduced the main commands you will be using in the beginning stages of your web development career.
+</p>
+
+<p>
+  There are more commands that you can pick up along the way, but make sure to be able to use these 4 commands very well. The next lesson is optional and is for people who want to become a command line ninja :)
+</p>
+
+
+
+
+
+
+

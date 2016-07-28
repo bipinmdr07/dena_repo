@@ -1,0 +1,22 @@
+<h1><%= title_for(RspecBlogLesson, 5, 6) %></h1>
+
+<p>
+  It's always a good idea to put in validations to make sure we don't store incorrect information in our database.
+</p>
+
+<p>
+  Take a look at the <%= link_to 'Rails Guides Active Record Validations', 'http://guides.rubyonrails.org/active_record_validations.html' %> or simply Google it if you need any help.
+</p>
+
+<h2>Instructions</h2>
+
+<ul>
+  <li>Set up validations for the <code>Post</code> model</li>
+  <ul>
+    <li>Validate that the <code>content</code> field's length is a minimum of <code>50</code> characters</li>
+    <li>Validate the presence of <code>title</code>, <code>author</code>, and <code>content</code></li>
+  </ul>
+</ul>
+
+
+<%= standard_git_workflow %>

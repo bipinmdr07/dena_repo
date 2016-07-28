@@ -1,0 +1,116 @@
+<h1><%= title_for(RspecBlogLesson, 5, 10) %></h1>
+
+<p>
+  Lastly, let's quickly write some model tests. 
+</p>
+
+<p>
+  Currently in our <code>post.rb</code>, we have two validations. Let's write some specs to make sure everything is working correctly.
+</p>
+
+<p>
+  To test validations, let's install the <code>shoulda-matchers</code> gem. You can view the documentation <%= link_to 'here', 'https://github.com/thoughtbot/shoulda-matchers' %>.
+</p>
+
+<p>
+  Basically what this gem allows you to do is write tests for model validations super simply. This is extremely useful, since if we didn't have this, we would have to write a ton of code to test if the validations actually work like we want it to.
+</p>
+
+<p>
+  To install the gem, open your <code>Gemfile</code> and add <code>gem 'shoulda-matchers', '~> 3.1'</code> inside the <code>test</code> group so that it looks like this:
+</p>
+
+<pre><code class="ruby">
+group :test do
+  gem 'shoulda-matchers', '~> 3.1'
+end
+</code></pre>
+
+<p>
+  Run <code>bundle install</code>.
+</p>
+
+
+<p>
+  Then in your text editor, open <code>rails_helper.rb</code>. At the very end of the file after the last <code>end</code>, copy and paste the following lines of code:
+</p>
+
+<pre><code class="ruby">
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    # Choose a test framework:
+    with.test_framework :rspec
+
+    # Choose one or more libraries:
+    with.library :active_record
+    with.library :active_model
+    with.library :action_controller
+    # Or, choose the following (which implies all of the above):
+    with.library :rails
+  end
+end
+</code></pre>
+
+<p>
+  Awesome. Now that we've got our shoulda-matchers installed, let's write our model tests.
+</p>
+
+<p>
+  Let's open <code>post_spec.rb</code>.
+</p>
+
+<p>
+  Inside of the <code>RSpec.describe Post, type: :model</code> block, let's add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+it {should validate_length_of(:content).is_at_least(50)}
+it {should validate_presence_of :title}
+it {should validate_presence_of :author}
+it {should validate_presence_of :content}
+</code></pre>
+
+<p>
+  Your file should now look like this:
+</p>
+
+<pre><code class="ruby">
+require 'rails_helper'
+
+RSpec.describe Post, type: :model do
+  it {should validate_presence_of :title}
+  it {should validate_presence_of :author}
+  it {should validate_presence_of :content}
+  it {should validate_length_of(:content).is_at_least(50)}
+end
+</code></pre>
+
+<p>
+  As you can see, the tests are pretty straightforward and easy to read. The shoulda-matchers gem allows us to write tests in human-readable formats.
+</p>  
+
+<p>
+  Let's run the tests.
+</p>
+
+<pre><code class="bash">
+bundle exec rspec
+</code></pre>
+
+<p>
+  All of the tests should pass, since we have already written validations for the <code>Post</code> model. For further information on what other things you can do with the shoulda-matcher gem, take a look at the documentation <%= link_to 'here', 'https://github.com/thoughtbot/shoulda-matchers' %> and try to read through it.
+</p>
+
+<p>
+  In this app, we don't have any logic in the model, so there is not much to test, but if there are any methods or logic inside the model that need to be tested, then you will need to test that as a model spec as well.
+</p>
+
+
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
