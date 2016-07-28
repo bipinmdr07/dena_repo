@@ -1,7 +1,7 @@
 class CommandLineLesson < ActiveRecord::Base
   COURSE_TITLE = "Become a Command Line Ninja"
 
-  LESSON_LENGTH = 1
+  LESSON_LENGTH = 2
 
   DURATION = 3
 
