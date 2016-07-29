@@ -1,7 +1,7 @@
 <h1><%= title_for(IdeatorLesson, 7, 1) %></h1>
 
 <p>
-  The first thing we are going to add on to our app is <strong>pagination</strong> to our <code>index</code> page. Basically the gist is, when we display all of our ideas on the <code>index</code> page, when we have 100 ideas on there, users have to scroll forever to get to the bottom of the page. Instead, we probably want to divide them into seperate pages, or paginate them.
+  The first thing we are going to add on to our app is <strong>pagination</strong> to our <code>index</code> page. Basically the gist is, when we display all of our ideas on the <code>index</code> page, when we have 100 ideas on there, users have to scroll forever to get to the bottom of the page. Instead, we probably want to divide them into seperate pages, or in other words, <em>paginate</em> them.
 </p>
 
 <p>
@@ -33,8 +33,12 @@ gem 'will_paginate', '~> 3.0.6'
 </p>
 
 <p>
-  Basically, we can just stick <code>.paginate(:page => params[:page], :per_page => 30)</code> after <code>@ideas = Idea.all</code> in our <code>ideas_controller.rb</code>and it would work perfectly. We can also adjust the <code>:per_page</code> to let's say 10, and it would only display 10 ideas per page. Your code should now look like this:
+  Basically, we can just stick <code>.paginate(:page => params[:page], :per_page => 30)</code> after <code>@ideas = Idea.all</code> in our <code>ideas_controller.rb</code>and it will work perfectly. We can also adjust the <code>:per_page</code> option to set the number of objects per page it displays. For example, if we set <code>:per_page</code> to <code>10</code>, it would only display 10 ideas per page. 
 </p>
+
+<p>
+  In our <code>ideas_controller.rb</code>, let's modify our code in the <code>index</code> method.
+</p>  
 
 <pre><code class="ruby">
 def index
@@ -43,7 +47,11 @@ end
 </code></pre>
 
 <p>
-  While we're at it, right now if you add an idea, it isn't displayed at the top. We should make it so that the newest ideas are displayed first. We can do this by ordering it by the time it was created at. We can do that like this:
+  While we're at it, right now if you add an idea, it isn't displayed at the top. We should make it so that the newest ideas are displayed first. <strong>We can do this by ordering it by the time it was created at.</strong>
+</p>
+
+<p>
+  Inside the <code>index</code> method, let's modify the code so that it looks like this:
 </p>
 
 <pre><code class="ruby">
@@ -53,7 +61,22 @@ end
 </code></pre>
 
 <p>
-  Awesome, now let's go back into the documentation. It also tells us how to render the page links in the view. Let's go ahead and add that in to our views. Go into <code>index.html.erb</code> and add this in to the very bottom of the page:
+  Awesome, now let's go back into the documentation. It also tells us how to render the page links in the view:
+</p> 
+
+<pre><code class="ruby">
+## perform a paginated query:
+@posts = Post.paginate(:page => params[:page])
+
+# or, use an explicit "per page" limit:
+Post.paginate(:page => params[:page], :per_page => 30)
+
+## render page links in the view:
+&lt;%= will_paginate @posts %&gt;
+</code></pre>
+
+<p>
+  Let's go ahead and implement this in our views. Go into <code>index.html.erb</code> and add this in to the very bottom of the page:
 </p>
 
 <pre><code class="erb">
@@ -71,6 +94,7 @@ end
 <p>
   Once you do that, it should be fully working. Let's refresh the page.
 </p>
+
 <p>
   We see now that the pagination links are there at the bottom of the page, but they aren't centered. Let's go ahead and center them. We can do this by using bootstrap's <code>text-center</code> class. Change your code to look like this:
 </p>

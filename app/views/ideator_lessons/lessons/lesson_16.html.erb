@@ -115,8 +115,20 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </p>
 
 <p>
-  With this link unfortunately, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as <code>GET</code>, <code>PATCH</code>, <code>PUT</code>. This means that we need to specify which verb we are going to trigger. In this case, this is <code>DELETE</code>. We can specify this by adding <code>method: :delete</code> like this:
+  With this link unfortunately, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as <code>GET</code>, <code>PATCH</code>, <code>PUT</code>. 
 </p>
+
+<pre><code>
+     idea GET    /ideas/:id(.:format)      ideas#show
+          PATCH  /ideas/:id(.:format)      ideas#update
+          PUT    /ideas/:id(.:format)      ideas#update
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+
+<p>
+  By default, <code>link_to</code> will create links that make <code>GET</code> requests. To make a <code>DELETE</code> request, we need to specify that in our <code>link_to</code>. We can do this by adding <code>method: :delete</code> as an option like this:
+</p>
+
 
 <pre><code class = "erb">
 &lt;%= link_to 'Delete', idea_path(idea), method: :delete %&gt;
@@ -139,7 +151,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </code></pre>
 
 <p>
-  Awesome! Let's now add that in to our HTML.
+  Awesome! Let's now add this link for each of our ideas. In <code>index.html.erb</code>, let's insert the link we just created, like this:
 </p>
 
 <pre><code class="erb">
@@ -160,7 +172,11 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </p>
 
 <p>
-  While we're at it, let's also add a link to edit ideas. I'm going to call this button "Revise" instead of "Edit", just because it sounds cooler :) If we go back to <code>rake routes</code>, we see that the <code>prefix</code> is <code>edit_idea</code>. That means our <code>link_to</code> is going to look something like this:
+  While we're at it, let's also add a link to edit ideas. I'm going to call this button "Revise" instead of "Edit", just because I think it sounds cooler :)
+</p>
+
+<p>
+  If we go back to <code>rake routes</code>, we see that the <code>prefix</code> is <code>edit_idea</code>. That means our <code>link_to</code> is going to look something like this:
 </p>
 
 <pre><code class="erb">
@@ -168,7 +184,26 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </code></pre>
 
 <p>
-  Let's paste that code under the delete button and refresh the page. We see that the link is there, but it would probably look better if this link also had a button to it. Let's give it the same class as the delete button and add <code>class: 'btn btn-sm pull-left'</code> to look like the following:
+  Let's paste that code under the delete button and refresh the page.
+</p>
+
+
+<pre><code class="erb">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
+      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea) %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  We see that the link is there, but it would probably look better if this link also had a button to it. Let's give it the same class as the delete button and add <code>class: 'btn btn-sm pull-left'</code> to look like the following:
 </p>
 
 <pre><code class="erb">
@@ -184,6 +219,10 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
   &lt;/div&gt;
 &lt;% end %&gt;
 </code></pre>
+
+<p>
+  Awesome, let's move on to the next lesson.
+</p>
 
 
 <%= standard_git_workflow %>
