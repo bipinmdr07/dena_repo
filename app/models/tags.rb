@@ -71,7 +71,7 @@ class Tags < ActiveRecord::Base
       [14, "Editing and Updating Ideas"] => %w(),
       [15, "Validate User Input - Validations"] => %w(),
       [16, "Deleting Ideas and Adding Links"] => %w(),
-      [17, "Routing"] => %w(),
+      [17, "Setting Up the Static Pages Controller"] => %w(),
       [18, "Adding the About Page"] => %w(),
       [19, "Configuring the Random Page"] => %w(),
       [20, "Adding Pagination"] => %w(),

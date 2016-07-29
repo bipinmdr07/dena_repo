@@ -46,7 +46,7 @@ class IdeatorLesson < ActiveRecord::Base
 		],
 		["Adding Other Pages",
 			[
-				[17, "Routing"],
+				[17, "Setting Up the Static Pages Controller"],
 				[18, "Adding the About Page"],
 				[19, "Configuring the Random Page"]
 			]

@@ -9,11 +9,11 @@
 </p>
 
 <p>
-  We're first going to create a file called <code>random.html.erb</code> under <code>/app/views/ideas/random.html.erb</code>.
+  We're first going to create a file called <code>random.html.erb</code> inside <code>/app/views/static_pages</code>.
 </p>
 
 <p>
-  Then we're going to go into our <code>ideas_controller.rb</code> and add the <code>random</code> method. In this method, we're going to try to store a random <code>Idea</code> into an instance variable so that we can use it in our <code>random.html.erb</code>.
+  Then we're going to go into our <code>static_pages_controller.rb</code> and add the <code>random</code> method. In this method, we're going to try to store a random <code>Idea</code> into an instance variable so that we can use it in our <code>random.html.erb</code>.
 </p>
 
 <p>
@@ -25,7 +25,11 @@
 </code></pre>
 
 <p>
-  What we are doing here is ordering all of our ideas randomly. Then we are grabbing the first idea off of the randomly ordered ideas, and then storing it into <code>@idea</code>. Let's now add the following method to the bottom of our <code>ideas_controller.rb</code>.
+  What we are doing here is first ordering all of our ideas randomly. Then we are grabbing the first idea off of the randomly ordered ideas, and then storing it into <code>@idea</code>. 
+</p>
+
+<p>
+  Let's now add modify the <code>random</code> method to in the <code>static_pages_controller.rb</code> to look like this:.
 </p>
 
 <pre><code class="ruby">
@@ -44,7 +48,7 @@ end
 </code></pre>
 
 <p>
-  Here, we are displaying the <code>description</code> and <code>author</code> of the <code>@idea</code>. Save the file.
+  Here, we are displaying the <code>description</code> and <code>author</code> of the <code>@idea</code>. Remember, here <code>@idea</code> is assigned a random <code>Idea</code>.
 </p>
 
 <p>
@@ -68,7 +72,11 @@ end
 </code></pre>
 
 <p>
-  If we refresh the page, we see that it's nicely dispayed now. Now let's add a button above the panel that will refresh the page for us each time we press the button.
+  If we refresh the page, we see that it's nicely displayed now.
+</p>
+
+<p>
+  Now let's add a button above the panel that will refresh the page for us each time we press the button.
 </p>
 
 <p>
@@ -116,13 +124,19 @@ end
 &lt;% end %&gt;
 </code></pre>
 
-<!-- <div class="well">
-  <h3>Shortcut for checking if something exists</h3>
+<div class="well">
+  <h3>Conditionals in the Views</h3>
 
   <p>
-    In case you were wondering, in Ruby, instead of writing something like <code>if something.present?</code> we can simpy say <code>if something</code> and it would return true if <code>something</code> existed. In our case we are checking if <code>@idea</code> is present simply by adding <code>if @idea</code>, instead of <code>if @idea.present?</code> or <code>if @idea.exists?</code>.
+    We've talked about how we can use <code>&lt;%= %&gt;</code> and <code>&lt;% %&gt;</code> to embed ruby code into our <code>erb</code> files.
   </p>
-</div> -->
+
+  <p>
+    In the code above, we used an <code>if</code> statement in the <code>erb</code> file. This is just another example of ruby being used inside the <code>erb</code> file. It works just like ruby, if a condition is true, the HTML code inside of the block is displayed, otherwise, it is not.
+  </p>
+
+  <%= create_flashcard %>
+</div>
 
 <p>
   Sweet, you've now added all of the pages succesfully! The final step in this lesson is to add a link to the random page in the navbar.
