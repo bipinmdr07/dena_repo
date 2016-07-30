@@ -1,3 +1,27 @@
+.fa-facebook-official {
+  color: #3b5998;
+}
+
+.fa-twitter-square {
+  color: #55ACEE;
+}
+
+.fa-github-square {
+  color: #333;
+}
+
+.fa-globe {
+  color: #0000EE;
+}
+
+.btn-back {
+  border-radius: 100px;
+  margin-bottom: 10px;
+  .fa {
+    color: #333 !important;
+  }
+}
+
 #comment-area {
   margin-bottom: 100px;
 }
@@ -210,6 +234,11 @@ span.radio.inline {
   width: 25px;
 }
 
+.prof_pic_nav {
+  border-radius: 10%;
+  height: 25px;
+}
+
 .prof_pic_sm {
   border-radius: 50%;
   height: 100px;
@@ -284,7 +313,6 @@ span.radio.inline {
 
 p {
   font-weight: 300;
-  font-size: 18px !important;
 }
 
 // label {
@@ -319,7 +347,7 @@ pre {
 	padding: 100px 0px 150px 0px;
 	p {
 		font-size: 18px;
-    color: black;
+    color: #333;
     margin-top: 2em;
     margin-bottom: 2em;
 	}

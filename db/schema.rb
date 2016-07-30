@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714132514) do
+ActiveRecord::Schema.define(version: 20160729200807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,17 @@ ActiveRecord::Schema.define(version: 20160714132514) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mentor_sessions", force: :cascade do |t|
+    t.integer  "mentor_id"
+    t.integer  "user_id"
+    t.text     "private_details"
+    t.text     "public_details"
+    t.text     "homework_assigned"
+    t.datetime "session_date"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "mvc_lessons", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -263,6 +274,17 @@ ActiveRecord::Schema.define(version: 20160714132514) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "student_sessions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "mentor_id"
+    t.text     "public_details"
+    t.text     "private_details"
+    t.text     "motivation_level"
+    t.integer  "mentor_session_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "submission_comments", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -324,35 +346,43 @@ ActiveRecord::Schema.define(version: 20160714132514) do
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                    default: "",    null: false
-    t.string   "encrypted_password",       default: "",    null: false
+    t.string   "email",                     default: "",    null: false
+    t.string   "encrypted_password",        default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",            default: 0,     null: false
+    t.integer  "sign_in_count",             default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "avatar"
     t.string   "name"
     t.boolean  "admin"
-    t.boolean  "intro_access",             default: true
-    t.boolean  "html_css_access",          default: true
-    t.boolean  "ruby_fundamentals_access", default: false
-    t.boolean  "ideator_access",           default: false
-    t.boolean  "ruby_core_access",         default: false
+    t.boolean  "intro_access",              default: true
+    t.boolean  "html_css_access",           default: true
+    t.boolean  "ruby_fundamentals_access",  default: false
+    t.boolean  "ideator_access",            default: false
+    t.boolean  "ruby_core_access",          default: false
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "instapost_access",         default: false
-    t.boolean  "github_access",            default: false
-    t.boolean  "javascript_access",        default: false
-    t.boolean  "command_line_access",      default: false
-    t.boolean  "rspec_blog_access",        default: false
-    t.boolean  "mvc_access",               default: false
-    t.boolean  "mentor",                   default: false
+    t.boolean  "instapost_access",          default: false
+    t.boolean  "github_access",             default: false
+    t.boolean  "javascript_access",         default: false
+    t.boolean  "command_line_access",       default: false
+    t.boolean  "rspec_blog_access",         default: false
+    t.boolean  "mvc_access",                default: false
+    t.boolean  "mentor",                    default: false
+    t.datetime "start_date"
+    t.datetime "graduation_date"
+    t.integer  "remaining_mentor_sessions", default: 8
+    t.integer  "mentor_id"
+    t.string   "facebook_handle"
+    t.string   "twitter_handle"
+    t.string   "github_handle"
+    t.string   "personal_website"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

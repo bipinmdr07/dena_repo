@@ -1,0 +1,19 @@
+<div class="devise_box">
+
+<h1 class="text-center">Log Mentor Session</h1>
+<br>
+
+<%= simple_form_for @mentor_session, url: mentee_mentor_sessions_path do |f| %>
+  <%= f.input :session_date, as: :string, input_html: {data: {provide: :datepicker}, class: 'datepicker',  value: @mentor_session.session_date.try(:strftime, "%m/%d/%Y") } %>
+  <%= f.input :public_details, input_html: { rows: 5 }, placeholder: "Write about the things that the student learned in the past week, some things he could work on, and a lot of words of encouragement :)" %>
+
+  <%= f.input :private_details, label: "Private details (This is only visible to you and the TECHRISE team.  Your student will never see this.)", input_html: { rows: 5 }, placeholder: "If there are any problems with the student or have any problems or suggestions with the TECHRISE curriculum, please write it here :) We consider critical feedback as a way to improve our services :)" %>
+
+  <%= f.input :homework_assigned, input_html: { rows: 5 }, placeholder: "Keep track of the homework assignments you gave the student." %>
+
+  <%= f.input :user_id, as: :hidden, input_html: { value: params[:mentee_id] } %>
+
+  <%= f.submit 'Log Session', class: 'btn btn-warning', data: { disable_with: 'Logging...' } %>
+<% end %>
+
+</div>

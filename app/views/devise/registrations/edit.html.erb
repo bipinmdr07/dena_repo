@@ -36,6 +36,26 @@
       </div>
 
       <div class="field">
+        <%= f.label :facebook_handle %><br />
+        <%= f.text_field :facebook_handle, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :twitter_handle %><br />
+        <%= f.text_field :twitter_handle, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :github_handle %><br />
+        <%= f.text_field :github_handle, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :personal_website %><br />
+        <%= f.text_field :personal_website, autocomplete: "off", class: 'form-control' %>
+      </div>
+
+      <div class="field">
         <%= f.label 'Profile Picture' %><br />
         <%= f.file_field :avatar %>
       </div>

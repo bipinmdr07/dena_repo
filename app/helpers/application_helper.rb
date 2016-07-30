@@ -13,7 +13,10 @@ module ApplicationHelper
   end
 
   def display_date(datetime)
-    datetime.strftime("%m/%d/%Y")
+    begin
+      datetime.strftime("%m/%d/%Y")
+    rescue
+    end
   end
 
   def display_datetime(datetime)
@@ -43,17 +46,11 @@ module ApplicationHelper
 	end
 
   def has_access?(course_access)
-
     # current_user[course_access + "_access"] is essentially 
     # the same as current_user.intro_access when course_access == "intro"
     return false unless current_user[course_access + "_access"]
     true
   end
-
-  def display_date(datetime)
-    datetime.strftime("%m/%d/%Y")
-  end
-
 
   def resource_name
     :user

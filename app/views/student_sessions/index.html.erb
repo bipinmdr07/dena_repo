@@ -1,0 +1,95 @@
+<%= render "shared/flash_messages" %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="mentee_title text-center"><span class="back_to_dashboard"><%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i>  Back to Dashboard'.html_safe, dashboard_path, class: 'btn btn-back btn-default' %></span> My Mentor Sessions</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <div class="mentee-panel text-center">
+      <%= image_tag @mentor.avatar, class: 'prof_pic_sm' %>
+      <h3><%= @mentor.name %></h3>
+      <label class="label label-default">TECHRISE Mentor</label>
+
+      <div class="social-links">
+        <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, @mentor.facebook_handle if @mentor.facebook_handle.present? %>
+        <%= link_to '<i class="fa fa-twitter-square" aria-hidden="true"></i>'.html_safe, @mentor.twitter_handle if @mentor.twitter_handle.present? %>
+        <%= link_to '<i class="fa fa-github-square" aria-hidden="true"></i>'.html_safe, @mentor.github_handle if @mentor.github_handle.present? %>
+        <%= link_to '<i class="fa fa-globe" aria-hidden="true"></i>'.html_safe, @mentor.personal_website if @mentor.personal_website.present? %>
+      </div>
+
+      <h5><%= pluralize current_user.remaining_mentor_sessions, 'mentor session' %> remaining</h5>
+    </div>
+  </div>
+</div>
+
+<section class="mentor_session_logs">
+  <div class="row">
+    <div class="col-xs-12">
+      <% @mentor_sessions.each do |mentor_session| %>
+        <div class="panel">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <small class="mentor_session_date"><%= display_datetime(mentor_session.session_date) %></small>
+              </div>
+            </div>
+            <br>
+
+            <div class="mentor_blob">
+              <div class="row">
+                <div class="col-xs-12 col-sm-2">
+                  <%= image_tag @mentor.avatar, class: 'mentor_prof' %>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                  <div class="public_details">
+                    <p><%= mentor_session.public_details %></p>
+                    <div class="triangle"></div>
+                  </div>
+                </div>
+              </div><!-- row-->
+            </div><!-- mentor_blob -->
+
+            <div class="mentor_blob">
+              <div class="row">
+                <div class="col-xs-12 col-sm-10">
+                  <div class="public_details">
+                    <% if mentor_session.student_session %>
+                      <p><%= StudentSession.find(mentor_session.student_session).public_details %></p>
+                    <% else %>
+                      <p>You have not yet logged their mentor session.</p>
+                      <%= link_to 'Log Mentor Session', new_student_session_path(mentor_session_id: mentor_session.id), class: 'btn btn-warning' %>
+                    <% end %>
+                    <div class="triangle-right"></div>
+                  </div>
+                </div><!-- col-xs-12 col-sm-10 -->
+                <div class="col-xs-12 col-sm-2">
+                  <%= image_tag current_user.avatar, class: 'mentor_prof' %>
+                </div><!-- col-xs-12 col-sm-2 -->
+              </div><!-- row-->
+            </div><!-- mentor_blob -->
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="session_details">
+                  <h3>Private Details</h3>
+                  <p><%= mentor_session.private_details %></p>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-sm-6">
+                <div class="session_details">
+                    <h3>Homework Assigned</h3>
+                    <p><%= mentor_session.homework_assigned %></p>
+                </div>
+              </div>
+            </div><!-- row -->
+
+          </div><!-- panel-body -->
+        </div><!-- panel -->
+      <% end %>
+    </div>
+  </div><!-- row -->
+</section><!-- mentor_session_logs -->

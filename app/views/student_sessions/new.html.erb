@@ -1,0 +1,21 @@
+<div class="devise_box">
+
+<%= render "shared/flash_messages" %>
+
+<h1 class="text-center">Log Mentor Session</h1>
+<br>
+
+<%= simple_form_for @student_session, url: student_sessions_path do |f| %>
+
+  <%= f.input :motivation_level, input_html: { rows: 5 }, placeholder: "How are you feeling about the course at this moment? (Motivated, Frustrated, Happy, etc..)" %>
+
+  <%= f.input :public_details, input_html: { rows: 5 }, placeholder: "Write about the things that you learned in the past week, some things that I could work on, and what you learned from your mentor :)" %>
+
+  <%= f.input :private_details, label: "Private details (This is only visible to you and the TECHRISE team.  Your mentor will never see this.)", input_html: { rows: 5 }, placeholder: "If there are any problems with the mentor or have any problems or suggestions with the TECHRISE curriculum, please write it here :) We consider critical feedback as a way to improve our services :)" %>
+
+  <%= f.input :mentor_session_id, as: :hidden, input_html: { value: params[:mentor_session_id] } %>  
+
+  <%= f.submit 'Log Session', class: 'btn btn-warning', data: { disable_with: 'Logging...' } %>
+<% end %>
+
+</div>
