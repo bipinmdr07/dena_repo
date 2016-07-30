@@ -3,7 +3,7 @@ class StudentSessionsController < ApplicationController
 
   def index
     @mentor_sessions = current_user.mentor_sessions.order("created_at DESC")
-    @mentor = User.find(current_user.mentor_id)
+    @mentor = User.find(current_user.mentor_id) if current_user.mentor_id
   end
 
   def new

@@ -6,6 +6,7 @@
   </div>
 </div>
 
+<% if @mentor %>
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3">
     <div class="mentee-panel text-center">
@@ -24,6 +25,18 @@
     </div>
   </div>
 </div>
+
+<% else %>
+  <div class="devise_box">
+    <p>
+      At TECHRISE, students have 30 minutes mentor sessions each week where you can ask questions, ask for advice, or ask for any kind of support that you need. In order to get admitted into TECHRISE, you must first complete the pre-work and pass the entrance interviews.
+    </p>
+
+    <p>
+      We look for motivated individuals who are curious to learn about web development. TECHRISE Mentors will be there whenever you need help.
+    </p>
+  </div>
+<% end %>
 
 <section class="mentor_session_logs">
   <div class="row">
