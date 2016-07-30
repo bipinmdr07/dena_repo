@@ -7,11 +7,19 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-12 col-sm-4">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
     <div class="mentee-panel text-center">
       <%= image_tag @mentor.avatar, class: 'prof_pic_sm' %>
       <h3><%= @mentor.name %></h3>
       <label class="label label-default">TECHRISE Mentor</label>
+
+      <div class="social-links">
+        <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, @mentor.facebook_handle if @mentor.facebook_handle.present? %>
+        <%= link_to '<i class="fa fa-twitter-square" aria-hidden="true"></i>'.html_safe, @mentor.twitter_handle if @mentor.twitter_handle.present? %>
+        <%= link_to '<i class="fa fa-github-square" aria-hidden="true"></i>'.html_safe, @mentor.github_handle if @mentor.github_handle.present? %>
+        <%= link_to '<i class="fa fa-globe" aria-hidden="true"></i>'.html_safe, @mentor.personal_website if @mentor.personal_website.present? %>
+      </div>
+
       <h5><%= pluralize current_user.remaining_mentor_sessions, 'mentor session' %> remaining</h5>
     </div>
   </div>
