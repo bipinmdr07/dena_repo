@@ -1,6 +1,6 @@
 <% title("Dashboard | TECHRISE") %>
 
-<% unless current_user.mentor || current_user.admin || @last_mentor_session.student_session.present? %>
+<% unless current_user.mentor || current_user.admin || @last_mentor_session.nil? || @last_mentor_session.student_session.present? %>
   <p class="alert alert-warning alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     You have an unlogged mentor session. Make sure you log your mentor session now so you can keep track of your progress. <br><%= link_to '<i class="fa fa-caret-right" aria-hidden="true"></i> Log Mentor Session'.html_safe, new_student_session_path(mentor_session_id: @last_mentor_session.id) %>
   </p>
