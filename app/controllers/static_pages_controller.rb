@@ -21,6 +21,8 @@ class StaticPagesController < ApplicationController
     @questions = current_user.questions.all.order("created_at DESC").limit(5)
     @submissions = current_user.submissions.all.order("created_at DESC").limit(5)
 
+    @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
+    
     if current_user.admin
       @unresolved_questions = Question.where(resolved: false) 
       @unapproved_submissions = Submission.where(approved: false)

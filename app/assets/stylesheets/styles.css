@@ -18,6 +18,7 @@ body {
 p {
   margin-bottom: 15px;
   line-height: 1.5;
+  font-size: 18px;
 }
 a {
   color: #ec6952;
@@ -2378,7 +2379,6 @@ select {
 }
 .access-section {
   padding-bottom: 200px;
-  padding-top: 90px;
   padding-left: 10px;
   padding-right: 10px;
 }
