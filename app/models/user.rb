@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :submission_replies, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :mentor_sessions
+  has_many :student_sessions
 
   validates :name, presence: true
 end

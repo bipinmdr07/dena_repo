@@ -1,0 +1,88 @@
+<%= render "shared/flash_messages" %>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i> All Mentees'.html_safe, mentees_path, class: 'btn btn-back btn-default' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6">
+    <div class="mentee-panel text-center">
+      <%= image_tag @mentee.avatar, class: 'prof_pic_sm' %>
+      <h3><%= @mentee.name %></h3>
+      <h5><%= display_date @mentee.try(:start_date) %></h5>
+      <h5><%= display_date @mentee.try(:graduation_date) %></h5>
+      <h5><%= pluralize @mentee.remaining_mentor_sessions, "mentor session" %> left</h5>
+      <%= link_to 'Log Mentor Session', new_mentee_mentor_session_path(params[:mentee_id]), class: 'btn btn-warning' %>
+    </div><!-- panel -->
+  </div><!-- col-xs-12 col-sm-6 -->
+</div><!-- row -->
+
+<section class="mentor_session_logs">
+  <div class="row">
+    <div class="col-xs-12">
+      <% @mentor_sessions.each do |mentor_session| %>
+        <div class="panel">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <small class="mentor_session_date"><%= display_datetime(mentor_session.session_date) %></small>
+              </div>
+            </div>
+            <br>
+
+            <div class="mentor_blob">
+              <div class="row">
+                <div class="col-xs-12 col-sm-2">
+                  <%= image_tag current_user.avatar, class: 'mentor_prof' %>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                  <div class="public_details">
+                    <p><%= mentor_session.public_details %></p>
+                    <div class="triangle"></div>
+                  </div>
+                </div>
+              </div><!-- row-->
+            </div><!-- mentor_blob -->
+
+            <div class="mentor_blob">
+              <div class="row">
+                <div class="col-xs-12 col-sm-10">
+                  <div class="public_details">
+                    <% if mentor_session.student_session %>
+                      <p><%= StudentSession.find(mentor_session.student_session).public_details %></p>
+                    <% else %>
+                      <p>Student has not yet logged their mentor session.</p>
+                    <% end %>
+                    <div class="triangle-right"></div>
+                  </div>
+                </div><!-- col-xs-12 col-sm-10 -->
+                <div class="col-xs-12 col-sm-2">
+                  <%= image_tag @mentee.avatar, class: 'mentor_prof' %>
+                </div><!-- col-xs-12 col-sm-2 -->
+              </div><!-- row-->
+            </div><!-- mentor_blob -->
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-6">
+                <div class="session_details">
+                  <h3>Private Details</h3>
+                  <p><%= mentor_session.private_details %></p>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-sm-6">
+                <div class="session_details">
+                    <h3>Homework Assigned</h3>
+                    <p><%= mentor_session.homework_assigned %></p>
+                </div>
+              </div>
+            </div><!-- row -->
+
+          </div><!-- panel-body -->
+        </div><!-- panel -->
+      <% end %>
+    </div>
+  </div><!-- row -->
+</section><!-- mentor_session_logs -->
