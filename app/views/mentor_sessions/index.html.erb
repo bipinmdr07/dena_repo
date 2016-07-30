@@ -15,10 +15,10 @@
       <h5><%= display_date @mentee.try(:graduation_date) %></h5>
       
       <div class="social-links">
-        <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, @mentee.facebook_handle if @mentee.facebook_handle %>
-        <%= link_to '<i class="fa fa-twitter-official" aria-hidden="true"></i>'.html_safe, @mentee.twitter_handle if @mentee.twitter_handle %>
-        <%= link_to '<i class="fa fa-github-official" aria-hidden="true"></i>'.html_safe, @mentee.github_handle if @mentee.github_handle %>
-        <%= link_to '<i class="fa fa-globe" aria-hidden="true"></i>'.html_safe, @mentee.personal_website if @mentee.personal_website %>
+        <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, @mentee.facebook_handle if @mentee.facebook_handle.present? %>
+        <%= link_to '<i class="fa fa-twitter-official" aria-hidden="true"></i>'.html_safe, @mentee.twitter_handle if @mentee.twitter_handle.present? %>
+        <%= link_to '<i class="fa fa-github-official" aria-hidden="true"></i>'.html_safe, @mentee.github_handle if @mentee.github_handle.present? %>
+        <%= link_to '<i class="fa fa-globe" aria-hidden="true"></i>'.html_safe, @mentee.personal_website if @mentee.personal_website.present? %>
       </div>
 
       <h5><%= pluralize @mentee.remaining_mentor_sessions, "mentor session" %> left</h5>
