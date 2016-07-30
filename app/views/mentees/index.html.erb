@@ -6,6 +6,13 @@
   </div>
 </div>
 
+<% if @mentees.empty? %>
+  <div class="devise_box">
+    <p>
+      You have no mentees yet.
+    </p>
+  </div>
+<% end %>
 
 <% @mentees.each do |mentee| %>
 <div class="col-xs-12 col-sm-4">
