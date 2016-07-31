@@ -16,8 +16,8 @@
 
       <div class="social-links">
         <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, "https://www.facebook.com/" + @mentor.facebook_handle if @mentor.facebook_handle.present? %>
-        <%= link_to '<i class="fa fa-twitter-official" aria-hidden="true"></i>'.html_safe, "https://twitter.com/" + @mentor.twitter_handle if @mentor.twitter_handle.present? %>
-        <%= link_to '<i class="fa fa-github-official" aria-hidden="true"></i>'.html_safe, "https://github.com/" + @mentor.github_handle if @mentor.github_handle.present? %>
+        <%= link_to '<i class="fa fa-twitter-square" aria-hidden="true"></i>'.html_safe, "https://twitter.com/" + @mentor.twitter_handle if @mentor.twitter_handle.present? %>
+        <%= link_to '<i class="fa fa-github-square" aria-hidden="true"></i>'.html_safe, "https://github.com/" + @mentor.github_handle if @mentor.github_handle.present? %>
         <%= link_to '<i class="fa fa-globe" aria-hidden="true"></i>'.html_safe, @mentor.personal_website if @mentor.personal_website.present? %>
       </div>
 
