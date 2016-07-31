@@ -53,6 +53,7 @@
                             <% else %>
                                 <li><%= link_to 'MENTOR LOGS', student_sessions_path %></li>
                             <% end %>
+                            <li><%= link_to 'GUIDELINES', guidelines_path %></li>
                             <li><%= link_to 'SETTINGS', edit_user_registration_path %></li>    
                             <li><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %></li>               
                         </ul>                            
