@@ -46,6 +46,9 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def guidelines
+  end
+
   def about
     render layout: "landing_page"
   end

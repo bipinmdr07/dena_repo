@@ -85,6 +85,7 @@ Rails.application.routes.draw do
   get 'dashboard',   to: 'static_pages#dashboard'
   get 'courses',   to: 'static_pages#courses'
   get 'activity_log',   to: 'static_pages#activity_log'
+  get 'guidelines',   to: 'static_pages#guidelines'
 
   get 'pricing', to: 'static_pages#pricing'
   get 'congratulations', to: 'static_pages#congratulations'
