@@ -50,6 +50,7 @@
 
                             <% if current_user.mentor %>
                                 <li><%= link_to 'MENTOR LOGS', mentees_path %></li>
+                                <li><%= link_to 'MENTOR GUIDELINES', mentor_guidelines_path %></li>
                             <% else %>
                                 <li><%= link_to 'MENTOR LOGS', student_sessions_path %></li>
                             <% end %>
