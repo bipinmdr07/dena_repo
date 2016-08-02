@@ -4,7 +4,8 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_many :replies, dependent: :destroy
 
-  validates :title, :content, :user_id, :lesson_id, :course_name, presence: true
+  validates :title, :content, :user_id, presence: true
+  validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
@@ -15,14 +16,14 @@ class Question < ActiveRecord::Base
 
   def as_indexed_json(options={})
     self.as_json(
-      include: { replies: { only: :id}
+      include: { replies: { only: :id }
     })
   end
-  
-  # def self.search(params)
-  #   tire.search(load: true) do
-  #     query { string params[:query], default_operator: "AND" } if params[:query].present?
-  #     filter :range, published_at: {lte: Time.zone.now}
-  #   end
-  # end
+
+  private
+
+  def is_mentor_post?
+    return true if mentor_post
+    false
+  end
 end
