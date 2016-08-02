@@ -14,5 +14,11 @@ class User < ActiveRecord::Base
   has_many :mentor_sessions
   has_many :student_sessions
 
-  validates :name, presence: true
+  validates :first_name, :last_name, presence: true
+
+  before_create :update_name!
+
+  def update_name!
+    name = first_name + " " + last_name
+  end 
 end

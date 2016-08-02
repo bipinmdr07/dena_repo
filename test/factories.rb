@@ -123,6 +123,8 @@ FactoryGirl.define do
     password "codingiscool"
     password_confirmation "codingiscool"
     name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
   end
 
   factory :mentor, class: "User" do
@@ -132,6 +134,8 @@ FactoryGirl.define do
     password "codingiscool"
     password_confirmation "codingiscool"
     name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
     mentor true
   end
 

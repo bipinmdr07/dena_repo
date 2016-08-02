@@ -11,11 +11,11 @@
 <section class="promo section section-on-bg">
 
     <div class="container text-center">                
-        <h1 class="title">Coding Bootcamp in Nepal<br/>Become a web developer in 3 months</h2>
+        <h1 class="title">Coding Bootcamp in Nepal<br/>Become a web developer in 2 months</h2>
         <p class="intro">
-          We are currently accepting applications for highly motivated students to join TECHRISE in future cohorts.
+          We are currently accepting applications for highly motivated students to join TECHRISE.
         </p>
-        <p><a class="btn btn-cta btn-cta-primary" href="/preregistration">Sign Up for Future Cohorts</a></p>
+        <p><a class="btn btn-cta btn-cta-primary" href="/users/sign_up">Sign Up for Admission</a></p>
     </div><!--//container-->
 </section><!--//promo-->
 
@@ -67,7 +67,7 @@
         </div><!-- col-xs-12 col-md-6 -->
 
         <div class="col-xs-12 col-md-5 col-md-offset-1">
-          <%= image_tag 'startup2.jpg', class: 'img-responsive shadow_screenshot', style: 'float: right;' %>
+          <%= image_tag 'background/mentor_image.jpg', class: 'img-responsive shadow_screenshot', style: 'float: right;' %>
         </div>
 
       </div><!-- row -->
@@ -89,8 +89,12 @@
               </div>
           </div>
           <div class="row">
-            <% skills.each do |skill| %>
-              <div class="col-sm-2 col-xs-6 portfolio-item text-center">
+            <% skills.each_with_index do |skill, i| %>
+              <% if i == 0 %>
+                <div class="col-sm-offset-1 col-sm-2 col-xs-6 portfolio-item text-center">
+              <% else %>
+                <div class="col-sm-2 col-xs-6 portfolio-item text-center">
+              <% end %>
                   <%= image_tag skill[2], class: 'skill_logo' %>
                   <h5><%= skill[0] %></h5>
                   <!-- <p><%= skill[1] %></p> -->
@@ -106,21 +110,22 @@
             <ul class="skills_ul">
               <li>Develop fully featured web applications</li>
               <li>Learn how to use Github to collaborate with other developers</li>
-              <li>Write complex algorithms and data structures</li>
+              <!-- <li>Write complex algorithms and data structures</li> -->
             </ul>
           </div>
 
           <div class="col-xs-12 col-md-6">
             <ul class="skills_ul">
-              <li>Build an advanced web application as part of an agile team</li>
+              <!-- <li>Build an advanced web application as part of an agile team</li> -->
               <li>Learn and apply Object Oriented Programming, MVC, and test driven development</li>
+              <li>Meet Like-minded Individuals who are passionate about coding</li>
             </ul>
           </div>
 
       </div>
   </section>
 
-  <section class="section">
+  <section class="section details">
     <div class="container text-center">
 
       <hr>
@@ -161,58 +166,6 @@
 
     </div>
   </section>
-
-
-  <!-- For Who Section -->
-  <!-- <section class = "section" id="for_who">
-    <a class = "anchor" id = "is_techrise_for_me"></a>
-      <div class="container">
-
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 class="section_header">Is Techrise For Me?</h2>
-                  <hr>
-              </div>
-          </div>
-
-          <div class="row scroll">
-
-            <div class = "col-sm-12 col-md-6">
-              <h3 class = "for_who_header text-center">Aspiring Entrepreneurs</h3>
-
-              <p>
-                You have an awesome idea that you think could change the way people do things. You want to build a prototype or MVP that you can show to your potential investors and customers to get quick feedback. But you lack the money, don't want to spend the money, or don't know any developers.
-              </p>
-              <p>
-                Why not just learn just enough coding so you can start building your web applications? Techrise is perfect for those who want to start building your prototypes for your ideas. By building real world apps from day 1, you'll learn how to quickly build out your apps to ship fast.
-              </p>
-
-            </div>
-
-            <div class = "col-sm-12 col-md-6">
-              <h3 class = "for_who_header text-center">Aspiring Developers</h3>
-
-              <p>
-                You might have tried coding before but it was too difficult and you quit. Or coding might be completely new to you. Either way, you think becoming a web developer is an awesome feat and you want to get started on a new journey.
-              </p>
-              <p>
-                Techrise teaches you how to start writing code like professional developers do in the real world. By learning how to use GitHub, Team Communication tools, and also how to solve difficult coding challenges, you will be prepared to start contributing in actual web development teams.
-              </p>
-
-            </div>
-
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                <h2 style = "font-weight: 600;margin:60px 0px 30px 0px;">DOES THIS SOUND LIKE YOU?</h2>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <%= link_to "YES, GET ME ONBOARD", new_user_registration_path, class: "btn btn-danger btn-cta-secondary bta-cta btn-lg btn-block" %>
-                </div>
-              </div>
-            </div>
-          
-          </div>
-      </div>
-  </section> -->
 
   <!-- ******Testimonials Section****** -->
   <section class="section testimonials">
@@ -271,7 +224,7 @@
       </div><!--//container-->
   </section><!--//testimonials--> 
 
-  <section class="section">
+  <section class="section testimonials-section">
     <div class="container text-center">
         <div class="item">
           <div class="row">

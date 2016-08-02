@@ -1,13 +1,33 @@
 <div class = "row">
   <div class = "col-xs-12 col-sm-10 col-sm-offset-1">
-    <h2 class="title text-center">Sign up</h2>
+    <h3 class="text-center" style="font-size: 30px;">Sign up for Admission</h3>
+
+    <p>
+      After you sign up, you will have 2 weeks to complete a series of pre-work assignments. At TECHRISE, we only accept highly motivated individuals who are eager to increase their skills and keep pushing themselves. The pre-work assignments are designed to test whether or not the applicant is motivated enough to succeed at TECHRISE.
+    </p>
+
+    <p>
+      Upon completion of the pre-work assignments, we will reach out to you for an interview for admission into TECHRISE. Once you are admitted, you will be paired with a TECHRISE mentor and the course materials will be released.
+    </p>  
+
+    <hr>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
       <div class="field">
-        <%= f.label :name %><br />
-        <%= f.text_field :name, autofocus: true, required: true, class: 'form-control', placeholder: 'Your name' %>
+        <%= f.label :first_name %><br />
+        <%= f.text_field :first_name, autofocus: true, required: true, class: 'form-control', placeholder: 'First Name' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name, autofocus: true, required: true, class: 'form-control', placeholder: 'First Name' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :facebook_handle %><br />
+        <%= f.text_field :facebook_handle, autofocus: true, required: true, class: 'form-control', placeholder: 'Your Facebook ID' %>
       </div>
 
       <div class="field">
