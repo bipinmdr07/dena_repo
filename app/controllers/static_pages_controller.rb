@@ -18,7 +18,7 @@ class StaticPagesController < ApplicationController
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
     @quote = Quote::ARRAY.sample
 
-    @questions = current_user.questions.all.order("created_at DESC").limit(5)
+    @questions = current_user.questions.where(mentor_post: false).order("created_at DESC").limit(5)
     @submissions = current_user.submissions.all.order("created_at DESC").limit(5)
 
     @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
