@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   resources :progressions, only: [:create, :destroy]
 
+  resources :prework_kickoffs, only: :create
+
   
   patch 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 

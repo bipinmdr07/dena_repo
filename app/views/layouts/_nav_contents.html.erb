@@ -44,6 +44,9 @@
                         <ul class="dropdown-menu">
                             <% if current_user.start_date && current_user.graduation_date %>
                                 <li><a style="text-transform: uppercase;"><%= pluralize ((current_user.graduation_date - current_user.start_date)/1.day).to_i, 'DAY' %> UNTIL GRADUATION</a></li>
+                            <% elsif !current_user.admitted && current_user.prework_end_date && current_user.prework_end_date > DateTime.now %>
+                                <% remaining_prework = (current_user.prework_end_date - DateTime.now).to_i / 86400 %> 
+                                <li><a style="text-transform: uppercase;"><%= remaining_prework %> DAYS UNTIL END OF PREWORK</a></li>
                             <% elsif !current_user.mentor || !current_user.admin %>
                                 <li><a style="text-transform: uppercase;">- DAYS UNTIL GRADUATION</a></li>
                             <% end %>
@@ -97,7 +100,7 @@
                 </li>
                 
                 <% unless user_signed_in? %>
-                    <li class="nav-item nav-item-cta last"><%= link_to 'Sign Up', preregistration_path, class: 'btn btn-cta btn-cta-secondary' %></li>
+                    <li class="nav-item nav-item-cta last"><%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-cta btn-cta-secondary' %></li>
                 <% end %>
 
             </ul><!--//nav-->
