@@ -35,6 +35,10 @@ Rails.application.routes.draw do
 
   resources :progressions, only: [:create, :destroy]
 
+  resources :student_questions do
+    resources :comments, only: [:create, :edit, :update, :destroy]
+  end
+
   
   patch 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 

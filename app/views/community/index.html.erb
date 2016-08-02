@@ -1,5 +1,12 @@
 <% title("Community | TECHRISE") %>
 
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="mentee_title text-center"><span class="back_to_dashboard"><%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i> Back to Dashboard'.html_safe, dashboard_path, class: 'btn btn-back btn-default' %></span>TECHRISE Community</h1>
+  </div>
+</div>
+
+
 <div class="panel">
   <div class="panel-head">
     <%= form_tag community_index_path, method: :get, class: 'form-inline' do %>

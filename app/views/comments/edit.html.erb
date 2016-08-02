@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="mentee_title text-center"><span class="back_to_dashboard"><%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i> '.html_safe + @student_question.title, student_question_path(params[:student_question_id]), class: 'btn btn-back btn-default' %></span> Edit comment</h1>
+  </div>
+</div>
+
+
+<%= simple_form_for :comment, url: student_question_comment_path(params[:student_question_id], params[:id]), method: :patch, input_html: {class: 'form-horizontal'} do |f|  %>
+  <div data-no-turbolink>
+    <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
+  </div>
+  <%= f.input :user_id, as: :hidden, input_html:{ value: current_user.id } %>
+
+  <br>
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>

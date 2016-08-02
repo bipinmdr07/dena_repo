@@ -47,6 +47,8 @@ class MentorSessionsController < ApplicationController
   end 
 
   def authenticate_mentor!
-    redirect_to root_path unless current_user.mentor
+    return if current_user.mentor
+    flash[:alert] = "Unauthorized"
+    redirect_to root_path 
   end
 end

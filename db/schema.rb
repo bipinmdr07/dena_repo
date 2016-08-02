@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729200807) do
+ActiveRecord::Schema.define(version: 20160802035827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,18 +111,15 @@ ActiveRecord::Schema.define(version: 20160729200807) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "forum_id"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "lesson"
     t.integer  "user_id"
-    t.boolean  "resolved",    default: false
-    t.string   "course_name"
+    t.integer  "student_question_id"
+    t.text     "content"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  add_index "comments", ["forum_id"], name: "index_comments_on_forum_id", using: :btree
+  add_index "comments", ["student_question_id"], name: "index_comments_on_student_question_id", using: :btree
+  add_index "comments", ["user_id", "student_question_id"], name: "index_comments_on_user_id_and_student_question_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
@@ -273,6 +270,16 @@ ActiveRecord::Schema.define(version: 20160729200807) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "student_questions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "student_questions", ["user_id"], name: "index_student_questions_on_user_id", using: :btree
 
   create_table "student_sessions", force: :cascade do |t|
     t.integer  "user_id"

@@ -3,6 +3,42 @@
 <h1 class="text-center">Log Mentor Session</h1>
 <br>
 
+<p>
+  In order for the student to maintain their high motivation and for you as a mentor to grow, logging mentor sessions is super important.
+</p>
+
+<p>
+  First, if you have any questions that were asked by a student where you think you gave a great answer to, please share it with all of the TECHRISE Mentors! :)
+</p>
+
+<button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal">
+  Add New Question
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add New Question</h4>
+      </div>
+      <%= simple_form_for StudentQuestion.new, remote: true do |f| %>
+        <div class="modal-body">        
+            <%= f.input :title %>
+            <%= f.input :answer %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<br>
+
 <%= simple_form_for @mentor_session, url: mentee_mentor_sessions_path do |f| %>
   <%= f.input :session_date, as: :string, input_html: {data: {provide: :datepicker}, class: 'datepicker',  value: @mentor_session.session_date.try(:strftime, "%m/%d/%Y") } %>
   <%= f.input :public_details, input_html: { rows: 5 }, placeholder: "Write about the things that the student learned in the past week, some things he could work on, and a lot of words of encouragement :)" %>
