@@ -100,6 +100,14 @@ FactoryGirl.define do
     lesson_id 1
     course_name "HtmlCssLesson"
   end
+
+  factory :mentor_post, class: 'Question' do
+    title "Question Title"
+    content "content"
+    lesson_id nil
+    course_name nil
+    mentor_post true
+  end
   
   factory :invalid_question, class: 'Question' do
     title nil
