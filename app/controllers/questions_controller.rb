@@ -58,12 +58,15 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    course_name = @question.course_name.underscore + "s"
-    lesson_name = Tags::LESSONS[course_name].keys[@question.lesson_id - 1][1]
-    back_to_lesson_url = "/" + course_name + "/" + @question.lesson_id.to_s
+    unless @question.mentor_post
+      course_name = @question.course_name.underscore + "s"
+      lesson_name = Tags::LESSONS[course_name].keys[@question.lesson_id - 1][1]
+      back_to_lesson_url = "/" + course_name + "/" + @question.lesson_id.to_s
+    end
 
     @question.destroy
-    redirect_to back_to_lesson_url
+    return redirect_to community_path if @question.mentor_post
+    redirect_to back_to_lesson_url 
   end
 
   private
@@ -76,6 +79,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :content, :lesson_id, :course_name, :user_id)
+    params.require(:question).permit(:title, :content, :lesson_id, :course_name, :user_id, :mentor_post)
   end
 end

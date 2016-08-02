@@ -10,7 +10,9 @@
     <% end %>
   <% end %>
 
-  <%= back_to_lesson %>
+  <% unless @question.mentor_post %>
+    <%= back_to_lesson %>
+  <% end %>
 
   <br>
 
