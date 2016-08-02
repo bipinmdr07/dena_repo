@@ -2219,7 +2219,6 @@ select {
   margin: 30px 0;
 }
 .story-section .team {
-  max-width: 900px;
   margin: 0 auto;
   padding: 30px;
   text-align: center;
@@ -2250,6 +2249,9 @@ select {
 }
 .story-section .team .member .member-inner img {
   margin: 0 auto;
+  max-height: 265px;
+  min-height: 265px;
+  width: 100%;
 }
 .story-section .team .member .member-inner:hover img {
   -webkit-opacity: 0.8;
