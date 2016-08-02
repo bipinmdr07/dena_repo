@@ -11,15 +11,26 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = current_user.questions.create(question_params)
+    @question = current_user.questions.new(question_params)
 
-    if @question.valid?
+    @question.mentor_post = true if current_user.mentor
+
+    if @question.save
       user = User.find(@question.user_id)
       UserMailer.new_question(@question).deliver_now
-      Slack.chat_postMessage(text: 'New question: <' + question_url(@question) + '|' + @question.title + '> by ' + user.name, 
-        username: 'TECHRISE Bot', 
-        channel: "#forum_questions", 
-        icon_emoji: ":smile_cat:") if Rails.env.production?
+
+      if @question.mentor_post
+        Slack.chat_postMessage(text: 'New mentor post: <' + question_url(@question) + '|' + @question.title + '> by ' + user.name, 
+          username: 'TECHRISE Bot', 
+          channel: "#forum_questions", 
+          icon_emoji: ":smile_cat:") if Rails.env.production?
+      else
+        Slack.chat_postMessage(text: 'New question: <' + question_url(@question) + '|' + @question.title + '> by ' + user.name, 
+          username: 'TECHRISE Bot', 
+          channel: "#forum_questions", 
+          icon_emoji: ":smile_cat:") if Rails.env.production?
+      end
+      
       redirect_to question_path(@question.id)
     else
       flash[:alert] = "Invalid attributes, please try again."

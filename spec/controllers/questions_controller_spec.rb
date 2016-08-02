@@ -59,7 +59,8 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "when the user isn't the person who created the post" do
       it "should redirect to the question path" do
-        question = FactoryGirl.create(:question, user_id: user.id + 1)
+        another_user = FactoryGirl.create(:user)
+        question = FactoryGirl.create(:question, user_id: another_user.id)
         get :edit, id: question.id
         expect(response).to redirect_to question_path(question)
       end
@@ -106,7 +107,8 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "when the user isn't person who created the post" do
       it "should redirect them to the question path" do
-        question = FactoryGirl.create(:question, user_id: user.id + 1)
+        another_user = FactoryGirl.create(:user)
+        question = FactoryGirl.create(:question, user_id: another_user.id)
         put :update, id: question.id, question:FactoryGirl.attributes_for(:question, content: "New content")
         expect(response).to redirect_to question_path(question)
       end
@@ -136,7 +138,8 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "when the user isn't person who created the post" do
       it "should redirect them to the question path" do
-        question = FactoryGirl.create(:question, user_id: user.id + 1)
+        another_user = FactoryGirl.create(:user)
+        question = FactoryGirl.create(:question, user_id: another_user.id)
         delete :destroy, id: question.id
         expect(response).to redirect_to question_path(question)
       end
