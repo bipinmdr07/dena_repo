@@ -24,19 +24,29 @@ RSpec.describe User, type: :model do
   end
 
   describe "#has_access?" do
+    it "should return true if user is admin" do
+      user = FactoryGirl.create(:user, admin: true)
+      expect(user.has_access?).to be(true)
+    end
+
+    it "should return true if user is mentor" do
+      user = FactoryGirl.create(:mentor)
+      expect(user.has_access?).to be(true)
+    end
+
     it "should return true if user is admitted" do
       user = FactoryGirl.create(:user, admitted: true, prework_start_time: nil, prework_end_date: nil)
       expect(user.has_access?).to be(true)
     end
 
     it "should return false if user's prework_end_date is before today" do
-      user = FactoryGirl.create(:user, prework_start_time: Date.today - 4.weeks, prework_end_date: Date.today - 2.weeks)
+      user = FactoryGirl.create(:prework_student, prework_start_time: Date.today - 4.weeks, prework_end_date: Date.today - 2.weeks)
       expect(user.has_access?).to be(false)
     end
 
     context "when user is admitted" do
       it "should return true if user's prework_end_time is after today" do
-        user = FactoryGirl.create(:user, admitted: true, prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
+        user = FactoryGirl.create(:admitted_student)
         expect(user.has_access?).to be(true)
       end
     end

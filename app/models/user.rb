@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   before_save :update_name!
 
   def has_access?
-    admitted || ( prework_end_date && prework_end_date > DateTime.now )
+    mentor || admin || admitted || ( prework_end_date && prework_end_date > DateTime.now )
   end
 
   def start_prework!
