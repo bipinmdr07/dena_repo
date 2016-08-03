@@ -26,5 +26,7 @@ module Techrise
     config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
 
     config.to_prepare { Devise::Mailer.layout "devise_mailer" }
+    #error routes
+    config.exceptions_app = self.routes
   end
 end
