@@ -139,14 +139,4 @@ FactoryGirl.define do
     mentor true
   end
 
-  factory :mentor, class: "User" do
-    sequence :email do |n|
-      "random_mentor#{n}@email.com"
-    end
-    password "codingiscool"
-    password_confirmation "codingiscool"
-    name "Coder Taro"
-    mentor true
-  end
-
 end
