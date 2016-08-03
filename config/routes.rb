@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'errors/not_found'
+
+  get 'errors/internal_server_error'
+
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -14,7 +18,7 @@ Rails.application.routes.draw do
   resources :questions do
     resources :replies, only: [:create, :edit, :update, :destroy]
   end
-  
+
   resources :community, only: :index
 
   resources :submissions do
@@ -35,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :progressions, only: [:create, :destroy]
 
-  
+
   patch 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 
   post 'submission_approvals/:id(.:format)', to: 'submission_approvals#create', as: 'submission_approvals'
@@ -59,7 +63,7 @@ Rails.application.routes.draw do
   get 'ruby_lessons/:id', to: 'ruby_lessons#show', :as => 'ruby_lessons'
 
   get 'ruby_core_lessons', to: 'ruby_core_lessons#index', :as => 'ruby_core'
-  get 'ruby_core_lessons/:id', to: 'ruby_core_lessons#show', :as => 'ruby_core_lessons' 
+  get 'ruby_core_lessons/:id', to: 'ruby_core_lessons#show', :as => 'ruby_core_lessons'
 
   get 'instapost_lessons', to: 'instapost_lessons#index', :as => 'instapost'
   get 'instapost_lessons/:id', to: 'instapost_lessons#show', :as => 'instapost_lessons'
@@ -97,5 +101,9 @@ Rails.application.routes.draw do
   get 'learn', to: 'static_pages#learn'
   get 'preregistration', to: 'static_pages#preregistration'
   get 'support', to: 'static_pages#support'
-  
+
+
+  #error routes
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 end
