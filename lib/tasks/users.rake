@@ -12,9 +12,13 @@ namespace :users do
   end
 
   task :update_prework_status => :environment do
-    User.all.each do |user|
+    User.where.not(start_date: nil).each do |user|
       user.admitted = true
       user.save
+    end
+    User.where(start_date: nil).each do |user|
+      user.prework_start_time = Date.today - 1.weeks
+      user.prework_end_date = Date.today + 1.weeks
     end
   end
 end
