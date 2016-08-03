@@ -29,7 +29,7 @@ class LessonsController < ApplicationController
   private
 
   def check_access!
-    lesson_locked_redirect unless current_user.admitted && current_user.prework_end_date.present? && current_user.prework_end_date < DateTime.now
+    lesson_locked_redirect unless current_user.has_access?
 
     if controller_name.classify == "IntroLesson"
       return if current_user.intro_access?

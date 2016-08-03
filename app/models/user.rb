@@ -16,9 +16,17 @@ class User < ActiveRecord::Base
 
   validates :first_name, :last_name, presence: true
 
-  before_create :update_name!
+  before_save :update_name!
+
+  def has_access?
+    admitted || ( prework_end_date && prework_end_date > DateTime.now )
+  end
+
+  def start_prework!
+    update(prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
+  end
 
   def update_name!
-    name = first_name + " " + last_name
+    self.name = self.first_name + " " + self.last_name
   end 
 end

@@ -125,6 +125,9 @@ FactoryGirl.define do
     name "Coder Taro"
     first_name "Coder"
     last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time Date.today + 2.weeks
+    prework_end_date Date.today + 4.weeks
   end
 
   factory :mentor, class: "User" do
@@ -137,6 +140,7 @@ FactoryGirl.define do
     first_name "Coder"
     last_name "Taro"
     mentor true
+    confirmed_at Time.zone.now
   end
 
 end
