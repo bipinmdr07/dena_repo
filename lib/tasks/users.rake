@@ -19,6 +19,12 @@ namespace :users do
     User.where(start_date: nil).each do |user|
       user.prework_start_time = Date.today - 1.weeks
       user.prework_end_date = Date.today + 1.weeks
+      user.save
+    end
+    User.where(admin: true).each do |user|
+      user.prework_start_time = nil
+      user.prework_end_date = nil
+      user.save
     end
   end
 end
