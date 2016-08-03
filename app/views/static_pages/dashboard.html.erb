@@ -71,7 +71,7 @@
       </div><!-- panel -->
     <% end %>
 
-    <% if current_user.prework_start_time.nil? && !current_user.admitted %>
+    <% if current_user.prework_start_time.nil? && !current_user.admitted && !current_user.admin && !current_user.mentor %>
       <div class="panel">
         <div class="panel-heading-stats">
           <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 2 Week Prework Period</h3>        
