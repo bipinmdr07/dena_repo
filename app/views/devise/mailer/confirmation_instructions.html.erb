@@ -1,5 +1,5 @@
-<p>Welcome <%= @email %>!</p>
+<h1>Hi <%= @resource.first_name %>! Welcome to TECHRISE!</h1>
 
-<p>You can confirm your account email through the link below:</p>
+<p>You're almost there! Just click the link below to confirm your account and you're all set.</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>

@@ -1,99 +1,153 @@
-<!-- Header -->
-<header>
+<div class="headline-bg pricing-headline-bg">
+</div><!--//headline-bg-->
+
+<!-- ******Pricing Section****** -->
+<section class="pricing section section-on-bg">
     <div class="container">
-        <div class="row">
-          <div class="col-lg-12" style="margin-bottom:50px;">
-                           
-              <!-- <img class="img-responsive" src="img/profile.png" alt=""> -->
-              <div class="intro-text">
+        <h2 class="title text-center">Change Your Life in 2 Months</h2>
+        <p class="intro text-center">We provide the training and mentorship necessary to become a proficient web developer.</p>
+         <div class="price-cols row">
+            <div class="items-wrapper col-md-10 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
                 
-                  <% if notice.present? %>
-                    <p class="alert alert-info"><%= notice %></p>
-                  <% end %>
-                  <% if alert.present? %>
-                    <p class="alert alert-danger"><%= alert %></p>
-                  <% end %>
+                
+                <div class="item price-2 col-sm-8 col-sm-offset-2 col-xs-12 text-center">
+                    <div class="item-inner">
+                        <div class="heading">
+                        <h3 class="title">TECHRISE CORE PROGRAM</h3>
+                            <p class="price-figure"><span class="price-figure-inner"><span class="currency"></span><span class="number">20,000</span><br /><span class="unit">NPR</span></span></p>
+                        </div>
+                        <div class="content">
+                            <ul class="list-unstyled feature-list">
+                                <li><i class="fa fa-check"></i>2 Months of Training</li>
+                                <li><i class="fa fa-check"></i>Weekly 1 on 1 Mentor Sessions</li>
+                                <li><i class="fa fa-check"></i>Daily Office Hours</li>
+                                <li><i class="fa fa-check"></i>Online Support</li>                                
+                                <li><i class="fa fa-check"></i>Lifetime Access to Course Material</li>
+                            </ul>
+                            <%= link_to 'Start 2 Week Pre-work Assignments', new_user_registration_path, class: 'btn btn-cta btn-cta-primary' %>
+                        </div><!--//content-->
+                        
+                    </div><!--//item-inner-->
+                </div><!--//item-->  
+                
+                
+            </div><!--//items-wrapper-->                   
+        </div><!--//row-->
+    </div><!--//container-->
+</section><!--//pricing-->
 
-                  <span class="name">Pricing</span>
-                  <hr class="star-light">
-                  <span class="skills">I want to start coding with Techrise, but how much do I need to invest in my education?</span>
-
-              </div>
-              
-          </div>
-          <!-- start of BASIC section -->
-          <div class = "col-xs-12 col-md-6">
-
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 style = "color:yellow;">BASIC</h2>
-                  <hr class="star-light">
-
-              </div>
+<!-- ******FAQ Section****** --> 
+<section class="faq section has-bg-color">
+    <div class="container">
+        <h2 class="title text-center">Frequently Asked Questions</h2>
+        <div class="row">
+            <div class="col-md-8 col-sm-10 col-xs-12 col-md-offset-2 col-sm-offset-1 col-xs-offset-0">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq1"><i class="fa fa-plus-square"></i>Who can join TECHRISE?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq1">
+                        <div class="panel-body">
+                            Anyone is welcome if that are passionate and motivated to learn web development. No experience necessary!
+                        </div>
+                    </div>
+                </div><!--//panel-->
+        
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq2"><i class="fa fa-plus-square"></i>How long is the program?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq2">
+                        <div class="panel-body">
+                            The program is two months long.
+                        </div>
+                    </div>
+                </div><!--//panel-->
+        
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq3"><i class="fa fa-plus-square"></i>Do I have to go to TECHRISE everyday?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq3">
+                        <div class="panel-body">
+                            No you do not! The courses are all online so you can learn from home, a cafe, anywhere you want. Our office is also open from Monday through Friday so you are more than welcome to work at the TECHRISE office as well.
+                        </div>
+                    </div>
+                </div><!--//panel-->
+                
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq4"><i class="fa fa-plus-square"></i>When do I have mentor sessions?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq4">
+                        <div class="panel-body">
+                            Mentor sessions are held once a week for 30 minutes at the TECHRISE office. 
+                        </div>
+                    </div>
+                </div><!--//panel--> 
+                
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq5"><i class="fa fa-plus-square"></i>How much work do I have to do each week?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq5">
+                        <div class="panel-body">
+                            We recommend that you devote around 3 hours, or 15 hours a week to TECHRISE. The more time you spend, the better you get as a web developer.
+                        </div>
+                    </div>
+                </div><!--//panel-->
+                
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq6"><i class="fa fa-plus-square"></i>What can I do if I learn Ruby on Rails?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq6">
+                        <div class="panel-body">
+                            You will be able to build most web applications relatively faster than other frameworks. There are tons of opportunities out there to use your skill and get a job.
+                        </div>
+                    </div>
+                </div><!--//panel-->
+                
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a data-parent="#accordion"
+                        data-toggle="collapse" class="panel-toggle" href="#faq7"><i class="fa fa-plus-square"></i>How do I apply?</a></h4>
+                    </div>
+        
+                    <div class="panel-collapse collapse" id="faq7">
+                        <div class="panel-body">
+                            You can apply here online. You will have 2 weeks to finish a series of pre-work assignments to be admitted to TECHRISE.
+                        </div>
+                    </div>
+                </div><!--//panel-->
+                
+                                  
             </div>
-
-            <div class = "row">
-
-              <div class = "col-lg-8 col-lg-offset-2">
-
-                <ul class = "unindented_ul pricing_box">
-                  <li><i class="fa fa-check"></i> Lifetime Access to Course Materials</li>
-                  <li><i class="fa fa-check"></i> Learn How to Develop Complete Ruby on Rails Applications</li>
-                  <li><i class="fa fa-check"></i> Train Your Brain With Algorithms</li>
-                  <li><i class="fa fa-check"></i> Access to Q & A Forums</li>
-                </ul>
-                  
-              </div>
-
-              <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <h3 class = "pull-right"><i><u>$298.00</u></i></h3>
-                  <br class = "clear">
-                  <br class = "clear">
-                  <%= link_to "JOIN BASIC", new_user_registration_path, class: "btn btn-danger btn-lg", style: "color:white;" %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- end of BASIC section -->
-
-          <!-- start of VIP section -->
-          <div class = "col-xs-12 col-md-6">
-
-            <div class="row">
-              <div class="col-lg-12 text-center">
-                  <h2 style = "color:yellow;">V.I.P</h2>
-                  <hr class="star-light">
-              </div>
-            </div>
-
-            <div class="row">
-
-              <div class = "col-lg-8 col-lg-offset-2">
-
-                  <ul class = "unindented_ul pricing_box">
-                    <li><i class="fa fa-check"></i> Lifetime Access to Course Materials</li>
-                    <li><i class="fa fa-check"></i> Learn How to Develop Complete Ruby on Rails Applications</li>
-                    <li><i class="fa fa-check"></i> Train Your Brain With Algorithms</li>
-                    <li><i class="fa fa-check"></i> Access to Q & A Forums</li>
-                    <li style = "color:orange;"><i class="fa fa-check"></i> 12 Weekly Mentor Sessions</li>
-                    <li style = "color:orange;"><i class="fa fa-check"></i> Access to Student Slack Channel</li>
-                  </ul>
-    
-              </div>
-
-              <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                  <h3 class = "pull-right"><i><u>$659.00</u></i></h3>
-                  <br class = "clear">
-                  <br class = "clear">
-                  <%= link_to "JOIN V.I.P", new_user_registration_path, class: "btn btn-danger btn-lg", style: "color:white;" %>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <!-- end of VIP section -->
+        </div><!--//row-->
+        <div class="contact-lead text-center">
+            <h4 class="title">Have more questions?</h4>
+            <%= link_to 'Get in touch', contact_us_path, class: 'btn btn-cta btn-cta-secondary' %>
         </div>
-    </div>
-</header>
+    </div><!--//container-->        
+</section><!--//faq-->
+
+<!-- ******CTA Section****** -->
+<section id="cta-section" class="section cta-section text-center pricing-cta-section">
+    <div class="container">
+       <h2 class="title">Change your life in 2 Months at <span class="counting">TECHRISE</span></h2>
+       <p class="intro">What are you waiting for?</p>
+       <p><%= link_to 'Join TECHRISE Now', new_user_registration_path, class: 'btn btn-cta btn-cta-primary' %></p>
+    </div><!--//container-->
+</section><!--//cta-section-->

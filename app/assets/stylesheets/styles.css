@@ -457,7 +457,11 @@ select {
   background-size: cover;
 }
 .headline-bg.pricing-headline-bg {
-  background-image: url('../images/background/bg-header-small-2.jpg');
+  background: #253340 url('background/bg-header-1.1.jpg') no-repeat 50% top;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 .headline-bg.contact-headline-bg {
   background-image: url('/assets/landing_page/bg-footer-3.jpg');
@@ -531,6 +535,7 @@ select {
   color: #999999;
   font-size: 18px;
 }
+
 .section-on-bg .title {
   color: #fff;
 }
@@ -1155,6 +1160,10 @@ select {
   padding-top: 170px;
   position: relative;
   z-index: 10;
+  margin: 0px;
+  background: rgba(37,51,64, 0.8);
+  margin-bottom: -60px !important;
+  height: 500px;
 }
 .pricing .title {
   font-size: 36px;

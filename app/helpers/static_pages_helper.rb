@@ -6,6 +6,6 @@ module StaticPagesHelper
 		items << ['JavaScript/jQuery', "Make your websites interactive with JavaScript and jQuery.", 'javascript.png']
 		items << ['Git/GitHub', "Learn what version control is and how you can use Git to collaborate with other awesome developers.", 'github.png']
 		items << ['Team Communication', "Pair up with another developer to work on a project together. We teach you how to use tools effectively for project management.", 'team.png']
-		items << ['Data Structures/Algorithms', "Learning data structures and algorithms are essential in your path to becoming a coder and will boost your logical thinking skills.", 'code.png']
+		# items << ['Data Structures/Algorithms', "Learning data structures and algorithms are essential in your path to becoming a coder and will boost your logical thinking skills.", 'code.png']
   end
 end

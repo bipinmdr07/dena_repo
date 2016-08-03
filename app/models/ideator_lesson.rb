@@ -7,6 +7,8 @@ class IdeatorLesson < ActiveRecord::Base
 
 	PERIOD = "2 ~ 3"
 
+	CONSTANT = "23"
+
 	LESSONS = [
 		["Setting Up Your App", 
 			[
