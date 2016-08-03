@@ -10,4 +10,11 @@ namespace :users do
       user.update(first_name: first_name, last_name: last_name)
     end
   end
+
+  task :update_prework_status => :environment do
+    User.all.each do |user|
+      user.admitted = true
+      user.save
+    end
+  end
 end

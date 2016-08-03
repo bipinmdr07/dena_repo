@@ -15,6 +15,7 @@ class LessonsController < ApplicationController
     @lessons = controller.constantize::LESSONS
     @lesson = params[:id]
     @lesson_length = controller.constantize::LESSON_LENGTH
+
     @next_lesson = @lesson.to_i + 1 
     @lesson == 1 ? @prev_lesson = 0 : @prev_lesson = @lesson.to_i - 1
     @course_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
