@@ -4,7 +4,7 @@ class QuestionUpvotesController < ApplicationController
   respond_to :js, :html, :json
 
   def create
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
     @question.liked_by current_user
 
     respond_to do |format|

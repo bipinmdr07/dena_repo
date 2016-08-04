@@ -4,7 +4,7 @@ class QuestionDownvotesController < ApplicationController
   respond_to :js, :html, :json
 
   def create
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
     @question.downvote_from current_user
 
     respond_to do |format|
