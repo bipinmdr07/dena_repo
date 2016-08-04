@@ -46,7 +46,7 @@
   </div><!-- panel-head -->
   <div class="panel-body">
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails, remote: true %>
 
 
     <% @questions.each do |question| %>
@@ -108,7 +108,7 @@
       </ul><!-- question_list -->
     <% end %>
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails, remote: true %>
    
   </div><!-- panel-body -->
 </div><!-- panel -->
