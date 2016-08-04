@@ -19,13 +19,13 @@
 
   <%= render 'submissions/student_submissions' %>
   <hr>
-  <% @all_submissions.order("created_at DESC").each do |submission| %>
+  <% @paginated_submissions.order("created_at DESC").each do |submission| %>
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
     
   <% end %>
 
-  <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @paginated_submissions, renderer: BootstrapPagination::Rails %>
 
 <% elsif (@user_submission && @user_submission.approved) %>
   <%= render 'submissions/student_submissions' %>
