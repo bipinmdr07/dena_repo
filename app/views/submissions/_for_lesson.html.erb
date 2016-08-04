@@ -20,25 +20,30 @@
   <%= render 'submissions/student_submissions' %>
   <hr>
 
+  <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
+
   <% @all_submissions.order("created_at DESC").each do |submission| %>
-    <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
-
-    <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
+    
   <% end %>
+
+  <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
 
 <% elsif (@user_submission && @user_submission.approved) %>
   <%= render 'submissions/student_submissions' %>
   <hr>
 
+  <%= will_paginate @submissions, renderer: BootstrapPagination::Rails %>
+
   <% @submissions.order("created_at DESC").each do |submission| %>
-    <%= will_paginate @submissions, renderer: BootstrapPagination::Rails %>
+    
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
 
-    <%= will_paginate @submissions, renderer: BootstrapPagination::Rails %>
   <% end %>
+
+  <%= will_paginate @submissions, renderer: BootstrapPagination::Rails %>
 
 <% elsif @user_submission %>
 
