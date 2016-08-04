@@ -1,0 +1,17 @@
+<div class="text-center">
+  <div class="upvote-icon">
+    <%= link_to question_upvote_path(question), method: :post, remote: true do %>
+      <i class="fa fa-caret-up" aria-hidden="true"></i>
+    <% end %>
+  </div><!-- upvote-icon -->
+
+  <div class="vote-count">
+    <%= question.get_upvotes.size %>
+  </div><!-- vote-count -->
+
+  <div class="downvote-icon">
+    <%= link_to question_downvote_path(question), method: :post, remote: true do %>
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
+    <% end %>
+  </div><!-- downvote-icon -->
+</div><!-- text-center -->

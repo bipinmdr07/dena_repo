@@ -77,6 +77,10 @@ gem 'elasticsearch-model', git: 'git://github.com/elasticsearch/elasticsearch-ra
 gem 'elasticsearch-rails', git: 'git://github.com/elasticsearch/elasticsearch-rails.git'
 gem 'bonsai-elasticsearch-rails'
 
+# upvoting
+gem 'acts_as_votable', '~> 0.10.0'
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

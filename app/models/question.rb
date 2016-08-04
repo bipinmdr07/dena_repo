@@ -7,6 +7,8 @@ class Question < ActiveRecord::Base
   validates :title, :content, :user_id, presence: true
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
+  acts_as_votable
+
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
 

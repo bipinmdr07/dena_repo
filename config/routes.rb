@@ -37,6 +37,10 @@ Rails.application.routes.draw do
 
   resources :prework_kickoffs, only: :create
 
+  post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
+
+  post 'question_downvotes/:id(.:format)', to: 'question_downvotes#create', as: 'question_downvote'
+
   patch 'update_interval/:id(.:format)', to: 'cards#update_interval', as: 'update_interval'
 
   post 'submission_approvals/:id(.:format)', to: 'submission_approvals#create', as: 'submission_approvals'
