@@ -6,7 +6,10 @@ ActiveAdmin.register User do
 
   index do
     column :name
+    column :first_name
+    column :last_name
     column :email
+    column :created_at
     column :sign_in_count
     column :current_sign_in_at
     column :last_sign_in_at
@@ -36,7 +39,8 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs 'User' do
-      f.input :name
+      f.input :first_name
+      f.input :last_name
       f.input :email
       f.input :admin
       f.input :intro_access
