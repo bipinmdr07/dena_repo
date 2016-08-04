@@ -21,7 +21,7 @@ class LessonsController < ApplicationController
     @course_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_name = controller + "s"
 
-    @questions = Question.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC").paginate(page: params[:page], per_page: 1)
+    @questions = Question.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
     @all_submissions = Submission.where(course_name: controller, lesson_id: params[:id])
     @submissions = @all_submissions.where(approved: true)
     @user_submission = current_user.submissions.find_by(lesson_id: params[:id], course_name: controller_name.classify)

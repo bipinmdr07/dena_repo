@@ -13,8 +13,18 @@
 
 .panel-head {
   background: #f7f7f7;
-  height: 80px;
+  height: 100%;
   padding: 20px 40px;
+}
+
+@media screen and (max-width: 480px) {
+  .panel-head {
+    .btn {
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 50px;
+    }
+  }
 }
 
 .community_prof_pic {
