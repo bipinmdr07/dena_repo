@@ -123,6 +123,63 @@ FactoryGirl.define do
     password "codingiscool"
     password_confirmation "codingiscool"
     name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time Date.today - 4.weeks
+    prework_end_date Date.today - 2.weeks
+    start_date DateTime.now
+    graduation_date DateTime.now + 2.months
+    admitted true
+  end
+
+  factory :admitted_student, class: 'User' do
+    sequence :email do |n|
+      "random#{n}@email.com"
+    end
+    password "codingiscool"
+    password_confirmation "codingiscool"
+    name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time Date.today - 4.weeks
+    prework_end_date Date.today - 2.weeks
+    start_date DateTime.now
+    graduation_date DateTime.now + 2.months
+    admitted true
+  end
+
+  factory :prework_student, class: 'User' do
+    sequence :email do |n|
+      "random#{n}@email.com"
+    end
+    password "codingiscool"
+    password_confirmation "codingiscool"
+    name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time Date.today
+    prework_end_date Date.today + 2.weeks
+    start_date nil
+    graduation_date nil
+  end
+
+  factory :pre_prework_student, class: 'User' do
+    sequence :email do |n|
+      "random#{n}@email.com"
+    end
+    password "codingiscool"
+    password_confirmation "codingiscool"
+    name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time nil
+    prework_end_date nil
+    start_date nil
+    graduation_date nil
   end
 
   factory :mentor, class: "User" do
@@ -132,7 +189,10 @@ FactoryGirl.define do
     password "codingiscool"
     password_confirmation "codingiscool"
     name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
     mentor true
+    confirmed_at Time.zone.now
   end
 
 end

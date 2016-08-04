@@ -71,6 +71,22 @@
       </div><!-- panel -->
     <% end %>
 
+    <% if current_user.prework_start_time.nil? && !current_user.admitted && !current_user.admin && !current_user.mentor %>
+      <div class="panel">
+        <div class="panel-heading-stats">
+          <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 2 Week Prework Period</h3>        
+        </div>
+        <div class="panel-body">
+          <p>
+            By pressing the button below, your pre-work period of 2 weeks will start. If you were not able to finish all of the assignments by the end of the pre-work preiod, you will no longer be eligible for admission into TECHRISE.
+          </p>
+
+          <%= link_to 'START PREWORK', prework_kickoffs_path, method: :post, class: 'btn btn-lg btn-block btn-cta btn-cta-primary' %>
+          
+        </div><!-- panel-heading-stats -->
+      </div><!-- panel -->
+    <% end %>
+
     <div class="panel">
       <div class="panel-heading-stats">
         <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Your Stats</h3>        

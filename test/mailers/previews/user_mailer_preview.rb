@@ -1,5 +1,9 @@
 # Preview all emails at http://localhost:3000/rails/mailers/user_mailer
 class UserMailerPreview < ActionMailer::Preview
+  def confirmation
+    Devise::Mailer.confirmation_instructions(User.first, "faketoken")
+  end
+
   def new_question
     UserMailer.new_question(Forum.first, Comment.first)
   end
