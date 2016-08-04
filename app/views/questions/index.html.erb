@@ -3,7 +3,7 @@
   <div class="row">
     <div id="blog-mansonry" class="blog-list">
       <% @questions.each do |question| %>
-        <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+        
         <article class="post col-md-4 col-sm-6 col-xs-12">
           <div class="post-inner">
             <div class="content">
@@ -14,12 +14,17 @@
               <div class="meta">
                   <ul class="meta-list list-inline">                                       
                     <li class="post-time post_date date updated"><%= display_date(question.created_at) %></li>
-                    <li class="post-author"><%= link_to course_name, '/' + question.course_name.underscore + "s/" + question.lesson_id.to_s %></a></li>
+
+                    <% unless question.mentor_post %>
+                      <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+                      <li class="post-author"><%= link_to course_name, '/' + question.course_name.underscore + "s/" + question.lesson_id.to_s %></a></li>
+                    <% end %>
                 </ul><!--//meta-list-->                             
               </div><!--meta-->
             </div><!--//content-->
           </div><!--//post-inner-->
         </article><!--//post-->
+
       <% end %>
     </div><!--//blog-list--> 
   </div>

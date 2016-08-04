@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
     @user = User.find(@question.user_id)
   end
 
@@ -72,7 +72,7 @@ class QuestionsController < ApplicationController
   private
 
   def check_permissions
-    @question = Question.find(params[:id])
+    @question = Question.friendly.find(params[:id])
     return if current_user.admin || (@question.user_id == current_user.id)
     flash[:alert] = "Unauthorized!"
     redirect_to question_path(@question) 

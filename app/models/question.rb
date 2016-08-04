@@ -1,6 +1,9 @@
 require 'elasticsearch/model'
 
 class Question < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :user
   has_many :replies, dependent: :destroy
 
@@ -11,6 +14,12 @@ class Question < ActiveRecord::Base
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+
+  
+
+  def should_generate_new_friendly_id?
+    title_changed? || super
+  end
 
   def self.search(*args)
     __elasticsearch__.search(*args)
