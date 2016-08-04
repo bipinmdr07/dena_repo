@@ -21,11 +21,11 @@
   <hr>
 
   <% @all_submissions.order("created_at DESC").each do |submission| %>
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @all_submissions, renderer: BootstrapPagination::Rails %>
   <% end %>
 
 <% elsif (@user_submission && @user_submission.approved) %>
@@ -33,11 +33,11 @@
   <hr>
 
   <% @submissions.order("created_at DESC").each do |submission| %>
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @submissions, renderer: BootstrapPagination::Rails %>
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @submissions, renderer: BootstrapPagination::Rails %>
   <% end %>
 
 <% elsif @user_submission %>
