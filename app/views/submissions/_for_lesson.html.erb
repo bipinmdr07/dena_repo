@@ -5,9 +5,9 @@
       <h3 class="question-header mentee_title text-center">
         <span class="back_to_dashboard">
           <% if @user_submission %>
-            <%= link_to 'My Submission', submission_path(@user_submission.id), class: 'btn btn-danger' %>
+            <%= link_to 'My Submission', submission_path(@user_submission.id), class: 'btn btn-back btn-default' %>
           <% else %>
-            <%= link_to 'Submit Your Work', new_submission_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-danger' %>
+            <%= link_to 'Submit Your Work', new_submission_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-back btn-default' %>
           <% end %>
         </span>
          Submissions
