@@ -17,6 +17,14 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, presence: true
 
   before_save :update_name!
+  after_create :send_slack
+
+  def send_slack
+    Slack.chat_postMessage(text: 'New user ' + first_name + last_name "has signed up!", 
+          username: 'TECHRISE Bot', 
+          channel: "#user_signup_alerts", 
+          icon_emoji: ":smile_cat:") if Rails.env.production?
+  end
 
   def has_access?
     mentor || admin || admitted || ( prework_end_date && prework_end_date > DateTime.now )
