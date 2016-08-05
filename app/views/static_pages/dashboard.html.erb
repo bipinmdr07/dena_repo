@@ -25,7 +25,7 @@
     <% if @last_lesson %>
 
       <% lesson_name = Tags::LESSONS[@last_lesson.parameters[:course_name].underscore + "s"].keys[@last_lesson.parameters[:lesson_id].to_i - 1][1] %>
-      
+
       <div class="panel">
         <div class="panel-body text-center">
           <div class="row">
@@ -74,7 +74,7 @@
     <% if current_user.prework_start_time.nil? && !current_user.admitted && !current_user.admin && !current_user.mentor %>
       <div class="panel">
         <div class="panel-heading-stats">
-          <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 2 Week Prework Period</h3>        
+          <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 2 Week Prework Period</h3>
         </div>
         <div class="panel-body">
           <p>
@@ -82,18 +82,18 @@
           </p>
 
           <%= link_to 'START PREWORK', prework_kickoffs_path, method: :post, class: 'btn btn-lg btn-block btn-cta btn-cta-primary' %>
-          
+
         </div><!-- panel-heading-stats -->
       </div><!-- panel -->
     <% end %>
 
     <div class="panel">
       <div class="panel-heading-stats">
-        <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Your Stats</h3>        
+        <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Your Stats</h3>
       </div>
       <div class="panel-body">
         <h5 class="pull-right">View your <%= link_to 'Activity Log', activity_log_path %></h5>
-        
+
         <h4><strong>Today</strong></h4>
         <ul class="unindented_ul">
           <li><small><i class="fa fa-check" aria-hidden="true"></i> <%= @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day).count %></small> Lessons Completed</li>
@@ -104,7 +104,7 @@
           <li><small><i class="fa fa-check" aria-hidden="true"></i> <%= @lessons.where("created_at >= ?", 1.week.ago).count %></small> Lessons Completed</li>
           <li><small><i class="fa fa-pencil" aria-hidden="true"></i> <%= @flashcards.where("created_at >= ?", 1.week.ago).count %></small> Flashcards Completed</li>
         </ul>
-        
+
       </div><!-- panel-heading-stats -->
     </div><!-- panel -->
   </div><!-- col-xs-12 col-md-4 -->
@@ -123,7 +123,7 @@
 
       <div class="panel">
         <div class="panel-heading-stats">
-          <h3><i class="fa fa-question-circle" aria-hidden="true"></i> Your Questions</h3>        
+          <h3><i class="fa fa-question-circle" aria-hidden="true"></i> Your Questions</h3>
         </div>
         <div class="panel-body">
 
@@ -141,16 +141,16 @@
           <% end %>
 
 
-        
+
       </div><!-- panel-heading-stats -->
     </div><!-- panel -->
 
     <div class="panel">
       <div class="panel-heading-stats">
-        <h3><i class="fa fa-check-circle" aria-hidden="true"></i> Your Submissions</h3>        
+        <h3><i class="fa fa-check-circle" aria-hidden="true"></i> Your Submissions</h3>
       </div>
       <div class="panel-body">
-        
+
         <ul class="unindented_ul">
           <% @submissions.each do |submission| %>
             <% course_name = Tags::LESSONS[submission.course_name.underscore + "s"].keys[submission.lesson_id - 1][1] %>
@@ -163,11 +163,11 @@
         <% else %>
           <h5 class="pull-right"><%= link_to 'View all', submissions_path %></h5>
         <% end %>
-        
+
       </div><!-- panel-heading-stats -->
     </div><!-- panel -->
 
-    
+
 
   </div><!-- col-xs-12 col-md-6 -->
 </div><!-- row -->
@@ -205,5 +205,5 @@
           </div><!-- panel-body text-center -->
         </div><!-- panel -->
       </div>
-      
+
 <% end %>
