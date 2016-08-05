@@ -97,7 +97,7 @@ RSpec.describe RepliesController, type: :controller do
           put :update, question_id: question.id, 
                       id: reply.id, 
                       reply: FactoryGirl.attributes_for(:reply, content: "New content!")
-          expect(response).to redirect_to question_path(question)
+          expect(response).to redirect_to question_path(question.id)
         end
       end
 
