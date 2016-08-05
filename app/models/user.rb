@@ -20,10 +20,10 @@ class User < ActiveRecord::Base
   after_create :send_slack
 
   def send_slack
-    Slack.chat_postMessage(text: 'New user ' + first_name + last_name "has signed up!", 
-          username: 'TECHRISE Bot', 
-          channel: "#user_signup_alerts", 
-          icon_emoji: ":smile_cat:") if Rails.env.production?
+    # Slack.chat_postMessage(text: 'New user ' + first_name + last_name "has signed up!", 
+    #       username: 'TECHRISE Bot', 
+    #       channel: "#user_signup_alerts", 
+    #       icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
   def has_access?
