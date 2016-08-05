@@ -1,4 +1,8 @@
 module LessonsHelper
+  def get_lesson_name(course_name, lesson_id)
+    Tags::LESSONS[course_name.underscore + "s"].keys[lesson_id.to_i - 1][1]
+  end
+
   def question_back_to_lesson
     if params[:id]
       forum = controller_name.classify.constantize.friendly.find(params[:id])
