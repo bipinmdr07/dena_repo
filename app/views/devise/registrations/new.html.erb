@@ -26,13 +26,18 @@
       </div>
 
       <div class="field">
-        <%= f.label :facebook_handle %><br />
-        <%= f.text_field :facebook_handle, autofocus: true, class: 'form-control', placeholder: 'Your Facebook ID' %>
+        <%= f.label :email %><br />
+        <%= f.email_field :email, required: true, class: 'form-control', placeholder: 'Your email' %>
       </div>
 
       <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, required: true, class: 'form-control', placeholder: 'Your email' %>
+        <%= f.label :mobile_number %><br />
+        <%= f.number_field :mobile_number, required: true, class: 'form-control', placeholder: 'Your Mobile Number' %>
+      </div>
+
+      <div class="field">
+        <%= f.label :facebook_handle %><br />
+        <%= f.text_field :facebook_handle, autocomplete: "off", class: 'form-control', placeholder: 'john.smith' %>
       </div>
 
       <div class="field">
