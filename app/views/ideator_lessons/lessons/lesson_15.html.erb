@@ -56,6 +56,29 @@ end
 </p>
 
 <p>
+  Let's refactor the <code>create</code> method as well:
+</p>
+
+<pre><code class = "ruby">
+def create
+  @idea = Idea.create(idea_params)
+  if @idea.valid?
+    redirect_to root_path
+  else
+    render :new
+  end
+end
+</code></pre>
+
+<p>
+  We can validate if the <code>Idea</code> that was created was valid with the <code>.valid?</code> method. If the <code>Idea</code> is valid, <code>@idea.valid?</code> will return <code>true</code>. Otherwise, it will return <code>false</code>.
+</p>
+
+<p>
+  If the <code>Idea</code> is valid, it will redirect to the <code>root_path</code>. Otherwise, it will render the <code>new</code> template.
+</p>
+
+<p>
  Awesome. Congratulations on writing your first validation!
 </p>
 
