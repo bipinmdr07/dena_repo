@@ -2,6 +2,8 @@ class AlgorithmLesson < ActiveRecord::Base
 
   COURSE_TITLE = "Understanding Data Structures and Algorithms"
 
+  SUBMISSION_COUNT = 0
+
   LESSON_LENGTH = 2
 
   DURATION = 30
@@ -9,13 +11,13 @@ class AlgorithmLesson < ActiveRecord::Base
   PERIOD = "8 ~ 10"
 
   LESSONS = [
-    ["Introduction to Data Structures and Algorithms", 
+    ["Introduction to Data Structures and Algorithms",
       [
         [1, "Why test?"],
         [2, "What is RSpec?"]
       ]
     ],
-    ["Arrays and Linked Lists", 
+    ["Arrays and Linked Lists",
       [
         [3, "Setting up your Web Dev Environment"],
         [4, "Setting Up Git"],
@@ -27,7 +29,7 @@ class AlgorithmLesson < ActiveRecord::Base
       ]
     ],
     ["Stacks and Queues",
-      [ 
+      [
         [11, "Creating the Posts Controller and Model"],
         [12, "Setting Up Validations"],
         [13, "Setting Up Routes"],
@@ -35,7 +37,7 @@ class AlgorithmLesson < ActiveRecord::Base
       ]
     ],
     ["Hashes",
-      [ 
+      [
         [11, "Creating the Posts Controller and Model"],
         [12, "Setting Up Validations"],
         [13, "Setting Up Routes"],

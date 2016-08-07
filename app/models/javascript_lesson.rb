@@ -1,6 +1,8 @@
 class JavascriptLesson < ActiveRecord::Base
   COURSE_TITLE = "Basic Javascript/jQuery - Manipulate the web page"
 
+  SUBMISSION_COUNT = 0
+
   LESSON_LENGTH = 2
 
   DURATION = 10
@@ -8,10 +10,10 @@ class JavascriptLesson < ActiveRecord::Base
   PERIOD = "7"
 
   LESSONS = [
-    ["Basic JavaScript", 
+    ["Basic JavaScript",
       [
         [1, "Learning the Basics"]
-        
+
       ]
     ],
     ["Basic jQuery",

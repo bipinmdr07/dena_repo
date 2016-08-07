@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
-  permit_params :email, :intro_access, :html_css_access, :ruby_fundamentals_access, :ideator_access, 
+  permit_params :email, :intro_access, :html_css_access, :ruby_access, :ideator_access,
   :ruby_core_access, :instapost_access, :github_access, :javascript_access, :admin, :command_line_access,
-  :rspec_blog_access, :mvc_access, :mentor, :start_date, :graduation_date, :remaining_mentor_sessions, :mentor_id, 
+  :rspec_blog_access, :mvc_access, :mentor, :start_date, :graduation_date, :remaining_mentor_sessions, :mentor_id,
   :facebook_handle, :twitter_handle, :github_handle, :personal_website
 
   index do
@@ -13,7 +13,7 @@ ActiveAdmin.register User do
     column :admin
     column :intro_access
     column :html_css_access
-    column :ruby_fundamentals_access
+    column :ruby_access
     column :ideator_access
     column :ruby_core_access
     column :instapost_access
@@ -41,7 +41,7 @@ ActiveAdmin.register User do
       f.input :admin
       f.input :intro_access
       f.input :html_css_access
-      f.input :ruby_fundamentals_access
+      f.input :ruby_access
       f.input :ideator_access
       f.input :ruby_core_access
       f.input :instapost_access

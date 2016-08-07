@@ -6,12 +6,25 @@ class ProgressionsController < ApplicationController
   def create
     respond_to do |format|
       format.html {}
-      format.js { 
-        progression = Progression.create(progression_params) 
+      format.js {
+        course_name = params[:progression][:course_name]
+        progression = Progression.create(progression_params)
         if progression.valid?
-          progression.create_activity key: 'progression.create', owner: current_user, 
-          parameters: {lesson_id: params[:progression][:lesson_id], course_name: params[:progression][:course_name]}
+          progression.create_activity key: 'progression.create', owner: current_user,
+          parameters: {lesson_id: params[:progression][:lesson_id], course_name: course_name}
         end
+
+        # if progression for course_name = lesson length and number of submission = submission count
+        #   unlock next lesson
+        puts current_user.progressions.where(course_name: course_name).count
+        progressions = current_user.progressions.where(course_name: course_name)
+        return unless progressions.count >= course_name.constantize::LESSON_LENGTH
+        submissions = current_user.submissions.where(course_name: course_name, approved: true)
+        return unless submissions.count >= course_name.constantize::SUBMISSION_COUNT
+
+        i = current_user.progressions.pluck(:course_name).uniq.count
+        next_course = Tags::LESSONS.keys[i].chomp('lessons') + 'access'
+        current_user.unlock_next_course!(next_course)
       }
     end
   end
@@ -19,8 +32,8 @@ class ProgressionsController < ApplicationController
   def destroy
     respond_to do |format|
       format.html {}
-      format.js { 
-        progression = Progression.find_by(progression_params) 
+      format.js {
+        progression = Progression.find_by(progression_params)
         progression.destroy
       }
     end

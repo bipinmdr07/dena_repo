@@ -1,6 +1,8 @@
 class InstapostLesson < ActiveRecord::Base
   COURSE_TITLE = "Instapost - Share your photos online"
 
+  SUBMISSION_COUNT = 1
+  
   LESSON_LENGTH = 33
 
   DURATION = 30
@@ -8,13 +10,13 @@ class InstapostLesson < ActiveRecord::Base
   PERIOD = "4 ~ 5"
 
   LESSONS = [
-    ["Setting Up Your App", 
+    ["Setting Up Your App",
       [
         [1, "Setting up your Web Dev Environment"],
         [2, "Setting Up Git"]
       ]
     ],
-    ["First Steps", 
+    ["First Steps",
       [
         [3, "Creating Wireframes"],
         [4, "Self-Directed Lesson: Installing Bootstrap"]

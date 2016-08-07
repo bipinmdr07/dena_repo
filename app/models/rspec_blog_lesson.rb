@@ -2,6 +2,8 @@ class RspecBlogLesson < ActiveRecord::Base
 
   COURSE_TITLE = "Testing Rails Applications with RSpec"
 
+  SUBMISSION_COUNT = 1
+
   LESSON_LENGTH = 24
 
   DURATION = 30
@@ -9,13 +11,13 @@ class RspecBlogLesson < ActiveRecord::Base
   PERIOD = "5 ~ 6"
 
   LESSONS = [
-    ["Introduction to RSpec", 
+    ["Introduction to RSpec",
       [
         [1, "Why test?"],
         [2, "What is RSpec?"]
       ]
     ],
-    ["Setting up Your App", 
+    ["Setting up Your App",
       [
         [3, "Self-Directed Lesson: Setting up your Web Dev Environment"],
         [4, "Self-Directed Lesson: Setting Up Git"],
@@ -26,7 +28,7 @@ class RspecBlogLesson < ActiveRecord::Base
       ]
     ],
     ["Setting up Posts",
-      [ 
+      [
         [9, "Self-Directed Lesson: Creating the Posts Controller and Model"],
         [10, "Self-Directed Lesson: Setting Up Routes"],
         [11, "Self-Directed Lesson: Setting up CRUD Actions"]

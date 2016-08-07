@@ -1,6 +1,8 @@
 class IdeatorLesson < ActiveRecord::Base
 	COURSE_TITLE = "Ideator - an Idea Sharing App"
 
+	SUBMISSION_COUNT = 1
+	
 	LESSON_LENGTH = 22
 
 	DURATION = 25
@@ -10,13 +12,13 @@ class IdeatorLesson < ActiveRecord::Base
 	CONSTANT = "23"
 
 	LESSONS = [
-		["Setting Up Your App", 
+		["Setting Up Your App",
 			[
 				[1, "Setting up your Web Dev Environment"],
 				[2, "Setting Up Git"]
 			]
 		],
-		["First Steps", 
+		["First Steps",
 			[
 				[3, "Creating Wireframes"],
 				[4, "Creating your First Page"]

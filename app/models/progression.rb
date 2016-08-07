@@ -9,12 +9,14 @@ class Progression < ActiveRecord::Base
   scope :today, -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
   # ranks :user_id
 
+  validates :course_name, uniqueness: { scope: [:lesson_id, :user_id] }
+
   private
 
   def delete_tag_activity
-    activity = PublicActivity::Activity.where('trackable_type = ? AND trackable_id = ?',  
+    activity = PublicActivity::Activity.where('trackable_type = ? AND trackable_id = ?',
                                             'Progression',self.id).first
     activity.destroy if activity
   end
-  
+
 end

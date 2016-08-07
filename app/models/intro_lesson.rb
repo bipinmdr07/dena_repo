@@ -1,6 +1,8 @@
 class IntroLesson < ActiveRecord::Base
 	COURSE_TITLE = "Intro to Web Development"
 
+	SUBMISSION_COUNT = 0
+	
 	LESSON_LENGTH = 7
 
 	DURATION = 1
@@ -8,7 +10,7 @@ class IntroLesson < ActiveRecord::Base
 	PERIOD = "PREWORK"
 
 	LESSONS = [
-		["What is Web Development?", 
+		["What is Web Development?",
 			[
 				[1, "Congratulations!"],
 				[2, "What do web developers do?"],

@@ -62,8 +62,8 @@
 	<%= render partial: 'course', locals: {course: 'Intro', course_name: "An introduction to web development and why it's so cool.", available: true, course_link: intro_path, course_access: 'intro', controller_name: 'IntroLesson'} %>
 
 	<%= render partial: 'course', locals: {course: 'HTML/CSS', course_name: "HTML and CSS are the tools developers use to structure web pages. Learning the basics of HTML and CSS to start building your own web pages.", available: true, course_link: html_css_path, course_access: 'html_css', controller_name: 'HtmlCssLesson'} %>
-	
-	<%= render partial: 'course', locals: {course: 'Ruby Fundamentals', course_name: 'Ruby is a beautiful programming language that makes programming so much easier for beginners. Master the fundamentals of programming while learning Ruby.', available: true, course_link: ruby_path, course_access: 'ruby_fundamentals', controller_name: 'RubyLesson'} %>
+
+	<%= render partial: 'course', locals: {course: 'Ruby Fundamentals', course_name: 'Ruby is a beautiful programming language that makes programming so much easier for beginners. Master the fundamentals of programming while learning Ruby.', available: true, course_link: ruby_path, course_access: 'ruby', controller_name: 'RubyLesson'} %>
 
 </div>
 
@@ -91,7 +91,7 @@
 
 <div class = "row">
 	<%= render partial: 'course', locals: {course: 'JavaScript/jQuery', course_name: 'Manipulate the DOM by using JavaScript. Learn the basics of JavaScript and jQuery.', available: true, course_link: javascript_path, course_access: 'javascript', controller_name: 'JavascriptLesson'} %>
-	
+
 	<%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
 
 	<%= render partial: 'course', locals: {course: 'Algorithms', course_name: 'Learning how to solve algorithms challenges will help you think logically and solve difficult problems in programming.', available: false, controller_name: 'AlgorithmLesson', course_link: 'algorithm_path', course_access: 'algorithm' } %>

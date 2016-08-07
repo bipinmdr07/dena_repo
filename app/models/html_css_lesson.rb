@@ -1,6 +1,8 @@
 class HtmlCssLesson < ActiveRecord::Base
 	COURSE_TITLE = "HTML/CSS"
 
+	SUBMISSION_COUNT = 3
+
 	LESSON_LENGTH = 14
 
 	DURATION = 15
@@ -8,13 +10,13 @@ class HtmlCssLesson < ActiveRecord::Base
 	PERIOD = "PREWORK"
 
 	LESSONS = [
-		["Introduction to HTML/CSS", 
+		["Introduction to HTML/CSS",
 			[
 				[1, "After this, there is no turning back"],
 				[2, "Building Your First Four HTML/CSS Projects"]
 			]
 		],
-		["Build a Personal Resume Page", 
+		["Build a Personal Resume Page",
 			[
 				[3, "Setting Up Your Environment"],
 				[4, "Building a Simple Personal Resume Page in 25 minutes"]

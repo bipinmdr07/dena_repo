@@ -34,4 +34,12 @@ class User < ActiveRecord::Base
     self.progressions.order('created_at DESC').first
     # PublicActivity::Activity.where(owner_id: mentee_id, key: 'progression.create').order('created_at DESC').first
   end
+
+  def unlock_next_course!(next_course)
+    puts next_course
+    self[next_course] = true
+    puts self[next_course]
+    puts self.inspect
+    save!
+  end
 end
