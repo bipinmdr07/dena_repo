@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  Let's start off by writing our <code>create</code> action in our <code>posts_controller.rb</code>. When we hit submit on our form, it will then trigger the <code>create</code> action. Right now we haven't set this up, so it will give us an error.
+  Let's start off by writing our <code>create</code> action in our <code>posts_controller.rb</code>. When we hit submit on our form, it will then trigger the <code>create</code> action. Right now we haven't set up the <code>creat</code> action, so it will give us an error.
 </p>
 
 <p>
@@ -34,17 +34,20 @@ end
 </p>
 
 <p>
-  <strong>First, we're creating an instance variable <code>@post</code> and assigning it <code>current_user.posts.create(post_params)</code>.</strong> There are several parts to this code that probably don't make sense to you right now. Let's try to clear this up.
+  <strong>First, we're creating an instance variable</strong> <code>@post</code> <strong>and assigning it</strong> <code>current_user.posts.create(post_params)</code>. There are several parts to this code that probably don't make sense to you right now. Let's try to clear this up.
 </p>
 
-<p>
-  Let's take a look at <code>current_user</code>. <strong><code>current_user</code> is a Devise helper method that gives us the current user that is logged in.</strong> You'll be using this a lot throughout your Rails development. (<%= link_to 'View the Devise documentation', 'write show, update, and delete actions for posts' %> for more Devise helpers that you can use.)
-</p>
+<div class="well">
+  <h3>current_user</h3>
+  <p>
+    Let's take a look at <code>current_user</code>.<code>current_user</code>  <strong>is a Devise helper method that returns the <code>User</code> object of the current user that is logged in.</strong> You'll be using this a lot throughout your Rails development. (<%= link_to 'View the Devise documentation', 'write show, update, and delete actions for posts' %> for more Devise helpers that you can use.)
+  </p>
+</div>
 
 <%= create_flashcard %>
 
 <p>
-  Next, we're doing this <code>current_user.posts</code> thing. What this is saying is, <code>create</code> a <code>post</code> by <code>current_user</code>. <strong>This automatically hooks up and connects the <code>current_user</code> and the created <code>post</code>.</strong> Specifically, the <code>user_id</code> of <code>current_user</code> is stored inside the newly created <code>Post</code>, so that we know who posted it.
+  Next, we're have this <code>current_user.posts.create(post_params)</code> code. What this is saying is, <code>create</code> a <code>post</code> by <code>current_user</code>. <strong>This automatically hooks up and connects the <code>current_user</code> with the created <code>post</code>.</strong> In other words, the <code>user_id</code> of the new <code>Post</code> is set to the <code>id</code> of <code>current_user</code>, so that we know who posted it.
 </p>
 
 <%= create_flashcard %>

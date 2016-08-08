@@ -1,22 +1,83 @@
 <div class = "forum_section">
 
-<h1>Have a Question?</h1>
-<p>
-  Don't leave your questions unanswered! Ask good questions to get good answers.
-</p>
+  <div class="row">
+    <div class="col-xs-12">
+      <h3 class="question-header mentee_title text-center"><span class="back_to_dashboard"><%= link_to '<i class="fa fa-question-circle" aria-hidden="true"></i> Ask Question'.html_safe, new_question_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-back btn-default' %></span> Questions</h3>
+    </div>
+  </div>
+
+  <% if @questions.empty? %>
+    <h5 class="text-center">
+      There are no questions for this lesson yet!
+    </h5>
+  <% else %>
+
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
 
 
-<%= link_to '<i class="fa fa-question-circle" aria-hidden="true"></i> Ask Question'.html_safe, new_question_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-primary' %>
+      <% @questions.each do |question| %>
+        <ul class="question_list">
+          <% user = User.find(question.user_id) %>
 
-<br>
-<br>
+          <% if question.mentor_post %>
+            <li class="question_container mentor_post">
+          <% else %>
+            <li class="question_container">
+          <% end %>
+          <div class="row">
+            <div class="col-xs-10 col-sm-4">
+              <div class="row">
+                <div class="col-xs-6 votes-container">
+                  <div id="votes-container-id-<%= question.id %>">
+                    <%= render partial: 'questions/votes', locals: {question: question} %>
+                  </div><!-- col-xs-6 votes-container -->
+                </div><!-- votes-container-id-<%= question.id %> -->
 
-  <h3>All Questions</h3>
+                <span class="col-xs-6">
+                  <%= image_tag user.avatar, class: 'community_prof_pic', style: "margin-top: 40px;" %>
+                </span><!-- col-xs-6 -->
+              </div><!-- row -->
+            </div><!-- col-xs-12 col-sm-4 -->
 
-  <% @questions.order("created_at DESC").each do |question| %>
-    <h4><%= link_to question.title, question_path(question.id) %> <span class = "comment_list">by <%= User.find(question.user_id).name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %>
-      <span class = "pull-right comment_list">Replies: <%= question.replies.count %><%= link_to ' Delete', question_path(question.id), method: :delete, data: { confirm: 'Are you sure?' } if (current_user && current_user.admin) %></span></h4>
+            <div class="col-xs-12 col-sm-6">
+              <div class="question_content">
+                <h5 class="question_container_title"><%= link_to question.title, question_path(question) %></h5>
+                <div class="question_container_information">
+                  <span class="question_container_time"><%= time_ago_in_words(question.created_at) %> ago</span> by <span class="question_container_user"><%= user.name %></span>
+                </div><!-- question_container_information -->
+              </div><!-- question_content -->
+
+              <div class="question_tags">
+                <% if question.mentor_post %>
+                  <label class="tag_label">MENTOR POST</label>
+                <% else %>
+                  <a href="/<%= question.course_name.underscore %>s"><label class="tag_label"><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></label></a>
+                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id.to_i - 1][1] %></label></a>
+                <% end %>
+              </div><!-- question_tags -->
+            </div><!-- col-xs-12 col-sm-2 -->
+
+            <div class="col-xs-12 col-sm-2">
+              <div class="reply_count_container">
+                <div class="reply_count"><%= question.replies.count %></div>
+                <div class="reply_count_label">Replies</div>
+                <% if question.resolved %>
+                  <div class="reply_resolved text-center">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </div><!-- reply_resolved -->
+                <% end %>
+              </div><!-- reply_count_container -->
+            </div><!-- col-xs-12 col-sm-2 -->
+          </div><!-- row -->
+          
+        </li><!-- question_container -->
+      </ul><!-- question_list -->
+    <% end %>
+
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+
   <% end %>
+
 
 
 </div>

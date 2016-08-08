@@ -13,7 +13,7 @@
 
       <div class="field">
         <%= f.label :last_name %><br />
-        <%= f.text_field :last_name, autofocus: true, required: true, class: 'form-control', placeholder: 'First Name' %>
+        <%= f.text_field :last_name, autofocus: true, required: true, class: 'form-control', placeholder: 'Last Name' %>
       </div>
 
       <div class="field">
@@ -24,6 +24,11 @@
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
+
+      <div class="field">
+        <%= f.label :mobile_number %><br />
+        <%= f.number_field :mobile_number, class: 'form-control', placeholder: 'Your Mobile Number' %>
+      </div>
 
       <div class="field">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
@@ -42,22 +47,22 @@
 
       <div class="field">
         <%= f.label :facebook_handle %><br />
-        <%= f.text_field :facebook_handle, autocomplete: "off", class: 'form-control' %>
+        <%= f.text_field :facebook_handle, autocomplete: "off", class: 'form-control', placeholder: 'john.smith' %>
       </div>
 
       <div class="field">
         <%= f.label :twitter_handle %><br />
-        <%= f.text_field :twitter_handle, autocomplete: "off", class: 'form-control' %>
+        <%= f.text_field :twitter_handle, autocomplete: "off", class: 'form-control', placeholder: 'john.smith' %>
       </div>
 
       <div class="field">
         <%= f.label :github_handle %><br />
-        <%= f.text_field :github_handle, autocomplete: "off", class: 'form-control' %>
+        <%= f.text_field :github_handle, autocomplete: "off", class: 'form-control', placeholder: 'john.smith' %>
       </div>
 
       <div class="field">
         <%= f.label :personal_website %><br />
-        <%= f.text_field :personal_website, autocomplete: "off", class: 'form-control' %>
+        <%= f.text_field :personal_website, autocomplete: "off", class: 'form-control', placeholder: 'http://www.johnsmith.com' %>
       </div>
 
       <div class="field">

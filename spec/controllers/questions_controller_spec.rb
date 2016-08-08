@@ -116,7 +116,7 @@ RSpec.describe QuestionsController, type: :controller do
         it "redirects them to the question url" do
           question = FactoryGirl.create(:question, user_id: user.id)
           put :update, id: question.id, question: FactoryGirl.attributes_for(:question, title: "New Title!")
-          expect(response).to redirect_to question_path(question)
+          expect(response).to redirect_to question_path(question.id)
         end
       end
 
@@ -148,7 +148,7 @@ RSpec.describe QuestionsController, type: :controller do
         it "redirects them to the question url" do
           question = FactoryGirl.create(:mentor_post, user_id: user.id)
           put :update, id: question.id, question: FactoryGirl.attributes_for(:question, title: "New Title!")
-          expect(response).to redirect_to question_path(question)
+          expect(response).to redirect_to question_path(question.id)
         end
       end
 

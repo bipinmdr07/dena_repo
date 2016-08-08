@@ -71,7 +71,7 @@ end
 </p>
 
 <p>
-	By default, when a method is triggered in the controller (in this case, the <code>index</code> method is triggered), then Rails will try to find an <code>html</code> file that has the same name as the method (in this case <code>index</code>) to display to the user in the <code>views</code> directory under the controller name's folder.
+	By default, when a method is triggered in the controller (in this case, the <code>index</code> method is triggered), then Rails will try to find an <code>html</code> file that has the same name as the method (in this case <code>index</code>) to display to the user in the <code>views</code> directory under the controller name's folder (Rails will also try to look into the inherited controller's folder, but let's not get into this right now).
 </p>
 
 <%= create_flashcard %>

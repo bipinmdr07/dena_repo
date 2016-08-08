@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
+  
   belongs_to :admin_user
   validates :title, :body, presence: true
 

@@ -28,7 +28,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @submission = Submission.find(params[:id])
+    @submission = Submission.includes(:submission_replies).find(params[:id])
     @user = User.find(@submission.user_id)
   end
 

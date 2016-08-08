@@ -86,6 +86,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.5.0)
       activerecord (>= 3.2, < 5)
+    acts_as_votable (0.10.0)
     addressable (2.4.0)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
@@ -492,6 +493,7 @@ DEPENDENCIES
   active_skin
   activeadmin!
   acts-as-taggable-on (~> 3.4)
+  acts_as_votable (~> 0.10.0)
   bonsai-elasticsearch-rails
   bootstrap-sass (~> 3.3.6)
   byebug

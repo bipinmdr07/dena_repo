@@ -17,6 +17,8 @@
   <p>
     However, if we name it something random like "Almond", it starts making no sense at all. You'll be running commands like <code>Almond.new</code> or <code>Almond.all</code> for trying to create or show user posts, which really makes no sense in this case. Instead, <code>Post.new</code> or <code>Post.all</code> would make much more sense
   </p>
+
+  <%= create_flashcard %>
 </div>
 
 <p>
@@ -72,6 +74,8 @@ end
   Notice how <code>photo</code> is a <code>string</code> and <code>description</code> is a <code>text</code>. The difference is in the size, <strong>string should be used for shorter text, and text should be used for longer text</strong>. See <%= link_to 'this Stackoverflow post', 'http://stackoverflow.com/questions/3354330/difference-between-string-and-text-in-rails' %> for an in-depth explanation.
 </p>
 
+<%= create_flashcard %>
+
 <p>
   Next, we see that <code>Post</code> <code>belongs_to :user</code>, which means we need to add a database column to store the <code>user_id</code> so that we know which <code>User</code> the <code>Post</code> belongs to. Since the <code>User</code>'s <code>id</code> is an Integer, we need to specify it as such.
 </p>
@@ -112,10 +116,14 @@ end
   </p>
 
   <p>
-    This is essentially what indexing is all about. It makes looking up things much more efficient. So when should you use indexes?
+    This is essentially what indexing is all about. It makes looking up things much more efficient.
   </p>
 
   <%= create_flashcard %>
+
+  <p>
+     So when should you use indexes?
+  </p>
 
   <p>
     <strong>As a rule of thumb, you should always use indexes when you have a foreign key.</strong>

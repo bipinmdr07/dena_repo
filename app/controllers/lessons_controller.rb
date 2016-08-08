@@ -20,8 +20,10 @@ class LessonsController < ApplicationController
     @lesson == 1 ? @prev_lesson = 0 : @prev_lesson = @lesson.to_i - 1
     @course_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_name = controller + "s"
-    @questions = Question.where(course_name: controller, lesson_id: params[:id])
-    @all_submissions = Submission.where(course_name: controller, lesson_id: params[:id])
+
+    @questions = Question.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    @paginated_submissions = Submission.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+    @all_submissions = Submission.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC")
     @submissions = @all_submissions.where(approved: true)
     @user_submission = current_user.submissions.find_by(lesson_id: params[:id], course_name: controller_name.classify)
     @submission_user_ids = @submissions.pluck(:user_id).uniq.first(10)

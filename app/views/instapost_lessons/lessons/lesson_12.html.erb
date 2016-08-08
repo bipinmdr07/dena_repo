@@ -109,7 +109,14 @@
 </p>
 
 <p>
-  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code>. <strong>Make sure you don't replace the <code>form_for</code> line.</strong> Without the <code>html: { method: :patch }</code>, the form will fail to update your <code>User</code>. Your new form in <code>edit.html.erb</code> should look like this:
+  Let's just copy and paste our new form fields into the form in <code>edit.html.erb</code> except for the first line that starts with <code>form_for</code>.
+</p> 
+<p>
+  <strong>Make sure you don't replace the <code>form_for</code> line.</strong> Notice how the first line contains <code>html: { method: :patch }</code>. This piece of code is telling the form to perform a <code>PATCH</code> action (review <%= link_to 'Overview of HTTP Methods', 'mvc_lessons/3' %>).
+</p>
+
+<p>
+  Your new form in <code>edit.html.erb</code> should look like this:
 </p>
 
 <pre><code class="erb">
@@ -174,7 +181,7 @@
 </p>
 
 <p>
-  We see that it is located at <code>edit_user_registration</code>. Now that we know that route, let's add the link to the navbar.
+  We see that the Prefix for the user edit page is <code>edit_user_registration</code>. Now that we know that route, let's add the link to the navbar.
 </p>
 
 <p>

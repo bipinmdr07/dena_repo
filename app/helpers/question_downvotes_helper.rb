@@ -1,0 +1,2 @@
+module QuestionDownvotesHelper
+end
