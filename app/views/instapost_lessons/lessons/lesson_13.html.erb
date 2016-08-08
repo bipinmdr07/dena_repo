@@ -13,7 +13,7 @@ resources :posts
 </code></pre>
 
 <p>
-  As we've seen in earlier lessons, this will provide a bunch of routes that we can use for posts. It provides us with the routes for the <code>index</code>, <code>create</code>, <code>new</code>, <code>edit</code>, <code>show</code>, <code>update</code>, and <code>destroy</code> actions.
+  As we've seen in earlier lessons, this will provide a bunch of routes that we can use for posts. It provides us with the routes for the <code>index</code>, <code>create</code>, <code>new</code>, <code>edit</code>, <code>show</code>, <code>update</code>, and <code>destroy</code> actions. Review "resources" section in <%= link_to 'Instapost- Creating a Form', 'ideator_lessons/12' %>.
 </p>
 
 <p>
@@ -21,15 +21,15 @@ resources :posts
 </p>
 
 <p>
-  Next, let's start building our form to create new posts. If we go back to our terminal where we did <code>rake routes</code>, we can see that next to where it says <code>new_posts GET</code>, we see the <code>/posts/new</code>. This means that if we go to <code>http://localhost:3000/posts/new</code>, we should be able to reach this page. Let's go ahead and go to <code>http://localhost:3000/posts/new</code>.
+  Next, let's start building our form to create new posts. If we go back to our terminal where we ran <code>rake routes</code>, we can see that next to where it says <code>new_posts GET</code>, we see the <code>/posts/new</code>. This means that if we go to <code>http://localhost:3000/posts/new</code>, we should be able to reach this page. Let's go ahead and go to <code>http://localhost:3000/posts/new</code>.
 </p>
 
 <p>
-  Woops! Rails is giving us an error saying that it can't find a template that corresponds to <code>new</code>. So let's go ahead and make it.
+  Woops! Rails is giving us the "No Template Found" error! (Go to <%= link_to 'this lesson', 'instapost_lessons/10' %> to review what this error means.) We can either redirect the user or make the corresponding view file. In this case, let's go ahead and make it.
 </p>
 
 <p>
-  In <code>app/views/posts/</code>, let's create a new file called <code>new.html.erb</code>. In this file, let's add the following line:
+  In <code>app/views/posts</code>, let's create a new file called <code>new.html.erb</code>. In this file, let's add the following line:
 </p>
 
 <pre><code class="erb">

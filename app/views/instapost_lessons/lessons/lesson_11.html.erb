@@ -51,7 +51,7 @@ edit_user_registration GET        /users/edit(.:format)                       de
 </code></pre>
 
 <p class="alert alert-warning">
-  Notice how I specified the method in the 'Log Out' link to be <code>:delete</code>. We need to specify that it is performing a <code>DELETE</code> action for it to work properly. Otherwise, it will perform a <code>GET</code> request and it will give you an error.
+  Notice how I specified the method in the 'Log Out' link to be <code>:delete</code>. We need to specify that it is performing a <code>DELETE</code> action for it to work properly. Otherwise, it will perform a <code>GET</code> request and it will give you an error. Review <%= link_to 'Overview of HTTP Methods', '/mvc_lessons/3' %>.
 </p>
 
 <%= create_flashcard %>
@@ -82,7 +82,11 @@ edit_user_registration GET        /users/edit(.:format)                       de
 </code></pre>
 
 <p class="alert alert-warning">
-  Notice this new <code>user_signed_in?</code> method we used right here. This is a devise helper method that returns <code>true</code> if a user is signed in and <code>false</code> if a user is not signed in.
+  Notice this new <code>user_signed_in?</code> method we used right here. This is a method provided by the Devise gem that returns <code>true</code> if a user is signed in and <code>false</code> if a user is not signed in.
+</p>
+
+<p class="alert alert-info">
+  Confused about how <code>&lt;%</code> and <code>%&gt;</code> work? Review the Embedded Ruby section of <%= link_to 'this lesson', '/ideator_lessons/12' %>.
 </p>
 
 <%= create_flashcard %>

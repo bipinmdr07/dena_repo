@@ -26,8 +26,65 @@ root 'posts#index'
   If you haven't already, start up your rails server and go to <code>http://localhost:3000/</code>, you should get an error saying that no template was found.
 </p>
 
+<div class="well">
+  <h3>No Template Found Error</h3>
+
+  <p>
+    In Rails, when you get the No Template Found Error, it means that you are missing a view file for the application to render. If you recall from the Ideator post, Rails will try to find a view file with the same name as the controller action being called.
+  </p>
+
+  <blockquote>
+    <p>
+      By default, when a method is triggered in the controller (in this case, the <code>index</code> method is triggered), then Rails will try to find an <code>html</code> file that has the same name as the method (in this case <code>index</code>) to display to the user in the <code>views</code> directory under the controller name's folder (Rails will also try to look into the inherited controller's folder, but let's not get into this right now).
+    </p>
+    <small><%= link_to 'Ideator - Creating your First Page', 'ideator_lessons/4' %></small>
+  </blockquote>
+
+  <p>
+    When Rails can't find a file with the same name as the controller action being called, it will give you the "No Template Found" error. In this case you have mainly two options:
+  </p>
+
+  <ul>
+    <li>Create the file</li>
+    <p>
+      For example, if the <code>index</code> action in <code>posts_controller.rb</code> is called, then create a file called <code>index.html.erb</code> inside the <code>apps/views/posts</code> directory.
+    </p>
+    <li>Redirect the user in the controller method</li>
+    <p>
+      This is used a lot in <code>create</code>, <code>update</code>, or <code>destroy</code> actions.
+    </p>
+
+    <p>
+      For example, this code will give you a "No Template Found" error:
+    </p>
+<pre><code class="ruby">
+def create
+  @post = Post.find(params[:id])
+  @post.create(post_params)
+end
+</code></pre>
+
+    <p>
+      But if you redirect the user like this, the error will disappear:
+    </p>
+
+<pre><code class="ruby">
+def create
+  @post = Post.find(params[:id])
+  @post.create(post_params)
+  redirect_to root_path
+end
+</code></pre>
+
+
+  </ul>
+
+  <%= create_flashcard %>
+
+</div>
+
 <p>
-  Let's go ahead and create <code>index.html.erb</code> in our <code>views/posts/</code> folder, and add a Hello World to test it out.
+  In this case, instead of redirecting the user, let's go ahead and create <code>index.html.erb</code> in our <code>apps/views/posts</code> folder, and add a Hello World to test it out.
 </p>
 
 <pre><code class="erb">

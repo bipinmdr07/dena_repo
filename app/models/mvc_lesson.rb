@@ -2,7 +2,7 @@ class MvcLesson < ActiveRecord::Base
 
   COURSE_TITLE = "Understand MVC"
 
-  LESSON_LENGTH = 7
+  LESSON_LENGTH = 6
 
   DURATION = 15
 
