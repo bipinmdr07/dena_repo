@@ -36,5 +36,10 @@ class User < ActiveRecord::Base
 
   def update_name!
     self.name = self.first_name + " " + self.last_name
-  end 
+  end
+
+  def last_lesson
+    self.progressions.order('created_at DESC').first
+    # PublicActivity::Activity.where(owner_id: mentee_id, key: 'progression.create').order('created_at DESC').first
+  end
 end

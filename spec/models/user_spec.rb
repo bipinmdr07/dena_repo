@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
   describe "#update_name!" do
     it "should save name after save" do
-      user = User.new(email: "test@example.com", password: "abcd123456", password_confirmation: "abcd123456", 
+      user = User.new(email: "test@example.com", password: "abcd123456", password_confirmation: "abcd123456",
                       first_name: "Cole", last_name: "Devin")
       user.save
       expect(user.reload.name).to eq("Cole Devin")
@@ -55,6 +55,16 @@ RSpec.describe User, type: :model do
       it "should return true if user's prework_end_time is after today" do
         user = FactoryGirl.create(:user, admitted: false, prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
         expect(user.has_access?).to be(true)
+      end
+    end
+
+    describe "#last_lesson" do
+      it "should return the last progress lesson" do
+        user = FactoryGirl.create(:user)
+        progression1 = FactoryGirl.create(:progression, user_id: user.id)
+        progression2 = FactoryGirl.create(:progression, user_id: user.id)
+        progression3 = FactoryGirl.create(:progression, user_id: user.id)
+        expect(user.last_lesson).to eq(progression3)
       end
     end
   end

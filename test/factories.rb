@@ -1,4 +1,4 @@
-FactoryGirl.define do  
+FactoryGirl.define do
 
   factory :mentor_session do
     private_details "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -12,21 +12,21 @@ FactoryGirl.define do
                       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                      proident, sunt in culpa qui officia deserunt mollit anim id est laborum."                    
+                      proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     homework_assigned "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
                       proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    session_date DateTime.tomorrow                                            
+    session_date DateTime.tomorrow
   end
 
   factory :invalid_mentor_session, class: 'MentorSession' do
     private_details nil
-    public_details nil                
+    public_details nil
     homework_assigned nil
-    session_date nil                                   
+    session_date nil
   end
 
   factory :student_session do
@@ -41,7 +41,7 @@ FactoryGirl.define do
                       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                       consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
                       cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                      proident, sunt in culpa qui officia deserunt mollit anim id est laborum."                    
+                      proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     motivation_level "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                       quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -52,16 +52,16 @@ FactoryGirl.define do
 
   factory :invalid_student_session, class: 'MentorSession' do
     private_details nil
-    public_details nil                
+    public_details nil
     motivation_level nil
   end
 
   factory :card do
-    
+
   end
 
   factory :admin_user do
-    
+
   end
 
   factory :reply do
@@ -86,7 +86,7 @@ FactoryGirl.define do
     lesson_id 1
     course_name "HtmlCssLesson"
   end
-  
+
   factory :invalid_submission, class: 'Submission' do
     title nil
     content nil
@@ -108,7 +108,7 @@ FactoryGirl.define do
     course_name nil
     mentor_post true
   end
-  
+
   factory :invalid_question, class: 'Question' do
     title nil
     content nil
@@ -195,4 +195,8 @@ FactoryGirl.define do
     confirmed_at Time.zone.now
   end
 
+  factory :progression do
+    lesson_id 1
+    course_name "HtmlCssLesson"
+  end
 end
