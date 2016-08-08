@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  Let's start off by writing our <code>create</code> action in our <code>posts_controller.rb</code>. When we hit submit on our form, it will then trigger the <code>create</code> action. Right now we haven't set up the <code>creat</code> action, so it will give us an error.
+  Let's start off by writing our <code>create</code> action in our <code>posts_controller.rb</code>. When we hit submit on our form, it will then trigger the <code>create</code> action. Right now we haven't set up the <code>create</code> action, so it will give us an error.
 </p>
 
 <p>
@@ -30,7 +30,7 @@ end
 </code></pre>
 
 <p>
-  Alright awesome, let's go over what this is all doing.
+  Let's go over what we are doing here.
 </p>
 
 <p>
@@ -86,26 +86,26 @@ class BankAccount
 
   private
 
-  def double_balance
+  def double_balance!
     @amount *= 2
   end
 end
 </code></pre>
 
   <p>
-    We can see that we can initialize the <code>BankAccount</code> with an initial amount. We have a <code>balance</code> method that <code>puts</code> the <code>amount</code> that the <code>BankAccount</code> holds. Then, we have a <code>double_balance</code> method that is <code>private</code>. This method doubles the amount in the bank account. Let's try this out:
+    We can see that we can initialize the <code>BankAccount</code> with an initial amount. We have a <code>balance</code> method that <code>puts</code> the <code>amount</code> that the <code>BankAccount</code> holds. Then, we have a <code>double_balance!</code> method that is <code>private</code>. This method doubles the amount in the bank account. Let's try this out:
   </p>
 
 <pre><code class="ruby">
 my_bank = BankAccount.new(2000)
 my_bank.balance
 => 2000
-my_bank.double_balance
+my_bank.double_balance!
 => NoMethodError: private method `double_balance' called for #&lt;BankAccount:0xxxxxxxxxx @amount=2000&gt;
 </code></pre>
 
   <p>
-    Notice how calling the <code>double_balance</code> gave us an error. This is because <code>private</code> methods can only be called inside of the class. Let's see how we can actually call the <code>double_balance</code> method:
+    Notice how calling the <code>double_balance!</code> gave us an error. This is because <code>private</code> methods can only be called inside of the class. Let's see how we can actually call the <code>double_balance</code> method:
   </p>
 
 <pre><code class="ruby">
@@ -119,7 +119,7 @@ class BankAccount
 
   def balance
     puts @amount
-    double_balance
+    double_balance!
     puts @amount
   end
 
@@ -132,7 +132,7 @@ end
 </code></pre>
 
   <p>
-    What we did here is call the <code>double_balance</code> method inside the <code>balance</code> method. We also <code>puts</code> the <code>amount</code> before and after calling <code>double_balance</code> to see how calling it affected the <code>amount</code>. Let's try this out:
+    What we did here is call the <code>double_balance!</code> method inside the <code>balance</code> method. We also <code>puts</code> the <code>amount</code> before and after calling <code>double_balance!</code> to see how calling it affected the <code>amount</code>. Let's try this out:
   </p>
 
 <pre><code class="ruby">
@@ -140,22 +140,22 @@ my_bank = BankAccount.new(2000)
 my_bank.balance
 => 2000
 4000
-my_bank.double_balance
-=> NoMethodError: private method `double_balance' called for #&lt;BankAccount:0xxxxxxxxxx @amount=2000&gt;
+my_bank.double_balance!
+=> NoMethodError: private method `double_balance!' called for #&lt;BankAccount:0xxxxxxxxxx @amount=2000&gt;
 </code></pre>
   
   <p>
-    As you can see, the <code>amount</code> was indeed doubled when we called the <code>balance</code> method! However, when we tried calling <code>double_balance</code> method outside the class in the terminal, it didn't work.
+    As you can see, the <code>amount</code> was indeed doubled when we called the <code>balance</code> method! However, when we tried calling <code>double_balance!</code> method outside the class in the terminal, it didn't work.
   </p>
 
   <h3>So why and when do we use private methods?</h3>
 
   <p>
-    In Ruby on Rails, private methods can be seen usually in controllers, like we just saw in our <code>posts_controller.rb</code>. <strong>We do this when we don't want other users from accessing the method for security reasons.</strong>
+    In Ruby on Rails, private methods are usually seen in controllers and models, like we just saw in our <code>posts_controller.rb</code>. <strong>We do this when we don't want other users from accessing the method for security reasons.</strong>
   </p>
 
   <p>
-    For example, in our <code>BankAccount</code> example, we probably don't want users to be able to access the <code>double_balance</code> method. If they were able to, everyone would be doubling their balance! 
+    For example, in our <code>BankAccount</code> example, we don't want users to be able to access the <code>double_balance!</code> method. If they were able to, everyone would be doubling their balance! 
   </p>
 
   <p>
@@ -212,7 +212,7 @@ has_many :posts
 </p>
 
 <p>
-  What I mean is, if you're logged in, you won't get an error. If you are logged out though, you'll get an error telling you that there's a problem with <code>current_user</code>.
+  In other words, if you're logged in, you won't get an error. If you are logged out though, you'll get an error telling you that there's a problem with <code>current_user</code>.
 </p>
 
 <p>

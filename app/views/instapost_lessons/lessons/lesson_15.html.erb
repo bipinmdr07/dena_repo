@@ -87,8 +87,8 @@ end
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;%= image_tag User.find(post.user_id).photo %&gt;
-  &lt;%= User.find(post.user_id).name %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
 &lt;% end %&gt;
@@ -98,19 +98,21 @@ end
   Save the file and refresh the page. We should now see our user's profile picture and name!
 </p>
 
-<p>
-  Let's refactor this code a little bit to make it more performant. We see that <code>User.find(post.user_id)</code> is repeated twice. This means that Rails will query (look for) a <code>User</code> with the post's <code>user_id</code> 2 times. Instead, we can store the user in an instance variable. This way, we're storing which user we're referring to, instead of querying for it twice. Let's change the code to be this:
-</p>
+<div class="well">
+  <h3>post.user - I'm confused</h3>
 
-<pre><code class="erb">
-&lt;% @posts.each do |post| %&gt;
-  &lt;% @user = User.find(post.user_id) %&gt;
-  &lt;%= image_tag @user.photo %&gt;
-  &lt;%= @user.name %&gt;
-  &lt;%= image_tag post.photo %&gt;
-  &lt;%= post.description %&gt;
-&lt;% end %&gt;
-</code></pre>
+  <p>
+    You might be wondering - where did <code>post.user</code> come from? If we look in our <code>schema.rb</code> file, <code>user</code> isn't a database field for the <code>post</code> table. Then how are we accessing the <code>user</code>?
+  </p>
+
+  <p>
+    This is another example of Rails magic. Since <code>Post</code> belongs to <code>User</code>, Rails allows you to call the <code>user</code> that owns the <code>Post</code> by doing <code>post.user</code>.
+  </p>
+
+  <p>
+    In this case, <code>post</code> is the placeholder variable in the <code>each</code> loop, representing a single <code>Post</code> from the <code>@posts</code> collection.
+  </p>  
+</div>
 
 <%= create_flashcard %>
 
