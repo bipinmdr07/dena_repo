@@ -25,12 +25,12 @@
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;% @user = User.find(post.user_id) %&gt;
-  &lt;%= image_tag @user.photo %&gt;
-  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
-  &lt;% if post.user_id == current_user.id %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;% if post.user == current_user %&gt;
     &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
   &lt;% end %&gt;
 

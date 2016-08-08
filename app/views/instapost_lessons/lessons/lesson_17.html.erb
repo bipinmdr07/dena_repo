@@ -31,7 +31,7 @@ before_action :is_owner?
 private
 
 def is_owner?
-  if Post.find(params[:id]).user_id != current_user.id
+  if Post.find(params[:id]).user != current_user
     redirect_to root_path
   end
 end
@@ -48,7 +48,7 @@ end
 <%= create_flashcard %>
 
 <p>
-  The <code>is_owner?</code> method just checks if the post's <code>user_id</code> and the <code>current_user.id</code> do not match, and if so, it redirects the user to the <code>root_path</code>.
+  The <code>is_owner?</code> method just checks if the post's <code>user</code> and the <code>current_user</code> do not match, and if so, it redirects the user to the <code>root_path</code>.
 </p>
 
 <p>
@@ -68,5 +68,131 @@ before_action :is_owner?, only: [:edit, :update]
 </p>
 
 <%= create_flashcard %>
+
+<p> 
+  Awesome. Now that the code is working, we can work on refactoring the code. Let's take a look at the <code>is_owner?</code> method once again.
+</p>
+
+<pre><code class="ruby">
+def is_owner?
+  if Post.find(params[:id]).user != current_user
+    redirect_to root_path
+  end
+end
+</code></pre>
+
+<p>
+  Here we have an <code>if</code> statement. We can actually reduce this to a one-liner:
+</p>
+
+<pre><code class="ruby">
+def is_owner?
+  redirect_to root_path if Post.find(params[:id]).user != current_user
+end
+</code></pre>
+
+<div class="well">
+  <h3>One-liner if statements</h3>
+
+  <p>
+    Many Rails developers tend to like to write one line statements if possible. There are several ways to do this. Let's take a look at an <code>if</code> statement.
+  </p>
+
+<pre><code class="ruby">
+if 2 + 2 == 4
+  puts "I'm really smart"
+end
+</code></pre>
+
+  <p>
+    This is great, but we're taking 3 lines to accomplish very little. We can reduce this to one line, like this:
+  </p>  
+
+<pre><code class="ruby">
+puts "I'm really smart" if 2 + 2 == 4
+</code></pre>
+
+  <h3>Ternary Operators</h3>
+
+  <p>
+    Let's look at another example. Let's say we have a <code>is_adult?</code> method inside of a <code>Person</code> model that has an <code>age</code> attribute.
+  </p>  
+
+<pre><code class="ruby">
+class Person
+  attr_accessor :age
+
+  def initialize(age)
+    @age = age
+  end
+
+  def is_adult?
+    if age >= 18
+      true
+    else
+      false
+    end
+  end
+end
+
+person = Person.new(20)
+person.is_adult?
+# => returns true
+
+child = Person.new(10)
+child.is_adult?
+# => returns false
+</code></pre>
+
+  <p> 
+    We can refactor the <code>is_adult?</code> method like this:
+  </p>  
+
+<pre><code class="ruby">
+class Person
+  attr_accessor :age
+
+  def initialize(age)
+    @age = age
+  end
+
+  def is_adult?
+    age >= 18 ? true : false
+  end
+end
+
+person = Person.new(20)
+person.is_adult?
+# => returns true
+
+child = Person.new(10)
+child.is_adult?
+# => returns false
+</code></pre>
+
+  <p>
+    Woah, this is totally cleaner code! But you are also probably confused because of the new syntax. This syntax is called is the ternary operator. It makes writing one-line if statements really easy. This is how it works:
+  </p>  
+
+<pre><code class="ruby">
+if_this_is_a_true_value ? then_the_result_is_this : else_it_is_this
+</code></pre>
+
+  <p>
+    Pretty cool right? :)
+  </p>
+
+  <%= create_flashcard %>
+
+</div>
+
+
+
+
+
+
+
+
+
 
 <%= standard_git_workflow %>

@@ -22,18 +22,9 @@ end
   What <code>Post.find(params[:id])</code> is doing is, it's <code>find</code>ing a <code>Post</code> with an <code>id</code> that matches the <code>params[:id]</code>.
 </p>
 
-<p>
-  Although we went over this in the Ideator lessons, you're probably asking yourself what <code>params[:id]</code> is again :)
+<p class="alert alert-success">
+  Before resuming, take 10 minutes to review the <code>find</code> method in <%= link_to 'Ideator - Editing and Updating Ideas', '/ideator_lessons/14' %>.
 </p>
-
-<div class="well">
-  <h3>What are params again?</h3>
-  <p>
-    <code>params</code> are basically user specified data to the rails application. When we go to the edit page for a post, we pass in the <code>id</code> of the <code>Post</code> as a paramter. For example, if we want to edit a <code>Post</code> with an <code>id</code> of <code>1</code>, the URL would look like this: <code>http://localhost:3000/posts/1/edit</code>). In this case, the <code>1</code> at the end of the URL is considered as a parameter by Rails. We know this because if we run <code>rake routes</code>, we see that the URI pattern is <code>/posts/:id/edit</code> where <code>:id</code> represents the parameter.
-  </p>
-
-  <%= create_flashcard %>
-</div>
 
 <p>
   So let's zoom back into our code. We have <code>Post.find(params[:id])</code>. What this means is that it's trying to find the post with the <code>id</code> that's passed in as a parameter.
@@ -61,9 +52,8 @@ end
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;% @user = User.find(post.user_id) %&gt;
-  &lt;%= image_tag @user.photo %&gt;
-  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
   &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
@@ -76,19 +66,18 @@ end
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;% @user = User.find(post.user_id) %&gt;
-  &lt;%= image_tag @user.photo %&gt;
-  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
-  &lt;% if post.user_id == current_user.id %&gt;
+  &lt;% if post.user == current_user %&gt;
     &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
   &lt;% end %&gt;
 &lt;% end %&gt;
 </code></pre>
 
 <p>
-  Here, we check to see if the <code>post</code>'s <code>user_id</code> matches the <code>id</code> of the current user that is logged in.
+  Here, we check to see if the <code>post</code>'s <code>user</code> matches the <code>current_user</code>.
 </p>
 
 <p>
@@ -149,7 +138,7 @@ end
 </p>
 
 <p>
-  There's one last thing we need to do. Although we added a conditional in our loop in <code>index.html.erb</code> to make sure that other users can't see the link to edit the post, people could still manually go to the Edit Posts URL and try to update the post. For example, someone could go to <code>http://localhost:3000/posts/1/edit</code> and they would be able to edit a Post with the <code>id</code> of <code>1</code>. We need to make sure that we don't allow this to happen.
+  There's one last thing we need to do. Although we added a conditional in our loop in <code>index.html.erb</code> to make sure that other users can't see the link to edit the post, <strong>people could still manually go to the Edit Posts URL and try to update the post.</strong> For example, someone could go to <code>http://localhost:3000/posts/1/edit</code> and they would be able to edit a Post with the <code>id</code> of <code>1</code>. We need to make sure that we don't allow this to happen.
 </p>
 
 <p>

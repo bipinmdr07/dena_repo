@@ -24,9 +24,8 @@ end
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;% @user = User.find(post.user_id) %&gt;
-  &lt;%= image_tag @user.photo %&gt;
-  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
   &lt;% if post.user_id == current_user.id %&gt;
@@ -41,9 +40,8 @@ end
 </p>
 
 <pre><code class="erb">
-&lt;% @user = User.find(post.user_id) %&gt;
-&lt;%= image_tag @user.photo %&gt;
-&lt;%= @user.name %&gt;
+&lt;%= image_tag post.user.photo %&gt;
+&lt;%= post.user.name %&gt;
 &lt;%= image_tag post.photo %&gt;
 &lt;%= post.description %&gt;
 &lt;% if post.user_id == current_user.id %&gt;
@@ -57,9 +55,8 @@ end
 </p>
 
 <pre><code class="erb">
-&lt;% @user = User.find(@post.user_id) %&gt;
-&lt;%= image_tag @user.photo %&gt;
-&lt;%= @user.name %&gt;
+&lt;%= image_tag @post.user.photo %&gt;
+&lt;%= @post.user.name %&gt;
 &lt;%= image_tag @post.photo %&gt;
 &lt;%= @post.description %&gt;
 &lt;% if @post.user_id == current_user.id %&gt;
@@ -69,14 +66,13 @@ end
 </code></pre>
 
 <p>
-  Let's add a link in <code>index.html.erb</code> for each of the posts:
+  Let's add a link in <code>index.html.erb</code> that takes the user to the show page for each post.
 </p>
 
 <pre><code class="erb">
 &lt;% @posts.each do |post| %&gt;
-  &lt;% @user = User.find(post.user_id) %&gt;
-  &lt;%= image_tag @user.photo %&gt;
-  &lt;%= @user.name %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
   &lt;!-- add this line below --&gt;
