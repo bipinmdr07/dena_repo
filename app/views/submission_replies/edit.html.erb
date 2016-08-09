@@ -15,7 +15,7 @@
 
   <%= simple_form_for @submission_reply, url: submission_submission_reply_path(params[:submission_id], params[:id]), method: :patch, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
-      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
+      <%= f.input :content, label: 'Comment', required: true %>
     </div>
 
     <br>

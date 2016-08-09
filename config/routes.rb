@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount Ckeditor::Engine => '/ckeditor'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
@@ -103,7 +102,7 @@ Rails.application.routes.draw do
   get 'preregistration', to: 'static_pages#preregistration'
   get 'support', to: 'static_pages#support'
 
-
+  post 'uploads' => 'uploads#create'
   #error routes
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
