@@ -10,7 +10,8 @@
 
 <pre><code class="ruby">
 def create
-  @comment = Post.find(params[:post_id]).comments.create(comment_params.merge(user_id: current_user.id))
+  @post = Post.find(params[:post_id])
+  @comment = @post.comments.create(comment_params.merge(user_id: current_user.id))
   if @comment.valid?
     redirect_to root_path
   else
@@ -43,21 +44,57 @@ end
 </p>
 
 <pre><code class="ruby">
-Post.find(params[:post_id]).comments.create(comment_params)
+@post = Post.find(params[:post_id])
+@comment = @post.comments.create(comment_params.merge(user_id: current_user.id))
 </code></pre>
 
 <p>
-  adding the <code>user_id</code> would become complex. However, we can use this <code>merge</code> method to merge in the <code>user_id</code> and set it to <code>current_user.id</code>. That's what <code>.merge(user_id: current_user.id)</code> is doing right here.
+  we can't do something like <code>current_user.@post.comments.create</code>. However, we can use this <code>merge</code> method to merge in the <code>user_id</code> and set it to <code>current_user.id</code>. That's what <code>.merge(user_id: current_user.id)</code> is doing right here.
 </p>
 
 <%= create_flashcard %>
+
+<div class="well">
+  <h3>.merge</h3>
+
+  <p>
+    Let's look at what the <code>merge</code> method does. Let's say we have a hash of information about a book:
+  </p>
+
+<pre><code class="ruby">
+book = {
+  title: "Harry Potter",
+  rating: 5
+}
+</code></pre>
+  
+  <p>
+    Let's say we want to add information about the owner of the book. Let's say that my friend <%= current_user.first_name %> is the owner of the book :D We can <strong>merge</strong> in this information like this:
+  </p>
+
+<pre><code class="ruby">
+book = {
+  title: "Harry Potter",
+  rating: 5
+}
+
+book.merge(owner: <%= current_user.first_name %>)
+# => {:title=>"Harry Potter", :rating=>5, :owner=>"<%= current_user.first_name %>"}
+
+</code></pre>
+
+  <p>
+    Let's go back to our <code>comment_params.merge(user_id: current_user.id)</code>. Here we are merging in the <code>user_id</code> into the <code>comments_params</code> hash, so that the <code>user_id</code> is saved in the database as well.
+  </p>
+
+</div>
 
 <p>
   Let's also add authentication to make sure that users who aren't signed in aren't allowed to access the <code>create</code> action. As we've done before, we can use Devise's <code>before_action :authenticate_user!</code> filter.
 </p>
 
 <pre><code class="ruby">
-class CommentsController &lt; Application Controller
+class CommentsController &lt; ApplicationController
   before_action :authenticate_user!, only: :create
 </code></pre>
 

@@ -85,7 +85,7 @@ add_index :comments, :post_id
 </code></pre>
 
 <p>
-  Let's look at the first line. What we're doing here is making an index of a <code>Comment</code> with a pair of <code>post_id</code> and <code>user_id</code>. For example, one comment might have a <code>user_id</code> of <code>12</code> and a <code>post_id</code> of <code>322</code>. In this case, by making an index of a pair of <code>post_id</code> and <code>user_id</code>, if we do a query like this:
+  Let's look at the first line. What we're doing here is making an index of a <code>Comment</code> with a pair of and <code>user_id</code> and <code>post_id</code>. For example, one comment might have a <code>user_id</code> of <code>12</code> and a <code>post_id</code> of <code>322</code>. In this case, by making an index of a pair of <code>post_id</code> and <code>user_id</code>, if we do a query like this:
 </p>
 
 <pre><code class="ruby">
@@ -103,7 +103,7 @@ current_user.comments.where(post_id: 322)
 <%= create_flashcard %>
 
 <p>
-  We also need the second line because we might want to do something like this:
+  We also need the second line (<code>add_index :comments, :post_id</code>) because we might want to do something like this:
 </p>
 
 <pre><code class="ruby">
@@ -116,7 +116,7 @@ current_user.comments.where(post_id: 322)
 </p>
 
 <p class="alert alert-warning">
-  Again, as a side note, <code>@post.comments</code> automatically queries for <code>Comment</code>s with the <code>post_id</code> of <code>@post</code>.
+  Again, as a side note, <code>@post.comments</code> automatically queries for <code>Comment</code>s that belong to the <code>current_user</code>.
 </p>
 
 <p>
