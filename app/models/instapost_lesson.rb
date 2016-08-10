@@ -1,7 +1,7 @@
 class InstapostLesson < ActiveRecord::Base
   COURSE_TITLE = "Instapost - Share your photos online"
 
-  LESSON_LENGTH = 33
+  LESSON_LENGTH = 39
 
   DURATION = 30
 
@@ -69,8 +69,18 @@ class InstapostLesson < ActiveRecord::Base
         [29, "Setting the basic styling"],
         [30, "Self-Directed Lesson: Styling the navbar"],
         [31, "Self-Directed Lesson: Styling Posts"],
-        [32, "Self-Directed Lesson: Styling the Profile Page"],
-        [33, "Final Touches"]
+        [32, "Self-Directed Lesson: Styling the Profile Page"]
+      ]
+    ],
+    ["Adding Likes to Posts",
+      [
+        [33, "Setting up Upvoting"],
+        [34, "Setting up our Controllers"],
+        [35, "Writing the Front End"],
+        [36, "What is AJAX?"],
+        [37, "Sending an AJAX Request"],
+        [38, "Re-rendering the Page"],
+        [39, "Final Touches"]
       ]
     ]
   ]

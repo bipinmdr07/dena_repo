@@ -99,7 +99,34 @@ class CommentsController &lt; ApplicationController
 </code></pre>
 
 <p>
-  Awesome! Now that we've set up the logic for creating posts, let's create a form to actually add comments to post in the next lesson.
+  Awesome! Now that we've set up the logic for creating posts, let's not forget to add validations to our posts.
+</p>
+
+<h3>Adding Validations</h3>
+
+<p>
+  Let's make sure that we get valid data to be saved into our database. Specifically, we need to make sure that the <code>text</code>, <code>post_id</code>, and <code>user_id</code> is present.
+</p>
+
+<p>
+  In our <code>comment.rb</code> file, let's add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+class Comment &lt; ActiveRecord::Base
+  belongs_to :user
+  belongs_to :post
+
+  validates :text, :user_id, :post_id, presence: true
+end
+</code></pre>
+
+<p>
+  Now if we try adding a comment without <code>text</code>, it won't save into the database.
+</p>
+
+<p>
+  In the next lesson, let's create a form to actually add comments to post in the next lesson.
 </p>
 
 

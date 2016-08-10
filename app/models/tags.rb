@@ -111,7 +111,13 @@ class Tags < ActiveRecord::Base
       [30, "Self-Directed Lesson: Styling the navbar"] => %w(),
       [31, "Self-Directed Lesson: Styling Posts"] => %w(),
       [32, "Self-Directed Lesson: Styling the Profile Page"] => %w(),
-      [33, "Final Touches"] => %w()
+      [33, "Setting up Upvoting"] => %w(),
+      [34, "Setting up our Controllers"] => %w(),
+      [35, "Writing the Front End"] => %w(),
+      [36, "What is AJAX?"] => %w(),
+      [37, "Sending an AJAX Request"] => %w(),
+      [38, "Re-rendering the Page"] => %w(),
+      [40, "Final Touches"] => %w()
     },
     "javascript_lessons" => {
       [1, "Learning the Basics"] => %w(),

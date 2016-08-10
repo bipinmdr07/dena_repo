@@ -1,0 +1,219 @@
+<h1><%= title_for(InstapostLesson, 9, 5) %></h1>
+
+<p>
+  Let's take a look at the code we wrote before:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;% if current_user.voted_up_on? post %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post %&gt; 
+    &lt;% else %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(post.id), method: :post %&gt;
+    &lt;% end %&gt;
+
+    &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% else %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  In order to perform AJAX requests, all we need to do is attach <code>remote: true</code> to our <code>link_to</code>s:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;% if current_user.voted_up_on? post %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post, remote: true %&gt; 
+    &lt;% else %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(post.id), method: :post, remote: true %&gt;
+    &lt;% end %&gt;
+
+    &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% else %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. Now if you click the link, it seems like nothing is happening. 
+</p>
+
+<p>
+  However, if we look in our Rails server, you will see that the server is responding to our clicks. Your server should look like this:
+</p>
+
+<%= image_tag 'instapost/after_ajax.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Notice how on the second like, it says <code>Processing by UpvotesController#create as JS</code> (if you can't see the words on the screenshot, check your own Rails server to see if you see this). JS stands for JavaScript. This means that the AJAX request is working!
+</p>
+
+<p>
+  Before adding in <code>remote: true</code>, the server process looked something like this:
+</p>  
+
+<%= image_tag 'instapost/before_ajax.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Here, it says <code>Processing by UpvotesController#create as HTML</code>.
+</p>
+
+<p>
+  Next, what we need to do is configure the controllers so that it responds to the JS requests. Inside the <code>create</code> method within both your <code>upvotes_controller.rb</code> and <code>downvotes_controller.rb</code> file, add the following lines of code:
+</p>  
+
+<pre><code class="ruby">
+respond_to do |format|
+  format.html {}
+  format.js {}
+end
+</code></pre>
+
+<p>
+  Your controllers should now look like this:
+</p>
+
+<pre><code class="ruby">
+class DownvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @post = Post.find(params[:post_id])
+    @post.downvote_from current_user
+    redirect_to posts_path
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+  end
+end
+</code></pre>
+
+<pre><code class="ruby">
+class UpvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @post = Post.find(params[:post_id])
+    @post.liked_by current_user
+    redirect_to posts_path
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+  end
+end
+</code></pre>
+
+<div class="well">
+  <h3>The respond_to method</h3>
+
+  <p>
+    We just saw above that with the <code>remote: true</code>, it processed the request as JS, and without it, it process the request as HTML.
+  </p>
+
+  <p>
+    We can tell Rails to respond differently according to the type of request it receives. For example, if the request was sent as HTML, you can redirect the user to <code>posts_path</code> and if the request was sent as JS, then you can tell the application to do otherwise.
+  </p>  
+
+  <p>
+    Inside our <code>upvotes_controller.rb</code> and <code>downvotes_controller.rb</code>, let's change the <code>create</code> action to look like the following:
+  </p>  
+
+<pre><code class="ruby">
+class UpvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @post = Post.find(params[:post_id])
+    @post.liked_by current_user
+
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js {}
+    end
+  end
+end
+</code></pre>
+
+<pre><code class="ruby">
+class DownvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @post = Post.find(params[:post_id])
+    @post.downvote_from current_user
+    
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.js {}
+    end
+  end
+end
+</code></pre>
+  
+  <p>
+    Now if you click on the heart icon, if you look inside the Rails server, you will notice that it gave you a "Missing Template" error. This is because <code>redirect_to posts_path</code> is only triggered when the request is sent as HTML. 
+  </p>
+
+  <p>
+    This means that Rails will try to find a file called <code>create</code> inside the <code>apps/views/upvotes</code> directory. Specifically, since the request is sent in as JS, it will try to find a <code>create.js.erb</code> file instead of a <code>create.html.erb</code> file.
+  </p>  
+
+  <p>
+    Let's see what happens when we remove the <code>remote: true</code> option.
+  </p>
+
+  <p>
+    Let's remove the <code>remote: true</code> option from the downvotes link:
+  </p>  
+
+<pre><code class="ruby">
+&lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post %&gt;
+</code></pre>
+
+  <p>
+    Save the file and refresh the page. Now try to downvote a post that you have already upvoted. This time, instead of giving you a "Missing Template" error, it will refresh the page and redirect you to the <code>posts_path</code>. 
+  </p>  
+
+  <p>
+    This is because inside our <code>respond_to</code> method, we have this piece of code:
+  </p>
+
+<pre><code class="ruby">
+respond_to do |format|
+  format.html { redirect_to posts_path }
+  format.js {}
+end
+</code></pre>
+
+  <p>
+    Notice how we have <code>redirect_to posts_path</code> inside the <code>format.html</code> block. This is saying, if the request is sent as HTML, then <code>redirect_to posts_path</code>.
+  </p>
+
+</div>
+
+<p>
+  Right now, if we click on the link, even though it won't show any error in the browser, if we look at the Rails server, we will see a "Missing Template" error. Let's create <code>create.js.erb</code> file inside both the <code>app/views/upvotes</code> folder and the <code>app/views/downvotes</code> folder.
+</p>
+
+<p>
+  Now if we press the link, it won't give us the "Missing Template error". Now what we need to do is to write some simple JavaScript to update the page to reflect our new likes!
+</p>
+
+
+<%= standard_git_workflow %>
+
+
+
+

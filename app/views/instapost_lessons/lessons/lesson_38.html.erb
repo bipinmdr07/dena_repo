@@ -1,0 +1,226 @@
+<h1><%= title_for(InstapostLesson, 9, 6) %></h1>
+
+<p>
+  This lesson will be jam-packed with concepts you have never encountered before! Don't be afraid of this challenge, let's buckle and finish up this feature!
+</p>
+
+<p>
+  First, let's think about what needs to happen. 
+</p>
+
+<ol>
+  <li>The user clicks the heart icon for a post</li>
+  <li>A <code>POST</code> request is sent to the server</li>
+  <li>The <code>create.js.erb</code> file is rendered</li>
+  <li>The number of likes for the post is updated</li>
+</ol>
+
+<p>
+  We've accomplished up until number 3. Now we need to finish the last step.
+</p>
+
+<p>
+  What we need to do is refresh a part of the page. How do we do that?
+</p>
+
+<h3>Introducing Partials</h3>
+
+<p>
+  Partials are reusable HTML files that can be rendered within the application. You'll see how they work in a second.
+</p>
+
+<p>
+  First, let's create a file called <code>_likes.html.erb</code> in the <code>app/views/posts</code> folder. <strong>Make sure the file name starts with <code>_</code>.</strong>
+</p>
+
+<p>
+  Next, inside of <code>index.html.erb</code>, let's move the following lines of code into the <code>_likes.html.erb</code> file:
+</p>
+
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;% if current_user.voted_up_on? post %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post, remote: true %&gt; 
+    &lt;% else %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(post.id), method: :post, remote: true %&gt;
+    &lt;% end %&gt;
+
+    &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% else %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Next, inside <code>index.html.erb</code> above the form for creating new comments, let's add the following line of code:
+</p>
+
+<pre><code class="erb">
+&lt;%= render partial: 'likes', locals: {post: post} %&gt;
+</code></pre>
+
+<p>
+  Your <code>index.html.erb</code> should now look something like this:
+</p>
+
+<pre><code class="erb">
+&lt;!-- code above --&gt;
+
+&lt;%= render partial: 'likes' %&gt;
+      
+&lt;% if user_signed_in? %&gt;
+  &lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post,  html: { class: 'form-horizontal' } do |f| %&gt;
+    &lt;%= f.input :text, label: 'Comment', placeholder: 'Add a comment...' %&gt;
+    &lt;%= f.submit 'Post', class: 'btn btn-primary btn-block' %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+
+&lt;!-- some code below --&gt;
+</code></pre>
+
+<p>
+  Let's save the file and refresh the page. We can see that nothing has changed.
+</p>
+
+<p>
+  You can render partials by calling <code>&lt;%= render partial: 'partial_file_name_without_underscore' %&gt;</code>. To clarify, the filename of partials must start with an underscore (<code>_</code>). When you render the partial, there is no need to put in the <code>_</code> in the beginning of the file name.
+</p>
+
+<p>
+  For example, we created a <code>_likes.html.erb</code> file, but we can render it with <code>&lt;%= render partial: 'likes' %&gt;</code>.
+</p>
+
+
+<div class="well">
+  <h3>Why Use a Partial?</h3>
+
+  <p>
+    You're probably now wondering why one would use a partial.
+  </p>  
+
+  <p>
+    <strong>The answer is because it allows us to keep our HTML code DRY (Don't Repeat Yourself). By creating a partial, you can render the HTML code anywhere in the application.</strong>
+  </p>  
+
+  <p>
+    If we have similar HTML code, then instead of copy and pasting all over the place, we can place it in a partial and render it where we need to.
+  </p>
+
+  <%= create_flashcard %>
+</div> 
+
+<p>
+  Now that we stored the HTML in a partial, what we can do is write some JavaScript to re-render only the partial of the post.
+</p>
+
+<div class="well">
+  <h3>Disclaimer :)</h3>
+  <p>
+    The content after this is quite advanced, so don't worry if you don't understand everything on the first try!
+  </p>
+</div>
+
+<p>
+  The first thing we need to do is make a container element for this partial. This is so that we can use JavaScript to select the container and tell the browser to replace the content of it with our new partial.
+</p>
+
+<p>
+  Let's wrap our partial in a <code>span</code> with a dynamic <code>id</code>:
+</p>
+
+<pre><code class="erb">
+&lt;span id="likes_container_&lt;%= post.id %&gt;"&gt;
+  &lt;%= render partial: 'likes' %&gt;
+&lt;/span&gt;
+</code></pre>
+
+<p>
+  The <code>id</code> of this <code>span</code> will change depending on the <code>id</code> of the <code>post</code>. For example, if the <code>post.id</code> is <code>1</code>, then the <code>span</code> <code>id</code> will be <code>likes_container_1</code>.
+</p>
+
+<p>
+  Next, let's change the piece of code that renders our partial:
+</p>
+
+<pre><code class="erb">
+&lt;span id="likes_container_&lt;%= post.id %&gt;"&gt;
+  &lt;%= render partial: 'likes', locals: {post: post} %&gt;
+&lt;/span&gt;
+</code></pre>
+
+<p>
+  Notice how we added <code>locals: {post: post}</code>. <code>locals</code> in partials are just variables that you can use within your partial. You can assign the variable a value. 
+</p>
+
+<p>
+  In this case, we are assigning the <code>post</code> variable to the value of <code>post</code> (<code>post</code> comes from the loop inside <code>index.html.erb</code>).
+</p>
+
+<p>
+  Then, we can use the <code>post</code> variable inside of the <code>partial.</code>
+</p>
+
+<p>
+  Let's change all of the <code>@post</code> instance variables in <code>_likes.html.erb</code> and replace it with <code>post</code> so that we can use the local variable specified in <code>&lt;%= render partial: 'likes', locals: {post: post} %&gt;</code>:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;% if current_user.voted_up_on? post %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post, remote: true %&gt; 
+    &lt;% else %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(post.id), method: :post, remote: true  %&gt;
+    &lt;% end %&gt;
+
+    &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% else %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>   
+  Awesome. Save the file and refresh the page. You'll see that nothing has changed yet. 
+</p>
+
+<p>
+  Here comes the juicy part. What we are going to do is write some jQuery/JavaScript to update the contents page.
+</p>
+
+<p>
+  Inside of the <code>create.js.erb</code> inside both the <code>app/views/downvotes</code> file and <code>app/views/upvotes</code> file, let's add the following piece of code:
+</p>
+
+<pre><code class="erb">
+$('#likes_container_&lt;%= @post.id %&gt;').html("&lt;%= escape_javascript render partial: '/posts/likes', locals: { post: @post } %&gt;")
+</code></pre>
+
+<p>
+  Save both of the files. Let's try out the feature.
+</p>
+
+<p>
+  Click on the heart icon. Notice how without refreshing the page, it updates the number of likes! If you click on it again, notice how it still changes the number of likes. This is awesome!
+</p>
+
+<p>
+  Phew! That was a lot of work. Hopefully in the last few lessons, you've learned that using AJAX allows for a much better user experience - imagine Facebook or Instagram refreshing everytime you like a post!
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
