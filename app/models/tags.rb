@@ -117,7 +117,7 @@ class Tags < ActiveRecord::Base
       [36, "What is AJAX?"] => %w(),
       [37, "Sending an AJAX Request"] => %w(),
       [38, "Re-rendering the Page"] => %w(),
-      [40, "Final Touches"] => %w()
+      [39, "Final Touches"] => %w()
     },
     "javascript_lessons" => {
       [1, "Learning the Basics"] => %w(),
