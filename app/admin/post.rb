@@ -13,7 +13,7 @@ ActiveAdmin.register Post do
     f.inputs 'Blog Post' do
       f.input :title
       f.input :featured_image
-      f.input :body, as: :ckeditor, ckeditor: {language: 'us'}
+      f.input :body, input_html: { 'data-provider'=> "summernote"}
       f.input :user_id, as: :hidden, input_html: {value: current_admin_user.id}
     end
     f.actions

@@ -107,5 +107,7 @@ $(window).on('scroll load', function() {
     $(document).ready(ready);
     return $(document).on('turbolinks:load', ready);
   });
-
+  $(document).ready(function() {
+      $('#summernote').summernote();
+    });
 /*  summernote */
