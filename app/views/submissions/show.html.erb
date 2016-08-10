@@ -35,7 +35,7 @@
       <h3><%= @submission.title %></h3>
       <small><%= display_date(@submission.created_at) %></small>
       <br>
-      
+
       <%= sanitize raw(@submission.content) %>
       <p class = "pull-right" ></p>
       <br class = "clear">
@@ -50,7 +50,7 @@
 
   <hr>
 
-        
+
   <% @submission.submission_replies.order("created_at ASC").each do |reply| %>
     <% user = User.find(reply.user_id) %>
     <div class="row">
@@ -83,8 +83,8 @@
 
 
   <%= simple_form_for :submission_reply, url: submission_submission_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-    <div data-no-turbolink>
-      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
+    <div data-no-turbolink="true">
+      <%= f.input :content, as: :summernote, label: 'Comment', required: true %>
     </div>
     <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 

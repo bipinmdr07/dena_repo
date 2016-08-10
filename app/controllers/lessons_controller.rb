@@ -16,7 +16,7 @@ class LessonsController < ApplicationController
     @lesson = params[:id]
     @lesson_length = controller.constantize::LESSON_LENGTH
 
-    @next_lesson = @lesson.to_i + 1 
+    @next_lesson = @lesson.to_i + 1
     @lesson == 1 ? @prev_lesson = 0 : @prev_lesson = @lesson.to_i - 1
     @course_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_name = controller + "s"
@@ -41,7 +41,7 @@ class LessonsController < ApplicationController
       return if current_user.html_css_access?
       lesson_locked_redirect
     elsif controller_name.classify == "RubyLesson"
-      return if current_user.ruby_fundamentals_access?
+      return if current_user.ruby_access?
       lesson_locked_redirect
     elsif controller_name.classify == "IdeatorLesson"
       return if current_user.ideator_access?

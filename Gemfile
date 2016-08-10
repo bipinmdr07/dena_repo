@@ -31,13 +31,16 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'mail_form'
 
+# summernote editor
+gem 'summernote-rails', '~> 0.8.1.1'
+
 # uploading stuff
 gem "figaro"
 gem 'carrierwave'
 gem 'mini_magick'
 gem "fog", '1.36.0'
 
-gem 'ckeditor', github: 'galetahub/ckeditor'
+gem "paperclip", "~> 5.0.0"
 
 # active admin
 gem 'activeadmin', github: 'activeadmin'
@@ -108,4 +111,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

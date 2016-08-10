@@ -1,4 +1,4 @@
-/*   
+/*
  * Template Name: Velocity - Responsive Website Template for Products
  * Version: 1.5.4
  * Author: Xiaoying Riley at 3rd Wave Media
@@ -98,6 +98,9 @@ a.btn-ghost .text,
 .btn-ghost .text {
   position: relative;
   top: -2px;
+}
+img {
+  max-width: 100%;
 }
 .highlight {
   color: #ec6952;
@@ -1777,6 +1780,7 @@ select {
   color: #ec6952;
 }
 /* Blog homepage */
+.
 .blog-list .post {
   padding: 0 15px;
   margin-bottom: 30px;
