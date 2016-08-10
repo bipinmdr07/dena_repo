@@ -30,7 +30,7 @@ end
 
 <pre><code class="erb">
 &lt;% post.comments.each do |comment| %&gt;
-  &lt;p&gt;&lt;%= User.find(comment.user_id).name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;%= comment.user.name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
   &lt;%= link_to 'Delete', post_comment_path(post_id: post.id, id: comment.id), method: :delete %&gt;
 &lt;% end %&gt;
 
@@ -50,7 +50,7 @@ end
 <pre><code class="erb">
 &lt;% post.comments.each do |comment| %&gt;
   &lt;p&gt;&lt;%= User.find(comment.user_id).name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
-  &lt;% if comment.user_id == current_user.id %&gt;
+  &lt;% if comment.user == current_user %&gt;
     &lt;%= link_to 'Delete', post_comment_path(post_id: post.id, id: comment.id), method: :delete %&gt;
   &lt;% end %&gt;
 &lt;% end %&gt;
@@ -66,7 +66,7 @@ before_action :is_owner?, only: :destroy
 
 <pre><code class="ruby">
 def is_owner?
-  if @comment.user_id != current_user.id
+  if @comment.user != current_user
     redirect_to root_path
   end
 end

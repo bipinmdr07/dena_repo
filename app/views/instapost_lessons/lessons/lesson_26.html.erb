@@ -6,7 +6,7 @@
 
 <pre><code class="erb">
 &lt;% post.comments.each do |comment| %&gt;
-  &lt;p&gt;&lt;%= User.find(comment.user_id).name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;%= comment.user.name %&gt; &lt;%= comment.text %&gt;&lt;/p&gt;
 &lt;% end %&gt;
 
 &lt;% if user_signed_in? %&gt;
