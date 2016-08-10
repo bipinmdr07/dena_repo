@@ -1,5 +1,5 @@
 <% if @question.mentor_post %>
-  
+
 <% else %>
   <%= question_back_to_lesson %>
 <% end %>
@@ -8,7 +8,7 @@
 
   <%= render "shared/flash_messages" %>
 
-  
+
 
   <div class="row">
     <div class="col-xs-12 col-sm-2">
@@ -47,7 +47,7 @@
 
   <hr>
 
-        
+
   <% @question.replies.order("created_at ASC").each do |reply| %>
     <% user = User.find(reply.user_id) %>
     <div class="row">
@@ -82,7 +82,7 @@
 
   <%= simple_form_for :reply, url: question_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
-      <%= f.cktext_area :content, label: 'Comment', ckeditor: {language: 'us'}, required: true, class: 'ckeditor' %>
+      <%= f.input :content, as: :text, label: 'Comment', required: true %>
     </div>
     <%= f.input :user_id, as: :hidden, input_html:{ value: current_user.id } %>
 

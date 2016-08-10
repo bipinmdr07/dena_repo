@@ -414,7 +414,11 @@ pre {
 .embed_video {
 	margin: 50px 0px;
 }
-
+.forum_container {
+  img {
+    max-width: 100%;
+  }
+}
 .forum_section {
 	margin: 50px 0px;
   border-top: 1px solid #eee;
@@ -433,8 +437,8 @@ pre {
 
 .screenshot {
 	width: 100%;
-  border: 1px solid whitesmoke; 
-  border-radius: 3px; 
+  border: 1px solid whitesmoke;
+  border-radius: 3px;
   box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
 }
 

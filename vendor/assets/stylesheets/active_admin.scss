@@ -17,7 +17,9 @@
 //   .status_tag { background: #6090DB; }
 $skinLogo: url("betalogo.png") no-repeat 0 0;
 @import "active_skin";
-
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "summernote";
 #header h1.site_title {
   background-size: 100%;
 }
@@ -25,4 +27,12 @@ $skinLogo: url("betalogo.png") no-repeat 0 0;
 .cke_chrome {
   width: 79.5% !important;
   overflow: hidden;
+}
+
+.label {
+  color: #333;
+}
+
+img {
+  max-width: 100%;
 }
