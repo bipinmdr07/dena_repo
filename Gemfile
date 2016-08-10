@@ -40,8 +40,6 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem "fog", '1.36.0'
 
-gem "paperclip", "~> 5.0.0"
-
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
