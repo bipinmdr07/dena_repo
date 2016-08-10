@@ -36,6 +36,9 @@ Rails.application.routes.draw do
 
   resources :prework_kickoffs, only: :create
 
+  resources :images, only: [:create, :destroy]
+
+
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 
   post 'question_downvotes/:id(.:format)', to: 'question_downvotes#create', as: 'question_downvote'
@@ -102,7 +105,6 @@ Rails.application.routes.draw do
   get 'preregistration', to: 'static_pages#preregistration'
   get 'support', to: 'static_pages#support'
 
-  post 'uploads' => 'uploads#create'
   #error routes
   match "/404", to: "errors#not_found", via: :all
   match "/500", to: "errors#internal_server_error", via: :all
