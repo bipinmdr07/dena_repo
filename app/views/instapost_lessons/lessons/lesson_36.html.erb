@@ -1,0 +1,24 @@
+<h1><%= title_for(InstapostLesson, 9, 4) %></h1>
+
+<p>
+  You might have heard about AJAX before, or it may be totally new for you. Either way, we'll try to disect what it is and how it works.
+</p>
+
+<p>
+  <strong>Ajax is simply the method of exchanging data with a server, and updating parts of a web page – without reloading the entire page.</strong>
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  For example, on the TECHRISE platform, when you press the "Mark as Completed" button, it updates the status of the lessons on your account without reloading the page. This is because we use AJAX to achieve this. <strong>AJAX allows us to provide users with a more responsive user experience.</strong>
+</p>
+
+<p>
+  <strong>AJAX stands for Asynchronous JavaScript and XML.</strong> Asynchronous means that multiple events can be processed at the same time. AJAX allows you to load data in the background and displays it on the web page without reloading the page. It's awesome!
+</p>  
+
+<p>
+  In our case, we want to use AJAX so that users can press the heart icon and like the post without refreshing the page. Rails allows us to send forms and make AJAX requests easily with the <code>remote: true</code> option. We'll see how this works in the next lesson.
+</p>
+

@@ -1,0 +1,270 @@
+<h1><%= title_for(InstapostLesson, 9, 3) %></h1>
+
+<p>
+  Let's create a nice front end so that users can click on heart icons to like posts.
+</p>
+
+<p>
+  To use the heart icons, let's use Font Awesome. We could use the CDN, but let's use the gem to install Font Awesome into our project.
+</p>
+
+<p>
+  In your <code>Gemfile</code>, let's add the following line:
+</p>  
+
+<pre><code class="ruby">
+gem 'font-awesome-sass', '~> 4.6.2'
+</code></pre>
+
+<p>
+  Run <code>bundle install</code>.
+</p>
+
+<p>
+  Open your <code>application.scss</code> file and add the following lines after the bootstrap imports:
+</p>
+
+<pre><code class="ruby">
+@import "font-awesome-sprockets";
+@import "font-awesome";
+</code></pre>
+
+<p>
+  Your file should now look like this:
+</p>
+
+<pre><code class="ruby">
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+</code></pre>
+
+<p>
+  Great. Now we can use Font Awesome's icons.
+</p>
+
+<p>
+  Let's now work on displaying the icon and the amount of likes the post has.
+</p>
+
+<p>
+  Let's add this above our form for adding comments to the post.
+</p>
+
+<pre><code class="erb">
+&lt;!-- Let's write our code here --&gt;
+
+&lt;% if user_signed_in? %&gt;
+  &lt;%= simple_form_for Comment.new, url: post_comments_path(post), method: :post,  html: { class: 'form-horizontal' } do |f| %&gt;
+    &lt;%= f.input :text, label: 'Comment', placeholder: 'Add a comment...' %&gt;
+    &lt;%= f.submit 'Post', class: 'btn btn-primary btn-block' %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  This is what we first need to do:
+</p>    
+
+<ul>
+  <li>If a user is signed in</li>
+  <ul>
+    <li>Display a heart icon</li>
+    <li>Display the number of likes</li>
+    <li>If the user clicks on the heart, it should like the post</li>
+  </ul> 
+  <li>If a user is not signed in</li>
+  <ul>
+    <li>Display a heart icon</li>
+    <li>Display the number of likes</li>
+    <li>There should be no link for liking the post</li>
+  </ul>
+</ul> 
+
+<p>
+  Let's first create a conditional to check if the user is signed in.
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+
+&lt;% else %&gt;
+
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's work on displaying the icon and number of likes when a user is not signed in. We can use the <code>fa fa-heart-o</code> icon for the heart:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+
+&lt;% else %&gt;
+  &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see a heart. 
+</p>
+
+<p>
+  Next, let's add the number of likes the post has. We can retreive this with <code>post.get_likes.size</code>. In order to display it in the form of "21 likes" or <code>1 like</code>, let's use the Rails pluralization engine to achieve this:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+
+&lt;% else %&gt;
+  &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. It should now display "0 likes".
+</p>
+
+<p>
+  Notice how the heart is a little too small. Let's wrap the entire code in a <code>post_like</code> span:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+
+&lt;% else %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt; end &gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  In our <code>master.scss</code> file, let's add the following code:
+</p>
+
+<pre><code class="scss">
+.post_like {
+  .fa {
+    font-size: 20px;
+  }
+}
+</code></pre>
+
+<p>
+  Save the file and refresh the page. The heart is looking good!
+</p>
+
+<p>
+  Next, let's work on the interface if the user is signed in. <strong>This is what should happen:</strong>
+</p>  
+
+<ul>
+  <li>
+    If the user has already liked the post
+  </li>
+  <ul>
+    <li>The heart icon's content should be filled (use <code>i class="fa fa-heart"</code>)</li>
+    <li>If the user clicks on the heart, it should unlike the post</li>
+  </ul>
+  <li>
+    If the user hasn't liked the post
+  </li>
+  <ul>
+    <li>The heart icon's content should be open (use <code>i class="fa fa-heart-o"</code>)</li>
+    <li>If the user clicks on the heart, it should like the post</li>
+  </ul>
+</ul>
+
+<p>
+  Let's write this in code.
+</p>
+
+<p>
+  According to the documentation, to find out if the user signed in has liked the post, we can use the <code>voted_up_on?</code> method like this:
+</p>
+
+<pre><code class="ruby">
+current_user.voted_up_on? post
+# => returns true or false
+</code></pre>
+
+<p>
+  Let's make our code look like this:
+</p>
+
+<pre><code class="erb">
+&lt;% if user_signed_in? %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;% if current_user.voted_up_on? post %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post %&gt; 
+    &lt;% else %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(post.id), method: :post %&gt;
+    &lt;% end %&gt;
+
+    &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% else %&gt;
+  &lt;span class="post_like"&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+  &lt;/span&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p class="alert alert-success">
+  Notice how we specified the <code>method</code> to be <code>:post</code>. By doing so, we are making sure we are making a <code>POST</code> request to the server instead of a <code>GET</code> request.
+</p>
+
+<p>
+  Save the file and refresh the page. Now if you press on one of the hearts, it will add a new like to the post! The number of likes for the posts should increase.
+</p>
+
+<p>
+  This is awesome, but having to reload the page every time you want to like a post is a really bad user experience.
+</p>
+
+<p>
+  In the next lessons, we're going to talk about what AJAX is, and how to make it so that we don't have to refresh the page every time we like a post.
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

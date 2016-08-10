@@ -243,6 +243,39 @@ before_action :authenticate_user!, only: [:new, :create]
   Let's test this out. Let's first log out of our application, and then try going to <code>http://localhost:3000/posts/new</code>. It should redirect you to the sign in page.
 </p>
 
+<h3>Setting Up Validations</h3>
+
+<p>
+  We need to make sure that the data that is passed in to the database is valid. Let's make sure that <code>user_id</code>, <code>photo</code>, and <code>description</code> is present.
+</p>
+
+<p>
+  In your <code>post.rb</code>, add in the following lines:
+</p>
+
+<pre><code class="ruby">
+validates :photo, :description :user_id, presence: true
+</code></pre>
+
+<p>
+  Your <code>post.rb</code> file should now look like this:
+</p>  
+
+<pre><code class="ruby">
+class Post &lt; ActiveRecord::Base
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+  
+  mount_uploader :photo, PhotoUploader
+
+  validates :photo, :description :user_id, presence: true
+end
+</code></pre>
+
+<p>
+  Now our database won't save any <code>Post</code>s without a <code>photo</code>, <code>description</code>, or <code>user_id</code>.
+</p>
+
 <p>
   Awesome! Let's keep on going.
 </p>

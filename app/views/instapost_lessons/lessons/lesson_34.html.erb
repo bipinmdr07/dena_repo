@@ -1,0 +1,318 @@
+<h1><%= title_for(InstapostLesson, 9, 2) %></h1>
+
+<p>
+  In this lesson, we're going to configure our controllers to handle upvotes and downvotes.
+</p>  
+
+<p>
+  First, let's go to <%= link_to 'the documentation', 'https://github.com/ryanto/acts_as_votable' %> and see how we can upvote or downvote posts.
+</p>
+
+<p>
+  If we look at the <%= link_to 'Like/Dislike Yes/No Up/Down', "https://github.com/ryanto/acts_as_votable#likedislike-yesno-updown" %> section, we can see that you can add a like to a post with the <code>.liked_by</code> method:
+</p>  
+
+<pre><code class="ruby">
+@post.liked_by @user1
+@post.downvote_from @user2
+</code></pre>
+
+<p>
+  We also see above that we can downvote the post with the <code>downvote_from</code> method.
+</p>
+
+<p>
+  Now that we know how to like and downvote posts, we need to set up a controller action to handle this.
+</p>  
+
+<p>
+  <strong>How could we do this?</strong>
+</p>
+
+<p>
+  The first thought might be to do the following:
+</p>
+
+<ul>
+  <li>Inside <code>posts_controller.rb</code>, add a <code>upvote</code> and <code>downvote</code> method</li>
+
+<pre><code class="ruby">
+class PostsController &lt; ApplicationController
+  # code above
+
+  def upvote
+    
+  end
+
+  def downvote
+
+  end
+
+  # code below
+end
+</code></pre>
+
+  <li>Create routes for the <code>upvote</code> and <code>downvote</code> method</li>
+  <li>Create a form or link that sends a request to the <code>upvote</code> or <code>downvote</code> method</li>
+  <li>Inside the methods, handle the upvoting and downvoting</li>
+</ul>
+
+<p>
+  Some people might say this is OK, but at TECHRISE, <strong>let's do it in a different way.</strong>
+</p>  
+
+<h3>Introducing the DHH Way of Organizing Controllers</h3>
+
+<p>
+  DHH is the creator of Ruby on Rails. He also races cars and has his own successful start up called Basecamp. He is superman.
+</p>
+
+<p>
+  DHH has a way of organizing controllers that make a lot of sense. First, read <%= link_to 'How DHH Organizes His Rails Controllers', 'http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/' %>.
+</p>  
+
+<p>
+  Basically this is what he is saying:
+</p>
+
+<blockquote>
+  <p>
+    [...] controllers should only use the default CRUD actions index, show, new, edit, create, update, destroy. Any other action would lead to the creation of a dedicated controller (which itself only has default CRUD actions).
+  </p>
+  <small>DHH (http://jeromedalbert.com/how-dhh-organizes-his-rails-controllers/)</small>
+</blockquote>
+
+<p>
+  In other words, in our example, instead of creating <code>upvote</code> and <code>downvote</code> methods, which aren't default <code>CRUD</code> actions, we should be creating controllers for <code>upvotes</code> and <code>downvotes</code>.
+</p>
+
+<p>
+  This might seem pretty complicated, but we'll walk through this step by step so it makes sense.
+</p>  
+
+<p>
+  First, let's generate an <code>Upvotes</code> controller. In the terminal, let's type in the following command:
+</p>
+
+<pre><code class="ruby">
+rails generate controller upvotes
+</code></pre>
+
+<p>
+  Next, let's generate a <code>Downvotes</code> controller. In the terminal, type in the following command:
+</p>  
+
+<pre><code class="ruby">
+rails generate controller downvotes
+</code></pre>
+
+<p>
+  Now that we have an <code>upvotes_controller.rb</code> and <code>downvotes_controller.rb</code>, let's setup the routes for it.
+</p>  
+
+<p>
+  What we want to do is nest the <code>upvotes</code> and <code>downvotes</code> routes under the <code>posts</code>. Edit your <code>resources :posts</code> block to look like this:
+</p>
+
+<pre><code class="ruby">
+resources :posts do
+  resources :comments
+  resources :upvotes
+  resources :downvotes
+end
+</code></pre>
+
+<p>
+  We're only going to need the <code>create</code> action (we'll explain why in a second), let's add that in our <code>routes.rb</code>:
+</p>
+
+<pre><code class="ruby">
+resources :posts do
+  resources :comments
+  resources :upvotes, only: :create
+  resources :downvotes, only: :create
+end
+</code></pre>
+
+<p>
+  Awesome. Now if we run <code>rake routes</code>, we should get the following output:
+</p>
+
+<pre><code class="ruby">
+                  Prefix Verb   URI Pattern                                 Controller#Action
+        new_user_session GET    /users/sign_in(.:format)                    devise/sessions#new
+            user_session POST   /users/sign_in(.:format)                    devise/sessions#create
+    destroy_user_session DELETE /users/sign_out(.:format)                   devise/sessions#destroy
+           user_password POST   /users/password(.:format)                   devise/passwords#create
+       new_user_password GET    /users/password/new(.:format)               devise/passwords#new
+      edit_user_password GET    /users/password/edit(.:format)              devise/passwords#edit
+                         PATCH  /users/password(.:format)                   devise/passwords#update
+                         PUT    /users/password(.:format)                   devise/passwords#update
+cancel_user_registration GET    /users/cancel(.:format)                     devise/registrations#cancel
+       user_registration POST   /users(.:format)                            devise/registrations#create
+   new_user_registration GET    /users/sign_up(.:format)                    devise/registrations#new
+  edit_user_registration GET    /users/edit(.:format)                       devise/registrations#edit
+                         PATCH  /users(.:format)                            devise/registrations#update
+                         PUT    /users(.:format)                            devise/registrations#update
+                         DELETE /users(.:format)                            devise/registrations#destroy
+                    root GET    /                                           posts#index
+           post_comments GET    /posts/:post_id/comments(.:format)          comments#index
+                         POST   /posts/:post_id/comments(.:format)          comments#create
+        new_post_comment GET    /posts/:post_id/comments/new(.:format)      comments#new
+       edit_post_comment GET    /posts/:post_id/comments/:id/edit(.:format) comments#edit
+            post_comment GET    /posts/:post_id/comments/:id(.:format)      comments#show
+                         PATCH  /posts/:post_id/comments/:id(.:format)      comments#update
+                         PUT    /posts/:post_id/comments/:id(.:format)      comments#update
+                         DELETE /posts/:post_id/comments/:id(.:format)      comments#destroy
+            post_upvotes POST   /posts/:post_id/upvotes(.:format)           upvotes#create
+          post_downvotes POST   /posts/:post_id/downvotes(.:format)         downvotes#create
+                   posts GET    /posts(.:format)                            posts#index
+                         POST   /posts(.:format)                            posts#create
+                new_post GET    /posts/new(.:format)                        posts#new
+               edit_post GET    /posts/:id/edit(.:format)                   posts#edit
+                    post GET    /posts/:id(.:format)                        posts#show
+                         PATCH  /posts/:id(.:format)                        posts#update
+                         PUT    /posts/:id(.:format)                        posts#update
+                         DELETE /posts/:id(.:format)                        posts#destroy
+                    user GET    /users/:id(.:format)                        users#show
+</code></pre>
+
+<p>
+  By nesting the <code>upvotes</code> and <code>downvotes</code> under <code>posts</code>, we can use the <code>post_id</code> in the URI pattern to tell Rails which <code>Post</code> to upvote.
+</p>
+
+<p>
+  OK, let's now add some logic into our controllers. Let's open up our <code>upvotes_controller.rb</code>.
+</p>
+
+<p>
+  First, we need to make sure that the user is signed in before they can upvote anything. Let's add a <code>before_action :authenticate_user!</code> filter to do this:
+</p>
+
+<pre><code class="ruby">
+class UpvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+end
+</code></pre>
+
+<p>
+  Next, let's add a <code>create</code> method.
+</p>
+
+<pre><code class="ruby">
+class UpvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+
+  end
+end
+</code></pre>
+
+<div class="well">
+  <h3>Why are we making a create method?</h3>
+
+  <p>
+    You might be wondering why we are making a <code>create</code> method inside the <code>Upvotes</code> controller. It might seem unintuitive, but if you think of it this way, it is actually quite intuitive:
+  </p>
+
+  <p>
+    <strong>We are <em>creating</em> an upvote</strong>. 
+  </p>
+
+  <p>
+    Instead of thinking "the user is upvoting the post", think "the user is <em>creating</em> an upvote". By doing so, we can keep our actions to our default <code>CRUD</code> actions (<code>index</code>, <code>show</code>, <code>new</code>, <code>edit</code>, <code>create</code>, <code>update</code>, <code>destroy</code>).
+  </p>
+</div>
+
+<p>
+  Let's write the logic for the <code>create</code> action.
+</p>
+
+<p>
+  First, we need to <code>find</code> the <code>Post</code> to <code>upvote</code>. When we ran <code>rake routes</code>, we saw that we could use the <code>post_id</code> parameter. Let's make the <code>create</code> method look like the following:
+</p>
+
+<pre><code class="ruby">
+def create
+  @post = Post.find(params[:post_id])
+end
+</code></pre>
+
+<p>
+  Next, we need to upvote the <code>Post</code>. As we talked about earlier in the lesson, we can do this with the <code>liked_by</code> method. Since the user liking the post is the <code>current_user</code>, we can write our code like this:
+</p>
+
+<pre><code class="ruby">
+def create
+  @post = Post.find(params[:post_id])
+  @post.liked_by current_user
+end
+</code></pre>
+
+<p>
+  Finally, let's redirect the user to the index page:
+</p>
+
+<pre><code class="ruby">
+def create
+  @post = Post.find(params[:post_id])
+  @post.liked_by current_user
+  redirect_to posts_path
+end
+</code></pre>
+
+
+
+<p>
+  Awesome. Let's set up our <code>downvotes_controller.rb</code> the same way.
+</p>
+
+<p>
+  Let's first add <code>before_action :authenticate_user!</code>:
+</p>
+
+<pre><code class="ruby">
+class DownvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+end
+</code></pre>
+
+<p>
+  Next, let's create a <code>create</code> action and <code>find</code> the post to downvote:
+</p>
+
+<pre><code class="ruby">
+class DownvotesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @post = Post.find(params[:post_id])
+    @post.downvote_from current_user
+    redirect_to posts_path
+  end
+end
+</code></pre>
+
+<p> 
+  Awesome. In the next lesson, let's create the front end so that users can like posts.
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@ ActiveAdmin.register User do
   permit_params :email, :intro_access, :html_css_access, :ruby_access, :ideator_access,
   :ruby_core_access, :instapost_access, :github_access, :javascript_access, :admin, :command_line_access,
   :rspec_blog_access, :mvc_access, :mentor, :start_date, :graduation_date, :remaining_mentor_sessions, :mentor_id,
-  :facebook_handle, :twitter_handle, :github_handle, :personal_website
+  :facebook_handle, :twitter_handle, :github_handle, :personal_website, :prework_start_time, :prework_end_date, :admitted 
 
   index do
     column :name
@@ -11,9 +11,13 @@ ActiveAdmin.register User do
     column :email
     column :created_at
     column :sign_in_count
+    column :start_date
+    column :graduation_date
+    column :prework_start_time
+    column :prework_end_date
     column :current_sign_in_at
     column :last_sign_in_at
-    column :admin
+    column :admitted
     column :intro_access
     column :html_css_access
     column :ruby_access
@@ -25,15 +29,14 @@ ActiveAdmin.register User do
     column :command_line_access
     column :rspec_blog_access
     column :mvc_access
-    column :mentor
-    column :start_date
-    column :graduation_date
     column :remaining_mentor_sessions
     column :mentor_id
     column :facebook_handle
     column :twitter_handle
     column :github_handle
     column :personal_website
+    column :mentor
+    column :admin
     actions
   end
 
@@ -42,7 +45,9 @@ ActiveAdmin.register User do
       f.input :first_name
       f.input :last_name
       f.input :email
+      f.input :admitted
       f.input :admin
+      f.input :mentor
       f.input :intro_access
       f.input :html_css_access
       f.input :ruby_access
@@ -54,7 +59,6 @@ ActiveAdmin.register User do
       f.input :command_line_access
       f.input :rspec_blog_access
       f.input :mvc_access
-      f.input :mentor
       f.input :start_date, :as => :datepicker
       f.input :graduation_date, :as => :datepicker
       f.input :remaining_mentor_sessions

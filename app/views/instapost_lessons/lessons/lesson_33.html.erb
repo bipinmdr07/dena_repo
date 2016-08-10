@@ -1,26 +1,83 @@
-<h1><%= title_for(InstapostLesson, 8, 5) %></h1>
+<h1><%= title_for(InstapostLesson, 9, 1) %></h1>
 
 <p>
-  Whew! Congratulations! You've made it this far! You started from scratch and now you have a fully functional web app that has the same functionality as the billion dollar company Instagram!
+  To add the upvoting feature, let's install a new gem into our app.
 </p>
 
 <p>
-  By now, you probably understand many of the basic Rails concepts. <strong>The important thing is to keep on coding and to keep on learning.</strong> The fun thing about software engineering is that there is always something more to learn!
+  Let's add the <code>acts_as_votable</code> gem.
+</p>
+
+<p class="alert alert-success">
+  Take a few minutes to read <%= link_to 'the documentation', 'https://github.com/ryanto/acts_as_votable' %>.
 </p>
 
 <p>
-  With that being said, here are some final tasks that you can do to make your site even more professional looking! Do tackle the tasks labeled "Easy", but don't bother trying the tasks labeled higher than "Easy" if you don't feel like it, they are pretty big tasks!
-</p>
+  First, let's add the following line into our <code>Gemfile</code>.
+</p>  
 
-<ul>
-  <li>Easy: Change the site title to: "Share Your Photos Online - Instapost"</li>
-  <li>Easy: Add a Favicon</li>
-  <li>Easy: Make adjustments to how the site looks</li>
-  <li>Intermediate: Scroll to Load More Photos</li>
-  <li>Advanced: Like Photos Feature</li>
-  <li>Advanced: Follow Users Feature</li>
-</ul>
+<pre><code class="ruby">
+gem 'acts_as_votable', '~> 0.10.0'
+</code></pre>
 
 <p>
-  You've worked so hard! You deserve a nice break from coding :) I'm really excited to how far you have come from day 1 of starting your coding journey!
+  Save the file and run <code>bundle install</code> in your terminal to install the gem.
 </p>
+
+<p>
+  Next, go into your terminal and run the following commands:
+</p>
+
+<pre><code class="ruby">
+rails generate acts_as_votable:migration
+rake db:migrate
+</code></pre>
+
+<p>
+  To make our <code>Post</code>s votable, let's open up our <code>post.rb</code> file and add in <code>acts_as_votable</code>. Your <code>post.rb</code> file should now look like this:
+</p>
+
+<pre><code class="ruby">
+class Post &lt; ActiveRecord::Base
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+  
+  mount_uploader :photo, PhotoUploader
+
+  validates :photo, :description :user_id, presence: true
+
+  acts_as_votable
+end
+</code></pre>
+
+<p>
+  We also need to set the <code>User</code> model as the voter. To do this, let's open up our <code>user.rb</code> file and add in <code>acts_as_voter</code>. Your <code>user.rb</code> file should now look like this:
+</p>
+
+<pre><code class="ruby">
+class User &lt; ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+  mount_uploader :photo, PhotoUploader
+  
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  acts_as_voter
+end
+</code></pre>
+
+<p>
+  Awesome. Now that we've got everything set up, in the next lesson, we're going to setup the backend for handling upvotes and downvotes.
+</p>
+
+<%= standard_git_workflow %>
+
+
+
+
+
+
+
