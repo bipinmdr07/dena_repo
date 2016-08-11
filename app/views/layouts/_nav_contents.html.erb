@@ -60,7 +60,7 @@
 
                             <% if current_user.admin %>
                                 <li class="nav-item page-scroll">
-                                  <%= link_to 'ADMIN DASHBOARD', admin_dashboard_path if current_user.admin %>
+                                  <%= link_to 'ADMIN DASHBOARD', admin_dashboard_index_path if current_user.admin %>
                                 </li>
                             <% end %>
 
