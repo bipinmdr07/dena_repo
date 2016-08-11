@@ -1,3 +1,5 @@
+include ActionView::Helpers::TextHelper
+
 class StaticPagesController < ApplicationController
 	before_filter :authenticate_user!, only: [:courses, :activity_log, :dashboard]
 
@@ -22,6 +24,18 @@ class StaticPagesController < ApplicationController
     @submissions = current_user.submissions.all.order("created_at DESC").limit(5)
 
     @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
+
+    @lessons_completed_today = @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @flashcards_completed_today = @flashcards.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @lessons_completed_this_week = @lessons.where("created_at >= ?", 1.week.ago)
+    @flashcards_completed_this_week = @flashcards.where("created_at >= ?", 1.week.ago)
+
+    @stat_hash = {
+      @lessons_completed_today => "Lesson".pluralize(@completed_lessons_today.try(:count)) + " Completed Today",
+      @flashcards_completed_today => "Flashcard".pluralize(@flashcards_completed_today.try(:count)) + " Completed Today",
+      @lessons_completed_this_week => "Lesson".pluralize(@lessons_completed_this_week.try(:count)) + " Completed This Week",
+      @flashcards_completed_this_week => "Flashcard".pluralize(@flashcards_completed_this_week.try(:count)) + " Completed Today"
+    }
     
     if current_user.admin
       @unresolved_questions = Question.where(resolved: false) 

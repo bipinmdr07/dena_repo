@@ -1,3 +1,28 @@
+.question_list_title {
+  font-weight: 600;
+}
+
+.question_list_course_name {
+  font-weight: 600;
+  color: #666;
+}
+
+.stat-box-dashboard {
+  border-radius: 100%;
+  border: 1px solid #eee;
+  width: 180px;
+  height: 180px;
+  padding-top: 30px;
+  border: 4px solid #eee;
+  margin-bottom: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.stat-box-dashboard-text {
+  font-size: 35px;
+}
+
 .tab-pane {
   padding-top: 50px;
 }
@@ -166,14 +191,17 @@ span.radio.inline {
 
 .panel-heading-stats {
   padding: 10px 15px;
-  border-bottom: 2px solid #eee;
+  // border-bottom: 2px solid #eee;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  background: #fdfdfd;
+  // background: #fdfdfd;
   h3 {
-    font-weight: 300;
+
     font-size: 20px;
     margin-top: 10px;
+    text-align: center;
+    // color: #777;
+    // text-transform: uppercase;
   }
 }
 
