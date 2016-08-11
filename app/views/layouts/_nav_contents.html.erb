@@ -16,7 +16,7 @@
                 <% if user_signed_in? %>
 
                     <li class="nav-item page-scroll">
-                      <%= link_to 'ADMIN DASHBOARD', admin_root_path if current_user.admin %>
+                      <%= link_to 'ADMIN', admin_root_path if current_user.admin %>
                     </li>
 
                     <li class="nav-item page-scroll">
@@ -56,6 +56,12 @@
 
                                 <li><a style="text-transform: uppercase;">- DAYS UNTIL GRADUATION</a></li>
                                 
+                            <% end %>
+
+                            <% if current_user.admin %>
+                                <li class="nav-item page-scroll">
+                                  <%= link_to 'ADMIN DASHBOARD', admin_dashboard_path if current_user.admin %>
+                                </li>
                             <% end %>
 
                             <% if current_user.mentor %>
