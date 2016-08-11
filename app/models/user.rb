@@ -23,7 +23,10 @@ class User < ActiveRecord::Base
   scope :active_prework_students, -> { where("prework_end_date > ?", DateTime.now) }
   scope :signed_up_this_week, -> { where("created_at >= ?", 1.week.ago.utc) }
   scope :signed_up_last_week, -> { where("created_at <= ?", 1.week.ago.utc).where("created_at >= ?", 2.week.ago.utc) }
-  scope :signed_up_this_month, -> { where("created_at >= ?", 1.month.ago.utc) }
+  scope :signed_up_this_month, -> { where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
+  scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?', 
+                                    Date.today.last_month.beginning_of_month, 
+                                    Date.today.beginning_of_month )}
 
   def send_slack
     Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up!", 

@@ -61,8 +61,8 @@
                 <div class="col-xs-12 col-sm-10">
                   <div class="public_details">
                     <% if mentor_session.student_session %>
-                      <p>Public: <%= mentor_session.student_session.public_details %></p>
-                      <p>Private: <%= mentor_session.student_session.private_details %></p>
+                      <p><strong>PUBLIC</strong> <%= mentor_session.student_session.public_details %></p>
+                      <p><strong>PRIVATE</strong> <%= mentor_session.student_session.private_details %></p>
                     <% else %>
                       <p>Student has not yet logged their mentor session.</p>
                     <% end %>
