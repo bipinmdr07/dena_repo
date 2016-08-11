@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   resources :images, only: [:create, :destroy]
 
+  resources :admin_dashboard, only: :index
 
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 
