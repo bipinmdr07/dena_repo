@@ -65,7 +65,4 @@ class LessonsController < ApplicationController
     flash[:alert] = "You don't have access to this course yet! Keep up the great coding! :)"
     redirect_to courses_path
   end
-
-
-
 end
