@@ -1,63 +1,109 @@
 <h1><%= title_for(IntroLesson, 1, 1) %></h1>
 
 <p>
-	You've done it!
+	Hi <%= current_user.first_name %>! Welcome to TECHRISE :)
 </p>
 
 <p>
-	You've taken your first step to becoming a web developer. Give yourself a high five! (Click the hand)
+	Our mission at TECHRISE is to provide friendly and meaningful support for our students so that students can start coding to achieve their dreams. <strong>We believe that even though there are infinite amount of free online resources, it is still hard to learn web development when you are first starting out.</strong> <strong>We are here to teach and motivate students to become skilled web developers in a short amount of time by teaching not only the skills, but also the mentality of web developers with an innovative coding education platform</strong>.
 </p>
-<br>
 
-<div id = "HighFive" style = "width:80%;height:300px;display:none;">
-	<i class="fa fa-hand-paper-o" style = "font-size:300px;display:block;">Woooooooo!!!</i>
-</div>
-
-<div id = "HideHighFive"style = "width:80%;height:300px;">
-	<i class="fa fa-hand-paper-o" style = "font-size:300px;margin:0 auto;width:50px;display:block;"></i>
-</div>
-	
-<br>
+<h3>This is how we do it</h3>
 
 <p>
-	Our goal at Techrise is to give you the best resources to learn in an organized way. There are so many great resources out there but at the same time, it's so difficult to figure out how and where to start. We provide those resources and lay out the path for you.
+	First, <strong>we make sure that all of our students are motivated</strong>. This is to ensure that our student community is active and full of motivated learners. We have prework assignments to filter out potential students that aren't motivated. These prework assignments aren't so difficult - some people finish the assignments within days. If you have the motivation, it is easy to finish these assignments on time. <strong>If you have any questions, you can always ask on the online forums for free as well :)</strong>
 </p>
 
 <p>
-	The initial step in learning how to code is tough! At first, you won't know what you're doing at all. You'll be following tutorials, running into bugs, and then realizing the problem was a missing semi-colon, etc. It's all part of learning, but it's frustrating.
+	Once you complete the prework, you will be called in for an interview. We try to find out if you are really passionate about learning, and if you are, we are always happy to take you in as a TECHRISE student.
 </p>
 
 <p>
-	<strong>That's why we're here to support your journey.</strong> We're creating a curriculum for you that will teach you to become a self-sufficient web developer who is able to learn on their own.
+	Next, <strong>most of our curriculum is online</strong>. We do this for two reasons:
+</p>
+
+<ol>
+	<li>You can work on the lessons anywhere and anytime. There is no need to come physically to class. You also save time and money.</li>
+	<li>We can constantly update and renew our curriculum. Whenever we have feedback from students, we immediately revise the lessons to make it better.</li>
+</ol>
+
+<p>
+	However, no matter how good the lessons are, <strong>you will always have questions.</strong> This is because everyone sees things a different way. <strong>This is why we offer the TECHRISE Support System.</strong>
+</p>
+
+<h3>The TECHRISE Support System</h3>
+
+<p>
+	There are mainly 2 ways we support our students in achieving their goals:
+</p>	
+
+<ul>
+	<li>1 on 1 Mentor Sessions</li>
+	<li>Online Community</li>
+</ul>
+
+<p>
+	After being admitted into TECHRISE, you will have <strong>1 on 1 Mentor Sessions</strong> each week for 30 minutes. You can ask all of the questions that you wish in this time. To make the most out of the mentor sessions, we ask our students to keep a log of all of the questions that they have. These mentor sessions are mandatory and students come into the office once a week. <strong>We believe that having a mentor guide you through your journey to becoming a web developer is essential in accelerating your learning.</strong>
+</p>	
+
+<p>
+	Besides the 1 on 1 mentor sessions, we also have an <strong>active online community</strong> where our students ask questions <strong>anytime</strong> they want. We try to get to the questions as quickly as possible so that students can keep making <strong>rapid progress</strong>.
+</p>	
+
+<p>
+	<strong>By combining physical 1 on 1 mentor sessions with a virtual community where students can ask questions anytime, we provide an ecosystem for students to learn at an accelerated pace.</strong>
+</p>
+
+<h3>Learn by Building - Project Based Learning</h3>
+
+<p>
+	<strong>Instead of just teaching concepts, we motivate our students by actually building web applications and seeing how it works.</strong> At TECHRISE, you will first build a simple application where users can post ideas on to the web page (similar to Twitter), then you will build a complete clone of Instagram. You will also learn how to <strong>test</strong> your applications using a testing framework called RSpec.
+</p>	
+
+<h3>Career Support</h3>
+
+<p>
+	After graduating from TECHRISE, <strong>we offer an option for exceptional students to continue their learning experience as a junior mentor at TECHRISE.</strong>
 </p>
 
 <p>
-	There are many great websites that do amazing jobs at teaching. But sometimes, they are either too general and not practical - you'll go through basic lessons on syntax and things like that, but you'll never be able to create actual web applications - or they are too overwhelming - you'll have to go through hundreds of lessons in order to complete the entire curriculum, or they simply just cost a lot of money.
+	As a junior mentor, you will be responsible for answering questions on the online community and helping students out in any way possible. By working as a junior mentor, <strong>you will not only be able to teach and help others, but also learn more about web development.</strong>
 </p>
 
 <p>
-	<strong>
-		Our goal is not to train you to become superstar coders from day one. Instead our goal is to teach you the essential skills and tools in order for you to become one in the future.
-	</strong>
+	<strong>Junior mentors that have proven to be a helpful junior mentor and have accumulated enough knowledge will be promoted as a Senior mentor.</strong> Senior mentors are responsible for supporting students by conducting 1 on 1 mentor sessions.
+</p>
+
+<h3>First Steps</h3>
+
+<p>
+	<strong>The first step in joining TECHRISE is to complete all of the prework assignments.</strong> Again, if you have any questions, feel free to ask anytime on our online forum.
 </p>
 
 <p>
-	<strong>
-		Learning how to code <i>can</i> and <i>will</i> change your life.
-	</strong>
-</p>
+	We are looking forward to seeing you soon! Good luck with the prework assignments, <%= current_user.first_name %>!
+</p>	
 
-<br>
 
-<%= link_to 'Are you ready?', intro_lessons_path(2), class: 'btn btn-danger btn-lg btn-block' %>
 
-<br class = "clear">
 
-<script>
-$( '#HideHighFive' ).click(function() {
-	$( '#HideHighFive' ).hide();
-	$( " #HighFive " ).show();
-  $( " #HighFive " ).hide( "puff", {percent:500}, 2000 );
-  $( '#HideHighFive' ).delay(2000).show(0);
-});
-</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

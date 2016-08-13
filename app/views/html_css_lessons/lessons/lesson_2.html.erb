@@ -1,51 +1,27 @@
 <h1><%= title_for(HtmlCssLesson, 1, 2) %></h1>
 
 <p>
-  Now that you've taken the red pill, there's no going back. <strong>Welcome to the world coding.</strong>
+  For your first intro to HTML and CSS, we are going to use Dash Assembly's HTML and CSS course. <strong>Throughout your experience at TECHRISE, although many of our course materials are written at TECHRISE, we may use some outside resources for some parts of the course for you to learn some basic fundamentals.</strong> This is because these services are already well-established and free to use.
 </p>
 
 <p>
-  For your first intro to HTML and CSS, we are going to use Dash Assembly's HTML and CSS course because it's simply <i>awesome</i>.
+  <strong>At TECHRISE, we believe that simply having the resources to learn is not enough for most people to truly learn.</strong> Instead, what is actually important is <strong>having someone guide you through every step of your path to becoming a web developer.</strong> This is why there are so many people that sign up for free coding education platforms but fail to internalize and learn the material.
 </p>
 
 <p>
-	Jump on to <a href = "https://dash.generalassemb.ly" target = "_blank">this link</a> to get started! You'll need to sign up for an account, but after that you'll be all set.
+  With that being said, we have <strong>hand-crafted the curriculum at TECHRISE to offer the best possible education. We are also constantly improving and updating our curriculum.</strong>
 </p>
 
-<p>
-	You'll be building <strong>a personal website</strong>, a <strong>responsive blog theme</strong>, a <strong>small business website</strong>, and a <strong>CSS robot</strong>. Pretty awesome stuff! For an intro course, we think it's one of the best courses out there.
-</p>
+<h2>Instructions</h2>
 
-<h2>Directions</h2>
 <ul>
+  <li>Go to <a href = "https://dash.generalassemb.ly" target = "_blank">this link</a> to get started! You'll need to sign up for an account.</li>
   <li><strong>Don't worry about finishing Project 3, 4, and 5</strong></li>
   <li>Finish <strong>Project 1 ~ 2</strong></li>
   <li>Upload screenshot of your completed Dash Assembly screen in the <%= link_to 'submission page.', new_submission_path(course_name: controller_name.classify, lesson_id: params[:id]) %></li>
-  <li>There is no need to submit the code for each of the projects, your code should be good to go if you passed all of the Dash lessons :)</li>
+  <li>There is no need to submit the code for each of the projects</li>
   <li>Go to next lesson while you wait for our feedback :)</li>
 </ul>
 
-<br>  
-
-<div class = "well">
-  <h3>What are Responsive Websites?</h3>
-  <p>
-  	A <strong><i>responsive</i> website</strong> is a website that responds to the screen size of the user. Because many people now use their smartphones to surf the internet, it makes sense to make the website look nice on both computers and smartphones.
-  </p> 
-  <p>
-    For example, this website is responsive. Try shrinking the browser and you will see the components shrinking and expanding like magic.
-  </p>
-  <p>
-    In the Dash course you'll do in this section, you'll learn how to make responsive websites. Throughout your time at Techrise, you'll learn how to make responsive websites. <strong>Having the mindset of creating websites that are responsive is important in web development.</strong>
-  </p>
-
-  <%= create_flashcard %>
-</div>
-
-
-
-<br>
-
-<br class = "clear">
 
 <% @submission_form = true %>

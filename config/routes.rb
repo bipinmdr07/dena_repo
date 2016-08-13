@@ -62,6 +62,9 @@ Rails.application.routes.draw do
   get 'html_css_lessons', to: 'html_css_lessons#index', :as => 'html_css'
   get 'html_css_lessons/:id', to: 'html_css_lessons#show', :as => 'html_css_lessons'
 
+  get 'bootstrap_lessons', to: 'bootstrap__lessons#index', :as => 'bootstrap'
+  get 'bootstrap_lessons/:id', to: 'bootstrap__lessons#show', :as => 'bootstrap_lessons'
+
   get 'ideator_lessons', to: 'ideator_lessons#index', :as => 'ideator'
   get 'ideator_lessons/:id', to: 'ideator_lessons#show', :as => 'ideator_lessons'
 

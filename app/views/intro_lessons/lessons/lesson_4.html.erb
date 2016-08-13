@@ -1,107 +1,49 @@
 <h1><%= title_for(IntroLesson, 1, 4) %></h1>
 
 <p>
-  Throughout your time with Techrise, you'll be learning the main tools that will get you started to become a competent developer. The main languages and frameworks you will be learning will be Ruby, Ruby on Rails, HTML, CSS, JavaScript, jQuery, and Git/GitHub.
+	<strong>Web developers are people who create dynamic web applications to solve problems and provide solutions.</strong>
 </p>
 
 <p>
-	This all probably sounds super foreign to you - don't worry, that's normal! As you progress through the courses, you'll start to understand each term deeper, but for now because we don't want to confuse you, we're going to keep everything <strong>SUPER</strong> simple. All you need to know at this point is the general gist of each term.
+	Web developers can take an idea and figure out an elegant solution for users on the web. <strong>In a time where everything is on the web, web developers are extremely in demand across the world.</strong>
 </p>
 
-<h2>Ruby</h2>
 <p>
-	As we covered in the last lesson, Ruby is a super beginner friendly programming language (doesn't mean that it's a "beginner's language"!). 
-</p>
+  It's an exciting time to be a web developer because of this high demand. Writing code can be a lot of fun and learning how to develop web applications is an extremely worthwhile investment.
+</p>  
 
-<%= create_flashcard %>
+<div class="well">
 
-<h2>Ruby on Rails</h2>
+  <h3>Front End Development</h3>
+
+  <p> 
+    <strong>Front-end development</strong> refers to programming work that is related to creating the user interface and the user experience. Front-end developers typically write code with HTML, CSS, and JavaScript. <strong>The job of front-end developers is to build a nice looking design as well as build a user experience that is pleasant for the user.</strong>
+  </p>
+
+  <%= create_flashcard %>
+
+  <h3>Back End Development</h3>
+
+  <p>
+    <strong>Back-end development</strong> refers to programming work that is related to database logic and the server. There are several frameworks that allow you to develop the back-end, such as Ruby on Rails and Node.js. <strong>The main job of back-end developers is to ensure that the server handles the data passed in correctly.</strong>
+  </p>
+
+
+  <%= create_flashcard %>
+
+  <p>
+    Ruby on Rails allows developers to develop both the front-end and back-end. <strong>At TECHRISE, you will learn how to build web applications with pretty interfaces as well as complex server-side logic.</strong>
+  </p>  
+</div>
+
+<h3>Getting Started</h3>
+
 <p>
-	Ruby on Rails is a web framework that allows you to build dynamic apps using both front end and back end development. It uses Ruby as the language. In case you were wondering, web frameworks are indeed different from programming languages. Web frameworks allows you to build full web applications easily using programming languages, while programming languages are just languages that simply communicate with the computer. Also in case you were wondering, dynamic apps are apps where data in the server changes dynamically, as opposed to just a static website where a database isn't needed.
+  The first step in becoming a web developer is learning HTML and CSS. During the prework period, you will learn the basics of HTML and CSS to prepare for developing web applications in Ruby on Rails.
 </p>
 
-<%= create_flashcard %>
-
-<h2>HTML</h2>
-<p>
-  HTML is a language that describes the structure of the web page. Every web page has an HTML file and dictates what you see on the browser. With HTML, you can tell the web page to have a header with the name "I like Ice Cream", a paragraph saying "Ice cream is a sophisticated food. It comes in all flavors and colors, etc...", an image of ice cream on top of the paragraph, etc. You can tell the web page what you want to include.
-</p>
-
-<%= create_flashcard %>
-
-<h2>CSS</h2>
-<p>
-  CSS is what describes how the web page should be displayed. So basically with CSS, you can make the web page have a super pink background, make the fonts huge, or anything you want it to look like. Think of CSS like a blueprint for your design. CSS kind of plays a role of being HTML's strict teacher. CSS basically lays out a blueprint for how the HTML should be displayed, just like how a strict teacher lays out a blueprint for how a student should behave.
-</p>
-
-<%= create_flashcard %>
-
-<h2>JavaScript</h2>
-<p>
-  Basically, JavaScript is a language that can interact with HTML to make your websites interactive. Interacting with the HTML means we can change the text on the page, the background color on the page, make things move around in pretty ways, and so many more different things with scripts using JavaScript. We can make a picture of a cat change to a picture of a dog when a user presses a button, and then in 3 seconds change the text of a header of "Cats are Awesome!" to "No, Dogs are Better than Cats!", and we can do all of these cool things that allow users to interact with the browser dynamically. Beware - Java and JavaScript are two completely different languages!
-</p>
-
-<h3 id = "BestAnimal">Cats are Awesome!</h3>
-<%= image_tag 'cat.jpg', id: 'AnimalPic', style: 'height:100px;' %>
-<button id = "ChangeAnimal" class = "btn btn-success">Press Me</button>
-
-<%= create_flashcard %>
-
-<h2>jQuery</h2>
-<p>
-  jQuery is a JavaScript library - it's a collection of useful scripts in JavaScript written by other smart people that you can use to make your life easier. JavaScript and jQuery use the same language, but jQuery uses a little different syntax. jQuery and JavaScript is technically the same language, but jQuery is basically just an extension of JavaScript. It's a little more complicated than that, but in general just remember jQuery is a tool that does the same things that JavaScript can do, but much easier.
-</p>
-
-<%= create_flashcard %>
-
-<h2>Git/GitHub</h2>
-<p>
-  Git is a tool that allows a team to work together seamlessly. Imagine you have to write some kind of huge essay with 20 different people. How would you effectively know which person is writing which part and editing which part? How would you know if the sentence you wrote still makes sense, given the changes the other teammates made? Wouldn't it be easier if there was a tool that allowed the team to see where changes were made, who made those changes, and also kept the previous changes that you can always revert back to? That's what Git enables you to do. With Git, you can collaborate in a team effectively by being able to see all of the changes that were made by whom, and being able to make comments on the code to suggest a better solution, or simply to tell them their code is awesome.
-</p>
-
-<%= create_flashcard %>
-
-<br>
-<p>
-  If you want a more in-depth view of what each of these tools are, you'll find a bunch of resources online about these topics. We've given you just the super high-level descriptions of these terms, but it's enough to get you started. Make sure you really understand these simple descriptions using the quizzes below though!
-</p>
-
-<h1>Quiz Time!</h1>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is Ruby?', answer: "It's an awesome beginner friendly programming language", number: 1 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is Ruby on Rails?', answer: "Ruby on Rails is a web framework that allows you to build dynamic apps using both front end and back end development.", number: 2 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is HTML?', answer: "HTML is a language that describes the structure of the web page. You can basically tell the web page what you want to include in what format.", number: 3 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is CSS?', answer: "CSS is a language that describes how the web page should be displayed. CSS is like a blueprint for your design.", number: 4 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is JavaScript?', answer: "JavaScript is a language that can interact with HTML to make your websites interactive.", number: 5 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is jQuery?', answer: "jQuery is a JavaScript library - it's a collection of useful scripts written by other smart people that you can use to make your life easier.", number: 6 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is Git?', answer: "Git allows a team to work together super efficiently, allows people to see the changes that were made, and allows developers to revert back to a previon version of the code.", number: 7 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'What is the difference between a programming language and a web framework?', answer: "Web frameworks allows you to build full web applications easily using programming languages, while programming languages are just languages that simply communicate with the computer.", number: 8 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'Is Java and JavaScript the same language?', answer: "Nope! It's completely different!", number: 9 } %>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'Is JavaScript and jQuery the same language? What are the differences between the two?', answer: "jQuery is a library of scripts written in JavaScript by smart people to make coder's lives easier. They use the same language but they have different syntax.", number: 10 } %>
-
-<br class = "clear">
 
 
 
-<script>
-$('#ChangeAnimal').click(function() {
-	$('#AnimalPic').attr('src', '<%= image_path "dog.jpg" %>');
-	$(this).html('Wait 2 seconds...');
-	$(this).prop("disabled",true);
-	window.setTimeout(function () {
-	    $("#BestAnimal").html('No, Dogs are Better than Cats!');
-	    $("#ChangeAnimal").html('See? JavaScript is Cool');
-	}, 3000);
-})
-</script>
 
 

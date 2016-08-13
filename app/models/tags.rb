@@ -17,17 +17,14 @@ class Tags < ActiveRecord::Base
 
   LESSONS = {
     "intro_lessons" => {
-      [1, "Congratulations!"] => %w(),
-      [2, "What do web developers do?"] => %w(),
-      [3, "What language should I learn?"] => %w(),
-      [4, "Overview of languages and tools"] => %w(ruby html javascript git github),
-      [5, "Why use the TECHRISE Flashcard System?"] => %w(),
-      [6, "How to Embed Code with TECHRISE Flashcards"] => %w(),
-      [7, "Guidelines to maximize your learning experience"] => %w()
+      [1, "Welcome to TECHRISE"] => %w(),
+      [2, "Why use the TECHRISE Flashcard System?"] => %w(),
+      [3, "How to Embed Code with TECHRISE Flashcards"] => %w(),
+      [4, "Getting Started"] => %w()
     },
     "html_css_lessons" => {
-      [1, "After this, there is no turning back"] => %w(),
-      [2, "Building Your First Four HTML/CSS Projects"] => %w(),
+      [1, "Guidelines for Learning"] => %w(),
+      [2, "Building Your First Two HTML/CSS Projects"] => %w(),
       [3, "Setting Up Your Environment"] => %w(sublime chrome),
       [4, "Building a Simple Personal Resume Page in 25 minutes"] => %w(html css),
       [5, "Introducing Twitter Bootstrap"] => %w(bootstrap twitter),
@@ -40,6 +37,17 @@ class Tags < ActiveRecord::Base
       [12, "Finishing Touches"] => %w(),
       [13, "CHALLENGE: Host Your Website"] => %w(),
       [14, "Congratulations"] => %w()
+    },
+    "bootstrap_lessons" => {
+      [1, "Introducing Twitter Bootstrap"] => %w(),
+      [2, "Adding Twitter Bootstrap to Your Site"] => %w(),
+      [3, "Adding a Navbar"] => %w(),
+      [4, "Adding Content"] => %w(),
+      [5, "Working with the Grid System"] => %w(),
+      [6, "Adding Some More Content"] => %w(),
+      [7, "Adding a Footer"] => %w(),
+      [8, "Finishing Touches"] => %w(),
+      [9, "CHALLENGE: Host Your Website"] => %w()
     },
     "ruby_lessons" => {
       [1, "Introduction to Ruby"] => %w(ruby),
