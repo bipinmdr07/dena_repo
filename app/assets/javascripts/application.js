@@ -18,7 +18,6 @@
 //= require summernote
 //= require RRSSB
 //= require ace-rails-ap
-//= require wice_grid
 //= require_tree .
 //= require turbolinks
 

@@ -1,26 +1,24 @@
 console.log("hi");
 
 var td = $('td').filter(function(){
-    return $(this).text() === 'Archive' && $(this).parent().is("#card_<%= params[:card_id] %>")
+    return ($(this).text() === 'Archive' || $(this).text() === 'Unarchive') && $(this).parent().is("#card_<%= params[:card_id] %>");
 })
 
 console.log(td);
 
-var text = "<%= link_to 'Unarchive', card_archive_path(card_id: @card.id), method: :patch, class: 'btn btn-danger', remote: true %>"
+<% if @card.archived %>
+  var text = "<%= escape_javascript link_to 'Unarchive', card_archive_path(card_id: @card.id), method: :patch, class: 'btn btn-success btn-fixed-archive', remote: true %>"
+<% else %>
+  var text = "<%= escape_javascript link_to 'Archive', card_archive_path(card_id: @card.id), method: :patch, class: 'btn btn-danger btn-fixed-archive', remote: true %>"
+<% end %>
 
 console.log(text);
 
-<% if @card.archived %>
-  var text = "<%= link_to 'Unarchive', card_archive_path(card_id: @card.id), method: :patch, class: 'btn btn-danger', remote: true %>"
-<% else %>
-  var text = "<%= link_to 'Archive', card_archive_path(card_id: @card.id), method: :patch, class: 'btn btn-danger', remote: true %>"
-<% end %>
-
 td.html(text);
 
-td.fadeOut(400, function(){
-  td.html(text);
-}
+// td.fadeOut(400, function(){
+//   td.html(text);
+// }
 
 // var td = $('td').filter(function(){
 //     return $(this).text() === 'Archive' && $(this).parent().is("#card_66")
