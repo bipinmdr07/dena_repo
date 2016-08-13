@@ -1,0 +1,2 @@
+class BootstrapLessonsController < LessonsController
+end

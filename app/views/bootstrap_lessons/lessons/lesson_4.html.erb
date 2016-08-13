@@ -1,0 +1,131 @@
+<h1><%= title_for(HtmlCssLesson, 3, 4) %></h1>
+
+<p>
+  Now that we've got our navbar, let's add some content to our website.
+</p>
+
+<p>
+  Let's go back to the bootstrap website CSS page and see what else we have to do. If we scroll down, under "Containers" we can see that it's telling us that the content needs to be wrapped around in a <code>.container</code> or <code>.container-fluid</code>. The page also tells us that <code>.container</code> has padding on the side, while <code>.container-fluid</code> gives you a container that spans the entire width of your browser. But let's not worry too much about what that means and just go ahead and add a <code>div</code> with a class of <code>container-fluid</code> into our <code>body</code> under our navbar section.
+</p>
+
+<pre><code class="erb">
+  &lt;!-- rest of navbar code above --&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+    &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+  &lt;/nav&gt;
+
+  &lt;div class = "container"&gt;
+  &lt;/div&gt;
+
+</code></pre>
+
+<p>
+  Next, let's go to the Components section of the bootstrap website and see what else we can use. If we scroll all the way down, we see a component called a Jumbotron (<%= link_to 'click here', 'http://getbootstrap.com/components/#jumbotron' %> if you don't see it). We're not sure what a Jumbotron is, but it looks like something we could use in our landing page. It looks good, so let's add this in.
+</p>
+
+<p>
+  Currently, we have a "Hello" within a <code>h1</code> tag that we don't need, so <strong><span style="color:red;">let's get rid of that.</span></strong>
+</p>
+
+<p>
+  Again, let's copy the code that they've provided for us and paste it into our body inside our <code>.container-fluid</code>. When we do this, let's make sure we indent everything correctly so that the code is easy to read. Let's go back to our browser and refresh the page. It should now have the Jumbotron. Looks pretty cool!
+</p>
+
+<p>
+  Let's now add some text in here that tells users what our company does.
+</p> 
+
+<ul>
+  <li>
+    Let's replace the text inside the <code>h1</code> tag with our brand name.
+  </li>
+  <li>
+    Let's then add some paragraphs about what we do.
+  </li>
+  <ul>
+    <li>
+      So in our case, I'm going to add an opening and closing <code>p</code> tag, and between those, I'm going to add some text like "Learn how to code with Techrise".
+    </li>
+  </ul>
+  <li>
+    Add another paragraph by adding a opening and closing <code>p</code> tag and inserting some text between those.
+  </li>
+</ul>
+
+<p>
+  At this point, your code should look something similar to this.
+</p>
+
+<pre><code class="erb">
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;!-- Latest compiled and minified CSS --&gt;
+    &lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"&gt;
+    &lt;!-- Latest compiled and minified JavaScript --&gt;
+    &lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;nav class="navbar navbar-default"&gt;
+      &lt;div class="container-fluid"&gt;
+        &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
+        &lt;div class="navbar-header"&gt;
+          &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"&gt;
+            &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+            &lt;span class="icon-bar"&gt;&lt;/span&gt;
+            &lt;span class="icon-bar"&gt;&lt;/span&gt;
+            &lt;span class="icon-bar"&gt;&lt;/span&gt;
+          &lt;/button&gt;
+          &lt;a class="navbar-brand" href="#"&gt;Techrise&lt;/a&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
+        &lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"&gt;
+          &lt;ul class="nav navbar-nav navbar-right"&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="dropdown"&gt;
+              &lt;a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"&gt;Dropdown &lt;span class="caret"&gt;&lt;/span&gt;&lt;/a&gt;
+              &lt;ul class="dropdown-menu"&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Another action&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Something else here&lt;/a&gt;&lt;/li&gt;
+                &lt;li role="separator" class="divider"&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#"&gt;Separated link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
+      &lt;/div&gt;&lt;!-- /.container-fluid --&gt;
+    &lt;/nav&gt;
+
+    &lt;div class = "container-fluid"&gt;
+      &lt;div class="jumbotron"&gt;
+        &lt;h1&gt;Techrise&lt;/h1&gt;
+        &lt;p&gt;Learn how to code with Techrise&lt;/p&gt;
+        &lt;p&gt;Learn HTML, CSS, JavaScript, Ruby, and Ruby on Rails&lt;/p&gt;
+        &lt;p&gt;&lt;a class="btn btn-primary btn-lg" href="#" role="button"&gt;Learn more&lt;/a&gt;&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+
+
+  &lt;/html&gt;
+
+</code></pre>
+
+<p>
+  Let's go back to our browser and refresh the page. Cool, it's starting to look like a landing page!
+</p>
+
+<%= image_tag 'jumbotron.png', class: 'screenshot' %>
+
+<br>
+
+<br class = "clear">
+
+
+
+

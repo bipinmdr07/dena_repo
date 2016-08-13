@@ -1,4 +1,39 @@
 namespace :users do
+  task :update_bootstrap => :environment do
+    Progression.where(course_name: "HtmlCssLesson").each do |progression|
+      if progression.lesson_id >= 5 && progression.lesson_id < 14
+        lesson_id = progression.lesson_id - 4      
+        progression.update(course_name: "BootstrapLesson", lesson_id: lesson_id)        
+        progression.user.update(bootstrap_access: true) unless progression.user.admitted
+      end
+      if progression.lesson_id == 14
+        progression.update(lesson_id: 5)
+      end
+    end
+
+    Submission.where(course_name: "HtmlCssLesson", lesson_id: 13)
+              .update_all(course_name: "BootstrapLesson", lesson_id: 9)
+
+    Question.where(course_name: "HtmlCssLesson").each do |question|
+      if question.lesson_id >= 5 && question.lesson_id < 14
+        lesson_id = question.lesson_id - 4      
+        question.update(course_name: "BootstrapLesson", lesson_id: lesson_id)        
+      end
+      if question.lesson_id == 14
+        question.update(lesson_id: 5)
+      end
+    end
+
+    Question.where(course_name: "IntroLesson").each do |question|
+      if question.lesson_id > 1 && question.lesson_id < 5
+        question.destroy
+      elsif question.lesson_id >= 5
+        lesson_id = question.lesson_id - 3
+        question.update(lesson_id: lesson_id)
+      end
+    end    
+  end
+
   task :update_name => :environment do 
     User.all.each do |user|
       next if user.first_name && user.last_name

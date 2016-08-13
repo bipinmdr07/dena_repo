@@ -1,7 +1,7 @@
 class HtmlCssLesson < ActiveRecord::Base
 	COURSE_TITLE = "HTML/CSS"
 
-	LESSON_LENGTH = 14
+	LESSON_LENGTH = 5
 
 	DURATION = 15
 
@@ -22,7 +22,7 @@ class HtmlCssLesson < ActiveRecord::Base
 		],
 		["Next Steps",
 			[
-				[14, "Congratulations"]
+				[5, "Congratulations"]
 			]
 		]
 	]

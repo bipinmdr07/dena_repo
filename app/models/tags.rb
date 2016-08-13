@@ -27,16 +27,7 @@ class Tags < ActiveRecord::Base
       [2, "Building Your First Two HTML/CSS Projects"] => %w(),
       [3, "Setting Up Your Environment"] => %w(sublime chrome),
       [4, "Building a Simple Personal Resume Page in 25 minutes"] => %w(html css),
-      [5, "Introducing Twitter Bootstrap"] => %w(bootstrap twitter),
-      [6, "Adding Twitter Bootstrap to Your Site"] => %w(bootstrap),
-      [7, "Adding a Navbar"] => %w(navbar nav bootstrap),
-      [8, "Adding Content"] => %w(bootstrap container-fluid container),
-      [9, "Working with the Grid System"] => %w(grid bootstrap),
-      [10, "Adding Some More Content"] => %w(),
-      [11, "Adding a Footer"] => %w(footer sublime chrome html css),
-      [12, "Finishing Touches"] => %w(),
-      [13, "CHALLENGE: Host Your Website"] => %w(),
-      [14, "Congratulations"] => %w()
+      [5, "Congratulations"] => %w()
     },
     "bootstrap_lessons" => {
       [1, "Introducing Twitter Bootstrap"] => %w(),
