@@ -7,22 +7,61 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/railscasts.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/languages/erb.min.js"></script>
-  
+
 </head>
 
-<body>
-  <!-- ******HEADER****** -->
-  <header class="header">  
-      <div class="container">       
-          <h1 class="logo" style="padding-top: 13px; float:none;">
-              <a href="/"><span class="text" style="font-size: 40px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
-          </h1><!--//logo-->     
-                               
-      </div><!--//container-->
-  </header><!--//header-->
+<body id="page-top" class="index course_html">
 
-  <%= yield %>
-  
-  <%= render '/layouts/audio' %>    
+  <div id = "wrap">
+
+    <%= render '/layouts/nav_lessons' %>
+
+    <div class="container-fluid">
+      <div class = "content">
+
+        <div class="row">
+          <div class="col-xs-3">
+            <ul class="nav nav-pills nav-stacked flashcard-nav">
+              <li role="presentation"><%= link_to 'HOME', study_path %></li>
+              <li role="presentation"><%= link_to 'ALL CARDS', cards_path %></li>
+            </ul>
+          </div><!-- col-xs-3 -->
+          <div class="col-xs-9">
+            <%= yield %>
+          </div><!-- col-xs-9 -->
+        </div><!-- row -->
+      </div><!-- content -->
+    </div><!-- container-fluid -->
+
+  </div>
+
+  <%= render '/layouts/lesson_footer' %>
+
+  <%= render '/layouts/audio' %>
+
+  <script type="text/javascript">
+  ready = function() {
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+    var url = window.location;
+    // Will only work if string in href matches with location
+    $('ul.nav a[href="' + url + '"]').parent().addClass('active');
+    // Will also work for relative and absolute hrefs
+    $('ul.nav a').filter(function() {
+        return this.href == url;
+    }).parent().addClass('active');
+  }
+  $(document).ready(ready);
+  $(document).on('page:load', ready);
+  $(document).on('page:change',  function() {
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  });
+  $(document).on('page:restore', function() {
+    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  });
+  $(document).ready(function() {
+    $('#post_body').summernote();
+  });
+
+  </script>
 </body>
 </html>

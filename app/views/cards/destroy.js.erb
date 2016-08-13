@@ -1,0 +1,4 @@
+var tr = $("#card_<%= params[:id] %>");
+tr.fadeOut(400, function(){
+    tr.remove();
+});

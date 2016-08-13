@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810091034) do
+ActiveRecord::Schema.define(version: 20160812080702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20160810091034) do
     t.text     "question"
     t.text     "answer"
     t.string   "topic"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.float    "prev_ef",             default: 2.5
     t.float    "prev_interval",       default: 0.0
     t.float    "quality_response"
@@ -85,8 +85,10 @@ ActiveRecord::Schema.define(version: 20160810091034) do
     t.float    "calculated_ef"
     t.datetime "repetition_date"
     t.string   "lesson_url"
+    t.boolean  "archived",            default: false
   end
 
+  add_index "cards", ["archived", "user_id"], name: "index_cards_on_archived_and_user_id", using: :btree
   add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|

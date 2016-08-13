@@ -1,0 +1,29 @@
+<div class="devise_box">
+  <table class="table">
+    <tr>
+      <th>Created At</th>
+      <th>Question</th>
+      <th>Answer</th>
+      <th>Displayed Next On</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @cards.each do |card| %>
+      <tr id="card_<%= card.id %>">
+        <td><%= display_datetime(card.created_at) %></td>
+        <td><%= card.question %></td>
+        <td><%= card.answer %></td>
+        <td><%= display_datetime(card.repetition_date) %></td>
+        <td><%= link_to "Edit", edit_card_path(card), class: 'btn btn-danger' %></td>
+
+        <% if card.archived? %>
+          <td><%= link_to "Unarchive", card_archive_path(card_id: card.id), method: :patch, class: 'btn btn-success btn-fixed-archive', remote: true %></td>
+        <% else %>
+          <td><%= link_to "Archive", card_archive_path(card_id: card.id), method: :patch, class: 'btn btn-danger btn-fixed-archive', remote: true %></td>
+        <% end %>
+        <td><%= link_to "Delete", card_path(card), method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" }, remote: true %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,7 @@
+<h1 class="text-center">Edit Card</h1>
+
+<%= simple_form_for @card do |f| %>
+  <%= f.input :question, placeholder: 'Write your flashcard question here', input_html: {rows: 5} %>
+  <%= f.input :answer, placeholder: 'Write your flashcard answer here', input_html: {rows: 5} %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

@@ -27,7 +27,9 @@ Rails.application.routes.draw do
 
   resources :student_sessions, except: :destroy
 
-  resources :cards
+  resources :cards do
+    patch :archive
+  end
 
   resources :posts
   get 'blog', to: 'blog#index', as: 'blog'

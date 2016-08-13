@@ -7,7 +7,9 @@ class Card < ActiveRecord::Base
 
   validates :user_id, :question, :answer, presence: true
 
-  scope :today, -> { where(["repetition_date <= ?", Date.today]).order("repetition_date ASC") }
+  scope :today, -> { where(archived: false)
+                    .where(["repetition_date <= ?", Date.today])
+                    .order("repetition_date ASC") }
 
   def update_code_syntax
     new_question = code_syntax(question)

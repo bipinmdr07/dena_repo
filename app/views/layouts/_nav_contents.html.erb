@@ -33,7 +33,7 @@
 
                     <li class="nav-item page-scroll">
                       <% 
-                        @cards = current_user.cards.where(repetition_date: nil)
+                        @cards = current_user.cards.where(archived: false, repetition_date: nil)
                         @cards += current_user.cards.today
                       %>
                       <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@cards.count}</span>".html_safe, study_path %>

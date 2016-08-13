@@ -57,7 +57,8 @@ FactoryGirl.define do
   end
 
   factory :card do
-
+    question "What is HTML?"
+    answer "HTML stands for Hyper Text Markup Language"
   end
 
   factory :admin_user do

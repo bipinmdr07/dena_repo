@@ -17,10 +17,6 @@
   color: #fff;
 }
 
-
-
-
-
 .pre-scrollable{
   max-height: 100vh !important;
 }
@@ -85,5 +81,23 @@
   }
   #sidebar {
     padding-top:0;
+  }
+}
+
+.flashcard-nav > li.active > a, .flashcard-nav > li.active > a:hover, .flashcard-nav > li.active > a:focus {
+  background-color: #ec6952;
+  border-radius: 2px;
+}
+
+.flashcard-nav {
+  li {
+    background-color: #fff;
+    border-radius: 2px;
+  }
+
+  li > a:hover, li > a:focus {
+    background-color: #ec6952;
+    color: #fff;
+    border-radius: 2px;
   }
 }
