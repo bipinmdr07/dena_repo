@@ -1,65 +1,138 @@
 <h1><%= title_for(RubyCoreLesson, 1, 2) %></h1>
 
 <p>
-  Now that you've started getting a good grasp on Ruby, let's start solving more difficult problems. We're going to start with easier problems, and then gradually move towards more difficult problems.
+  Now it's time to solve a popular coding interview challenge!
+</p>
+
+<p class="alert alert-danger">
+  WARNING: You will probably feel frustrated at solving these coding challenges - they can become quite difficult!
+</p>
+
+<h3>Check Palindrome</h3>
+
+<p>
+  Given a string, write a method called <code>is_palindrome?</code> to check if it is a palindrome. <strong>A palindrome is a word or phrase that is the same read from the front and backwards (for example, "racecar", "eve").</strong> The palindrome does not need to be limited to words in the dictionary (strings like "eyebeye", "bsdfdsb" should be considered palindromes).
+</p>
+
+<p>
+  <strong>Make sure that the method works regardless of capitalization.</strong>
 </p>
 
 <div class="well">
-  <h3>I don't know where to start 😭</h3>
-  <p>
-    When you first tackle these problems, you probably won't know where to start at all. It takes practice to be able to think logically and clearly, but it's certainly worth the effort.
-  </p>
+  <h3>
+    EXAMPLE
+  </h3>
 
   <p>
-    <strong>The first thing you want to do is to simplify the problem.</strong> Try to use real life examples or imagine yourself doing the task yourself. <strong>The second step is to break down the operations into bite size pieces.</strong> Think <strong><i>if I were to perform these operations, exactly how would I do it? How can I tell a person who can only take exact orders how to achieve the goal?</i></strong>. Once you have those steps down, it's time for you to start writing code. Writing all of your ideas out on paper really helps in visualizing your thoughts and often leads to clearer solutions.
+    Your code should run like this:
   </p>
 
-  <p>
-    It's going to be tough, but good luck! :)
-  </p>
+  <pre><code class="ruby">
+  # Input
+  is_palindrome?("Racecar")
+
+  # Output
+  true
+
+  # Input
+  is_palindrome?("rAcEcar")
+
+  # Output
+  true
+
+  # Input
+  is_palindrome?("banana")
+
+  # Output
+  false
+  </code></pre>
 </div>
 
-<h3>Assignments</h3>
-<h5>DURATION: 1 week</h5>
+<div class="well">
+  <h3>Getting Started</h3>
 
-<h4>Problem Set 1</h4>
-<ol>
-  <li><a href="http://www.codewars.com/kata/53e30ec0116393fe1a00060b/train/ruby" target="_blank">Remove Duplicates</a></li>
-  <li><a href="http://www.codewars.com/kata/540f8a19a7d43d24ac001018/train/ruby" target="_blank">Arithmatic Sequence</a></li>
-  <li><a href="http://www.codewars.com/kata/537922daa79ca02290000d18/train/ruby" target="_blank">2 + 2 * 2</a></li>
-  <li><a href="http://www.codewars.com/kata/53d16bd82578b1fb5b00128c/train/ruby" target="_blank">Grader</a></li>
-  <li><a href="http://www.codewars.com/kata/53dc54212259ed3d4f00071c/train/ruby" target="_blank">Sum Array</a></li>
-</ol>
+  <p>
+    First, download the starter kit for this problem:
+  </p>
 
-<h4>Problem Set 2</h4>
-<ol>
-  <li><a href="http://www.codewars.com/kata/53369039d7ab3ac506000467/train/ruby" target="_blank">Convert Boolean to String</a></li>
-  <li><a href="http://www.codewars.com/kata/5265326f5fda8eb1160004c8/train/ruby" target="_blank">Convert Number to String</a></li>
-  <li><a href="http://www.codewars.com/kata/511f0fe64ae8683297000001/train/ruby" target="_blank">Add Item to Array</a></li>
-  <li><a href="http://www.codewars.com/kata/get-the-middle-character" target="_blank">Get the Middle Character</a></li>
-</ol>
+  <p>
+    <%= link_to 'Download Starter Kit', '/ruby-core/is_palindrome.zip', class: 'btn btn-danger' %>
+  </p>
 
-<h4>Problem Set 3</h4>
-<ol>
-  <li><a href="http://www.codewars.com/kata/rock-paper-scissors" target="_blank">Rock Paper Scissors</a></li>
-  <li><a href="http://www.codewars.com/kata/tip-calculator" target="_blank">Tip Calculator</a></li>
-  <li><a href="http://www.codewars.com/kata/how-do-i-compare-numbers" target="_blank">How do I compare numbers</a></li>
-  <li><a href="http://www.codewars.com/kata/number-of-people-in-the-bus" target="_blank">Number of People in the Bus</a></li>
-  <li><a href="http://www.codewars.com/kata/50654ddff44f800200000007/train/ruby" target="_blank">Short Long Short</a></li>
-</ol>
+  <p>
+    Next, unzip the folder and <strong>navigate to the folder in your terminal</strong>.
+  </p>
 
-<h4>Problem Set 4</h4>
-<ol>
-  <li><a href="http://www.codewars.com/kata/523b4ff7adca849afe000035/train/ruby" target="_blank">Function 1 - hello world</a></li>
-  <li><a href="http://www.codewars.com/kata/523b623152af8a30c6000027/train/ruby" target="_blank">Function 2 - squaring an argument</a></li>
-  <li><a href="http://www.codewars.com/kata/523b66342d0c301ae400003b/train/ruby" target="_blank">Function 3 - multiplying two numbers</a></li>
-  <li><a href="http://www.codewars.com/kata/514a7bb557cdc630ab00001d/train/ruby" target="_blank">Statistics Algorithm - Calculate Mean</a></li>
-</ol>
+  <p>
+    For most people, you can do this by <code>cd</code>ing into the folder like this:
+  </p>
 
-<h4>Problem Set 5</h4>
-<ol>
-  <li><a href="http://www.codewars.com/kata/515e271a311df0350d00000f/train/ruby" target="_blank">Square(n) Sum</a></li>
-  <li><a href="http://www.codewars.com/kata/51c8991dee245d7ddf00000e/train/ruby" target="_blank">Reversed Words</a></li>
-  <li><a href="http://www.codewars.com/kata/535474308bb336c9980006f2/train/ruby" target="_blank">Greet Me</a></li>
-  <li><a href="http://www.codewars.com/kata/513f887e484edf3eb3000001/train/ruby" target="_blank">Ruby Person Class Bug</a></li>
-</ol>
+<pre><code class="bash">
+cd ~/Downloads/is_palindrome
+</code></pre>
+
+  <p>
+    Once you are in the folder in the terminal, <strong>run the following command</strong>:
+  </p>  
+
+<pre><code class="bash">
+bundle install
+</code></pre>
+
+  <p>
+    Next, run the following command:
+  </p>
+
+<pre><code class="bash">
+rspec
+</code></pre>
+
+  <p>
+    <strong>This will run some tests to see if your code is working.</strong> Since you haven't written any code yet, you will see that all of the tests fail. The output should look something like this:
+  </p>  
+
+  <%= image_tag 'ruby-core/failing-tests.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Next, open up your text editor and open <code>palindrome.rb</code> located inside <code>is_palindrome/lib</code>.
+  </p>
+
+  <p>
+    You should see code like this:
+  </p>
+
+<pre><code class="ruby">
+def is_palindrome?(string)
+  # Write your code here!
+end
+</code></pre>
+
+  <p>
+    <strong>Implement your solution in this file.</strong>
+  </p>
+
+  <p>
+    Once you have implemented the solution, go into your terminal and run this command again:
+  </p>
+
+<pre><code class="bash">
+rspec
+</code></pre>
+
+  <p>
+    If your solution is correct, you should see an output like this:
+  </p>
+
+<%= image_tag 'ruby-core/passing-tests.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Submit the code inside of <code>palindrome.rb</code> below :)
+  </p>
+
+  <p>
+    Good luck!
+  </p>
+
+</div>
+
+<% @submission_form = true %>
