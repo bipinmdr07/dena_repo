@@ -11,7 +11,7 @@ class RubyCoreLesson < ActiveRecord::Base
     ["Ruby Core Training", 
       [
         [1, "Practice, Practice, Practice"],
-        [2, "Codewars"]
+        [2, "Coding Challenge: Check Palindrome"]
       ]
     ]
   ]
