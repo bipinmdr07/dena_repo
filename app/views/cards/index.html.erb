@@ -18,9 +18,9 @@
         <td><%= link_to "Edit", edit_card_path(card), class: 'btn btn-danger' %></td>
 
         <% if card.archived? %>
-          <td><%= link_to "Unarchive", card_archive_path(card_id: card.id), method: :patch, class: 'btn btn-danger', data: { confirm: "Are you sure?" }, remote: true %></td>
+          <td><%= link_to "Unarchive", card_archive_path(card_id: card.id), method: :patch, class: 'btn btn-danger', remote: true %></td>
         <% else %>
-          <td><%= link_to "Archive", card_archive_path(card_id: card.id), method: :patch, class: 'btn btn-danger', data: { confirm: "Are you sure?" }, remote: true %></td>
+          <td><%= link_to "Archive", card_archive_path(card_id: card.id), method: :patch, class: 'btn btn-danger', remote: true %></td>
         <% end %>
         <td><%= link_to "Delete", card_path(card), method: :delete, class: 'btn btn-danger', data: { confirm: "Are you sure?" }, remote: true %></td>
       </tr>
