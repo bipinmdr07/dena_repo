@@ -67,6 +67,21 @@ end
 </p>
 
 <p>
+	Your <code>routes.rb</code> should now look something like this:
+</p>
+
+<pre><code class="ruby">
+Rails.application.routes.draw do
+  # The priority is based upon order of creation: first created -> highest priority.
+  # See how all your routes lay out with "rake routes".
+
+  # You can have the root of your site routed with "root"
+  root 'ideas#index'
+
+end
+</code></pre>
+
+<p>
 	Here, we are telling rails that when the user accesses the 'root' of the application (the homepage), it will trigger the <code>index</code> action (another word for method) in the <code>ideas_controller.rb</code>. 
 </p>
 
