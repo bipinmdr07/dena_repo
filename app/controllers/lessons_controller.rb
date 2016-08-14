@@ -40,6 +40,9 @@ class LessonsController < ApplicationController
     elsif controller_name.classify == "HtmlCssLesson"
       return if current_user.html_css_access?
       lesson_locked_redirect
+    elsif controller_name.classify == "BootstrapLesson"
+      return if current_user.bootstrap_access?
+      lesson_locked_redirect
     elsif controller_name.classify == "RubyLesson"
       return if current_user.ruby_fundamentals_access?
       lesson_locked_redirect
