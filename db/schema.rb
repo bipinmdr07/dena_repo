@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812080702) do
+ActiveRecord::Schema.define(version: 20160813192942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,11 @@ ActiveRecord::Schema.define(version: 20160812080702) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "algorithm_lessons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bootstrap_lessons", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -412,6 +417,7 @@ ActiveRecord::Schema.define(version: 20160812080702) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
+    t.boolean  "bootstrap_access",          default: false
   end
 
   add_index "users", ["admitted"], name: "index_users_on_admitted", using: :btree
