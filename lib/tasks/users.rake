@@ -32,6 +32,8 @@ namespace :users do
         question.update(lesson_id: lesson_id)
       end
     end    
+
+    User.where(admitted: true).update_all(bootstrap_access: true)
   end
 
   task :update_name => :environment do 
