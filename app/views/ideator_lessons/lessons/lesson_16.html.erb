@@ -101,8 +101,10 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 &lt;% @ideas.each do |idea| %&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
-      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
-      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
       &lt;br&gt;
       &lt;%= link_to 'Delete', idea_path(idea) %&gt;
     &lt;/div&gt;
@@ -139,7 +141,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </p>
 
 <pre><code class = "erb">
-&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-right' %&gt;
+&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger' %&gt;
 </code></pre>
 
 <p>
@@ -147,7 +149,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </p>
 
 <pre><code class="erb">
-&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
 </code></pre>
 
 <p>
@@ -158,10 +160,12 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 &lt;% @ideas.each do |idea| %&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
-      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
-      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
       &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;% end %&gt;
@@ -192,10 +196,12 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 &lt;% @ideas.each do |idea| %&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
-      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
-      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
       &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
       &lt;%= link_to 'Revise', edit_idea_path(idea) %&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -203,22 +209,65 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </code></pre>
 
 <p>
-  We see that the link is there, but it would probably look better if this link also had a button to it. Let's give it the same class as the delete button and add <code>class: 'btn btn-sm pull-left'</code> to look like the following:
+  We see that the link is there, but it would probably look better if this link also had a button to it. Let's give it the same class as the delete button and add <code>class: 'btn btn-sm btn-success'</code> to look like the following:
 </p>
 
 <pre><code class="erb">
 &lt;% @ideas.each do |idea| %&gt;
   &lt;div class="panel panel-default"&gt;
     &lt;div class="panel-body"&gt;
-      &lt;h3&gt;&lt;%= idea.description %&gt;&lt;/h3&gt;
-      &lt;h4 class = "pull-right">by &lt;%= idea.author %&gt;&lt;/h4&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
       &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm pull-left', data: {confirm: "Are you sure?"} %&gt;
-      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm pull-left' %&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;% end %&gt;
 </code></pre>
+
+<p>
+  Lastly, to make these buttons look nicer, let's put these buttons in a bootstrap button group. We can do this by wrapping the 2 links we have just created in a <code>btn-group</code> div like this:
+</p>
+
+<pre><code class="erb">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre><pre><code class="erb">
+&lt;% @ideas.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+
+      &lt;div class="btn-group" role="group"&gt;
+        &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+        &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  If we refresh the page, we see that the buttons are now neatly aligned.
+</p>
 
 <p>
   Awesome, let's move on to the next lesson.
