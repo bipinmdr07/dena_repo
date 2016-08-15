@@ -606,6 +606,11 @@ select {
   padding: 15px;
 }
 
+.quote-profile img {
+  height: 70px;
+  width: 70px;
+}
+
 .quote .quote-content {
   margin-left: 90px;
   background: #f5f5f5;
