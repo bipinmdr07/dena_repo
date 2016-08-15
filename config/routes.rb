@@ -103,6 +103,7 @@ Rails.application.routes.draw do
   get 'activity_log',   to: 'static_pages#activity_log'
   get 'guidelines',   to: 'static_pages#guidelines'
 
+  get 'curriculum', to: 'static_pages#curriculum'
   get 'pricing', to: 'static_pages#pricing'
   get 'congratulations', to: 'static_pages#congratulations'
   get 'about', to: 'static_pages#about'

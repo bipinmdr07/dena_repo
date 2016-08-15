@@ -63,6 +63,10 @@ class StaticPagesController < ApplicationController
   def guidelines
   end
 
+  def curriculum
+    render layout: "landing_page"
+  end
+
   def about
     render layout: "landing_page"
   end
