@@ -21,8 +21,9 @@ class User < ActiveRecord::Base
 
   scope :admitted, -> { where(admitted: true) }
   scope :active_prework_students, -> { where("prework_end_date > ?", DateTime.now) }
-  scope :signed_up_this_week, -> { where("created_at >= ?", 1.week.ago.utc) }
-  scope :signed_up_last_week, -> { where("created_at <= ?", 1.week.ago.utc).where("created_at >= ?", 2.week.ago.utc) }
+  scope :signed_up_this_week, -> { where("created_at >= ?", DateTime.now.beginning_of_week) }
+  scope :signed_up_last_week, -> { where("created_at <= ?", DateTime.now.last_week.end_of_week)
+                                  .where("created_at >= ?", DateTime.now.last_week.beginning_of_week) }
   scope :signed_up_this_month, -> { where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
   scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?', 
                                     Date.today.last_month.beginning_of_month, 

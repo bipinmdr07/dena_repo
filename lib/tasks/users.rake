@@ -31,7 +31,18 @@ namespace :users do
         lesson_id = question.lesson_id - 3
         question.update(lesson_id: lesson_id)
       end
-    end    
+    end  
+
+    PublicActivity::Activity.all.each do |progression|
+      if progression.parameters[:course_name] == 'HtmlCssLesson'
+        if progression.parameters[:lesson_id].to_i >= 5 && progression.parameters[:lesson_id].to_i < 14
+          lesson_id = (progression.parameters[:lesson_id].to_i - 4).to_s
+          progression.parameters[:course_name] = "BootstrapLesson"
+          progression.parameters[:lesson_id] = lesson_id
+          progression.save
+        end
+      end
+    end  
 
     User.where(admitted: true).update_all(bootstrap_access: true)
   end
