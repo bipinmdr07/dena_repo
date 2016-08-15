@@ -8,10 +8,11 @@ class RubyCoreLesson < ActiveRecord::Base
   PERIOD = "3 ~ 4"
 
   LESSONS = [
-    ["Ruby Core Training", 
+    ["Ruby Core Training",
       [
         [1, "Practice, Practice, Practice"],
-        [2, "Coding Challenge: Check Palindrome"]
+        [2, "Coding Challenge: Check Palindrome"],
+        [3, "Coding Challenge: Square Each Digits"]
       ]
     ]
   ]
