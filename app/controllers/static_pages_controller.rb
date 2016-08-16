@@ -25,6 +25,8 @@ class StaticPagesController < ApplicationController
 
     @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
 
+    @activities = PublicActivity::Activity.all.order('created_at DESC').limit(20)
+
     @lessons_completed_today = @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @flashcards_completed_today = @flashcards.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @lessons_completed_this_week = @lessons.where("created_at >= ?", 1.week.ago)

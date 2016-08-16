@@ -128,25 +128,40 @@
       </div><!-- panel-body -->
     </div>
 
-      <div class="panel">
-        <div class="panel-heading-stats">
-          <h3>My Questions</h3>
-        </div>
-        <div class="panel-body">
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3>Activity Log</h3>
+      </div>
+      <div class="panel-body" style="overflow: auto; max-height: 250px;">
 
-          <ul class="unindented_ul">
-            <% @questions.each do |question| %>
-              
-              <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
-              <li><span class="question_list_title"><%= link_to question.title, question_path(question) %></span> in <span class="question_list_course_name"><%= course_name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
-            <% end %>
-          </ul>
+        <% @activities.each do |activity| %>
+          <div class="activity">
+            <%= render_activity activity %>
+          </div>
+        <% end %>
+        
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
 
-          <% if @questions.empty? %>
-            <h3>You haven't asked any questions yet.</h3>
-          <% else %>
-            <h5 class="pull-right"><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View all'.html_safe, questions_path %></h5>
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3>My Questions</h3>
+      </div>
+      <div class="panel-body">
+
+        <ul class="unindented_ul">
+          <% @questions.each do |question| %>
+            
+            <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+            <li><span class="question_list_title"><%= link_to question.title, question_path(question) %></span> in <span class="question_list_course_name"><%= course_name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
           <% end %>
+        </ul>
+
+        <% if @questions.empty? %>
+          <h3>You haven't asked any questions yet.</h3>
+        <% else %>
+          <h5 class="pull-right"><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View all'.html_safe, questions_path %></h5>
+        <% end %>
 
 
 
