@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :community, only: :index
+  resources :feedbacks, only: [:index, :destroy, :create]
 
   resources :submissions do
     resources :submission_replies, only: [:create, :edit, :update, :destroy]
@@ -53,6 +54,7 @@ Rails.application.routes.draw do
   patch 'comment_statuses/:id(.:format)', to: 'comment_statuses#create', as: 'comment_statuses'
 
   patch 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
+
 
   get 'study', to: 'study#index', as: 'study'
 
