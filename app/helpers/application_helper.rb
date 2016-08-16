@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def og_description(description)
+    content_for(:description) { description }
+  end
+
   def og_image(image)
     content_for(:og_image) { image }
   end

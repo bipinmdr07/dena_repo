@@ -1,6 +1,6 @@
 <title><%= content_for?(:title) ? content_for(:title) : "Coding Bootcamp in Nepal | TECHRISE" %></title>
 
-<meta name="description" content="Learn how to code with interactive lessons and personal mentors at TECHRISE. Learn how to create web applications with HTML/CSS, Ruby on Rails, JavaScript, and other essential skills for all aspiring web developers and entrepreneurs.">
+<meta name="description" content="Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way.">
 
 
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -9,9 +9,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Custom Fonts -->
-<!--   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'> 
@@ -32,10 +29,14 @@
   <meta property="og:title" content="Coding Bootcamp in Nepal | TECHRISE"/>
 <% end %>
 
-<% unless @post.nil? %>
+<% unless @post.nil? || !@post.featured_image %>
   <meta property="og:image" content="<%= asset_path @post.featured_image %>"/>
 <% else %>
   <meta property="og:image" content="http://www.techrise.me<%= asset_path 'background/bg-header-1.1.jpg' %>"/>
 <% end %>
 
-<meta property="og:description" content="Learn how to code with interactive lessons and personal mentors at TECHRISE. Learn how to create web applications with HTML/CSS, Ruby on Rails, JavaScript, and other essential skills for all aspiring web developers and entrepreneurs."/>
+<% if content_for?(:og_description) %>
+
+<% else %>
+  <meta property="og:description" content="Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way."/>
+<% end %>

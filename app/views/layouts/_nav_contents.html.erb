@@ -82,24 +82,8 @@
                         </ul>                            
                     </li><!--//dropdown-->    
 
-                <% else %>
-
-                    <li class="nav-item page-scroll">
-                      <a href="/curriculum">Curriculum</a>
-                    </li>
-
-                    <li class="nav-item page-scroll">
-                      <a href="/learn">Learn More</a>
-                    </li>
-
-                    <li class="nav-item page-scroll">
-                      <a href="/about">About</a>
-                    </li>
-
-                    <li class="nav-item page-scroll">
-                      <a href="/pricing">Pricing</a>
-                    </li>
-
+                <% else %>                
+                    
                     <li class="nav-item page-scroll">
                       <a href="/contact_us">Contact Us</a>
                     </li>
@@ -110,6 +94,27 @@
 
                     <li class="nav-item page-scroll">
                       <a href="/blog">Blog</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">About TECHRISE <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                              <a href="/curriculum">Curriculum</a>
+                            </li>
+
+                            <li>
+                              <a href="/learn">Learn More</a>
+                            </li>
+
+                            <li>
+                              <a href="/pricing">Pricing</a>
+                            </li>
+
+                            <li>
+                              <a href="/about">About</a>
+                            </li>
+                        </ul>
                     </li>
 
                 <% end %>          
