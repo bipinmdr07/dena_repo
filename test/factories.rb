@@ -61,8 +61,22 @@ FactoryGirl.define do
     answer "HTML stands for Hyper Text Markup Language"
   end
 
-  factory :admin_user do
-
+  factory :admin_user, class: 'User' do
+    sequence :email do |n|
+      "random#{n}@email.com"
+    end
+    password "codingiscool"
+    password_confirmation "codingiscool"
+    name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time Date.today - 4.weeks
+    prework_end_date Date.today - 2.weeks
+    start_date DateTime.now
+    graduation_date DateTime.now + 2.months
+    admitted true
+    admin true
   end
 
   factory :reply do
