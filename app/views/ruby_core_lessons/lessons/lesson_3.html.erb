@@ -1,0 +1,91 @@
+<h1><%= title_for(RubyCoreLesson, 1, 2) %></h1>
+
+<p>
+  Implement a method to perform basic string compression using the counts of repeated characters. For example, the string <code>aabccccaaa</code> would become <code>a2b1c5a3</code>. <strong>If the "compressed" string is smaller than the original string, your method should return the original string.</strong> You can assume the string has only uppercase and lowercase letters (a-z).
+</p>
+
+
+<div class="well">
+  <h3>Getting Started</h3>
+
+  <p>
+    First, download the starter kit for this problem:
+  </p>
+
+  <p>
+    <%= link_to 'Download Starter Kit', '/ruby-core/string_compressor.zip', class: 'btn btn-danger' %>
+  </p>
+
+  <p>
+    Next, unzip the folder and <strong>navigate to the folder in your terminal</strong>.
+  </p>
+
+  <p>
+    For most people, you can do this by <code>cd</code>ing into the folder like this:
+  </p>
+
+<pre><code class="bash">
+cd ~/Downloads/string_compressor
+</code></pre>
+
+  <p>
+    Once you are in the folder in the terminal, <strong>run the following command</strong>:
+  </p>  
+
+<pre><code class="bash">
+bundle install
+</code></pre>
+
+  <p>
+    Next, run the following command:
+  </p>
+
+<pre><code class="bash">
+rspec
+</code></pre>
+
+  <p>
+    <strong>This will run some tests to see if your code is working.</strong> Since you haven't written any code yet, you will see that all of the tests fail.
+  </p>  
+
+  <p>
+    Next, open up your text editor and open <code>string_compressor.rb</code> located inside <code>string_compressor/lib</code>.
+  </p>
+
+  <p>
+    You should see code like this:
+  </p>
+
+<pre><code class="ruby">
+def string_compressor(string)
+  # Write your code here!
+end
+</code></pre>
+
+  <p>
+    <strong>Implement your solution in this file.</strong>
+  </p>
+
+  <p>
+    Once you have implemented the solution, go into your terminal and run this command again:
+  </p>
+
+<pre><code class="bash">
+rspec
+</code></pre>
+
+  <p>
+    If your solution is correct, you should see all of the tests pass.
+  </p>
+
+  <p>
+    Submit the code below :)
+  </p>
+
+  <p>
+    Good luck!
+  </p>
+
+</div>
+
+<% @submission_form = true %>
