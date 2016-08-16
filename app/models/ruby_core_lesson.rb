@@ -10,8 +10,13 @@ class RubyCoreLesson < ActiveRecord::Base
   LESSONS = [
     ["Ruby Core Training", 
       [
-        [1, "Practice, Practice, Practice"],
-        [2, "Coding Challenge: Check Palindrome"]
+        [1, "Practice, Practice, Practice"]
+      ]
+    ],
+    ["Coding Challenges",
+      [
+        [2, "Check Palindrome"],
+        [3, "String Compressor"]
       ]
     ]
   ]

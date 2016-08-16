@@ -6,12 +6,14 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
-  
+
+
   def authenticate_admin!
     return if current_user && current_user.admin
     flash[:alert] = "Unauthorized :("
     redirect_to dashboard_path
   end
+
 
   private
 
