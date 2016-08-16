@@ -1,0 +1,51 @@
+<% og_title("#{@event.title} | TECHRISE - Coding Bootcamp in Nepal") %>
+<% title("#{@event.title} | TECHRISE - Coding Bootcamp in Nepal") %>
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1 class="mentee_title text-center"><span class="back_to_dashboard"><%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i> Back to Events'.html_safe, events_path, class: 'btn btn-back btn-default' %></span> <%= @event.title %></h1>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-8">
+    <div class="panel panel-default">
+      
+
+      <div class="panel-heading">
+        Overview
+      </div>
+
+      <div class="panel-body event-overview">
+        <%= sanitize @event.overview %>
+      </div>
+    </div><!-- panel panel-default -->    
+  </div>
+
+  <div class="col-xs-12 col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Date and Location</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="event-info">
+          <li>
+            <i class="fa fa-calendar-check-o" aria-hidden="true"></i> <strong>Date</strong><br><%= display_datetime(@event.datetime) %>
+          </li>
+          <li>
+            <i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Venue</strong><br>
+            <%= @event.venue %>
+          </li>
+          <li>
+            <%= link_to 'Facebook Event', @event.facebook_link, class: 'btn btn-block btn-facebook' %>
+          </li>
+          <li>
+            <%= link_to 'Sign Up For Event', @event.signup_link, class: 'btn btn-cta-primary btn-block' %>
+          </li>
+        </ul>
+      </div><!-- panel-body -->
+    </div><!-- panel panel-default -->
+  </div><!-- col-xs-12 col-sm-4 -->
+</div><!-- row -->
