@@ -11,6 +11,12 @@ namespace :users do
       end
     end
 
+    Progression.where(course_name: "IntroLesson").each do |progression|
+      if progression.lesson_id > 4
+        progression.destroy
+      end
+    end
+
     Submission.where(course_name: "HtmlCssLesson", lesson_id: 13)
               .update_all(course_name: "BootstrapLesson", lesson_id: 9)
 
@@ -32,8 +38,14 @@ namespace :users do
         question.update(lesson_id: lesson_id)
       end
     end  
-
+  
     PublicActivity::Activity.all.each do |progression|
+      if progression.parameters[:course_name] == "IntroLesson"
+        if progression.parameters[:lesson_id].to_i > 4
+          progression.destroy
+        end
+      end
+
       if progression.parameters[:course_name] == 'HtmlCssLesson'
         if progression.parameters[:lesson_id].to_i >= 5 && progression.parameters[:lesson_id].to_i < 14
           lesson_id = (progression.parameters[:lesson_id].to_i - 4).to_s

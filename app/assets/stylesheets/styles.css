@@ -2102,6 +2102,15 @@ select {
 .blog-page .header-blog .main-nav .nav .dropdown-menu a {
   color: #fff;
 }
+
+.blog-page .header-blog .main-nav .nav .nav-item .btn-cta {
+  color: #fff;
+}
+
+.blog-page .btn-cta:hover {
+  color: #ec6952;
+}
+
 .blog-page .header-blog h1.logo a {
   max-width: inherit;
   background: none;
