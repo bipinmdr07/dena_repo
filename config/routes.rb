@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     patch :archive
   end
 
-  resources :posts
+  resources :posts, only: [:index, :show]
+  resources :events, only: [:index, :show]
+
   get 'blog', to: 'blog#index', as: 'blog'
 
   resources :progressions, only: [:create, :destroy]
