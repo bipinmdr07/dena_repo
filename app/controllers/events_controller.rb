@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
-    @upcoming_events = Event.where("datetime > ?", DateTime.now)
-    @past_events = Event.where("datetime < ?", DateTime.now)
+    @upcoming_events = Event.upcoming
+    @past_events = Event.past
     render layout: "event_page"
   end
 
