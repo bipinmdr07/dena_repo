@@ -227,6 +227,23 @@
             </div>
           </div><!-- panel-body text-center -->
         </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3><%= pluralize @unresolved_feedbacks.count, "Feedback" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unresolved_feedbacks.each do |feedback| %>
+                  <li><%= link_to feedback.title, feedback_path(feedback.id) %> by <%= User.find(feedback.user_id).name %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+
       </div>
 
 <% end %>
