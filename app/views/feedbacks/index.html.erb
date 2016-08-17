@@ -1,0 +1,41 @@
+<% title("Feedback | TECHRISE") %>
+<div class="panel">
+  <div class="panel-body">
+
+    <%= will_paginate @feedbacks, renderer: BootstrapPagination::Rails, remote: true %>
+
+
+    <% @feedbacks.each do |feedback| %>
+      <ul class="question_list">
+        <% user = User.find(feedback.user_id) %>
+          <li class="question_container">
+
+          <div class="row">
+            <div class="col-xs-10 col-sm-2">
+              <div class="row">
+                <span class="col-xs-6">
+                  <%= image_tag user.avatar, class: 'community_prof_pic', style: "margin-top: 40px;" %>
+                </span><!-- col-xs-6 -->
+              </div><!-- row -->
+            </div><!-- col-xs-12 col-sm-4 -->
+
+            <div class="col-xs-12 col-sm-8">
+              <div class="question_content">
+                <h5 class="question_container_title"><%= link_to feedback.title, feedback_path(feedback) %></h5>
+                <div class="question_container_information">
+                  <span class="question_container_time"><%= time_ago_in_words(feedback.created_at) %> ago</span> by <span class="question_container_user"><%= user.name %></span>
+                </div><!-- question_container_information -->
+              </div><!-- question_content -->
+            </div><!-- col-xs-12 col-sm-2 -->
+
+
+          </div><!-- row -->
+
+        </li><!-- question_container -->
+      </ul><!-- question_list -->
+    <% end %>
+
+    <%= will_paginate @questions, renderer: BootstrapPagination::Rails, remote: true %>
+
+  </div><!-- panel-body -->
+</div><!-- panel -->

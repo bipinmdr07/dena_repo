@@ -38,10 +38,11 @@ class StaticPagesController < ApplicationController
       @lessons_completed_this_week => "Lesson".pluralize(@lessons_completed_this_week.try(:count)) + " Completed This Week",
       @flashcards_completed_this_week => "Flashcard".pluralize(@flashcards_completed_this_week.try(:count)) + " Completed Today"
     }
-    
+
     if current_user.admin
-      @unresolved_questions = Question.where(resolved: false) 
+      @unresolved_questions = Question.where(resolved: false)
       @unapproved_submissions = Submission.where(approved: false)
+			@unresolved_feedbacks = Feedback.where(resolved: false)
     end
   end
 
