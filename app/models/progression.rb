@@ -6,6 +6,8 @@ class Progression < ActiveRecord::Base
 
   after_destroy :delete_tag_activity
 
+  validates :course_name, uniqueness: { scope: [:lesson_id, :user_id] }
+
   scope :today, -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
   # ranks :user_id
 
