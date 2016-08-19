@@ -1,7 +1,7 @@
 class RubyCoreLesson < ActiveRecord::Base
   COURSE_TITLE = "Ruby Core Training"
 
-  LESSON_LENGTH = 2
+  LESSON_LENGTH = 3
 
   DURATION = 15
 
