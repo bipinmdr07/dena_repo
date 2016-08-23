@@ -49,10 +49,14 @@ class StaticPagesController < ApplicationController
   def courses
     @cards = current_user.cards.where(repetition_date: nil)
     @cards += current_user.cards.today
+
     @activities = PublicActivity::Activity.where(owner_id: current_user.id)
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
+
+    @last_lesson_id = @last_lesson.parameters[:lesson_id]
+    @last_course_name = @last_lesson.parameters[:course_name]
   end
 
   def activity_log

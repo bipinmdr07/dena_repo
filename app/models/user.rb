@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def start_prework!
-    update(prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
+    update(prework_start_time: Date.today, prework_end_date: Date.today + 4.days)
   end
 
   def update_name!

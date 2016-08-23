@@ -60,7 +60,7 @@
 
               <div class="row" style="margin-top:20px;">
                 <div class="col-xs-12">
-                  <h3><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, '/' + @last_lesson.parameters[:course_name].underscore + "s/" + @last_lesson.parameters[:lesson_id], class: 'btn btn-danger' %></h3>
+                  <h3><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, get_lesson_url_string(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]), class: 'btn btn-danger' %></h3>
                 </div>
               </div><!-- row -->
             </div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
@@ -73,11 +73,11 @@
     <% if current_user.prework_start_time.nil? && !current_user.admitted && !current_user.admin && !current_user.mentor %>
       <div class="panel">
         <div class="panel-heading-stats">
-          <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 2 Week Prework Period</h3>
+          <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 4 Day Prework Period</h3>
         </div>
         <div class="panel-body">
           <p>
-            By pressing the button below, your pre-work period of 2 weeks will start. If you were not able to finish all of the assignments by the end of the pre-work preiod, you will no longer be eligible for admission into TECHRISE.
+            By pressing the button below, your pre-work period of 4 days will start. If you were not able to finish all of the assignments by the end of the pre-work preiod, you will no longer be eligible for admission into TECHRISE.
           </p>
 
           <%= link_to 'START PREWORK', prework_kickoffs_path, method: :post, class: 'btn btn-lg btn-block btn-cta btn-cta-primary' %>
@@ -176,7 +176,9 @@
 
         <ul class="unindented_ul">
           <% @submissions.each do |submission| %>
-            <% course_name = Tags::LESSONS[submission.course_name.underscore + "s"].keys[submission.lesson_id - 1][1] %>
+
+            <% course_name = get_lesson_name(submission.course_name, submission.lesson_id) %>
+
             <li><span class="question_list_title"><%= link_to submission.title, submission_path(submission) %></span> in <span class="question_list_course_name"><%= course_name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %></li>
           <% end %>
         </ul>
@@ -187,7 +189,7 @@
           <h5 class="pull-right"><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View all'.html_safe, submissions_path %></h5>
         <% end %>
 
-      </div><!-- panel-heading-stats -->
+      </div><!-- panel-body -->
     </div><!-- panel -->
 
 

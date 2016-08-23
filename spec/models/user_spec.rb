@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
       user.start_prework!
       user.reload
       expect(user.prework_start_time).to eq Date.today
-      expect(user.prework_end_date).to eq Date.today + 2.weeks
+      expect(user.prework_end_date).to eq Date.today + 4.days
     end
   end
 
@@ -61,9 +61,9 @@ RSpec.describe User, type: :model do
     describe "#last_lesson" do
       it "should return the last progress lesson" do
         user = FactoryGirl.create(:user)
-        progression1 = FactoryGirl.create(:progression, user_id: user.id)
-        progression2 = FactoryGirl.create(:progression, user_id: user.id)
-        progression3 = FactoryGirl.create(:progression, user_id: user.id)
+        progression1 = FactoryGirl.create(:progression, user_id: user.id, lesson_id: 1)
+        progression2 = FactoryGirl.create(:progression, user_id: user.id, lesson_id: 2)
+        progression3 = FactoryGirl.create(:progression, user_id: user.id, lesson_id: 3)
         expect(user.last_lesson).to eq(progression3)
       end
     end

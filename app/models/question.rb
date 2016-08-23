@@ -2,7 +2,7 @@ require 'elasticsearch/model'
 
 class Question < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :title, use: :slugged
+  friendly_id :title, use: [:slugged, :finders]
 
   belongs_to :user
   has_many :replies, dependent: :destroy

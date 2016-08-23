@@ -134,6 +134,18 @@ ActiveRecord::Schema.define(version: 20160817093439) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "events", force: :cascade do |t|
+    t.text     "overview"
+    t.string   "facebook_link"
+    t.datetime "datetime"
+    t.string   "venue"
+    t.string   "title"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "featured_image"
+    t.string   "signup_link"
+  end
+
   create_table "feedbacks", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "title"

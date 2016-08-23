@@ -3,6 +3,10 @@ module LessonsHelper
     Tags::LESSONS[course_name.underscore + 's'].keys[lesson_id.to_i - 1][1]
   end
 
+  def get_lesson_url_string(course_name, lesson_id)
+    '/' + course_name.underscore + "s/" + lesson_id.to_s    
+  end
+
   def question_back_to_lesson
     if params[:id]
       forum = controller_name.classify.constantize.friendly.find(params[:id])

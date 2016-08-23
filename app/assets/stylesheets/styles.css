@@ -1910,6 +1910,7 @@ select {
   padding: 30px;
   padding-bottom: 15px;
   color: #666666;
+  background-color: #fff;
 }
 .blog-list .post .content .post-title {
   margin-top: 0;
