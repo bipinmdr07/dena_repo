@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   patch 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
 
+
   get 'study', to: 'study#index', as: 'study'
 
   get 'intro_lessons', to: 'intro_lessons#index', :as => 'intro'

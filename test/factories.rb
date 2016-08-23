@@ -214,4 +214,17 @@ FactoryGirl.define do
     lesson_id 1
     course_name "HtmlCssLesson"
   end
+
+  factory :feedback do
+    title "Confusion about this"
+    course_name "HtmlCssLesson"
+    content "Don't worry about memorizing all of the syntax, that will come with time and experience. If you forget the syntax, you can always just Google it."
+    lesson_id 1
+  end
+
+  factory :invalid_feedback, class: "Feedback" do
+    title "Confusion about this"
+    course_name ""
+    content "Don't worry about memorizing all of the syntax, that will come with time and experience. If you forget the syntax, you can always just Google it."
+  end
 end
