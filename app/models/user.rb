@@ -40,8 +40,8 @@ class User < ActiveRecord::Base
     mentor || admin || admitted || ( prework_end_date && prework_end_date > DateTime.now )
   end
 
-  def start_prework!
-    update(prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
+  def start_prework
+    update(prework_start_time: Date.today, prework_end_date: Date.today + 4.days)
   end
 
   def update_name!
