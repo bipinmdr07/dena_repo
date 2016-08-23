@@ -1,5 +1,5 @@
 <div class="container">       
-    <h1 class="logo" style="padding-top: 13px;">
+    <h1 class="logo" styc="padding-top: 13px;">
         <a href="/"><span class="text" style="font-size: 40px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
     </h1><!--//logo-->
     <nav class="main-nav navbar-right" role="navigation">
@@ -48,6 +48,7 @@
                                 <li><a style="text-transform: uppercase;"><%= pluralize ((current_user.graduation_date - DateTime.now)/1.day).to_i, 'DAY' %> UNTIL GRADUATION</a></li>
 
                             <% elsif !current_user.admitted && current_user.prework_end_date && current_user.prework_end_date > DateTime.now %>
+                            
                                 <% remaining_prework = (current_user.prework_end_date - DateTime.now).to_i / 86400 %> 
 
                                 <li><a style="text-transform: uppercase;"><%= remaining_prework %> DAYS UNTIL END OF PREWORK</a></li>
