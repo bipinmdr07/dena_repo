@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :mentor_sessions
   has_many :student_sessions
-  has_many :feedbacks
 
   validates :first_name, :last_name, presence: true
 

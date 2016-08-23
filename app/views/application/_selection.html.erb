@@ -44,7 +44,7 @@ $(document).on("click", ".openQuestion", function () {
     //  var userId = <%= current_user.id %>;
      var lesson_id = <%= params[:id] %>;
      var course_name = "<%= controller_name.classify.constantize %>";
-     $(".modal-body #question_title").val( "\'"+selectedText+"\'" );
+     $(".modal-body #question_title").val( '\"'+selectedText+'\"' );
     //  $(".modal-body #feedback_user_id").val( userId );
      $(".modal-body #question_lesson_id").val( lesson_id );
      $(".modal-body #question_course_name").val( course_name );
@@ -75,5 +75,5 @@ $(document).on("click", ".openQuestion", function () {
 </div>
 
 <ul class="selText">
-    <a data-toggle="modal" title="Ask Question" class="openQuestion btn" href="#myModal"><i class="fa fa-comment fa-lg bcolor" aria-hidden="true"></i></a>
+    <a data-toggle="modal" title="Ask Question" class="openQuestion btn" href="#myModal"><i class="fa fa-question-circle fa-lg bcolor" aria-hidden="true"></i> Ask Question</a>
 </ul>

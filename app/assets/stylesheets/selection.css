@@ -8,6 +8,8 @@ ul.selText {
     /*background: #eee;*/
     color: black;
     padding-left: initial;
+    background: #ec6952;
+    border-radius: 50px;
 }
 ul.selText li {
     display: inline-block;
@@ -23,6 +25,14 @@ ul.selText li {
     /*vertical-align: center;*/
 }
 
-i.fa.fa-comment.bcolor {
-    color: black;
+i.fa.fa-question-circle.bcolor {
+    color: white;
+}
+
+.openQuestion {
+    color: white;
+}
+
+.openQuestion:hover {
+    color: #eee;
 }

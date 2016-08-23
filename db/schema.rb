@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817093439) do
+ActiveRecord::Schema.define(version: 20160823105802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,19 +145,6 @@ ActiveRecord::Schema.define(version: 20160817093439) do
     t.string   "featured_image"
     t.string   "signup_link"
   end
-
-  create_table "feedbacks", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "course_name"
-    t.integer  "lesson_id"
-    t.boolean  "resolved",    default: false
-  end
-
-  add_index "feedbacks", ["user_id"], name: "index_feedbacks_on_user_id", using: :btree
 
   create_table "forums", force: :cascade do |t|
     t.datetime "created_at", null: false

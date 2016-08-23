@@ -42,7 +42,6 @@ class StaticPagesController < ApplicationController
     if current_user.admin
       @unresolved_questions = Question.where(resolved: false)
       @unapproved_submissions = Submission.where(approved: false)
-			@unresolved_feedbacks = Feedback.where(resolved: false)
     end
   end
 

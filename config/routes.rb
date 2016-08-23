@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :community, only: :index
-  resources :feedbacks, only: [:index, :destroy, :create, :show]
 
   resources :submissions do
     resources :submission_replies, only: [:create, :edit, :update, :destroy]
