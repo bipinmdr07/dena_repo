@@ -55,8 +55,6 @@ class StaticPagesController < ApplicationController
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
 
-    @last_lesson_id = @last_lesson.parameters[:lesson_id]
-    @last_course_name = @last_lesson.parameters[:course_name]
   end
 
   def activity_log
