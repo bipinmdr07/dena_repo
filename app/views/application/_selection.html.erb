@@ -39,15 +39,15 @@ $(document).ready(function() {
 });
 
 
-$(document).on("click", ".openFeedback", function () {
+$(document).on("click", ".openQuestion", function () {
      var selectedText = x.Selector.getSelected();
-     var userId = <%= current_user.id %>;
+    //  var userId = <%= current_user.id %>;
      var lesson_id = <%= params[:id] %>;
      var course_name = "<%= controller_name.classify.constantize %>";
-     $(".modal-body #feedback_content").val( selectedText );
-     $(".modal-body #feedback_user_id").val( userId );
-     $(".modal-body #feedback_lesson_id").val( lesson_id );
-     $(".modal-body #feedback_course_name").val( course_name );
+     $(".modal-body #question_title").val( "\'"+selectedText+"\'" );
+    //  $(".modal-body #feedback_user_id").val( userId );
+     $(".modal-body #question_lesson_id").val( lesson_id );
+     $(".modal-body #question_course_name").val( course_name );
 
 });
 </script>
@@ -56,15 +56,14 @@ $(document).on("click", ".openFeedback", function () {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Feedback</h4>
+        <h4 class="modal-title" id="myModalLabel">Question</h4>
       </div>
       <div class="modal-body">
-        <%= simple_form_for :feedback, url: feedbacks_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
+        <%= simple_form_for :question, url: questions_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
           <%= f.input :title, required: true %>
-          <%= f.input :content, input_html: {rows: 6, readonly: :true}, required: true  %>
-          <%= f.input :user_id, as: :hidden, required: true %>
+          <%= f.input :content, as: :summernote, required: true  %>
+          <%= f.input :lesson_id, as: :hidden,  required: true %>
           <%= f.input :course_name, as: :hidden, required: true %>
-          <%= f.input :lesson_id, as: :hidden, required: true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -75,15 +74,15 @@ $(document).on("click", ".openFeedback", function () {
   </div>
 </div>
 
-
+<!--
 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
  Send feedback
-</button>
+</button> -->
 
 <ul class="selText">
-    <a data-toggle="modal" title="Send Feedback" class="openFeedback btn btn-primary" href="#myModal"><i class="fa fa-comment" aria-hidden="true"></i></a>
+    <a data-toggle="modal" title="Ask Question" class="openQuestion btn btn-primary" href="#myModal"><i class="fa fa-comment" aria-hidden="true"></i></a>
 </ul>
-
+<!--
 <%= current_user.id %>
  <input type="text" name="user" id="mytext">
- <input type="submit" value="Submit">
+ <input type="submit" value="Submit"> -->
