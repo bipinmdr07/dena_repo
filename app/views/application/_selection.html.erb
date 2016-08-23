@@ -25,8 +25,8 @@ $(document).ready(function() {
         if(selectedText != ''){
           // document.getElementById("mytext").value = selectedText;
             $('ul.selText').css({
-                'left': pageX + 0,
-                'top' : pageY - 0
+                'left': pageX + 55,
+                'top' : pageY - 50
             }).fadeIn(200);
         } else {
             $('ul.selText').fadeOut(200);
@@ -75,5 +75,5 @@ $(document).on("click", ".openQuestion", function () {
 </div>
 
 <ul class="selText">
-    <a data-toggle="modal" title="Ask Question" class="openQuestion btn btn-primary" href="#myModal"><i class="fa fa-comment" aria-hidden="true"></i></a>
+    <a data-toggle="modal" title="Ask Question" class="openQuestion btn" href="#myModal"><i class="fa fa-comment fa-lg bcolor" aria-hidden="true"></i></a>
 </ul>
