@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
 
     @question.mentor_post = true if current_user.mentor
 
-    if @question.save!
+    if @question.save
       user = User.find(@question.user_id)
       UserMailer.new_question(@question).deliver_now
 
