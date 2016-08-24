@@ -8,7 +8,7 @@ class RubyCoreLesson < ActiveRecord::Base
   PERIOD = "3 ~ 4"
 
   LESSONS = [
-    ["Ruby Core Training", 
+    ["Ruby Core Training",
       [
         [1, "Practice, Practice, Practice"]
       ]
@@ -16,7 +16,8 @@ class RubyCoreLesson < ActiveRecord::Base
     ["Coding Challenges",
       [
         [2, "Check Palindrome"],
-        [3, "String Compressor"]
+        [3, "String Compressor"],
+        [4, "Square Each Digits"]
       ]
     ]
   ]
