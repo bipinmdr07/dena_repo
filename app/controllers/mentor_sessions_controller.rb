@@ -5,6 +5,7 @@ class MentorSessionsController < ApplicationController
   def index
     @mentor_sessions = MentorSession.where(user_id: params[:mentee_id]).order("created_at DESC")
     @mentee = User.find(params[:mentee_id])
+    @last_mentor_session = MentorSession.where(user_id: params[:mentee_id]).order("created_at DESC").first
   end
 
   def show
@@ -32,8 +33,9 @@ class MentorSessionsController < ApplicationController
 
   def update
     @mentor_session = MentorSession.find(params[:id])
-    if @mentor_session.update
+    if @mentor_session.update(mentor_session_params)
       flash[:success] = "Updated mentor log"
+      redirect_to mentee_mentor_sessions_path(params[:mentee_id])
     else
       flash[:alert] = "Invalid attributes. Please try again."
       render :edit
@@ -44,7 +46,7 @@ class MentorSessionsController < ApplicationController
 
   def mentor_session_params
     params.require(:mentor_session).permit(:mentor_id, :user_id, :private_details, :public_details, :homework_assigned, :session_date).merge(mentor_id: current_user.id)
-  end 
+  end
 
   def authenticate_mentor!
     redirect_to root_path unless current_user.mentor

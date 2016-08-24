@@ -38,6 +38,8 @@
   </div>
 <% end %>
 
+<%= @last_student_session.inspect %>
+
 <section class="mentor_session_logs">
   <div class="row">
     <div class="col-xs-12">
@@ -55,6 +57,11 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-2">
                   <%= image_tag @mentor.avatar, class: 'mentor_prof' %>
+                  <% if mentor_session.id == @last_student_session.id %>
+                  <div class="edit_post_links">
+                    <%= link_to "Edit", edit_student_session_path(mentor_session.id), class: 'btn btn-sm btn-warning' %>
+                  </div>
+                  <% end %>
                 </div>
                 <div class="col-xs-12 col-sm-10">
                   <div class="public_details">

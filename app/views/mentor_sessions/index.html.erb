@@ -13,7 +13,7 @@
       <h3><%= @mentee.name %></h3>
       <h5><%= display_date @mentee.try(:start_date) %></h5>
       <h5><%= display_date @mentee.try(:graduation_date) %></h5>
-      
+
       <div class="social-links">
         <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, "https://www.facebook.com/" + @mentee.facebook_handle if @mentee.facebook_handle.present? %>
         <%= link_to '<i class="fa fa-twitter-square" aria-hidden="true"></i>'.html_safe, "https://twitter.com/" + @mentee.twitter_handle if @mentee.twitter_handle.present? %>
@@ -44,6 +44,11 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-2">
                   <%= image_tag current_user.avatar, class: 'mentor_prof' %>
+                  <% if mentor_session.id == @last_mentor_session.id %>
+                    <div class="edit_post_links">
+                      <%= link_to "Edit", edit_mentee_mentor_session_path(mentor_session.user_id, mentor_session.id), class: 'btn btn-sm btn-warning' %>
+                    </div>
+                  <% end %>
                 </div>
                 <div class="col-xs-12 col-sm-10">
                   <div class="public_details">
