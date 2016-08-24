@@ -4,7 +4,7 @@ class RepliesController < ApplicationController
 
 	def create
 		question = Question.find(params[:question_id])
-		comment = current_user.replies.create(reply_params)
+		comment = current_user.replies.create(reply_params.merge(question_id: question.id))
 
 		if comment.valid?
 			user = User.find(comment.user_id)
@@ -26,7 +26,7 @@ class RepliesController < ApplicationController
 	end
 
 	def update
-    if @reply.update(reply_params)
+    if @reply.update(reply_params.merge(question_id: question.id))
       flash[:success] = "Updated!"
       redirect_to question_path(@question.id)
     else
@@ -51,6 +51,6 @@ class RepliesController < ApplicationController
   end
 
 	def reply_params
-		params.require(:reply).permit(:content, :user_id).merge(question_id: params[:question_id])
+		params.require(:reply).permit(:content, :user_id)
 	end
 end
