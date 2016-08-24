@@ -22,7 +22,7 @@
         <% end %>
       </div>
       <div class="edit_post_links">
-        <% if current_user.id == @question.user_id || current_user.admin %>
+        <% if current_user == @question.user || current_user.admin %>
           <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_question_path(@question.id), class: 'btn btn-sm btn-warning'  %>
           <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, question_path(@question.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
         <% end %>
@@ -37,7 +37,7 @@
       <p class = "pull-right" ></p>
       <br class = "clear">
 
-      <% if current_user.admin || @question.user_id == current_user %>
+      <% if current_user.admin || @question.user == current_user %>
         <div id="question_solved_form_container">
           <%= render partial: 'question_solved_form' %>
         </div>

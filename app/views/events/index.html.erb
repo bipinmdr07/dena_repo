@@ -1,0 +1,94 @@
+<% og_title("Events | TECHRISE - Coding Bootcamp in Nepal") %>
+<% title("Events | TECHRISE - Coding Bootcamp in Nepal") %>
+
+<% unless @upcoming_events.empty? %>
+  <div class="event-intro text-center">
+    <h1>Upcoming Events At TECHRISE</h1>
+    <p>
+      At TECHRISE, we hold free events for people interested in web development related fields.<br>
+      Discover events and connect with local like minded people.
+    </p>
+  </div>
+
+
+  <section class="featured-blog-posts section">
+          
+          <!-- ******BLOG LIST****** --> 
+          <div class="blog container">
+              <div class="row">
+                  <div id="blog-mansonry" class="blog-list">
+                    <% @upcoming_events.each do |event| %>
+                      <article class="post col-md-4 col-sm-6 col-xs-12">
+                          <div class="post-inner">
+                              <figure class="post-thumb">
+                                  <%= link_to event_path(event) do %>
+                                    <%= image_tag event.featured_image, class: 'img-responsive' %>
+                                  <% end %>                            
+                              </figure><!--//post-thumb-->
+                              <div class="content">
+                                  <h3 class="post-title"><%= link_to event.title, event_path(event) %></h3>
+                                  <div class="post-entry">
+                                      <%= truncate(event.overview, length: 120, escape: false) %>
+                                      <%= link_to event_path(event), class: 'read-more' do %>
+                                        Read More <i class="fa fa-long-arrow-right"></i>
+                                      <% end %>
+                                  </div>
+                                  <div class="event-meta">
+                                    <h4><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <%= display_datetime(event.datetime) %></h4>
+                                    <h4><i class="fa fa-map-marker" aria-hidden="true"></i> <%= event.venue %></a></h4>                                                                 
+                                  </div><!--meta-->
+                              </div><!--//content-->
+                          </div><!--//post-inner-->
+                      </article><!--//post-->
+                    <% end %>
+                  </div><!--//blog-list-->  
+              </div><!--//row-->
+              
+          </div><!--//blog-->        
+
+  </section>
+<% end %>
+
+<% unless @past_events.empty? %>
+  <div class="event-intro text-center">
+    <h1>Past Events At TECHRISE</h1>
+  </div>
+
+
+  <section class="featured-blog-posts section">
+          
+          <!-- ******BLOG LIST****** --> 
+          <div class="blog container">
+              <div class="row">
+                  <div id="blog-mansonry" class="blog-list">
+                    <% @past_events.each do |event| %>
+                      <article class="post col-md-4 col-sm-6 col-xs-12">
+                          <div class="post-inner">
+                              <figure class="post-thumb">
+                                  <%= link_to event_path(event) do %>
+                                    <%= image_tag event.featured_image, class: 'img-responsive' %>
+                                  <% end %>                            
+                              </figure><!--//post-thumb-->
+                              <div class="content">
+                                  <h3 class="post-title"><%= link_to event.title, event_path(event) %></h3>
+                                  <div class="post-entry">
+                                      <%= truncate(event.overview, length: 120, escape: false) %>
+                                      <%= link_to event_path(event), class: 'read-more' do %>
+                                        Read More <i class="fa fa-long-arrow-right"></i>
+                                      <% end %>
+                                  </div>
+                                  <div class="event-meta">
+                                    <h4><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <%= display_datetime(event.datetime) %></h4>
+                                    <h4><i class="fa fa-map-marker" aria-hidden="true"></i> <%= event.venue %></a></h4>                                                                 
+                                  </div><!--meta-->
+                              </div><!--//content-->
+                          </div><!--//post-inner-->
+                      </article><!--//post-->
+                    <% end %>
+                  </div><!--//blog-list-->  
+              </div><!--//row-->
+              
+          </div><!--//blog-->        
+
+  </section>
+<% end %>

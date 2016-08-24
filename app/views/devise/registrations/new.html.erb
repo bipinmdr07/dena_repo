@@ -1,14 +1,61 @@
+<%- title "Apply to TECHRISE | TECHRISE - IT Coding Bootcamp in Nepal" %>
+<%- og_title "Apply to TECHRISE | TECHRISE - IT Coding Bootcamp in Nepal" %>
+
 <div class = "row">
-  <div class = "col-xs-12 col-sm-10 col-sm-offset-1">
-    <h3 class="text-center" style="font-size: 30px;">Apply to TECHRISE</h3>
+  <div class = "col-xs-12 col-md-7">
+    <h1 class="text-center">Start Your Coding Career</h1>
+
+    <hr>
 
     <p>
+      With our <strong>FREE pre-work course</strong>, you'll learn the basics of HTML and CSS to get your web development career started at TECHRISE.
+    </p>
+
+    <br>
+
+    <div class="step text-center col-md-4 col-sm-4 col-xs-12">
+       <h3 class="title"><span class="number">1</span><br /><span class="text">Complete our Pre-work Course</span></h3>
+       
+    </div><!--//step-->
+    <div class="step text-center col-md-4 col-sm-4 col-xs-12">
+       <h3 class="title"><span class="number">2</span><br /><span class="text">Interview with TECHRISE</span></h3>
+      
+    </div><!--//step-->
+    <div class="step text-center col-md-4 col-sm-4 col-xs-12">
+       <h3 class="title"><span class="number">3</span><br /><span class="text">Join TECHRISE and Start Creating<br> Web Applications</span></h3>                  
+    </div><!--//step-->
+          
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <ul class="techrise_list">
+          <li><i class="fa fa-check-circle" aria-hidden="true"></i> Learn the basics of HTML and CSS by building multiple projects</li>
+          <li><i class="fa fa-check-circle" aria-hidden="true"></i> Receive constant technical support from TECHRISE Mentors</li>
+          <li><i class="fa fa-check-circle" aria-hidden="true"></i> Learn the Ruby programming language and solve complex coding challenges</li>
+        </ul> 
+      </div>
+
+      <div class="col-xs-12 col-sm-6">
+        <ul class="techrise_list">
+          <li><i class="fa fa-check-circle" aria-hidden="true"></i> Build multiple web applications using Ruby on Rails</li>
+          <li><i class="fa fa-check-circle" aria-hidden="true"></i> Learn advanced web development topics such as testing and TDD</li>
+          <li><i class="fa fa-check-circle" aria-hidden="true"></i> Improve your understanding with weekly <br>1 on 1 Mentor Sessions</li>
+        </ul> 
+      </div>
+    </div><!-- row -->
+
+    <!-- <p>
       After you sign up, you will have <strong>2 weeks</strong> to complete a series of pre-work assignments. At TECHRISE, <strong>we only accept highly motivated individuals who are eager to increase their skills and keep pushing themselves</strong>. The pre-work assignments are designed to test whether or not the applicant is motivated enough to succeed at TECHRISE.
     </p>
 
     <p>
       Upon completion of the pre-work assignments, we will reach out to you for an interview for admission into TECHRISE. Tuition fees will be applied only when you are fully admitted as a TECHRISE student. Once you are admitted, <strong>you will start on a 2 month journey where you will build projects, have 1 on 1 mentor training, and meet like-minded individuals who love to code.</strong>
-    </p>
+    </p> -->
+
+  </div>
+
+  <div class="col-xs-12 col-md-4 col-md-push-1">
 
     <hr>
 
@@ -55,11 +102,13 @@
       
       <br>
       <div class="actions">
-        <%= f.submit "Sign up", class: 'btn btn-block btn-cta-primary' %>
+        <%= f.submit "Sign up", class: 'btn btn-block btn-cta-primary btn-lg' %>
       </div>
     <% end %>
 
     <br>
     <%= render "devise/shared/links" %>
+
+    <hr>
   </div>
 </div>

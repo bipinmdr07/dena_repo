@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     patch :archive
   end
 
-  resources :posts
+  resources :posts, only: [:index, :show]
+  resources :events, only: [:index, :show]
+
   get 'blog', to: 'blog#index', as: 'blog'
 
   resources :progressions, only: [:create, :destroy]
@@ -53,6 +55,7 @@ Rails.application.routes.draw do
   patch 'comment_statuses/:id(.:format)', to: 'comment_statuses#create', as: 'comment_statuses'
 
   patch 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
+
 
   get 'study', to: 'study#index', as: 'study'
 
@@ -103,6 +106,7 @@ Rails.application.routes.draw do
   get 'activity_log',   to: 'static_pages#activity_log'
   get 'guidelines',   to: 'static_pages#guidelines'
 
+  get 'curriculum', to: 'static_pages#curriculum'
   get 'pricing', to: 'static_pages#pricing'
   get 'congratulations', to: 'static_pages#congratulations'
   get 'about', to: 'static_pages#about'

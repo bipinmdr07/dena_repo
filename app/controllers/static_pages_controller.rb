@@ -25,6 +25,8 @@ class StaticPagesController < ApplicationController
 
     @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
 
+    @activities = PublicActivity::Activity.all.order('created_at DESC').limit(20)
+
     @lessons_completed_today = @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @flashcards_completed_today = @flashcards.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @lessons_completed_this_week = @lessons.where("created_at >= ?", 1.week.ago)
@@ -36,9 +38,9 @@ class StaticPagesController < ApplicationController
       @lessons_completed_this_week => "Lesson".pluralize(@lessons_completed_this_week.try(:count)) + " Completed This Week",
       @flashcards_completed_this_week => "Flashcard".pluralize(@flashcards_completed_this_week.try(:count)) + " Completed Today"
     }
-    
+
     if current_user.admin
-      @unresolved_questions = Question.where(resolved: false) 
+      @unresolved_questions = Question.where(resolved: false)
       @unapproved_submissions = Submission.where(approved: false)
     end
   end
@@ -46,10 +48,12 @@ class StaticPagesController < ApplicationController
   def courses
     @cards = current_user.cards.where(repetition_date: nil)
     @cards += current_user.cards.today
+
     @activities = PublicActivity::Activity.where(owner_id: current_user.id)
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
+
   end
 
   def activity_log
@@ -61,6 +65,10 @@ class StaticPagesController < ApplicationController
   end
 
   def guidelines
+  end
+
+  def curriculum
+    render layout: "landing_page"
   end
 
   def about

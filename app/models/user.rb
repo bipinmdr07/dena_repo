@@ -21,17 +21,18 @@ class User < ActiveRecord::Base
 
   scope :admitted, -> { where(admitted: true) }
   scope :active_prework_students, -> { where("prework_end_date > ?", DateTime.now) }
-  scope :signed_up_this_week, -> { where("created_at >= ?", 1.week.ago.utc) }
-  scope :signed_up_last_week, -> { where("created_at <= ?", 1.week.ago.utc).where("created_at >= ?", 2.week.ago.utc) }
+  scope :signed_up_this_week, -> { where("created_at >= ?", DateTime.now.beginning_of_week) }
+  scope :signed_up_last_week, -> { where("created_at <= ?", DateTime.now.last_week.end_of_week)
+                                  .where("created_at >= ?", DateTime.now.last_week.beginning_of_week) }
   scope :signed_up_this_month, -> { where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
-  scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?', 
-                                    Date.today.last_month.beginning_of_month, 
+  scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?',
+                                    Date.today.last_month.beginning_of_month,
                                     Date.today.beginning_of_month )}
 
   def send_slack
-    Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up!", 
-          username: 'TECHRISE Bot', 
-          channel: "#user_signup_alerts", 
+    Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up!",
+          username: 'TECHRISE Bot',
+          channel: "#user_signup_alerts",
           icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def start_prework!
-    update(prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
+    update(prework_start_time: Date.today, prework_end_date: Date.today + 4.days)
   end
 
   def update_name!

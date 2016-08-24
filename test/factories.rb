@@ -61,8 +61,22 @@ FactoryGirl.define do
     answer "HTML stands for Hyper Text Markup Language"
   end
 
-  factory :admin_user do
-
+  factory :admin_user, class: 'User' do
+    sequence :email do |n|
+      "random#{n}@email.com"
+    end
+    password "codingiscool"
+    password_confirmation "codingiscool"
+    name "Coder Taro"
+    first_name "Coder"
+    last_name "Taro"
+    confirmed_at Time.zone.now
+    prework_start_time Date.today - 4.weeks
+    prework_end_date Date.today - 2.weeks
+    start_date DateTime.now
+    graduation_date DateTime.now + 2.months
+    admitted true
+    admin true
   end
 
   factory :reply do
@@ -199,5 +213,18 @@ FactoryGirl.define do
   factory :progression do
     lesson_id 1
     course_name "HtmlCssLesson"
+  end
+
+  factory :feedback do
+    title "Confusion about this"
+    course_name "HtmlCssLesson"
+    content "Don't worry about memorizing all of the syntax, that will come with time and experience. If you forget the syntax, you can always just Google it."
+    lesson_id 1
+  end
+
+  factory :invalid_feedback, class: "Feedback" do
+    title "Confusion about this"
+    course_name ""
+    content "Don't worry about memorizing all of the syntax, that will come with time and experience. If you forget the syntax, you can always just Google it."
   end
 end

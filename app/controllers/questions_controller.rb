@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
 
     @question.mentor_post = true if current_user.mentor
 
-    if @question.save
+    if @question.save!
       user = User.find(@question.user_id)
       UserMailer.new_question(@question).deliver_now
 
@@ -39,7 +39,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:replies).friendly.find(params[:id])
+    @question = Question.includes(:replies).find(params[:id])
     @user = User.find(@question.user_id)
   end
 

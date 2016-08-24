@@ -52,7 +52,7 @@ class Tags < ActiveRecord::Base
     "ruby_core_lessons" => {
       [1, "Practice, Practice, Practice"] => %w(ruby),
       [2, "Coding Challenge: Check Palindrome"] => %w(ruby),
-      [3, "Coding Challenge: Square Each Digits"] => %w(ruby)
+      [3, "Coding Challenge: String Compressor"] => %w(ruby)
     },
     "ideator_lessons" => {
       [1, "Setting up your Web Dev Environment"] => %w(),
