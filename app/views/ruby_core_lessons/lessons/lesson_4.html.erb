@@ -1,0 +1,137 @@
+<h1><%= title_for(RubyCoreLesson, 2, 3) %></h1>
+
+<p>
+  Let's solve another problem.
+</p>
+
+<p class="alert alert-danger">
+  WARNING: You will probably feel frustrated at solving these coding challenges - they can become quite difficult!
+</p>
+
+<h3>Square Each Digits</h3>
+
+<p>
+  Given a number, write a method called  <code>square_each_digit</code> to find out the square of each digit of the input. If the input is not a number, the program should return "NaN".
+</p>
+
+<div class="well">
+  <h3>Getting Started</h3>
+
+  <p>
+    First, download the starter kit for this problem:
+  </p>
+
+  <p>
+    <%= link_to 'Download Starter Kit', '/ruby-core/square_each_digit.zip', class: 'btn btn-danger' %>
+  </p>
+
+  <p>
+    Next, unzip the folder and <strong>navigate to the folder in your terminal</strong>.
+  </p>
+
+  <p>
+    For most people, you can do this by <code>cd</code>ing into the folder like this:
+  </p>
+
+  <pre><code class="bash">
+  cd ~/Downloads/square_each_digit
+  </code></pre>
+
+  <p>
+    Once you are in the folder in the terminal, <strong>run the following command</strong>:
+  </p>
+
+  <pre><code class="bash">
+  rspec
+  </code></pre>
+
+  <p>
+    <strong>This will run some tests to see if your code is working.</strong> Since you haven't written any code yet, you will see that all of the tests fail. The output should look something like this:
+  </p>
+
+  <%= image_tag 'ruby-core/failing-test-square-digit.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Next, open up your text editor and open <code>square_each_digit.rb</code>
+  </p>
+
+  <p>
+    You should see code like this:
+  </p>
+
+  <pre><code class="ruby">
+    def square_each_digit num
+      # Write your code here
+    end
+
+    describe "#square_each_digit" do
+      context "it is a number" do
+        it "returns square of each digit" do
+          expect(square_each_digit(3211)).to eq(9411)
+          expect(square_each_digit(654326)).to eq(3625169436)
+          expect(square_each_digit(1111)).to eq(1111)
+        end
+      end
+
+      context "it is not a number" do
+        it "returns NaN" do
+          expect(square_each_digit("hello")).to eq("NaN")
+          expect(square_each_digit("12hello")).to eq("NaN")
+        end
+      end
+    end
+  </code></pre>
+
+  <p>
+    For now you can ignore following codes:
+  </p>
+
+  <pre><code class="ruby">
+    describe "#square_each_digit" do
+      context "it is a number" do
+        it "returns square of each digit" do
+          expect(square_each_digit(3211)).to eq(9411)
+          expect(square_each_digit(654326)).to eq(3625169436)
+          expect(square_each_digit(1111)).to eq(1111)
+        end
+      end
+
+      context "it is not a number" do
+        it "returns NaN" do
+          expect(square_each_digit("hello")).to eq("NaN")
+          expect(square_each_digit("12hello")).to eq("NaN")
+        end
+      end
+    end
+  </code></pre>
+
+
+  <p>
+    <strong>Implement your solution in this file.</strong>
+  </p>
+
+  <p>
+    Once you have implemented the solution, go into your terminal and run this command again:
+  </p>
+
+  <pre><code class="bash">
+  rspec
+  </code></pre>
+
+  <p>
+    If your solution is correct, you should see an output like this:
+  </p>
+
+  <%= image_tag 'ruby-core/passing-test-square-digit.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Submit the code inside of <code>square_each_digit.rb</code> below :)
+  </p>
+
+  <p>
+    Good luck!
+  </p>
+
+</div>
+
+<% @submission_form = true %>
