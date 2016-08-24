@@ -26,7 +26,7 @@ class RepliesController < ApplicationController
 	end
 
 	def update
-    if @reply.update(reply_params.merge(question_id: question.id))
+    if @reply.update(reply_params.merge(question_id: @question.id))
       flash[:success] = "Updated!"
       redirect_to question_path(@question.id)
     else

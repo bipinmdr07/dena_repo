@@ -27,11 +27,11 @@ RSpec.describe User, type: :model do
 
       context "user has 1 more day left" do
         it "has title containing 1 day" do
-          user = FactoryGirl.create(:prework_student, admitted: false, prework_end_date: DateTime.now + 1.day)
+          user = FactoryGirl.create(:prework_student, admitted: false, prework_end_date: DateTime.now + 1.day + 10.minutes)
 
           user.send_prework_reminders
 
-          expect(ActionMailer::Base.deliveries.last.subject).to eq("Last day to finish pre-work assignments!")
+          expect(ActionMailer::Base.deliveries.last.subject).to eq("1 day left until your pre-work period ends!")
           expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
         end
       end
@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
 
           user.send_prework_reminders
 
-          expect(ActionMailer::Base.deliveries.last.subject).to eq("Your pre-work period is almost over!")
+          expect(ActionMailer::Base.deliveries.last.subject).to eq("Last day to finish pre-work assignments!")
           expect(ActionMailer::Base.deliveries.last.to).to eq([user.email])
         end
       end
