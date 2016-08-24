@@ -1,6 +1,10 @@
 # Preview all emails at http://localhost:3000/rails/mailers/user_mailer
 class UserMailerPreview < ActionMailer::Preview
 
+  def prework_finished
+    UserMailer.prework_finished(FactoryGirl.build(:prework_student, admitted: false))
+  end
+
   def prework_reminder_4_days
     UserMailer.prework_reminder(FactoryGirl.build(:prework_student), 4)
   end

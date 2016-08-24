@@ -3,6 +3,12 @@ class UserMailer < ApplicationMailer
 
 	default from: "TECHRISE <contact@techrise.me>"
 
+	def prework_finished(user)
+		@user = user
+
+		mail(from: "TECHRISE <contact@techrise.me>", to: user.email, subject: "Your Pre-work Period at TECHRISE has ended")
+	end
+
 	def prework_reminder(user, days)
 		@user = user
 		@days = days		

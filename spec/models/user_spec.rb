@@ -4,6 +4,37 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :first_name }
   it { should validate_presence_of :last_name }
 
+  describe "#send_prework_finished_message" do
+    context "user is not admitted" do
+      it "sends an email" do
+        user_1 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 8.hours, admitted: false)
+        expect {
+          user_1.send_prework_finished_message
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+    end
+
+    context "user is admitted" do
+      it "does not send an email" do
+        user_1 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 8.hours, admitted: true)
+        expect {
+          user_1.send_prework_finished_message
+        }.to change { ActionMailer::Base.deliveries.count }.by(0)
+      end
+    end
+  end
+
+  describe "#self.declined_today" do
+    it "returns users who were declined today" do
+      user_1 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 8.hours, admitted: false)
+      user_2 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 23.hours, admitted: false)
+      user_3 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 24.hours, admitted: false)
+      user_4 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now, admitted: false)
+      user_5 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now + 10.minutes, admitted: false)
+      expect(User.declined_today.count).to eq(3)
+    end
+  end
+
   describe "#send_prework_reminders" do
     context "user is not admitted" do
       it "sends an email" do
