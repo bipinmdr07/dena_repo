@@ -49,12 +49,8 @@
                                 <li><a style="text-transform: uppercase;"><%= pluralize ((current_user.graduation_date - DateTime.now)/1.day).to_i, 'DAY' %> UNTIL GRADUATION</a></li>
 
                             <% elsif !current_user.admitted && current_user.prework_end_date && current_user.prework_end_date > DateTime.now %>
-<<<<<<< HEAD
-                            
-                                <% remaining_prework = (current_user.prework_end_date - DateTime.now).to_i / 86400 %> 
-=======
+                        
                                 <% remaining_prework = (current_user.prework_end_date - DateTime.now).to_i / 86400 %>
->>>>>>> e0bcfa9bc70506ad5d9099a58ece005a38a34f8e
 
                                 <li><a style="text-transform: uppercase;"><%= remaining_prework %> DAYS UNTIL END OF PREWORK</a></li>
 
