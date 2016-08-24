@@ -16,7 +16,7 @@ class RubyCoreLesson < ActiveRecord::Base
     ["Coding Challenges",
       [
         [2, "Check Palindrome"],
-        [3, "String Compressor"]
+        [3, "String Compressor"],
         [4, "Square Each Digits"]
       ]
     ]
