@@ -4,6 +4,23 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :first_name }
   it { should validate_presence_of :last_name }
 
+  describe "#send_prework_reminders" do
+    context "user is not admitted" do
+      it "sends an email" do
+        user = FactoryGirl.create(:prework_student, admitted: false)
+        expect{
+          user.send_prework_reminders
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+    end
+
+    context "user is admitted" do
+      it "does not send an email" do
+
+      end
+    end
+  end
+
   describe "#update_name!" do
     it "should save name after save" do
       user = User.new(email: "test@example.com", password: "abcd123456", password_confirmation: "abcd123456",
