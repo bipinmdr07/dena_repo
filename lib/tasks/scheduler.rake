@@ -9,3 +9,13 @@ task :send_prework_reminders => :environment do
   end
   puts "done."
 end
+
+task :send_prework_finished_message => :environment do
+  puts "Sending emails" 
+  User.declined_today.each do |user|
+    puts "Sending email to #{user.name}"
+    user.send_prework_finished_message
+    puts "Sent email to #{user.name}"
+  end
+  puts "done."
+end
