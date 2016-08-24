@@ -1,13 +1,18 @@
 class UserMailer < ApplicationMailer
+	include ActionView::Helpers::TextHelper
+
 	default from: "TECHRISE <contact@techrise.me>"
 
-	def prework_reminder(email, days)
-		@days = days
+	def prework_reminder(user, days)
+		@user = user
+		@days = days		
 
 		if days >= 1
-			mail(from: "TECHRISE <contact@techrise.me>", to: email, subject: "#{days} days left until your pre-work period ends!")
+			mail(from: "TECHRISE <contact@techrise.me>", to: user.email, subject: "#{pluralize(days, 'day')} left until your pre-work period ends!")
+		elsif days == 0
+			mail(from: "TECHRISE <contact@techrise.me>", to: user.email, subject: "Last day to finish pre-work assignments!")
 		else
-			mail(from: "TECHRISE <contact@techrise.me>", to: email, subject: "Your pre-work period has ended.")
+			mail(from: "TECHRISE <contact@techrise.me>", to: user.email, subject: "Your pre-work period is almost over!")			
 		end
 	end
 

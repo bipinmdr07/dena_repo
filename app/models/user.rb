@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
                                     Date.today.beginning_of_month )}  
 
   def send_prework_reminders
-    return if self.admitted
-    UserMailer.prework_reminder(self.email, (current_user.prework_end_date - DateTime.now).to_i / 86400).deliver_now
+    return if self.admitted || prework_end_date.nil?
+    UserMailer.prework_reminder(self, (self.prework_end_date - DateTime.now).to_i / 86400).deliver_now
   end
 
   def send_slack

@@ -5,19 +5,23 @@
 <% end %>
 
 <p>
-  To be admitted into TECHRISE, you must complete the pre-work assignments. This is to make sure that all of our students are motivated and determined to learn.
+  To be admitted into TECHRISE, you must complete the pre-work assignments. This is to ensure that <strong>all of our students are motivated and determined to learn.</strong>
 </p>
 
 <p>
-  If you need any help, TECHRISE Mentors will be there to support you. Ask questions on the forum anytime to get help on finishing the pre-work assignements.
+  If you need any help, <strong>TECHRISE Mentors</strong> will be there to support you. Ask questions on the forum anytime to get help on finishing the pre-work assignements.
 </p>
+
+<p>
+  You have until <strong><%= @user.prework_end_date.strftime("%m/%d/%Y %l:%M %p") %></strong> to complete the assignments.
+</p>  
 
 <p>
   Good luck!
 </p>
 
 <p>
-  Happy coding
+  Happy coding,
 </p>
 
 <p>

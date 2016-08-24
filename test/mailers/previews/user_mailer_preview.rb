@@ -2,23 +2,23 @@
 class UserMailerPreview < ActionMailer::Preview
 
   def prework_reminder_4_days
-    UserMailer.prework_reminder(User.first.email, 4)
+    UserMailer.prework_reminder(FactoryGirl.build(:prework_student), 4)
   end
 
   def prework_reminder_3_days
-    UserMailer.prework_reminder(User.first.email, 3)
+    UserMailer.prework_reminder(FactoryGirl.build(:prework_student), 3)
   end
 
   def prework_reminder_2_days
-    UserMailer.prework_reminder(User.first.email, 2)
+    UserMailer.prework_reminder(FactoryGirl.build(:prework_student), 2)
   end
 
   def prework_reminder_1_days
-    UserMailer.prework_reminder(User.first.email, 1)
+    UserMailer.prework_reminder(FactoryGirl.build(:prework_student), 1)
   end
 
   def prework_reminder_0_days
-    UserMailer.prework_reminder(User.first.email, 0)
+    UserMailer.prework_reminder(FactoryGirl.build(:prework_student), 0)
   end
 
   def confirmation
