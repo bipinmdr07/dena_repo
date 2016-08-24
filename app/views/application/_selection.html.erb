@@ -1,0 +1,79 @@
+<script type="text/javascript">
+if (!window.x) {
+    x = {};
+}
+
+x.Selector = {};
+x.Selector.getSelected = function() {
+    var t = '';
+    if (window.getSelection) {
+        t = window.getSelection();
+    } else if (document.getSelection) {
+        t = document.getSelection();
+    } else if (document.selection) {
+        t = document.selection.createRange().text;
+    }
+    return t;
+}
+
+var pageX;
+var pageY;
+
+$(document).ready(function() {
+    $(document).bind("mouseup", function() {
+        var selectedText = x.Selector.getSelected();
+        if(selectedText != ''){
+          // document.getElementById("mytext").value = selectedText;
+            $('ul.selText').css({
+                'left': pageX + 55,
+                'top' : pageY - 50
+            }).fadeIn(200);
+        } else {
+            $('ul.selText').fadeOut(200);
+        }
+    });
+    $(document).on("mousedown", function(e){
+        pageX = e.pageX;
+        pageY = e.pageY;
+    });
+});
+
+
+$(document).on("click", ".openQuestion", function () {
+     var selectedText = x.Selector.getSelected();
+    //  var userId = <%= current_user.id %>;
+     var lesson_id = <%= params[:id] %>;
+     var course_name = "<%= controller_name.classify.constantize %>";
+     $(".modal-body #question_title").val( '\"'+selectedText+'\"' );
+    //  $(".modal-body #feedback_user_id").val( userId );
+     $(".modal-body #question_lesson_id").val( lesson_id );
+     $(".modal-body #question_course_name").val( course_name );
+
+});
+</script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"S>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Question</h4>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for :question, url: questions_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
+          <%= f.input :title, required: true %>
+          <%= f.input :content, as: :summernote, required: true  %>
+          <%= f.input :lesson_id, as: :hidden,  required: true %>
+          <%= f.input :course_name, as: :hidden, required: true %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit 'Submit Question', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<ul class="selText">
+    <a data-toggle="modal" title="Ask Question" class="openQuestion btn" href="#myModal"><i class="fa fa-question-circle fa-lg bcolor" aria-hidden="true"></i> Ask Question</a>
+</ul>

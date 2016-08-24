@@ -1,5 +1,26 @@
 # Preview all emails at http://localhost:3000/rails/mailers/user_mailer
 class UserMailerPreview < ActionMailer::Preview
+
+  def prework_reminder_4_days
+    UserMailer.prework_reminder(User.first.email, 4)
+  end
+
+  def prework_reminder_3_days
+    UserMailer.prework_reminder(User.first.email, 3)
+  end
+
+  def prework_reminder_2_days
+    UserMailer.prework_reminder(User.first.email, 2)
+  end
+
+  def prework_reminder_1_days
+    UserMailer.prework_reminder(User.first.email, 1)
+  end
+
+  def prework_reminder_0_days
+    UserMailer.prework_reminder(User.first.email, 0)
+  end
+
   def confirmation
     Devise::Mailer.confirmation_instructions(User.first, "faketoken")
   end

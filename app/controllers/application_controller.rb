@@ -7,14 +7,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
+
   def authenticate_admin!
     return if current_user && current_user.admin
     flash[:alert] = "Unauthorized :("
     redirect_to dashboard_path
   end
 
+
   private
-  
+
 	def after_sign_in_path_for(resource)
 	  root_path
 	end

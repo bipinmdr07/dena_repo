@@ -30,7 +30,15 @@ class User < ActiveRecord::Base
                                     Date.today.beginning_of_month )}  
 
   def send_prework_reminders
-    # UserMailer.prework_reminder(self.email, current_user.prework_end_date - DateTime.now).to_i / 86400).deliver_now
+    return if self.admitted
+    UserMailer.prework_reminder(self.email, (current_user.prework_end_date - DateTime.now).to_i / 86400).deliver_now
+  end
+
+  def send_slack
+    Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up!",
+          username: 'TECHRISE Bot',
+          channel: "#user_signup_alerts",
+          icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
   def has_access?
@@ -47,16 +55,6 @@ class User < ActiveRecord::Base
 
   def last_lesson
     self.progressions.order('created_at DESC').first
-    # PublicActivity::Activity.where(owner_id: mentee_id, key: 'progression.create').order('created_at DESC').first
-  end
-
-  private
-
-  def send_slack
-    Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up!", 
-          username: 'TECHRISE Bot', 
-          channel: "#user_signup_alerts", 
-          icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
 end

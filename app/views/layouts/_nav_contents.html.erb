@@ -1,5 +1,5 @@
-<div class="container">       
-    <h1 class="logo" styc="padding-top: 13px;">
+<div class="container">
+    <h1 class="logo" style="padding-top: 13px;">
         <a href="/"><span class="text" style="font-size: 40px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
     </h1><!--//logo-->
     <nav class="main-nav navbar-right" role="navigation">
@@ -14,6 +14,7 @@
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <% if user_signed_in? %>
+
 
                     <li class="nav-item page-scroll">
                       <%= link_to 'ADMIN', admin_root_path if current_user.admin %>
@@ -32,7 +33,7 @@
                     </li>
 
                     <li class="nav-item page-scroll">
-                      <% 
+                      <%
                         @cards = current_user.cards.where(archived: false, repetition_date: nil)
                         @cards += current_user.cards.today
                       %>
@@ -48,15 +49,19 @@
                                 <li><a style="text-transform: uppercase;"><%= pluralize ((current_user.graduation_date - DateTime.now)/1.day).to_i, 'DAY' %> UNTIL GRADUATION</a></li>
 
                             <% elsif !current_user.admitted && current_user.prework_end_date && current_user.prework_end_date > DateTime.now %>
+<<<<<<< HEAD
                             
                                 <% remaining_prework = (current_user.prework_end_date - DateTime.now).to_i / 86400 %> 
+=======
+                                <% remaining_prework = (current_user.prework_end_date - DateTime.now).to_i / 86400 %>
+>>>>>>> e0bcfa9bc70506ad5d9099a58ece005a38a34f8e
 
                                 <li><a style="text-transform: uppercase;"><%= remaining_prework %> DAYS UNTIL END OF PREWORK</a></li>
 
                             <% elsif !current_user.mentor || !current_user.admin %>
 
                                 <li><a style="text-transform: uppercase;">- DAYS UNTIL GRADUATION</a></li>
-                                
+
                             <% end %>
 
                             <% if current_user.admin %>
@@ -78,13 +83,15 @@
                                 <li><%= link_to 'MENTOR RESOURCES', mentor_resources_path %></li>
                             <% end %>
 
-                            <li><%= link_to 'SETTINGS', edit_user_registration_path %></li>    
-                            <li><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %></li>               
-                        </ul>                            
-                    </li><!--//dropdown-->    
+                            <li><%= link_to 'SETTINGS', edit_user_registration_path %></li>
+                            <li><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %></li>
+                        </ul>
 
-                <% else %>                
-                    
+                    </li><!--//dropdown-->
+
+
+                <% else %>
+
                     <li class="nav-item page-scroll">
                       <a href="/contact_us">Contact Us</a>
                     </li>
@@ -122,16 +129,17 @@
                         </ul>
                     </li>
 
-                <% end %>          
+                <% end %>
+
                 <li class="nav-item">
-                    <%= link_to 'LOG IN', new_user_session_path unless user_signed_in? %>                    
+                    <%= link_to 'LOG IN', new_user_session_path unless user_signed_in? %>
                 </li>
-                
+
                 <% unless user_signed_in? %>
                     <li class="nav-item nav-item-cta last"><%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-cta btn-cta-secondary' %></li>
                 <% end %>
 
             </ul><!--//nav-->
         </div><!--//navabr-collapse-->
-    </nav><!--//main-nav-->                     
-</div><!--//container-->    
+    </nav><!--//main-nav-->
+</div><!--//container-->

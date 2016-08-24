@@ -33,6 +33,9 @@
     </div>
 
   </div>
+  <% if user_signed_in? && (params[:id].present?) && (controller_name.classify.include? "Lesson") %>
+    <%= render '/application/selection' %>
+  <% end %>
 
   <%= render '/layouts/lesson_footer' %>
 

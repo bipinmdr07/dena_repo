@@ -179,6 +179,7 @@ FactoryGirl.define do
     prework_end_date Date.today + 2.weeks
     start_date nil
     graduation_date nil
+    admitted false
   end
 
   factory :pre_prework_student, class: 'User' do
@@ -195,6 +196,7 @@ FactoryGirl.define do
     prework_end_date nil
     start_date nil
     graduation_date nil
+    admitted false
   end
 
   factory :mentor, class: "User" do
@@ -213,5 +215,18 @@ FactoryGirl.define do
   factory :progression do
     lesson_id 1
     course_name "HtmlCssLesson"
+  end
+
+  factory :feedback do
+    title "Confusion about this"
+    course_name "HtmlCssLesson"
+    content "Don't worry about memorizing all of the syntax, that will come with time and experience. If you forget the syntax, you can always just Google it."
+    lesson_id 1
+  end
+
+  factory :invalid_feedback, class: "Feedback" do
+    title "Confusion about this"
+    course_name ""
+    content "Don't worry about memorizing all of the syntax, that will come with time and experience. If you forget the syntax, you can always just Google it."
   end
 end
