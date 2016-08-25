@@ -6,10 +6,17 @@ class SubmissionApprovalsController < ApplicationController
 
   def create
     @submission = Submission.find(params[:id])
+    
     if @submission.approved
       @submission.update(approved: false)
     else
       @submission.update(approved: true)
+
+      Notification.create(recipient: @submission.user, 
+                          actor: current_user, 
+                          action: "approved", 
+                          notifiable: @submission)
+
     end
 
     respond_to do |format|

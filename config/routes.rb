@@ -44,6 +44,12 @@ Rails.application.routes.draw do
 
   resources :admin_dashboard, only: :index
 
+  resources :notifications  do
+    collection do
+      post :mark_as_read
+    end
+  end	  
+
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 
   post 'question_downvotes/:id(.:format)', to: 'question_downvotes#create', as: 'question_downvote'

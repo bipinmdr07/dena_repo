@@ -4,10 +4,15 @@ class RepliesController < ApplicationController
 
 	def create
 		question = Question.find(params[:question_id])
-		comment = current_user.replies.create(reply_params.merge(question_id: question.id))
+		reply = current_user.replies.create(reply_params.merge(question_id: question.id))
 
-		if comment.valid?
-			user = User.find(comment.user_id)
+		if reply.valid?
+			user = User.find(reply.user_id)
+			
+			# Create notifications
+			(question.users.uniq + [question.user] - [current_user]).each do |user|
+			  Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: question)
+			end
 
 			UserMailer.new_reply(question, User.find(question.user_id).email).deliver_now
 			UserMailer.new_reply(question, "techrisecoding@gmail.com").deliver_now
