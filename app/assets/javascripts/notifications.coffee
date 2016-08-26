@@ -22,11 +22,13 @@ class Notifications
         $("[data-behavior='unread-count']").text(0)
     )
 
-  handleSuccess: (data) =>
+  handleSuccess: (data) =>    
     items = $.map data, (notification) ->
-      "<li><a href='#{notification.url}'>#{notification.actor} #{notification.action} #{notification.notifiable.type}</a></li>"
-    $("[data-behavior='unread-count']").text(items.length)
-    $("[data-behavior='notification-items']").html(items)
+      "<li data-read-at='#{notification.read_at}'><a href='#{notification.url}'><img src=#{notification.actor_photo_url} class='notification-prof'> #{notification.actor} #{notification.action} #{notification.notifiable.type}<br><time class='timeago' datetime='#{notification.created_at}'>#{notification.created_at}</time></a></li>"    
+    $("[data-behavior='notification-items']").append(items)
+    unread_count = $('*[data-read-at="null"]').length
+    $("[data-behavior='unread-count']").text(unread_count)
+    $("time.timeago").timeago()
 
 $(document).on "turbolinks:load", ->
-  new Notifications
+  new Notifications  

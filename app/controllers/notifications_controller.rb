@@ -1,8 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    # @notifcations = Notification.where(recipient: current_user).unread
+  def index    
     @notifications = Notification.where(recipient: current_user).recent
   end
 
