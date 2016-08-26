@@ -26,6 +26,18 @@ RSpec.describe RepliesController, type: :controller do
           post :create, question_id: question.id, reply: FactoryGirl.attributes_for(:reply)
         }.to change { ActionMailer::Base.deliveries.count }.by(2)
       end
+
+      it "creates notification for involved users" do
+        user_1 = FactoryGirl.create(:user)
+        user_2 = FactoryGirl.create(:user)
+
+        FactoryGirl.create(:reply, question_id: question.id, user_id: user_1.id)
+        FactoryGirl.create(:reply, question_id: question.id, user_id: user_2.id)
+
+        expect {
+          post :create, question_id: question.id, reply: FactoryGirl.attributes_for(:reply)
+        }.to change(Notification, :count).by(2)
+      end
     end
 
     context "when the attributes are invalid" do

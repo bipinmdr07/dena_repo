@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
 
   belongs_to :user
   has_many :replies, dependent: :destroy
+  has_many :users, through: :replies
 
   validates :title, :content, :user_id, presence: true
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
@@ -13,9 +14,7 @@ class Question < ActiveRecord::Base
   acts_as_votable
 
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
-
-  
+  include Elasticsearch::Model::Callbacks  
 
   def should_generate_new_friendly_id?
     title_changed? || super
