@@ -4,21 +4,27 @@ class SubmissionRepliesController < ApplicationController
 
 
 	def create
-		@submission = Submission.find(params[:submission_id])
+		submission = Submission.find(params[:submission_id])
 		reply = current_user.submission_replies.create(reply_params)
 
 		if reply.valid?
 			user = User.find(reply.user_id)
-			UserMailer.new_submission_reply(@submission, User.find(@submission.user_id).email).deliver_now
-			UserMailer.new_submission_reply(@submission, "techrisecoding@gmail.com").deliver_now
-			Slack.chat_postMessage(text: 'New reply by ' + user.name + '! View it <' + submission_url(@submission) + '|here>.', 
+
+      # Create notifications
+      (submission.users.uniq + [submission.user] - [current_user]).each do |user|
+        Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: submission)
+      end
+
+			UserMailer.new_submission_reply(submission, User.find(submission.user_id).email).deliver_now
+			UserMailer.new_submission_reply(submission, "techrisecoding@gmail.com").deliver_now
+			Slack.chat_postMessage(text: 'New reply by ' + user.name + '! View it <' + submission_url(submission) + '|here>.', 
 				username: 'TECHRISE Bot', 
 				channel: "#forum_questions", 
 				icon_emoji: ":smile_cat:") if Rails.env.production?
 		else
 			flash[:alert] = "Invalid attributes, please try again."
 		end
-		redirect_to submission_path(@submission)
+		redirect_to submission_path(submission)
 	end
 
 	def edit

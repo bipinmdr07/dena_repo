@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823105802) do
+ActiveRecord::Schema.define(version: 20160826051716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,6 +220,23 @@ ActiveRecord::Schema.define(version: 20160823105802) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "notifications", ["actor_id"], name: "index_notifications_on_actor_id", using: :btree
+  add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
+  add_index "notifications", ["recipient_id", "created_at"], name: "index_notifications_on_recipient_id_and_created_at", using: :btree
+  add_index "notifications", ["recipient_id", "read_at"], name: "index_notifications_on_recipient_id_and_read_at", using: :btree
+  add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
