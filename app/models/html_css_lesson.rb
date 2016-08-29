@@ -8,7 +8,7 @@ class HtmlCssLesson < ActiveRecord::Base
 	PERIOD = "PREWORK"
 
 	LESSONS = [
-		["Introduction to HTML/CSS", 
+		["Building Your first HTML/CSS Projects", 
 			[
 				[1, "Guidelines for Learning"],
 				[2, "Building Your First Two HTML/CSS Projects"]
