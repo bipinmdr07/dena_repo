@@ -10,6 +10,7 @@ class LessonsController < ApplicationController
 
   def show
     controller = controller_name.classify
+    
     @lesson_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_title = controller.constantize::COURSE_TITLE
     @lessons = controller.constantize::LESSONS
@@ -22,6 +23,7 @@ class LessonsController < ApplicationController
     @course_name = controller + "s"
 
     @questions = Question.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
+
     @paginated_submissions = Submission.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC").paginate(page: params[:page], per_page: 5)
     @all_submissions = Submission.where(course_name: controller, lesson_id: params[:id]).order("created_at DESC")
     @submissions = @all_submissions.where(approved: true)

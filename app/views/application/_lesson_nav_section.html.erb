@@ -1,3 +1,29 @@
+<% if @submission_form && @user_submission.nil? %>
+  <div class="well">
+    <%= render partial: 'shared/flash_messages' %>
+
+    <h2>Submit your work</h2>
+    <p>
+      Awesome work! Follow the directions on the lesson and submit your work. We'll get back to you soon and give you feedback or code review.
+    </p>
+
+    <p>
+      (P.S Give it an awesome title name just for fun :D )
+    </p>
+
+    <%= simple_form_for :submission, url: submissions_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
+      <%= f.input :title, required: true %>
+      <div data-no-turbolink="true">
+        <%= f.input :content, as: :summernote, input_html: {rows: 6}, required: true %>
+      </div>
+      <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id]} %>
+      <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify} %>
+      <%= f.submit 'Submit', class: 'btn btn-cta-primary btn-block' %>
+    <% end %>
+
+  </div>
+<% end %>
+
 <div class = "lesson_nav_box text-center">
 
   <% if @next_lesson > @lesson_length %>
@@ -11,6 +37,7 @@
   <% end %>
 
   <% if current_user.progressions.where(course_name: controller_name.classify.constantize, lesson_id: params[:id]).count > 0 %>
+
     <%= simple_form_for :progression, url: progression_path, html: {id: 'delete_progression_form'}, method: :delete, remote: true do |f| %>
       <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id] } %>
       <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify.constantize } %>
@@ -19,7 +46,9 @@
         <i class="fa fa-check-circle" aria-hidden="true"></i> Mark as Uncompleted
       <% end %>
     <% end %>
+
   <% else %>
+
     <%= simple_form_for :progression, url: progressions_path, html: {id: 'progression_form'}, method: :post, remote: true do |f| %>
       <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id] } %>
       <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify.constantize } %>
@@ -28,6 +57,7 @@
         <i class="fa fa-check-circle" aria-hidden="true"></i> Mark as Completed
       <% end %>
     <% end %>
+
   <% end %>
 
   <!-- hidden forms for using with create.js.erb and destroy.js.erb -->

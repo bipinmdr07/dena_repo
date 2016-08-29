@@ -6,8 +6,6 @@
         <span class="back_to_dashboard">
           <% if @user_submission %>
             <%= link_to 'My Submission', submission_path(@user_submission.id), class: 'btn btn-back btn-default', :"data-no-turbolink" => true %>
-          <% else %>
-            <%= link_to 'Submit Your Work', new_submission_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-back btn-default' %>
           <% end %>
         </span>
          Submissions
@@ -19,10 +17,9 @@
 
   <%= render 'submissions/student_submissions' %>
   <hr>
+  
   <% @paginated_submissions.order("created_at DESC").each do |submission| %>
-
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
-
   <% end %>
 
   <%= will_paginate @paginated_submissions, renderer: BootstrapPagination::Rails %>

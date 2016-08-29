@@ -25,9 +25,19 @@ class Tags < ActiveRecord::Base
     "html_css_lessons" => {
       [1, "Guidelines for Learning"] => %w(),
       [2, "Building Your First Two HTML/CSS Projects"] => %w(),
-      [3, "Setting Up Your Environment"] => %w(sublime chrome),
-      [4, "Building a Simple Personal Resume Page in 25 minutes"] => %w(html css),
-      [5, "Congratulations"] => %w()
+      [3, "Introduction to HTML/CSS"] => %w(),
+      [4, "Setting Up Your Environment"] => %w(),       
+      [5, "Getting Started"] => %w(),
+      [6, "Learning about Divs"] => %w(),
+      [7, "Adding some Padding"] => %w(),
+      [8, "Creating a Background Image"] => %w(),
+      [9, "Creating a perfect background image"] => %w(),
+      [10, "Adding Margins"] => %w(),
+      [11, "Adding a Profile Picture"] => %w(),
+      [12, "Making everything look nice"] => %w(),
+      [13, "Adding Social Buttons"] => %w(),
+      [14, "Final Touches"] => %w(),
+      [15, "Congratulations"] => %w()
     },
     "bootstrap_lessons" => {
       [1, "Introducing Twitter Bootstrap"] => %w(),

@@ -16,13 +16,23 @@ class HtmlCssLesson < ActiveRecord::Base
 		],
 		["Build a Personal Resume Page", 
 			[
-				[3, "Setting Up Your Environment"],
-				[4, "Building a Simple Personal Resume Page in 25 minutes"]
+				[3, "Introduction to HTML/CSS"],
+				[4, "Setting Up Your Environment"],				
+				[5, "Getting Started"],
+				[6, "Learning about Divs"],
+				[7, "Adding some Padding"],
+				[8, "Adding a Background Image"],
+				[9, "Creating a perfect background image"],
+				[10, "Adding Margins"],
+				[11, "Adding a Profile Picture"],
+				[12, "Making everything look nice"],
+				[13, "Adding Social Buttons"],
+				[14, "Final Touches"],
 			]
 		],
 		["Next Steps",
 			[
-				[5, "Congratulations"]
+				[15, "Congratulations"]
 			]
 		]
 	]
