@@ -1,7 +1,7 @@
 class HtmlCssLesson < ActiveRecord::Base
 	COURSE_TITLE = "HTML/CSS"
 
-	LESSON_LENGTH = 5
+	LESSON_LENGTH = 15
 
 	DURATION = 15
 
