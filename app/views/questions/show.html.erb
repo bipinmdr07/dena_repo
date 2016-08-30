@@ -1,14 +1,10 @@
-<% if @question.mentor_post %>
-
-<% else %>
-  <%= question_back_to_lesson %>
+<% unless @question.mentor_post %>
+  <%= back_to_lesson %>
 <% end %>
 
 <div class="devise_box forum_container">
 
   <%= render "shared/flash_messages" %>
-
-
 
   <div class="row">
     <div class="col-xs-12 col-sm-2">
@@ -77,8 +73,6 @@
     </div>
     <hr>
   <% end %>
-
-
 
   <%= simple_form_for :reply, url: question_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
