@@ -1,0 +1,13 @@
+<h1 class="text-center"><%= @deck.title %></h1>
+
+<%= simple_form_for Card.new, url: admin_cards_path(deck_id: @deck.id) do |f| %>
+	<%= f.input :question, placeholder: 'Write your flashcard question here', input_html: {rows: 5} %>
+  <%= f.input :answer, placeholder: 'Write your flashcard answer here', input_html: {rows: 5} %>
+  <%= f.input :tag_list, label: 'Related Tags', placeholder: 'Separate tags with single comma ","', input_html: {rows: 2} %>
+	<%= f.submit 'Create New Card', class: 'btn btn-cta-primary btn-block' %>
+<% end %>
+
+<% @deck.cards.each do |card| %>
+	<%= card.question %>
+	<%= card.answer %>	
+<% end %>

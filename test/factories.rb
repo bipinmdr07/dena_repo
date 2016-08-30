@@ -61,6 +61,12 @@ FactoryGirl.define do
     answer "HTML stands for Hyper Text Markup Language"
   end
 
+	factory :master_card, class: 'Card' do
+		question "What is HTML?"
+		answer "HTML is this"
+		master true
+	end
+
   factory :admin_user, class: 'User' do
     sequence :email do |n|
       "random#{n}@email.com"

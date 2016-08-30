@@ -50,6 +50,11 @@ Rails.application.routes.draw do
     end
   end	  
 
+  namespace :admin do
+    resources :decks
+    resources :cards
+  end
+
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 
   post 'question_downvotes/:id(.:format)', to: 'question_downvotes#create', as: 'question_downvote'

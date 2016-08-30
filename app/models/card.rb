@@ -3,9 +3,11 @@ class Card < ActiveRecord::Base
   include PublicActivity::Model
 
   belongs_to :user
+  belongs_to :deck
+
   before_save :update_code_syntax
 
-  validates :user_id, :question, :answer, presence: true
+  validates :question, :answer, presence: true
 
   scope :today, -> { where(archived: false)
                     .where(["repetition_date <= ?", Date.today])
