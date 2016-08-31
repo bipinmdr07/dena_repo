@@ -11,7 +11,7 @@
   <!-- sidebar -->
   <div class="col-lg-3 visible-lg">
     <div style="width: 100%">
-      <div id="sidebar_container">
+      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
         <%= render 'sidebar' %>
       </div>
     </div>
@@ -71,7 +71,7 @@ $('ul.nav a').filter(function() {
 
 $('ul.nav a').filter(function() {
     return this.href == url
-}).parent().parent().parent().closest('li').find('a').addClass('collapsed')
+}).parent().parent().parent().closest('li').find('a').attr('aria-expanded', 'true');
 
 // scroll to current lesson
 var ready;

@@ -34,7 +34,6 @@
 
 .affix {
     bottom: 80px;
-    top: 140px;
 }
 
 @media (min-width: 767px) {
@@ -60,6 +59,7 @@
     line-height: 50px;
     font-weight: 600;
     font-family: 'Lato', sans-serif;
+    margin-left: 10px;
   }
 }
 
@@ -172,7 +172,7 @@
     float: right;        /* adjust as needed */
     color: grey;         /* adjust as needed */
 }
-.chapter-nav.collapsed:after {    
+.chapter-nav[aria-expanded="true"]:after {    
     font-family: FontAwesome;
     content: "\f107";     /* adjust as needed, taken from bootstrap.css */
 }

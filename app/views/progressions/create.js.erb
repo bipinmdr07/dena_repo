@@ -24,13 +24,13 @@ $('ul.nav a').filter(function() {
     return this.href == url
 }).parent().addClass('active');
 
-$('#sidebar a').filter(function() {
+$('ul.nav a').filter(function() {
     return this.href == url
 }).parent().parent().addClass('collapse in');
 
 $('ul.nav a').filter(function() {
     return this.href == url
-}).parent().parent().addClass('collapse in');
+}).parent().parent().parent().closest('li').find('a').attr('aria-expanded', 'true');
 
 // scroll to current lesson
 var ready;

@@ -1,12 +1,12 @@
 <ul class="nav nav-pills nav-stacked left-menu" id="sidebar">
 
-  <li><%= link_to '<i class="fa fa-home" aria-hidden="true"></i> <span class="nav-text">Back Home</span>'.html_safe, courses_path %></li>
+  <li><%= link_to '<i class="fa fa-home" aria-hidden="true"></i> <span class="nav-text">All Courses</span>'.html_safe, courses_path %></li>
   <li class="course-title"><%= link_to @course_title, "/" + @course_link %></li>
 
   <% @lessons.each_with_index do |chapter, i| %>
 
     <li>
-      <a class="chapter-nav" data-target="#chapter_<%= i %>" data-toggle="collapse" data-parent="#sidebar"><%= chapter[0] %></a>
+      <a class="chapter-nav" data-target="#chapter_<%= i %>" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><%= chapter[0] %></a>
       <ul class="nav nav-stacked collapse left-submenu" id="chapter_<%= i %>" style="position: relative;">
         <% chapter[1].each do |lesson| %>
           <% if controller_name.classify == "Progression" %>
