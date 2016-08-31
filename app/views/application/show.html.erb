@@ -7,15 +7,15 @@
 </style>
 
 
-<div class="row row-offcanvas row-offcanvas-left">
+<div class="row">
   <!-- sidebar -->
-  <div class="col-lg-2 visible-lg">
+  <div class="col-lg-3 visible-lg">
       <div id="sidebar_container">
         <%= render 'sidebar' %>
       </div>
   </div>
 
-  <div class="col-lg-8 col-lg-offset-1 col-md-12">
+  <div class="col-lg-9 col-md-12">
 
     <section class="lesson_content">
 
@@ -40,6 +40,60 @@
 
 <script type="text/javascript">
 
+$(function(){
+  // lock lesson nav
+  var windw = this;
+  var pos;
+
+  $.fn.followTo = function ( elem ) {
+    var $this = this,
+        $window = $(windw),
+        $bumper = $(elem),
+        bumperPos = $bumper.offset().top,
+        thisHeight = $this.outerHeight(),
+        setPosition = function(){
+            if ($window.scrollTop() > (bumperPos - thisHeight)) {
+                $this.css({
+                    position: 'absolute',
+                    top: (bumperPos - thisHeight)
+                });
+            } else {
+                $this.css({
+                    position: 'fixed',
+                    top: 0
+                });
+            }
+        };
+      $window.resize(function()
+      {
+          bumperPos = pos.offset().top;
+          thisHeight = $this.outerHeight();
+          setPosition();
+      });
+      $window.scroll(setPosition);
+      setPosition();      
+  };
+
+  $('#header').followTo('#sidebar_container');
+
+  $('#header').followTo('#slider');
+})
+
+var wrap = $("#wrap");
+var sidebar = $("#sidebar");
+var handle = $(".handle");
+
+$(document).bind('scroll', function() {
+   if ($(window).scrollTop() > 10) {
+    sidebar.addClass("fixed-sidebar");
+    handle.addClass("fixed-handle");
+  } else {
+    sidebar.removeClass("fixed-sidebar");
+    handle.removeClass("fixed-handle");
+  }
+});
+
+
 // add .active to current lesson
 var url = window.location;
 // Will only work if string in href matches with location
@@ -62,7 +116,7 @@ ready = function() {
     position: "right",
     width: 350,
     speed: 700,
-    top: 70
+    top: 0
   });
 
 };

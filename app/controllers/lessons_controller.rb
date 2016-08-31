@@ -29,6 +29,8 @@ class LessonsController < ApplicationController
     @submissions = @all_submissions.where(approved: true)
     @user_submission = current_user.submissions.find_by(lesson_id: params[:id], course_name: controller_name.classify)
     @submission_user_ids = @submissions.pluck(:user_id).uniq.first(10)
+
+    render layout: "layouts/lesson"
   end
 
   private

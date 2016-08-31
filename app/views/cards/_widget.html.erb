@@ -8,7 +8,7 @@
     <%= f.input :answer, placeholder: 'Write your flashcard answer here', input_html: {rows: 5} %>
     <%= f.input :tag_list, label: 'Related Tags', placeholder: 'Separate tags with single comma ","', input_html: {rows: 2} %>
     <%= f.input :lesson_url, as: :hidden, input_html: {value: request.original_url} %>
-    <%= f.submit class: 'btn btn-primary' %>
+    <%= f.submit class: 'btn btn-cta-primary btn-block' %>
   <% end %>
 </div>
 

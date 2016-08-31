@@ -60,7 +60,7 @@
 
               <div class="row" style="margin-top:20px;">
                 <div class="col-xs-12">
-                  <h3><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, get_lesson_url_string(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]), class: 'btn btn-danger' %></h3>
+                  <h3><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, get_lesson_url_string(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]), class: 'btn btn-cta-primary' %></h3>
                 </div>
               </div><!-- row -->
             </div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
@@ -124,7 +124,7 @@
           <small><%= @quote[1] %></small>
         </blockquote>
 
-        <h3><%= link_to 'Study Flashcards', study_path, class: 'btn btn-danger btn-block' %></h3>
+        <h3><%= link_to 'Study Flashcards', study_path, class: 'btn btn-cta-primary btn-block' %></h3>
       </div><!-- panel-body -->
     </div>
 
