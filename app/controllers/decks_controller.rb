@@ -1,6 +1,9 @@
 class DecksController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @decks = Deck.master
+    render layout: "layouts/study"
   end
 
   def show

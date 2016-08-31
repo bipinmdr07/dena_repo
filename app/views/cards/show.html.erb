@@ -5,7 +5,7 @@
     }
   </style>
 
-  <h6 class="deck-title"><%= @card.deck_title %></h6>
+  <h6 class="deck-title"><%= link_to @card.deck_title, @card.deck %></h6>
 
   <div class="devise_box">    
 
@@ -44,12 +44,17 @@
       </ul>
     </div><!-- well -->
 
+    <hr>
+
     <% if @card.next_in_deck %>
-      <%= link_to '<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Review previous flashcard'.html_safe, deck_card_path(@card.deck.id, @card.prev_in_deck.id), class: 'btn btn-cta-secondary' if @card.prev_in_deck %>
+      <%= link_to '<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Go to previous flashcard'.html_safe, deck_card_path(@card.deck.id, @card.prev_in_deck.id), class: 'btn btn-cta-secondary' if @card.prev_in_deck %>
       <%= link_to 'Go to next flashcard <i class="fa fa-long-arrow-right" aria-hidden="true"></i>'.html_safe, deck_card_path(@card.deck.id, @card.next_in_deck.id), class: 'btn btn-cta-primary' %>
     <% else %>
-      <p>You've finished all of the flashcards in this deck!</p>
-      <%= link_to '<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Review previous flashcard'.html_safe, deck_card_path(@card.deck.id, @card.prev_in_deck.id), class: 'btn btn-cta-secondary' if @card.prev_in_deck %>
+      <h3>You've finished all of the flashcards in this deck!</h3>
+
+      <br>
+
+      <%= link_to '<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Go to previous flashcard'.html_safe, deck_card_path(@card.deck.id, @card.prev_in_deck.id), class: 'btn btn-cta-secondary' if @card.prev_in_deck %>
     <% end %>
 
   </div><!-- answer-box -->

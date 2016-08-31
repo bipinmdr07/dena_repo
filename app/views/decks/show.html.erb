@@ -7,7 +7,7 @@
   <% @deck.cards.each do |card| %>
     <div class="col-xs-12 col-sm-6 col-md-4">
       <div class="deck">
-        <h4 class="deck-title"><%= link_to truncate(sanitize(card.question), length: 18), deck_card_path(@deck, card) %></h4>
+        <h4 class="deck-title"><%= link_to strip_tags(card.question).truncate(30), deck_card_path(@deck, card) %></h4>
       </div>
     </div>
   <% end %>
