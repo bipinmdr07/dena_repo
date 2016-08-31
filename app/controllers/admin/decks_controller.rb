@@ -5,9 +5,9 @@ class Admin::DecksController < ApplicationController
     @decks = Deck.master
   end
 
-	def show
-		@deck = Deck.includes(:cards).find(params[:id])
-	end
+  def show
+    @deck = Deck.includes(:cards).find(params[:id])
+  end
 
   def new
     @deck = Deck.new

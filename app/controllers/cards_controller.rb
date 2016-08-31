@@ -10,6 +10,10 @@ class CardsController < ApplicationController
   end
 
   def show
+    @card = Card.find(params[:id])
+    @cards = current_deck.cards.all.order("id ASC")
+    @card_position = @cards.index(@card) + 1
+    @card_count = current_deck.cards.count    
   end
 
   def new
@@ -60,8 +64,13 @@ class CardsController < ApplicationController
 
   private
 
-  def check_card_owner
+  def current_deck
+    Deck.find(params[:deck_id])
+  end 
+
+  def check_card_owner  
     @card = params[:id] ? Card.find(params[:id]) : Card.find(params[:card_id])
+    return if @card.master
     return if @card.user == current_user
     flash[:alert] = "Unauthorized!" 
     redirect_to cards_path

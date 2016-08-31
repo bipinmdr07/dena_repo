@@ -27,6 +27,10 @@ Rails.application.routes.draw do
 
   resources :student_sessions, except: :destroy
 
+  resources :decks do
+    resources :cards
+  end
+
   resources :cards do
     patch :archive
   end

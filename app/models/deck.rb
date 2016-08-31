@@ -5,4 +5,5 @@ class Deck < ActiveRecord::Base
   validates :title, presence: true
 
   scope :master, -> { where(master: true) }
+  
 end

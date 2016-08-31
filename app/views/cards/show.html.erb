@@ -1,0 +1,83 @@
+<div id="card_container">
+  <style type="text/css" media="screen">
+    #editor { 
+      height: 300px;
+    }
+  </style>
+
+  <h6 class="deck-title"><%= @card.deck_title %></h6>
+
+  <div class="devise_box">    
+
+    <h6 class="flashcard-position">Flashcard <%= @card_position %> of <%= @card_count %></h6>
+
+    <%= sanitize @card.question %>
+      
+    <div class="panel panel-default" style="border-top: none !important;">
+      <div class="panel-heading" style="background: #0F0F0F; color: white;">
+          <h3 class="panel-title">Type your answer below:</h3>
+      </div>
+      <div class="panel-body" style="background-color: #0F0F0F;">
+          <div id="editor">
+          </div>
+      </div>
+    </div><!-- panel panel-default -->
+
+    <button type="button" class="btn btn-cta-primary">Check Answer</button>
+                
+  </div><!-- devise_box -->
+
+  <div class="devise_box answer-box">
+    <h2>Answer:</h2>
+    <%= sanitize @card.answer %>      
+      
+    <div class="well">
+      <h3>Related Resources</h3>
+      <ul>
+
+        <% @card.tag_list.each do |tag| %>
+          <% links = Tags.get_links(tag) %>
+          <% links.each do |link| %>
+            <li><%= link_to link[1], '/' + link[0] %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div><!-- well -->
+
+    <% if @card.next_in_deck %>
+      <%= link_to '<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Review previous flashcard'.html_safe, deck_card_path(@card.deck.id, @card.prev_in_deck.id), class: 'btn btn-cta-secondary' if @card.prev_in_deck %>
+      <%= link_to 'Go to next flashcard <i class="fa fa-long-arrow-right" aria-hidden="true"></i>'.html_safe, deck_card_path(@card.deck.id, @card.next_in_deck.id), class: 'btn btn-cta-primary' %>
+    <% else %>
+      <p>You've finished all of the flashcards in this deck!</p>
+      <%= link_to '<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Review previous flashcard'.html_safe, deck_card_path(@card.deck.id, @card.prev_in_deck.id), class: 'btn btn-cta-secondary' if @card.prev_in_deck %>
+    <% end %>
+
+  </div><!-- answer-box -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+
+  <script type="text/javascript">
+
+      var editor = ace.edit("editor");
+      editor.setOptions({
+        maxLines: 100,
+        tabSize: 2,
+        useSoftTabs: true,
+        displayIndentGuides: true
+      });
+      editor.setTheme("ace/theme/vibrant_ink");
+
+      <% if @card.question.include?("<code class='ruby'>") %>
+        editor.session.setMode("ace/mode/ruby");
+      <% elsif @card.question.include?("<code class='javascript'>") %>
+        editor.session.setMode("ace/mode/javascript");
+      <% end %>
+
+      $('button').on('click', function(){
+        $('.answer-box').fadeToggle(1000, "swing");
+        $('button').hide();
+        var own_answer = document.getElementById("answer").value;
+        $('#own_answer').text("Your answer: \n" + editor.getValue());
+      })
+  </script>
+</div>

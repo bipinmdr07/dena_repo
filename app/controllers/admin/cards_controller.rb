@@ -21,7 +21,7 @@ class Admin::CardsController < ApplicationController
   private
 
 	def card_params
-		params.require(:card).permit(:question, :answer, :tag_list).merge(deck_id: :deck_id)
+		params.require(:card).permit(:question, :answer, :tag_list).merge(deck_id: params[:deck_id], master: true)
 	end
 
   def authenticate_admin!

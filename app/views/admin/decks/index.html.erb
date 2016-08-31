@@ -1,8 +1,12 @@
-<ul class="deck-list">
+<h1 class="text-center">Master Decks</h1>
+
+<div class="row">
 	<% @decks.each do |deck| %>
-		<li>
-			<span class="deck-title"><%= link_to deck.title, admin_deck_path(deck) %></span>
-			<span class="deck-card-count"><%= deck.cards.count %></span>
-		</li>
+		<div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="deck">
+  			<h4 class="deck-title"><%= link_to deck.title, admin_deck_path(deck) %></h4>
+  			<p class="flashcards-count"><%= pluralize deck.cards.count, "flashcard" %></p>
+      </div>
+		</div>
 	<% end %>
-</ul>
+</div>

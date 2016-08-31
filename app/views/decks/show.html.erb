@@ -1,0 +1,15 @@
+<%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i> All Master Decks'.html_safe, decks_path, class: 'btn btn-default btn-back' %>
+<h1 class="text-center"><%= @deck.title %></h1>
+
+<br>    
+
+<div class="row">
+  <% @deck.cards.each do |card| %>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="deck">
+        <h4 class="deck-title"><%= link_to truncate(sanitize(card.question), length: 18), deck_card_path(@deck, card) %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+
