@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826051716) do
+ActiveRecord::Schema.define(version: 20160830162306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,9 +91,13 @@ ActiveRecord::Schema.define(version: 20160826051716) do
     t.datetime "repetition_date"
     t.string   "lesson_url"
     t.boolean  "archived",            default: false
+    t.boolean  "master",              default: false, null: false
+    t.integer  "deck_id"
   end
 
   add_index "cards", ["archived", "user_id"], name: "index_cards_on_archived_and_user_id", using: :btree
+  add_index "cards", ["deck_id"], name: "index_cards_on_deck_id", using: :btree
+  add_index "cards", ["master"], name: "index_cards_on_master", using: :btree
   add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
@@ -133,6 +137,17 @@ ActiveRecord::Schema.define(version: 20160826051716) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "decks", force: :cascade do |t|
+    t.string   "title"
+    t.boolean  "master",     default: false, null: false
+    t.integer  "user_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "decks", ["master"], name: "index_decks_on_master", using: :btree
+  add_index "decks", ["user_id"], name: "index_decks_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.text     "overview"

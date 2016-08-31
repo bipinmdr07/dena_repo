@@ -3,13 +3,25 @@ class Card < ActiveRecord::Base
   include PublicActivity::Model
 
   belongs_to :user
+  belongs_to :deck
+
   before_save :update_code_syntax
 
-  validates :user_id, :question, :answer, presence: true
+  validates :question, :answer, presence: true
 
   scope :today, -> { where(archived: false)
                     .where(["repetition_date <= ?", Date.today])
                     .order("repetition_date ASC") }
+
+  delegate :title, to: :deck, prefix: true                  
+
+  def next_in_deck
+    deck.cards.where("id > ?", id).first
+  end
+
+  def prev_in_deck
+    deck.cards.where("id < ?", id).last
+  end                    
 
   def update_code_syntax
     new_question = code_syntax(question)

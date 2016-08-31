@@ -81,6 +81,9 @@ gem 'bonsai-elasticsearch-rails'
 # upvoting
 gem 'acts_as_votable', '~> 0.10.0'
 
+# better stylesheets
+gem 'bourbon'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

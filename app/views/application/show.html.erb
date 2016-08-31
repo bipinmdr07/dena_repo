@@ -7,15 +7,17 @@
 </style>
 
 
-<div class="row row-offcanvas row-offcanvas-left">
+<div class="row">
   <!-- sidebar -->
-  <div class="col-lg-2 visible-lg">
-      <div id="sidebar_container">
+  <div class="col-lg-3 visible-lg">
+    <div style="width: 100%">
+      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
         <%= render 'sidebar' %>
       </div>
+    </div>
   </div>
 
-  <div class="col-lg-8 col-lg-offset-1 col-md-12">
+  <div class="col-lg-9 col-md-12">
 
     <section class="lesson_content">
 
@@ -40,6 +42,19 @@
 
 <script type="text/javascript">
 
+var wrap = $("#wrap");
+var sidebar = $("#sidebar_container");
+var handle = $(".handle");
+
+$(document).bind('scroll', function() {
+  if (76 - $(window).scrollTop() >= 0) {
+    sidebar.css("top", 76 - $(window).scrollTop());  
+  } else {
+    sidebar.css("top", 0);
+  }
+});
+
+
 // add .active to current lesson
 var url = window.location;
 // Will only work if string in href matches with location
@@ -49,6 +64,14 @@ $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
 $('ul.nav a').filter(function() {
     return this.href == url
 }).parent().addClass('active');
+
+$('ul.nav a').filter(function() {
+    return this.href == url
+}).parent().parent().addClass('collapse in');
+
+$('ul.nav a').filter(function() {
+    return this.href == url
+}).parent().parent().parent().closest('li').find('a').attr('aria-expanded', 'true');
 
 // scroll to current lesson
 var ready;
@@ -62,7 +85,7 @@ ready = function() {
     position: "right",
     width: 350,
     speed: 700,
-    top: 70
+    top: 0
   });
 
 };

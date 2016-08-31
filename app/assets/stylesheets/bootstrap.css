@@ -3021,6 +3021,8 @@ select[multiple].input-lg {
           user-select: none;
   background-image: none;
   border: none;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
 }
 .btn:focus,
 .btn:active:focus,

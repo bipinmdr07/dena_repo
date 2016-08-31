@@ -75,6 +75,15 @@ a.btn-cta-secondary:hover,
   border: 2px solid #ec6952;
   color: #fff;
 }
+
+.btn-cta-secondary .fa {
+  color: #ec6952 !important;
+}
+
+.btn-cta-secondary:hover .fa {
+  color: white !important;
+}
+
 a.btn-ghost,
 .btn-ghost {
   background: none;

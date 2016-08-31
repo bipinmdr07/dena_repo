@@ -11,7 +11,6 @@ class LessonsController < ApplicationController
   def show
     controller = controller_name.classify
     
-    @lesson_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_title = controller.constantize::COURSE_TITLE
     @lessons = controller.constantize::LESSONS
     @lesson = params[:id]
@@ -29,6 +28,8 @@ class LessonsController < ApplicationController
     @submissions = @all_submissions.where(approved: true)
     @user_submission = current_user.submissions.find_by(lesson_id: params[:id], course_name: controller_name.classify)
     @submission_user_ids = @submissions.pluck(:user_id).uniq.first(10)
+
+    render layout: "layouts/lesson"
   end
 
   private

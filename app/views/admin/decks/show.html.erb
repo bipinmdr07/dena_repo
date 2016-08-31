@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to '<i class="fa fa-caret-left" aria-hidden="true"></i> All Master Decks'.html_safe, admin_decks_path, class: 'btn btn-default btn-back' %>
+    <h1 class="text-center"><%= @deck.title %></h1>
+
+    <%= simple_form_for Card.new, url: admin_cards_path(deck_id: @deck.id) do |f| %>
+      <%= f.input :question, as: :summernote, placeholder: 'Write your flashcard question here', input_html: {rows: 3} %>
+      <%= f.input :answer, as: :summernote, placeholder: 'Write your flashcard answer here', input_html: {rows: 3} %>
+      <%= f.input :tag_list, label: 'Related Tags', placeholder: 'Separate tags with single comma ","', input_html: {rows: 2} %>
+      <%= f.submit 'Create New Card', class: 'btn btn-cta-primary btn-block', data: {disable_with: 'Creating card...'} %>
+    <% end %>
+  </div>
+</div>
+<hr>
+
+<div class="row">
+  <% @deck.cards.each do |card| %>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="deck">
+        <h4 class="deck-title"><%= link_to strip_tags(card.question).truncate(18), deck_card_path(@deck, card) %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>
+

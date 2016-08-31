@@ -27,6 +27,10 @@ Rails.application.routes.draw do
 
   resources :student_sessions, except: :destroy
 
+  resources :decks do
+    resources :cards
+  end
+
   resources :cards do
     patch :archive
   end
@@ -49,6 +53,11 @@ Rails.application.routes.draw do
       post :mark_as_read
     end
   end	  
+
+  namespace :admin do
+    resources :decks
+    resources :cards
+  end
 
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 

@@ -16,17 +16,21 @@
 
     <%= render '/layouts/nav_lessons' %>
 
-    <div class="container-fluid">
+    <div class="container">
       <div class = "content">
 
         <div class="row">
-          <div class="col-xs-3">
-            <ul class="nav nav-pills nav-stacked flashcard-nav">
-              <li role="presentation"><%= link_to 'HOME', study_path %></li>
-              <li role="presentation"><%= link_to 'ALL CARDS', cards_path %></li>
+          <div class="col-xs-12">
+            <ul class="nav nav-tabs">
+              <li role="presentation"><%= link_to 'Home', study_path %></li>
+              <li role="presentation"><%= link_to 'Your Cards', cards_path %></li>
+              <li role="presentation"><%= link_to 'Master Decks', decks_path %></li>
             </ul>
-          </div><!-- col-xs-3 -->
-          <div class="col-xs-9">
+          </div><!-- col-xs-12 -->
+
+          <br>
+
+          <div class="col-xs-12">
             <%= yield %>
           </div><!-- col-xs-9 -->
         </div><!-- row -->

@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Master Decks</h1>
+
+    <br>
+
+    <h4 class="intro">
+      Become a better programmer, even if you've only got five minutes.  
+    </h4>
+
+    <p>
+      Flashcards are short quizzes with questions and answers provided. Refresh your memory and deepen your understanding by going through the flashcards every day.
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <% @decks.each do |deck| %>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="deck">
+        <h4 class="deck-title"><%= link_to deck.title, deck_card_path(deck, deck.cards.order(:id).first) %></h4>
+        <p class="flashcards-count"><%= pluralize deck.cards.count, "flashcard" %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
