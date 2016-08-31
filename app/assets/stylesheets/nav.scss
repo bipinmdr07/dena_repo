@@ -1,3 +1,9 @@
+.left-submenu {
+  li {
+    font-size: 14px;
+  }
+}
+
 .header.scrolled_nav {
   height: 80px;
   top: 0;
@@ -24,7 +30,6 @@
 .fixed-sidebar {
   position: fixed !important;
   top: 10px;
-  width: 100vh;
 }
 
 .affix {
@@ -41,20 +46,57 @@
 .nav-stacked > li.active > a,
 .nav-stacked > li.active > a:hover,
 .nav-stacked > li.active > a:focus {
-  background-color: whitesmoke;
+  background-color: rgb(41, 40, 41);
+  font-weight: 600;
+  color: white;
 }
+
+.nav-stacked {
+  .fa-home {
+    font-size: 36px;
+    vertical-align: middle;
+  }
+  .nav-text {
+    line-height: 50px;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+.nav-pills > li > a {
+  color: #5c5c5c;
+  font-weight: 600;
+  font-size: 16px;
+}
+
 
 #sidebar {
   padding-right: 0;
-  padding-top: 20px;
   position: relative;
+  width: 300px;
+  white-space: normal;
+  overflow: auto;
 }
+
+#sidebar_container {
+  position: fixed;
+  left: 0px;
+  background: rgb(32, 32, 32);
+  height: 100%;
+  overflow: scroll;
+}
+
+.nav-stacked > li > a:hover, .nav-stacked > li > a:focus {
+  text-decoration: none;
+  background-color: inherit;
+}
+
 #sidebar .nav {
   max-width: 95% !important;
 }
 #sidebar li {
-  border:0 #f2f2f2 solid;
   border-bottom-width:1px;
+  border-bottom: 2px solid #161616;
 }
 
 /* collapsed sidebar styles */
@@ -106,4 +148,31 @@
     color: #fff;
     border-radius: 2px;
   }
+}
+
+.course-title {
+  text-align: center;
+  a {
+    color: white !important;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+  }
+}
+
+.lesson-nav {
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.chapter-nav:after {
+    /* symbol for "opening" panels */
+    font-family: FontAwesome;    
+    content: "\f105"; 
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+.chapter-nav.collapsed:after {    
+    font-family: FontAwesome;
+    content: "\f107";     /* adjust as needed, taken from bootstrap.css */
 }

@@ -11,7 +11,6 @@ class LessonsController < ApplicationController
   def show
     controller = controller_name.classify
     
-    @lesson_link = controller.split(/(?=[A-Z])/).join("_").downcase + "s"
     @course_title = controller.constantize::COURSE_TITLE
     @lessons = controller.constantize::LESSONS
     @lesson = params[:id]

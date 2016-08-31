@@ -2,19 +2,20 @@ success_sound.play();
 
 $('#progression_form').hide();
 $('#hidden_progression_form').hide();
-
 $('#hidden_delete_progression_form').show();
 
 <%
-@lesson_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
+@course_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
 @course_title = params[:progression][:course_name].constantize::COURSE_TITLE
 @lessons = params[:progression][:course_name].constantize::LESSONS
+puts @course_link
 %>
-$('#sidebar_container').html('<%= escape_javascript render partial: "sidebar" %>');
 
+$('#sidebar_container').html('<%= escape_javascript render partial: "sidebar" %>');
 
 // add .active to current lesson
 var url = window.location;
+
 // Will only work if string in href matches with location
 $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
 
@@ -22,6 +23,15 @@ $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
 $('ul.nav a').filter(function() {
     return this.href == url
 }).parent().addClass('active');
+
+$('#sidebar a').filter(function() {
+    return this.href == url
+}).parent().parent().addClass('collapse in');
+
+$('ul.nav a').filter(function() {
+    return this.href == url
+}).parent().parent().addClass('collapse in');
+
 // scroll to current lesson
 var ready;
 ready = function() {
@@ -34,12 +44,11 @@ ready = function() {
     position: "right",
     width: 350,
     speed: 700,
-    top: 70
+    top: 0
   });
 
 };
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
-
 
