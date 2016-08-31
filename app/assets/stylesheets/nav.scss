@@ -172,7 +172,13 @@
     float: right;        /* adjust as needed */
     color: grey;         /* adjust as needed */
 }
+
+.chapter-nav[aria-expanded="true"] {
+  color: white;
+}
+
 .chapter-nav[aria-expanded="true"]:after {    
     font-family: FontAwesome;
     content: "\f107";     /* adjust as needed, taken from bootstrap.css */
+    color: white;
 }
