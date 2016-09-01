@@ -33,13 +33,13 @@ class MentorSessionsController < ApplicationController
 
   def update
     @mentor_session = MentorSession.find(params[:id])
-    if @mentor_session.update(mentor_session_params)
-      flash[:success] = "Updated mentor log"
-      redirect_to mentee_mentor_sessions_path(params[:mentee_id])
-    else
-      flash[:alert] = "Invalid attributes. Please try again."
-      render :edit
-    end
+      if @mentor_session.update(mentor_session_params)
+        flash[:success] = "Updated mentor log"
+        redirect_to mentee_mentor_sessions_path(params[:mentee_id])
+      else
+        flash[:alert] = "Invalid attributes. Please try again."
+        render :edit
+      end
   end
 
   private

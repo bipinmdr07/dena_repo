@@ -10,7 +10,7 @@ RSpec.describe MentorSessionsController, type: :controller do
 
   describe "GET #index" do
     context "when user is mentor" do
-      it "should give 200 OK" do        
+      it "should give 200 OK" do
         get :index, mentee_id: user.id
         expect(response).to render_template :index
       end
@@ -46,7 +46,7 @@ RSpec.describe MentorSessionsController, type: :controller do
           post :create, mentee_id: user.id, mentor_session: FactoryGirl.attributes_for(:mentor_session, user_id: user.id)
         }.to change(MentorSession, :count).by(1)
       end
-    end 
+    end
 
     context "when attributes are invalid" do
       it "shouldn't create a new mentor session" do
@@ -54,7 +54,28 @@ RSpec.describe MentorSessionsController, type: :controller do
           post :create, mentee_id: user.id, mentor_session: FactoryGirl.attributes_for(:invalid_mentor_session, user_id: user.id)
         }.to change(MentorSession, :count).by(0)
       end
-    end 
+    end
+  end
+
+  describe "PATCH #update" do
+    context "when attributes are valid" do
+      it "should update a mentor session" do
+          mentor_session = FactoryGirl.create(:mentor_session, user_id: user.id, mentor_id: mentor.id)
+          patch :update, mentee_id: user.id, mentor_session: FactoryGirl.attributes_for(:mentor_session, private_details: "Change to this"), id: mentor_session.id
+          mentor_session.reload
+          expect(mentor_session.private_details).to eq("Change to this")
+      end
+    end
+
+    context "when attributes are invalid" do
+      it "should update a mentor session" do
+          mentor_session = FactoryGirl.create(:mentor_session, user_id: user.id, mentor_id: mentor.id)
+          patch :update, mentee_id: user.id, mentor_session: FactoryGirl.attributes_for(:mentor_session, public_details: ""), id: mentor_session.id
+          mentor_session.reload
+          expect(mentor_session.public_details).to_not eq("")
+      end
+    end
+
   end
 
 
