@@ -20,6 +20,8 @@ class Notifications
       dataType: "JSON"
       success: ->
         $("[data-behavior='unread-count']").text(0)
+        $bell = $('a[data-behavior="notifications-link"] .fa-bell')
+        $bell.css 'color', 'rgb(102, 102, 102)'
     )
 
   handleSuccess: (data) =>    
@@ -28,7 +30,10 @@ class Notifications
     $("[data-behavior='notification-items']").append(items)
     unread_count = $('*[data-read-at="null"]').length
     $("[data-behavior='unread-count']").text(unread_count)
-    $("time.timeago").timeago()
+    $("time.timeago").timeago()    
+    if unread_count != 0
+      $bell = $('a[data-behavior="notifications-link"] .fa-bell')
+      $bell.css 'color', '#ec6952'
 
 $(document).on "turbolinks:load", ->
   new Notifications  
