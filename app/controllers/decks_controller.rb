@@ -7,6 +7,6 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck = Deck.find(params[:id])
+    @deck = Deck.includes(:cards).find(params[:id])
   end
 end
