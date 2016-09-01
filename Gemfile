@@ -44,9 +44,6 @@ gem "fog", '1.36.0'
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
 
-# code text editor
-gem 'ace-rails-ap'
-
 # tagging
 gem 'acts-as-taggable-on', '~> 3.4'
 

@@ -17,7 +17,6 @@
 //= require bootstrap-sprockets
 //= require summernote
 //= require RRSSB
-//= require ace-rails-ap
 //= require_tree .
 //= require turbolinks
 
@@ -102,7 +101,7 @@ $(function() {
           }
         }
       });
-    });    
+    });      
   };
 
   $(document).ready(ready);
@@ -112,4 +111,21 @@ $(function() {
   $(document).ready(function() {
     $('#summernote').summernote();
   });
-/*  summernote */
+  /*  summernote */
+
+  var load_ace;
+
+  load_ace = function(){
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/idle_fingers");
+    editor.getSession().setMode("ace/mode/ruby");
+    document.getElementById('editor').style.fontSize='14px';
+    editor.setValue("\n\n\n\n\n\n\n\n\n");
+    editor.gotoLine(1);
+  }
+
+  $(document).on('turbolinks:load', function() {
+     load_ace();
+  });
+
+

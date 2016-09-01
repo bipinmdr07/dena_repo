@@ -22,10 +22,7 @@
 
       <div class="col-xs-12 col-sm-6">
         <div class="panel panel-default" style="border-top: none !important;">
-          <div class="panel-heading" style="background: #0F0F0F; color: white;">
-              <h3 class="panel-title">Type your answer below:</h3>
-          </div>
-          <div class="panel-body" style="background-color: #0F0F0F;">
+          <div class="panel-body" style="background-color: #323232; border-radius: 4px">
               <div id="editor">
               </div>
           </div>
@@ -34,49 +31,49 @@
     </div><!-- row -->
 
     
-    <button type="button" class="btn btn-primary">Check Answer</button>
+    <button type="button" class="btn btn-cta-primary">Check Answer</button>
+  </div>
 
-    <div class="check_answer">
-      <div class="row">
-        <h2>Answer:</h2>
-        <div class="col-xs-12 col-sm-6">
-          <%= sanitize card.answer %>
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
-          <div class="well">
-            <h3>Related Resources</h3>
-            <ul>
-
-              <% if card.lesson_url %>
-
-                <% url = URI.parse(card.lesson_url).path.split("/") %>
-                <% controller_name = url[1] %>
-                <% lesson_number = url[2] %>
-                <% course_name = Tags::LESSONS[controller_name].keys[lesson_number.to_i - 1][1] %>
-
-                <li><%= link_to course_name, card.lesson_url %></li>
-              <% end %>
-
-              <% card.tag_list.each do |tag| %>
-                <% links = Tags.get_links(tag) %>
-                <% links.each do |link| %>
-                  <li><%= link_to link[1], '/' + link[0] %></li>
-                <% end %>
-              <% end %>
-            </ul>
-          </div><!-- well -->
-        </div><!-- col-xs-12 col-sm-6 -->
-      </div><!-- row -->
-
-      <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
-
-      <div style="margin: 30px auto 30px;display: table;">
-        <%= simple_form_for card, url: update_interval_path(card.id), method: :patch, remote: true do |f| %>
-          <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
-        <% end %>
+  <div class="devise_box answer-box">
+    <div class="row">
+      <h2>Answer:</h2>
+      <div class="col-xs-12 col-sm-6">
+        <%= sanitize card.answer %>
       </div>
-    </div><!-- check_answer -->
+
+      <div class="col-xs-12 col-sm-6">
+        <div class="well">
+          <h3>Related Resources</h3>
+          <ul>
+
+            <% if card.lesson_url %>
+
+              <% url = URI.parse(card.lesson_url).path.split("/") %>
+              <% controller_name = url[1] %>
+              <% lesson_number = url[2] %>
+              <% course_name = Tags::LESSONS[controller_name].keys[lesson_number.to_i - 1][1] %>
+
+              <li><%= link_to course_name, card.lesson_url %></li>
+            <% end %>
+
+            <% card.tag_list.each do |tag| %>
+              <% links = Tags.get_links(tag) %>
+              <% links.each do |link| %>
+                <li><%= link_to link[1], '/' + link[0] %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div><!-- well -->
+      </div><!-- col-xs-12 col-sm-6 -->
+    </div><!-- row -->
+
+    <h3>Rate your understanding <small>(0: I don't get this at all, 5: I'm a master)</small></h3>
+
+    <div style="margin: 30px auto 30px;display: table;">
+      <%= simple_form_for card, url: update_interval_path(card.id), method: :patch, remote: true do |f| %>
+        <%= f.input :quality_response, collection: 0..5, as: :radio_buttons, item_wrapper_class: 'inline', label: false, required: true %> 
+      <% end %>
+    </div>
   <% end %>
 </div><!-- devise_box -->
 
@@ -95,7 +92,6 @@
       useSoftTabs: true,
       displayIndentGuides: true
     });
-    editor.setTheme("ace/theme/vibrant_ink");
 
     <% if card.question.include?("<code class='ruby'>") %>
       editor.session.setMode("ace/mode/ruby");
@@ -104,8 +100,10 @@
     <% end %>
 
     $('button').on('click', function(){
-      $('.check_answer').toggle();
-      $('button').hide();
+
+      $('.answer-box').fadeToggle(1000, "swing");
+    
+      $(this).prop("disabled", true);
       var own_answer = document.getElementById("answer").value;
       $('#own_answer').text("Your answer: \n" + editor.getValue());
     })

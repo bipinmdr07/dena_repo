@@ -39,7 +39,6 @@ GEM
   remote: http://rails-assets.org/
   specs:
     CFPropertyList (2.3.2)
-    ace-rails-ap (4.0.2)
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
       actionview (= 4.2.4)
@@ -480,7 +479,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ace-rails-ap
   active_skin
   activeadmin!
   acts-as-taggable-on (~> 3.4)

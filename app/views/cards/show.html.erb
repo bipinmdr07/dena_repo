@@ -14,10 +14,7 @@
     <%= sanitize @card.question %>
       
     <div class="panel panel-default" style="border-top: none !important;">
-      <div class="panel-heading" style="background: #0F0F0F; color: white;">
-          <h3 class="panel-title">Type your answer below:</h3>
-      </div>
-      <div class="panel-body" style="background-color: #0F0F0F;">
+      <div class="panel-body" style="background-color: #323232; border-radius: 4px">
           <div id="editor">
           </div>
       </div>
@@ -80,7 +77,7 @@
 
       $('button').on('click', function(){
         $('.answer-box').fadeToggle(1000, "swing");
-        $('button').hide();
+        $(this).prop("disabled", true);
         var own_answer = document.getElementById("answer").value;
         $('#own_answer').text("Your answer: \n" + editor.getValue());
       })
