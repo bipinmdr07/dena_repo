@@ -5,7 +5,7 @@ class LessonsController < ApplicationController
   def index
     @lessons = controller_name.classify.constantize::LESSONS
     @course_title = controller_name.classify.constantize::COURSE_TITLE
-    @lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
+    @course_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
   end
 
   def show

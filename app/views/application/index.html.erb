@@ -15,7 +15,7 @@
 
         <div class="course_description">
           <% chapter[1].each do |lesson| %>
-            <%= link_to "<li> Lesson #{lesson[0]} - #{lesson[1]} #{lesson_completed(lesson[0])}</li>".html_safe, "#{@course_link}/#{(lesson[0])}" %>
+            <%= link_to "<li> Lesson #{lesson[0]} - #{lesson[1]} #{lesson_completed(lesson[0])}</li>".html_safe, "/#{@course_link}/#{(lesson[0])}" %>
           <% end %>
         </div><!-- course_description -->
       </div><!-- course_box -->
