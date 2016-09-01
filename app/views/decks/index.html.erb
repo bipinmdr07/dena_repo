@@ -19,8 +19,8 @@
     <div class="col-xs-12 col-sm-6 col-md-4">
       <div class="deck">
         <% if deck.cards.empty? %>
-         <h4 class="deck-title"><%= deck.title %></h4>
-          <p class="flashcards-count">Coming Soon</p>
+          <h4 class="deck-title"><%= deck.title %></h4>
+          <p class="flashcards-count"><a href="#">Coming Soon</a></p>
         <% else %>
           <h4 class="deck-title"><%= link_to deck.title, deck_card_path(deck, deck.cards.order(:id).try(:first)) %></h4>
           <p class="flashcards-count"><%= pluralize deck.cards.count, "flashcard" %></p>
