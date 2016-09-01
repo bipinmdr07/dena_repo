@@ -56,5 +56,17 @@ RSpec.describe StudentSessionsController, type: :controller do
           expect(student_session.public_details).to eq("It was awesome session")
         end
       end
+
+      context "when attributes are invalid" do
+        it "should not update the mentor logs" do
+          mentor_session = FactoryGirl.create(:mentor_session, user_id: user.id, mentor_id: mentor.id)
+          student_session = FactoryGirl.create(:student_session, user_id: user.id, mentor_id: mentor.id, mentor_session_id: mentor_session.id)
+
+          patch :update, student_session: FactoryGirl.attributes_for(:student_session, mentor_session_id: mentor_session.id, public_details: ""), id: student_session.id
+          student_session.reload
+
+          expect(student_session.public_details).to_not eq("")
+        end
+      end
     end
 end
