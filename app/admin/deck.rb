@@ -1,4 +1,4 @@
-ActiveAdmin.register Event do
+ActiveAdmin.register Deck do
   permit_params :title, :master
 
   form do |f|
