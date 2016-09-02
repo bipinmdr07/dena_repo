@@ -128,4 +128,8 @@ $(function() {
      load_ace();
   });
 
+  $(document).on('turbolinks:load', function() {
+    $('#summernote').summernote();
+  });
+
 
