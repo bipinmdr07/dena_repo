@@ -1,7 +1,5 @@
-class RubyLesson < ActiveRecord::Base
+class RubyLesson < Lesson
   COURSE_TITLE = "Ruby Fundamentals"
-
-  LESSON_LENGTH = 3
 
   DURATION = 15
 

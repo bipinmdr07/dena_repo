@@ -1,8 +1,6 @@
-class AlgorithmLesson < ActiveRecord::Base
+class AlgorithmLesson < Lesson
 
   COURSE_TITLE = "Understanding Data Structures and Algorithms"
-
-  LESSON_LENGTH = 2
 
   DURATION = 30
 

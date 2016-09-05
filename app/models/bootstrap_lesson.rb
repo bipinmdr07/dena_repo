@@ -1,7 +1,5 @@
-class BootstrapLesson < ActiveRecord::Base
+class BootstrapLesson < Lesson
   COURSE_TITLE = "Introduction to Bootstrap"
-
-  LESSON_LENGTH = 9
 
   DURATION = 2
 

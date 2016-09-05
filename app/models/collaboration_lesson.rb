@@ -1,7 +1,7 @@
 class CollaborationLesson < Lesson
   COURSE_TITLE = "Understanding Data Structures and Algorithms"  
 
-  DURATION = 9
+  DURATION = 1
 
   PERIOD = "8 ~ 10"
 

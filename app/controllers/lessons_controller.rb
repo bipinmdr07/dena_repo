@@ -14,7 +14,7 @@ class LessonsController < ApplicationController
     @course_title = controller.constantize::COURSE_TITLE
     @lessons = controller.constantize::LESSONS
     @lesson = params[:id]
-    @lesson_length = controller.constantize::LESSON_LENGTH
+    @lesson_length = controller.constantize.lesson_length
 
     @next_lesson = @lesson.to_i + 1
     @lesson == 1 ? @prev_lesson = 0 : @prev_lesson = @lesson.to_i - 1
