@@ -1,0 +1,2 @@
+class SkillAcademyLessonsController < LessonsController
+end

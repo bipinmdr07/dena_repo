@@ -1,0 +1,2 @@
+module SkillAcademyLessonsHelper
+end

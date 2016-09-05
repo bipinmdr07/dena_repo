@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830162306) do
+ActiveRecord::Schema.define(version: 20160905170641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,16 +66,6 @@ ActiveRecord::Schema.define(version: 20160830162306) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "algorithm_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "bootstrap_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "cards", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "question"
@@ -115,11 +105,6 @@ ActiveRecord::Schema.define(version: 20160830162306) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
-
-  create_table "command_line_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -180,21 +165,6 @@ ActiveRecord::Schema.define(version: 20160830162306) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "github_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "html_css_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "ideator_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "images", force: :cascade do |t|
     t.string   "image_id"
     t.string   "image_filename"
@@ -203,21 +173,6 @@ ActiveRecord::Schema.define(version: 20160830162306) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "photo"
-  end
-
-  create_table "instapost_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "intro_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "javascript_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "mentor_sessions", force: :cascade do |t|
@@ -229,11 +184,6 @@ ActiveRecord::Schema.define(version: 20160830162306) do
     t.datetime "session_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
-  end
-
-  create_table "mvc_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -318,21 +268,6 @@ ActiveRecord::Schema.define(version: 20160830162306) do
     t.integer  "owner_id"
     t.text     "uri_cache"
     t.string   "simplified_type",        default: "file"
-  end
-
-  create_table "rspec_blog_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "ruby_core_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "ruby_lessons", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "student_questions", force: :cascade do |t|
