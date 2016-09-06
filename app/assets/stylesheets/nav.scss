@@ -32,10 +32,6 @@
   top: 10px;
 }
 
-.affix {
-    bottom: 80px;
-}
-
 @media (min-width: 767px) {
   .affix,.affix-top {
       position:fixed;

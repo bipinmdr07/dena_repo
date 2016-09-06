@@ -57,7 +57,7 @@
     sidebar = $("#sidebar_container");
 
     position_sidebar = function(){
-      if (76 - $(window).scrollTop() >= 0) {
+      if (76 - $(window).scrollTop() > 0) {        
         sidebar.css("top", 76 - $(window).scrollTop());  
       } else {
         sidebar.css("top", 0);
