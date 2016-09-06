@@ -42,55 +42,72 @@
 
 <script type="text/javascript">
 
-var wrap = $("#wrap");
-var sidebar = $("#sidebar_container");
-var handle = $(".handle");
+(function(){
+  var scroll_sidebar, add_active_to_nav, ready, add_offset;
 
-$(document).bind('scroll', function() {
-  if (76 - $(window).scrollTop() >= 0) {
-    sidebar.css("top", 76 - $(window).scrollTop());  
-  } else {
-    sidebar.css("top", 0);
+  add_offset = function(){
+    var target;
+
+    target = document.getElementsByClassName("active");
+    target[0].parentNode.scrollTop = target[0].offsetTop; 
   }
-});
 
+  scroll_sidebar = function() {
+    var sidebar, position_sidebar;
+    sidebar = $("#sidebar_container");
 
-// add .active to current lesson
-var url = window.location;
-// Will only work if string in href matches with location
-$('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+    position_sidebar = function(){
+      if (76 - $(window).scrollTop() >= 0) {
+        sidebar.css("top", 76 - $(window).scrollTop());  
+      } else {
+        sidebar.css("top", 0);
+      }
+    }
 
-// Will also work for relative and absolute hrefs
-$('ul.nav a').filter(function() {
-    return this.href == url
-}).parent().addClass('active');
+    position_sidebar();
+    $(document).bind('scroll', position_sidebar);
+  }
 
-$('ul.nav a').filter(function() {
-    return this.href == url
-}).parent().parent().addClass('collapse in');
+  add_active_to_nav = function(){
+    var url;
 
-$('ul.nav a').filter(function() {
-    return this.href == url
-}).parent().parent().parent().closest('li').find('a').attr('aria-expanded', 'true');
+    url = window.location;
+    // Will only work if string in href matches with location
+    $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
 
-// scroll to current lesson
-var ready;
-ready = function() {
+    // Will also work for relative and absolute hrefs
+    $('ul.nav a').filter(function() {
+        return this.href == url
+    }).parent().addClass('active');
 
-  var target = document.getElementsByClassName("active");
-  target[0].parentNode.scrollTop = target[0].offsetTop; 
+    $('ul.nav a').filter(function() {
+        return this.href == url
+    }).parent().parent().addClass('collapse in');
 
-  $("#slider").slideReveal({
-    trigger: $(".trigger"),
-    position: "right",
-    width: 350,
-    speed: 700,
-    top: 0
+    $('ul.nav a').filter(function() {
+        return this.href == url
+    }).parent().parent().parent().closest('li').find('a').attr('aria-expanded', 'true');
+
+  }
+
+  // scroll to current lesson
+  slider_init = function() {
+    $("#slider").slideReveal({
+      trigger: $(".trigger"),
+      position: "right",
+      width: 350,
+      speed: 700,
+      top: 0
+    });
+  };
+
+  $(document).on('turbolinks:load', function(){
+    scroll_sidebar();
+    add_offset();
+    slider_init();    
+    add_active_to_nav();
   });
 
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
+})();
 
 </script>

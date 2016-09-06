@@ -24,7 +24,9 @@ var load_ace, summernote, fixed_header_scroll;
 
 /* ======= Fixed header when scrolled ======= */
 fixed_header_scroll = function(){
-  var toggle_scrolled = function(){
+  var toggle_scrolled;
+  
+  toggle_scrolled = function(){
     if ($(window).scrollTop() > 0) {
       $('#header').addClass('scrolled');
     }
@@ -32,7 +34,7 @@ fixed_header_scroll = function(){
       $('#header').removeClass('scrolled');
     }
   }
-  
+
   $(window).on('scroll load', toggle_scrolled);  
 }
 
