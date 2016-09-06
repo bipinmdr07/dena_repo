@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905170641) do
+ActiveRecord::Schema.define(version: 20160906054719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -369,7 +369,7 @@ ActiveRecord::Schema.define(version: 20160905170641) do
     t.boolean  "admin"
     t.boolean  "intro_access",              default: true
     t.boolean  "html_css_access",           default: true
-    t.boolean  "ruby_fundamentals_access",  default: false
+    t.boolean  "ruby_acesss",               default: false
     t.boolean  "ideator_access",            default: false
     t.boolean  "ruby_core_access",          default: false
     t.string   "first_name"
