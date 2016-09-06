@@ -1,4 +1,4 @@
-<% title(Tags::LESSONS[controller_name.classify.underscore + "s"].keys[params[:id].to_i - 1][1] + " | TECHRISE") %>
+<% title(get_lesson_name(controller_name.classify.underscore, params[:id]) + " | TECHRISE") %>
 
 <style type="text/css">
 .course_html {
