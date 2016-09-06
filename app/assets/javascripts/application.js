@@ -20,32 +20,27 @@
 //= require_tree .
 //= require turbolinks
 
-
-/* ======= Header Background Slideshow - Flexslider ======= */
-    /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */
-
-$('.bg-slider').flexslider({
-    animation: "fade",
-    directionNav: false, //remove the default direction-nav - https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties
-    controlNav: false, //remove the default control-nav
-    slideshowSpeed: 8000
-});
+var load_ace, summernote, fixed_header_scroll;
 
 /* ======= Fixed header when scrolled ======= */
-$(window).on('scroll load', function() {
-
-     if ($(window).scrollTop() > 0) {
-         $('#header').addClass('scrolled');
-     }
-     else {
-         $('#header').removeClass('scrolled');
-
-     }
-});
+fixed_header_scroll = function(){
+  var toggle_scrolled = function(){
+    if ($(window).scrollTop() > 0) {
+      $('#header').addClass('scrolled');
+    }
+    else {
+      $('#header').removeClass('scrolled');
+    }
+  }
+  
+  $(window).on('scroll load', toggle_scrolled);  
+}
 
 /* summernote editor */
-$(function() {
+summernote = function() {
+
   var delete_episode_image, ready, upload_episode_image;
+
   upload_episode_image = function(that, file) {
     var data;
     data = new FormData;
@@ -66,6 +61,7 @@ $(function() {
       }
     });
   };
+
   delete_episode_image = function(file_id) {
     return $.ajax({
       type: 'DELETE',
@@ -75,6 +71,7 @@ $(function() {
       processData: false
     });
   };
+
   ready = function() {
     return $('[data-provider="summernote"]').each(function() {
       return $(this).summernote({
@@ -102,34 +99,25 @@ $(function() {
         }
       });
     });      
-  };
+  };  
+  ready();
+}
 
-  $(document).ready(ready);
-    return $(document).on('turbolinks:load', ready);
-  });
-
-  $(document).ready(function() {
-    $('#summernote').summernote();
-  });
-  /*  summernote */
-
-  var load_ace;
-
-  load_ace = function(){
+load_ace = function(){
+  if ($("div#editor").length > 0) {
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/idle_fingers");
     editor.getSession().setMode("ace/mode/ruby");
     document.getElementById('editor').style.fontSize='14px';
     editor.setValue("\n\n\n\n\n\n\n\n\n");
     editor.gotoLine(1);
-  }
+  }  
+}
 
-  $(document).on('turbolinks:load', function() {
-     load_ace();
-  });
-
-  $(document).on('turbolinks:load', function() {
-    $('#summernote').summernote();
-  });
+$(document).on('turbolinks:load', function() {    
+  fixed_header_scroll();
+  load_ace();    
+  summernote();
+});
 
 

@@ -18,11 +18,13 @@ class LessonsController < ApplicationController
     @current_course_name = current_controller + "s"
     @current_lesson_id = params[:id]    
 
-    @current_lesson_questions = Question.where(course_name: current_controller, lesson_id: @current_lesson_id)
-                         .order("created_at DESC")
-                         .paginate(page: params[:page], per_page: 5)
+    @current_lesson_questions = Question.where(course_name: current_controller, 
+                                               lesson_id: @current_lesson_id)
+                                        .order("created_at DESC")
+                                        .paginate(page: params[:page], per_page: 5)
 
-    @current_lesson_submissions = Submission.where(course_name: current_controller, lesson_id: @current_lesson_id)
+    @current_lesson_submissions = Submission.where(course_name: current_controller, 
+                                                   lesson_id: @current_lesson_id)
                                             .order("created_at DESC")
 
     @paginated_submissions = @current_lesson_submissions.paginate(page: params[:page], per_page: 5)                                 
