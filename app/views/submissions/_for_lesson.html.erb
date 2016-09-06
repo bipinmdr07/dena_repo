@@ -28,7 +28,7 @@
   <%= render 'submissions/student_submissions' %>
   <hr>
 
-  <% @submissions.order("created_at DESC").each do |submission| %>
+  <% @current_lesson_approved_submissions.order("created_at DESC").each do |submission| %>
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
 
