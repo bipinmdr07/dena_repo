@@ -23,7 +23,7 @@
 
       <%= render partial: '/cards/widget' %>
 
-      <%= render file: "app/views/#{@course_link}/lessons/lesson_#{@lesson}" %>
+      <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
       <br class = "clear">
 
       <%= render 'lesson_nav_section' %>

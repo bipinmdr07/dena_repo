@@ -1,11 +1,7 @@
 feature "Submission links" do
 
-  before :each do
-    @user = FactoryGirl.create(:user)
-    login_as(@user, scope: :user)
-  end
-
   scenario "User has not made any submissions yet" do
+    user = FactoryGirl.create(:user)    
     another_user = FactoryGirl.create(:user)
     submission_by_another_user = FactoryGirl.create(:submission, 
       lesson_id: 15, 
@@ -13,6 +9,7 @@ feature "Submission links" do
       approved: true,
       title: "Submission by Another User")    
 
+    login_as(user, scope: :user)
     visit '/html_css_lessons/15'
 
     expect(page).to_not have_content "Submission by Another User"
@@ -22,20 +19,22 @@ feature "Submission links" do
   end
 
   scenario "User has not made an approved submission yet" do
-    submission_by_user = FactoryGirl.create(:submission, lesson_id: 15, user_id: @user.id, approved: false)
+    user = FactoryGirl.create(:user)
+    submission_by_user = FactoryGirl.create(:submission, lesson_id: 15, user_id: user.id, approved: false)
     another_user = FactoryGirl.create(:user)
     another_user_2 = FactoryGirl.create(:user)
     submission_by_another_user = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user.id, 
-      approved: true,
-      title: "Submission by Another User")
+                                                    lesson_id: 15, 
+                                                    user_id: another_user.id, 
+                                                    approved: true,
+                                                    title: "Submission by Another User")
     submission_by_another_user_2 = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user_2.id, 
-      approved: true,
-      title: "Submission by Another User 2")
+                                                      lesson_id: 15, 
+                                                      user_id: another_user_2.id, 
+                                                      approved: true,
+                                                      title: "Submission by Another User 2")
 
+    login_as(user, scope: :user)
     visit '/html_css_lessons/15'
 
     expect(page).to_not have_content "Submission by Another User"
@@ -45,14 +44,16 @@ feature "Submission links" do
   end
 
   scenario "User has made an approved submission" do
-    submission_by_user = FactoryGirl.create(:submission, lesson_id: 15, user_id: @user.id, approved: true)
+    user = FactoryGirl.create(:user)
+    submission_by_user = FactoryGirl.create(:submission, lesson_id: 15, user_id: user.id, approved: true)
     another_user = FactoryGirl.create(:user)
     submission_by_another_user = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user.id, 
-      approved: true,
-      title: "Submission by Another User")
+                                                    lesson_id: 15, 
+                                                    user_id: another_user.id, 
+                                                    approved: true,
+                                                    title: "Submission by Another User")
 
+    login_as(user, scope: :user)
     visit '/html_css_lessons/15'
 
     expect(page).to have_content "#{submission_by_another_user.title}"
@@ -61,7 +62,7 @@ feature "Submission links" do
   end
 
   scenario "User is an admin" do
-    @user.update(admin: true)
+    user = FactoryGirl.create(:user, admin: true)    
     another_user = FactoryGirl.create(:user)
     another_user_2 = FactoryGirl.create(:user)
     another_user_3 = FactoryGirl.create(:user)
@@ -81,6 +82,7 @@ feature "Submission links" do
       approved: false,
       title: "Submission by Another User 3")
 
+    login_as(user, scope: :user)
     visit '/html_css_lessons/15'
 
     expect(page).to have_content "Submission by Another User"
@@ -90,7 +92,11 @@ feature "Submission links" do
   end
 
   scenario "There are no submissions yet" do
+    user = FactoryGirl.create(:user)
+
+    login_as(user, scope: :user)
     visit '/html_css_lessons/15'
+    
     expect(page).to have_content "No submissions have been made for this assignment yet."
   end
 end

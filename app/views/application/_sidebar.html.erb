@@ -1,18 +1,18 @@
 <ul class="nav nav-pills nav-stacked left-menu" id="sidebar">
 
   <li><%= link_to '<i class="fa fa-home" aria-hidden="true"></i> <span class="nav-text">All Courses</span>'.html_safe, courses_path %></li>
-  <li class="course-title"><%= link_to @course_title, "/" + @course_link %></li>
+  <li class="course-title"><%= link_to @current_course_title, "/" + @current_course_link %></li>
 
-  <% @lessons.each_with_index do |chapter, i| %>
+  <% @current_course_lessons.each_with_index do |chapter, i| %>
 
     <li>
       <a class="chapter-nav" data-target="#chapter_<%= i %>" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><%= chapter[0] %></a>
       <ul class="nav nav-stacked collapse left-submenu" id="chapter_<%= i %>" style="position: relative;">
         <% chapter[1].each do |lesson| %>
           <% if controller_name.classify == "Progression" %>
-          <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0], params[:progression][:course_name])}".html_safe, "/#{@course_link}/#{(lesson[0])}" %></li>
+          <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0], params[:progression][:course_name])}".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %></li>
           <% else %>
-            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0])}".html_safe, "/#{@course_link}/#{(lesson[0])}" %></li>
+            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0])}".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %></li>
           <% end %>
         <% end %>
       </ul>

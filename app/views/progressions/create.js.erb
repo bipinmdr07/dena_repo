@@ -4,13 +4,6 @@ $('#progression_form').hide();
 $('#hidden_progression_form').hide();
 $('#hidden_delete_progression_form').show();
 
-<%
-@course_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
-@course_title = params[:progression][:course_name].constantize::COURSE_TITLE
-@lessons = params[:progression][:course_name].constantize::LESSONS
-puts @course_link
-%>
-
 $('#sidebar_container').html('<%= escape_javascript render partial: "sidebar" %>');
 
 // add .active to current lesson

@@ -1,4 +1,4 @@
-<% if @submission_form && @user_submission.nil? %>
+<% if @submission_form && @submission_by_current_user.nil? %>
   <div class="well">
     <%= render partial: 'shared/flash_messages' %>
 
@@ -26,7 +26,7 @@
 
 <div class = "lesson_nav_box text-center">
 
-  <% if @next_lesson > @lesson_length %>
+  <% if @next_lesson > @current_course_length %>
     <p>
       Congratulations! You've reached the end of this course.
     </p>
@@ -82,6 +82,6 @@
 
   <br>
 
-  <%= link_to 'Previous Lesson', "/#{@course_link}/#{@prev_lesson}", class: 'btn btn-warning btn-lg' if @prev_lesson > 0 %>
-  <%= link_to 'Next Lesson', "/#{@course_link}/#{@next_lesson}", class: 'btn btn-success btn-lg' if @next_lesson <= @lesson_length %>
+  <%= link_to 'Previous Lesson', "/#{@current_course_link}/#{@prev_lesson}", class: 'btn btn-warning btn-lg' if @prev_lesson > 0 %>
+  <%= link_to 'Next Lesson', "/#{@current_course_link}/#{@next_lesson}", class: 'btn btn-success btn-lg' if @next_lesson <= @current_course_length %>
 </div>

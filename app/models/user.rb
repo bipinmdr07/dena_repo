@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   end
 
   def has_access_to?(lesson)
-    self[lesson.chomp("_lessons") + "_access"] ? true : false
+    self[lesson + "_access"] ? true : false
   end
 
   def has_access?
