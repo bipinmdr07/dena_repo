@@ -97,8 +97,11 @@
 	<%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
 </div>
 
-<!-- 
+
 <div class="row">
-	<% render partial: 'course', locals: {course: 'Algorithms', course_name: 'Learning how to solve algorithms challenges will help you think logically and solve difficult problems in programming.', available: false, controller_name: 'AlgorithmLesson', course_link: 'algorithm_path', course_access: 'algorithm' } %>
+	<%= render partial: 'course', locals: {course: 'Algorithms', course_name: 'Learning how to solve algorithms challenges will help you think logically and solve difficult problems in programming.', available: false, controller_name: 'AlgorithmLesson', course_link: algorithm_path, course_access: 'algorithm' } %>
+
+	<%= render partial: 'course', locals: {course: 'Skill Academy - A Skill Sharing Platform', course_name: '', available: false, controller_name: 'SkillAcademyLesson', course_link: skill_academy_path, course_access: 'skill_academy' } %>
+
+	<%= render partial: 'course', locals: {course: 'Team Collaboration', course_name: '', available: false, controller_name: 'CollaborationLesson', course_link: collaboration_path, course_access: 'collaboration' } %>
 </div>
--->

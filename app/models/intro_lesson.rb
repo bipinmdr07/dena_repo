@@ -1,7 +1,5 @@
-class IntroLesson < ActiveRecord::Base
+class IntroLesson < Lesson
 	COURSE_TITLE = "Introduction to TECHRISE"
-
-	LESSON_LENGTH = 4
 
 	DURATION = 1
 

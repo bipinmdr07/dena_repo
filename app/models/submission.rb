@@ -8,4 +8,7 @@ class Submission < ActiveRecord::Base
 
   delegate :name, to: :user, prefix: true
   delegate :avatar, to: :user, prefix: true
+
+  scope :approved, -> { where(approved: true) }
+
 end

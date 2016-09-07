@@ -9,16 +9,16 @@
 
   <%= render partial: 'shared/flash_messages' %>
 
-  <% if @questions.empty? %>
+  <% if @current_lesson_questions.empty? %>
     <h5 class="text-center">
       There are no questions for this lesson yet!
     </h5>
   <% else %>
 
-  <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @current_lesson_questions, renderer: BootstrapPagination::Rails %>
 
 
-      <% @questions.each do |question| %>
+      <% @current_lesson_questions.each do |question| %>
         <ul class="question_list">
 
           <% if question.mentor_post %>
@@ -76,7 +76,7 @@
       </ul><!-- question_list -->
     <% end %>
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @current_lesson_questions, renderer: BootstrapPagination::Rails %>
 
   <% end %>
 

@@ -1,0 +1,2 @@
+class CollaborationLessonsController < LessonsController
+end

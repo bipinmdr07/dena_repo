@@ -1,0 +1,113 @@
+<% title(get_lesson_name(controller_name.classify.underscore, params[:id]) + " | TECHRISE") %>
+
+<style type="text/css">
+.course_html {
+  background: white;
+}
+</style>
+
+
+<div class="row">
+  <!-- sidebar -->
+  <div class="col-lg-3 visible-lg">
+    <div style="width: 100%">
+      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
+        <%= render 'sidebar' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 col-md-12">
+
+    <section class="lesson_content">
+
+      <%= render partial: '/cards/widget' %>
+
+      <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
+      <br class = "clear">
+
+      <%= render 'lesson_nav_section' %>
+
+      <%= render partial: '/submissions/for_lesson' if @submission_form %>
+
+      <%= render partial: '/questions/for_lesson' %>
+
+      <%= render 'git_workflow_modal' %>
+
+    </section>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+(function(){
+  var scroll_sidebar, add_active_to_nav, ready, add_offset;
+
+  add_offset = function(){
+    var target;
+
+    target = document.getElementsByClassName("active");
+    target[0].parentNode.scrollTop = target[0].offsetTop; 
+  }
+
+  scroll_sidebar = function() {
+    var sidebar, position_sidebar;
+    sidebar = $("#sidebar_container");
+
+    position_sidebar = function(){
+      if (76 - $(window).scrollTop() > 0) {        
+        sidebar.css("top", 76 - $(window).scrollTop());  
+      } else {
+        sidebar.css("top", 0);
+      }
+    }
+
+    position_sidebar();
+    $(document).bind('scroll', position_sidebar);
+  }
+
+  add_active_to_nav = function(){
+    var url;
+
+    url = window.location;
+    // Will only work if string in href matches with location
+    $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+
+    // Will also work for relative and absolute hrefs
+    $('ul.nav a').filter(function() {
+        return this.href == url
+    }).parent().addClass('active');
+
+    $('ul.nav a').filter(function() {
+        return this.href == url
+    }).parent().parent().addClass('collapse in');
+
+    $('ul.nav a').filter(function() {
+        return this.href == url
+    }).parent().parent().parent().closest('li').find('a').attr('aria-expanded', 'true');
+
+  }
+
+  // scroll to current lesson
+  slider_init = function() {
+    $("#slider").slideReveal({
+      trigger: $(".trigger"),
+      position: "right",
+      width: 350,
+      speed: 700,
+      top: 0
+    });
+  };
+
+  $(document).on('turbolinks:load', function(){
+    scroll_sidebar();
+    add_offset();
+    slider_init();    
+    add_active_to_nav();
+  });
+
+})();
+
+</script>

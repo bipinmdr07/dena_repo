@@ -1,7 +1,5 @@
-class GithubLesson < ActiveRecord::Base
+class GithubLesson < Lesson
   COURSE_TITLE = "Github - Master your Github Chops"
-
-  LESSON_LENGTH = 4
 
   DURATION = 8
 

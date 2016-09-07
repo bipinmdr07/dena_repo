@@ -53,6 +53,10 @@ class User < ActiveRecord::Base
           icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
+  def has_access_to?(lesson)
+    self[lesson + "_access"] ? true : false
+  end
+
   def has_access?
     mentor || admin || admitted || ( prework_end_date && prework_end_date > DateTime.now )
   end

@@ -1,7 +1,5 @@
-class JavascriptLesson < ActiveRecord::Base
+class JavascriptLesson < Lesson
   COURSE_TITLE = "Basic Javascript/jQuery - Manipulate the web page"
-
-  LESSON_LENGTH = 2
 
   DURATION = 10
 

@@ -35,7 +35,7 @@ module ApplicationHelper
     if controller_name.empty?
       0.0
     else
-      ((current_user.progressions.where(course_name: controller_name).count.to_f / controller_name.constantize::LESSON_LENGTH.to_f) * 100).round(2)
+      ((current_user.progressions.where(course_name: controller_name).count.to_f / controller_name.constantize.lesson_length.to_f) * 100).round(2)
     end
   end
 

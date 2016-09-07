@@ -1,7 +1,5 @@
-class InstapostLesson < ActiveRecord::Base
+class InstapostLesson < Lesson
   COURSE_TITLE = "Instapost - Share your photos online"
-
-  LESSON_LENGTH = 39
 
   DURATION = 30
 
