@@ -1,21 +1,13 @@
 include ActionView::Helpers::TextHelper
 
 class StaticPagesController < ApplicationController
-	before_filter :authenticate_user!, only: [:courses, :activity_log, :dashboard]
-
+  before_action :authenticate_user!, only: :guidelines
+  
   def index
   	if current_user.present?
 			redirect_to dashboard_path
 		else
     	render layout: "landing_page"
-    end
-  end
-  
-  def activity_log
-    if current_user.admin
-      @activities = PublicActivity::Activity.all.order('created_at DESC').limit(20)
-    else
-      @activities = PublicActivity::Activity.where(owner_id: current_user.id).order('created_at DESC').limit(20)
     end
   end
 
