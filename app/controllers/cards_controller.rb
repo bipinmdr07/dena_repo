@@ -21,10 +21,15 @@ class CardsController < ApplicationController
   end
 
   def create
+    @cards = current_user.cards.where(repetition_date: nil)
+    @cards += current_user.cards.today
+
     @card = current_user.cards.new(card_params)
+
     if @card.save!
       @card.tag_list.add(card_params[:tag_list])
     end
+
     respond_to do |format|
       format.html {}
       format.js {}
@@ -53,6 +58,9 @@ class CardsController < ApplicationController
   end
 
   def update_interval
+    @cards = current_user.cards.where(repetition_date: nil)
+    @cards += current_user.cards.today
+    
     @card = Card.find(params[:id])
     @card.update_interval!(card_params[:quality_response].to_i)
     @card.create_activity key: 'flashcard.complete', owner: current_user, parameters: {card_id: @card.id}

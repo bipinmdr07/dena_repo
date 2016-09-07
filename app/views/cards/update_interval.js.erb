@@ -1,6 +1,3 @@
-<% @cards = current_user.cards.where(repetition_date: nil) %>
-<% @cards += current_user.cards.today %>
-
 <% if @cards.empty? %>
   completed_sound.play();
 <% else %>
