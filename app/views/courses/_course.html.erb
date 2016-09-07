@@ -16,13 +16,12 @@
         course_title = controller_name.classify.constantize::COURSE_TITLE
         lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
       end
-
     %>
 
-    	<h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= link_to course, link %></h3>
+      <h3 class = "underlined-header"><i class="fa fa-code" style="color: #d9534f"aria-hidden="true"></i> <%= link_to course, link %></h3>
 
       <div class="course_description">
-    	 
+       
         <% if controller_name.empty? %>
           <p><%= course_name %></p>
         <% else %>

@@ -122,9 +122,8 @@ Rails.application.routes.draw do
   get 'mentor_guidelines', to: 'mentor_materials#guidelines'
   get 'mentor_resources', to: 'mentor_materials#resources'
 
-  get 'dashboard',   to: 'static_pages#dashboard'
-  get 'courses',   to: 'static_pages#courses'
-  get 'activity_log',   to: 'static_pages#activity_log'
+  get 'dashboard',   to: 'dashboard#index'
+  get 'courses',   to: 'courses#index'
   get 'guidelines',   to: 'static_pages#guidelines'
 
   get 'curriculum', to: 'static_pages#curriculum'

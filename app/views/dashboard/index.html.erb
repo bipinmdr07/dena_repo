@@ -108,8 +108,6 @@
           <% end %>
         </div><!-- row-->
 
-        <h5 class="pull-right"><i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View your <%= link_to 'Activity Log', activity_log_path %></h5>
-
       </div><!-- panel-body -->
     </div><!-- panel -->
   </div><!-- col-xs-12 col-md-4 -->
@@ -118,7 +116,7 @@
     <div class="panel">
       <div class="panel-body">
         <%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
-        <h3 class="text-center">You have <%= pluralize(@cards.count, 'card') %> to review today</h3>
+        <h3 class="text-center">You have <%= pluralize(@due_cards.count, 'card') %> to review today</h3>
         <blockquote>
           <%= @quote[0] %>
           <small><%= @quote[1] %></small>
@@ -163,8 +161,6 @@
           <h5 class="pull-right"><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View all'.html_safe, questions_path %></h5>
         <% end %>
 
-
-
       </div><!-- panel-heading-stats -->
     </div><!-- panel -->
 
@@ -191,8 +187,6 @@
 
       </div><!-- panel-body -->
     </div><!-- panel -->
-
-
 
   </div><!-- col-xs-12 col-md-6 -->
 </div><!-- row -->
