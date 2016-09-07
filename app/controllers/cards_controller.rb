@@ -20,11 +20,15 @@ class CardsController < ApplicationController
     @card = Card.new
   end
 
-  def create
+  def create    
     @card = current_user.cards.new(card_params)
+
     if @card.save!
       @card.tag_list.add(card_params[:tag_list])
     end
+
+    @due_cards = due_cards
+
     respond_to do |format|
       format.html {}
       format.js {}
@@ -52,10 +56,13 @@ class CardsController < ApplicationController
     @card.save!
   end
 
-  def update_interval
+  def update_interval    
     @card = Card.find(params[:id])
     @card.update_interval!(card_params[:quality_response].to_i)
     @card.create_activity key: 'flashcard.complete', owner: current_user, parameters: {card_id: @card.id}
+
+    @due_cards = due_cards
+
     respond_to do |format|
       format.html { redirect_to study_path }
       format.js {}
@@ -63,6 +70,10 @@ class CardsController < ApplicationController
   end
 
   private
+
+  def due_cards
+    current_user.cards.due
+  end
 
   def current_deck
     Deck.find(params[:deck_id])
