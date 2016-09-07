@@ -44,7 +44,7 @@ class ProgressionsController < ApplicationController
     params[:progression][:course_name].constantize::COURSE_TITLE
   end
 
-  def current_lessons
+  def current_course_lessons
     params[:progression][:course_name].constantize::LESSONS
   end
 
