@@ -12,8 +12,8 @@ class StaticPagesController < ApplicationController
   end
 
   def dashboard
-    @cards = current_user.cards.where(repetition_date: nil)
-    @cards += current_user.cards.today
+    @due_cards = due_cards
+    
     @activities = PublicActivity::Activity.where(owner_id: current_user.id)
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
     @quote = Quote::ARRAY.sample
 
     @questions = current_user.questions.where(mentor_post: false).order("created_at DESC").limit(5)
-    @submissions = current_user.submissions.all.order("created_at DESC").limit(5)
+    @submissions = current_user.submissions.order("created_at DESC").limit(5)
 
     @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
 
@@ -46,8 +46,7 @@ class StaticPagesController < ApplicationController
   end
 
   def courses
-    @cards = current_user.cards.where(repetition_date: nil)
-    @cards += current_user.cards.today
+    @due_cards = due_cards
 
     @activities = PublicActivity::Activity.where(owner_id: current_user.id)
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
@@ -97,6 +96,13 @@ class StaticPagesController < ApplicationController
 
   def support
     render layout: "landing_page"
+  end
+
+  private
+
+  def due_cards
+    return unless user_signed_in?
+    current_user.cards.due
   end
 
 end

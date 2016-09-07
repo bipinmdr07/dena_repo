@@ -13,14 +13,20 @@ class Card < ActiveRecord::Base
                     .where(["repetition_date <= ?", Date.today])
                     .order("repetition_date ASC") }
 
-  delegate :title, to: :deck, prefix: true                  
+  scope :unstudied, -> { where(repetition_date: nil) }                    
+
+  delegate :title, to: :deck, prefix: true      
+
+  def self.due
+    self.today | self.unstudied
+  end            
 
   def next_in_deck
-    deck.cards.where("id > ?", id).first
+    where(deck: deck).where("id > ?", id).first
   end
 
   def prev_in_deck
-    deck.cards.where("id < ?", id).last
+    where(deck: deck).where("id < ?", id).last
   end                    
 
   def update_code_syntax

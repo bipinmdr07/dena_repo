@@ -34,10 +34,9 @@
 
                     <li class="nav-item page-scroll">
                       <%
-                        @cards = current_user.cards.where(archived: false, repetition_date: nil)
-                        @cards += current_user.cards.today
+                        @due_cards = current_user.cards.due                        
                       %>
-                      <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@cards.count}</span>".html_safe, study_path %>
+                      <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@due_cards.count}</span>".html_safe, study_path %>
                     </li>
 
                     <li class="nav-item dropdown" data-behavior="notifications">
