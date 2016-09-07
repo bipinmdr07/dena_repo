@@ -63,5 +63,3 @@ show_page_trigger = function(){
   slider_init();
   add_offset();
 }
-
-$(document).on('turbolinks:load', show_page_trigger);
