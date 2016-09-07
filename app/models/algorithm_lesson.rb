@@ -49,6 +49,15 @@ class AlgorithmLesson < Lesson
         [19, "Editing Posts"],
         [20, "Deleting Posts"]
       ]
+    ],
+    ["Sorting Algorithms",
+      [
+        [21, "Bubble Sort"],        
+        [22, "Selection Sort"],
+        [23, "Insertion Sort"],
+        [24, "Quick Sort"],
+        [25, "Merge Sort"],
+      ]
     ]
   ]
 end
