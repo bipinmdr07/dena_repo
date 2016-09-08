@@ -175,6 +175,20 @@ class Tags < ActiveRecord::Base
       [5, "What is schema.rb?"] => %w(),
       [6, "Adding and Updating Database Columns"] => %w()
     },
+    "collaboration_lessons" => {
+      [1, "Being a team player"] => %w(),
+      [2, "Communicating Effectively"] => %w(),
+      [3, "Agile"] => %w(),
+      [4, "Scrum"] => %w(),
+      [5, "Trello"] => %w(),
+      [6, "Slack"] => %w(),
+      [7, "Github"] => %w(),
+      [8, "Continuous Integration"] => %w(),
+      [9, "Pair Programming"] => %w(),
+      [10, "How to communicate effectively online"] => %w(),
+      [11, "Making Awesome Pull Requests"] => %w(),
+      [12, "Code Reviews"] => %w(),
+    }
   }
 
 end
