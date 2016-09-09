@@ -21,7 +21,7 @@ ActiveAdmin.register User do
     column :intro_access
     column :html_css_access
     column :bootstrap_access
-    column :ruby_fundamentals_access
+    column :ruby_access
     column :ideator_access
     column :ruby_core_access
     column :instapost_access
@@ -52,7 +52,7 @@ ActiveAdmin.register User do
       f.input :intro_access
       f.input :html_css_access
       f.input :bootstrap_access
-      f.input :ruby_fundamentals_access
+      f.input :ruby_access
       f.input :ideator_access
       f.input :ruby_core_access
       f.input :instapost_access
