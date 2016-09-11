@@ -397,8 +397,6 @@ ActiveRecord::Schema.define(version: 20160909133300) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
-    t.boolean  "collaboration_access",      default: false, null: false
-    t.boolean  "skill_academy_access",      default: false, null: false
   end
 
   add_index "users", ["admitted"], name: "index_users_on_admitted", using: :btree
