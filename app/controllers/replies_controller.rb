@@ -3,37 +3,34 @@ class RepliesController < ApplicationController
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
 	def create
-		question = Question.find(params[:question_id])
-		reply = current_user.replies.create(reply_params.merge(question_id: question.id))
+		reply = current_user.replies.create(reply_params)
 
-		if reply.valid?
-			user = reply.user
-			
+		if reply.valid?			
 			# Create notifications
-			(question.users.uniq + [question.user] - [current_user]).each do |user|
-			  Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: question)
+			(current_question.users.uniq + [current_question.user] - [current_user]).each do |user|
+			  Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_question)
 			end
 
-			UserMailer.new_reply(question, question.user.email).deliver_now
-			UserMailer.new_reply(question, "techrisecoding@gmail.com").deliver_now
+			UserMailer.new_reply(current_question, current_question.user_email).deliver_now
+			UserMailer.new_reply(current_question, "techrisecoding@gmail.com").deliver_now
 
-			Slack.chat_postMessage(text: 'New reply by ' + user.name + '. View it <' + question_url(question.id) + '|here >.', 
+			Slack.chat_postMessage(text: 'New reply by ' + reply.user_name + '. View it <' + question_url(current_question.id) + '|here >.', 
 				username: 'TECHRISE Bot', 
 				channel: "#forum_questions", 
 				icon_emoji: ":smile_cat:") if Rails.env.production?
 		else
 			flash[:alert] = "Invalid attributes, please try again."
 		end
-		redirect_to question_path(question.id)
+		redirect_to question_path(current_question)
 	end
 
 	def edit
 	end
 
 	def update
-    if @reply.update(reply_params.merge(question_id: @question.id))
+    if current_reply.update(reply_params)
       flash[:success] = "Updated!"
-      redirect_to question_path(@question.id)
+      redirect_to question_path(current_reply.question)
     else
       flash[:alert] = "Woops! It looks like there has been an error. Please try again."
       render :edit
@@ -41,21 +38,27 @@ class RepliesController < ApplicationController
   end
 
   def destroy
-    @reply.destroy
-    redirect_to question_path(@question)
+    current_reply.destroy
+    redirect_to question_path(current_reply.question)
   end
 
 	private
 
+  def current_question
+    @current_question ||= Question.find(params[:question_id])
+  end
+
+  def current_reply
+    @current_reply ||= Reply.find(params[:id])
+  end
+
 	def check_permissions
-		@reply = Reply.find(params[:id])
-    @question = Question.find(@reply.question_id)
-    return if current_user.admin || (@reply.user_id == current_user.id)
+    return if current_user.admin || (current_reply.user == current_user)
     flash[:alert] = "Unauthorized!"
-    redirect_to question_path(@question)
+    redirect_to question_path(current_reply.question)
   end
 
 	def reply_params
-		params.require(:reply).permit(:content, :user_id)
+		params.require(:reply).permit(:content, :user_id).merge(question_id: params[:question_id])
 	end
 end

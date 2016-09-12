@@ -11,15 +11,18 @@ Rails.application.routes.draw do
   resources 'contacts', only: [:new, :create]
 
   resources :questions do
-    resources :replies, only: [:create, :edit, :update, :destroy]
+    resources :replies, only: [:create, :edit, :update]
   end
+
+  resources :replies, only: [:destroy]
 
   resources :community, only: :index
 
   resources :submissions do
-    resources :submission_replies, only: [:create, :edit, :update, :destroy]
+    resources :submission_replies, only: [:create, :edit, :update]
   end
 
+  resources :submission_replies, only: [:destroy]
 
   resources :mentees, only: :index do
     resources :mentor_sessions, except: :destroy
