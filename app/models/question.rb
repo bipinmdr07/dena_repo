@@ -12,6 +12,7 @@ class Question < ActiveRecord::Base
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
   delegate :name, to: :user, prefix: true
+  delegate :email, to: :user, prefix: true
   delegate :avatar, to: :user, prefix: true
 
   acts_as_votable
