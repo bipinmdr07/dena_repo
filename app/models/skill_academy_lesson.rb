@@ -1,5 +1,5 @@
 class SkillAcademyLesson < Lesson
-  COURSE_TITLE = "Understanding Data Structures and Algorithms"
+  COURSE_TITLE = "Skill Academy - A Skill Sharing Platform"
 
   DURATION = 60
 
@@ -9,9 +9,9 @@ class SkillAcademyLesson < Lesson
     ["Setting Up Your App", 
       [ 
         [1, "Introduction"],
-        [1, "Self-Directed Lesson: Setting up your Web Dev Environment"],
-        [2, "Self-Directed Lesson: Setting Up Git and Heroku"],
-        [3, "Setting up Continuous Integration"]
+        [2, "Self-Directed Lesson: Setting up your Web Dev Environment"],
+        [3, "Self-Directed Lesson: Setting Up Git and Heroku"],
+        [4, "Setting up Continuous Integration"]
       ]
     ],
     ["First Steps", 

@@ -1,0 +1,42 @@
+.hint-prompt {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+
+
+
+@mixin hint-buttons {
+  background: white;
+  border: 2px solid #dddddd;
+  .fa {
+    color: inherit !important;
+  }
+}
+
+.btn-hint {
+  @include hint-buttons;
+}
+
+.btn-show-hints {
+  @include hint-buttons;
+}
+
+
+
+
+
+.hint-activated {
+  background-color: #d9edf7;
+}
+
+.hint {
+  display: none;
+  padding: 20px;
+  -webkit-transition: all 3s ease-out;  /* Saf3.2+, Chrome */
+     -moz-transition: all 3s ease-out;  /* FF4+ */
+      -ms-transition: all 3s ease-out;  /* IE10 */
+       -o-transition: all 3s ease-out;  /* Opera 10.5+ */
+          transition: all 3s ease-out;
+}

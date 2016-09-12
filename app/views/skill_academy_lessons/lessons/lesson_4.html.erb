@@ -1,0 +1,219 @@
+<h1><%= title_for(SkillAcademyLesson, 1, 4) %></h1> 
+
+<p>
+  For this project, let's set up continuous integration so that we have automated builds and can make sure that everything is passing before we push it up live.
+</p>
+
+<h2>Tasks</h2>
+<ul>
+  <li>Integrate Travis CI</li>
+</ul>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>  
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>  
+
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>  
+</div>
+
+<div class="hint" data-hint-id="4">
+<p>
+  Let's move on to enabling the user to destroy their posts. The steps in order to do this is quite similar to what we did with the edit posts functionality that we just created.
+</p>
+
+<p>
+  In our <code>posts_controller.rb</code>, let's create a <code>destroy</code> method.
+</p>
+
+<pre><code class="ruby">
+def destroy
+  @post = Post.find(params[:id])
+  @post.destroy
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  The first line, we should already understand. <code>@post</code> is assigned to the <code>Post</code> with an <code>id</code> of the <code>params[:id]</code> (refer back to <%= link_to 'Ideator - Editing and Updating Posts', '/ideator_lessons/14' %>. The next line is simply saying that we want to destroy that post. Finally, the last line redirects the user to the <code>root_path</code>.
+</p>
+
+<p>
+  Let's go ahead and add the link so that we can test this out. Right now, our <code>index.html.erb</code> contains this loop:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;%= post.user.name %&gt;
+  &lt;%= image_tag post.photo %&gt;
+  &lt;%= post.description %&gt;
+  &lt;%= image_tag post.user.photo %&gt;
+  &lt;% if post.user == current_user %&gt;
+    &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Let's go in our <code>index.html.erb</code> file and add a link to delete the post, if you are the owner of the post. Let's add the following line of code:
+</p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
+</code></pre>
+
+<p class="alert alert-warning">
+  Notice how we added <code>method: :delete</code>. This specifies that we want to perform a <code>DELETE</code> request rather than a <code>GET</code> or <code>POST</code> request. (By default, <code>link_to</code> creates a <code>GET</code> request.)
+</p>
+
+<%= create_flashcard %>
+
+
+</div>
+
+
+<div class="hint" data-hint-id="5">
+
+  <p>
+    Your loop should now look like this:
+  </p>
+
+  <pre><code class="erb">
+  &lt;% @posts.each do |post| %&gt;
+    &lt;%= image_tag post.user.photo %&gt;
+    &lt;%= post.user.name %&gt;
+    &lt;%= image_tag post.photo %&gt;
+    &lt;%= post.description %&gt;
+    &lt;% if post.user == current_user %&gt;
+      &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
+      &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
+    &lt;% end %&gt;
+  &lt;% end %&gt;
+  </code></pre>
+</div>
+
+<div class="hint-prompt">
+  <h5>Think you have the solution?</h5>
+  <button class="btn btn-show-hints"><i class="fa fa-check" aria-hidden="true"></i> I've solved it myself</button>
+  <button class="btn btn-hint" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Give me a hint!</button>
+</div>
+
+<script type="text/javascript">
+$(".btn-show-hints").on("click", function(){
+  var hint = $(".hint");
+  hint.fadeIn();
+  hint.addClass("hint-activated");
+  window.setTimeout(function(){
+    hint.removeClass("hint-activated");
+  }, 10000);
+});
+
+$(".btn-hint").on("click", function(){
+  var hint_id, hint_content, next_hint_id;
+
+  hint_id = $(this).data("hint-id");
+  next_hint_id = hint_id + 1;
+  hint_content = $(".hint[data-hint-id=" + hint_id + "]");
+
+  hint_content.fadeIn();
+
+  // update data-hint-id of hint button
+  $(this).data("hint-id", next_hint_id);
+
+  // if there is no more hints, disable button
+  if ($(".hint[data-hint-id=" + next_hint_id + "]").length === 0) {
+    $(this).prop("disabled", true);
+  }
+
+  // scroll to hint
+  $('html,body').animate({ 
+      scrollTop: hint_content.offset().top - 50
+  }, 800);
+
+  hint_content.addClass("hint-activated");
+  window.setTimeout(function(){
+    hint_content.removeClass("hint-activated");
+  }, 10000);
+});
+
+</script>
