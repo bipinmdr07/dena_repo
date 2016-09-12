@@ -1,43 +1,38 @@
 class SkillAcademyLesson < Lesson
   COURSE_TITLE = "Understanding Data Structures and Algorithms"
 
-  DURATION = 50
+  DURATION = 60
 
   PERIOD = "8 ~ 10"
 
   LESSONS = [
     ["Setting Up Your App", 
-      [
-        [1, "Why test?"],
-        [2, "What is RSpec?"]
+      [ 
+        [1, "Introduction"],
+        [1, "Self-Directed Lesson: Setting up your Web Dev Environment"],
+        [2, "Self-Directed Lesson: Setting Up Git and Heroku"],
+        [3, "Setting up Continuous Integration"]
       ]
     ],
     ["First Steps", 
       [
-        [3, "Setting up your Web Dev Environment"],
-        [4, "Setting Up Git"],
-        [5, "Self-Navigated Lesson: Installing Bootstrap"],
-        [6, "Self-Navigated Lesson: Installing Simple Form"],
-        [8, "Installing RSpec"],
-        [9, "Installing Factory Girl"],
-        [10, "Self Directed Lesson - Adding a Navbar"]
+        [5, "Self-Directed Lesson: Installing Bootstrap"],
+        [6, "Self-Directed Lesson: Installing Simple Form"],
+        [8, "Self-Directed Lesson: Installing RSpec"],
+        [9, "Self-Directed Lesson: Installing Factory Girl"],
       ]
     ],
     ["Setting Up the Landing Page", 
       [
-        [3, "Setting up your Web Dev Environment"],
-        [4, "Setting Up Git"],
-        [5, "Self-Navigated Lesson: Installing Bootstrap"],
-        [6, "Self-Navigated Lesson: Installing Simple Form"],
-        [8, "Installing RSpec"],
-        [9, "Installing Factory Girl"],
-        [10, "Self Directed Lesson - Adding a Navbar"]
+        [7, "Choosing a template"],
+        [8, "Integrating the template with a Rails application"],
+        [9, ""]
       ]
     ],
     ["Adding User Authentication",
       [ 
-        [11, "Creating the Posts Controller and Model"],
-        [12, "Setting Up Validations"],
+        [10, "As a user, I should be able to log in/log out"],
+        [12, "As a user, I should be able to edit my profile"],
         [13, "Setting Up Routes"],
         [14, "Setting up CRUD Actions"]
       ]

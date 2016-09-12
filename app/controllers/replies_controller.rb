@@ -7,14 +7,14 @@ class RepliesController < ApplicationController
 		reply = current_user.replies.create(reply_params.merge(question_id: question.id))
 
 		if reply.valid?
-			user = User.find(reply.user_id)
+			user = reply.user
 			
 			# Create notifications
 			(question.users.uniq + [question.user] - [current_user]).each do |user|
 			  Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: question)
 			end
 
-			UserMailer.new_reply(question, User.find(question.user_id).email).deliver_now
+			UserMailer.new_reply(question, question.user.email).deliver_now
 			UserMailer.new_reply(question, "techrisecoding@gmail.com").deliver_now
 
 			Slack.chat_postMessage(text: 'New reply by ' + user.name + '. View it <' + question_url(question.id) + '|here >.', 
