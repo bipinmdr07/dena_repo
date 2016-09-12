@@ -12,7 +12,7 @@ Rails.application.configure do
   }
   ActionMailer::Base.delivery_method = :smtp
 
-    config.action_mailer.default_url_options = { :host => 'www.techrise.me' }
+  config.action_mailer.default_url_options = { :host => 'www.techrise.me' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -41,7 +41,7 @@ Rails.application.configure do
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  # Do fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,

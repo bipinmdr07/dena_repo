@@ -1,0 +1,83 @@
+<% title(get_lesson_name(controller_name.classify.underscore, params[:id]) + " | TECHRISE") %>
+
+<style type="text/css">
+.course_html {
+  background: white;
+}
+</style>
+
+
+<div class="row">
+  <!-- sidebar -->
+  <div class="col-lg-3 visible-lg">
+    <div style="width: 100%">
+      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
+        <%= render 'sidebar' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 col-md-12">
+
+    <section class="lesson_content">
+
+      <%= render partial: '/cards/widget' %>
+
+      <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
+      <br class = "clear">
+
+      <%= render 'lesson_nav_section' %>
+
+      <%= render partial: '/submissions/for_lesson' if @submission_form %>
+
+      <%= render partial: '/questions/for_lesson' %>
+
+      <%= render 'git_workflow_modal' %>
+
+    </section>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+$(".btn-show-hints").on("click", function(){
+  var hint = $(".hint");
+  hint.fadeIn();
+  hint.addClass("hint-activated");
+  window.setTimeout(function(){
+    hint.removeClass("hint-activated");
+  }, 10000);
+});
+
+$(".btn-hint").on("click", function(){
+  var hint_id, hint_content, next_hint_id;
+
+  hint_id = $(this).data("hint-id");
+  next_hint_id = hint_id + 1;
+  hint_content = $(".hint[data-hint-id=" + hint_id + "]");
+
+  hint_content.fadeIn();
+
+  // update data-hint-id of hint button
+  $(this).data("hint-id", next_hint_id);
+
+  // if there is no more hints, disable button
+  if ($(".hint[data-hint-id=" + next_hint_id + "]").length === 0) {
+    $(this).prop("disabled", true);
+    $(".btn-show-hints").prop("disabled", true);
+  }
+
+  // scroll to hint
+  $('html,body').animate({ 
+      scrollTop: hint_content.offset().top - 50
+  }, 800);
+
+  hint_content.addClass("hint-activated");
+  window.setTimeout(function(){
+    hint_content.removeClass("hint-activated");
+  }, 10000);
+});
+
+$(document).on('turbolinks:load', show_page_trigger);
+</script>
