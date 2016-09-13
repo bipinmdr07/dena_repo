@@ -25,24 +25,24 @@ class SkillAcademyLesson < Lesson
     ],
     ["Setting Up the Landing Page", 
       [
-        [7, "Choosing a template"],
-        [8, "Integrating the template with a Rails application"],
+        [10, "Choosing a template"],
+        [11, "Integrating the template with a Rails application"]
       ]
     ],
     ["Adding User Authentication",
-      [ 
-        [10, "As a user, I should be able to log in/log out"],
-        [12, "As a user, I should be able to edit my profile"],
-        [13, "Setting Up Routes"],
-        [14, "Setting up CRUD Actions"]
+      [         
+        [12, "As a user, I should be able to log in/log out"],
+        [13, "As a user, I should be able to edit my profile"],
+        [14, "Setting Up Routes"],
+        [15, "Setting up CRUD Actions"]
       ]
     ],
     ["Setting Up Photo Uploading",
       [ 
-        [11, "Creating the Posts Controller and Model"],
-        [12, "Setting Up Validations"],
-        [13, "Setting Up Routes"],
-        [14, "Setting up CRUD Actions"]
+        [16, "Creating the Posts Controller and Model"],
+        [17, "Setting Up Validations"],
+        [18, "Setting Up Routes"],
+        [19, "Setting up CRUD Actions"]
       ]
     ],
     ["Setting Up Courses",

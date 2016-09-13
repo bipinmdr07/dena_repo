@@ -71,7 +71,6 @@ var hints = {
     // if there are no more hints, disable button
     if ($("." + content_class_name +  "[data-" + dataEl + "=" + next_id + "]").length === 0) {    
       el.prop("disabled", true);
-      hints.show_all();
     }
 
     this.scroll_to(content);
