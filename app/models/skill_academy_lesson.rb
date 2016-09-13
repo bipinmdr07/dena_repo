@@ -14,12 +14,13 @@ class SkillAcademyLesson < Lesson
         [4, "Setting up Continuous Integration"]
       ]
     ],
-    ["First Steps", 
+    ["Installing Necessary Gems", 
       [
         [5, "Self-Directed Lesson: Installing Bootstrap"],
         [6, "Self-Directed Lesson: Installing Simple Form"],
-        [8, "Self-Directed Lesson: Installing RSpec"],
-        [9, "Self-Directed Lesson: Installing Factory Girl"],
+        [7, "Self-Directed Lesson: Installing RSpec"],
+        [8, "Self-Directed Lesson: Installing Factory Girl"],
+        [9, "Self-Directed Lesson: Installing Pry-Rails"]
       ]
     ],
     ["Setting Up the Landing Page", 
