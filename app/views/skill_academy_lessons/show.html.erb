@@ -25,6 +25,8 @@
 
       <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
 
+      <br class = "clear">
+
       <div class="hint-prompt">
         <h5>Think you have the solution?</h5>
         <button class="btn btn-gotcha" data-gotcha-id="1"><i class="fa fa-check" aria-hidden="true"></i> I've solved it myself</button>
@@ -69,17 +71,18 @@ var hints = {
     // if there are no more hints, disable button
     if ($("." + content_class_name +  "[data-" + dataEl + "=" + next_id + "]").length === 0) {    
       el.prop("disabled", true);
+      hints.show_all();
     }
 
-    // scroll to hint
-    $('html,body').animate({ 
-        scrollTop: content.offset().top - 50
-    }, 800);    
+    this.scroll_to(content);
   },
   show_all: function(){
     this.show_hint($(".hint"));
+    this.show_hint($(".gotcha"));
     $(".btn-hint").prop("disabled", true);
     $(".btn-gotcha").prop("disabled", true);
+    this.scroll_to($(".hint")[0]);    
+    return;
   },
   show_hint: function(el){
     el.fadeIn();
@@ -87,16 +90,17 @@ var hints = {
     window.setTimeout(function(){
       el.removeClass("hint-activated");
     }, 10000);
+  },
+  scroll_to: function(el) {
+    $('html,body').animate({ 
+        scrollTop: el.offset().top - 50
+    }, 800);
   }
 }  
 
 
 $(".btn-gotcha").on("click", function(){
-  if ($(".gotcha[data-gotcha-id="+ $(this).data("gotcha-id") + 1 + "]").length === 0) {
-    hints.show_all();
-  } else {
-    hints.show_next($(this), "gotcha-id");  
-  }  
+  hints.show_next($(this), "gotcha-id");  
 });
 
 $(".btn-hint").on("click", function(){
