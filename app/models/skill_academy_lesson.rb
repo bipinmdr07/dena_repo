@@ -27,7 +27,6 @@ class SkillAcademyLesson < Lesson
       [
         [7, "Choosing a template"],
         [8, "Integrating the template with a Rails application"],
-        [9, ""]
       ]
     ],
     ["Adding User Authentication",
