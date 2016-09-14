@@ -40,9 +40,8 @@ module ApplicationHelper
   end
 
   def lesson_completed(lesson_id, course_name=controller_name.classify.constantize)
-    if current_user.progressions.where(course_name: course_name, lesson_id: lesson_id).count > 0
-      '<i class="fa fa-check-circle progression_check" aria-hidden="true"></i>'.html_safe
-    end
+    return if current_user.progressions.find_by(course_name: course_name, lesson_id: lesson_id).nil?
+    '<i class="fa fa-check-circle progression_check" aria-hidden="true"></i>'.html_safe  
   end
 
 	def title_for(course, chapter, lesson)
