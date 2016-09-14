@@ -81,7 +81,7 @@
     <%= f.input :user_id, as: :hidden, input_html:{ value: current_user.id } %>
 
     <br>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <%= f.submit 'Submit', class: 'btn btn-primary', data: {disable_with: "Submitting reply..."} %>
   <% end %>
 
 </div>
