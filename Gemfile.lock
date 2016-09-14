@@ -501,7 +501,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  jquery-ui-rails
   letter_opener
   mail_form
   mini_magick
