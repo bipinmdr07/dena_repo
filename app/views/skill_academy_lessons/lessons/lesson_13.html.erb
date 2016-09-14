@@ -1,20 +1,415 @@
-<h1><%= title_for(SkillAcademyLesson, 4, 2) %></h1> 
+<h1><%= title_for(SkillAcademyLesson, 5, 1) %></h1> 
 
 <p>
   Let's work on our first user story.
 </p>
 
 <div class="story">
-  <h2>As a user, I should be able to log in/log out</h2>
-  <ul>
-    <li></li>
-  </ul> 
-</div>
+  <div class="story-title">
+    <h2>As an instructor, I want to be able to create a new course #1</h2>
+  </div>
+
+  <div class="story-wrapper">
+    <%= image_tag 'shared/prof.jpg', class: 'story-user-img' %>
+
+    <div class="story-panel">
+      <div class="story-user">
+        <div class="story-user-text">
+          <strong>takehiromouri</strong> commented 6 days ago
+        </div>
+      </div>
+
+      <div class="story-comment">
+        <p>
+          Courses should contain the following data:
+        </p>
+        <ul>
+          <li>title</li>
+          <li>description</li>
+          <li>price</li>
+          <li>start time</li>
+          <li>end time</li>
+          <li>category</li>
+          <li>target</li>
+          <li>location</li>
+          <li>address</li> 
+          <li>photo</li>
+        </ul> 
+      </div><!-- story-comment -->
+    </div><!-- story-content --> 
+  </div><!-- story-wrapper -->
+</div><!-- story -->
 
 <p>
-  How can we build this feature?
+  What are the first things we need to do?
 </p>
 
 <div class="hint" data-hint-id="1">
+  <p>
+    First, we need to create a controller and model for courses.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="1">
+  <p>
+    When we generate controllers, we typically run commands like this:
+  </p>
+
+<pre><code class="bash">
+rails g controller courses
+</code></pre>
+
+  <p>
+    In our application that we are creating right now, we want to create a <strong>double sided platform</strong>. One side of the app consists of students and the other side consists of instructors.
+  </p>
+
+  <p>
+    In these kinds of applications, we will need to configure our controllers in a different way that we have before.
+  </p>
+
+  <p>
+    Let's take a look at what we need to do with our courses:
+  </p>
+
+<div class="well">
+  <h4><strong>Instructor side</strong></h4>
+  <ul>    
+    <li>As an instructor, I want to be able to create a new course</li>
+    <li>As an instructor, I want to be able to see all of my courses</li>
+    <li>As an instructor, I want to be able to edit/update course</li>
+    <li>As an instructor, I want to be able to edit/update course"</li>
+    <li>As an instructor, I want to be able to add new sections to the course</li>
+    <li>As an instructor, I want to be able be able to see all sections in the course page</li>
+    <li>As an instructor, I want to be able to edit/update sections</li>
+    <li>As an instructor, I want to be able to delete sections</li>
+    <li>As an instructor, I want to be able to add new lessons to a section</li>
+    <li>As an instructor, I want to be able to edit/update lessons</li>
+    <li>As an instructor, I want to be able to delete lessons</li>
+  </ul>
+
+  <h4><strong>Student side</strong></h4>
+  <ul>    
+    <li>As a user, I want to be able to see the profile picture and introduction of the instructor</li>
+    <li>As a user, I want to be able to enroll in courses</li>
+    <li>As a user, I want to be able to unenroll in courses</li>
+    <li>As a user, I want to be able to rate a course I have enrolled in</li>
+    <li>As a user, I want to be able to delete a rating</li>
+    <li>as a user, I want to be able to see the average rating of a course</li>
+    <li>As a user, I want to be able to see all enrolled courses</li>
+  </ul>
+</div>
+
+  <p>
+    In order to organize all of these actions, we can <strong>namespace</strong> our controllers. Namespacing basically means putting the controller and views in a subfolder, so we can seperate the configurations for both sides of the platform.
+  </p>
+
+  <p> 
+    Basically, your controller directory will look something like this:
+  </p>
+
+  <%= image_tag "skill_academy/namespacing.jpg" %>
+
+  <p>
+    Notice how in the screenshot above, we see 3 controller files named <code>courses_controller.rb</code> under different directories. This is the power of namespacing. We'll see throughout this course that organizing our controllers using namespaces can lead to clearer, more understandable code.
+  </p>
+
+  <p>
+    Let's create a <code>Courses</code> controller namespaced under <code>instructor</code>.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    To create a namespaced controller under <code>instructor</code>, let's run the following command:
+  </p>
+
+<pre><code class="ruby">
+rails g controller instructor/courses
+</code></pre>
+  
+  <p>
+    This will generate a <code>courses_controller.rb</code> inside of the <code>instructor</code> directory. It will create a <code>instructor/courses</code> directory inside the <code>views</code> folder as well.
+  </p>
+
+  <p>
+    Next, we need to create a <code>Course</code> model and create a database column for that as well.
+  </p>
 
 </div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    Let's run the following command to create a <code>Course</code> model.
+  </p>
+
+<pre><code class="ruby">
+rails g model course
+</code></pre>
+  
+  <p>
+    Next, let's edit the migration file to create the database table for courses.
+  </p>
+
+<pre><code class="ruby">
+class CreateCourses &lt; ActiveRecord::Migration
+  def change
+    create_table :courses do |t|
+      t.string   "title"
+      t.text     "description"
+      t.integer  "price"
+      t.datetime "start_time"
+      t.datetime "end_time"
+      t.integer  "category"
+      t.integer  "user_id"
+      t.text     "target"
+      t.string   "location"
+      t.string   "address"
+      t.string   "photo"
+      t.timestamps null: false
+    end
+    add_index :courses, :user_id
+  end
+end
+</code></pre>
+
+  <p>
+    <strong>Make sure to add an index to the foreign key (<code>user_id</code>)</strong>.
+  </p>  
+
+  <p>
+    To migrate the files, run <code>rake db:migrate</code>.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="4">
+
+  <p>
+    Next, let's work on how we can build the feature so that instructors can create new courses.
+  </p>
+
+  <p>
+    Here is the general flow of what we want to accomplish:
+  </p>
+
+  <h4><strong>When the user is signed in:</strong></h4>
+  <ol>
+    <li>User clicks on a link to create a new course</li> 
+    <li>User fills out a form about the new course</li>
+    <li>User presses submit</li>
+    <li>New course is created</li>
+  </ol>
+
+  <p>
+    Before we start building this feature, let's write some controller specs.
+  </p>
+
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p> 
+    Specs are quite useful because they layout the specification of how the application should function.
+  </p>
+
+  <p>
+    For this feature, we need to write specs for the <code>new</code> and <code>create</code> action.
+  </p>
+</div>  
+
+<div class="hint" data-hint-id="4">
+  <p>
+    First, let's lay out the specifications:
+  </p>
+
+<pre><code class="ruby">
+describe "GET #new" do
+  context "user is signed in" do
+    it "renders the new template" do
+
+    end
+  end
+
+  context "user is not signed in" do
+    it "redirects the user" do
+
+    end
+  end
+end
+
+describe "POST #create" do
+  context "attributes are valid" do
+    it "creates a new course" do
+
+    end
+  end
+
+  context "attributes are invalid" do
+    it "doesn't create a new course" do
+      
+    end
+  end
+end
+</code></pre>
+  
+  <p>
+    Then inside of the <code>it</code> blocks, we can write our tests.
+  </p>
+
+</div>  
+
+
+<div class="hint" data-hint-id="5">
+  <p>
+    Your tests should look something like this:
+  </p>    
+
+<pre><code class="ruby">
+describe "GET #new" do
+  context "user is signed in" do
+    it "renders the new template" do
+      user = FactoryGirl.create(:user)
+
+      sign_in user
+      get :new
+
+      expect(response).to render_template(:new)
+    end
+  end
+
+  context "user is not signed in" do
+    it "redirects the user" do
+      user = FactoryGirl.create(:user)
+
+      get :new
+
+      expect(response.status).to eq(302)
+    end
+  end
+end
+
+describe "POST #create" do
+  context "attributes are valid" do
+    it "creates a new course" do
+      user = FactoryGirl.create(:user)
+
+      sign_in user
+
+      expect {
+        post :create, course: FactoryGirl.attributes_for(:course)
+      }.to change(Course, :count).by(1)       
+      expect(response).to redirect_to course_path(assigns[:course])
+    end
+  end
+
+  context "attributes are invalid" do
+    it "doesn't create a new course" do
+      user = FactoryGirl.create(:user)
+
+      sign_in user
+
+      expect {
+        post :create, course: FactoryGirl.attributes_for(:invalid_course)
+      }.to change(Course, :count).by(0)
+      expect(response).to render_template(:new)
+    end
+  end
+end
+</code></pre>
+  
+  <p>
+    Now that we've written our specs, let's run the specs to make sure all of the specs fail.
+  </p>
+
+  <p>
+    Next, let's write the controller actions to make these tests pass.
+  </p>
+
+</div>
+
+<div class="hint" data-hint-id="6">
+  <p>
+    To make the tests pass, your controller should look like this:
+  </p>
+
+<pre><code class="ruby">
+class Instructor::CoursesController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def new
+    @course = Course.new
+  end
+
+  def create
+    @course = current_user.courses.create(course_params)
+    if @course.valid?
+      flash[:success] = "Congratulations! Your course has been created!"
+      redirect_to course_path(@course) 
+    else
+      flash[:danger] = "Sorry, it looks like there was an error."
+      render :new
+    end
+  end
+
+  private 
+
+  def course_params
+    params.require(:course).permit(:title, :description, :price, :start_time, :end_time, 
+                                    :category, :user_id, :target, :location, :address, :photo)
+  end
+end
+</code></pre>
+
+  <p>
+    We also need to set up database relations in the model.
+  </p>
+
+<pre><code class="ruby">
+class User &lt; ActiveRecord::Base
+  has_many :courses
+end
+</code></pre>
+
+<pre><code class="ruby">
+class Course &lt; ActiveRecord::Base
+  belongs_to :instructor, class_name: "User"
+end
+</code></pre>
+
+  <p>
+    <code>belongs_to :instructor, class_name: "User"</code> might seem new for you, but it's quite simple. We are saying that the course belongs to an "instructor" that is a <code>User</code> class.
+  </p>
+
+  <p>
+    By doing so, we can access the instructor of the course with code like below:
+  </p>
+
+<pre><code class="ruby">
+@course = Course.find(params[:id])
+@course.instructor
+
+# This is more expressive and makes more sense than @course.user 
+</code></pre>
+
+  <p>
+    Now that we have the backend configured, let's work on hooking it up with the frontend. 
+  </p>
+
+  <p>
+    The next step is to create view files for creating a new course and add links to the navigation bar.
+  </p>
+
+</div>
+
+<div class="hint" data-hint-id="6">
+  <p>First thing we need to do is create a <code>new.html.erb</code> file inside the <code>instructor/courses</code> directory.</p>
+
+  <p>
+    Inside of this file, let's create a form to create a new course.
+  </p>
+</div>
+
+
+
+
+
+
+

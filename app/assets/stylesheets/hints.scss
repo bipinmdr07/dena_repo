@@ -1,3 +1,74 @@
+.story {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+.story-wrapper {
+  position: relative;
+  padding-left: 60px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+}
+
+.story-user-img {
+  float: left;
+  margin-left: -60px;
+  border-radius: 3px;
+  height: 44px;
+  width: 44px;
+}
+
+.story-panel {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.story-user {
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #767676;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  &:before {
+    position: absolute;
+    top: 11px;
+    right: 100%;
+    left: -16px;
+    display: block;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    content: " ";
+    border-color: transparent;
+    border-style: solid solid outset;
+    border-width: 8px;
+    border-right-color: #ddd;
+  }
+  .story-user-text {
+    max-width: 78%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.story-comment {
+  width: 100%;
+  padding: 15px;
+  overflow: visible;
+  font-size: 14px;
+}
+
+.story-title {  
+  h2 {
+    border-bottom: 1px solid #ddd !important;
+  }
+}
+
 .task-box {
   background: whitesmoke;
   padding: 20px;
@@ -34,7 +105,7 @@
 
 @mixin hint-gotchas {
   display: none;
-  padding: 20px;
+  padding: 10px 20px;
   -webkit-transition: all 3s ease-out;  /* Saf3.2+, Chrome */
      -moz-transition: all 3s ease-out;  /* FF4+ */
       -ms-transition: all 3s ease-out;  /* IE10 */

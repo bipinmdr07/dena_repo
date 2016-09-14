@@ -31,78 +31,71 @@ class SkillAcademyLesson < Lesson
     ],
     ["Adding User Authentication",
       [         
-        [12, "As a user, I should be able to log in/log out"],
-        [13, "As a user, I should be able to edit my profile"],
-        [14, "Setting Up Routes"],
-        [15, "Setting up CRUD Actions"]
+        [12, "As a student, I should be able to log in/log out"]        
       ]
-    ],
-    ["Setting Up Photo Uploading",
-      [ 
-        [16, "Creating the Posts Controller and Model"],
-        [17, "Setting Up Validations"],
-        [18, "Setting Up Routes"],
-        [19, "Setting up CRUD Actions"]
-      ]
-    ],
+    ],    
     ["Setting Up Courses",
       [
-        [15, "Why TDD?"],
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [13, "As an instructor, I want to be able to create a new course"],
+        [14, "As an instructor, I want to be able to see all of my courses"],
+        [15, "As an instructor, I want to be able to edit/update course"],
+        [16, "As an instructor, I want to be able to edit/update course"]
+      ]
+    ],
+    ["Adding sections to courses",
+      [
+        [17, "As an instructor, I want to be able to add new sections to the course"],
+        [18, "As an instructor, I want to be able be able to see all sections in the course page"],
+        [19, "As an instructor, I want to be able to edit/update sections"],
+        [20, "As an instructor, I want to be able to delete sections"]
+      ]
+    ],
+    ["Adding lessons to sections",
+      [
+        [21, "As an instructor, I want to be able to add new lessons to a section"],
+        [22, "As an instructor, I want to be able to see all lessons in the course page"],
+        [23, "As an instructor, I want to be able to edit/update lessons"],
+        [24, "As an instructor, I want to be able to delete lessons"]
+      ]
+    ],
+    ["Setting up the course page",
+      [
+        [25, "As a student, I want to see all of the course details on the course page"],
+        [26, "As a student, I want to be able to see the profile picture and introduction of the instructor"]
       ]
     ],
     ["Building the Enrollments Feature",
       [
-        [15, "Why TDD?"],
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [27, "As a student, I want to be able to enroll in courses"],
+        [28, "As a student, I want to be able to unenroll from courses"],
+        [29, "As a student, I want to be able to see all of my enrolled courses"]
       ]
     ],
     ["Setting Up Course Ratings",
       [
-        [15, "Why TDD?"],
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [30, "As a student, I want to be able to rate a course I have enrolled in"],
+        [31, "As a student, I want to be able to delete a rating"],
+        [32, "As a student, I want to be able to see the average rating of a course"]
       ]
     ],
-    ["Designing the User Profile Page",
+    ["Designing the Instructor Profile Page",
       [
-        [15, "Why TDD?"],
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [33, "As a student, I should be able to see all courses taught by the instructor"],
+        [34, "As a student, I should be able to see the number of courses taught by the instructor"]
       ]
     ],
-    ["Adding a Notification Bar",
+    ["Adding a Notifications",
       [
-        [15, "Why TDD?"],
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [35, "As an instructor, I want to be notified when a user enrolls/unenrolls in my course"],
+        [36, "As an instructor, I want to be notified when a user rates my course"]
       ]
     ],
     ["Additional Features",
       [
-        [15, "Why TDD?"],
-        [16, "Testing the index action"],
-        [17, "Creating New Posts"],
-        [18, "Individual Post Pages"],
-        [19, "Editing Posts"],
-        [20, "Deleting Posts"]
+        [37, "As a student, I want to be search and sort/filter for courses"],
+        [38, "As a student, I want to be able to recover courses that I've deleted"],
+        [39, "As a student, I want to be able to recover sections that I've deleted"],
+        [41, "As a student, I want to be able to recover lessons that I've deleted"]
       ]
     ]
   ]
