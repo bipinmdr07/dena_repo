@@ -66,6 +66,8 @@ hints = {
     if(!this.has_next("hint", el.data("hint-id") + 1)) {
       this.disable_button($(".btn-hint"));
     } 
+
+    this.scroll_to(gotcha);
   },
   show_next_hint: function(el) {
     var hint = $(".hint[data-hint-id=" + el.data("hint-id") + "]");
@@ -74,6 +76,8 @@ hints = {
     if (!this.has_next("hint", el.data("hint-id") + 1)) {
       this.disable_button(el);
     }
+
+    this.scroll_to(hint);
   },
   has_next: function(class_name, next_id){
     return ($("." + class_name +  "[data-" + class_name + "-id=" + next_id + "]").length !== 0);
