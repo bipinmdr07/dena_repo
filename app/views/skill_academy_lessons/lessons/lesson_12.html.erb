@@ -5,17 +5,34 @@
 </p>
 
 <div class="story">
-  <h2>As a user, I should be able to log in/log out</h2>
-  <ul>
-    <li>There should be a navigation bar item to sign in/sign out</li>
-  </ul> 
-</div>
+  <div class="story-title">
+    <h2>As a user, I should be able to log in/log out</h2>
+  </div>
+  
+  <div class="story-wrapper">
+    <%= image_tag 'shared/prof.jpg', class: 'story-user-img' %>
+
+    <div class="story-panel">
+      <div class="story-user">
+        <div class="story-user-text">
+          <strong>takehiromouri</strong> commented
+        </div>
+      </div>
+
+      <div class="story-comment">
+        <ul>
+          <li>There should be a navigation bar item to sign in/sign out</li>
+        </ul> 
+      </div><!-- story-comment -->
+    </div><!-- story-content --> 
+  </div><!-- story-wrapper -->
+</div><!-- story -->
 
 <p>
   How can we start building this feature?
 </p>
   
-<div class="gotcha" data-gotcha-id="1">
+<div class="gotcha" data-hint-id="1" data-gotcha-id="1">
   <p>
     When building out features, <strong>it is important to focus on building the core functionality of the feature first, then working on the surrounding features later.</strong>
   </p>

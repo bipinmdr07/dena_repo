@@ -90,11 +90,11 @@
   }
 }
 
-.btn-hint {
+#btn-hint {
   @include hint-buttons;
 }
 
-.btn-gotcha {
+#btn-gotcha {
   @include hint-buttons;
 }
 

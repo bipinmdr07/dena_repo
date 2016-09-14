@@ -29,8 +29,8 @@
 
       <div class="hint-prompt">
         <h5>Think you have the solution?</h5>
-        <button class="btn btn-gotcha" data-gotcha-id="1"><i class="fa fa-check" aria-hidden="true"></i> I've solved it myself</button>
-        <button class="btn btn-hint" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Give me a hint!</button>
+        <button class="btn" id="btn-gotcha" data-gotcha-id="1"><i class="fa fa-check" aria-hidden="true"></i> I've solved it myself</button>
+        <button class="btn" id="btn-hint" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Give me a hint!</button>
       </div>
 
       <br class = "clear">
@@ -51,35 +51,61 @@
 
 <script type="text/javascript">
 var hints;
-var hints = {
-  show_next: function(el, dataEl){
-    var id, content, hint_id, content_class_name;
+hints = {
+  show_next_gotcha: function(el) {
+    var gotcha = $(".gotcha[data-gotcha-id=" + el.data("gotcha-id") + "]");
+    this.show_hint(gotcha);
+    // display elements with data-hint-id that is <= el.data-hint-id  
+    this.show_preceding_hints(gotcha);
+    // - Increment btn-gotcha data-gotcha-id
+    el.data("gotcha-id", el.data("gotcha-id") + 1);
 
-    id = el.data(dataEl);
-    next_id = id + 1;
-
-    // get class name of element to display
-    content_class_name = dataEl.slice(0, -3);
-
-    content = $("." + content_class_name +  "[data-" + dataEl + "=" + id + "]");
-
-    this.show_hint(content);
-
-    // update data-hint-id of hint button
-    el.data(dataEl, next_id);
-
-    // if there are no more hints, disable button
-    if ($("." + content_class_name +  "[data-" + dataEl + "=" + next_id + "]").length === 0) {    
-      el.prop("disabled", true);
+    if (!this.has_next("gotcha", el.data("gotcha-id") + 1)) {
+      this.disable_button(el);
     }
+    if(!this.has_next("hint", el.data("hint-id") + 1)) {
+      this.disable_button($(".btn-hint"));
+    } 
+  },
+  show_next_hint: function(el) {
+    var hint = $(".hint[data-hint-id=" + el.data("hint-id") + "]");
+    this.show_preceding_hints(hint);
 
-    this.scroll_to(content);
+    if (!this.has_next("hint", el.data("hint-id") + 1)) {
+      this.disable_button(el);
+    }
+  },
+  has_next: function(class_name, next_id){
+    return ($("." + class_name +  "[data-" + class_name + "-id=" + next_id + "]").length !== 0);
+  },
+  disable_button: function(el){
+    el.prop("disabled", true);
+  },
+  show_preceding_hints: function(el){
+    var hints = $('[data-hint-id]').filter(function(){
+      return $(this).data("hint-id") <= el.data("hint-id");
+    }); 
+
+    var that = this;
+    $.each(hints, function(){
+      that.show_hint( $(this) );
+      // if gotcha element was inside the displayed hints, updated btn-gotcha data-gotcha-id
+      if ($(this).attr("class").includes('gotcha')) {
+        $("#btn-gotcha").data("gotcha-id", $(this).data("gotcha-id") + 1);
+
+        if (!that.has_next("gotcha", $("#btn-gotcha").data("gotcha-id"))) {
+          that.disable_button($("#btn-gotcha"));
+        }
+      }
+    });
+     // - Increment btn-hint data-hint-id 
+    $("#btn-hint").data("hint-id", el.data("hint-id") + 1);   
   },
   show_all: function(){
     this.show_hint($(".hint"));
     this.show_hint($(".gotcha"));
-    $(".btn-hint").prop("disabled", true);
-    $(".btn-gotcha").prop("disabled", true);
+    $("#btn-hint").prop("disabled", true);
+    $("#btn-gotcha").prop("disabled", true);
     this.scroll_to($(".hint")[0]);    
     return;
   },
@@ -97,13 +123,12 @@ var hints = {
   }
 }  
 
-
-$(".btn-gotcha").on("click", function(){
-  hints.show_next($(this), "gotcha-id");  
+$("#btn-gotcha").on("click", function(){
+  hints.show_next_gotcha($(this), "gotcha-id");  
 });
 
-$(".btn-hint").on("click", function(){
-  hints.show_next($(this), "hint-id");
+$("#btn-hint").on("click", function(){
+  hints.show_next_hint($(this), "hint-id");
 });
 
 $(document).on('turbolinks:load', show_page_trigger);
