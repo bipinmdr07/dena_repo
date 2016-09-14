@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909133300) do
+ActiveRecord::Schema.define(version: 20160914192321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,18 +106,6 @@ ActiveRecord::Schema.define(version: 20160909133300) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
-  create_table "comments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "student_question_id"
-    t.text     "content"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  add_index "comments", ["student_question_id"], name: "index_comments_on_student_question_id", using: :btree
-  add_index "comments", ["user_id", "student_question_id"], name: "index_comments_on_user_id_and_student_question_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
-
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -144,12 +132,6 @@ ActiveRecord::Schema.define(version: 20160909133300) do
     t.datetime "updated_at",     null: false
     t.string   "featured_image"
     t.string   "signup_link"
-  end
-
-  create_table "forums", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -185,6 +167,9 @@ ActiveRecord::Schema.define(version: 20160909133300) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
+
+  add_index "mentor_sessions", ["mentor_id"], name: "index_mentor_sessions_on_mentor_id", using: :btree
+  add_index "mentor_sessions", ["user_id"], name: "index_mentor_sessions_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
@@ -225,7 +210,8 @@ ActiveRecord::Schema.define(version: 20160909133300) do
   end
 
   add_index "progressions", ["course_name"], name: "index_progressions_on_course_name", using: :btree
-  add_index "progressions", ["user_id", "course_name"], name: "index_progressions_on_user_id_and_course_name", using: :btree
+  add_index "progressions", ["lesson_id"], name: "index_progressions_on_lesson_id", using: :btree
+  add_index "progressions", ["user_id", "lesson_id", "course_name"], name: "index_progressions_on_user_id_and_lesson_id_and_course_name", using: :btree
   add_index "progressions", ["user_id"], name: "index_progressions_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
@@ -242,6 +228,8 @@ ActiveRecord::Schema.define(version: 20160909133300) do
   end
 
   add_index "questions", ["course_name", "lesson_id"], name: "index_questions_on_course_name_and_lesson_id", using: :btree
+  add_index "questions", ["course_name"], name: "index_questions_on_course_name", using: :btree
+  add_index "questions", ["lesson_id"], name: "index_questions_on_lesson_id", using: :btree
   add_index "questions", ["slug"], name: "index_questions_on_slug", unique: true, using: :btree
   add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
 
@@ -253,7 +241,6 @@ ActiveRecord::Schema.define(version: 20160909133300) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "replies", ["question_id", "user_id"], name: "index_replies_on_question_id_and_user_id", using: :btree
   add_index "replies", ["user_id", "question_id"], name: "index_replies_on_user_id_and_question_id", using: :btree
   add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
@@ -270,16 +257,6 @@ ActiveRecord::Schema.define(version: 20160909133300) do
     t.string   "simplified_type",        default: "file"
   end
 
-  create_table "student_questions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.text     "answer"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "student_questions", ["user_id"], name: "index_student_questions_on_user_id", using: :btree
-
   create_table "student_sessions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "mentor_id"
@@ -291,18 +268,9 @@ ActiveRecord::Schema.define(version: 20160909133300) do
     t.datetime "updated_at",        null: false
   end
 
-  create_table "submission_comments", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "lesson"
-    t.integer  "user_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "submission_id"
-    t.boolean  "approved",      default: false
-  end
-
-  add_index "submission_comments", ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
+  add_index "student_sessions", ["mentor_id"], name: "index_student_sessions_on_mentor_id", using: :btree
+  add_index "student_sessions", ["mentor_session_id"], name: "index_student_sessions_on_mentor_session_id", using: :btree
+  add_index "student_sessions", ["user_id"], name: "index_student_sessions_on_user_id", using: :btree
 
   create_table "submission_replies", force: :cascade do |t|
     t.integer  "user_id"
@@ -329,6 +297,7 @@ ActiveRecord::Schema.define(version: 20160909133300) do
 
   add_index "submissions", ["course_name", "lesson_id"], name: "index_submissions_on_course_name_and_lesson_id", using: :btree
   add_index "submissions", ["course_name"], name: "index_submissions_on_course_name", using: :btree
+  add_index "submissions", ["lesson_id"], name: "index_submissions_on_lesson_id", using: :btree
   add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
@@ -404,6 +373,7 @@ ActiveRecord::Schema.define(version: 20160909133300) do
   add_index "users", ["admitted"], name: "index_users_on_admitted", using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["mentor_id"], name: "index_users_on_mentor_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
