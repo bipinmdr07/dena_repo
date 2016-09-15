@@ -9,6 +9,6 @@ class StudyController < ApplicationController
   private
 
   def due_cards
-    current_user.cards.due
+    @due_cards ||= current_user.cards.due
   end
 end

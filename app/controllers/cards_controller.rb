@@ -72,11 +72,11 @@ class CardsController < ApplicationController
   private
 
   def due_cards
-    current_user.cards.due
+    @due_cards ||= current_user.cards.due
   end
 
   def current_deck
-    Deck.find(params[:deck_id])
+    @current_deck ||= Deck.find(params[:deck_id])
   end 
 
   def check_card_owner  
