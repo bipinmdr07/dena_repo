@@ -374,6 +374,8 @@ class Course &lt; ActiveRecord::Base
 end
 </code></pre>
 
+<div class="well">
+  <h3>belongs_to :something, class_name: 'class'</h3>
   <p>
     <code>belongs_to :instructor, class_name: "User"</code> might seem new for you, but it's quite simple. We are saying that the course belongs to an "instructor" that is a <code>User</code> class.
   </p>
@@ -388,23 +390,122 @@ end
 
 # This is more expressive and makes more sense than @course.user 
 </code></pre>
+</div>
 
   <p>
-    Now that we have the backend configured, let's work on hooking it up with the frontend. 
+    We have now configured the backend, but the tests are still failing, since we have not created a view file yet.
   </p>
 
   <p>
     The next step is to create view files for creating a new course and add links to the navigation bar.
   </p>
 
+  <p>
+    Let's first add the links on the navigation bar. You should be able to do this by now :)
+  </p>
 </div>
 
-<div class="hint" data-hint-id="9">
+<div class="hint" data-hint-id="8">
   <p>First thing we need to do is create a <code>new.html.erb</code> file inside the <code>instructor/courses</code> directory.</p>
 
   <p>
     Inside of this file, let's create a form to create a new course.
   </p>
+</div>
+
+<div class="hint" data-hint-id="9">
+  <p>
+    The code for the form might look something like this:
+  </p>
+
+<pre><code class="ruby">
+&lt;h1 class="text-center"&gt;Create a New Course&lt;/h1&gt;
+
+&lt;%= simple_form_for @course, url: instructor_courses_path do |f| %&gt;
+  &lt;%= f.input :title, placeholder: 'Title of Course' %&gt;
+  &lt;%= f.input :description, placeholder: 'Description of Course' %&gt;
+  &lt;%= f.input :start_time, minute_step: 30, label: 'Start Time (Optional, leave blank for online)', include_blank: true %&gt;
+  &lt;%= f.input :end_time, minute_step: 30, label: 'End Time (Optional)', include_blank: true %&gt;
+  &lt;%= f.input :category, collection: ["Business", "Programming", "Design"] %&gt;
+  &lt;%= f.input :price %&gt;
+  &lt;%= f.input :target, placeholder: 'Who is this event for? Ex) Students who want to learn Ruby on Rails.' %&gt;
+  &lt;%= f.input :location, placeholder: 'Location of Event (Optional, leave blank for online)' %&gt;
+  &lt;%= f.input :address, placeholder: 'Address of Event (Optional, leave blank for online)' %&gt;
+  &lt;%= f.input :photo %&gt;
+  &lt;%= f.submit class: 'btn btn-primary', data: { disable_with: "Creating course..." } %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+  <p>
+    There a few new elements here. Let's walk through each one of them.
+  </p>
+
+  <ul>
+    <li><code>disable_with</code> - by enabling this option, the button will be disabled with the text passed in as a parameter once a user has pressed the button</li>
+    <li>Notice the use of placeholders - <strong>using placeholders will often times lead to a better looking form</strong></li>
+    <li><code>minute_step</code> allows you to create a dropdown for times in increments. For example, <code>minute_step: 30</code> will create a dropdown that is incremented by 30 minutes.</li>
+    <li><code>collection</code>s enable you to create a select menu from the array you pass in</li>
+  </ul>
+
+  <p>
+    We can refactor the <code>collection</code> so that we can reuse the category types. Instead of passing in <code>["Business", "Programming", "Design"]</code>, <strong>we can store this as a constant</strong> in the <code>Course</code> model.
+  </p>
+
+  <p>
+    Let's open up <code>course.rb</code>. To define a constant in ruby, all we have to do is create an all-uppercased variable:
+  </p>  
+
+<pre><code class="ruby">
+class Course &lt; ActiveRecord::Base
+  belongs_to :instructor, class_name: "User"
+
+  CATEGORIES = %w(Business Programming Design Excel Presentations)
+end  
+</code></pre>
+  
+  <p>
+    Notice how I used <code>%w()</code>. <code>%w()</code> is a shortcut for creating arrays, without needing to use quotations or commas.
+  </p>
+
+<pre><code class="ruby">
+%w(Business Programming Design Excel Presentations)
+# same as
+["Business", "Programming", "Design", "Excel", "Presentations"]
+</code></pre>
+
+  <%= create_flashcard %>
+
+  <p>
+    We can retrieve constants like such: <code>Object::CONSTANT_NAME</code>. So in this case, we can retrieve the categories with <code>Course::CATEGORIES</code>.
+  </p>  
+
+  <p>
+    Open up the <code>new.html.erb</code> file with the form. Let's refactor it to implement the constant.
+  </p>
+
+<pre><code class="ruby">
+&lt;h1 class="text-center"&gt;Create a New Course&lt;/h1&gt;
+
+&lt;%= simple_form_for @course, url: instructor_courses_path do |f| %&gt;
+  &lt;%= f.input :title, placeholder: 'Title of Course' %&gt;
+  &lt;%= f.input :description, placeholder: 'Description of Course' %&gt;
+  &lt;%= f.input :start_time, minute_step: 30, label: 'Start Time (Optional, leave blank for online)', include_blank: true %&gt;
+  &lt;%= f.input :end_time, minute_step: 30, label: 'End Time (Optional)', include_blank: true %&gt;
+  &lt;!-- change here --&gt;
+  &lt;%= f.input :category, collection: Course::CATEGORIES %&gt;
+  &lt;%= f.input :price %&gt;
+  &lt;%= f.input :target, placeholder: 'Who is this event for? Ex) Students who want to learn Ruby on Rails.' %&gt;
+  &lt;%= f.input :location, placeholder: 'Location of Event (Optional, leave blank for online)' %&gt;
+  &lt;%= f.input :address, placeholder: 'Address of Event (Optional, leave blank for online)' %&gt;
+  &lt;%= f.input :photo %&gt;
+  &lt;%= f.submit class: 'btn btn-primary', data: { disable_with: "Creating course..." } %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+</div>
+
+<div class="hint" data-hint-id="13">
+  
 </div>
 
 

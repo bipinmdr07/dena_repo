@@ -63,11 +63,13 @@ hints = {
       // display elements with data-hint-id that is <= el.data-hint-id  
       this.show_preceding_hints(gotcha);
       // - Increment btn-gotcha data-gotcha-id
-      el.data("gotcha-id", el.data("gotcha-id") + 1);
+      // el.data("gotcha-id", el.data("gotcha-id") + 1);
 
       if (!this.has_next("gotcha", el.data("gotcha-id"))) {
         this.disable_button(el);
       }    
+
+      console.log(el.data("hint-id"));
       if(!this.has_next("hint", el.data("hint-id"))) {      
         this.disable_button($("#btn-hint"));      
       } 
@@ -79,6 +81,7 @@ hints = {
     var hint = $(".hint[data-hint-id=" + el.data("hint-id") + "]");
     this.show_preceding_hints(hint);
 
+    console.log(el.data("hint-id"));
     if (!this.has_next("hint", el.data("hint-id"))) {
       this.disable_button(el);
     }
@@ -97,7 +100,7 @@ hints = {
     }); 
 
     var that = this;
-    $.each(hints, function(){
+    $.each(hints, function(){      
       that.show_hint( $(this) );
       // if gotcha element was inside the displayed hints, updated btn-gotcha data-gotcha-id
       if ($(this).attr("class").includes('gotcha')) {
@@ -109,7 +112,8 @@ hints = {
       }
     });
      // - Increment btn-hint data-hint-id 
-    $("#btn-hint").data("hint-id", el.data("hint-id") + 1);   
+    $("#btn-hint").data("hint-id", el.data("hint-id") + 1);  
+    $("#btn-gotcha").data("hint-id", el.data("hint-id") + 1);   
   },
   show_all: function(){
     this.show_hint($(".hint"));
