@@ -54,26 +54,32 @@ var hints;
 hints = {
   show_next_gotcha: function(el) {
     var gotcha = $(".gotcha[data-gotcha-id=" + el.data("gotcha-id") + "]");
-    this.show_hint(gotcha);
-    // display elements with data-hint-id that is <= el.data-hint-id  
-    this.show_preceding_hints(gotcha);
-    // - Increment btn-gotcha data-gotcha-id
-    el.data("gotcha-id", el.data("gotcha-id") + 1);
 
-    if (!this.has_next("gotcha", el.data("gotcha-id") + 1)) {
-      this.disable_button(el);
-    }
-    if(!this.has_next("hint", el.data("hint-id") + 1)) {
-      this.disable_button($(".btn-hint"));
+    if (gotcha.length === 0) {
+      this.show_all();
     } 
+    else {
+      this.show_hint(gotcha);
+      // display elements with data-hint-id that is <= el.data-hint-id  
+      this.show_preceding_hints(gotcha);
+      // - Increment btn-gotcha data-gotcha-id
+      el.data("gotcha-id", el.data("gotcha-id") + 1);
 
-    this.scroll_to(gotcha);
+      if (!this.has_next("gotcha", el.data("gotcha-id"))) {
+        this.disable_button(el);
+      }    
+      if(!this.has_next("hint", el.data("hint-id"))) {      
+        this.disable_button($("#btn-hint"));      
+      } 
+
+      this.scroll_to(gotcha);
+    }
   },
   show_next_hint: function(el) {
     var hint = $(".hint[data-hint-id=" + el.data("hint-id") + "]");
     this.show_preceding_hints(hint);
 
-    if (!this.has_next("hint", el.data("hint-id") + 1)) {
+    if (!this.has_next("hint", el.data("hint-id"))) {
       this.disable_button(el);
     }
 
@@ -82,7 +88,7 @@ hints = {
   has_next: function(class_name, next_id){
     return ($("." + class_name +  "[data-" + class_name + "-id=" + next_id + "]").length !== 0);
   },
-  disable_button: function(el){
+  disable_button: function(el){    
     el.prop("disabled", true);
   },
   show_preceding_hints: function(el){
@@ -136,4 +142,11 @@ $("#btn-hint").on("click", function(){
 });
 
 $(document).on('turbolinks:load', show_page_trigger);
+
+$(document).on('turbolinks:load', function(){
+  if ($(".hint").length === 0) {
+    $("#btn-hint").prop('disabled', true);
+    $("#btn-gotcha").prop('disabled', true);
+  }
+});
 </script>
