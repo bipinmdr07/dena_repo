@@ -7,6 +7,7 @@ class ProgressionsController < ApplicationController
     @current_course_link = current_course_link
     @current_course_title = current_course_title
     @current_course_lessons = current_course_lessons
+    @progression_lesson_ids = current_user.progressions.where(course_name: params[:progression][:course_name]).pluck(:lesson_id)  
 
     respond_to do |format|
       format.html {}
@@ -24,6 +25,7 @@ class ProgressionsController < ApplicationController
     @current_course_link = current_course_link
     @current_course_title = current_course_title
     @current_course_lessons = current_course_lessons
+    @progression_lesson_ids = current_user.progressions.where(course_name: params[:progression][:course_name]).pluck(:lesson_id)  
 
     respond_to do |format|
       format.html {}

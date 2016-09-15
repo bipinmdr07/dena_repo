@@ -42,6 +42,8 @@ class LessonsController < ApplicationController
       @prev_lesson = @current_lesson_id.to_i - 1
     end
 
+    @progression_lesson_ids = current_user.progressions.where(course_name: current_controller).pluck(:lesson_id)  
+
     render layout: "layouts/lesson"
   end
 
