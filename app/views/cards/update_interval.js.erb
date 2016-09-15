@@ -4,6 +4,6 @@
   success_sound.play();
 <% end %>
 
-$("#card_container").html("<%= escape_javascript render partial: 'cards/card', locals: { card: @cards.first, cards: @cards } %>");
-$('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@cards => @cards } %>")
+$("#card_container").html("<%= escape_javascript render partial: 'cards/card', locals: { card: @due_cards.first, cards: @due_cards } %>");
+$('#header').html("<%= escape_javascript render partial: '/layouts/nav_contents', locals: { :@due_cards => @due_cards } %>")
 $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
