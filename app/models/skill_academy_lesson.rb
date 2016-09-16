@@ -38,24 +38,25 @@ class SkillAcademyLesson < Lesson
       [
         [13, "As an instructor, I want to be able to create a new course"],
         [14, "As an instructor, I want to be able to see all of my courses"],
-        [15, "As an instructor, I want to be able to edit/update course"],
-        [16, "As an instructor, I want to be able to edit/update course"]
+        [15, "As an instructor, I want to be able to view the details of a specific course"],
+        [16, "As an instructor, I want to be able to edit/update a course"],
+        [17, "As an instructor, I want to be able to delete a course"]
       ]
     ],
     ["Adding sections to courses",
       [
-        [17, "As an instructor, I want to be able to add new sections to the course"],
-        [18, "As an instructor, I want to be able be able to see all sections in the course page"],
-        [19, "As an instructor, I want to be able to edit/update sections"],
-        [20, "As an instructor, I want to be able to delete sections"]
+        [18, "As an instructor, I want to be able to add new sections to the course"],
+        [19, "As an instructor, I want to be able be able to see all sections in the course page"],
+        [20, "As an instructor, I want to be able to edit/update sections"],
+        [21, "As an instructor, I want to be able to delete sections"]
       ]
     ],
     ["Adding lessons to sections",
       [
-        [21, "As an instructor, I want to be able to add new lessons to a section"],
-        [22, "As an instructor, I want to be able to see all lessons in the course page"],
-        [23, "As an instructor, I want to be able to edit/update lessons"],
-        [24, "As an instructor, I want to be able to delete lessons"]
+        [22, "As an instructor, I want to be able to add new lessons to a section"],
+        [23, "As an instructor, I want to be able to see all lessons in the course page"],
+        [24, "As an instructor, I want to be able to edit/update lessons"],
+        [25, "As an instructor, I want to be able to delete lessons"]
       ]
     ],
     ["Setting up the course page",

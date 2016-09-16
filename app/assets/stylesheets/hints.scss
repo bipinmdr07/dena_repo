@@ -98,6 +98,10 @@
   @include hint-buttons;
 }
 
+#btn-all-hints {
+  @include hint-buttons; 
+}
+
 
 .hint-activated {
   background-color: #d9edf7;

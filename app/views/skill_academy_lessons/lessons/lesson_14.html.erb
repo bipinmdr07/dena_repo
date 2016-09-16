@@ -34,15 +34,24 @@
 
 <div class="hint" data-hint-id="3">
   <p>
-    The most appropriate place to display <strong>all</strong> of our courses would be in the <code>index</code> page. It would also make sense to write the <code>index</code> action inside of our <code>courses_controller.rb</code> namespaced under <code>instructor</code> (<code>instructor/courses_controller.rb</code>.
-  </p>
+    We need to make sure that the <code>index</code> action renders the index template:
+  </p>    
 
-  <p>
-    Before we write any code to build the feature, let's first write tests.
-  </p>
+<pre><code class="ruby">
+describe "GET #index" do
+  it "renders the index template" do
+    
+  end
+end
+</code></pre>  
 </div>
 
 <div class="hint" data-hint-id="4">
+
+  <p>
+    The code should look something like below. First you create a user, you sign the user in, perform a GET request to the <code>index</code> action, then expect the response to render the <code>index</code> template:
+  </p>
+
 <pre><code class="ruby">
 describe "GET #index" do
   it "renders the index template" do
@@ -54,12 +63,109 @@ describe "GET #index" do
     expect(response).to render_template(:index)
   end
 end
-</code> </pre>
+</code></pre> 
+
+  <p>
+    Let's run the test and make sure it fails. The next step is to make the tests pass.
+  </p>
 </div>
 
+<div class="hint" data-hint-id="5">
+  <p>
+    First, let's define the <code>index</code> method:
+  </p>  
 
+<pre><code class="ruby">
+def index
+  @courses = current_user.courses.order("created_at DESC")
+end
+</code></pre>
+  
+  <p>
+    Let's run the tests again. It will still give us an error. Let's fix it.
+  </p>
 
+</div>
 
+<div class="hint gotcha" data-gotcha-id="1" data-hint-id="6">
+  <p>
+    We need to create an <code>index.html.erb</code> file inside the <code>instructor/courses</code> directory. Once we do that, let's display all of our courses.
+  </p>
+
+  <p>
+    Here's one way you could implement this.
+  </p>
+
+  <p>
+    Inside <code>index.html.erb</code>:
+  </p>
+
+<pre><code class="erb">
+&lt;div class="title-box text-center"&gt;
+  &lt;h1&gt;My Courses&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;% if @courses.present? %&gt;
+  &lt;div class="row"&gt;
+    &lt;% @courses.each do |course| %&gt;
+      &lt;div class="col-xs-12 col-sm-6 col-md-4"&gt;
+        &lt;%= render partial: 'instructor/courses/course', locals: { course: course } %&gt;
+      &lt;/div&gt;&lt;!-- col-xs-12 col-sm-6 col-md-4 --&gt;
+    &lt;% end %&gt;
+  &lt;/div&gt;
+&lt;% else %&gt;  
+  
+  &lt;div class="row"&gt;
+    &lt;div class="col-xs-12 col-sm-10 col-offset-1 col-md-6 col-md-offset-3"&gt;
+      &lt;h3 class="text-center"&gt;You are not teaching any courses right now.&lt;/h3&gt;
+
+      &lt;h2 class="text-center"&gt;Getting started is easy. &lt;br&gt;Just click the button below.&lt;/h2&gt;
+      &lt;%= link_to 'Create New Course', new_instructor_course_path, class: 'btn btn-danger btn-lg center-block' %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+  <p>
+    I also set up a partial named <code>_course.html.erb</code> inside <code>views/instructor/courses</code>:
+  </p>
+
+<pre><code class="erb">
+&lt;div class="course-box text-center"&gt;
+  
+  &lt;div class="course-box-image"&gt;
+    &lt;%= image_tag course.photo, class: 'img-responsive center-block' %&gt;    
+  &lt;/div&gt;
+
+  &lt;h3&gt;&lt;%= link_to course.title, instructor_course_path(course) %&gt;&lt;/h3&gt;
+  &lt;p&gt;&lt;%= truncate course.description, length: 80, omission: '... (read more)' %&gt;&lt;/p&gt;
+
+  &lt;h4&gt;&lt;%= course.instructor_name %&gt;&lt;/h4&gt;
+  &lt;label class="label label-primary"&gt;&lt;%= course.category %&gt;&lt;/label&gt;
+  
+&lt;/div&gt;&lt;!-- course-box --&gt;
+</code></pre>
+
+  <p>
+    Inside <code>course.rb</code>, in order to follow the Law of Demeter, I set up a <code>delegate</code> method like such:
+  </p>
+
+<pre><code class="ruby">
+class Course &lt; ActiveRecord::Base
+  belongs_to :instructor, class_name: "User", foreign_key: :user_id
+
+  delegate :name, to: :instructor, prefix: true
+end
+</code></pre>
+
+  <div class="well">
+    <h3>The Law of Demeter</h3>
+
+    <p>
+      Read about the Law of Demeter and how we can use <code>delegate</code> to prevent ourselves from breaking the Law of Demeter. <%= link_to 'here', 'https://samurails.com/tutorial/rails-delegate-dont-break-the-law-of-demeter/', target: '_blank' %>.
+    </p>
+  </div>
+</div>
 
 
 

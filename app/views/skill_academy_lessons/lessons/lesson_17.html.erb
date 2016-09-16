@@ -1,0 +1,26 @@
+<h1><%= title_for(SkillAcademyLesson, 5, 5) %></h1>
+
+<p>
+  Let's work on the next user story.
+</p>
+
+<%= render layout: 'shared/story', locals: {story_title: title_for(SkillAcademyLesson, 5, 3)} do %>
+  <p>
+    As an instructor, I should be able to delete a course - but in order to avoid mistakes, let's implement soft deletion (marking it as deleted and not actually deleting them in the database).
+  </p>
+
+  <ul>
+    <li>Link to delete course on the instructor course show page</li>
+    <li>After deleting the course, it should take the user to the instructor course index page</li>
+  </ul>
+<% end %>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    You can use the <code>acts_as_paranoid</code> gem to accomplish soft-deletion.
+  </p>
+</div>
+
+<h3>Submit your progress up to here! In the submission form below, paste your github repository so we can take a look at your work and make sure you're on the right track :)</h3>
+
+<% @submission_form = true %>

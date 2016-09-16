@@ -31,6 +31,7 @@
         <h5>Think you have the solution?</h5>
         <button class="btn" id="btn-gotcha" data-gotcha-id="1"><i class="fa fa-check" aria-hidden="true"></i> I've solved it myself</button>
         <button class="btn" id="btn-hint" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Give me a hint!</button>
+        <button class="btn" id="btn-all-hints" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Show all</button>
       </div>
 
       <br class = "clear">
@@ -120,6 +121,7 @@ hints = {
     this.show_hint($(".gotcha"));
     $("#btn-hint").prop("disabled", true);
     $("#btn-gotcha").prop("disabled", true);
+    $("#btn-all-hints").prop("disabled", true);
     this.scroll_to($(".hint")[0]);    
     return;
   },
@@ -145,12 +147,18 @@ $("#btn-hint").on("click", function(){
   hints.show_next_hint($(this), "hint-id");
 });
 
+$("#btn-all-hints").on("click", function(){
+  hints.show_all();
+});
+
+
 $(document).on('turbolinks:load', show_page_trigger);
 
 $(document).on('turbolinks:load', function(){
   if ($(".hint").length === 0) {
     $("#btn-hint").prop('disabled', true);
     $("#btn-gotcha").prop('disabled', true);
+    $("#btn-all-hints").prop('disabled', true);
   }
 });
 </script>

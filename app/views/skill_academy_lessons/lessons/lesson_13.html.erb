@@ -352,14 +352,18 @@ end
 
 <pre><code class="ruby">
 class Course &lt; ActiveRecord::Base
-  belongs_to :instructor, class_name: "User"
+  belongs_to :instructor, class_name: "User", foreign_key: :user_id
 end
 </code></pre>
 
 <div class="well">
-  <h3>belongs_to :something, class_name: 'class'</h3>
+  <h3>belongs_to :something, class_name: 'class', foreign_key: :foreign_key</h3>
   <p>
-    <code>belongs_to :instructor, class_name: "User"</code> might seem new for you, but it's quite simple. We are saying that the course belongs to an "instructor" that is a <code>User</code> class.
+    <code>belongs_to :instructor, class_name: "User", foreign_key: :user</code> might seem new for you, but it's quite simple. We are saying that the course belongs to an "instructor" that is a <code>User</code> class, where the foreign key is <code>:user_id</code>.
+  </p>
+
+  <p>
+    To give you a refresher, <strong>a foreign key is a database field that refers to a row in another database table.</strong> For example, <code>user_id</code> is refering to the <code>id</code> column of the <code>User</code> table.
   </p>
 
   <p>
