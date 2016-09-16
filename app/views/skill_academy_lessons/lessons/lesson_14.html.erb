@@ -42,6 +42,20 @@
   </p>
 </div>
 
+<div class="hint" data-hint-id="4">
+<pre><code class="ruby">
+describe "GET #index" do
+  it "renders the index template" do
+    user = FactoryGirl.create(:user)
+
+    sign_in user
+    get :index
+
+    expect(response).to render_template(:index)
+  end
+end
+</code> </pre>
+</div>
 
 
 

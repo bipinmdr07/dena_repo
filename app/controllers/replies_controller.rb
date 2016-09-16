@@ -48,6 +48,7 @@ class RepliesController < ApplicationController
     @current_question ||= Question.find(params[:question_id])
   end
 
+  helper_method :current_reply
   def current_reply
     @current_reply ||= Reply.find(params[:id])
   end
