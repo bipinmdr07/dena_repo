@@ -11,7 +11,11 @@
 
   <p>
     The instructor should be able to create a section from the instructor course show page. There should be a link that takes the instructor to a page to fill out information about the section.
-  </p>  
+  </p>    
+
+  <p>
+    The flow should look like this:
+  </p>
 
   <ul>
     <li>User clicks on link to create section</li>
@@ -28,3 +32,30 @@
     </ul>
   </ul>
 <% end %>
+
+<div class="gotcha" data-hint-id="1" data-gotcha-id="1">
+  <p>
+    When you migrate the <code>sections</code> table into the database, make sure that you add an index to the <code>course_id</code>.
+  </p>
+
+<pre><code class="ruby">
+add_index :sections, :course_id
+</code></pre>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Once you have created the controllers and model for <code>sections</code>, make sure you set up the database relations.
+  </p>  
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    A <code>lesson</code> should have many <code>sections</code> and a <code>section</code> should belong to a <code>lesson</code>.
+  </p>  
+</div>
+
+
+
+
+
