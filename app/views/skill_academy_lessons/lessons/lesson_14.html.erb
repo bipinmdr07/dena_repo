@@ -1,0 +1,18 @@
+<h1><%= title_for(SkillAcademyLesson, 5, 2) %></h1>
+
+<p>
+  Now that we've built functionality to create new courses, let's display them on to the page.
+</p>
+
+<%= render layout: 'shared/story', locals: {story_title: "As an instructor, I want to be able to see all of my courses"} do %>
+  <p>
+    As an instructor, I should be able to view all of the courses that I have created on one page. The following information should be displayed for each course:
+  </p>
+  <ul>
+    <li>Course title</li>
+    <li>Course photo</li>
+    <li>Course description</li>
+    <li>Instructor name</li>    
+  </ul>
+<% end %>
+

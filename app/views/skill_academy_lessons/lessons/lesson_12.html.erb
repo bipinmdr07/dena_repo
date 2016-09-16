@@ -4,29 +4,11 @@
   Let's work on our first user story.
 </p>
 
-<div class="story">
-  <div class="story-title">
-    <h2>As a user, I should be able to log in/log out</h2>
-  </div>
-  
-  <div class="story-wrapper">
-    <%= image_tag 'shared/prof.jpg', class: 'story-user-img' %>
-
-    <div class="story-panel">
-      <div class="story-user">
-        <div class="story-user-text">
-          <strong>takehiromouri</strong> commented
-        </div>
-      </div>
-
-      <div class="story-comment">
-        <ul>
-          <li>There should be a navigation bar item to sign in/sign out</li>
-        </ul> 
-      </div><!-- story-comment -->
-    </div><!-- story-content --> 
-  </div><!-- story-wrapper -->
-</div><!-- story -->
+<%= render layout: 'shared/story', locals: {story_title: "As a user, I should be able to log in/log out"} do %>
+  <ul>
+    <li>There should be a navigation bar item to sign in/sign out</li>
+  </ul> 
+<% end %>
 
 <p>
   How can we start building this feature?

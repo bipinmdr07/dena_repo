@@ -4,41 +4,23 @@
   Let's work on our first user story.
 </p>
 
-<div class="story">
-  <div class="story-title">
-    <h2>As an instructor, I want to be able to create a new course #1</h2>
-  </div>
-
-  <div class="story-wrapper">
-    <%= image_tag 'shared/prof.jpg', class: 'story-user-img' %>
-
-    <div class="story-panel">
-      <div class="story-user">
-        <div class="story-user-text">
-          <strong>takehiromouri</strong> commented
-        </div>
-      </div>
-
-      <div class="story-comment">
-        <p>
-          Courses should contain the following data:
-        </p>
-        <ul>
-          <li>title</li>
-          <li>description</li>
-          <li>price</li>
-          <li>start time</li>
-          <li>end time</li>
-          <li>category</li>
-          <li>target</li>
-          <li>location</li>
-          <li>address</li> 
-          <li>photo</li>
-        </ul> 
-      </div><!-- story-comment -->
-    </div><!-- story-content --> 
-  </div><!-- story-wrapper -->
-</div><!-- story -->
+<%= render layout: 'shared/story', locals: {story_title: "As an instructor, I want to be able to create a new course"} do %>
+  <p>
+    Courses should contain the following data:
+  </p>
+  <ul>
+    <li>title</li>
+    <li>description</li>
+    <li>price</li>
+    <li>start time</li>
+    <li>end time</li>
+    <li>category</li>
+    <li>target</li>
+    <li>location</li>
+    <li>address</li> 
+    <li>photo</li>
+  </ul> 
+<% end %>
 
 <p>
   What are the first things we need to do?
@@ -483,7 +465,7 @@ end
     Open up the <code>new.html.erb</code> file with the form. Let's refactor it to implement the constant.
   </p>
 
-<pre><code class="ruby">
+<pre><code class="erb">
 &lt;h1 class="text-center"&gt;Create a New Course&lt;/h1&gt;
 
 &lt;%= simple_form_for @course, url: instructor_courses_path do |f| %&gt;
@@ -500,13 +482,15 @@ end
   &lt;%= f.input :photo %&gt;
   &lt;%= f.submit class: 'btn btn-primary', data: { disable_with: "Creating course..." } %&gt;
 &lt;% end %&gt;
+  
+  <p>
+    Now if we run our tests, all of the tests should be passing.
+  </p>
+
 </code></pre>
 
 </div>
 
-<div class="hint" data-hint-id="13">
-  
-</div>
 
 
 
