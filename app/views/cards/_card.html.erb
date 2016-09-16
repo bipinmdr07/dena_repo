@@ -6,13 +6,13 @@
 
 <div class="devise_box">
 
-  <% if @cards.empty? %>
+  <% if @due_cards.empty? %>
     <h3 class="text-center">Congratulations! You have no cards left today!</h3>
     <h3 class="text-center"><%= link_to '>> Go to lessons', courses_path %></h3>
   <% else %>
 
     <h4 class="pull-left"><%= link_to '<< Back to Lessons', courses_path %></h4>
-    <h4 class="pull-right"><%= pluralize(cards.count, 'card') %> left for today!</h4>
+    <h4 class="pull-right"><%= pluralize(due_cards.count, 'card') %> left for today!</h4>
     <hr class="clear">
 
     <div class="row">
@@ -84,7 +84,7 @@
       $(this).closest("form").submit();
   });
 
-  <% unless @cards.empty? %>
+  <% unless @due_cards.empty? %>
     var editor = ace.edit("editor");
     editor.setOptions({
       maxLines: 100,
