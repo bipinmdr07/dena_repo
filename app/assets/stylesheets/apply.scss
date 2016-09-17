@@ -72,6 +72,9 @@
 .program-box-buttons {
   position: absolute;
   right: 0px;
+  .btn {
+    border-radius: 2px;
+  }
 }
 
 .program-title {
@@ -100,3 +103,16 @@
   margin-right: 10px;
 }
 
+.application-form {
+  margin-top: 40px;
+  padding: 20px;
+  margin-bottom: 40px;
+  .actions {
+    width: 200px;
+  }
+  input {
+    background: whitesmoke;
+    border-radius: 0px;
+    margin-bottom: 20px;
+  }
+}
