@@ -43,6 +43,9 @@ Rails.application.routes.draw do
 
   get 'blog', to: 'blog#index', as: 'blog'
 
+  get 'apply', to: 'apply#index', as: 'apply'
+  get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
+
   resources :progressions, only: [:create, :destroy]
 
   resources :prework_kickoffs, only: :create

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <%= render '/layouts/meta' %>
+
+</head>
+
+<body class="home-page apply"> 
+
+<%= render '/layouts/nav_lessons' %>
+
+<div class="apply-wrapper">
+  <div class="row">
+    <div class="container">    
+      <div class="apply-content-wrapper">
+        <%= yield %>      
+      </div><!-- apply-content-wrapper -->
+    </div><!-- container -->
+  </div><!-- row -->
+</div><!-- apply-wrapper -->
+
+<%= render '/layouts/footer' %>
+
+</body>
+</html>
