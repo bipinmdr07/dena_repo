@@ -11,6 +11,8 @@ end
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
+  resources :applicants, only: :create
+
   resources 'contacts', only: [:new, :create]
 
   resources :questions do
