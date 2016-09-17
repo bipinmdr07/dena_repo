@@ -4,6 +4,22 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :first_name }
   it { should validate_presence_of :last_name }
 
+  describe "#has_started_prework?" do
+    context "user has started prework" do
+      it "returns true" do
+        user = FactoryGirl.create(:prework_student)
+        expect(user.has_started_prework?).to eq(true)
+      end
+    end
+
+    context "user has not started prework" do
+      it "returns false" do
+        user = FactoryGirl.create(:pre_prework_student)
+        expect(user.has_started_prework?).to eq(false)
+      end
+    end
+  end
+
   describe "#send_prework_finished_message" do
     context "user is not admitted" do
       it "sends an email" do

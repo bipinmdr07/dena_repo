@@ -173,7 +173,7 @@ FactoryGirl.define do
 
   factory :prework_student, class: 'User' do
     sequence :email do |n|
-      "random#{n}@email.com"
+      "prework#{n}@email.com"
     end
     password "codingiscool"
     password_confirmation "codingiscool"
@@ -190,7 +190,7 @@ FactoryGirl.define do
 
   factory :pre_prework_student, class: 'User' do
     sequence :email do |n|
-      "random#{n}@email.com"
+      "preprework#{n}@email.com"
     end
     password "codingiscool"
     password_confirmation "codingiscool"

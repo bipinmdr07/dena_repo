@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:github]
   mount_uploader :avatar, AvatarUploader
 
   has_many :cards, dependent: :destroy
@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
   before_save :update_name!
   after_create :send_slack
 
+  enum package: [:remote, :immersive]
+
   scope :admitted, -> { where(admitted: true) }
   scope :active_prework_students, -> { where("prework_end_date >= ?", DateTime.now) }
   scope :signed_up_this_week, -> { where("created_at >= ?", DateTime.now.beginning_of_week) }
@@ -29,6 +31,32 @@ class User < ActiveRecord::Base
   scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?', 
                                     Date.today.last_month.beginning_of_month, 
                                     Date.today.beginning_of_month )}  
+
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+      end
+    else
+      super
+    end
+  end
+
+  def self.from_omniauth(auth)    
+    where(auth.slice(:provider, :uid).to_hash).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid      
+      user.email = auth.info.email
+    end
+  end
+
+  def self.create_from_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]      
+    end
+  end
 
   def send_prework_finished_message
     return if admitted
@@ -51,6 +79,10 @@ class User < ActiveRecord::Base
           username: 'TECHRISE Bot',
           channel: "#user_signup_alerts",
           icon_emoji: ":smile_cat:") if Rails.env.production?
+  end
+
+  def has_started_prework?
+    !prework_start_time.nil?
   end
 
   def has_access_to?(lesson)
