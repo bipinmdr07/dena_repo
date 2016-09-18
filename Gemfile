@@ -85,6 +85,9 @@ gem 'bourbon'
 gem 'omniauth'
 gem 'omniauth-github'
 
+# social buttons
+gem 'bootstrap-social-rails'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
