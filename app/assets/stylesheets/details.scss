@@ -26,8 +26,39 @@
   }
 }
 
-.program-highlights {
-  padding: 50px 0px;
+.payment-details {
+  border: solid 1px #979797;
+  padding: 94px 30px 30px;
+  position: relative;
+  margin: 72px auto 48px;
+  h4 {
+    font-weight: 600;
+  }
+  p {
+    font-weight: 400;
+    color: #777;
+  }
+}
+
+.payment-price {
+  background: #ec6952;
+  color: white;
+  font-size: 48px;
+  line-height: 72px;
+  height: 72px;
+  padding: 0 45px;
+  text-align: center;
+  display: inline-block;
+  font-weight: 300;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.program-highlights {  
   .highlight-checkbox {
     background-image: url(details/success.png);
     background-position: left center;

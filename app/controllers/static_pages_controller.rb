@@ -18,7 +18,7 @@ class StaticPagesController < ApplicationController
   end
 
   def remote
-
+    render layout: 'details'
   end
 
   def immersive
