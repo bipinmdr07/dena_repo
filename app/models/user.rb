@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :student_sessions
   has_many :notifications, foreign_key: :recipient_id
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :package, presence: true
 
   before_save :update_name!
   after_create :send_slack

@@ -152,6 +152,7 @@ FactoryGirl.define do
     start_date DateTime.now
     graduation_date DateTime.now + 2.months
     admitted true
+    package :immersive
   end
 
   factory :admitted_student, class: 'User' do
@@ -169,6 +170,7 @@ FactoryGirl.define do
     start_date DateTime.now
     graduation_date DateTime.now + 2.months
     admitted true
+    package :immersive
   end
 
   factory :prework_student, class: 'User' do
@@ -186,6 +188,7 @@ FactoryGirl.define do
     start_date nil
     graduation_date nil
     admitted false
+    package :immersive
   end
 
   factory :pre_prework_student, class: 'User' do
@@ -203,6 +206,7 @@ FactoryGirl.define do
     start_date nil
     graduation_date nil
     admitted false
+    package :immersive
   end
 
   factory :mentor, class: "User" do

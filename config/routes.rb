@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }do
-  get "/users/sign_up" => "authentications#index"
-  get "/users/sign_in" => "authentications#index"
-end
+    get "/users/sign_up" => "authentications#index"
+    get "/users/sign_in" => "authentications#index"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -50,6 +50,10 @@ end
 
   get 'apply', to: 'apply#index', as: 'apply'
   get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
+  get 'apply/immersive', to: 'apply#immersive', as: 'apply_immersive'
+
+  get 'remote', to: 'static_pages#remote'
+  get 'immersive', to: 'static_pages#immersive'
 
   resources :progressions, only: [:create, :destroy]
 
