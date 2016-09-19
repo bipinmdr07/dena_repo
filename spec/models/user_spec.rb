@@ -7,12 +7,15 @@ RSpec.describe User, type: :model do
 
   describe "#set_admitted" do
     context "user is a remote student" do
-      it "updates admitted to true" do
+      it "admits user" do
         user = FactoryGirl.create(:user, package: :remote)
 
         user.reload
 
         expect(user.admitted).to eq(true)
+        expect(user.start_date).to eq(Date.today)
+        expect(user.graduation_date).to eq(Date.today + 1.month)
+        expect(user.remaining_mentor_sessions).to eq(4)
       end
     end
   end

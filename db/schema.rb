@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917172555) do
+ActiveRecord::Schema.define(version: 20160919155256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -352,7 +352,7 @@ ActiveRecord::Schema.define(version: 20160917172555) do
     t.boolean  "mentor",                    default: false
     t.datetime "start_date"
     t.datetime "graduation_date"
-    t.integer  "remaining_mentor_sessions", default: 8
+    t.integer  "remaining_mentor_sessions", default: 16
     t.integer  "mentor_id"
     t.string   "facebook_handle"
     t.string   "twitter_handle"

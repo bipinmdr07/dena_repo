@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   before_save :update_name!
   after_create :send_slack
   after_create :set_admitted!
+  after_create :set_graduation_date!
 
   enum package: [:remote, :immersive]
 
@@ -34,10 +35,10 @@ class User < ActiveRecord::Base
                                     Date.today.last_month.beginning_of_month, 
                                     Date.today.beginning_of_month )}  
 
-  # Set remote students to admitted by default
+  # Set remote students to admitted and set graduation date by default
   def set_admitted!
     return unless remote?
-    update(admitted: true)
+    update(admitted: true, start_date: Date.today, graduation_date: Date.today + 1.month, remaining_mentor_sessions: 4)
   end
 
   # Override devise method for Oauth
