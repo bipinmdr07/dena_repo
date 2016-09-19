@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }do
-    get "/users/sign_up" => "authentications#index"
-    get "/users/sign_in" => "authentications#index"
-  end
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+
+  # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
+  #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
+  # end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -14,6 +16,27 @@ Rails.application.routes.draw do
   resources :remote_applicants, only: :create
   resources :immersive_applicants, only: :create
 
+
+  get 'apply', to: 'apply#index', as: 'apply'
+  get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
+  get 'apply/immersive', to: 'apply#immersive', as: 'apply_immersive'
+
+  get 'remote', to: 'static_pages#remote'
+  get 'immersive', to: 'static_pages#immersive'
+
+  get 'apply/remote/next-steps', to: 'apply#remote_next_steps'
+  get 'apply/immersive/next-steps', to: 'apply#immersive_next_steps'
+
+  # namespace 'apply' do
+  #   namespace 'remote' do
+  #     get 'next-steps', to: 'apply#remote_next_steps'
+  #   end
+
+  #   namespace 'immersive' do
+  #     get 'next-steps', to: 'apply#immersive_next_steps'
+  #   end
+  # end
+  
   resources 'contacts', only: [:new, :create]
 
   resources :questions do
@@ -48,13 +71,6 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show]
 
   get 'blog', to: 'blog#index', as: 'blog'
-
-  get 'apply', to: 'apply#index', as: 'apply'
-  get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
-  get 'apply/immersive', to: 'apply#immersive', as: 'apply_immersive'
-
-  get 'remote', to: 'static_pages#remote'
-  get 'immersive', to: 'static_pages#immersive'
 
   resources :progressions, only: [:create, :destroy]
 

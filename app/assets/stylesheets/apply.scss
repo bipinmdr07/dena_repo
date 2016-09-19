@@ -107,6 +107,7 @@
   margin-top: 40px;
   padding: 20px;
   margin-bottom: 40px;
+  font-family: 'Lato', sans-serif;
   .actions {
     width: 200px;
   }
@@ -123,4 +124,18 @@
 
 .social-login-button {
   margin-bottom: 30px;
+}
+
+.next-steps-container {
+  margin-top: 50px;
+  p {
+    font-family: 'Lato', sans-serif;
+    line-height: 1.5;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 15px;
+  }
+  strong {
+    color: #666;
+  }
 }

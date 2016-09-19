@@ -4,7 +4,7 @@ class RemoteApplicantsController < ApplicationController
 
     if user.valid?
       # send email
-      redirect_to root_path     
+      redirect_to apply_remote_next_steps_path
     else
       redirect_to apply_remote_path
     end

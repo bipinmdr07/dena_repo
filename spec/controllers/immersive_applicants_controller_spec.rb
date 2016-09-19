@@ -9,10 +9,10 @@ RSpec.describe ImmersiveApplicantsController, type: :controller do
         }.to change(User, :count).by(1)
       end
 
-      it "redirects the user to the dashboard page" do
+      it "redirects the user to the next steps page" do
         post :create, user: FactoryGirl.attributes_for(:user, package: nil)        
         
-        expect(response).to redirect_to dashboard_path
+        expect(response).to redirect_to apply_immersive_next_steps_path
       end
 
       it "sends a confirmation email" do

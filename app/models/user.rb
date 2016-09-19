@@ -33,7 +33,9 @@ class User < ActiveRecord::Base
                                     Date.today.last_month.beginning_of_month, 
                                     Date.today.beginning_of_month )}  
 
-  def self.new_with_session(params, session)
+
+
+  def self.new_with_session(params, session)    
     if session["devise.user_attributes"]
       new(session["devise.user_attributes"], without_protection: true) do |user|
         user.attributes = params
@@ -45,10 +47,14 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)    
+    binding.pry
     where(auth.slice(:provider, :uid).to_hash).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid      
-      user.email = auth.info.email
+      user.email = auth.info.email      
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      user.avatar = auth.info.image # assuming the user model has an image
     end
   end
 
@@ -56,6 +62,25 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]      
+    end
+  end
+
+  # If sign in through Oauth, don't require password
+  def password_required?
+    super && provider.blank?
+  end
+
+  # No confirmation email sent when there is no email
+  def confirmation_required?
+    super && email.present?
+  end
+
+  # Don't require update with password if Oauth
+  def update_with_password(params, *options)
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
     end
   end
 
