@@ -84,6 +84,7 @@ gem 'bourbon'
 # omniauth
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'omniauth-facebook'
 
 # social buttons
 gem 'bootstrap-social-rails'

@@ -19,7 +19,7 @@
 
           <div class="col-xs-12 col-sm-6">
             <div class="social-login-button">
-              <%= link_to user_github_omniauth_authorize_path(package), class: 'btn btn-block btn-social btn-facebook' do %>
+              <%= link_to user_facebook_omniauth_authorize_path(package), class: 'btn btn-block btn-social btn-facebook' do %>
                 <span class="fa fa-facebook"></span>
                 Sign up with Facebook
               <% end %>
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <%= f.hidden_field :package, value: 0 %>
+      <%= f.hidden_field :package, value: package_enum %>
 
       <br>
 
