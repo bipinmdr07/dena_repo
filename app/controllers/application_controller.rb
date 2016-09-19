@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def configure_permitted_parameters
-	  devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name, :first_name, :last_name, :facebook_handle, :twitter_handle, :github_handle, :personal_website, :mobile_number, :uid, :provider, :application_reasons])
+	  devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name, :first_name, :last_name, :facebook_handle, :twitter_handle, :github_handle, :personal_website, :mobile_number, :uid, :provider, :application_reasons, :package])
 	  devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :email, :password, :current_password, :name, :avatar, :facebook_handle, :twitter_handle, :github_handle, :personal_website, :mobile_number])
 	end
 end

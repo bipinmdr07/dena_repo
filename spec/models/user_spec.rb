@@ -5,10 +5,23 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :last_name }
   it { should validate_presence_of :package }
 
+  describe "#set_admitted" do
+    context "user is a remote student" do
+      it "updates admitted to true" do
+        user = FactoryGirl.create(:user, package: :remote)
+
+        user.reload
+
+        expect(user.admitted).to eq(true)
+      end
+    end
+  end
+
   describe "#has_started_prework?" do
     context "user has started prework" do
       it "returns true" do
         user = FactoryGirl.create(:prework_student)
+
         expect(user.has_started_prework?).to eq(true)
       end
     end
@@ -16,6 +29,7 @@ RSpec.describe User, type: :model do
     context "user has not started prework" do
       it "returns false" do
         user = FactoryGirl.create(:pre_prework_student)
+
         expect(user.has_started_prework?).to eq(false)
       end
     end
@@ -25,6 +39,7 @@ RSpec.describe User, type: :model do
     context "user is not admitted" do
       it "sends an email" do
         user_1 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 8.hours, admitted: false)
+
         expect {
           user_1.send_prework_finished_message
         }.to change { ActionMailer::Base.deliveries.count }.by(1)
@@ -34,6 +49,7 @@ RSpec.describe User, type: :model do
     context "user is admitted" do
       it "does not send an email" do
         user_1 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 8.hours, admitted: true)
+
         expect {
           user_1.send_prework_finished_message
         }.to change { ActionMailer::Base.deliveries.count }.by(0)
@@ -48,6 +64,7 @@ RSpec.describe User, type: :model do
       user_3 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now - 24.hours, admitted: false)
       user_4 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now, admitted: false)
       user_5 = FactoryGirl.create(:prework_student, prework_end_date: DateTime.now + 10.minutes, admitted: false)
+
       expect(User.declined_today.count).to eq(3)
     end
   end
@@ -124,8 +141,8 @@ RSpec.describe User, type: :model do
       user.start_prework!
       user.reload
 
-      expect(user.prework_start_time).to eq Date.today
-      expect(user.prework_end_date).to eq Date.today + 4.days
+      expect(user.prework_start_time).to be_within(0.1).of(DateTime.now)
+      expect(user.prework_end_date).to be_within(0.1).of(DateTime.now + 4.days)
     end
   end
 
@@ -142,17 +159,20 @@ RSpec.describe User, type: :model do
 
     it "should return true if user is admitted" do
       user = FactoryGirl.create(:user, admitted: true, prework_start_time: nil, prework_end_date: nil)
+
       expect(user.has_access?).to be(true)
     end
 
     it "should return false if user's prework_end_date is before today" do
       user = FactoryGirl.create(:prework_student, prework_start_time: Date.today - 4.weeks, prework_end_date: Date.today - 2.weeks)
+
       expect(user.has_access?).to be(false)
     end
 
     context "when user is admitted" do
       it "should return true if user's prework_end_time is after today" do
         user = FactoryGirl.create(:admitted_student)
+
         expect(user.has_access?).to be(true)
       end
     end
@@ -160,6 +180,7 @@ RSpec.describe User, type: :model do
     context "when user is not admitted" do
       it "should return true if user's prework_end_time is after today" do
         user = FactoryGirl.create(:user, admitted: false, prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
+        
         expect(user.has_access?).to be(true)
       end
     end

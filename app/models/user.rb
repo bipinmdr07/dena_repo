@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 
   before_save :update_name!
   after_create :send_slack
+  after_create :set_admitted!
 
   enum package: [:remote, :immersive]
 
@@ -33,8 +34,13 @@ class User < ActiveRecord::Base
                                     Date.today.last_month.beginning_of_month, 
                                     Date.today.beginning_of_month )}  
 
+  # Set remote students to admitted by default
+  def set_admitted!
+    return unless remote?
+    update(admitted: true)
+  end
 
-
+  # Override devise method for Oauth
   def self.new_with_session(params, session)    
     if session["devise.user_attributes"]
       new(session["devise.user_attributes"], without_protection: true) do |user|
@@ -47,7 +53,6 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)    
-    binding.pry
     where(auth.slice(:provider, :uid).to_hash).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid      
@@ -58,21 +63,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.create_from_omniauth(auth)
-    create! do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]      
-    end
-  end
-
   # If sign in through Oauth, don't require password
   def password_required?
     super && provider.blank?
-  end
-
-  # No confirmation email sent when there is no email
-  def confirmation_required?
-    super && email.present?
   end
 
   # Don't require update with password if Oauth
@@ -120,7 +113,7 @@ class User < ActiveRecord::Base
   end
 
   def start_prework!
-    update(prework_start_time: Date.today, prework_end_date: Date.today + 4.days)
+    update(prework_start_time: DateTime.now, prework_end_date: DateTime.now + 4.days)
   end
 
   def update_name!

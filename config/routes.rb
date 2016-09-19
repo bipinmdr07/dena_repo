@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }
 
   # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
   #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
@@ -13,10 +13,6 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
-  resources :remote_applicants, only: :create
-  resources :immersive_applicants, only: :create
-
-
   get 'apply', to: 'apply#index', as: 'apply'
   get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
   get 'apply/immersive', to: 'apply#immersive', as: 'apply_immersive'
@@ -26,16 +22,6 @@ Rails.application.routes.draw do
 
   get 'apply/remote/next-steps', to: 'apply#remote_next_steps'
   get 'apply/immersive/next-steps', to: 'apply#immersive_next_steps'
-
-  # namespace 'apply' do
-  #   namespace 'remote' do
-  #     get 'next-steps', to: 'apply#remote_next_steps'
-  #   end
-
-  #   namespace 'immersive' do
-  #     get 'next-steps', to: 'apply#immersive_next_steps'
-  #   end
-  # end
   
   resources 'contacts', only: [:new, :create]
 

@@ -7,14 +7,10 @@ class ApplyController < ApplicationController
 
   def remote    
     build_resource
-    # yield @resource if block_given?    
-    # respond_with @resource
   end
 
   def immersive       
     build_resource
-    # yield @resource if block_given?
-    # respond_with @resource
   end
 
   def remote_next_steps
