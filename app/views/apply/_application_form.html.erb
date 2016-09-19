@@ -33,7 +33,7 @@
 <% else %>
 
   <div class="application-form">
-    <%= simple_form_for :user, url: applicants_path, method: :post do |f| %>
+    <%= simple_form_for :user, url: form_url, method: :post do |f| %>
       <%= devise_error_messages! %>
 
       <div class="row">
@@ -79,9 +79,7 @@
           <%= f.label "Reasons for Applying" %><br />
           <%= f.text_area :application_reasons, class: 'form-control', placeholder: 'Please tell us about why you want to join TECHRISE and what you want to accomplish.', rows: "5" %>
         </div>
-      </div>
-
-      <%= f.hidden_field :package, value: package_enum %>
+      </div>      
 
       <br>
 

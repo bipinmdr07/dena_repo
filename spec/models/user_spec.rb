@@ -110,7 +110,7 @@ RSpec.describe User, type: :model do
   describe "#update_name!" do
     it "should save name after save" do
       user = User.new(email: "test@example.com", password: "abcd123456", password_confirmation: "abcd123456",
-                      first_name: "Cole", last_name: "Devin")
+                      first_name: "Cole", last_name: "Devin", package: :immersive)
       user.save
 
       expect(user.reload.name).to eq("Cole Devin")

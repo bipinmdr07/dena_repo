@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
   has_many :student_sessions
   has_many :notifications, foreign_key: :recipient_id
 
-  validates :first_name, :last_name, :package, presence: true
+  validates :first_name, :last_name, presence: true
+  validates :package, presence: true, if: :is_student?
 
   before_save :update_name!
   after_create :send_slack
@@ -103,6 +104,13 @@ class User < ActiveRecord::Base
 
   def last_lesson
     self.progressions.order('created_at DESC').first
+  end
+
+  private
+
+  def is_student?
+    return false if mentor || admin
+    true
   end
 
 end
