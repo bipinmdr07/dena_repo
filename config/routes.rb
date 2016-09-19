@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }, path_names: {
+    sign_up: ''
+  }
 
   # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
   #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
@@ -89,7 +91,6 @@ Rails.application.routes.draw do
 
   patch 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
 
-
   get 'study', to: 'study#index', as: 'study'
 
   get 'intro_lessons', to: 'intro_lessons#index', as: 'intro'
@@ -145,12 +146,12 @@ Rails.application.routes.draw do
   get 'guidelines',   to: 'static_pages#guidelines'
 
   get 'curriculum', to: 'static_pages#curriculum'
-  get 'pricing', to: 'static_pages#pricing'
-  get 'congratulations', to: 'static_pages#congratulations'
+  # get 'pricing', to: 'static_pages#pricing'
+  # get 'congratulations', to: 'static_pages#congratulations'
   get 'about', to: 'static_pages#about'
   get 'contact_us', to: 'static_pages#contact_us'
-  get 'learn', to: 'static_pages#learn'
-  get 'preregistration', to: 'static_pages#preregistration'
+  # get 'learn', to: 'static_pages#learn'
+  # get 'preregistration', to: 'static_pages#preregistration'
   get 'support', to: 'static_pages#support'
 
   #error routes
