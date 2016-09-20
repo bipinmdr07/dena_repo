@@ -12,7 +12,7 @@ class RubyLesson < Lesson
         [2, "Ruby Fundamentals"],
         [3, "Foobar Problem"],
         [4, "Test-First Ruby: Hello"],
-        [5, "Test-First Ruby: Temperature"]
+        [5, "Challenge: Temperature Conversion"]
       ]
     ]
   ]
