@@ -20,11 +20,7 @@
   background: white;  
 }
 
-.program-box {
-  margin-top: 40px;
-  padding: 40px;
-  border: 1px solid #ccc;
-  display: table;
+@mixin program-box-text-styles {  
   h2 {
     font-size: 40px;
     font-weight: 300;
@@ -38,6 +34,14 @@
   p {
     font-size: 16px;
   }
+}
+
+.program-box {
+  margin-top: 40px;
+  padding: 40px;
+  border: 1px solid #ccc;
+  display: table;
+  @include program-box-text-styles;
 }
 
 .program-content {
@@ -138,4 +142,109 @@
   strong {
     color: #666;
   }
+}
+
+.explore-programs {
+  background: whitesmoke;
+  padding-top: 50px;
+  padding-bottom: 200px;
+
+  .explore-program-box {
+    @include program-box-text-styles;
+    background: white;
+    border: 1px solid #ec6952;
+  }
+
+  .explore-programs-title {
+    color: #ec6952;
+    font-weight: 900;
+  }
+
+  .explore-programs-subtitle {
+    margin-bottom: 50px;
+  }
+
+  .program-box-title {
+    border-bottom: 1px solid #ec6952;
+    text-align: center;
+    padding: 10px 0px;
+    background: #ec6952;
+    color: white;
+    h4 {
+      font-size: 24px;    
+      font-family: 'Titillium Web', sans-serif;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+  }
+
+  .program-box-highlights {
+    border-bottom: 1px solid #ec6952;
+    text-align: center;
+    padding-bottom: 10px;
+    h3 {
+      font-size: 40px;
+      font-weight: 900;       
+      color: #ec6952; 
+    }
+    h5 {
+      font-weight: 900;
+    }
+  }
+
+  .program-box-details {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: 280px;
+    ul {
+      list-style-type: none;
+      li {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      li:before {
+        content: '';
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        background-image: url(details/success.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-left: -30px;
+        margin-right: 15px;
+      }  
+    }    
+  }
+
+}
+
+.remote-box {
+  border: 1px solid #ff931e !important;
+
+  .program-box-title {
+    border-bottom: 1px solid #ff931e;
+    background: #ff931e;    
+  }
+
+  .explore-programs-title {
+    color: #ff931e;
+  }
+
+  .program-box-highlights {
+    border-bottom: 1px solid #ff931e;
+    text-align: center;
+    padding-bottom: 10px;
+    h3 {
+      font-size: 40px;
+      font-weight: 900;       
+      color: #ff931e;
+    }
+  }
+
+  small {
+    position: absolute;
+    right: 30px;
+    bottom: 12px;
+  }
+
 }
