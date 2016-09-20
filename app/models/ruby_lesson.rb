@@ -11,7 +11,8 @@ class RubyLesson < Lesson
         [1, "Introduction to Ruby"],
         [2, "Ruby Fundamentals"],
         [3, "Foobar Problem"],
-        [4, "Test-First Ruby: Hello"]
+        [4, "Test-First Ruby: Hello"],
+        [5, "Test-First Ruby: Temperature"]
       ]
     ]
   ]

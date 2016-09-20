@@ -59,13 +59,10 @@ NameError:
 
   <p>The first error is saying that the method is not defined. Let's define that method in our <strong>hello.rb</strong> file.</p>
 
-<pre>
-  <code class="ruby">
+<pre><code class="ruby">
 def hello
 
-end
-  </code>
-</pre>
+end</code></pre>
 
   <p>
     Save the file and run rspec.
@@ -87,13 +84,10 @@ end
   <h3>Make it return something</h3>
   <p>Inside the <strong>hello</strong> function, put a single line of string other than "hello".(Here we are simulating you making an honest mistake, so we can see what the error message looks like.)</p>
 
-<pre>
-  <code class="ruby">
+<pre><code class="ruby">
 def hello
   "hpllo?"
-end
-  </code>
-</pre>
+end</code></pre>
 
   <p>Save it and run the test again.</p>
 
@@ -102,8 +96,7 @@ end
     You should now see the following error:
   </p>
 
-<pre>
-  <code class="bash">
+<pre><code class="bash">
 1) #hello the hello function says hello
  Failure/Error: expect(hello).to eq("Hello!")
 
@@ -111,20 +104,16 @@ end
         got: "hpllo?"
 
    (compared using ==)
- # ./spec/hello_spec.rb:7:in `block (3 levels) in <top (required)>'
-  </code>
-</pre>
+ # ./spec/hello_spec.rb:7:in `block (3 levels) in <top (required)>'</code></pre>
 
   <p>
     It is expecting "Hello!" but instead of that, it is getting "hpllo?". So let's fix that and run the test again.
   </p>
 
-<pre>
-  <code class="ruby">
+<pre><code class="ruby">
 def hello
   "Hello!"
-end
-  </code>
+end</code>
 </pre>
 
   <h3>Watch it pass.</h3>
@@ -140,8 +129,7 @@ end
     Similarly, let's define a method named <strong>greet</strong>
   </p>
 
-  <pre>
-    <code class="ruby">
+  <pre><code class="ruby">
 1) #hello the greet function says hello to someone
      Failure/Error:
        def greet
@@ -150,20 +138,15 @@ end
      ArgumentError:
        wrong number of arguments (1 for 0)
      # ./lib/hello.rb:5:in `greet'
-     # ./spec/hello_spec.rb:13:in `block (3 levels) in <top (required)>'
-    </code>
-  </pre>
+     # ./spec/hello_spec.rb:13:in `block (3 levels) in <top (required)>'</code></pre>
 
   <p>
     You now encounter the <strong>ArgumentError:</strong>. Meaning that our test code is passing one argument to our code but code is not expecting any arguments. Change the code and run the test.
   </p>
 
-  <pre>
-    <code class="ruby">
+  <pre><code class="ruby">
 def greet(name)
-end
-    </code>
-  </pre>
+end</code></pre>
 
   <p>
     You should see different error message now.
@@ -178,8 +161,7 @@ end
             got: nil
 
        (compared using ==)
-     # ./spec/hello_spec.rb:13:in `block (3 levels) in <top (required)>'
-  </code>
+     # ./spec/hello_spec.rb:13:in `block (3 levels) in <top (required)>'</code>
 </pre>
 
   <h3>Let's make it pass.</h3>
@@ -188,8 +170,7 @@ end
   <code class="ruby">
 def greet(name)
 	"Hello, #{name}!"
-end
-  </code>
+end</code>
 </pre>
 
   <p>
