@@ -145,9 +145,20 @@
 }
 
 .explore-programs {
+  font-family: 'Lato', sans-serif;  
   background: whitesmoke;
   padding-top: 50px;
   padding-bottom: 200px;
+
+  h1 {
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    font-size: 46px;
+  }
+
+  .btn-cta-secondary {
+    background: #fff;
+  }
 
   .explore-program-box {
     @include program-box-text-styles;
@@ -247,4 +258,8 @@
     bottom: 12px;
   }
 
+}
+
+.cta-box {
+  margin-top: 60px;
 }
