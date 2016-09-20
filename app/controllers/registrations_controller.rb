@@ -28,7 +28,6 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_inactive_sign_up_path_for(resource)  
-    binding.pry
     if resource.remote?      
       apply_remote_next_steps_path
     else
