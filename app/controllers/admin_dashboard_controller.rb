@@ -23,6 +23,9 @@ class AdminDashboardController < ApplicationController
       .order("created_at DESC")
       .paginate(page: params[:page], per_page: 5)
 
+    @applicants = User.where(admitted: false).order("created_at DESC")
+                                             .paginate(page: params[:page], per_page: 5)
+
   end
 
 end

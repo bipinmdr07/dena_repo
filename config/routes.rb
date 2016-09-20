@@ -24,6 +24,10 @@ Rails.application.routes.draw do
 
   get 'apply/remote/next-steps', to: 'apply#remote_next_steps'
   get 'apply/immersive/next-steps', to: 'apply#immersive_next_steps'
+
+  resources :users, only: [] do
+    resources :student_admissions, only: :create
+  end
   
   resources 'contacts', only: [:new, :create]
 

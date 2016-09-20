@@ -5,20 +5,38 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :last_name }
   it { should validate_presence_of :package }
 
-  # describe "#set_admitted" do
-  #   context "user is a remote student" do
-  #     it "admits user" do
-  #       user = FactoryGirl.create(:user, package: :remote)
+  describe "#set_admitted" do
+    context "user is a remote student" do
+      it "admits user" do
+        user = FactoryGirl.create(:pre_prework_student, package: :remote)
 
-  #       user.reload
+        user.set_admitted!
+        user.reload
 
-  #       expect(user.admitted).to eq(true)
-  #       expect(user.start_date).to eq(Date.today)
-  #       expect(user.graduation_date).to eq(Date.today + 1.month)
-  #       expect(user.remaining_mentor_sessions).to eq(4)
-  #     end
-  #   end
-  # end
+        expect(user.admitted).to eq(true)
+        expect(user.start_date).to be_within(0.1).of(Date.today.to_datetime)
+        expect(user.graduation_date).to be_within(0.1).of((Date.today + 1.month).to_datetime)
+        expect(user.remaining_mentor_sessions).to eq(4)
+        expect(user.ruby_access).to eq(true)
+        expect(user.bootstrap_access).to eq(true)
+      end
+    end
+
+    context "user is a immersive student" do
+      it "admits user" do
+        user = FactoryGirl.create(:pre_prework_student, package: :immersive)
+
+        user.set_admitted!
+        user.reload
+
+        expect(user.admitted).to eq(true)
+        expect(user.start_date).to be_within(0.1).of(Date.today.to_datetime)
+        expect(user.graduation_date).to be_within(0.1).of((Date.today + 2.month).to_datetime)
+        expect(user.ruby_access).to eq(true)
+        expect(user.bootstrap_access).to eq(true)
+      end
+    end
+  end
 
   describe "#has_started_prework?" do
     context "user has started prework" do

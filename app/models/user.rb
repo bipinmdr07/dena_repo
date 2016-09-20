@@ -32,12 +32,18 @@ class User < ActiveRecord::Base
   scope :signed_up_this_month, -> { where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
   scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?', 
                                     Date.today.last_month.beginning_of_month, 
-                                    Date.today.beginning_of_month )}  
+                                    Date.today.beginning_of_month )}    
 
   # Set remote students to admitted and set graduation date by default
   def set_admitted!
-    return unless remote?
-    update(admitted: true, start_date: Date.today, graduation_date: Date.today + 1.month, remaining_mentor_sessions: 4)
+    if remote?
+      update(admitted: true, start_date: Date.today.to_datetime, 
+            graduation_date: (Date.today + 1.month).to_datetime, remaining_mentor_sessions: 4, 
+            bootstrap_access: true, ruby_access: true)
+    elsif immersive?
+      update(admitted: true, start_date: Date.today.to_datetime, 
+            graduation_date: (Date.today + 2.month).to_datetime, bootstrap_access: true, ruby_access: true)
+    end
   end
 
   # Override devise method for Oauth
