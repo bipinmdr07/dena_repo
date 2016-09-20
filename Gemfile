@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 source 'http://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -81,11 +81,19 @@ gem 'acts_as_votable', '~> 0.10.0'
 # better stylesheets
 gem 'bourbon'
 
+# omniauth
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-facebook'
+
+# social buttons
+gem 'bootstrap-social-rails'
+
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: [:production, :staging]
 
 group :test do
   gem 'selenium-webdriver'

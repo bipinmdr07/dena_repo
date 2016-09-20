@@ -1,13 +1,30 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks", registrations: "registrations" }, path_names: {
+    sign_up: ''
+  }
+
+  # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
+  #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
+  # end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
+  get 'apply', to: 'apply#index', as: 'apply'
+  get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
+  get 'apply/immersive', to: 'apply#immersive', as: 'apply_immersive'
+
+  get 'remote', to: 'static_pages#remote'
+  get 'immersive', to: 'static_pages#immersive'
+
+  get 'apply/remote/next-steps', to: 'apply#remote_next_steps'
+  get 'apply/immersive/next-steps', to: 'apply#immersive_next_steps'
+  
   resources 'contacts', only: [:new, :create]
 
   resources :questions do
@@ -74,7 +91,6 @@ Rails.application.routes.draw do
 
   patch 'question_statuses/:id(.:format)', to: 'question_statuses#create', as: 'question_statuses'
 
-
   get 'study', to: 'study#index', as: 'study'
 
   get 'intro_lessons', to: 'intro_lessons#index', as: 'intro'
@@ -130,12 +146,12 @@ Rails.application.routes.draw do
   get 'guidelines',   to: 'static_pages#guidelines'
 
   get 'curriculum', to: 'static_pages#curriculum'
-  get 'pricing', to: 'static_pages#pricing'
-  get 'congratulations', to: 'static_pages#congratulations'
+  # get 'pricing', to: 'static_pages#pricing'
+  # get 'congratulations', to: 'static_pages#congratulations'
   get 'about', to: 'static_pages#about'
   get 'contact_us', to: 'static_pages#contact_us'
-  get 'learn', to: 'static_pages#learn'
-  get 'preregistration', to: 'static_pages#preregistration'
+  # get 'learn', to: 'static_pages#learn'
+  # get 'preregistration', to: 'static_pages#preregistration'
   get 'support', to: 'static_pages#support'
 
   #error routes
