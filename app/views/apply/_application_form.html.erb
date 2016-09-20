@@ -80,7 +80,14 @@
         <% end %>
 
         <div class="col-xs-12">
-          <%= f.label "Reasons for Applying" %><br />
+          <%= f.label "Reasons for Applying" %>
+
+          <% if package_value == :immersive %>
+            <p>
+              If you already have experience with web development and would like to skip the pre-work process, please let us know down below and we can schedule an interview so you can join TECHRISE Core Immersive immediately.
+            </p>
+          <% end %>
+
           <%= f.text_area :application_reasons, class: 'form-control', placeholder: 'Please tell us about why you want to join TECHRISE and what you want to accomplish.', rows: "5" %>
         </div>
       </div>      
