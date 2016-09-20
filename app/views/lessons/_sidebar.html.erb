@@ -9,10 +9,10 @@
       <a class="chapter-nav" data-target="#chapter_<%= i %>" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><%= chapter[0] %></a>
       <ul class="nav nav-stacked collapse left-submenu" id="chapter_<%= i %>" style="position: relative;">
         <% chapter[1].each do |lesson| %>
-          <% if controller_name.classify == "Progression" %>
-          <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0], params[:progression][:course_name])}".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %></li>
+          <% if controller_name.classify == "Progression" %>          
+            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(@progression_lesson_ids.include?(lesson[0]))}".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %></li>
           <% else %>
-            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(lesson[0])}".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %></li>
+            <li><%= link_to "#{lesson[0]}. #{lesson[1]} #{lesson_completed(@progression_lesson_ids.include?(lesson[0]))}".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %></li>
           <% end %>
         <% end %>
       </ul>
