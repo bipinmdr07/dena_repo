@@ -22,12 +22,12 @@ class Card < ActiveRecord::Base
   end            
 
   def next_in_deck
-    where(deck: deck).where("id > ?", id).first
+    Card.where(deck: deck).where("id > ?", id).first
   end
 
   def prev_in_deck
-    where(deck: deck).where("id < ?", id).last
-  end                    
+    Card.where(deck: deck).where("id < ?", id).last
+  end                      
 
   def update_code_syntax
     new_question = code_syntax(question)

@@ -48,6 +48,7 @@ class SubmissionRepliesController < ApplicationController
     @current_submission ||= Submission.find(params[:submission_id])
   end
 
+  helper_method :current_submission_reply
   def current_submission_reply
     @current_submission_reply ||= SubmissionReply.find(params[:id])
   end
