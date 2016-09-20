@@ -93,7 +93,7 @@ gem 'bootstrap-social-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: [:production, :staging]
 
 group :test do
   gem 'selenium-webdriver'
