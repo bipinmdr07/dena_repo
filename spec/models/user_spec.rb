@@ -5,20 +5,20 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :last_name }
   it { should validate_presence_of :package }
 
-  describe "#set_admitted" do
-    context "user is a remote student" do
-      it "admits user" do
-        user = FactoryGirl.create(:user, package: :remote)
+  # describe "#set_admitted" do
+  #   context "user is a remote student" do
+  #     it "admits user" do
+  #       user = FactoryGirl.create(:user, package: :remote)
 
-        user.reload
+  #       user.reload
 
-        expect(user.admitted).to eq(true)
-        expect(user.start_date).to eq(Date.today)
-        expect(user.graduation_date).to eq(Date.today + 1.month)
-        expect(user.remaining_mentor_sessions).to eq(4)
-      end
-    end
-  end
+  #       expect(user.admitted).to eq(true)
+  #       expect(user.start_date).to eq(Date.today)
+  #       expect(user.graduation_date).to eq(Date.today + 1.month)
+  #       expect(user.remaining_mentor_sessions).to eq(4)
+  #     end
+  #   end
+  # end
 
   describe "#has_started_prework?" do
     context "user has started prework" do
