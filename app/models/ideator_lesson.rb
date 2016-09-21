@@ -1,7 +1,7 @@
 class IdeatorLesson < Lesson
 	COURSE_TITLE = "Ideator - an Idea Sharing App"
 
-	DURATION = 22
+	DURATION = 25
 
 	PERIOD = "2 ~ 3"
 

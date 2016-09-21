@@ -163,7 +163,8 @@
   .explore-program-box {
     @include program-box-text-styles;
     background: white;
-    border: 1px solid #ec6952;
+    border: 2px solid #ec6952;
+    border-radius: 4px;
   }
 
   .explore-programs-title {
@@ -177,7 +178,7 @@
   }
 
   .program-box-title {
-    border-bottom: 1px solid #ec6952;
+    border-bottom: 2px solid #ec6952;
     text-align: center;
     padding: 10px 0px;
     background: #ec6952;
@@ -237,7 +238,7 @@
 }
 
 .immersive-box {
-  border: 1px solid #253340 !important;
+  border: 2px solid #253340 !important;
 
   .program-box-title {
     border-bottom: 1px solid #253340;
