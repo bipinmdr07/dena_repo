@@ -2,8 +2,7 @@ class RepliesController < ApplicationController
 	before_action :authenticate_user!
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
-	def create
-    binding.pry
+	def create    
 		reply = current_user.replies.create(reply_params)
 
 		if reply.valid?			
