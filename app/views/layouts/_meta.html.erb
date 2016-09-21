@@ -1,31 +1,14 @@
-<title><%= content_for?(:title) ? content_for(:title) : "Coding Bootcamp in Nepal | TECHRISE" %></title>
-
-<meta name="description" content="Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way.">
-
-<!-- facebook Open Graph -->
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="<%= request.original_url %>">
-<% if content_for?(:og_title) %>
-  <meta property="og:title" content="<%= content_for(:og_title) %>"/>
-<% else %>
-  <meta property="og:title" content="Coding Bootcamp in Nepal | TECHRISE"/>
-<% end %>
-
-<% if @post && @post.featured_image %>
-  <meta property="og:image" content="<%= asset_path @post.featured_image %>"/>
-<% elsif content_for?(:og_image) %>
-  <meta property="og:image" content="<%= content_for(:og_image) %>"/>
-<% else %>
-  <meta property="og:image" content="http://www.techrise.me<%= asset_path 'background/bg-header-1.1.jpg' %>"/>
-<% end %>
-
-<% if content_for?(:og_description) %>
-
-<% else %>
-  <meta property="og:description" content="Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way."/>
-<% end %>
-
-
+<%= display_meta_tags site: 'TECHRISE', reverse: true %>
+<% set_meta_tags title: 'Ruby on Rails Coding Bootcamp in Nepal',
+                 description: 'Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way.',
+                 keywords: 'Coding Bootcamp, Ruby on Rails, Ruby, Nepal, IT, Training',
+                 og: {
+                  type: "website",
+                  url: request.original_url,
+                  title: "Coding Bootcamp in Nepal | TECHRISE",
+                  image: "http://www.techrise.me#{asset_path 'background/bg-header-1.1.jpg'}",
+                  description: "Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way."
+                 } %>
 
 
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
