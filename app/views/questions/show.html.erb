@@ -74,7 +74,7 @@
     <hr>
   <% end %>
 
-  <%= simple_form_for :reply, url: question_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
+  <%= simple_form_for :reply, url: question_replies_path(@question.id), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
       <%= f.input :content, as: :summernote, label: 'Comment', required: true %>
     </div>
