@@ -34,35 +34,58 @@
 	</p>
 </div>
 
-<!-- 
+
+<h2>Setting Up Your Cloud9 Environment</h2>
+
 <p>
-	<strong>First, download Tokaido <a href = "https://github.com/tokaido/tokaidoapp/releases" target = "_blank">Here</a>.</strong> This will enable you to use Ruby on Rails instantly.
+	Installing Ruby on Rails, Ruby, git, and everything else takes so much time and it can be extremely frustrating. We don't want you to get stuck on this part - we'd rather have you start coding immediately :) That's why we provide Cloud9 accounts for all of our students, so that any student can start coding right away.
+</p>
+
+<p class="alert alert-success">
+	You should have gotten an invitation from the TECHRISE team by now, but if you haven't please contact us at contact@techrise.me.
 </p>
 
 <p>
-	<strong>Let's open Tokaido and click "Open Terminal".</strong>
+	Once you've signed up for Cloud9, then you can create a workspace:
 </p>
 
-<div class="well">
-	<h3>Using Tokaido</h3>
+<%= image_tag 'ideator/c9_dashboard.png', class: 'screenshot' %>	
 
-	<p>
-		Tokaido makes installing Ruby on Rails super easy. Setting up Rails can take a lot of time for people just starting out, so we are using Tokaido to create our Rails applications.
-	</p>
+<p>
+	Click on "Create New Workspace". This will take you to a new page where you can fill out information about your new project.
+</p>
 
-	<p>
-		<strong>Whenever we work with Ruby on Rails, make sure that you open the terminal from Tokaido, by pressing "Open Terminal":</strong>
-	</p>
+<p>
+	Enter "Ideator" as the project name, and choose the Ruby template as shown below:
+</p>
 
-	<%= image_tag 'ideator/tokaido.png', class: 'img-responsive screenshot' %>
-</div>
- -->
+<%= image_tag 'ideator/c9_new_project.png', class: 'screenshot' %>
+
+<p>
+	Finally, click the "Create Workspace" button. Just like that, your Rails environment has been created!
+</p>
+
+<p>		
+	With C9, you can develop applications in the browser. The interface looks similar to a setup you would have on your computer.
+</p>
+
+<%= image_tag 'ideator/c9_interface.png', class: 'screenshot' %>
+
+<p>
+	To create a new terminal window, you can click on the plus button up top:
+</p>
+
+<%= image_tag 'ideator/c9_new_terminal.png', class: 'screenshot' %>
+
+<p>	
+	Try clicking around to see how everything works. Everything is designed so that it works just like the set up that you are used to!
+</p>
 
 <p>
 	First, let's open up our terminal.
 </p>
 
-<div class="well">
+<!-- <div class="well">
 	<h3>Command Line Crash Course</h3>
 
 	<p>
@@ -130,13 +153,13 @@ rails new ideator
 
 <p>
 	This command magically creates a new rails application. Awesome!
-</p>
+</p> -->
 
 <div class="well">
 	<h3>How to create a new Rails application</h3>
 
 	<p>
-		Navigate yourself to the folder where you want to create your Rails application using the <code>cd</code> command. 
+		When using C9, you don't have to create a new Rails application - C9 does that all for you. But if you want to install Ruby on Rails and Ruby on your system and create a new Rails application, this is what you should do.
 	</p>
 
 	<p>
@@ -153,34 +176,22 @@ rails new app_name
 
 	<%= create_flashcard %>
 
+	<p>
+		Running the command should create a bunch of files and you shouldn’t get any errors.
+	</p>
+
+
 </div>
 
 <p>
-	Running the command should create a bunch of files and you shouldn’t get any errors.
-</p>
-
-
-<p>
-	Great, now that we’ve created our new rails app, let’s start this baby up.
-</p>
-
-<p>
-	In the terminal, let’s navigate to our project folder. Let's type the following in the terminal and press enter:
-</p>
-
-<pre><code class="bash">
-cd ~/desktop/ideator
-</code></pre>
-
-<p>
-	Next we have to create our initial database. In the terminal enter the following commands:
+	For every new Rails application, we have to create our initial database. In the terminal enter the following commands:
 </p>
 
 <pre><code class="bash">
 rake db:create:all
 </code></pre>
 
-<div class="well">
+<!-- <div class="well">
 	<h3>No Rakefile found?</h3>
 	<p>
 		If you get an error saying <code>No Rakefile found</code>, chances are you didn't navigate to your <code>ideator</code> folder before running the <code>rake</code> commands.
@@ -189,35 +200,29 @@ rake db:create:all
 	<p>
 		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering the <code>rake</code> commands.
 	</p>
-<!-- 
-	<p>	
-		If that doesn't work, make sure you are running the terminal from Tokaido. If you haven't done so, <strong>open Tokaido and click "Open Terminal"</strong>.
-	</p> -->
 
 </div>
-
+ -->
 <p>
-	Now let’s fire up our rails server by entering this command.
+	Now let’s fire up our rails server by entering this command in the terminal window.
 </p>
 
 <pre><code class="bash">
-rails server
+rails s -b $IP -p $PORT
 </code></pre>
 
 <p>
-	Give it a few seconds to load. Now go into your browser and go to the following address:
+	Give it a few seconds to load. You can start the application by clicking the Preview button:
 </p>
 
-<pre><code class="bash">
-http://localhost:3000/
-</code></pre>
+<%= image_tag 'ideator/c9_start_server.png', class: 'screenshot' %>
 
 <p>
 	You should see a nice welcome page from Ruby on Rails.
 </p>
 
 <%= image_tag 'ideator/welcome_page.png', class: 'img-responsive screenshot', style: 'margin-bottom: 30px' %>
-
+<!-- 
 <div class="well">
 	<h3>Don't see a nice welcome page?</h3>
 	<p>
@@ -228,7 +233,7 @@ http://localhost:3000/
 		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering <code>rails server</code>.
 	</p>
 
-</div>
+</div> -->
 
 <p>
   Awesome! You're one step closer to finishing your first rails app!

@@ -27,7 +27,7 @@ class Card < ActiveRecord::Base
 
   def prev_in_deck
     Card.where(deck: deck).where("id < ?", id).last
-  end                    
+  end
 
   def update_code_syntax
     new_question = code_syntax(question)
@@ -36,6 +36,7 @@ class Card < ActiveRecord::Base
     self.answer = new_answer
   end  
 
+  # need to extract logic below to another object
   def update_interval!(quality_response)
     @prev_ef = calculated_ef.nil? ? 0 : calculated_ef
     @prev_interval = calculated_interval.nil? ? 0 : calculated_interval
@@ -73,6 +74,7 @@ class Card < ActiveRecord::Base
 
   private
 
+  # need to extract logic below to another object
   def code_syntax(text)
     language = text.match(/\`(.*?)\`/) # returns `ruby`
     return text if language.nil?
@@ -82,6 +84,7 @@ class Card < ActiveRecord::Base
     return text
   end
   
+  # need to extract logic below to another object
   def calculate_interval
     if @prev_interval == 0
       @calculated_interval = 1
@@ -92,6 +95,7 @@ class Card < ActiveRecord::Base
     end
   end
 
+  # need to extract logic below to another object
   def calculate_easiness_factor
     @calculated_ef = @prev_ef+(0.1-(5-@quality_response)*(0.08+(5-@quality_response)*0.02))
     if @calculated_ef < 1.3
@@ -99,7 +103,7 @@ class Card < ActiveRecord::Base
     end
     @calculated_ef
   end
-
+  
   def calculate_date
     @repetition_date = Date.today + @calculated_interval
   end
