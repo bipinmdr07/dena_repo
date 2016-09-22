@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:github, :facebook]
   mount_uploader :avatar, AvatarUploader
 
   has_many :cards, dependent: :destroy
@@ -16,9 +16,13 @@ class User < ActiveRecord::Base
   has_many :notifications, foreign_key: :recipient_id
 
   validates :first_name, :last_name, presence: true
+  validates :package, presence: true, if: :is_student?
 
   before_save :update_name!
   after_create :send_slack
+  # after_create :set_admitted!
+
+  enum package: [:remote, :immersive]
 
   scope :admitted, -> { where(admitted: true) }
   scope :active_prework_students, -> { where("prework_end_date >= ?", DateTime.now) }
@@ -28,7 +32,56 @@ class User < ActiveRecord::Base
   scope :signed_up_this_month, -> { where(created_at: Time.now.beginning_of_month..Time.now.end_of_month) }
   scope :signed_up_last_month, -> { where( 'created_at > ? AND created_at < ?', 
                                     Date.today.last_month.beginning_of_month, 
-                                    Date.today.beginning_of_month )}  
+                                    Date.today.beginning_of_month )}    
+
+  # Set remote students to admitted and set graduation date by default
+  def set_admitted!
+    if remote?
+      update(admitted: true, start_date: Date.today.to_datetime, 
+            graduation_date: (Date.today + 1.month).to_datetime, remaining_mentor_sessions: 4, 
+            bootstrap_access: true, ruby_access: true)
+    elsif immersive?
+      update(admitted: true, start_date: Date.today.to_datetime, 
+            graduation_date: (Date.today + 2.month).to_datetime, bootstrap_access: true, ruby_access: true)
+    end
+  end
+
+  # Override devise method for Oauth
+  def self.new_with_session(params, session)    
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
+      end
+    else
+      super
+    end
+  end
+
+  def self.from_omniauth(auth)    
+    where(auth.slice(:provider, :uid).to_hash).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid      
+      user.email = auth.info.email      
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.name   # assuming the user model has a name
+      user.avatar = auth.info.image # assuming the user model has an image
+    end
+  end
+
+  # If sign in through Oauth, don't require password
+  def password_required?
+    super && provider.blank?
+  end
+
+  # Don't require update with password if Oauth
+  def update_with_password(params, *options)
+    if encrypted_password.blank?
+      update_attributes(params, *options)
+    else
+      super
+    end
+  end
 
   def send_prework_finished_message
     return if admitted
@@ -53,6 +106,10 @@ class User < ActiveRecord::Base
           icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
+  def has_started_prework?
+    !prework_start_time.nil?
+  end
+
   def has_access_to?(lesson)
     self[lesson + "_access"] ? true : false
   end
@@ -62,7 +119,7 @@ class User < ActiveRecord::Base
   end
 
   def start_prework!
-    update(prework_start_time: Date.today, prework_end_date: Date.today + 4.days)
+    update(prework_start_time: DateTime.now, prework_end_date: DateTime.now + 4.days)
   end
 
   def update_name!
@@ -71,6 +128,13 @@ class User < ActiveRecord::Base
 
   def last_lesson
     self.progressions.order('created_at DESC').first
+  end
+
+  private
+
+  def is_student?
+    return false if mentor || admin
+    true
   end
 
 end

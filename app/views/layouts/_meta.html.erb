@@ -1,7 +1,15 @@
-<title><%= content_for?(:title) ? content_for(:title) : "Coding Bootcamp in Nepal | TECHRISE" %></title>
-
-<meta name="description" content="Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way.">
-
+<%= display_meta_tags site: 'TECHRISE',
+                      reverse: true,
+                      title: 'Ruby on Rails Coding Bootcamp in Nepal',
+                      description: 'Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way.',
+                      keywords: 'Coding Bootcamp, Ruby on Rails, Ruby, Nepal, IT, Training',
+                      og: {
+                        type: "website",
+                        url: request.original_url,
+                        title: "Coding Bootcamp in Nepal | TECHRISE",
+                        image: "http://www.techrise.me#{asset_path 'background/bg-header-1.1.jpg'}",
+                        description: "Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way."
+                      } %>
 
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -11,34 +19,14 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'> 
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,900,900italic,300italic,300' rel='stylesheet' type='text/css'>  -->
 
 <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,200,300' rel='stylesheet' type='text/css'>
 
-<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
-
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet">
+<!-- <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300,100' rel='stylesheet' type='text/css'>
+ -->
+<link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js"></script>
 
 <meta name="google-site-verification" content="R3LOLk39gjNUL80jKUvXPImniRdCdohSRRHTG80B6gg" />
-
-<!-- facebook Open Graph -->
-<meta property="og:type" content="website"/>
-<% if content_for?(:og_title) %>
-  <meta property="og:title" content="<%= content_for(:og_title) %>"/>
-<% else %>
-  <meta property="og:title" content="Coding Bootcamp in Nepal | TECHRISE"/>
-<% end %>
-
-<% unless @post.nil? || !@post.featured_image %>
-  <meta property="og:image" content="<%= asset_path @post.featured_image %>"/>
-<% else %>
-  <meta property="og:image" content="http://www.techrise.me<%= asset_path 'background/bg-header-1.1.jpg' %>"/>
-<% end %>
-
-<% if content_for?(:og_description) %>
-
-<% else %>
-  <meta property="og:description" content="Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way."/>
-<% end %>

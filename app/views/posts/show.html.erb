@@ -1,5 +1,10 @@
-<%- title "#{@post.title} | TECHRISE - IT Coding Bootcamp in Nepal" %>
-<%- og_title "#{@post.title} | TECHRISE - IT Coding Bootcamp in Nepal" %>
+<% set_meta_tags title: '#{@post.title}',
+                 description: 'Become a Web Developer in 2 Months at TECHRISE with 1 on 1 mentor sessions, project based learning, and a friendly and supportive community to guide you through the way.',
+                 og: {
+                  url: request.original_url,
+                  title: "#{@post.title} | TECHRISE - Coding Bootcamp in Nepal",
+                  image: "#{asset_path @post.featured_image}"
+                 } %>
 
 <!-- ******BLOG****** -->         
 <div class="blog-entry-wrapper"> 
