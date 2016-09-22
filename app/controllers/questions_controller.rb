@@ -16,9 +16,8 @@ class QuestionsController < ApplicationController
 
     if @question.save      
       send_email_notification!      
-
       send_slack_notification!      
-      
+    
       redirect_to question_path(@question.id)
     else
       flash[:alert] = "Invalid attributes, please try again."

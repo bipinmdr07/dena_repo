@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
   enum package: [:remote, :immersive]
 
   scope :admitted, -> { where(admitted: true) }
+  scope :unadmitted, -> { where(admitted: false) }
   scope :active_prework_students, -> { where("prework_end_date >= ?", DateTime.now) }
   scope :signed_up_this_week, -> { where("created_at >= ?", DateTime.now.beginning_of_week) }
   scope :signed_up_last_week, -> { where("created_at <= ?", DateTime.now.last_week.end_of_week)
@@ -103,7 +104,7 @@ class User < ActiveRecord::Base
   end  
 
   def has_started_prework?
-    !prework_start_time.nil?
+    prework_start_time.present? && prework_end_date.present?
   end
 
   def has_access_to?(lesson)

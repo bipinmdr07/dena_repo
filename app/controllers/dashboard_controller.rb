@@ -30,8 +30,8 @@ class DashboardController < ApplicationController
     }
 
     if current_user.admin
-      @unresolved_questions = Question.where(resolved: false)
-      @unapproved_submissions = Submission.where(approved: false)
+      @unresolved_questions = Question.unresolved
+      @unapproved_submissions = Submission.unapproved
     end
   end
 
