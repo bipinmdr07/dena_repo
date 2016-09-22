@@ -1,0 +1,48 @@
+<h1 class="text-center" style="margin-bottom: 50px">Applicants Dashboard</h1>
+
+
+<%= will_paginate @applicants %>
+
+<% @applicants.each_with_index do |user, i| %>
+  <% if i % 3 == 0 %>
+    <div class="row">
+  <% end %>
+
+  <div class="col-xs-12 col-sm-4">
+    <div class="mentee-panel text-center">
+      <%= image_tag user.avatar, class: 'prof_pic_sm' %>
+      <h3><%= user.name %></h3>
+      <h5><%= user.email %></h5>
+      <h5><strong>Prework Start Date:</strong> <%= display_date user.try(:prework_start_time) %></h5>
+      <h5><strong>Prework End Date:</strong> <%= display_date user.try(:prework_end_date) %></h5>
+
+      <div class="social-links">
+        <%= link_to '<i class="fa fa-facebook-official" aria-hidden="true"></i>'.html_safe, "https://www.facebook.com/" + user.facebook_handle if user.facebook_handle.present? %>
+        <%= link_to '<i class="fa fa-twitter-square" aria-hidden="true"></i>'.html_safe, "https://twitter.com/" + user.twitter_handle if user.twitter_handle.present? %>
+        <%= link_to '<i class="fa fa-github-square" aria-hidden="true"></i>'.html_safe, "https://github.com/" + user.github_handle if user.github_handle.present? %>
+        <%= link_to '<i class="fa fa-globe" aria-hidden="true"></i>'.html_safe, user.personal_website if user.personal_website.present? %>
+      </div>
+
+      <p><%= simple_format user.application_reasons %></p>
+      
+
+      <% if user.last_lesson %>
+        <h5><strong>Currently On: </strong></h5>
+        <h5><label class="tag_label"><%= get_lesson_name(user.last_lesson.course_name, user.last_lesson.lesson_id) %></label></h5>
+        <h5 style="color: #d9534f"><%= user.last_lesson.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson") %> Lesson <%= user.last_lesson.lesson_id %></h5>
+      <% end %>
+
+      <div class="btn-group">
+
+        <%= link_to 'Admit Applicant', user_student_admissions_path(user_id: user.id), class: 'btn btn-sm btn-cta btn-cta-primary', data: { confirm: "Are you sure?"}, method: :post %>
+
+        <%= link_to 'Admin', edit_admin_user_path(user.id), class: 'btn btn-sm btn-cta btn-cta-secondary' %>
+      </div><!-- btn-group -->
+    </div><!-- mentee-panel -->
+  </div>
+
+  <% if i % 3 == 2 || i == @applicants.size - 1 %>
+    </div>
+  <% end %>
+
+<% end %>

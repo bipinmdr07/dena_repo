@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :intro_access, :html_css_access, :ruby_fundamentals_access, :ideator_access,
+  permit_params :email, :intro_access, :html_css_access, :ruby_access, :ideator_access,
   :ruby_core_access, :instapost_access, :github_access, :javascript_access, :admin, :command_line_access,
   :rspec_blog_access, :mvc_access, :mentor, :start_date, :graduation_date, :remaining_mentor_sessions, :mentor_id,
   :facebook_handle, :twitter_handle, :github_handle, :personal_website, :prework_start_time, :prework_end_date, :admitted 
@@ -23,13 +23,13 @@ ActiveAdmin.register User do
     column :bootstrap_access
     column :ruby_access
     column :ideator_access
+    column :mvc_access
     column :ruby_core_access
     column :instapost_access
     column :github_access
     column :javascript_access
     column :command_line_access
-    column :rspec_blog_access
-    column :mvc_access
+    column :rspec_blog_access    
     column :remaining_mentor_sessions
     column :mentor_id
     column :facebook_handle
@@ -54,13 +54,13 @@ ActiveAdmin.register User do
       f.input :bootstrap_access
       f.input :ruby_access
       f.input :ideator_access
+      f.input :mvc_access
       f.input :ruby_core_access
       f.input :instapost_access
       f.input :github_access
       f.input :javascript_access
       f.input :command_line_access
-      f.input :rspec_blog_access
-      f.input :mvc_access
+      f.input :rspec_blog_access      
       f.input :start_date, :as => :datepicker
       f.input :graduation_date, :as => :datepicker
       f.input :remaining_mentor_sessions
