@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable, omniauth_providers: [:github, :facebook]
   mount_uploader :avatar, AvatarUploader
 
+  belongs_to :mentor_user, class_name: 'User', foreign_key: :mentor_id
+  has_many :mentees, class_name: 'User', foreign_key: :mentor_id
+
   has_many :cards, dependent: :destroy
   has_many :progressions, dependent: :destroy
   has_many :submissions, dependent: :destroy
@@ -12,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :questions, dependent: :destroy
   has_many :replies, dependent: :destroy
   has_many :mentor_sessions
-  has_many :student_sessions
+  has_many :student_sessions  
   has_many :notifications, foreign_key: :recipient_id
 
   validates :first_name, :last_name, presence: true
@@ -97,14 +100,7 @@ class User < ActiveRecord::Base
   def send_prework_reminders
     return if admitted || prework_end_date.nil?
     UserMailer.prework_reminder(self, (self.prework_end_date - DateTime.now).to_i / 86400).deliver_now
-  end
-
-  def send_slack
-    Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up for " + package + "!",
-          username: 'TECHRISE Bot',
-          channel: "#user_signup_alerts",
-          icon_emoji: ":smile_cat:") if Rails.env.production?
-  end
+  end  
 
   def has_started_prework?
     !prework_start_time.nil?
@@ -120,14 +116,23 @@ class User < ActiveRecord::Base
 
   def start_prework!
     update(prework_start_time: DateTime.now, prework_end_date: DateTime.now + 4.days)
+  end  
+
+  def last_lesson
+    self.progressions.order('created_at DESC').first
+  end
+
+  protected
+
+  def send_slack
+    Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up for " + package + "!",
+          username: 'TECHRISE Bot',
+          channel: "#user_signup_alerts",
+          icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
   def update_name!
     self.name = self.first_name + " " + self.last_name
-  end
-
-  def last_lesson
-    self.progressions.order('created_at DESC').first
   end
 
   private

@@ -220,6 +220,7 @@ FactoryGirl.define do
     last_name "Taro"
     mentor true
     confirmed_at Time.zone.now
+    package :immersive
   end
 
   factory :progression do

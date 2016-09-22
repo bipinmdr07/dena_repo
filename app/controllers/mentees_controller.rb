@@ -3,7 +3,7 @@ class MenteesController < ApplicationController
   before_action :authenticate_mentor!
 
   def index
-    @mentees = User.where(mentor_id: current_user.id).order("graduation_date DESC")
+    @mentees = current_user.mentees.order("graduation_date DESC")
   end
 
   private
