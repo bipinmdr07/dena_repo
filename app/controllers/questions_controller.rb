@@ -12,24 +12,12 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
+    set_mentor_post        
 
-    @question.mentor_post = true if current_user.mentor
+    if @question.save      
+      send_email_notification!      
 
-    if @question.save
-      user = User.find(@question.user_id)
-      UserMailer.new_question(@question).deliver_now
-
-      if @question.mentor_post
-        Slack.chat_postMessage(text: 'New mentor post: <' + question_url(@question) + '|' + @question.title + '> by ' + user.name, 
-          username: 'TECHRISE Bot', 
-          channel: "#forum_questions", 
-          icon_emoji: ":smile_cat:") if Rails.env.production?
-      else
-        Slack.chat_postMessage(text: 'New question: <' + question_url(@question) + '|' + @question.title + '> by ' + user.name, 
-          username: 'TECHRISE Bot', 
-          channel: "#forum_questions", 
-          icon_emoji: ":smile_cat:") if Rails.env.production?
-      end
+      send_slack_notification!      
       
       redirect_to question_path(@question.id)
     else
@@ -40,7 +28,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.includes(:replies).find(params[:id])
-    @user = User.find(@question.user_id)
+    @user = @question.user
   end
 
   def edit
@@ -57,23 +45,40 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def destroy
-    unless @question.mentor_post
-      course_name = @question.course_name.underscore + "s"
-      lesson_name = Tags::LESSONS[course_name].keys[@question.lesson_id - 1][1]
-      back_to_lesson_url = "/" + course_name + "/" + @question.lesson_id.to_s
-    end
-
+  def destroy  
     @question.destroy
-    return redirect_to community_path if @question.mentor_post
-    redirect_to back_to_lesson_url 
+
+    if @question.mentor_post
+      redirect_to community_path
+    else
+      back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
+      redirect_to back_to_lesson_url 
+    end    
+
   end
 
   private
 
+  def set_mentor_post
+    @question.mentor_post = true if current_user.mentor
+  end
+
+  def send_email_notification!
+    UserMailer.new_question(@question).deliver_now
+  end
+
+  def send_slack_notification!
+    post_type = @question.mentor_post ? "mentor post" : "question"
+
+    Slack.chat_postMessage(text: 'New ' + post_type + ': <' + question_url(@question) + '|' + @question.title + '> by ' + @question.user_name, 
+        username: 'TECHRISE Bot', 
+        channel: "#forum_questions", 
+        icon_emoji: ":smile_cat:") if Rails.env.production?
+  end
+
   def check_permissions
     @question = Question.friendly.find(params[:id])
-    return if current_user.admin || (@question.user_id == current_user.id)
+    return if current_user.admin || (@question.user == current_user)
     flash[:alert] = "Unauthorized!"
     redirect_to question_path(@question) 
   end
