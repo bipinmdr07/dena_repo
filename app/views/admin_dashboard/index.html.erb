@@ -4,7 +4,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#statistics">STATS</a></li>
     <li><a data-toggle="tab" href="#logs">LOGS</a></li>
-    <li><a data-toggle="tab" href="#applications">APPLICATIONS</a></li>
+    <li><a data-toggle="tab" href="/applicants">APPLICATIONS</a></li>
   </ul>
 
   <div class="tab-content">
@@ -105,30 +105,6 @@
     </div><!-- private_logs -->
 
 
-    <div id="applications" class="tab-pane fade">
-      <%= will_paginate @applicants %>
-
-      <% @applicants.each do |user| %>
-        <div class="mentor_blob">
-          <div class="row">
-            <div class="col-xs-12 col-sm-2">
-              <%= image_tag user.avatar, class: 'mentor_prof' %>
-              <h5 class="text-center"><%= user.name %></h5>
-              <h5 class="text-center"><%= user.package %></h5>
-              <%= link_to 'Admit Applicant', user_student_admissions_path(user_id: user.id), class: 'btn btn-cta-primary', data: { confirm: "Are you sure?"}, method: :post %>
-            </div>
-            <div class="col-xs-12 col-sm-10">
-              <div class="public_details">
-                <p><%= simple_format user.application_reasons %></p>
-                <div class="triangle"></div>
-              </div>
-            </div>
-          </div><!-- row-->
-        </div><!-- mentor_blob -->
-      <% end %>
-
-      <%= will_paginate @applicants %>
-    </div>
   </div>
 
 
