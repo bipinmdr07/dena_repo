@@ -12,7 +12,7 @@ Rails.application.configure do
   }
   ActionMailer::Base.delivery_method = :smtp
 
-    config.action_mailer.default_url_options = { :host => 'www.techrise.me' }
+  config.action_mailer.default_url_options = { :host => 'www.techrise.me' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
