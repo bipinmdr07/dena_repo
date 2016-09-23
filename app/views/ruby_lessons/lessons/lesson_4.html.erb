@@ -12,26 +12,43 @@
 <div class="well">
   <h3>Getting Started</h3>
 
-  <p>First, download the starter kit for this problem:</p>
+  <p>First, go to C9 and create a new workspace. Fill out the Workspace name and description.</p>
 
   <p>
-    <%= link_to 'Download Starter Kit', '/ruby-fundamentals/hello.zip', class: 'btn btn-danger' %>
+    In the "Clone from Github or Mercurial URL" section, let's add the following <code>https://github.com/TECHRISE/ruby_fundamentals_challenges.git</code>.
   </p>
 
-  <p>Next, unzip and navigate to the folder.</p>
+  <%= image_tag 'ruby_lessons/temperature/coding_challenge_workspace.png', class: 'img-responsive screenshot' %>
 
   <p>
-    For most people, you can do this by <code>cd</code>ing into the folder like this:
+    Select Ruby as the template: 
   </p>
 
-  <pre><code class="bash">
-cd ~/Downloads/hello</code></pre>
+  <%= image_tag 'ruby_lessons/temperature/coding_challenge_workspace_2.png', class: 'img-responsive screenshot' %>
 
-  <p>Once you are in the folder, run the bundle install command. It will install all the required gems.</p>
+  <p>
+    Once you have created your workspace, let's navigate to the <code>temperature</code> directory. In the workspace terminal, type in the following command and press enter:
+  </p>
 
-  <pre><code class="bash">
-bundle install</code>
-  </pre>
+<pre><code class="bash">
+cd hello
+</code></pre>
+
+  <p>
+    Next, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+bundle install
+</code></pre>
+
+  <p>
+    This command installs a bunch of packages and dependencies.
+  </p>
+
+  <p>
+    Next, let's run the following command:
+  </p>
 
   <pre><code class="bash">
 rspec</code></pre>
@@ -40,7 +57,7 @@ rspec</code></pre>
     This will run some tests to see if the code is working or not. Since you haven't written any code yet, you should see the failing tests.
   </p>
 
-  <%= image_tag 'ruby_lessons/hello_failing.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ruby_lessons/hello/failing_tests.png', class: 'img-responsive screenshot' %>
 
   <p>Open the project in the sublime and open the <strong>hello.rb</strong> file.</p>
 
@@ -53,7 +70,7 @@ Failure/Error: expect(hello).to eq("Hello!")
 
 NameError:
  undefined local variable or method `hello' for #<RSpec::ExampleGroups::StringCompressor::TheHelloFunction:0x00562eeffa3718>
-# ./spec/hello_spec.rb:7:in `block (3 levels) in <top (required)>'
+# ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'
   </code>
 </pre>
 
@@ -76,7 +93,7 @@ end</code></pre>
             got: nil
 
        (compared using ==)
-     # ./spec/hello_spec.rb:7:in `block (3 levels) in <top (required)>'
+     # ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'
 </code></pre>
 
   <p>You should now see a different error. This means that while it found the file, and it found the function, it's not returning anything! ("nil" is the Ruby way of saying "not anything".)</p>
@@ -104,7 +121,7 @@ end</code></pre>
         got: "hpllo?"
 
    (compared using ==)
- # ./spec/hello_spec.rb:7:in `block (3 levels) in <top (required)>'</code></pre>
+ # ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'</code></pre>
 
   <p>
     It is expecting "Hello!" but instead of that, it is getting "hpllo?". So let's fix that and run the test again.
@@ -117,10 +134,10 @@ end</code>
 </pre>
 
   <h3>Watch it pass.</h3>
-  <%= image_tag 'ruby_lessons/first_passing_test.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ruby_lessons/hello/first_passing_test.png', class: 'img-responsive screenshot' %>
 
   <p>
-    The green dot represents that one out of three tests is passing.
+    The green dot on the top left represents that one out of three tests is passing.
   </p>
 
   <h3>Moving on to second test.</h3>
@@ -138,7 +155,7 @@ end</code>
      ArgumentError:
        wrong number of arguments (1 for 0)
      # ./lib/hello.rb:5:in `greet'
-     # ./spec/hello_spec.rb:13:in `block (3 levels) in <top (required)>'</code></pre>
+     # ./spec/hello_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</code></pre>
 
   <p>
     You now encounter the <strong>ArgumentError:</strong>. Meaning that our test code is passing one argument to our code but code is not expecting any arguments. Change the code and run the test.
@@ -161,7 +178,7 @@ end</code></pre>
             got: nil
 
        (compared using ==)
-     # ./spec/hello_spec.rb:13:in `block (3 levels) in <top (required)>'</code>
+     # ./spec/hello_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</code>
 </pre>
 
   <h3>Let's make it pass.</h3>
@@ -174,10 +191,10 @@ end</code>
 </pre>
 
   <p>
-    This <code>#{name}</code> , is known as <strong>string interpolation</strong>. <strong>name</strong> is replaced by the string passed onto the function.
+    This <code>#{name}</code> , is known as <strong>string interpolation</strong>. <code>name</code> is replaced by the string passed onto the function.
   </p>
 
   <p>Save the code and run the test.</p>
 
-  <%= image_tag 'ruby_lessons/passing_test.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ruby_lessons/hello/passing_tests.png', class: 'img-responsive screenshot' %>
 </div>

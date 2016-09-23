@@ -12,15 +12,29 @@
   <h3>Getting Started</h3>
 
   <p>
-    First, download the starter kit for this problem:
+    In your C9 workspace you have created in the previous lesson, let's navigate to the <code>temperature</code> directory. In the workspace terminal, type in the following command and press enter:
   </p>
 
-  <p>
-    <%= link_to 'Download Starter Kit', '/ruby-fundamentals/temperature.zip', class: 'btn btn-danger' %>
-  </p>
+<pre><code class="bash">
+cd temperature
+</code></pre>
 
   <p>
-    Next, unzip and navigate to the folder in your terminal and then run the <code>rspec</code> command.
+    Next, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+bundle
+</code></pre>
+
+  <p>
+    This should install a bunch of packages and dependencies:
+  </p>
+
+<%= image_tag 'ruby_lessons/temperature/coding_challenge_bundle.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Next, let's run the following command:
   </p>
 
 <pre><code class="ruby">
@@ -30,13 +44,13 @@
     Since you haven't written any code yet, you will see that all the tests fail.The output should look something like this:
   </p>
 
-  <%= image_tag 'ruby_lessons/temperature/temp_failing_tests.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ruby_lessons/temperature/temperature_failing.png', class: 'img-responsive screenshot' %>
 
   <p>
     Try writing codes on your own. Make use of Google if you need. Once you finish writing the code, run <code>rspec</code> again and you should see passing tests.
   </p>
 
-  <%= image_tag 'ruby_lessons/temperature/temp_passing_tests.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ruby_lessons/temperature/temperature_passing.png', class: 'img-responsive screenshot' %>
 </div>
 
 <% @submission_form = true %>
