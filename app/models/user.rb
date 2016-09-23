@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
 
   before_save :update_name!
   after_create :send_slack
-  # after_create :set_admitted!
 
   enum package: [:remote, :immersive]
 

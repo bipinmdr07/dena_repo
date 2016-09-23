@@ -1,16 +1,14 @@
 class SyntaxBuilder
-  attr_reader :card
-
   def initialize(card)
     @card = card
   end
 
   def question
-    build_syntax(card.question)
+    build_syntax(@card.question)
   end
 
   def answer
-    build_syntax(card.answer)
+    build_syntax(@card.answer)
   end
 
   private

@@ -1,2 +1,0 @@
-module JavascriptLessonsHelper
-end
