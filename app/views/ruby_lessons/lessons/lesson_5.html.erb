@@ -1,0 +1,184 @@
+<h1><%= title_for(RubyLesson, 1, 5) %></h1>
+
+<p>
+  Let's explore math with Ruby!
+</p>
+
+<p>
+  In the terminal window, let's type in <code>irb</code>:
+</p>
+
+<pre><code class="bash">
+irb
+</code></pre>
+
+<%= image_tag 'ruby_lessons/irb.png', class: 'screenshot' %>
+
+<p>
+  <code>irb</code> stands for <strong>I</strong>nteractive <strong>R</strong>uby <strong>C</strong>onsole. In this console, we can write and execute Ruby code. In otherwords, instead of creating a new Ruby file, saving it, and running it with the <code>ruby</code> command, we can simply run the Ruby code inside this console.
+</p>  
+
+<p>
+  In our <code>irb</code>, let's do some math. Type in the following command and press enter:
+</p>    
+
+<pre><code class="irb">
+3 * 4
+</code></pre>
+
+<p>
+  You will see that it outputs <code>12</code>.
+</p>
+
+<p>
+  You can do any type of math. <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> all work. Try them out in the Ruby console.
+</p>
+
+<h3>Integers</h3>
+
+<p>
+  In Ruby, numbers such as <code>1</code>, <code>11</code>, and <code>111</code> are called <strong>integers</strong>. <strong>Integers are whole numbers without any decimal points.</strong>
+</p>
+
+<p>
+  Integers in Ruby can be tricky, especially when dealing with division. For example, take a look at this example:
+</p>
+
+<pre><code class="irb">
+100/3
+=> 33
+</code></pre>
+
+<p>
+  The answer should be <code>33.333</code>, but instead, it gives us <code>33</code>. In Ruby, <strong>it is important to remember that dividing two integers will result in an integer result.</strong>
+</p>
+
+<p>
+  To get the proper answer, we need to use <strong>floats</strong>.
+</p>
+
+<h3>Floats</h3>
+
+<p>
+  A <code>float</code> is short for <strong>floating decimal point</strong>. <strong>In short, floats are numbers with decimal points.</strong> You can read more about the theory <%= link_to 'here', 'https://en.wikipedia.org/wiki/Floating_point', target: '_blank' %>, but you don't have to worry about it right now.
+</p>
+
+<p>
+  In our ruby console, let's type in the following and press enter:
+</p>  
+
+<pre><code class="irb">
+100.0/3.0
+</code></pre>
+
+<p>
+  Notice how this time, we got this answer:
+</p>
+
+<pre><code class="irb">
+=> 33.333333333333336
+</code></pre>
+
+<p>
+  We can also divide an integer with a float, and we get a float answer:
+</p>
+
+<pre><code class="irb">
+100/3.0
+=> 33.333333333333336
+</code></pre>
+
+<div class="well">
+  <h3>Data Types</h3>
+
+  <p>
+    If you are just beginning in your programming career, you might may write code like this:
+  </p>  
+
+<pre><code class="irb">
+  "100" * 3
+</code></pre>
+
+  <p>
+    This won't work since <code>"100"</code> is a string. The result of this would be the following:
+  </p>
+
+<pre><code class="irb">
+  => "100100100"
+</code></pre>
+
+  <p>
+    Notice how this resulted in three <code>"100"</code>s and which is not what we wanted.
+  </p>
+
+  <p>
+    This brings us to a topic of <code>types</code>. We saw that there were three different ways to represent numbers.
+  </p>  
+
+  <ul>
+    <li><code>"10"</code> - String</li>
+    <li><code>10</code> - Fixnum (Integer)</li>
+    <li><code>10.0</code> - Float</li>
+  </ul>
+
+  <p>
+    All of the different data types have different properties. We can ask for the <code>class</code> to see what the data's type is:
+  </p>
+
+<pre><code class="irb">
+"10".class
+=> String
+10.class
+=> Fixnum
+10.0.class
+=> Float
+</code></pre>
+</div>
+
+<h3>Remainders</h3>
+
+<p>
+  Calculating the remainder of two numbers that are divided by each other is an important concept in computer programming.
+  To calculate this, we can use the <code>%</code> (modulo) operator. For example, the remainder of <code>3</code> divided by <code>2</code> is <code>1</code>.
+</p>
+
+<pre><code class="irb">
+3 % 2
+=> 1
+</code></pre>
+
+<p>
+  Modulos are used in computer programming, especially when seeing if a number is divisible by another number:
+</p>
+
+<pre><code class="irb">
+15 % 5
+=> 0
+
+9 % 3
+=> 0
+
+10 % 7
+=> 3
+</code></pre>
+
+<p>
+  As you can see, if a number is divisble by another number, then the remainder is <code>0</code>. This pattern is very useful and will come up when you are trying to solve various problems.
+</p>
+
+
+<h2>Overview</h2>
+
+<ul>
+  <li>Numbers can be represented in different <strong>data types</strong></li>
+  <ul>
+    <li><code>"10"</code> - <strong>String</strong></li>
+    <li><code>10</code> - <strong>Fixnum</strong> (Integer)</li>
+    <li><code>10.0</code> - <strong>Float</strong></li>
+  </ul>
+  <li>You can calculate the remainder of two numbers that are divided by each other with the modulo <code>%</code> operator</li>
+</ul>
+
+
+
+

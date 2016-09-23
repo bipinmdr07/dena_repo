@@ -1,0 +1,104 @@
+<h1><%= title_for(RubyLesson, 1, 7) %></h1>
+
+<p>
+  <strong>Variables</strong> are where you can store data in a program. In our interactive ruby console, let's type in the following and press enter:
+</p>
+
+<pre><code class="irb">
+name = "Bob"
+</code></pre>
+
+<p>
+  Here, we have inserted the string "Bob" into the variable called <code>name</code>. Let's go into <code>irb</code> and type in the following and press enter:
+</p>
+
+<pre><code class="irb">
+name
+=> "Bob"
+</code></pre>
+
+<p>
+  As we can see, typing <code>name</code> outputs <code>"Bob"</code>.
+</p>  
+
+<p>
+  In Ruby, we can store any kind of data type:
+</p>
+
+<pre><code class="irb">
+age = 35
+diameter = 12.6
+</code></pre>
+
+<p>
+  We can also store expressions inside variables. In your <code>irb</code>, type in the following:
+</p>
+
+<pre><code class="irb"> 
+number_of_people = 2
+pieces_of_cake = 10
+</code></pre>
+
+<p>
+  Let's say we are having a party and we need to figure out how many pieces of cake in total we need. We can calculate this using <code>number_of_people</code> and multiplying that by <code>pieces_of_cake</code> and store the information into a variable:
+</p>
+
+<pre><code class="irb"> 
+total_cakes_necessary = number_of_people * cakes
+=> 20
+</code></pre>
+
+<p>
+  You can also override variables. In the <code>irb</code>, let's type in the following:
+</p>
+
+<pre><code class="irb">
+name = "Takehiro Mouri"
+name
+=> "Takehiro Mouri"
+</code></pre>
+
+<p>
+  We can override the value inside <code>name</code> by assigning it another value:
+</p>
+
+<pre><code class="irb">
+name = "Natsuko Robyn Shinozaki"
+name
+=> "Natsuko Robyn Shinozaki"
+</code></pre>
+
+<h3>String Interpolation</h3>
+
+<p>
+  We can insert the value of a variable into a string. This is called <strong>string interpolation</strong>.
+</p>  
+
+<p>
+  In the <code>irb</code>, let's type in the following:
+</p>
+
+<pre><code class="irb">
+name = "Bob"
+"Hello #{name}!"
+=> "Hello Bob!"
+</code></pre>
+
+<p>
+  As you can see, by putting the variable name inside of <code>#{ }</code>, we can insert the value of the variable inside the string.
+</p>
+
+<p class="alert alert-warning">
+  Strings can be declared with either a single quote <code>''</code> or double quote <code>""</code>, but <code>#{}</code> only works if the string is declared with <strong>double quotes (<code>""</code>)</strong>.
+</p>
+
+
+
+
+
+
+
+
+
+
+

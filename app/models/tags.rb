@@ -51,9 +51,17 @@ class Tags < ActiveRecord::Base
       [9, "CHALLENGE: Host Your Website"] => %w()
     },
     "ruby_lessons" => {
-      [1, "Introduction to Ruby"] => %w(ruby),
-      [2, "Ruby Fundamentals"] => %w(ruby),
-      [3, "Foobar Problem"] => %w(foobar)
+      [1, "Introduction to Ruby"] => %w(),
+      [2, "Setting up your environment"] => %w(),
+      [3, "Super Basic Command Line Crash Course"] => %w(),
+      [4, "Your First Ruby Program"] => %w(),
+      [5, "Math is easy"] => %w(),
+      [6, "Objects and Methods"] => %w(),
+      [7, "Variables"] => %w(),
+      [8, "Arrays"] => %w(),
+      [9, "Hashes"] => %w(),
+      [10, "Loops"] => %w(),
+      [11, "Conditionals and Logical Operators"] => %w()
     },
     "command_line_lessons" => {
       [1, "4 Commands You Need to Know"] => %w(command line),
