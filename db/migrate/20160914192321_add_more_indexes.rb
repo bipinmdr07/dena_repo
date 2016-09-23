@@ -8,10 +8,10 @@ class AddMoreIndexes < ActiveRecord::Migration
     add_index "questions", "lesson_id"
     add_index :submissions, :lesson_id
     add_index :users, :mentor_id    
-    drop_table :student_questions
-    drop_table :submission_comments
-    drop_table :forums
-    drop_table :comments
+    # drop_table :student_questions
+    # drop_table :submission_comments
+    # drop_table :forums
+    # drop_table :comments
     add_index :mentor_sessions, :mentor_id
     add_index :mentor_sessions, :user_id
   end

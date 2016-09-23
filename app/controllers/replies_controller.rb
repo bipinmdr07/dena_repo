@@ -2,22 +2,15 @@ class RepliesController < ApplicationController
 	before_action :authenticate_user!
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
-	def create
-		reply = current_user.replies.create(reply_params)
+	def create    
+		@reply = current_user.replies.create(reply_params)
 
-		if reply.valid?			
-			# Create notifications
-			(current_question.users.uniq + [current_question.user] - [current_user]).each do |user|
-			  Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_question)
-			end
+		if @reply.valid?			
+      create_notifications!
+			
+      send_email_notifications!			
 
-			UserMailer.new_reply(current_question, current_question.user_email).deliver_now
-			UserMailer.new_reply(current_question, "techrisecoding@gmail.com").deliver_now
-
-			Slack.chat_postMessage(text: 'New reply by ' + reply.user_name + '. View it <' + question_url(current_question.id) + '|here >.', 
-				username: 'TECHRISE Bot', 
-				channel: "#forum_questions", 
-				icon_emoji: ":smile_cat:") if Rails.env.production?
+			send_slack_notifications!
 		else
 			flash[:alert] = "Invalid attributes, please try again."
 		end
@@ -43,6 +36,23 @@ class RepliesController < ApplicationController
   end
 
 	private
+
+  def send_slack_notifications!
+    Slack.chat_postMessage(text: 'New reply by ' + @reply.user_name + '. View it <' + question_url(current_question.id) + '|here >.', 
+        username: 'TECHRISE Bot', 
+        channel: "#forum_questions", 
+        icon_emoji: ":smile_cat:") if Rails.env.production?
+  end
+
+  def send_email_notifications!
+    UserMailer.new_reply(current_question, current_question.user_email).deliver_now
+  end
+
+  def create_notifications!
+    (current_question.users.uniq + [current_question.user] - [current_user]).each do |user|
+      Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_question)
+    end
+  end
 
   def current_question
     @current_question ||= Question.find(params[:question_id])

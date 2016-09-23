@@ -9,7 +9,9 @@ RSpec.describe MentorSession, type: :model do
     user = FactoryGirl.create(:user, remaining_mentor_sessions: 8)
     mentor = FactoryGirl.create(:mentor)
     FactoryGirl.create(:mentor_session, mentor_id: mentor.id, user_id: user.id)
+
     user.reload
+    
     expect(user.remaining_mentor_sessions).to eq(7)
   end
 end

@@ -7,17 +7,9 @@ class SubmissionRepliesController < ApplicationController
 		reply = current_user.submission_replies.create(reply_params)
 
 		if reply.valid?
-      # Create notifications
-      (current_submission.users.uniq + [current_submission.user] - [current_user]).each do |user|
-        Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_submission)
-      end
-
-			UserMailer.new_submission_reply(current_submission, current_submission.user_email).deliver_now
-			UserMailer.new_submission_reply(current_submission, "techrisecoding@gmail.com").deliver_now
-			Slack.chat_postMessage(text: 'New reply by ' + reply.user_name + '! View it <' + submission_url(current_submission) + '|here>.', 
-				username: 'TECHRISE Bot', 
-				channel: "#forum_questions", 
-				icon_emoji: ":smile_cat:") if Rails.env.production?
+      create_notifications!      
+      send_email_notification!
+			send_slack_notification!			
 		else
 			flash[:alert] = "Invalid attributes, please try again."
 		end
@@ -43,6 +35,23 @@ class SubmissionRepliesController < ApplicationController
   end
 
 	private
+
+  def send_slack_notification!
+    Slack.chat_postMessage(text: 'New reply by ' + reply.user_name + '! View it <' + submission_url(current_submission) + '|here>.', 
+        username: 'TECHRISE Bot', 
+        channel: "#forum_questions", 
+        icon_emoji: ":smile_cat:") if Rails.env.production?
+  end 
+
+  def send_email_notification!
+    UserMailer.new_submission_reply(current_submission, current_submission.user_email).deliver_now      
+  end
+
+  def create_notifications!
+    (current_submission.users.uniq + [current_submission.user] - [current_user]).each do |user|
+      Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_submission)
+    end
+  end
 
   def current_submission
     @current_submission ||= Submission.find(params[:submission_id])

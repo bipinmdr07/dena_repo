@@ -22,14 +22,14 @@ RSpec.describe SubmissionRepliesController, type: :controller do
         expect(response).to redirect_to submission_path(@submission.id)
       end
 
-      it "sends 2 emails" do
+      it "sends an email" do
         setup_submission_by_current_user
 
         sign_in @user
         
         expect {
           post :create, submission_id: @submission.id, submission_reply: FactoryGirl.attributes_for(:submission_reply)
-        }.to change { ActionMailer::Base.deliveries.count }.by(2)
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it "creates notification for involved users" do

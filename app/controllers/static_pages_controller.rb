@@ -2,6 +2,8 @@ include ActionView::Helpers::TextHelper
 
 class StaticPagesController < ApplicationController
   before_action :authenticate_user!, only: :guidelines
+
+  layout :landing_page, except: [:index, :guidelines, :preregistration]
   
   def index
   	if current_user.present?
@@ -11,39 +13,23 @@ class StaticPagesController < ApplicationController
     end
   end
 
-  def guidelines
-  end
-
-  def curriculum
-    render layout: "landing_page"
-  end
-
-  def about
-    render layout: "landing_page"
-  end
-
-  def pricing
-    render layout: "landing_page"
-  end
-
-  def contact_us
-    render layout: "landing_page"
-  end
-
-  def congratulations
-    render layout: "landing_page"
-  end
-
-  def learn
-    render layout: "landing_page"
-  end
-
   def preregistration
     render layout: 'preregistration'
   end
 
-  def support
-    render layout: "landing_page"
+  def remote
+    render layout: 'details'
+  end
+
+  def immersive
+    render layout: 'details'
+  end
+
+
+  private
+
+  def landing_page
+    "landing_page"
   end
 
 end

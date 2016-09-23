@@ -152,6 +152,7 @@ FactoryGirl.define do
     start_date DateTime.now
     graduation_date DateTime.now + 2.months
     admitted true
+    package :immersive
   end
 
   factory :admitted_student, class: 'User' do
@@ -169,11 +170,12 @@ FactoryGirl.define do
     start_date DateTime.now
     graduation_date DateTime.now + 2.months
     admitted true
+    package :immersive
   end
 
   factory :prework_student, class: 'User' do
     sequence :email do |n|
-      "random#{n}@email.com"
+      "prework#{n}@email.com"
     end
     password "codingiscool"
     password_confirmation "codingiscool"
@@ -186,11 +188,12 @@ FactoryGirl.define do
     start_date nil
     graduation_date nil
     admitted false
+    package :immersive
   end
 
   factory :pre_prework_student, class: 'User' do
     sequence :email do |n|
-      "random#{n}@email.com"
+      "preprework#{n}@email.com"
     end
     password "codingiscool"
     password_confirmation "codingiscool"
@@ -203,6 +206,7 @@ FactoryGirl.define do
     start_date nil
     graduation_date nil
     admitted false
+    package :immersive
   end
 
   factory :mentor, class: "User" do
@@ -216,6 +220,7 @@ FactoryGirl.define do
     last_name "Taro"
     mentor true
     confirmed_at Time.zone.now
+    package :immersive
   end
 
   factory :progression do
