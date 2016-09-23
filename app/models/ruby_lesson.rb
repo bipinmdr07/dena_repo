@@ -6,11 +6,13 @@ class RubyLesson < Lesson
   PERIOD = "1"
 
   LESSONS = [
-    ["Learning the Basics of Ruby", 
+    ["Learning the Basics of Ruby",
       [
         [1, "Introduction to Ruby"],
         [2, "Ruby Fundamentals"],
-        [3, "Foobar Problem"]
+        [3, "Foobar Problem"],
+        [4, "Test-First Ruby: Hello"],
+        [5, "Challenge: Temperature Conversion"]
       ]
     ]
   ]
