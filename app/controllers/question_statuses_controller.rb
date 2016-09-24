@@ -22,7 +22,7 @@ class QuestionStatusesController < ApplicationController
   private
 
   def check_if_admin_or_questioner
-    return if current_user.admin || @question.user_id == current_user
+    return if current_user.admin || @question.user == current_user
     flash[:alert] = "Unauthorized."
     redirect_to root_path
   end

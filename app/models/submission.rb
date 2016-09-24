@@ -11,5 +11,6 @@ class Submission < ActiveRecord::Base
   delegate :avatar, to: :user, prefix: true
 
   scope :approved, -> { where(approved: true) }
+  scope :unapproved, -> { where(approved: false) }
 
 end

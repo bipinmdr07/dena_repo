@@ -1,0 +1,200 @@
+<h1><%= title_for(RubyLesson, 1, 4) %></h1>
+
+<p>
+  Now that you have some experience with Ruby codes, let's get familiar with some testing the ruby codes.
+</p>
+
+<h3>Making First Test Pass</h3>
+  <p>
+    Given a bunch of tests, you need to write code such that every code passes the test. You should begin writing passing test for one failure at a time. This method is known as <strong>Test Driven Development</strong>.
+  </p>
+
+<div class="well">
+  <h3>Getting Started</h3>
+
+  <p>First, go to C9 and create a new workspace. Fill out the Workspace name and description.</p>
+
+  <p>
+    In the "Clone from Github or Mercurial URL" section, let's add the following <code>https://github.com/TECHRISE/ruby_fundamentals_challenges.git</code>.
+  </p>
+
+  <%= image_tag 'ruby_lessons/temperature/coding_challenge_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Select Ruby as the template: 
+  </p>
+
+  <%= image_tag 'ruby_lessons/temperature/coding_challenge_workspace_2.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Once you have created your workspace, let's navigate to the <code>temperature</code> directory. In the workspace terminal, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+cd hello
+</code></pre>
+
+  <p>
+    Next, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+bundle install
+</code></pre>
+
+  <p>
+    This command installs a bunch of packages and dependencies.
+  </p>
+
+  <p>
+    Next, let's run the following command:
+  </p>
+
+  <pre><code class="bash">
+rspec</code></pre>
+
+  <p>
+    This will run some tests to see if the code is working or not. Since you haven't written any code yet, you should see the failing tests.
+  </p>
+
+  <%= image_tag 'ruby_lessons/hello/failing_tests.png', class: 'img-responsive screenshot' %>
+
+  <p>Open the project in the sublime and open the <strong>hello.rb</strong> file.</p>
+
+  <p>The first failure you'll see is the <strong>NameError:</strong></p>
+
+<pre>
+  <code class="bash">
+1) #hello the hello function says hello
+Failure/Error: expect(hello).to eq("Hello!")
+
+NameError:
+ undefined local variable or method `hello' for #<RSpec::ExampleGroups::StringCompressor::TheHelloFunction:0x00562eeffa3718>
+# ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'
+  </code>
+</pre>
+
+  <p>The first error is saying that the method is not defined. Let's define that method in our <strong>hello.rb</strong> file.</p>
+
+<pre><code class="ruby">
+def hello
+
+end</code></pre>
+
+  <p>
+    Save the file and run rspec.
+  </p>
+
+<pre><code class="bash">
+1) #hello the hello function says hello
+     Failure/Error: expect(hello).to eq("Hello!")
+
+       expected: "Hello!"
+            got: nil
+
+       (compared using ==)
+     # ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'
+</code></pre>
+
+  <p>You should now see a different error. This means that while it found the file, and it found the function, it's not returning anything! ("nil" is the Ruby way of saying "not anything".)</p>
+
+  <h3>Make it return something</h3>
+  <p>Inside the <strong>hello</strong> function, put a single line of string other than "hello".(Here we are simulating you making an honest mistake, so we can see what the error message looks like.)</p>
+
+<pre><code class="ruby">
+def hello
+  "hpllo?"
+end</code></pre>
+
+  <p>Save it and run the test again.</p>
+
+  <h3>Watch it fail again.</h3>
+  <p>
+    You should now see the following error:
+  </p>
+
+<pre><code class="bash">
+1) #hello the hello function says hello
+ Failure/Error: expect(hello).to eq("Hello!")
+
+   expected: "Hello!"
+        got: "hpllo?"
+
+   (compared using ==)
+ # ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'</code></pre>
+
+  <p>
+    It is expecting "Hello!" but instead of that, it is getting "hpllo?". So let's fix that and run the test again.
+  </p>
+
+<pre><code class="ruby">
+def hello
+  "Hello!"
+end</code>
+</pre>
+
+  <h3>Watch it pass.</h3>
+  <%= image_tag 'ruby_lessons/hello/first_passing_test.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    The green dot on the top left represents that one out of three tests is passing.
+  </p>
+
+  <h3>Moving on to second test.</h3>
+
+  <p>
+    Similarly, let's define a method named <strong>greet</strong>
+  </p>
+
+  <pre><code class="ruby">
+1) #hello the greet function says hello to someone
+     Failure/Error:
+       def greet
+       end
+
+     ArgumentError:
+       wrong number of arguments (1 for 0)
+     # ./lib/hello.rb:5:in `greet'
+     # ./spec/hello_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</code></pre>
+
+  <p>
+    You now encounter the <strong>ArgumentError:</strong>. Meaning that our test code is passing one argument to our code but code is not expecting any arguments. Change the code and run the test.
+  </p>
+
+  <pre><code class="ruby">
+def greet(name)
+end</code></pre>
+
+  <p>
+    You should see different error message now.
+  </p>
+
+<pre>
+  <code class="bash">
+1) #hello the greet function says hello to someone
+     Failure/Error: expect(greet("Alice")).to eq("Hello, Alice!")
+
+       expected: "Hello, Alice!"
+            got: nil
+
+       (compared using ==)
+     # ./spec/hello_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</code>
+</pre>
+
+  <h3>Let's make it pass.</h3>
+
+<pre>
+  <code class="ruby">
+def greet(name)
+	"Hello, #{name}!"
+end</code>
+</pre>
+
+  <p>
+    This <code>#{name}</code> , is known as <strong>string interpolation</strong>. <code>name</code> is replaced by the string passed onto the function.
+  </p>
+
+  <p>Save the code and run the test.</p>
+
+  <%= image_tag 'ruby_lessons/hello/passing_tests.png', class: 'img-responsive screenshot' %>
+</div>

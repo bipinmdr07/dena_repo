@@ -11,12 +11,7 @@ class SubmissionApprovalsController < ApplicationController
       @submission.update(approved: false)
     else
       @submission.update(approved: true)
-
-      Notification.create(recipient: @submission.user, 
-                          actor: current_user, 
-                          action: "approved", 
-                          notifiable: @submission)
-
+      send_notification!
     end
 
     respond_to do |format|
@@ -27,6 +22,13 @@ class SubmissionApprovalsController < ApplicationController
   end
 
   private
+
+  def send_notification!
+    Notification.create(recipient: @submission.user, 
+                          actor: current_user, 
+                          action: "approved", 
+                          notifiable: @submission)
+  end
 
   def check_if_admin
     return if current_user.admin

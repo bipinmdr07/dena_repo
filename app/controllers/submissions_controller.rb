@@ -14,10 +14,9 @@ class SubmissionsController < ApplicationController
   def create
     @submission = current_user.submissions.create(submission_params)
 
-    if @submission.valid?
-      user = User.find(@submission.user_id)
-      UserMailer.new_submission(@submission).deliver_now
-      Slack.chat_postMessage(text: 'New submission by ' + user.name + '! View it <' + submission_url(@submission) + '|here>.', username: 'TECHRISE Bot', channel: "#forum_questions", icon_emoji: ":smile_cat:") if Rails.env.production?
+    if @submission.valid?      
+      send_email_notification!
+      send_slack_notification!      
       redirect_to submission_path(@submission.id)
     else
       flash[:alert] = "Invalid, please try again."
@@ -46,9 +45,7 @@ class SubmissionsController < ApplicationController
   end
 
   def destroy
-    course_name = @submission.course_name.underscore + "s"
-    lesson_name = Tags::LESSONS[course_name].keys[@submission.lesson_id - 1][1]
-    back_to_lesson_url = "/" + course_name + "/" + @submission.lesson_id.to_s
+    back_to_lesson_url = PreviousLessonUrlBuilder.new(@submission).url     
 
     @submission.destroy
     
@@ -56,6 +53,16 @@ class SubmissionsController < ApplicationController
   end
 
   private
+
+  def send_email_notification!
+    UserMailer.new_submission(@submission).deliver_now
+  end
+
+  def send_slack_notification!
+    Slack.chat_postMessage(text: 'New submission by ' + @submission.user_name + '! View it <' + submission_url(@submission) + '|here>.', 
+                           username: 'TECHRISE Bot', channel: "#forum_questions", 
+                           icon_emoji: ":smile_cat:") if Rails.env.production?
+  end
 
   def check_duplicate
     return unless current_user.submissions.find_by(lesson_id: submission_params[:lesson_id],
