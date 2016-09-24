@@ -26,7 +26,7 @@ class Tags < ActiveRecord::Base
       [1, "Guidelines for Learning"] => %w(),
       [2, "Building Your First Two HTML/CSS Projects"] => %w(),
       [3, "Introduction to HTML/CSS"] => %w(),
-      [4, "Setting Up Your Environment"] => %w(),       
+      [4, "Setting Up Your Environment"] => %w(),
       [5, "Getting Started"] => %w(),
       [6, "Learning about Divs"] => %w(),
       [7, "Adding some Padding"] => %w(),
@@ -61,7 +61,10 @@ class Tags < ActiveRecord::Base
       [8, "Arrays"] => %w(),
       [9, "Hashes"] => %w(),
       [10, "Loops"] => %w(),
-      [11, "Conditionals and Logical Operators"] => %w()
+      [11, "Conditionals and Logical Operators"] => %w(),
+      [30, "Foobar Problem"] => %w(foobar),
+      [31, "Test-First Ruby: Hello"] => %w(),
+      [32, "Challenge: Temperature Conversion"] => %w()
     },
     "command_line_lessons" => {
       [1, "4 Commands You Need to Know"] => %w(command line),
