@@ -61,7 +61,8 @@ class Tags < ActiveRecord::Base
       [8, "Arrays"] => %w(),
       [9, "Hashes"] => %w(),
       [10, "Loops"] => %w(),
-      [11, "Conditionals and Logical Operators"] => %w(),
+      [11, "Defining our own methods"] => %w(),
+      [12, "Conditionals and Logical Operators"] => %w(),
       [30, "Foobar Problem"] => %w(foobar),
       [31, "Test-First Ruby: Hello"] => %w(),
       [32, "Challenge: Temperature Conversion"] => %w()

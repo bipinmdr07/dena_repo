@@ -18,7 +18,8 @@ class RubyLesson < Lesson
         [8, "Arrays"],
         [9, "Hashes"],
         [10, "Loops"],
-        [11, "Conditionals and Logical Operators"]
+        [11, "Defining our own methods"],
+        [12, "Conditionals and Logical Operators"]
       ]
     ],
     ["Ruby Challenges",

@@ -1,0 +1,332 @@
+<h1><%= title_for(RubyLesson, 1, 12) %></h1>
+
+<p>
+  Now let's see how we can build up logic with our programs.
+</p>
+
+<h3>Comparison Operators</h3>
+
+<p>
+  When we want to compare to values to build up logic, we use the comparison operators below.
+</p>  
+
+<table class="table">
+  <tr>
+    <th>Operator</th>
+    <th>Example</th>
+    <th>Meaning</th>
+  </tr>
+
+  <tr>
+    <td><code>==</code></td>
+    <td><code>a == b</code></td>
+    <td>returns <code>true</code> if <code>a</code> and <code>b</code> are equal</td>
+  </tr>
+
+  <tr>
+    <td><code>!=</code></td>
+    <td><code>a != b</code></td>
+    <td>returns <code>true</code> if <code>a</code> and <code>b</code> are <strong>not</strong> equal</td>
+  </tr>
+
+  <tr>
+    <td><code>&gt;</code></td>
+    <td><code>a &gt; b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is larger than <code>b</code></td>
+  </tr>
+
+  <tr>
+    <td><code>&gt;=</code></td>
+    <td><code>a &gt;= b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is larger than or equal to <code>b</code></td>
+  </tr>
+
+  <tr>
+    <td><code>&lt;</code></td>
+    <td><code>a &lt; b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is smaller than <code>b</code></td>
+  </tr>
+
+  <tr>
+    <td><code>&lt;=</code></td>
+    <td><code>a &lt;= b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is smaller than or equal to <code>b</code></td>
+  </tr>
+</table>
+
+<h3>Logical Operators</h3>
+
+<p>
+  We also use <strong>logical operators</strong> to build up logic as well.
+</p>  
+
+<table class="table">
+  <tr>
+    <th>Operator</th>    
+    <th>Example</th>
+    <th>Meaning</th>
+  </tr>
+
+  <tr>
+    <td><code>&&</code></td>
+    <td><code>A && B</code></td>
+    <td>Returns <code>true</code> if both <code>A</code> and <code>B</code> is <code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>||</code></td>
+    <td><code>A || B</code></td>
+    <td>Returns <code>true</code> if either <code>A</code> or <code>B</code> is <code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>!</code></td>
+    <td><code>!A</code></td>
+    <td>Returns the opposite of <code>A</code></td>
+  </tr>
+</table>
+
+
+<h3>if</h3>
+
+<p>
+  Let's cover the concept of if statements. If statements allow programmers to execute code only if a certain property is true. It's very similar to real life.
+</p>
+
+<div class="well">
+  <h3>Real life examples</h3> 
+
+  <p>
+    In real life, we base our decisions off of many factors and situations. Here are some examples:
+  </p>
+
+  <ul>
+    <li>If it is raining, don't go outside. Otherwise go outside.</li>
+    <li>If I am hungry, I want to eat. Otherwise, I don't want to eat.</li>
+  </ul>
+
+  <p>
+    In programming, we can build logic in similar ways as well.
+  </p>    
+</div>
+
+<p>
+  Inside C9, let's first navigate into our <code>ruby_fundamentals</code> folder:
+</p>  
+
+<pre><code class="bash">
+cd ruby_fundamentals
+</code></pre>
+
+<div class="well">
+  <h3>Gotchas</h3>
+
+  <p>
+    Before navigating to the <code>ruby_fundamentals</code> folder, make sure that you are not in <code>irb</code>. Your workspace terminal should look like this:
+  </p>
+
+  <%= image_tag 'ruby_lessons/blank_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Make sure your workspace does not look like this:
+  </p>  
+
+  <%= image_tag 'ruby_lessons/irb_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    If it does look like that, it means you are in your interactive ruby console. You can exit out easily by typing in <code>exit</code>:
+  </p>
+
+  <%= image_tag 'ruby_lessons/exit_irb.png', class: 'img-responsive screenshot' %>
+</div>
+
+<p>
+  Inside of this folder, let's create a new file called <code>is_even.rb</code>. You can do this by right clicking on the folder and creating a new file, or you can run the following command:
+</p>
+
+<pre><code class="bash">
+touch is_even.rb
+</code></pre>
+
+<p>
+  Open the new file that we just created.
+</p>
+
+<p>
+  Let's write a method that outputs <code>"#{number} is even!"</code> if the argument that is passed in is an even number, and <code>"#{number} is odd!"</code> if it isn't an even number.
+</p>
+
+<p>
+  First, let's create a method called <code>is_even?</code> that takes in a parameter <code>n</code>.
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  
+end
+</code></pre>
+
+<p>
+  Next, let's think about the logic we want to create. What we need to do is find out if the number is even. To do this what can we use?
+</p>
+
+<p>
+  <strong>We can use the <code>%</code> operator</strong>. <em>If the number is even, then the remainder of dividing the number by 2 should be 0.</em>
+</p>
+
+<p>
+  In Ruby, we can check <strong>if</strong> the condition is true with an <code>if</code> condition:
+</p>    
+
+<pre class="ruby"><code>
+if (condition)
+  # then execute code here
+else
+  # otherwise execute code here
+end
+</code></pre>
+
+<p>
+  To check if the number is even, we can write code like this:
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    # then execute code here
+  else
+    # otherwise execute code here
+  end   
+end
+</code></pre>
+
+<p class="alert alert-info">
+  In Ruby, parenthesis are optional and are not necessary. <code>if (n % 2 == 0)</code> and <code>if n % 2 == 0</code> do the same thing. Other programming languages may require the use of parenthesis.
+</p>
+
+<p>
+  The next task is to print it out to the console. To do this, we can use <code>puts</code>:
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    puts "#{n} is an even number!"
+  else
+    puts "#{n} is an odd number!"
+  end
+end
+</code></pre>
+
+<p>
+  Now that we have completed our method, let's run the method by calling it:
+</p>
+
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    puts "#{n} is an even number!"
+  else
+    puts "#{n} is an odd number!"
+  end
+end
+
+is_even?(1)
+is_even?(2)
+is_even?(3)
+is_even?(4)
+is_even?(5)
+is_even?(6)
+is_even?(7)
+is_even?(8)
+is_even?(9)
+is_even?(10)
+</code></pre>
+
+<p>
+  Save the file. Let's run the file:
+</p>
+
+<pre><code class="bash">
+ruby is_even.rb
+</code></pre>
+
+<p>
+  Your output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/is_even_successful.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Awesome! But what if we wanted to put in more conditions? For example, what if we wanted to print out <code>"#{n} is divisible by 3!"</code> when the number is divisible by 3?
+</p>
+
+<p>
+  That's where <code>elsif</code> statements are useful.
+</p>
+
+<pre><code class="ruby">
+if condition
+  # execute code here
+elsif another_condition
+  # execute code here
+elsif another_condition_2
+  # execute code here
+else
+  # execute code here
+end
+</code></pre>
+
+<p>
+  With <code>elsif</code>, we can check for another condition. We can also attach as many <code>elsif</code> statements as we want as demonstrated above.
+</p>
+
+<p>
+  How could we check if the number is divisible by 3?
+</p>
+
+<p>
+  A number divisible by <code>3</code> will have no remainder if it is divided by 3. That means we should check if the remainder of dividing the number by 3 is 0. To do this, we can once again use <code>%</code>.
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    puts "#{n} is an even number!"
+  elsif n % 3 == 0
+    puts "#{n} is divisible by 3!"
+  else
+    puts "#{n} is an odd number!"
+  end
+end
+</code></pre>
+
+<p>
+  Now let's run the program again:
+</p>
+
+<pre><code class="bash">
+ruby is_even.rb
+</code></pre>
+
+<p>
+  Your output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/is_even_3.png', class: 'img-responsive screenshot' %>
+
+<h2>Overview</h2>
+
+<ul>
+  <li>We can use <code>if</code> statements to build logic</li>
+  <li>We can use <code>elsif</code> statements to attach extra conditions</li>
+  <li>We can use <code>else</code> to run code if none of the conditions in the if else statement were <code>true</code></li>
+</ul> 
+
+
+
+
+
+
+

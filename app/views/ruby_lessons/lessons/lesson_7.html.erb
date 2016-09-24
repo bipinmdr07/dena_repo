@@ -92,6 +92,132 @@ name = "Bob"
   Strings can be declared with either a single quote <code>''</code> or double quote <code>""</code>, but <code>#{}</code> only works if the string is declared with <strong>double quotes (<code>""</code>)</strong>.
 </p>
 
+<h3>String concatenation</h3>
+
+<p>
+  We can also attach two strings together. This is called <strong>string concatenation</strong>. We can <em>concatenate</em> (attach) two strings together by adding them with the <code>+</code> operator:
+</p>
+
+<pre><code class="irb">
+first_name = "Robert"
+last_name = "Walters"
+first_name + last_name
+=> "RobertWalters"
+</code></pre>
+
+<p>
+  As you can see here, the two strings were attached, but we need a space between <code>"Robert"</code> and <code>"Walters"</code>. What we can do is add a blank space in between <code>first_name</code> and <code>last_name</code>:
+</p>
+
+<pre><code class="irb">
+first_name + " " + last_name
+=> "Robert Walters"
+</code></pre>
+
+<h3>Getting User Input</h3>
+
+<p> 
+  Getting user input in Ruby is pretty easy.
+</p>
+
+<p>
+  Let's hop into C9. First, let's navigate to the <code>ruby_fundamentals</code> folder.
+</p>
+
+<pre><code class="bash">
+cd ruby_fundamentals
+</code></pre>
+
+<div class="well">
+  <h3>Gotchas</h3>
+
+  <p>
+    Before navigating to the <code>ruby_fundamentals</code> folder, make sure that you are not in <code>irb</code>. Your workspace terminal should look like this:
+  </p>
+
+  <%= image_tag 'ruby_lessons/blank_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Make sure your workspace does not look like this:
+  </p>  
+
+  <%= image_tag 'ruby_lessons/irb_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    If it does look like that, it means you are in your interactive ruby console. You can exit out easily by typing in <code>exit</code>:
+  </p>
+
+  <%= image_tag 'ruby_lessons/exit_irb.png', class: 'img-responsive screenshot' %>
+</div>
+
+<p>
+  Let's create a new file called <code>user_input.rb</code>. You can do this by right clicking on the folder and creating a new file, <strong>or you can run the following command and create the file from the command line</strong>:
+</p>
+
+<pre><code class="bash">
+touch user_input.rb
+</code></pre>
+
+<p>
+  Let's open up the <code>user_input.rb</code> file. Inside this file, let's add the following lines of code:
+</p>  
+
+<pre><code class="ruby">
+puts "Enter your name:"
+name = gets
+puts "Your name is #{name}"
+</code></pre>
+
+<p>
+  Save the file and run the program:
+</p>
+
+<pre><code class="bash">
+ruby user_input.rb
+</code></pre>
+
+<%= image_tag 'ruby_lessons/user_input_1.png', class: 'img-responsive screenshot' %>
+
+<p>
+  It should prompt you for your name, then print out <code>"Your name is #{name}"</code>.
+</p>  
+
+<p>
+  As you can see, we use the <code>gets</code> method to get user input, then we put that into a variable called <code>name</code>.
+</p>
+
+<p>
+  Next, let's change up the script a little bit. Change the file to look like this:
+</p>
+
+<pre><code class="ruby">
+puts "Enter your name:"
+name = gets
+puts "Hi #{name}! You're a future Ruby developer!"
+</code></pre>
+
+<p>
+  Save the file and run the program.
+</p>
+
+<%= image_tag 'ruby_lessons/user_input_2.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Hmm...there seems to be something wrong.
+</p>
+
+
+
+<h2>Overview</h2>
+<ul>
+  <li><strong>Variables</strong> are where you can store data in a program</li>
+  <li>We can reassign the value inside a variable</li>
+  <li>Inserting the value of a variable inside of a string is called <strong>string interpolation</strong></li>
+  <li>We can attach two strings together with the <code>+</code> operator. This is called <strong>string concatenation</strong></li>
+</ul> 
+
+
+
 
 
 

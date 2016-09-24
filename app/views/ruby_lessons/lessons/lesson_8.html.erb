@@ -1,1 +1,240 @@
 <h1><%= title_for(RubyLesson, 1, 8) %></h1>
+
+<p>
+  <strong>Arrays</strong> are objects that hold multiple objects. They are somewhat like lists.
+</p>
+
+<p>
+  In the interactive ruby console, let's type in the following and press enter:
+</p>
+
+<pre><code class="irb">
+colors = ["red", "blue", "green"]
+</code></pre>
+
+<p>
+  Now <code>colors</code> holds 3 items, <code>"red"</code>, <code>"blue"</code>, and <code>"green"</code>. 
+</p>
+
+<p>
+  Arrays can be initialized with the <code>[]</code> syntax. To create an empty array, we simply write code like such:
+</p>
+
+<pre><code class="irb">
+empty_array = []
+</code></pre>
+
+<p class="alert alert-success">
+  Another way to declare an empty array is with <code>Array.new</code>.
+</p>
+
+<h3>Accessing Elements</h3>
+
+<p>
+  In the <code>colors</code> array we have created, let's say we want to access the second item, <code>"blue"</code>. In order to do this, we simply enter the following code:
+</p>
+
+<pre><code class="irb">
+colors[1]
+=> "blue"
+</code></pre>
+
+<p>
+  As you can see, you can insert the index of the item next to the variable to retreive the item.
+</p>
+
+<div class="well">
+  <h3>Zero based indexing</h3>
+  <p>
+    But wait, <strong>shouldn't it be</strong> <code>colors[2]</code>? Since it's the 2nd item, it would make sense to say <code>colors[2]</code> instead of <code>colors[1]</code>, right?
+  </p>  
+
+  <p>
+    Well it turns out that in Computer Science, arrays are indexed from 0. That means that the first item would be referenced like <code>colors[0]</code>.
+  </p>
+</div>
+
+<p>
+  <strong>We can also replace the element inside of an array</strong>:
+</p>
+
+<pre><code class="irb">
+colors[1]
+=> "blue"
+
+colors[1] = "black"
+colors
+=> ["red", "black", "green"]
+</code></pre>
+
+<p>
+  Let's make another array. In <code>irb</code>, let's enter the following:
+</p>
+
+<pre><code class="irb">
+people = ["Jack", "Adam", "Mike"]
+</code></pre>
+
+<p>
+  Here, we have created a <code>people</code> array with the names of 3 people inside of it. Let's go over some common array methods.
+</p>
+
+<h2>Array Methods</h2>
+
+<p>
+  In Ruby, there are a lot of array methods that we can use. Many of them read like English, so they are fairly easy to understand.
+</p>
+
+<p class="alert alert-info">
+  <strong>Don't worry about trying to memorize everything</strong> - the goal here is to simply introduce you to some of the methods that Ruby has. You will remember and internalize these methods once you use them a couple of times - but they are impossible to remember at once, so don't worry.
+</p>
+
+<p>
+  Let's retrieve the first person in the list. To do this, we can simply type the following:
+</p>  
+
+<pre><code class="irb">
+people.first
+=> "Jack"
+</code></pre>
+
+<p>
+  To retrieve the last person in the list, simply type the following:
+</p>  
+
+<pre><code class="irb">
+people.last
+=> "Mike"
+</code></pre>
+
+<p>
+  What if we want to find the size of the array? 
+</p>
+
+<pre><code class="irb">
+people.count
+=> 3
+
+people.length
+=> 3
+</code></pre>
+
+<p>
+  What if we wanted to see if a person was included in the list?
+</p>
+
+<pre><code class="irb">
+people.include?("Jack")
+=> true
+
+people.include?("Bob")
+=> false
+</code></pre>
+
+<p>
+  To get the index of a person:
+</p>
+
+<pre><code class="irb">
+people.index("Jack")
+=> 0
+</code></pre>
+
+<p>
+  To join all of the names into one string:
+</p>
+
+<pre><code class="irb">
+people.join
+=> "JackAdamMike"
+</code></pre>
+
+<p>
+  To join all of the names into one string, but put a space between each name:
+</p>
+
+<pre><code class="irb">
+people.join(" ")
+=> "Jack Adam Mike"
+</code></pre>
+
+<p>
+  To remove the last element from an array:
+</p>
+
+<pre><code class="irb">
+people.pop
+=> "Mike"
+
+people
+=> ["Jack", "Adam"]
+</code></pre>
+
+<p>
+  To add an element to the end of the array:
+</p>
+
+<pre><code class="irb">
+people.push("Bob")
+=> ["Jack", "Adam", "Bob"]
+</code></pre>
+
+<p>
+  To reverse the order of an array:
+</p>
+
+<pre><code class="irb">
+people.reverse
+=> ["Bob", "Adam", "Jack"]
+</code></pre>
+
+<p>
+  Get a random element from an array:
+</p>
+
+<pre><code class="irb">
+people.sample
+</code></pre>
+
+<p>
+  To get only unique elements:
+</p>
+
+<pre><code class="irb">
+people = ["Jake", "Jake", "Adam", "Mike", "Mike", "Mike"]
+people
+=> ["Jake", "Jake", "Adam", "Mike", "Mike", "Mike"]
+
+people.uniq
+=> ["Jake", "Adam", "Mike"]
+</code></pre>
+
+<p>
+  There are a bunch of other array methods that would be great to take a look at. You can take a look at them <%= link_to 'here', 'https://ruby-doc.org/core-2.2.0/Array.html', target: '_blank' %>.
+</p>
+
+<h2>Overview</h2>
+
+<ul>
+  <li>Arrays are objects that hold a list of items</li>
+  <li>You can create an empty array with <code>[]</code> or <code>Array.new</code></li>
+  <li><strong>Arrays utilize zero based indexing</strong> - the first element's index is <code>0</code></li>
+  <li>You can replace elements inside of arrays</li>
+  <li>You can access elements by inserting the index like such: <code>people[1]</code> (returns the 2nd element)</li>
+  <li>There are many array methods that are easy to use</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

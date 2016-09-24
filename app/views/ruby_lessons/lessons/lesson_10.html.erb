@@ -1,0 +1,285 @@
+<h1><%= title_for(RubyLesson, 1, 10) %></h1>
+
+<p>
+  Now that we've talked about arrays, let's talk about looping.
+</p>
+
+<h3>each loop</h3>
+
+<pre><code class="irb">
+numbers = [1,2,3,4,5]
+</code></pre>
+
+<p>
+  Here we have a <code>numbers</code> array. We can <em>loop</em> through each item in the array with the <code>each</code> method:
+</p>
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5 
+=> [1, 2, 3, 4, 5]
+</code></pre>
+
+<p>
+  There's a few new things we have never seen before. First, let's look at the <code>do</code> and <code>end</code>.
+</p>
+
+<p>
+  The code that is inbetween <code>do</code> and <code>end</code> is called a <strong>block</strong>. A block is a piece of code that can be executed. In our example, our block consists of <code>puts i</code>.
+</p>  
+
+<p>
+  <code>|i|</code> is a placeholder variable. <strong>The placeholder variable acts exactly like any other variable, except it is only valid within the block.</strong>
+</p>
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5 
+=> [1, 2, 3, 4, 5]
+
+puts i
+=> NameError: undefined local variable or method `i' for main:Object
+</code></pre>
+
+<p>
+  <strong>The placeholder variable can be named anything</strong>:
+</p>
+
+<pre><code class="irb">
+numbers.each do |random_name|
+  puts random_name
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5 
+=> [1, 2, 3, 4, 5]
+</code></pre>
+
+<p>
+  However, it is good practice to name variables in a way that it makes sense. In otherwords, instead of <code>random_name</code>, naming the variable something like <code>i</code> or <code>n</code> or <code>number</code> is more appropriate.
+</p>
+
+<p class="alert alert-info">
+  One of my teachers from college once said that naming variables is one of the hardest things about programming. I'm not sure if I completely agree, but it is true that naming variables is extremely important. <strong>To write good expressive code, it is important to name variables in a way that makes sense.</strong>
+</p>
+
+<p>
+  Let's take a look at this code once again:
+</p>  
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<p>
+  Here is how you should read the above code in English: <strong><em>For <code>each</code> item (<code>i</code>) in the <code>numbers</code> array, print out the item (<code>i</code>).</em></strong>
+</p>
+
+<p>
+  Inside the block, we can run any piece of code. Take a look at the following piece of code:
+</p>  
+
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i * 2
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+2
+4
+6
+8
+10
+=> [1, 2, 3, 4, 5]
+</code></pre>
+
+<p>
+  As you can see, the program printed out each number multiplied by 2.
+</p>
+
+<h3>while loop</h3>
+
+<p>
+  Most languages have a <code>while</code> loop. While loops are pretty straightforward:
+</p>
+
+<pre><code class="irb">
+i = 0
+
+while (i &lt; 5) do
+  puts i
+  i += 1
+end
+</code></pre>
+
+<p>
+  Result:
+</p>
+
+<pre><code class="irb">
+0
+1
+2
+3
+4
+</code></pre>
+
+<p>
+  While loops execute the code inbetween <code>do</code> and <code>end</code> until the condition (in this case <code>i &lt; 5</code>) is <code>false</code>.
+</p>  
+
+<pre><code class="irb">
+while (condition_is_true) do
+  # execute code here
+end
+</code></pre>
+
+<h3>times loop</h3>
+
+<p>
+  Ruby has another way to loop, which is the <code>times</code> loop.
+</p>
+
+<pre><code class="irb">
+10.times do |i|
+  puts i
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+=> 10
+</code></pre>
+
+<p>
+  Another example:
+</p>
+
+<pre><code class="irb">
+5.times do
+  puts "this is spam"
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+this is spam
+this is spam
+this is spam
+this is spam
+this is spam
+=> 5
+</code></pre>
+
+<p>
+  Again, the code inbetween <code>do</code> and <code>end</code> are blocks.
+</p>  
+
+<h3>upto loop</h3>
+
+<p>
+  You can also loop using <code>upto</code>.
+</p>  
+
+<pre><code class="irb">
+1.upto(10) do |n|
+  puts n
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+
+<h3>downto loop</h3>
+
+<p>
+  Similarly, there is a <code>downto</code> loop as well.
+</p>
+
+<pre><code class="irb">
+10.downto(0) do |n|
+  puts n
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+</code></pre>
+
+
+
+
+
+
+
+
+
