@@ -1,0 +1,139 @@
+<h1><%= title_for(SkillAcademyLesson, 3, 2) %></h1> 
+
+<p>
+  Now that we've picked a template that we want to work with, let's go ahead and integrate it into our Rails application.
+</p>
+
+<div class="task-box">
+  <h2>Tasks</h2>
+  <ul>
+    <li>Integrate the template into the Rails application</li>
+    <li>Create a landing page for the application</li>
+  </ul>
+</div>
+
+<div class="gotcha" data-gotcha-id="1">
+  <p>
+    Copy and pasting the HTML file in a non-layout file (files such as <code>index.html.erb</code> or <code>show.html.erb</code>) is not a great idea.
+  </p>  
+</div>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    In Rails applications, we use layouts to define our templates for the web application. For example, in Ideator and Instapost, we put our template elements (such as the navigation bar and the footer) inside <code>application.html.erb</code>. 
+  </p>  
+
+  <p>
+    When integrating the template, what we need to do is place the template elements inside of <code>application.html.erb</code>.
+  </p>  
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Let's try testing this out in the browser. Fire up your rails server and open <code>localhost</code>.
+  </p>
+
+<pre><code class="ruby">
+rails s
+</code></pre>
+
+  <p>
+    If you go to <code>localhost</code>, you will see that it displays the default Ruby on Rails welcome page. We need this page to display the landing page.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    In order to create a landing page, let's create a new controller to handle static pages.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="4">
+
+  <p>
+    In the terminal, let's run the following command:
+  </p>
+
+<pre><code class="bash">
+rails g controller static_pages
+</code></pre>
+
+  <p>
+    Next, let's set up a controller action that we can map our landing page content to.
+  </p>
+
+</div>
+
+<div class="hint" data-hint-id="5">
+
+  <p>
+    Let's create an <code>index</code> action in <code>static_pages_controller.rb</code>.
+  </p>
+
+<pre><code class="ruby">
+class StaticPagesController &lt; ApplicationController
+  def index
+    
+  end
+end
+</code></pre>
+
+  <p>
+    Next, let's create an <code>index.html.erb</code> file inside of the <code>app/views/static_pages</code> directory. 
+  </p>
+  
+  <p>
+    Let's insert the HTML elements that were not included in the <code>application.html.erb</code> file inside of the new <code>index.html.erb</code> that we just created. In other words, all of the HTML except for the navigation bar and the footer should be in the <code>index.html.erb</code> file now.
+  </p>  
+
+  <p>
+    If we go back into the browser and refresh the page, it will still be displaying the Ruby on Rails welcome page.
+  </p>  
+
+  <p>
+    How can we display the landing page when we visit <code>localhost:3000</code>?
+  </p>
+</div>
+
+<div class="hint" data-hint-id="6">
+
+  <p>
+    In the <code>routes.rb</code> file, configure the <code>root</code> so that it points to <code>static_pages#index</code>.
+  </p>
+
+<pre><code class="bash">
+root 'static_pages#index'
+</code></pre>
+
+  <p>
+    Save the file and refresh the page. The landing page should now be displayed.
+  </p>
+
+</div>
+
+<div class="gotcha" data-gotcha-id="2">
+  <p>
+    Once you've transfered the HTML into the layout, if you try to access the page on localhost, you might see that the design is distored if you haven't transfered your CSS and JS files.
+  </p>  
+
+  <p>
+    Make sure to place the CSS files inside the <code>app/stylesheets</code> directory and the JS files in the <code>app/javascripts</code> directory.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="3">
+  <p>
+    Your template will likely include a <code>bootstrap.css</code> and perhaps a <code>bootstrap.js</code> file. Since we already installed bootstrap with a gem, there is no need for these files, so we don't need to copy the bootstrap files into the application.
+  </p>
+</div>
+
+
+
+
+
+
+
+
+
+
+

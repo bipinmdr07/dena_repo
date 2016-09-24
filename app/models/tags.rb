@@ -187,6 +187,45 @@ class Tags < ActiveRecord::Base
       [5, "What is schema.rb?"] => %w(),
       [6, "Adding and Updating Database Columns"] => %w()
     },
+    "collaboration_lessons" => {
+      [1, "Being a team player"] => %w(),
+      [2, "Communicating Effectively"] => %w(),
+      [3, "Agile"] => %w(),
+      [4, "Scrum"] => %w(),
+      [5, "Trello"] => %w(),
+      [6, "Slack"] => %w(),
+      [7, "Github"] => %w(),
+      [8, "Continuous Integration"] => %w(),
+      [9, "Pair Programming"] => %w(),
+      [10, "How to communicate effectively online"] => %w(),
+      [11, "Making Awesome Pull Requests"] => %w(),
+      [12, "Code Reviews"] => %w(),
+    },
+    "skill_academy_lessons" => {
+      [1, "Introduction"]=>[],
+      [1, "Self-Directed Lesson: Setting up your Web Dev Environment"]=>[],
+      [2, "Self-Directed Lesson: Setting Up Git and Heroku"]=>[],
+      [3, "Setting up Continuous Integration"]=>[],
+      [5, "Self-Directed Lesson: Installing Bootstrap"]=>[],
+      [6, "Self-Directed Lesson: Installing Simple Form"]=>[],
+      [8, "Self-Directed Lesson: Installing RSpec"]=>[],
+      [9, "Self-Directed Lesson: Installing Factory Girl"]=>[],
+      [7, "Choosing a template"]=>[],
+      [8, "Integrating the template with a Rails application"]=>[],
+      [9, ""]=>[],
+      [10, "As a user, I should be able to log in/log out"]=>[],
+      [12, "As a user, I should be able to edit my profile"]=>[],
+      [13, "Setting Up Routes"]=>[],
+      [14, "Setting up CRUD Actions"]=>[],
+      [11, "Creating the Posts Controller and Model"]=>[],
+      [12, "Setting Up Validations"]=>[],
+      [15, "Why TDD?"]=>[],
+      [16, "Testing the index action"]=>[],
+      [17, "Creating New Posts"]=>[],
+      [18, "Individual Post Pages"]=>[],
+      [19, "Editing Posts"]=>[],
+      [20, "Deleting Posts"]=>[]
+    }
   }
 
 end

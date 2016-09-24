@@ -1,0 +1,76 @@
+<h1><%= title_for(SkillAcademyLesson, 2, 5) %></h1> 
+
+
+<p>
+  Next, let's install a gem called <code>pry</code>. Pry is a replacement of <code>irb</code> (interactive ruby or ruby console) that allows developers to work more efficiently. It is also extremely useful when trying to debug things.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe src="https://player.vimeo.com/video/26391171" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+
+<p>
+  You can use pry in the middle of some code to pause the program. For example:
+</p>
+
+<pre><code class="ruby">
+class PostsController &lt; ActionController::Base
+# code here
+
+  def create
+    binding.pry
+    # Program will stop here
+    # You can now run ruby code inside of the terminal to debug
+    # Once you exit, the program will resume from the line below:
+    @post = Post.create(post_params)
+  end
+
+
+end
+</code></pre>
+
+<blockquote>
+  <p>
+    Pry can be invoked in the middle of a running program. It opens a Pry session at the point it's called and makes all program state at that point available. When the session ends the program continues with any modifications you made to it.
+  </p>
+
+  <p>
+    This functionality can be used for such things as: debugging, implementing developer consoles and applying hot patches.
+  </p>
+  <small>http://pryrepl.org/</small>
+</blockquote>
+
+<div class="task-box">
+  <h2>Tasks</h2>
+  <ul>
+    <li>Read about Pry <%= link_to 'here', 'http://pryrepl.org/', target: "_blank" %></li>
+    <li>Install pry-rails gem</li>  
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    Read the github documentation for pry-rails <%= link_to 'here', 'https://github.com/rweng/pry-rails', target: "_blank" %>.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    In your Gemfile, include the following line of code:
+  </p>
+
+<pre><code class="ruby">
+gem 'pry-rails', group: :development
+</code></pre>
+
+  <p>
+    Run <code>bundle install</code>.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="1">
+  <p>
+    In order for <code>binding.pry</code> to work in your application, you will need to restart the server.
+  </p>
+</div>
