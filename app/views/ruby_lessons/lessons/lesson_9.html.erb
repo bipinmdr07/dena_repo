@@ -57,7 +57,57 @@ people["Jake"]
 </code></pre>
 
 <p>
-  We can add to our existing hash as such:
+  We can also add to a value like this:
+</p>
+
+<pre><code class="irb">
+people["Jake"]
+=> 100
+
+people["Jake"] += 5
+
+people["Jake"]
+=> 105
+</code></pre>
+
+<div class="well">
+  <h3>+=, -=, *=, /=</h3>
+
+  <p>
+    When programming, you will see <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/</code> being used quite a lot. They are self-explanatory - take a look at the examples below:
+  </p>
+
+<pre><code class="ruby">
+number = 5
+
+# 5 + 5
+number += 5
+
+number
+=> 10
+
+# 10 - 2
+number -= 2
+
+number
+=> 8
+
+# 8 * 5
+number *= 5
+
+number
+=> 40
+
+# 40 / 10
+number /= 10
+
+number
+=> 10
+</code></pre>
+</div>
+
+<p>
+  We can add a new item to our existing hash as such:
 </p>
 
 <pre><code class="irb">

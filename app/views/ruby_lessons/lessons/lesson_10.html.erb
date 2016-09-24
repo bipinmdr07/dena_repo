@@ -37,8 +37,38 @@ end
   The code that is inbetween <code>do</code> and <code>end</code> is called a <strong>block</strong>. A block is a piece of code that can be executed. In our example, our block consists of <code>puts i</code>.
 </p>  
 
+<div class="well">
+  <h3>Blocks</h3>
+
+  <p>
+    Blocks in Ruby are a set of instructions that are passed around your program.
+  </p>
+
+  <p>
+    Blocks are created either with <code>do</code> and <code>end</code>, or with <code>{}</code>s. For example, these two pieces of code do the same thing:
+  </p>
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<pre><code class="irb">
+numbers.each {|i| puts i}
+</code></pre>
+
+  <p class="alert alert-info">
+    At first, converting these two syntaxes can be confusing. <strong>An easy way to remember the syntax</strong> is to replace <code>do</code> with <code>{</code> and <code>end</code> with <code>}</code> and vice-versa.
+  </p>
+
+  <p>
+    The <code>|i|</code> represents block arguments, which can be used within the block. The arguments can be named anything. The <code>||</code> characters are called pipe characters.
+  </p>
+</div>
+
 <p>
-  <code>|i|</code> is a placeholder variable. <strong>The placeholder variable acts exactly like any other variable, except it is only valid within the block.</strong>
+  <code>|i|</code> is a block argument. <strong>The block argument acts exactly like a regular variable, except it is only valid within the block.</strong>
 </p>
 
 <pre><code class="irb">

@@ -206,6 +206,23 @@ puts "Hi #{name}! You're a future Ruby developer!"
   Hmm...there seems to be something wrong.
 </p>
 
+<p>
+  It turns out that the <code>gets</code> method attaches a new line after the user input. To fix this, we can use the <code>chomp</code> method.
+</p>
+
+<p>
+  The <code>chomp</code> method will get rid of unnecessary line breaks. We can call <code>chomp</code> on the <code>gets</code> method to get rid of this bug. Let's change the file to look like this:
+</p>
+
+<pre><code class="ruby">
+puts "Enter your name:"
+name = gets.chomp
+puts "Hi #{name}! You're a future Ruby developer!"
+</code></pre>
+
+<p>
+  Save the file and run the program. You will see that everything is now correctly inputted!
+</p>
 
 
 <h2>Overview</h2>
@@ -214,8 +231,24 @@ puts "Hi #{name}! You're a future Ruby developer!"
   <li>We can reassign the value inside a variable</li>
   <li>Inserting the value of a variable inside of a string is called <strong>string interpolation</strong></li>
   <li>We can attach two strings together with the <code>+</code> operator. This is called <strong>string concatenation</strong></li>
+  <li>We can get user input with the <code>gets</code> method</li>
+  <li>We can use the <code>chomp</code> method to get rid of line breaks that come with the user input from <code>gets</code></li>
 </ul> 
 
+
+<h2>Coding Challenge - Favorite Food</h2>
+
+<p>
+  Create a program that asks for the user's name and their favorite food and outputs the results to the console. Running the program should look something like this:
+</p>  
+
+<%= image_tag 'ruby_lessons/favorite_food.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Paste the code below and submit it so we can give you a code review!
+</p>
+
+<% @submission_form = true %>
 
 
 

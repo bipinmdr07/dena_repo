@@ -82,8 +82,7 @@ people = ["Jack", "Adam", "Mike"]
 <h2>Array Methods</h2>
 
 <p>
-  In Ruby, there are a lot of array methods that we can use. Many of them read like English, so they are fairly easy to understand.
-</p>
+  In Ruby, there are a lot of array methods that we can use. Many of them read like English, so they are fairly easy to understand.</p>
 
 <p class="alert alert-info">
   <strong>Don't worry about trying to memorize everything</strong> - the goal here is to simply introduce you to some of the methods that Ruby has. You will remember and internalize these methods once you use them a couple of times - but they are impossible to remember at once, so don't worry.
@@ -213,6 +212,54 @@ people.uniq
   There are a bunch of other array methods that would be great to take a look at. You can take a look at them <%= link_to 'here', 'https://ruby-doc.org/core-2.2.0/Array.html', target: '_blank' %>.
 </p>
 
+<h3>Arrays can contain multiple data types</h3>
+
+<p>
+  One thing to note is that arrays in Ruby can hold different data types:
+</p>
+
+<pre><code class="irb">
+array = ["this is a string", 10, 32.12, [true, "Hello"], {key: "value"}]
+</code></pre>
+
+<p>
+  In other languages, having different types inside an array is not allowed. <strong>In Ruby, we have the convenience of allowing multiple types in one array.</strong>
+</p>
+
+<h3>Multi-dimensional Arrays</h3>
+
+<p>
+  An array can also hold an array within the array.
+</p>
+
+<pre><code class="ruby">
+people = [["Adam", 21], ["Jake", 23], ["Paul", 30]]
+</code></pre>
+
+<p>
+  Here, we have an array with 3 <em>subarrays</em> inside of it. For example, <code>["Adam", 21]</code> is one subarray, <code>["Jake", 23]</code> is another, and <code>["Paul", 30]</code> is another. 
+</p>
+
+<p>
+  Accessing the data inside multidimensional array can be quite tricky at first. Let's create a multidimensional array that holds the name and age of 3 people:
+</p>  
+
+<pre><code class="ruby">
+people = [["Adam", 21], ["Jake", 23], ["Paul", 30]]
+
+# Getting the 0th item will give us the first subarray
+people[0]
+=> ["Adam", 21]
+
+# To get the first item inside of the subarray, we access the 0th index of the subarray
+people[0][0]
+=> "Adam"
+
+# To get the second item inside of the subarray, we access the 1st index of the subarray
+people[0][1]
+=> 21
+</code></pre>
+
 <h2>Overview</h2>
 
 <ul>
@@ -222,6 +269,8 @@ people.uniq
   <li>You can replace elements inside of arrays</li>
   <li>You can access elements by inserting the index like such: <code>people[1]</code> (returns the 2nd element)</li>
   <li>There are many array methods that are easy to use</li>
+  <li>Ruby arrays can contain data of different types</li>
+  <li>Arrays can store arrays within itself</li>
 </ul>
 
 
