@@ -4,9 +4,9 @@ class SubmissionRepliesController < ApplicationController
 
 
 	def create
-		reply = current_user.submission_replies.create(reply_params)
+		@reply = current_user.submission_replies.create(reply_params)
 
-		if reply.valid?
+		if @reply.valid?
       create_notifications!      
       send_email_notification!
 			send_slack_notification!			
@@ -37,7 +37,7 @@ class SubmissionRepliesController < ApplicationController
 	private
 
   def send_slack_notification!
-    Slack.chat_postMessage(text: 'New reply by ' + reply.user_name + '! View it <' + submission_url(current_submission) + '|here>.', 
+    Slack.chat_postMessage(text: 'New reply by ' + @reply.user_name + '! View it <' + submission_url(current_submission) + '|here>.', 
         username: 'TECHRISE Bot', 
         channel: "#forum_questions", 
         icon_emoji: ":smile_cat:") if Rails.env.production?
