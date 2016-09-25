@@ -4,14 +4,14 @@
   Now that we've talked about arrays, let's talk about looping.
 </p>
 
-<h3>each loop</h3>
+<h3>each</h3>
 
 <pre><code class="irb">
 numbers = [1,2,3,4,5]
 </code></pre>
 
 <p>
-  Here we have a <code>numbers</code> array. We can <em>loop</em> through each item in the array with the <code>each</code> method:
+  Here we have a <code>numbers</code> array. We can <em>iterate</em> through each item in the array with the <code>each</code> method. Programmers will use the word <em>iterate</em> a lot - it means to <strong>go through each item one by one</strong>. Let's look at an example:
 </p>
 
 <pre><code class="irb">
@@ -30,7 +30,7 @@ end
 </code></pre>
 
 <p>
-  There's a few new things we have never seen before. First, let's look at the <code>do</code> and <code>end</code>.
+  As you can see, the program is going through each number in the <code>numbers</code> array, and printing it out. There's a few new things we have never seen before. First, let's look at the <code>do</code> and <code>end</code>.
 </p>
 
 <p>
@@ -63,36 +63,28 @@ numbers.each {|i| puts i}
   </p>
 
   <p>
-    The <code>|i|</code> represents block arguments, which can be used within the block. The arguments can be named anything. The <code>||</code> characters are called pipe characters.
+    The <code>i</code> inbetween the <code>||</code>s is a <em>block argument</em>. <em>Block arguments</em> are basically variables that can be used within the block. The arguments can be named anything. The <code>||</code> characters are called pipe characters, and the variable inbetween them are the block arguments.
   </p>
 </div>
 
 <p>
-  <code>|i|</code> is a block argument. <strong>The block argument acts exactly like a regular variable, except it is only valid within the block.</strong>
+  <code>|i|</code> is called a <em>block argument</em>. <strong>The block argument acts exactly like a regular variable, except it is only valid within the block.</strong>
 </p>
 
-<pre><code class="irb">
+<pre><code class="ruby">
 numbers.each do |i|
+  # i works inside this block
+  # Again, the block starts at 'do' and ends at 'end'
   puts i
 end
-</code></pre>
 
-<p>Result:</p>
-
-<pre><code class="irb">
-1
-2
-3
-4
-5 
-=> [1, 2, 3, 4, 5]
-
+# i doesn't work outside of the block
 puts i
 => NameError: undefined local variable or method `i' for main:Object
 </code></pre>
 
 <p>
-  <strong>The placeholder variable can be named anything</strong>:
+  <strong>Also, the block argument (the variable between the pipe characters) can be named anything</strong>:
 </p>
 
 <pre><code class="irb">
@@ -101,7 +93,7 @@ numbers.each do |random_name|
 end
 </code></pre>
 
-<p>Result:</p>
+<p>Even though we changed <code>i</code> to <code>random_name</code>, the result is still the same:</p>
 
 <pre><code class="irb">
 1
@@ -113,7 +105,7 @@ end
 </code></pre>
 
 <p>
-  However, it is good practice to name variables in a way that it makes sense. In otherwords, instead of <code>random_name</code>, naming the variable something like <code>i</code> or <code>n</code> or <code>number</code> is more appropriate.
+  <strong>However, it is good practice to name variables in a way that it makes sense.</strong> In otherwords, instead of <code>random_name</code>, naming the variable something like <code>i</code> or <code>n</code> or <code>number</code> is more appropriate.
 </p>
 
 <p class="alert alert-info">
@@ -159,6 +151,47 @@ end
 <p>
   As you can see, the program printed out each number multiplied by 2.
 </p>
+
+<p>Let's take a look at another example. First, let's declare an array and push in some strings:</p>
+
+<pre><code class="ruby">
+countries = []
+countries.push("Nepal")
+countries.push("Japan")
+countries.push("Malaysia")
+</code></pre>
+
+<p class="alert alert-info">
+  To give you a refresher, the <code>push</code> array method pushes the element passed in as the parameter to the array.
+</p>
+
+<p>
+  Now let's <em>iterate</em> through each country:
+</p>
+
+<pre><code class="irb">
+countries.each do |country|
+  puts "#{country} is awesome!"
+end
+
+Nepal is awesome!
+Japan is awesome!
+Malaysia is awesome!
+</code></pre>
+
+<p>
+  Let's go over each step of this program.
+</p>
+
+<ul>
+  <li>First, we are iterating through each country in the <code>countries</code> array with the <code>each</code> method</li>
+  <li>Next, we are calling the block argument <code>country</code>. This way we can reference <code>country</code> inside the block</li>
+  <li>In the first iteration, <code>country</code> is equal to <code>"Nepal"</code></li>
+  <li>In the next iteration, <code>country</code> is equal to <code>"America"</code></li>
+  <li>In the final iteration, <code>country</code> is equal to <code>"Malaysia"</code></li>
+</ul>
+
+
 
 <h3>while loop</h3>
 
@@ -360,6 +393,7 @@ another_hash["another_key"] += 20
 
 
 # If we don't set a default value we will get an error
+# since a new key will not have a value. In otherwords, the value is nil by default
 error_hash = Hash.new
 
 error_hash["new_key"] += 2
@@ -508,7 +542,7 @@ key: key_3, value: value_3
 
 <% @hints = true %>
 
-
+<% @submission_form = true %>
 
 
 

@@ -17,7 +17,7 @@ class RubyLesson < Lesson
         [7, "Variables"],
         [8, "Arrays"],
         [9, "Hashes"],
-        [10, "Loops"],
+        [10, "Looping and Iterating"],
         [11, "Defining our own methods"],
         [12, "Conditionals and Logical Operators"]
       ]
