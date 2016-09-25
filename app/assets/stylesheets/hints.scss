@@ -110,6 +110,7 @@
 @mixin hint-gotchas {
   display: none;
   padding: 10px 20px;
+  border-top: 1px solid #eee;
   -webkit-transition: all 3s ease-out;  /* Saf3.2+, Chrome */
      -moz-transition: all 3s ease-out;  /* FF4+ */
       -ms-transition: all 3s ease-out;  /* IE10 */

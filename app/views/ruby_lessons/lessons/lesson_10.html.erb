@@ -328,10 +328,182 @@ end
 
 <p><strong>This is a tricky problem!</strong> Good luck on this challenge!</p>
 
+<div class="well">
+  <h3>Hint</h3>
+  <p>
+    In this challenge, you will have to utilize a hash. To initialize a hash with a default value, you can initialize the hash with <code>Hash.new</code> and pass in the default value as such:
+  </p>
+
+<pre><code class="irb">
+new_hash = Hash.new(0)
+
+new_hash["key"]
+=> 0
+</code></pre>
+
+  <p>
+    This will allow you to do things like this:
+  </p>
+
+<pre><code class="irb">
+new_hash = Hash.new(0)
+
+# Since the default value for every key is 0, we can add 10 to it
+new_hash["key"] += 10
+=> 10
+
+# Set the default value of each key to 100
+another_hash = Hash.new(100)
+
+another_hash["another_key"] += 20
+=> 120
+
+
+# If we don't set a default value we will get an error
+error_hash = Hash.new
+
+error_hash["new_key"] += 2
+NoMethodError: undefined method `+' for nil:NilClass
+</code></pre>
+  
+  <p>
+    In the last example, since <code>error_hash</code> doesn't have a default value, we can't perform addition to it. It is telling us that we can't perform addition on a <code>NilClass</code>. 
+  </p>
+
+  <p class="alert alert-info">
+    nil represents nothing.
+  </p>
+
+</div>
+
 <div class="hint" data-hint-id="1">
   <p>
-    First, let's get the user input.
+    First, let's prompt the user for a sentence using <code>puts</code>.
   </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Next, let's prompt the user for a hint. We can get user input with <code>gets</code> and store the user input in a variable.
+  </p>
+</div>
+
+<div class="gotcha" data-hint-id="2" data-gotcha-id="1">
+  <p>
+    Make sure you <code>chomp</code> off the new line character from the user input.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    Once you have the user input, let's split the sentences into words. What is a string method that can split strings?
+  </p>
+</div>
+
+<div class="hint" data-hint-id="4">
+  <p>
+    We can use the <code>split</code> method to split the sentences into words. Make sure to store the words into a variable so we can use them later.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="5">
+  <p>
+    Next, let's think about what we need to do to solve this problem.
+  </p>
+
+  <p>
+    The flow of the program would be something like this:
+  </p>  
+
+  <ul>
+    <li>Prompt user for input</li>
+    <li>Get user input</li>
+    <li>Split the user input into seperate words</li>
+    <li>For each word, see if the word has appeared yet in the sentence and keep track of how many times it has appeared</li>
+    <li>Print out the results</li>
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="6">
+  <p><strong>For each word, see if the word has appeared yet in the sentence and keep track of how many times it has appeared.</strong> Let's look at what we could do to solve this.</p>
+
+  <p>
+    Since we need to keep track of the words that have appeared in the array and how many times it has appeared, we should either use an array or a hash, since it will allow us to store items easily.
+  </p>
+
+  <p> 
+    Which one should we use?
+  </p>
+</div>
+
+
+<div class="gotcha" data-gotcha-id="2" data-hint-id="7">
+  <p>
+    Should we use an array to solve this problem? If we use an array, this is what the logic would look like:
+  </p>
+
+  <ul>
+    <li>For each word</li>
+    <ul>
+      <li>Check if word is already in array</li>
+      <ul>
+        <li>If it isn't, push an array consisting of the word and also the integer <code>1</code> to keep track of how many times the word has appeared (for example, <code>["pizza", 1]</code>)</li>
+        <li>If it is, find the subarray containing the word and increment the second element which contains the number of times the word has appeared by <code>1</code></li>
+      </ul>
+    </ul>
+  </ul>
+
+  <p>
+    This can be more logic than is needed.
+  </p>
+
+  <p>
+    Instead, we can do this much easily with a hash. <strong>Since hashes don't allow duplicate keys, we don't have to check if the word already exists in the hash.</strong>
+  </p>
+</div>
+
+<div class="hint" data-hint-id="8">
+  <p> 
+    Let's create a new hash with a default value of <code>0</code>. 
+  </p>
+
+  <p>
+    Then, for every word in the sentence, we can add the word into the hash as a <em>key</em>, and store the frequency as the <em>value</em>.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="3" data-hint-id="9">
+  <p>
+    Make sure that when you insert the word into the hash, you are making everything the same case (lowercase or uppercase) to make sure we count words like <code>"Pizza"</code> and <code>"pizza"</code> as the same word.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="10">
+  <p>
+    Lastly, let's iterate through each key value pair in the hash and print it out. We can iterate through the hash like such:
+  </p>
+
+<pre><code class="irb">
+hash = {
+  "key_1" => "value_1",
+  "key_2" => "value_2",
+  "key_3" => "value_3"
+}
+
+hash.each do |key, value|
+  puts "key: #{key}, value: #{value}"
+end
+</code></pre>
+
+  <p>
+    Result:
+  </p>
+
+<pre><code class="irb">
+key: key_1, value: value_1
+key: key_2, value: value_2
+key: key_3, value: value_3
+</code></pre>
 </div>
 
 <% @hints = true %>
