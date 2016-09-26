@@ -274,17 +274,17 @@ class BillCalculator
 
 	def input_orders
 		puts "Enter the food menu you have ordered:" 
-	    while(true) do
-	        order = gets.chomp
-	        break if order.downcase == "exit"
-	        
-	        puts "Enter the price of the order:"
-	        price = gets.chomp.to_i
-	        
-	        @orders << Order.new(order, price)
-	        
-	        puts "Enter another food item or type exit to generate a bill:"
-	    end
+		while(true) do
+			order = gets.chomp
+			break if order.downcase == "exit"
+
+			puts "Enter the price of the order:"
+			price = gets.chomp.to_i
+
+			@orders << Order.new(order, price)
+
+			puts "Enter another food item or type exit to generate a bill:"
+		end
 	end
 
 	def calculate
@@ -335,15 +335,15 @@ def calculate
 		puts "#{order.item}: #{order.price}"
 		@total_price += order.price
 	end
-    	    
-    puts "Enter the tax rate:"
-    tax_rate = gets.chomp.to_i
+		    
+	puts "Enter the tax rate:"
+	tax_rate = gets.chomp.to_i
 
-    puts "Calculating tax..."
-    tax_amount = @total_price * tax_rate.to_f/100
+	puts "Calculating tax..."
+	tax_amount = @total_price * tax_rate.to_f/100
 
-    @total_price += tax_amount
-    puts "Total: #{@total_price}"
+	@total_price += tax_amount
+	puts "Total: #{@total_price}"
 end
 </code></pre>
 
