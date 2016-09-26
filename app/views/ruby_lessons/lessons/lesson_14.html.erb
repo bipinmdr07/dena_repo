@@ -48,7 +48,7 @@ end
 
 order = Order.new
 
-puts order
+puts order.inspect
 </code></pre>
 
 <p>
@@ -59,6 +59,10 @@ puts order
 #&lt;Order:0x000000008052c8&gt;
 </code></pre>
 
+<p class="alert alert-info">
+	The <code>inspect</code> method allows us to look at the object in more detail.
+</p>
+
 <p>
 	We just created our first <code>Order</code> object. Let's go through what we just did.
 </p>
@@ -66,7 +70,7 @@ puts order
 <ul>
 	<li>We created an <code>Order</code> class (it doesn't do anything yet)</li>
 	<li>We created a new <code>Order</code> with the <code>new</code> method</li>
-	<li>We stored the new <code>Order</code> into a variabled called <code>order</code></li>
+	<li>We stored the new <code>Order</code> into a variable called <code>order</code></li>
 	<li>We printed the <code>order</code></li>
 </ul>
 
@@ -84,7 +88,7 @@ end
 
 order = Order.new
 
-puts order
+puts order.inspect
 </code></pre>
 
 <p>
@@ -96,6 +100,8 @@ puts order
 </p>
 
 <%= image_tag 'ruby_lessons/order_error.png', class: 'screenshot img-responsive' %>
+
+<br>
 
 <div class="well">
 	<h3>Debugging</h3>
@@ -113,43 +119,91 @@ order.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (Arg
 	</p>
 
 	<p>
-		First, it says that the error is on line 2 of <code>order.rb</code> (<code>order.rb:2</code>).
+		<strong>First</strong>, it says that the error is on line 2 of <code>order.rb</code> (<code>order.rb:2</code>).
 	</p>
 
 	<p>
-		Then it says that the error is in <code>initialize</code> (<code>order.rb:2:in `initialize'</code>).
+		<strong>Then</strong> it says that the error is in <code>initialize</code> (<code>order.rb:2:in `initialize'</code>).
 	</p>
 
 	<p>
-		Finally, it says that we are giving a wrong number of arguments - we gave it 0 arguments and it expected 2 arguments (<code>wrong number of arguments (given 0, expected 2) (ArgumentError)	</code>).
+		<strong>Finally</strong>, it says that we are giving a wrong number of arguments - we gave it 0 arguments and it expected 2 arguments (<code>wrong number of arguments (given 0, expected 2) (ArgumentError)	</code>).
 	</p>
 
 	<p>
-		From this information, we know that the root of the problem is on line 2 in the <code>initialize</code> method. It seems that we need to give the program more arguments.
+		From this information, we know that the root of the problem is on line 2 in the <code>initialize</code> method. But wait...what is this <code>initialize</code> method?
 	</p>
 </div>
-
-
 
 <div class="well">
-	<h3>Everything in Ruby is an Object</h3>
+	<h3>initialize</h3>
 
 	<p>
-		<strong>In Ruby, <em>everything is an object.</em></strong>
+		Whenever a new object is created, Ruby looks for a method called <code>initialize</code> and runs the method. In other words, when the <code>new</code> method is triggered, Ruby looks for a method called <code>initialize</code> in the class and executes it.
 	</p>
 
 	<p>
-		In <code>irb</code>, let's type in the following:
+		For example, let's say we have a class called <code>Test</code> that looks like this:
 	</p>
 
-<pre><code class="irb">
-String.class
-=> Class	
+<pre><code class="ruby">
+class Test
+  def initialize
+  	puts "I've been initialized!"
+  end
+end
 </code></pre>
 
+	<p>
+		Now when we create a new instance of this class, let's see what happens:
+	</p>
+
+<pre><code class="ruby">
+class Test
+  def initialize
+  	puts "I've been initialized!"
+  end
+end
+
+Test.new
+</code></pre>
+
+	<p>
+		The output will look like this:
+	</p>
+
+<pre><code class="bash">
+I've been initialized!	
+</code></pre>
+
+	<p>
+		<strong>Again, when we create a new instance of a class in Ruby, it finds the <code>initialize</code> method and executes it.</strong> In this case, our <code>initialize</code> method simply <code>puts</code> the string "I've been initialized!".
+	</p>
+
+	<p>
+		Let's go back to our order program. When we run <code>Order.new</code>, Ruby finds the <code>initialize</code> method and runs the method. In the <code>initialize</code> method, we have two parameters: <code>item</code> and <code>price</code>. 
+	</p>
+
+	<p>
+		The initialize method here <em>expects</em> two parameters. The parameters are passed in from the <code>new</code> method:
+	</p>
+
+<pre><code class="ruby">
+Order.new(item, price)
+</code></pre>
+
+	<p>
+		The parameters passed in through the <code>new</code> method are now passed into the <code>initialize method.</code>
+	</p>
+
+	<p>The parameter values are then stored into two variables, <code>@item</code> and <code>@price</code>. These variables that have a <code>@</code> attached to the back of the name are called <strong><em>instance variables</em></strong>.
+	</p>
 </div>
 
 
+<p>
+	In the next lesson, let's talk about what <em>instance variables</em> are.
+</p>
 
 
 

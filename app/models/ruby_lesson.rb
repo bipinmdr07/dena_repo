@@ -28,11 +28,9 @@ class RubyLesson < Lesson
         [14, "Classes"],
         [15, "Instance Variables"],
         [16, "attr_reader and attr_writer"],
-        [17, "Instance Methods"],
-        [18, "Encapsulation"],
-        [19, "Class Methods vs Instance Methods"],
-        [20, "Constant Variables"],
-        [21, "Challenge: Building a Deck of Cards"]
+        [17, "Instance Methods, Class Methods, and Encapsulation"],
+        [18, "Constant Variables"],
+        [19, "Challenge: Building a Deck of Cards"]
       ]
     ],
     ["Ruby Challenges",

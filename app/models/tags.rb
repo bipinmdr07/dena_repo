@@ -63,6 +63,13 @@ class Tags < ActiveRecord::Base
       [10, "Loops"] => %w(),
       [11, "Defining our own methods"] => %w(),
       [12, "Conditionals and Logical Operators"] => %w(),
+      [13, "Introduction to Object Oriented Programming"] => %w(),
+      [14, "Classes"] => %w(),
+      [15, "Instance Variables"] => %w(),
+      [16, "attr_reader and attr_writer"] => %w(),
+      [17, "Instance Methods, Class Methods, Encapsulation"] => %w(),
+      [18, "Constant Variables"] => %w(),
+      [19, "Challenge: Building a Deck of Cards"] => %w(),
       [30, "Foobar Problem"] => %w(foobar),
       [31, "Test-First Ruby: Hello"] => %w(),
       [32, "Challenge: Temperature Conversion"] => %w()
