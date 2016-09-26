@@ -54,7 +54,7 @@
                   <label class="tag_label">MENTOR POST</label>
                 <% else %>
                   <a href="/<%= question.course_name.underscore %>s"><label class="tag_label"><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></label></a>
-                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id.to_i - 1][1] %></label></a>
+                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= get_lesson_name(question.course_name, question.lesson_id) %></label></a>
                 <% end %>
               </div><!-- question_tags -->
             </div><!-- col-xs-12 col-sm-2 -->

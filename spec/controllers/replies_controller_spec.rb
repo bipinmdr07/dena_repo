@@ -22,14 +22,14 @@ RSpec.describe RepliesController, type: :controller do
         expect(response).to redirect_to question_path(@question)
       end
 
-      it "sends 2 emails" do
+      it "sends an email" do
         setup_question_by_current_user
 
         sign_in @user
 
         expect {
           post :create, question_id: @question.id, reply: FactoryGirl.attributes_for(:reply)
-        }.to change { ActionMailer::Base.deliveries.count }.by(2)
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it "creates notification for involved users" do

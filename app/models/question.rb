@@ -15,6 +15,8 @@ class Question < ActiveRecord::Base
   delegate :email, to: :user, prefix: true
   delegate :avatar, to: :user, prefix: true
 
+  scope :unresolved, -> { where(resolved: false) }
+
   acts_as_votable
 
   include Elasticsearch::Model

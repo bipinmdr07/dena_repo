@@ -29,7 +29,7 @@ RSpec.describe StudentSessionsController, type: :controller do
       it "should create a new mentor session" do
         mentor_session = FactoryGirl.create(:mentor_session, user_id: user.id, mentor_id: mentor.id)
         expect{
-          post :create, student_session: FactoryGirl.attributes_for(:student_session, mentor_session_id: mentor_session.id)
+          post :create, student_session: FactoryGirl.attributes_for(:student_session, user_id: user.id, mentor_id: mentor.id, mentor_session_id: mentor_session.id)
         }.to change(StudentSession, :count).by(1)
       end
     end 
