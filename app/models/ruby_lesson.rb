@@ -22,6 +22,19 @@ class RubyLesson < Lesson
         [12, "Conditionals and Logical Operators"]
       ]
     ],
+    ["Object Oriented Programming",
+      [
+        [13, "Introduction to Object Oriented Programming"],
+        [14, "Classes"],
+        [15, "Instance Variables"],
+        [16, "attr_reader and attr_writer"],
+        [17, "Instance Methods"],
+        [18, "Encapsulation"],
+        [19, "Class Methods vs Instance Methods"],
+        [20, "Constant Variables"],
+        [21, "Challenge: Building a Deck of Cards"]
+      ]
+    ],
     ["Ruby Challenges",
       [ 
         [31, "Foobar Challenge"],
