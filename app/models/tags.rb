@@ -60,7 +60,7 @@ class Tags < ActiveRecord::Base
       [7, "Variables"] => %w(),
       [8, "Arrays"] => %w(),
       [9, "Hashes"] => %w(),
-      [10, "Loops"] => %w(),
+      [10, "Looping and Iterating"] => %w(),
       [11, "Defining our own methods"] => %w(),
       [12, "Conditionals and Logical Operators"] => %w(),
       [13, "Introduction to Object Oriented Programming"] => %w(),

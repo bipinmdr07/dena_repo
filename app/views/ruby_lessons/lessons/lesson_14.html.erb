@@ -172,7 +172,7 @@ Test.new
 		The output will look like this:
 	</p>
 
-<pre><code class="bash">
+<pre><code class="irb">
 I've been initialized!	
 </code></pre>
 
@@ -181,11 +181,15 @@ I've been initialized!
 	</p>
 
 	<p>
-		Let's go back to our order program. When we run <code>Order.new</code>, Ruby finds the <code>initialize</code> method and runs the method. In the <code>initialize</code> method, we have two parameters: <code>item</code> and <code>price</code>. 
+		<strong>Let's go back to our order program.</strong> When we run <code>Order.new</code>, Ruby finds the <code>initialize</code> method and runs the method. In the <code>initialize</code> method, we have two parameters: <code>item</code> and <code>price</code>. 
 	</p>
 
 	<p>
-		The initialize method here <em>expects</em> two parameters. The parameters are passed in from the <code>new</code> method:
+		The initialize method here <strong><em>expects</em></strong> two parameters - if it doesn't receive two parameters, then the program will return an error.
+	</p>
+
+	<p>
+		The parameters for the <code>initialize</code> method are passed in from the <code>new</code> method:
 	</p>
 
 <pre><code class="ruby">
