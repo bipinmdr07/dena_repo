@@ -68,11 +68,10 @@ class Tags < ActiveRecord::Base
       [15, "Instance Variables"] => %w(),
       [16, "attr_reader and attr_writer"] => %w(),
       [17, "Instance Methods, Class Methods, Encapsulation"] => %w(),
-      [18, "Constant Variables"] => %w(),
-      [19, "Challenge: Building a Deck of Cards"] => %w(),
-      [30, "Foobar Problem"] => %w(foobar),
-      [31, "Test-First Ruby: Hello"] => %w(),
-      [32, "Challenge: Temperature Conversion"] => %w()
+      [18, "Challenge: Building a Deck of Cards"] => %w(),
+      [19, "Foobar Challenge"] => %w(),
+      [20, "Test-First Ruby: Hello"] => %w(),
+      [21, "Challenge: Temperature Conversion"]  => %w()
     },
     "command_line_lessons" => {
       [1, "4 Commands You Need to Know"] => %w(command line),

@@ -34,9 +34,9 @@ class RubyLesson < Lesson
     ],
     ["Ruby Challenges",
       [ 
-        [31, "Foobar Challenge"],
-        [32, "Test-First Ruby: Hello"],
-        [33, "Challenge: Temperature Conversion"] 
+        [19, "Foobar Challenge"],
+        [20, "Test-First Ruby: Hello"],
+        [21, "Challenge: Temperature Conversion"] 
       ]
     ]
   ]
