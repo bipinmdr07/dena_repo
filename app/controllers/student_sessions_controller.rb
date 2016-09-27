@@ -3,6 +3,7 @@ class StudentSessionsController < ApplicationController
 
   def index
     @mentor_sessions = current_user.mentor_sessions.order("created_at DESC")
+                                                   .includes(:student_session)
     @mentor = current_user.mentor_user if current_user.mentor_id
   end
 

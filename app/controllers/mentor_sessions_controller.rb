@@ -3,7 +3,9 @@ class MentorSessionsController < ApplicationController
   before_action :authenticate_mentor!
 
   def index
-    @mentor_sessions = MentorSession.where(user_id: params[:mentee_id]).order("created_at DESC")
+    @mentor_sessions = MentorSession.where(user_id: params[:mentee_id])
+                                    .order("created_at DESC")
+                                    .includes(:student_session)
     @mentee = User.find(params[:mentee_id])
   end
 

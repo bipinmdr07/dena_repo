@@ -19,9 +19,10 @@ class AdminDashboardController < ApplicationController
       signed_up_last_month => "signed up last month"
     }
 
-    @mentor_sessions = MentorSession.includes(:student_session).all
+    @mentor_sessions = MentorSession.all
       .order("created_at DESC")
       .paginate(page: params[:page], per_page: 5)    
+      .includes(:student_session, :mentor, :user)
 
   end
 

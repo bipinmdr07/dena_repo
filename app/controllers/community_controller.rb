@@ -3,9 +3,15 @@ class CommunityController < ApplicationController
   
   def index
     if params[:query].present?
-      @questions = Question.search(params[:query]).page(params[:page]).records
+      @questions = Question.search(params[:query])
+      					   .page(params[:page])
+      					   .records
+      					   .includes(:user)
     else
-      @questions = Question.includes(:replies).order("created_at DESC").paginate(page: params[:page], per_page: 10)
+      @questions = Question.includes(:replies)
+      					   .order("created_at DESC")
+      				       .paginate(page: params[:page], per_page: 10)
+      				       .includes(:user)
     end
   end
 end

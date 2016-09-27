@@ -51,7 +51,7 @@ class Tags < ActiveRecord::Base
       [9, "CHALLENGE: Host Your Website"] => %w()
     },
     "ruby_lessons" => {
-      [1, "Introduction to Ruby"] => %w(),
+      [1, "Introduction to Ruby"] => %w(ruby),
       [2, "Setting up your environment"] => %w(),
       [3, "Super Basic Command Line Crash Course"] => %w(),
       [4, "Your First Ruby Program"] => %w(),

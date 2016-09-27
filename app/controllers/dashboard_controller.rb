@@ -4,18 +4,17 @@ class DashboardController < ApplicationController
   def index
     @due_cards = due_cards
     
-    @activities = PublicActivity::Activity.where(owner_id: current_user.id)
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
     @quote = Quote::ARRAY.sample
 
-    @questions = current_user.questions.where(mentor_post: false).order("created_at DESC").limit(5)
-    @submissions = current_user.submissions.order("created_at DESC").limit(5)
+    @questions = current_user.questions.where(mentor_post: false).order("created_at DESC").limit(5).includes(:user)
+    @submissions = current_user.submissions.order("created_at DESC").limit(5).includes(:user)
 
     @last_mentor_session = current_user.mentor_sessions.last unless current_user.mentor
 
-    @activities = PublicActivity::Activity.all.order('created_at DESC').limit(20)
+    @activities = PublicActivity::Activity.order('created_at DESC').limit(20).includes(:owner)
 
     @lessons_completed_today = @lessons.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @flashcards_completed_today = @flashcards.where("created_at >= ?", Time.zone.now.beginning_of_day)
@@ -30,8 +29,8 @@ class DashboardController < ApplicationController
     }
 
     if current_user.admin
-      @unresolved_questions = Question.unresolved
-      @unapproved_submissions = Submission.unapproved
+      @unresolved_questions = Question.unresolved.includes(:user)
+      @unapproved_submissions = Submission.unapproved.includes(:user)
     end
   end
 
