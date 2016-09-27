@@ -190,7 +190,7 @@
             <div class="panel-body">
               <ul class="unindented_ul">
                 <% @unresolved_questions.each do |question| %>
-                  <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                  <li><%= link_to question.title, question_path(question.id) %> by <%= question.user_name %></li>
                 <% end %>
               </ul>
             </div>
@@ -205,7 +205,7 @@
             <div class="panel-body">
               <ul class="unindented_ul">
                 <% @unapproved_submissions.each do |submission| %>
-                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
                 <% end %>
               </ul>
             </div>
