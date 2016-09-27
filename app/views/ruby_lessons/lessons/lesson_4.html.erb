@@ -51,7 +51,7 @@ ruby hello.rb
 <%= image_tag 'ruby_lessons/print_hello_world.png', class: 'screenshot' %>
 
 <p>
-  As you can see above, we can ruby programs with the <code>ruby</code> command.
+  As you can see above, we can run ruby programs with the <code>ruby</code> command.
 </p>
 
 <h3>Error Messages</h3>
@@ -103,6 +103,11 @@ hello.rb:2:in `&lt;main&gt;': undefined local variable or method `hello' for mai
 <p>
   With this information, we can start debugging the program. We know that the program doesn't know a command <code>hello</code>, so we can just simply remove that code. 
 </p>
+
+<pre><code class="ruby">
+puts "Hello world"
+</code></pre>
+
 
 <p>
   Save the file and run the program again. You will see that the error message has gone away.
