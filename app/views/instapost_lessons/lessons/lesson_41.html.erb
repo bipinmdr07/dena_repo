@@ -1,1 +1,171 @@
 <h1><%= title_for(InstapostLesson, 10, 2) %></h1>
+
+<p>
+	Let's take a look at this piece of code:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+	&lt;%= image_tag post.user.photo, class: 'prof_pic_small' %&gt;
+	&lt;%= link_to post.user.name, user_path(post.user_id) %&gt;
+
+	&lt;% post.comments.each do |comment| %&gt;
+
+		&lt;%= link_to comment.user.name,  user_path(comment.user_id) %&gt; &lt;%= comment.text %&gt;
+
+	&lt;% end %&gt;	
+
+	...
+
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+	In this code above, let's specifically look at the following pieces of code:
+</p>
+
+<pre><code class="ruby">
+post.user.photo
+post.user.name
+
+...
+
+comment.user.name
+</code></pre>
+
+<p>
+	<strong>Notice how the code above all call attributes of another object.</strong>
+</p>
+
+<p>
+	For example, in <code>post.user.photo</code>, <code>photo</code> is an attribute of <code>user</code>, which is an attribute of <code>post</code>. 
+</p>
+
+<p>
+	This violates <strong>the Law of Demeter</strong>.
+</p>
+
+<div class="well">
+	<h3>The Law of Demeter</h3>
+
+	<p>
+		In the simplest terms, <strong>the Law of Demeter states that an object should not call methods through another object.</strong> It is also called the <strong>principle of least knowledge</strong>.
+	</p>
+
+	<p>
+		The reason and motive for this guideline is to keep the code maintanable and adaptable. By keeping an object from calling methods of another object, we keep the objects less dependent on other objects. This is related to the concept of <em>loose coupling</em>.
+	</p>
+
+	<p>
+		<em>Loose coupling</em> refers to code in which objects do not depend on each other and has little or no kowledge about other objects. <strong>Tightly coupled code can lead to unmaintanable code</strong> - if you change one piece of the code, it might lead another piece of the codebase to break.
+	</p>
+</div>
+
+<p>
+	<strong>How can we abide by the law of demeter in Rails?</strong>
+</p>
+
+<p>
+	What we can do is create methods within the class that return the specific method of the other object we are trying to access. For example, in our <code>Post.rb</code>, we can write the following methods:
+</p>
+
+<pre><code class="ruby">
+class Post &lt; ActiveRecord::Base
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+  
+  mount_uploader :photo, PhotoUploader
+
+  def user_photo
+  	user.photo
+  end
+
+  def user_name
+  	user.name
+  end
+
+  delegate :photo, :name, to: :user, prefix: true  
+end	
+</code></pre>
+
+<p>
+	Now, instead of accessing the <CODE>photo</CODE> of the <code>user</code> directly (<code>post.user.photo</code>), we have created a method <em>inside</em> of the <code>Post</code> class that we can use to access the same data: <code>post.user_photo</code>.
+</p>
+
+<p>
+	<strong>However, this can become repetitive, and fortunately Rails provides a convenient method to achieve this; the <code>delegate</code> method.</strong>
+</p>
+
+<p>
+	We can reactor the code like this:
+</p>
+
+<p>
+	In <code>Post.rb</code>:
+</p>
+
+<pre><code class="ruby">
+class Post &lt; ActiveRecord::Base
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+  
+  mount_uploader :photo, PhotoUploader
+
+  delegate :photo, :name, to: :user, prefix: true  
+end
+</code></pre>
+
+<p>
+	In <code>Comment.rb</code>:
+</p>
+
+<pre><code class="ruby">
+class Comment &lt; ActiveRecord::Base
+  belongs_to :user
+  belongs_to :post
+
+  delegate :name, to: :user, prefix: true
+end
+</code></pre>
+
+<p>
+	In <code>index.html.erb</code>:
+</p>
+
+<pre><code class="erb">
+&lt;!--  image_tag post.user.photo, class: 'prof_pic_small' --&gt;
+&lt;%= image_tag post.user_photo, class: 'prof_pic_small' %&gt;
+
+&lt;!--  link_to post.user.name, user_path(post.user_id) --&gt;
+&lt;%= link_to post.user_name, user_path(post.user_id) %&gt;
+
+&lt;!-- link_to comment.user.name,  user_path(comment.user_id) --&gt;
+&lt;%= link_to comment.user_name,  user_path(comment.user_id) %&gt;
+</code></pre>
+
+<p class="alert alert-info">
+	Setting <code>prefix: true</code> gives you a method like this: <code>post.user_name</code>. Setting <code>prefix: false</code> would result in a method without the prefix - <code>post.name</code>.
+</p>
+
+<p>
+	By using <code>delegate</code>, we can follow the Law of Demeter, which will lead to a more maintanable codebase.
+</p>
+
+<h2>Extra Reading</h2>
+
+<ul>
+	<li>https://en.wikipedia.org/wiki/Law_of_Demeter</li>	
+	<li>https://samurails.com/tutorial/rails-delegate-dont-break-the-law-of-demeter/</li>
+	<li>http://www.virtuouscode.com/2011/07/05/demeter-its-not-just-a-good-idea-its-the-law/</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+

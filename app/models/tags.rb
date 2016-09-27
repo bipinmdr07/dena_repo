@@ -148,7 +148,7 @@ class Tags < ActiveRecord::Base
       [38, "Re-rendering the Page"] => %w(),
       [39, "Final Touches"] => %w(),
       [40, "Eager Loading and the N+1 Query Problem"] => %w(),
-      [41, "Using Delegation"] => %w()
+      [41, "The Law of Demeter and Delegation"] => %w()
     },
     "javascript_lessons" => {
       [1, "Learning the Basics"] => %w(),

@@ -84,7 +84,7 @@ class InstapostLesson < Lesson
     ["Refactoring to implement Best Practices",
       [
         [40, "Eager Loading and the N+1 Query Problem"],
-        [41, "Using Delegation"]
+        [41, "The Law of Demeter and Delegation"]
       ]
     ]
   ]
