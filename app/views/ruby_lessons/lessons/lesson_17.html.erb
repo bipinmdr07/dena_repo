@@ -94,7 +94,7 @@ puts "Total: #{total_price}"
 </p>
 
 <p>
-	Let's first divide the program into steps:
+	Let's first divide the program into steps (read the comments added to the program):
 </p>
 
 
@@ -141,7 +141,7 @@ puts "Total: #{total_price}"
 </p>
 
 <p>
-	In our <code>BillCalculator</code> class, let's add two <em>instance methods</em>; <code>input_orders</code> and <code>calculate_total_price</code>:
+	In our <code>BillCalculator</code> class, let's add two <em>instance methods</em>; <code>input_orders</code> and <code>calculate_total_price</code> (we'll talk about what instance methods are next):
 </p>
 
 <pre><code class="ruby">
@@ -237,7 +237,7 @@ cathy.count
 
 
 <p>
-	Next, let's take the following code and refactor it so that we can put it inside of our <code>BillCalculator</code> class.
+	Next, let's take the following code and refactor it so that we can put it inside of our <code>BillCalculator</code> class. Take a look at the newly added comments:
 </p>
 
 <pre><code class="ruby">
@@ -348,7 +348,7 @@ end
 </code></pre>
 
 <p>
-	Since we are referencing the <code>item</code> and <CODE>price</CODE> of the <code>order</code>, we have to set the <CODE>attr_reader</CODE> for the <code>Order</code> class. If you haven't already, let's add <code>attr_reader</code> to the <code>Order</code> class.
+	Since we are referencing the <code>item</code> and <CODE>price</CODE> of the <code>order</code> (<code>puts "#{order.item}: #{order.price}"</code>), we have to set the <CODE>attr_reader</CODE> for the <code>Order</code> class or else it will give us an error. If you haven't already, let's add <code>attr_reader</code> to the <code>Order</code> class.
 </p>
 
 <pre><code class="ruby">
@@ -546,8 +546,19 @@ end
 	Now that we've refactored our procedural code into objected oriented code, we have a much more organized codebase. We've also split methods into seperate methods. 
 </p>
 
+
+<pre><code class="ruby">
+bill_calculator = BillCalculator.new
+bill_calculator.input_orders
+bill_calculator.calculate_total_price
+</code></pre>
+
 <p>
 	Notice how our code makes a lot more sense now, and we have methods that even a person who knows nothing about programming can understand.
+</p>
+
+<p>
+	Now to run the code, we can add the following lines of code:
 </p>
 
 <p>
