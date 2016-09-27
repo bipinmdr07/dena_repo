@@ -86,6 +86,79 @@
   </tr>
 </table>
 
+<p>
+  Here's a basic rundown of the logical operators:
+</p>
+
+<table class="table">
+  <tr>
+    <th>Expression</th>
+    <th>Result</th>
+  </tr>
+
+  <tr>
+    <td><code>false && false</code></td>
+    <td><code>false</code></td>
+  </tr>
+
+  <tr>
+    <td><code>true && false</code></td>
+    <td><code>false</code></td>
+  </tr>
+
+  <tr>
+    <td><code>false && true</code></td>
+    <td><code>false</code></td>
+  </tr>
+
+  <tr>
+    <td><code>true && true</code></td>
+    <td><code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>false || false</code></td>
+    <td><code>false</code></td>
+  </tr>
+
+  <tr>
+    <td><code>false || true</code></td>
+    <td><code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>true || false</code></td>
+    <td><code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>true || true</code></td>
+    <td><code>true</code></td>
+  </tr>
+</table>
+
+<hr>
+
+<h2>Quiz</h2>
+
+<p><code>true && !false</code></p>    
+<p><code>false || !false</code></p>
+<p><code>true && (false || true)</code></p>
+<p><code>true && (true && false)</code></p>
+
+<button onclick="$('.answers').show()" class="btn btn-cta-primary">Display Answers</button>
+
+<div class="answers well" style="display: none; margin-top: 20px">
+  <h3>Answers</h3>
+  <ul>
+    <li><code>true && !false</code> => <code>true</code></li>
+    <li><code>false || !false</code> => <code>false</code></li>
+    <li><code>true && (false || true)</code> => <code>true</code></li>
+    <li><code>true && (true && false)</code> => <code>false</code></li>
+  </ul>
+</div>
+
+<hr>
 
 <h3>if</h3>
 
@@ -339,6 +412,10 @@ ruby is_even.rb
 
 <p>
   First, try to create this program yourself.
+</p>
+
+<p class="alert alert-info">
+  If you don't know how to get started, click the "Give me a hint!" button down below.
 </p>
 
 <p><strong>Specifications</strong></p>
