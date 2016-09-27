@@ -21,11 +21,11 @@ people = {
 </p>
 
 <p>
-  In the <code>people</code> hash above, <code>"Jake"</code> is the <em>key</em>, and <code>30</code> is the <code>value</code>. <code>"Jake"</code> and <code>30</code> are paired, thus they are called <strong>key value pairs</strong>. 
+  In the <code>people</code> hash above, <code>"Jake"</code> is the <strong><em>key</em></strong>, and <code>30</code> is the <strong><em>value</em></strong>. <code>"Jake"</code> and <code>30</code> are paired, thus they are called <strong>key value pairs</strong>. 
 </p>  
 
 <p>
-  Next, <code>"Adam"</code> is the <em>key</em>, and <code>31</code> is the <code>value</code>. Again, <code>"Adam"</code> and <code>31</code> are a <strong>key value pair</strong>.
+  Next, <code>"Adam"</code> is the <strong><em>key</em></strong>, and <code>31</code> is the <strong><em>value</em></strong>. Again, <code>"Adam"</code> and <code>31</code> are a <strong>key value pair</strong>.
 </p>
 
 <p>
@@ -47,11 +47,14 @@ people["Jake"]
 
 
 <pre><code class="irb">
+# We give it the key and we get the value
 people["Jake"]
 => 30
 
+# We can assign the value of the key to something else
 people["Jake"] = 100
 
+# Now the value is 100 (it used to be 30)
 people["Jake"]
 => 100
 </code></pre>
