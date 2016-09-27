@@ -80,6 +80,12 @@ class InstapostLesson < Lesson
         [38, "Re-rendering the Page"],
         [39, "Final Touches"]
       ]
+    ],
+    ["Refactoring to implement Best Practices",
+      [
+        [40, "Eager Loading and the N+1 Query Problem"],
+        [41, "Using Delegation"]
+      ]
     ]
   ]
 end
