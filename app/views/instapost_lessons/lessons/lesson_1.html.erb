@@ -8,88 +8,68 @@
   Together, we're going to build a clone of <strong>Instagram</strong>, which is now a billion dollar company. But you too, can make an app that is just like it!
 </p>
 
+
 <p>
-  First, let's open our terminal.
+  First, let's login to C9 and create a new workspace.
+</p>
+
+<h2>Setting Up Your Cloud9 Environment</h2>
+
+<p>
+  Installing Ruby on Rails, Ruby, git, and everything else takes so much time and it can be extremely frustrating. We don't want you to get stuck on this part - we'd rather have you start coding immediately :) That's why we provide Cloud9 accounts for all of our students, so that any student can start coding right away.
+</p>
+
+<p class="alert alert-success">
+  You should have gotten an invitation from the TECHRISE team by now, but if you haven't please contact us at contact@techrise.me.
 </p>
 
 <p>
-  In the terminal, let’s navigate to our desktop by running the following command.
+  Once you've signed up for Cloud9, then you can create a workspace:
 </p>
 
-
-<pre><code class="bash">
-cd ~/desktop
-</code></pre>
+<%= image_tag 'ideator/c9_dashboard.png', class: 'screenshot' %>  
 
 <p>
-  This is where we’ll create our Instapost app. In the terminal that we just opened up, let’s type in the following command.
-</p>
-
-
-<pre><code class="bash">
-rails new instapost
-</code></pre>
-
-<p>
-  This command creates a new rails application. Awesome!
+  Click on "Create New Workspace". This will take you to a new page where you can fill out information about your new project.
 </p>
 
 <p>
-  It should create a bunch of files and you shouldn’t get any errors. If you do, make sure that everything is spelled out correctly.
+  Enter "Instapost" as the project name, and choose the Ruby template as shown below:
+</p>
+
+<%= image_tag 'ideator/c9_new_project.png', class: 'screenshot' %>
+
+<p>
+  Finally, click the "Create Workspace" button. Just like that, your Rails environment has been created!
 </p>
 
 
 <p>
-  Great, now that we’ve created our new rails app, let’s start up our server. Let’s open up another terminal window.
+  First, let's open up our terminal.
 </p>
 
 <p>
-  We want to have <strong>two</strong> terminal windows open since we want one for the server and one for typing in rails commands. In one of the terminal windows, let’s navigate to our project folder. We can do this by running the following command:
-</p>
-
-<pre><code class="bash">
-cd ~/desktop/instapost
-</code></pre>
-
-<p>
-  First we have to create our initial database. In the console enter
+  For every new Rails application, we have to create our initial database. In the terminal enter the following commands:
 </p>
 
 <pre><code class="bash">
 rake db:create:all
-</code></pre>
-
-<pre><code class="bash">
 rake db:migrate
 </code></pre>
 
-<div class="well">
-  <h3>No Rakefile found?</h3>
-  <p>
-    If you get an error saying <code>No Rakefile found</code>, chances are you didn't navigate to your <code>instapost</code> folder before running the <code>rake</code> commands.
-  </p>
-
-  <p>
-    If you haven't done so, make sure to enter <code>cd ~/desktop/instapost</code> before entering the <code>rake</code> commands.
-  </p>
-
-</div>
-
 <p>
-  Now let’s fire up our rails server by entering this command.
+  Now let’s fire up our rails server by entering this command in the terminal window.
 </p>
 
 <pre><code class="bash">
-rails server
+rails s -b $IP -p $PORT
 </code></pre>
 
 <p>
-  Give it a few seconds to load. Now go into your browser and go to
+  Give it a few seconds to load. You can start the application by clicking the Preview button:
 </p>
 
-<pre><code class="bash">
-http://localhost:3000/
-</code></pre>
+<%= image_tag 'ideator/c9_start_server.png', class: 'screenshot' %>
 
 <p>
   You should see a nice welcome page from Ruby on Rails.
@@ -98,20 +78,6 @@ http://localhost:3000/
 <%= image_tag 'ideator/welcome_page.png', class: 'img-responsive screenshot', style: 'margin-bottom: 30px' %>
 
 
-<div class="well">
-  <h3>I don't see a welcome page/I get an error</h3>
-  <p>
-    If you don’t see a welcome page or get an error, make sure you've navigated to your project folder. You can do this by running this command:
-  </p>
-
-<pre><code class="bash">
-cd ~/desktop/instapost
-</code></pre>
-
-  <p>
-    If this doesn't solve the problem, make sure that you have followed the instructions above step by step :)
-  </p>
-</div>
 
 <p>
   Awesome! We're all set!
