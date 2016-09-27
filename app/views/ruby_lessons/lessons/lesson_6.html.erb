@@ -1,0 +1,88 @@
+<h1><%= title_for(RubyLesson, 1, 6) %></h1>
+
+<p>
+  In Ruby, every data type such as strings, integers, and dates are <strong>objects</strong>. For now, <strong>we can think of objects as things that receive commands to execute.</strong> Once we go into object oriented programming (OOP), we will talk more about objects.
+</p>
+
+<p>
+  <strong>Methods</strong> on the other hand, are the commands we tell the objects to execute.
+</p>  
+
+<p> 
+  For example <code>"This is a string"</code> is a <code>String</code> object. We can command it to reverse itself with the <code>.reverse</code> method:
+</p>
+
+<pre><code class="irb">
+"This is a string".reverse
+=> "gnirts a si sihT"
+</code></pre>
+
+<p>
+  Again, in this case <code>"This is a string"</code> is a <code>String</code> object, and <code>.reverse</code> is the method. <code>"This is a string"</code> is receiving the command to be <code>reverse</code>d.
+</p>  
+
+<p>An easy way to remember: <strong>Objects are nouns, methods are verbs</strong>.</p>
+
+<h3>String Methods</h3>
+
+<p>
+  There are many string methods, which can be seen <%= link_to 'here', 'https://ruby-doc.org/core-2.2.0/String.html', target: '_blank' %> if you are interested. Let's go through some of the most commonly used ones.
+</p>
+
+<pre><code class="irb">
+# Makes all letters uppercase
+"this is a string".upcase
+=> "THIS IS A STRING"
+
+# Makes all letters lowercase
+"THIS IS A STRING".downcase
+=> "this is a string"
+
+# Get length of string
+"this is a string".length
+=> 16
+
+# Reverse string
+"this is a string".reverse
+=> "gnirts a si siht"
+
+# Capitalize first letter
+"this is a string".capitalize
+=> "This is a string"
+
+# Check if string exists within string
+"this is a string".include?("ri")
+=> true
+
+"this is a string".include?("jy")
+=> false
+
+# Split string into an array of individual characters
+"this is a string".split("")
+=> ["t", "h", "i", "s", " ", "i", "s", " ", "a", " ", "s", "t", "r", "i", "n", "g"]
+
+# Convert string into integer
+"10".to_i
+=> 10
+
+# Convert string into float
+"10".to_f
+=> 10.0
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

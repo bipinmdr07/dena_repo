@@ -1,0 +1,267 @@
+<h1><%= title_for(RubyLesson, 1, 7) %></h1>
+
+<p>
+  <strong>Variables</strong> are where you can store data in a program. In our interactive ruby console, let's type in the following and press enter:
+</p>
+
+<pre><code class="irb">
+name = "Bob"
+</code></pre>
+
+<p>
+  Here, we have inserted the string "Bob" into the variable called <code>name</code>. Let's go into <code>irb</code> and type in the following and press enter:
+</p>
+
+<pre><code class="irb">
+name
+=> "Bob"
+</code></pre>
+
+<p>
+  As we can see, typing <code>name</code> outputs <code>"Bob"</code>.
+</p>  
+
+<p>
+  In Ruby, we can store any kind of data type:
+</p>
+
+<pre><code class="irb">
+age = 35
+diameter = 12.6
+</code></pre>
+
+<p>
+  We can also store expressions inside variables. In your <code>irb</code>, type in the following:
+</p>
+
+<pre><code class="irb"> 
+number_of_people = 2
+pieces_of_cake = 10
+</code></pre>
+
+<p>
+  Let's say we are having a party and we need to figure out how many pieces of cake in total we need. We can calculate this using <code>number_of_people</code> and multiplying that by <code>pieces_of_cake</code> and store the information into a variable:
+</p>
+
+<pre><code class="irb"> 
+total_cakes_necessary = number_of_people * cakes
+=> 20
+</code></pre>
+
+<p>
+  You can also override variables. In the <code>irb</code>, let's type in the following:
+</p>
+
+<pre><code class="irb">
+name = "Takehiro Mouri"
+name
+=> "Takehiro Mouri"
+</code></pre>
+
+<p>
+  We can see that <code>name</code> is currently assigned to <code>"Takehiro Mouri"</code>. We can override the value inside <code>name</code> by assigning it another value:
+</p>
+
+<pre><code class="irb">
+name = "Natsuko Robyn Shinozaki"
+name
+=> "Natsuko Robyn Shinozaki"
+</code></pre>
+
+<p>
+  Now <code>name</code> holds the value <code>"Natsuko Robyn Shinozaki"</code>.
+</p>
+
+<h3>String Interpolation</h3>
+
+<p>
+  We can insert the value of a variable into a string. This is called <strong>string interpolation</strong>.
+</p>  
+
+<p>
+  In the <code>irb</code>, let's type in the following:
+</p>
+
+<pre><code class="irb">
+name = "Bob"
+"Hello #{name}!"
+=> "Hello Bob!"
+</code></pre>
+
+<p>
+  As you can see, by putting the variable name inside of <code>#{ }</code>, we can insert the value of the variable inside the string.
+</p>
+
+<p class="alert alert-warning">
+  Strings can be declared with either a single quote <code>''</code> or double quote <code>""</code>, but <code>#{}</code> only works if the string is declared with <strong>double quotes (<code>""</code>)</strong>.
+</p>
+
+<h3>String concatenation</h3>
+
+<p>
+  We can also attach two strings together. This is called <strong>string concatenation</strong>. We can <em>concatenate</em> (attach) two strings together by adding them with the <code>+</code> operator:
+</p>
+
+<pre><code class="irb">
+first_name = "Robert"
+last_name = "Walters"
+first_name + last_name
+=> "RobertWalters"
+</code></pre>
+
+<p>
+  As you can see here, the two strings were attached, but we need a space between <code>"Robert"</code> and <code>"Walters"</code>. What we can do is add a blank space in between <code>first_name</code> and <code>last_name</code>:
+</p>
+
+<pre><code class="irb">
+first_name + " " + last_name
+=> "Robert Walters"
+</code></pre>
+
+<h3>Getting User Input</h3>
+
+<p> 
+  Getting user input in Ruby is pretty easy.
+</p>
+
+<p>
+  Let's hop into C9. First, let's navigate to the <code>ruby_fundamentals</code> folder.
+</p>
+
+<pre><code class="bash">
+cd ruby_fundamentals
+</code></pre>
+
+<div class="well">
+  <h3>Gotchas</h3>
+
+  <p>
+    Before navigating to the <code>ruby_fundamentals</code> folder, make sure that you are not in <code>irb</code>. Your workspace terminal should look like this:
+  </p>
+
+  <%= image_tag 'ruby_lessons/blank_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Make sure your workspace does not look like this:
+  </p>  
+
+  <%= image_tag 'ruby_lessons/irb_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    If it does look like that, it means you are in your interactive ruby console. You can exit out easily by typing in <code>exit</code>:
+  </p>
+
+  <%= image_tag 'ruby_lessons/exit_irb.png', class: 'img-responsive screenshot' %>
+</div>
+
+<p>
+  Let's create a new file called <code>user_input.rb</code>. You can do this by right clicking on the folder and creating a new file, <strong>or you can run the following command and create the file from the command line</strong>:
+</p>
+
+<pre><code class="bash">
+touch user_input.rb
+</code></pre>
+
+<p>
+  Let's open up the <code>user_input.rb</code> file. Inside this file, let's add the following lines of code:
+</p>  
+
+<pre><code class="ruby">
+puts "Enter your name:"
+name = gets
+puts "Your name is #{name}"
+</code></pre>
+
+<p>
+  Save the file and run the program:
+</p>
+
+<pre><code class="bash">
+ruby user_input.rb
+</code></pre>
+
+<%= image_tag 'ruby_lessons/user_input_1.png', class: 'img-responsive screenshot' %>
+
+<p>
+  It should prompt you for your name, then print out <code>"Your name is #{name}"</code>.
+</p>  
+
+<p>
+  As you can see, we use the <code>gets</code> method to get user input, then we put that into a variable called <code>name</code>.
+</p>
+
+<p>
+  Next, let's change up the script a little bit. Change the file to look like this:
+</p>
+
+<pre><code class="ruby">
+puts "Enter your name:"
+name = gets
+puts "Hi #{name}! You're a future Ruby developer!"
+</code></pre>
+
+<p>
+  Save the file and run the program.
+</p>
+
+<%= image_tag 'ruby_lessons/user_input_2.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Hmm...there seems to be something wrong.
+</p>
+
+<p>
+  It turns out that the <code>gets</code> method attaches a new line after the user input. To fix this, we can use the <code>chomp</code> method.
+</p>
+
+<p>
+  The <code>chomp</code> method will get rid of unnecessary line breaks. We can call <code>chomp</code> on the <code>gets</code> method to get rid of this bug. Let's change the file to look like this:
+</p>
+
+<pre><code class="ruby">
+puts "Enter your name:"
+name = gets.chomp
+puts "Hi #{name}! You're a future Ruby developer!"
+</code></pre>
+
+<p>
+  Save the file and run the program. You will see that everything is now correctly inputted!
+</p>
+
+
+<h2>Overview</h2>
+<ul>
+  <li><strong>Variables</strong> are where you can store data in a program</li>
+  <li>We can reassign the value inside a variable</li>
+  <li>Inserting the value of a variable inside of a string is called <strong>string interpolation</strong></li>
+  <li>We can attach two strings together with the <code>+</code> operator. This is called <strong>string concatenation</strong></li>
+  <li>We can get user input with the <code>gets</code> method</li>
+  <li>We can use the <code>chomp</code> method to get rid of line breaks that come with the user input from <code>gets</code></li>
+</ul> 
+
+
+<h2>Coding Challenge - Favorite Food</h2>
+
+<p>
+  Create a program that asks for the user's name and their favorite food and outputs the results to the console. Running the program should look something like this:
+</p>  
+
+<%= image_tag 'ruby_lessons/favorite_food.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Paste the code below and submit it so we can give you a code review!
+</p>
+
+<% @submission_form = true %>
+
+
+
+
+
+
+
+
+
+
+
+

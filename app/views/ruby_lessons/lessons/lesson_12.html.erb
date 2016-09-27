@@ -1,0 +1,680 @@
+<h1><%= title_for(RubyLesson, 1, 12) %></h1>
+
+<p>
+  Now let's see how we can build up logic with our programs.
+</p>
+
+<h3>Comparison Operators</h3>
+
+<p>
+  When we want to compare to values to build up logic, we use the comparison operators below.
+</p>  
+
+<table class="table">
+  <tr>
+    <th>Operator</th>
+    <th>Example</th>
+    <th>Meaning</th>
+  </tr>
+
+  <tr>
+    <td><code>==</code></td>
+    <td><code>a == b</code></td>
+    <td>returns <code>true</code> if <code>a</code> and <code>b</code> are equal</td>
+  </tr>
+
+  <tr>
+    <td><code>!=</code></td>
+    <td><code>a != b</code></td>
+    <td>returns <code>true</code> if <code>a</code> and <code>b</code> are <strong>not</strong> equal</td>
+  </tr>
+
+  <tr>
+    <td><code>&gt;</code></td>
+    <td><code>a &gt; b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is larger than <code>b</code></td>
+  </tr>
+
+  <tr>
+    <td><code>&gt;=</code></td>
+    <td><code>a &gt;= b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is larger than or equal to <code>b</code></td>
+  </tr>
+
+  <tr>
+    <td><code>&lt;</code></td>
+    <td><code>a &lt; b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is smaller than <code>b</code></td>
+  </tr>
+
+  <tr>
+    <td><code>&lt;=</code></td>
+    <td><code>a &lt;= b</code></td>
+    <td>returns <code>true</code> if <code>a</code> is smaller than or equal to <code>b</code></td>
+  </tr>
+</table>
+
+<h3>Logical Operators</h3>
+
+<p>
+  We also use <strong>logical operators</strong> to build up logic as well.
+</p>  
+
+<table class="table">
+  <tr>
+    <th>Operator</th>    
+    <th>Example</th>
+    <th>Meaning</th>
+  </tr>
+
+  <tr>
+    <td><code>&&</code></td>
+    <td><code>A && B</code></td>
+    <td>Returns <code>true</code> if both <code>A</code> and <code>B</code> is <code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>||</code></td>
+    <td><code>A || B</code></td>
+    <td>Returns <code>true</code> if either <code>A</code> or <code>B</code> is <code>true</code></td>
+  </tr>
+
+  <tr>
+    <td><code>!</code></td>
+    <td><code>!A</code></td>
+    <td>Returns the opposite of <code>A</code></td>
+  </tr>
+</table>
+
+
+<h3>if</h3>
+
+<p>
+  Let's cover the concept of if statements. If statements allow programmers to execute code only if a certain property is true. It's very similar to real life.
+</p>
+
+<div class="well">
+  <h3>Real life examples</h3> 
+
+  <p>
+    In real life, we base our decisions off of many factors and situations. Here are some examples:
+  </p>
+
+  <ul>
+    <li>If it is raining, don't go outside. Otherwise go outside.</li>
+    <li>If I am hungry, I want to eat. Otherwise, I don't want to eat.</li>
+  </ul>
+
+  <p>
+    In programming, we can build logic in similar ways as well.
+  </p>    
+</div>
+
+<p>
+  Inside C9, let's first navigate into our <code>ruby_fundamentals</code> folder:
+</p>  
+
+<pre><code class="bash">
+cd ruby_fundamentals
+</code></pre>
+
+<div class="well">
+  <h3>Gotchas</h3>
+
+  <p>
+    Before navigating to the <code>ruby_fundamentals</code> folder, make sure that you are not in <code>irb</code>. Your workspace terminal should look like this:
+  </p>
+
+  <%= image_tag 'ruby_lessons/blank_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Make sure your workspace does not look like this:
+  </p>  
+
+  <%= image_tag 'ruby_lessons/irb_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    If it does look like that, it means you are in your interactive ruby console. You can exit out easily by typing in <code>exit</code>:
+  </p>
+
+  <%= image_tag 'ruby_lessons/exit_irb.png', class: 'img-responsive screenshot' %>
+</div>
+
+<p>
+  Inside of this folder, let's create a new file called <code>is_even.rb</code>. You can do this by right clicking on the folder and creating a new file, or you can run the following command:
+</p>
+
+<pre><code class="bash">
+touch is_even.rb
+</code></pre>
+
+<p>
+  Open the new file that we just created.
+</p>
+
+<p>
+  Let's write a method that outputs <code>"#{number} is even!"</code> if the argument that is passed in is an even number, and <code>"#{number} is odd!"</code> if it isn't an even number.
+</p>
+
+<p>
+  First, let's create a method called <code>is_even?</code> that takes in a parameter <code>n</code>.
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  
+end
+</code></pre>
+
+<p>
+  Next, let's think about the logic we want to create. What we need to do is find out if the number is even. To do this what can we use?
+</p>
+
+<p>
+  <strong>We can use the <code>%</code> operator</strong>. <em>If the number is even, then the remainder of dividing the number by 2 should be 0.</em>
+</p>
+
+<p>
+  In Ruby, we can check <strong>if</strong> the condition is true with an <code>if</code> condition:
+</p>    
+
+<pre class="ruby"><code>
+if (condition)
+  # then execute code here
+else
+  # otherwise execute code here
+end
+</code></pre>
+
+<p>
+  To check if the number is even, we can write code like this:
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    # then execute code here
+  else
+    # otherwise execute code here
+  end   
+end
+</code></pre>
+
+<p class="alert alert-info">
+  In Ruby, parenthesis are optional and are not necessary. <code>if (n % 2 == 0)</code> and <code>if n % 2 == 0</code> do the same thing. Other programming languages may require the use of parenthesis.
+</p>
+
+<p>
+  The next task is to print it out to the console. To do this, we can use <code>puts</code>:
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    puts "#{n} is an even number!"
+  else
+    puts "#{n} is an odd number!"
+  end
+end
+</code></pre>
+
+<p>
+  Now that we have completed our method, let's run the method by calling it:
+</p>
+
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    puts "#{n} is an even number!"
+  else
+    puts "#{n} is an odd number!"
+  end
+end
+
+is_even?(1)
+is_even?(2)
+is_even?(3)
+is_even?(4)
+is_even?(5)
+is_even?(6)
+is_even?(7)
+is_even?(8)
+is_even?(9)
+is_even?(10)
+</code></pre>
+
+<p>
+  Save the file. Let's run the file:
+</p>
+
+<pre><code class="bash">
+ruby is_even.rb
+</code></pre>
+
+<p>
+  Your output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/is_even_successful.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Awesome! But what if we wanted to put in more conditions? For example, what if we wanted to print out <code>"#{n} is divisible by 3!"</code> when the number is divisible by 3?
+</p>
+
+<p>
+  That's where <code>elsif</code> statements are useful.
+</p>
+
+<pre><code class="ruby">
+if condition
+  # execute code here
+elsif another_condition
+  # execute code here
+elsif another_condition_2
+  # execute code here
+else
+  # execute code here
+end
+</code></pre>
+
+<p>
+  With <code>elsif</code>, we can check for another condition. We can also attach as many <code>elsif</code> statements as we want as demonstrated above.
+</p>
+
+<p>
+  How could we check if the number is divisible by 3?
+</p>
+
+<p>
+  A number divisible by <code>3</code> will have no remainder if it is divided by 3. That means we should check if the remainder of dividing the number by 3 is 0. To do this, we can once again use <code>%</code>.
+</p>
+
+<pre><code class="ruby">
+def is_even?(n)
+  if n % 2 == 0
+    puts "#{n} is an even number!"
+  elsif n % 3 == 0
+    puts "#{n} is divisible by 3!"
+  else
+    puts "#{n} is an odd number!"
+  end
+end
+</code></pre>
+
+<p>
+  Now let's run the program again:
+</p>
+
+<pre><code class="bash">
+ruby is_even.rb
+</code></pre>
+
+<p>
+  Your output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/is_even_3.png', class: 'img-responsive screenshot' %>
+
+<h2>Overview</h2>
+
+<ul>
+  <li>We can use <code>if</code> statements to build logic</li>
+  <li>We can use <code>elsif</code> statements to attach extra conditions</li>
+  <li>We can use <code>else</code> to run code if none of the conditions in the if else statement were <code>true</code></li>
+</ul> 
+
+
+<h2>Coding Challenge</h2>
+
+<p>
+  To wrap up what we've learned so far, let's create an application where the user can input orders at a restaurant and the price of the order, and generate a bill automatically.
+</p>
+
+<p>
+  The finished program will look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/make_bill.png', class: 'img-responsive screenshot' %>
+
+<p>
+  First, try to create this program yourself.
+</p>
+
+<p><strong>Specifications</strong></p>
+<ul>
+  <li>It should prompt the user for a food order</li>
+  <li>It should prompt the user for the price of that order</li>
+  <li>It should prompt the user for another food order, or type in "exit" to calculate the bill</li>
+  <li>Once the user types in "exit", it should print out each order and the price</li>
+  <li>It should calculate the total sum of prices</li>
+  <li>It should prompt the user for the tax rate</li>
+  <li>It should calculate the total tax for the orders</li>
+  <li>It should calculate the total price based on the orders and tax rate</li>
+</ul>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    First, let's break this program into little pieces.
+  </p>
+
+  <ul>
+    <li><strong>Step 1 - Prompt the user for orders</strong></li>
+    <ul>
+      <li>It should prompt the user for a food order</li>
+      <li>It should prompt the user for the price of that order</li>
+      <li>It should prompt the user for another food order, or type in "exit" to calculate the bill</li>
+      <li>Once the user types in "exit", it should print out each order and the price</li>
+    </ul>
+    <li><strong>Step 2- Calculate Sum of Prices</strong></li>
+    <ul>
+      <li>It should calculate the total sum of prices</li>
+    </ul>
+    <li><strong>Step 3 - Calculate Tax</strong></li>
+    <ul>
+      <li>It should prompt the user for the tax rate</li>
+      <li>It should calculate the total tax for the orders</li>
+    </ul>
+    <li><strong>Step 4 - Calculate Total Price</strong></li>
+    <ul>
+      <li>It should calculate the total price based on the orders and tax rate</li>
+    </ul>
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    <strong>Let's start with Step 1.</strong>
+  </p>
+
+  <p>For this step, we prompt the user for orders until the user inputs <code>"exit"</code>. Based on what we learned, how can we accomplish this?</p>
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    We can use a <strong>while loop</strong>. While a condition is true, the program should keep on prompting the user for orders.
+  </p>
+
+  <p>Before we jump into writing code, it's a good idea to write <em>pseudocode</em>. </p>
+
+  <blockquote>
+    <p>Pseudocode (pronounced SOO-doh-kohd) is a detailed yet readable description of what a computer program or algorithm must do, expressed in a formally-styled natural language rather than in a programming language. </p>
+    <small>http://whatis.techtarget.com/definition/pseudocode</small>
+  </blockquote>
+
+  <p>
+    <strong>Writing pseudocode can help clarify the logic behind the program.</strong> This prevents you from wasting time getting stuck on the syntax.
+  </p>
+
+  <p>
+    Try writing pseudocode for this step to figure out the logic. From there, writing the program is a lot simpler.
+  </p>
+
+</div>
+
+<div class="hint" data-hint-id="4">
+
+  <P>
+     Here's an example of pseudocode for this step:
+  </P>
+
+<pre><code class="ruby">
+# initialize an empty hash so we can store the order and the price and store it into a variable called orders
+
+# Prompt user for food item
+
+# While true, do the following:
+
+# get user input and store it into a variable called order
+# exit loop if order is equal to "exit"
+
+# prompt user for the price of the order
+# get user input and store it into a variable called price
+
+# store the order as the key and price as the value in the orders hash
+
+# prompt user for another food item, or type exit to generate a bill
+
+# end loop
+</code></pre>
+
+  <p>
+    The next step is to convert this into real code. Try converting the pseudocode into real Ruby code.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="5">
+<pre><code class="ruby">
+# initialize an empty hash so we can store the order and the price and store it into a variable called orders
+orders = {}
+
+# Prompt user for food item
+puts "Enter the food menu you have ordered:" 
+
+# While true, do the following:
+while(true) do
+  # get user input and store it into a variable called order
+  order = gets.chomp
+  # exit loop if order is equal to "exit"
+  if order.downcase == "exit"
+    break
+  end
+
+  # prompt user for the price of the order
+  puts "Enter the price of the order:"
+            
+  # get user input and store it into a variable called price
+  price = gets.chomp.to_i
+
+  # store the order as the key and price as the value in the orders hash
+  orders[order] = price
+
+  # prompt user for another food item, or type exit to generate a bill
+  puts "Enter another food item or type exit to generate a bill:"
+
+# end loop
+end
+</code></pre>
+
+  <div class="well">
+    <h3>break</h3>
+    <p>You can break out of a <code>while</code> loop inside of the loop with <code>break</code>. The program will exit the loop and resume the program after the end of the while loop.</p>
+  </div>
+
+  <p>Notice how I compare the <code>downcase</code> of <code>order</code> to <code>"exit"</code>. This is so that the program will exit the loop both when the user inputs "Exit" or "exit".</p>
+
+  <p>Let's move on to the next step. Try writing pseudocode for the next step before viewing the next hint.</p>
+</div>
+
+<div class="hint" data-hint-id="6">
+  <p>Sample pseudocode for this step:</p>
+
+<pre><code class="ruby">
+# Create a new variable called total_price and set it to 0 
+# For each key value pair in the orders hash, do the following
+# Print out the order and price
+# Add the price to the total price
+</code></pre>
+
+  <p>Next, let's convert this into code.</p>
+</div>
+
+<div class="hint" data-hint-id="7">
+<p>Here's what the code might look like:</p>
+
+<pre><code class="ruby">
+# Create a new variable called price_sum and set it to 0 
+price_sum = 0
+
+# For each key value pair in the orders hash, do the following
+orders.each do |order, price|
+
+  # Print out the order and price
+  puts "#{order}: #{price}"
+
+  # Add the price to the total price
+  price_sum += price
+end
+</code></pre>
+
+  <p>
+    Let's move on to the next step: calculating taxes. Let's write pseudocode for this as well.
+  </p>
+</div>  
+
+<div class="hint" data-hint-id="8">
+<p>
+  The pseudocode might look something like this:
+</p>
+<pre><code class="ruby">
+# Prompt the user for the tax rate
+
+# Store the user input in a variable called tax_rate
+
+# Multiply price_sum by the tax_rate divided by 100 and store it into a variable called tax
+</code></pre>
+
+<p>
+  Now let's convert it into actual code.
+</p>
+</div>
+
+<div class="hint" data-hint-id="9">
+<pre><code class="ruby">
+# Prompt the user for the tax rate
+puts "Enter the tax rate:"
+
+# Store the user input in a variable called tax_rate
+tax_rate = gets.chomp
+
+# Multiply price_sum by the tax_rate divided by 100 and store it into a variable called tax
+tax = price_sum * tax_rate.to_f/100
+</code></pre>
+
+<p>
+  Note how we are converting the <code>tax_rate</code> into a float with the <code>.to_f</code> method. This is important, as <code>gets.chomp</code> will get the user input as a string by default. In order to divide it by 100 and get a decimal answer, we need to convert <code>tax_rte</code> into a float. 
+</p>
+
+<p>
+  Converting into an integer won't work, since if we divide and integer by an integer, we will only get an integer result. For example, if the user inputted <code>13</code> for the <code>tax_rate</code>, <code>13/100</code> will result in <code>0</code>. However, <code>13.0/100</code> will be <code>0.13</code>.
+</p>
+
+<p>
+  Next, let's write pseudocode for the final step - calculating the total price.
+</p>
+</div>
+
+<div class="hint" data-hint-id="10">
+<pre><code class="ruby">
+# Add the price_sum and tax and store it into a variable called total_price
+
+# Print out the total price
+</code></pre>
+
+<p>
+  Next, convert this into real code.
+</p>
+</div>
+
+<div class="hint" data-hint-id="11">
+<pre><code class="ruby">
+# Add the price_sum and tax and store it into a variable called total_price
+total_price = price_sum + tax
+
+# Print out the total price
+puts "Total: #{total_price}"
+</code></pre>
+
+  <p>
+    Your program should now look like this (you can delete the pseudocode):
+  </p>
+
+<pre><code class="ruby">
+orders = {}
+
+puts "Enter the food menu you have ordered:" 
+while(true) do
+    order = gets.chomp
+    if order.downcase == "exit"
+      break
+    end
+    
+    puts "Enter the price of the order:"
+    price = gets.chomp.to_i
+    
+    orders[order] = price
+    
+    puts "Enter another food item or type exit to generate a bill:"
+end
+
+
+price_sum = 0
+orders.each do |order, price|
+    puts "#{order}: #{price}"
+    price_sum += price
+end
+
+puts "Enter the tax rate:"
+tax_rate = gets.chomp.to_i
+
+puts "Calculating tax..."
+tax = price_sum * tax_rate.to_f/100
+
+total_price = price_sum + tax
+puts "Total: #{total_price}"
+</code></pre>
+
+  <p>
+    If we run the code, it runs correctly! However, we can write this program in a better way. Let's <em>refactor</em> this code.
+  </p>
+
+  <div class="well">
+    <h3>Refactoring</h3>
+    <p>As a programmer, you will spend a lot of time <strong>refactoring</strong>. <strong>Refactoring is the process of restructuring the code to improve the design without alterting its external behavior.</strong></p>
+
+    <p>
+      Refactoring is also a skill in itself and takes a lot of practice. Looking over your code and refactoring often will lead to higher quality code. <strong>Being able to refactor effectively is an important skill to have as a developer.</strong>
+    </p>
+  </div>
+
+  <p>Let's take a look at the following piece of code:</p>
+
+<pre><code class="ruby">
+if order.downcase == "exit"
+  break
+end
+</code></pre>
+  
+  <p>
+    We can refactor this to make the code shorter and more concise:
+  </p>
+
+<pre><code class="ruby">
+break if order.downcase == "exit"
+</code></pre>
+
+  <p>
+    As you can see, in Ruby we can rewrite if statements into one line. This style is used by many Ruby developers, as we can reduce the line of code from 3 lines to 1 line easily.
+  </p>
+
+<pre><code class="ruby">
+# 3 lines
+if order.downcase == "exit"
+  break
+end 
+
+# 1 line
+break if order.downcase == "exit"
+</code></pre>
+
+  <p>
+    The code right now is a little bit better, but we can even make it better. In the next lesson, we'll explore <strong>Object Oriented Programming</strong> (OOP).
+  </p>
+  
+</div>
+
+<% @hints = true %>
+
+
+
+

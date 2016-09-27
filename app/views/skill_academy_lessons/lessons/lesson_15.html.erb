@@ -1,0 +1,24 @@
+<h1><%= title_for(SkillAcademyLesson, 5, 3) %></h1>
+
+<p>
+  Now let's add functionality so that instructors can view the details of their course easily.
+</p>
+
+<%= render layout: 'shared/story', locals: {story_title: title_for(SkillAcademyLesson, 5, 3)} do %>
+  <p>
+    Inside the <code>show</code> page, let's display the following information:
+  </p>
+
+  <ul>
+    <li>title</li>
+    <li>description</li>
+    <li>price</li>
+    <li>start time</li>
+    <li>end time</li>
+    <li>category</li>
+    <li>target</li>
+    <li>location</li>
+    <li>address</li> 
+    <li>photo</li>
+  </ul>
+<% end %>

@@ -1,0 +1,55 @@
+<p>Now that you have learned the basic of Test-First Ruby, let's solve another challenge that includes the Test-First approach. In this lesson, you have to write code to make the test pass.</p>
+
+<h3>Temperature Conversion</h3>
+
+<p>Given a temperature in centigrade, your program should convert it to fahrenheit and vice versa.</p>
+
+<p>For example, given a temperatue in centigrade, 0<sup>o</sup>C, it should return 32.</p>
+
+<div class="well">
+  <h3>Getting Started</h3>
+
+  <p>
+    In your C9 workspace you have created in the previous lesson, let's navigate to the <code>temperature</code> directory. In the workspace terminal, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+cd temperature
+</code></pre>
+
+  <p>
+    Next, type in the following command and press enter:
+  </p>
+
+<pre><code class="bash">
+bundle
+</code></pre>
+
+  <p>
+    This should install a bunch of packages and dependencies:
+  </p>
+
+<%= image_tag 'ruby_lessons/temperature/coding_challenge_bundle.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Next, let's run the following command:
+  </p>
+
+<pre><code class="ruby">
+  rspec</code></pre>
+
+  <p>
+    Since you haven't written any code yet, you will see that all the tests fail.The output should look something like this:
+  </p>
+
+  <%= image_tag 'ruby_lessons/temperature/temperature_failing.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Try writing codes on your own. Make use of Google if you need. Once you finish writing the code, run <code>rspec</code> again and you should see passing tests.
+  </p>
+
+  <%= image_tag 'ruby_lessons/temperature/temperature_passing.png', class: 'img-responsive screenshot' %>
+</div>
+
+<% @submission_form = true %>
+

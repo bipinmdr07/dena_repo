@@ -1,56 +1,186 @@
 <h1><%= title_for(RubyLesson, 1, 5) %></h1>
 
-<p>Now that you have learned the basic of Test-First Ruby, let's solve another challenge that includes the Test-First approach. In this lesson, you have to write code to make the test pass.</p>
+<p>
+  Let's explore math with Ruby! 
+</p>
 
-<h3>Temperature Conversion</h3>
+<p class="alert alert-info">
+  Most math you will encounter in web development won't be calculus or advanced math at all. Most of the math will be simple operations that you probably know already.
+</p>
 
-<p>Given a temperature in centigrade, your program should convert it to fahrenheit and vice versa.</p>
+<p>
+  In the terminal window, let's type in <code>irb</code>:
+</p>
 
-<p>For example, given a temperatue in centigrade, 0<sup>o</sup>C, it should return 32.</p>
+<pre><code class="bash">
+irb
+</code></pre>
+
+<%= image_tag 'ruby_lessons/irb.png', class: 'screenshot' %>
+
+<p>
+  <code>irb</code> stands for <strong>I</strong>nteractive <strong>R</strong>uby console. In this console, we can write and execute Ruby code. In other words, instead of creating a new Ruby file, saving it, and running it with the <code>ruby</code> command, we can simply run the <strong>Ruby code inside this console with <code>irb</code></strong>.
+</p>  
+
+<p>
+  In our <code>irb</code>, let's do some math. Type in the following command and press enter:
+</p>    
+
+<pre><code class="irb">
+3 * 4
+</code></pre>
+
+<p>
+  You will see that it outputs <code>12</code>.
+</p>
+
+<p>
+  You can do any type of math - addition(<code>+</code>), subtraction(<code>-</code>), multiplication(<code>*</code>), and division(<code>/</code>) all work. Try them out in the Ruby console.
+</p>
+
+<h3>Integers</h3>
+
+<p>
+  In Ruby, numbers such as <code>1</code>, <code>11</code>, and <code>111</code> are called <strong>integers</strong>. <strong>Integers are whole numbers without any decimal points.</strong>
+</p>
+
+<p>
+  Integers in Ruby can be tricky, especially when dealing with division. For example, take a look at this example:
+</p>
+
+<pre><code class="irb">
+100/3
+=> 33
+</code></pre>
+
+<p>
+  The answer should be <code>33.333</code>, but instead, it gives us <code>33</code>. In Ruby, <strong>it is important to remember that dividing two integers will result in an integer result.</strong>
+</p>
+
+<p>
+  To get the proper answer, we need to use <strong>floats</strong>.
+</p>
+
+<h3>Floats</h3>
+
+<p>
+  A <code>float</code> is short for <strong>floating decimal point</strong>. <strong>In short, floats are numbers with decimal points.</strong> You can read more about the theory <%= link_to 'here', 'https://en.wikipedia.org/wiki/Floating_point', target: '_blank' %>, but you don't have to worry about it right now.
+</p>
+
+<p>
+  In our ruby console, let's type in the following and press enter:
+</p>  
+
+<pre><code class="irb">
+100.0/3.0
+</code></pre>
+
+<p>
+  Notice how this time, we got this answer:
+</p>
+
+<pre><code class="irb">
+=> 33.333333333333336
+</code></pre>
+
+<p>
+  We can also divide an integer with a float, and we get a float answer:
+</p>
+
+<pre><code class="irb">
+100/3.0
+=> 33.333333333333336
+</code></pre>
 
 <div class="well">
-  <h3>Getting Started</h3>
+  <h3>Data Types</h3>
 
   <p>
-    In your C9 workspace you have created in the previous lesson, let's navigate to the <code>temperature</code> directory. In the workspace terminal, type in the following command and press enter:
-  </p>
+    If you are just beginning in your programming career, you might sometimes accidentally write code like this:
+  </p>  
 
-<pre><code class="bash">
-cd temperature
+<pre><code class="irb">
+  "100" * 3
 </code></pre>
 
   <p>
-    Next, type in the following command and press enter:
+    This won't work since <code>"100"</code> is a string. The result of this would be the following:
   </p>
 
-<pre><code class="bash">
-bundle
+<pre><code class="irb">
+  => "100100100"
 </code></pre>
 
   <p>
-    This should install a bunch of packages and dependencies:
+    Notice how this resulted in three <code>"100"</code>s and which is not what we wanted.
   </p>
-
-<%= image_tag 'ruby_lessons/temperature/coding_challenge_bundle.png', class: 'img-responsive screenshot' %>
 
   <p>
-    Next, let's run the following command:
-  </p>
+    This brings us to a topic of <code>types</code>. We saw that there were three different ways to represent numbers.
+  </p>  
 
-<pre><code class="ruby">
-  rspec</code></pre>
-
-  <p>
-    Since you haven't written any code yet, you will see that all the tests fail.The output should look something like this:
-  </p>
-
-  <%= image_tag 'ruby_lessons/temperature/temperature_failing.png', class: 'img-responsive screenshot' %>
+  <ul>
+    <li><code>"10"</code> - String</li>
+    <li><code>10</code> - Fixnum (Integer)</li>
+    <li><code>10.0</code> - Float</li>
+  </ul>
 
   <p>
-    Try writing codes on your own. Make use of Google if you need. Once you finish writing the code, run <code>rspec</code> again and you should see passing tests.
+    All of the different data types have different properties. We can ask for the <code>class</code> to see what the data's type is:
   </p>
 
-  <%= image_tag 'ruby_lessons/temperature/temperature_passing.png', class: 'img-responsive screenshot' %>
+<pre><code class="irb">
+"10".class
+=> String
+10.class
+=> Fixnum
+10.0.class
+=> Float
+</code></pre>
 </div>
 
-<% @submission_form = true %>
+<h3>Remainders</h3>
+
+<p>
+  Calculating the remainder of two numbers that are divided by each other is an important concept in computer programming.
+  To calculate this, we can use the <code>%</code> (modulo) operator. For example, the remainder of <code>3</code> divided by <code>2</code> is <code>1</code>.
+</p>
+
+<pre><code class="irb">
+3 % 2
+=> 1
+</code></pre>
+
+<p>
+  Modulos are used in computer programming, especially when seeing if a number is divisible by another number:
+</p>
+
+<pre><code class="irb">
+15 % 5
+=> 0
+
+9 % 3
+=> 0
+
+10 % 7
+=> 3
+</code></pre>
+
+<p>
+  As you can see, if a number is divisble by another number, then the remainder is <code>0</code>. This pattern is very useful and will come up when you are trying to solve various problems.
+</p>
+
+
+<h2>Overview</h2>
+
+<ul>
+  <li>Numbers can be represented in different <strong>data types</strong></li>
+  <ul>
+    <li><code>"10"</code> - <strong>String</strong></li>
+    <li><code>10</code> - <strong>Fixnum</strong> (Integer)</li>
+    <li><code>10.0</code> - <strong>Float</strong></li>
+  </ul>
+  <li>You can calculate the remainder of two numbers that are divided by each other with the modulo <code>%</code> operator</li>
+</ul>
+
+

@@ -1,0 +1,146 @@
+<h1><%= title_for(RubyLesson, 1, 9) %></h1>
+
+<p>
+  <strong>Hashes are objects with that contain a pair of <em>keys</em> and <em>values</em>.</strong>
+</p>
+
+<p>
+  Below is a hash that contain the name of a person and the age.
+</p>
+
+<pre><code class="irb">
+people = {
+  "Jake" => 30,
+  "Adam" => 31,
+  "Mike" => 25
+}
+</code></pre>
+
+<p>
+  As you can see, hashes can be created with the <code>{}</code> syntax.
+</p>
+
+<p>
+  In the <code>people</code> hash above, <code>"Jake"</code> is the <strong><em>key</em></strong>, and <code>30</code> is the <strong><em>value</em></strong>. <code>"Jake"</code> and <code>30</code> are paired, thus they are called <strong>key value pairs</strong>. 
+</p>  
+
+<p>
+  Next, <code>"Adam"</code> is the <strong><em>key</em></strong>, and <code>31</code> is the <strong><em>value</em></strong>. Again, <code>"Adam"</code> and <code>31</code> are a <strong>key value pair</strong>.
+</p>
+
+<p>
+  Let's say we want to get the age of <code>"Jake"</code>. We can simply write the following code:
+</p>
+
+<pre><code class="irb">
+people["Jake"]
+=> 30
+</code></pre>
+
+<p>
+  As you can see, <strong>with hashes, we give it the key and we get the value</strong>.
+</p>
+
+<p>
+ We can also replace the value of a key easily:
+</p>  
+
+
+<pre><code class="irb">
+# We give it the key and we get the value
+people["Jake"]
+=> 30
+
+# We can assign the value of the key to something else
+people["Jake"] = 100
+
+# Now the value is 100 (it used to be 30)
+people["Jake"]
+=> 100
+</code></pre>
+
+<p>
+  We can also add to a value like this:
+</p>
+
+<pre><code class="irb">
+people["Jake"]
+=> 100
+
+people["Jake"] += 5
+
+people["Jake"]
+=> 105
+</code></pre>
+
+<div class="well">
+  <h3>+=, -=, *=, /=</h3>
+
+  <p>
+    When programming, you will see <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/</code> being used quite a lot. They are self-explanatory - take a look at the examples below:
+  </p>
+
+<pre><code class="ruby">
+number = 5
+
+# 5 + 5
+number += 5
+
+number
+=> 10
+
+# 10 - 2
+number -= 2
+
+number
+=> 8
+
+# 8 * 5
+number *= 5
+
+number
+=> 40
+
+# 40 / 10
+number /= 10
+
+number
+=> 10
+</code></pre>
+</div>
+
+<p>
+  We can add a new item to our existing hash as such:
+</p>
+
+<pre><code class="irb">
+people["Bob"] = 21
+
+people
+=> {"Jake"=>100, "Adam"=>31, "Mike"=>25, "Bob"=>21}
+</code></pre>
+
+<p>
+  <strong>Hashes are useful when storing data that is a pair.</strong> In the example above, we are storing a name and the age as a pair. 
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

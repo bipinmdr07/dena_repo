@@ -1,0 +1,221 @@
+<h1><%= title_for(RubyLesson, 2, 2) %></h1>
+
+<p>
+	In the last lesson, we talked about what a set of orders might look like:
+</p>
+
+<ul>
+	<li><strong>Order 1</strong></li>
+	<ul>
+		<li>Item: Pizza</li>
+		<li>Price: 200</li>
+	</ul>
+
+	<li><strong>Order 2</strong></li>
+	<ul>
+		<li>Item: Milk Tea</li>
+		<li>Price: 40</li>
+	</ul>
+
+	<li><strong>Order 1</strong></li>
+	<ul>
+		<li>Item: Coffee</li>
+		<li>Price: 60</li>
+	</ul>
+</ul>
+
+<p>
+	How can we organize this data into understandable pieces of code?
+</p>
+
+<p>
+	<strong>Introducing classes</strong>. Classes in programming represent the type of object. For example, orders can be represented as an <code>Order</code> class.
+</p>
+
+<pre><code class="ruby">
+class Order
+	
+end
+</code></pre>
+
+<p>
+	Congratulations! You've written your first Ruby class! Let's now create a new <code>Order</code> and print it out to the console. Change your file to look like this:
+</p>
+
+<pre><code class="ruby">
+class Order
+end
+
+order = Order.new
+
+puts order.inspect
+</code></pre>
+
+<p>
+	Save the file and run the program. It should give you an output something like this:
+</p>
+
+<pre><code class="ruby">
+#&lt;Order:0x000000008052c8&gt;
+</code></pre>
+
+<p class="alert alert-info">
+	The <code>inspect</code> method allows us to look at the object in more detail.
+</p>
+
+<p>
+	We just created our first <code>Order</code> object. Let's go through what we just did.
+</p>
+
+<ul>
+	<li>We created an <code>Order</code> class (it doesn't do anything yet)</li>
+	<li>We created a new <code>Order</code> with the <code>new</code> method</li>
+	<li>We stored the new <code>Order</code> into a variable called <code>order</code></li>
+	<li>We printed the <code>order</code></li>
+</ul>
+
+<p>
+	Let's add some code to store information inside each <code>Order</code> object. Change the file to look like this:
+</p>
+
+<pre><code class="ruby">
+class Order
+	def initialize(item, price)
+		@item = item
+		@price = price
+	end
+end
+
+order = Order.new
+
+puts order.inspect
+</code></pre>
+
+<p>
+	Save the file and run the program. 
+</p>
+
+<p>
+	Woops! Looks like we got an error.
+</p>
+
+<%= image_tag 'ruby_lessons/order_error.png', class: 'screenshot img-responsive' %>
+
+<br>
+
+<div class="well">
+	<h3>Debugging</h3>
+
+	<p>
+		Let's try to decipher this error message:
+	</p>
+
+<pre><code class="bash">
+order.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (ArgumentError)	
+</code></pre>
+	
+	<p>
+		<strong>From this error message, we can tell where the bug is.</strong>
+	</p>
+
+	<p>
+		<strong>First</strong>, it says that the error is on line 2 of <code>order.rb</code> (<code>order.rb:2</code>).
+	</p>
+
+	<p>
+		<strong>Then</strong> it says that the error is in <code>initialize</code> (<code>order.rb:2:in `initialize'</code>).
+	</p>
+
+	<p>
+		<strong>Finally</strong>, it says that we are giving a wrong number of arguments - we gave it 0 arguments and it expected 2 arguments (<code>wrong number of arguments (given 0, expected 2) (ArgumentError)	</code>).
+	</p>
+
+	<p>
+		From this information, we know that the root of the problem is on line 2 in the <code>initialize</code> method. But wait...what is this <code>initialize</code> method?
+	</p>
+</div>
+
+<div class="well">
+	<h3>initialize</h3>
+
+	<p>
+		Whenever a new object is created, Ruby looks for a method called <code>initialize</code> and runs the method. In other words, when the <code>new</code> method is triggered, Ruby looks for a method called <code>initialize</code> in the class and executes it.
+	</p>
+
+	<p>
+		For example, let's say we have a class called <code>Test</code> that looks like this:
+	</p>
+
+<pre><code class="ruby">
+class Test
+  def initialize
+  	puts "I've been initialized!"
+  end
+end
+</code></pre>
+
+	<p>
+		Now when we create a new instance of this class, let's see what happens:
+	</p>
+
+<pre><code class="ruby">
+class Test
+  def initialize
+  	puts "I've been initialized!"
+  end
+end
+
+Test.new
+</code></pre>
+
+	<p>
+		The output will look like this:
+	</p>
+
+<pre><code class="bash">
+I've been initialized!	
+</code></pre>
+
+	<p>
+		<strong>Again, when we create a new instance of a class in Ruby, it finds the <code>initialize</code> method and executes it.</strong> In this case, our <code>initialize</code> method simply <code>puts</code> the string "I've been initialized!".
+	</p>
+
+	<p>
+		Let's go back to our order program. When we run <code>Order.new</code>, Ruby finds the <code>initialize</code> method and runs the method. In the <code>initialize</code> method, we have two parameters: <code>item</code> and <code>price</code>. 
+	</p>
+
+	<p>
+		The initialize method here <em>expects</em> two parameters. The parameters are passed in from the <code>new</code> method:
+	</p>
+
+<pre><code class="ruby">
+Order.new(item, price)
+</code></pre>
+
+	<p>
+		The parameters passed in through the <code>new</code> method are now passed into the <code>initialize method.</code>
+	</p>
+
+	<p>The parameter values are then stored into two variables, <code>@item</code> and <code>@price</code>. These variables that have a <code>@</code> attached to the back of the name are called <strong><em>instance variables</em></strong>.
+	</p>
+</div>
+
+
+<p>
+	In the next lesson, let's talk about what <em>instance variables</em> are.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

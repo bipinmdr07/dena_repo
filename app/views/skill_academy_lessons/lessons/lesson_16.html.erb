@@ -1,0 +1,127 @@
+<h1><%= title_for(SkillAcademyLesson, 5, 4) %></h1>
+
+<p>
+  Now let's add functionality so that users can update their course. This is pretty straightforward, so you should be able to do it on your own :)
+</p>
+
+<%= render layout: 'shared/story', locals: {story_title: title_for(SkillAcademyLesson, 5, 3)} do %>
+  <p>
+    As an instructor, I should be able to edit and update the course contents. 
+  </p>
+
+  <p>
+    First, we need a page where we display the course details individually. 
+  </p>
+
+  <p>
+    Inside the page, the page should have a link to the edit page where instructors can edit their course information.
+  </p>
+  <ul>
+    <li>If the user tries to edit a course that they have not created, it should give the user an error</li>
+    <li>If the data that is sent to the server is invalid, render the edit page again with a flash message</li>
+    <li>If the data is valid, then update the course and redirect the user to the instructor course page</code></li>
+  </ul>
+<% end %>
+
+
+<div class="hint" data-hint-id="1">
+  <p>
+    As always, let's start with tests first. Here's what the skeleton of the tests should look like:
+  </p>  
+
+<pre><code class="ruby">
+describe "GET #edit" do
+  context "user created the course" do
+    it "renders edit template" do
+
+    end 
+  end
+
+  context "user didn't create the course" do
+    it "redirects the user to courses_path" do
+
+    end
+  end
+end
+
+describe "PATCH #update" do
+  context "attributes are valid" do
+    it "updates the course" do
+      
+    end
+  end
+
+  context "attributes are invalid" do
+    it "doesn't update the course" do
+
+    end
+  end
+
+end
+</code></pre>
+
+</div>
+
+<div class="hint" data-hint-id="2">
+
+<p>
+  Your completed specs should look like this. Make the specs fail, then try to make them pass.
+</p>
+
+<pre><code class="ruby">
+describe "GET #edit" do
+  context "user created the course" do
+    it "renders edit template" do
+      user = FactoryGirl.create(:user)        
+      course = FactoryGirl.create(:course, user_id: user.id)
+
+      sign_in user
+      get :edit, id: course.id
+
+      expect(response).to render_template(:edit)
+    end 
+  end
+
+  context "user didn't create the course" do
+    it "redirects the user to courses_path" do
+      user = FactoryGirl.create(:user)    
+      course = FactoryGirl.create(:course, user_id: user.id + 1)
+
+      sign_in user
+      get :edit, id: course.id
+
+      expect(response).to redirect_to courses_path
+    end
+  end
+end
+
+describe "PATCH #update" do
+  context "attributes are valid" do
+    it "updates the course" do
+      user = FactoryGirl.create(:user)   
+      course = FactoryGirl.create(:course, user_id: user.id) 
+
+      sign_in user
+      patch :update, id: course.id, course: FactoryGirl.attributes_for(:course, title: "New Title!")
+      course.reload
+      
+      expect(course.title).to eq("New Title!")
+    end
+  end
+
+  context "attributes are invalid" do
+    it "doesn't update the course" do
+      user = FactoryGirl.create(:user)
+      course = FactoryGirl.create(:course, user_id: user.id) 
+
+      sign_in user   
+      patch :update, id: course.id, course: FactoryGirl.attributes_for(:invalid_course, title: "New Title!")
+      course.reload
+      
+      expect(course.title).to_not eq("New Title!")
+    end
+  end
+
+end
+</code></pre>
+</div>

@@ -1,0 +1,117 @@
+<h1><%= title_for(RubyLesson, 2, 3) %></h1>
+
+
+
+	<p>
+		Instance variables are variables prefixed with <code>@</code>. Instance variables are variables that have different values for each instance of the class. 
+	</p>
+
+	<p>
+		For example, in real life, each order consists of different food items and different prices. Like this, in classes, each <em>instance</em> of a class will have different values for various attributes.
+	</p> 
+
+	<p>
+		<strong>Instance variables can be used throughout the class.</strong> <strong>Local variables (variables without <code>@</code>) can only be used within the method that it was created in:</strong>
+	</p>
+
+	<p>For example:</p>
+
+<pre><code class="ruby">
+class Person
+	def initialize(name)
+		@name = name
+		age = 21
+	end
+
+	# We can use @name in methods outside of the initialize method as well
+	def say_name
+		puts "My name is #{name}"
+	end
+
+	# This will give us an error!! Local variables can only be used in the method it was declared in!
+	def say_age
+		puts "My age is #{age}"
+	end
+end	
+</code></pre>
+
+<p>
+	Now that we know what the <code>initialize</code> method is and what instance variablse are, let's fix our program:
+</p>
+
+<pre><code class="ruby">
+class Order
+	def initialize(item, price)
+		@item = item
+		@price = price
+	end
+end
+
+# Let's add parameters so that our initialize method works
+order = Order.new("Pizza", 200)
+
+puts order.inspect
+</code></pre>
+
+<p>
+	Now the output should be something like this:
+</p>
+
+<pre><code class="bash">
+#&lt;Order:0x000000024f0d60 @item="Pizza", @price=240&gt;
+</code></pre>
+
+<p>
+	As you can see, <code>"Pizza"</code> has been stored in <code>@item</code> and <code>240</code> has been stored in <code>@price</code>. These instance variables are now stored inside of this instance of the <code>Order</code> object. What if we create another order? Let's make the file look like this:
+</p>
+
+<pre><code class="ruby">
+class Order
+	def initialize(item, price)
+		@item = item
+		@price = price
+	end
+end
+
+# Let's add parameters so that our initialize method works
+order = Order.new("Pizza", 200)
+
+puts order.inspect
+
+order_2 = Order.new("Tea", 20)
+
+puts order_2.inspect
+</code></pre>
+
+<p>
+	Now you should see two different instances of the <code>Order</code> object, both with different values for the instance variables:
+</p>
+
+<pre><code class="bash">
+#&lt;Order:0x000000012d8920 @item="Pizza", @price=240&gt;
+#&lt;Order:0x000000012d8768 @item="Tea", @price=20&gt;
+</code></pre>
+
+<p>
+	As you can see, instance variables (variables prefixed with <code>@</code>) are variables that have different values for every instance of the object.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

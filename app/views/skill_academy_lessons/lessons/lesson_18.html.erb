@@ -1,0 +1,61 @@
+<h1><%= title_for(SkillAcademyLesson, 6, 1) %></h1>
+
+<p>
+  Now that we've set up the courses, let's start building features so instructors can add sections to the courses.
+</p>  
+
+<%= render layout: 'shared/story', locals: {story_title: title_for(SkillAcademyLesson, 5, 3)} do %>
+  <p>
+    A course should have many sections. For example, an HTML/CSS course should have one section about what HTML and CSS is, one section about HTML tags, one section about p tags, etc. Let's build a feature so that instructors can easily add sections to the lessons.
+  </p>
+
+  <p>
+    The instructor should be able to create a section from the instructor course show page. There should be a link that takes the instructor to a page to fill out information about the section.
+  </p>    
+
+  <p>
+    The flow should look like this:
+  </p>
+
+  <ul>
+    <li>User clicks on link to create section</li>
+    <li>User fills out form</li>
+    <li>A section should store the following information in the database:</li>
+    <ul>
+      <li><code>title</code></li>
+      <li><code>course_id</code></li>
+    </ul>
+    <li>Once the user submits the form</li>
+    <ul>
+      <li>If the information is valid, then create a new section and redirect the user to the instructor course show page</li>
+      <li>If the information is invalid, render the form again with a flash message</li>
+    </ul>
+  </ul>
+<% end %>
+
+<div class="gotcha" data-hint-id="1" data-gotcha-id="1">
+  <p>
+    When you migrate the <code>sections</code> table into the database, make sure that you add an index to the <code>course_id</code>.
+  </p>
+
+<pre><code class="ruby">
+add_index :sections, :course_id
+</code></pre>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Once you have created the controllers and model for <code>sections</code>, make sure you set up the database relations.
+  </p>  
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    A <code>lesson</code> should have many <code>sections</code> and a <code>section</code> should belong to a <code>lesson</code>.
+  </p>  
+</div>
+
+
+
+
+
