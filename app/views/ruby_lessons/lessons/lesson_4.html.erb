@@ -61,7 +61,7 @@ ruby hello.rb
 </p>
 
 <pre><code class="ruby">
-hello
+put "Today's an awesome day for coding!"
 </code></pre>
 
 <p>
@@ -70,7 +70,7 @@ hello
 
 <pre><code class="ruby">
 puts "Hello world"
-hello
+put "Today's an awesome day for coding!"
 </code></pre>
 
 <p>
@@ -92,22 +92,22 @@ hello
 </p>
 
 <pre><code class="bash">
-hello.rb:2:in `&lt;main&gt;': undefined local variable or method `hello' for main:Object (NameError)  
+hello.rb:2:in `&lt;main&gt;': undefined method `put' for main:Object (NoMethodError)
 </code></pre>
 
 <ul>
   <li><code>hello.rb:2</code> - this is telling us that the error is on line 2 of the <code>hello.rb</code> file</li>
-  <li><code>undefined local variable or method `hello'</code> - this is telling us that the program doesn't know the command <code>hello</code> since it is undefined</li>
+  <li><code>undefined method `put'</code> - this is telling us that the program doesn't know the command <code>put</code> since it is undefined</li>
 </ul>
 
 <p>
-  With this information, we can start debugging the program. We know that the program doesn't know a command <code>hello</code>, so we can just simply remove that code. 
+  With this information, we can start debugging the program. The bug here is the <code>put</code> isn't a command in Ruby - instead it should be <code>puts</code>.
 </p>
 
 <pre><code class="ruby">
 puts "Hello world"
+puts "Today's an awesome day for coding!"
 </code></pre>
-
 
 <p>
   Save the file and run the program again. You will see that the error message has gone away.
