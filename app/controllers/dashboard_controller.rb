@@ -3,6 +3,8 @@ class DashboardController < ApplicationController
 
   def index
     @due_cards = due_cards
+
+    @activities = PublicActivity::Activity.where(owner_id: current_user.id)
     
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
