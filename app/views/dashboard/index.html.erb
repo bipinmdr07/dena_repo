@@ -191,7 +191,7 @@
               <ul class="unindented_ul">
                 <% @unresolved_questions.each do |question| %>
 
-                  <% if !question.user.admitted %>
+                  <% if !question.user_admitted %>
                     <li><%= link_to question.title, question_path(question.id) %> by <%= question.user_name %></li>
                   <% end %>
 
@@ -209,8 +209,8 @@
             <div class="panel-body">
               <ul class="unindented_ul">
                 <% @unresolved_questions.each do |question| %>
-                  <% if User.find(question.user_id).admitted %>
-                    <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                  <% if question.user_admitted %>
+                    <li><%= link_to question.title, question_path(question.id) %> by <%= question.user_name %></li>
                   <% end %>
                 <% end %>
               </ul>
@@ -232,9 +232,9 @@
               <ul class="unindented_ul">
 
                 <% @unapproved_submissions.each do |submission| %>
-                  <% if User.find(submission.user_id).admitted == false %>
+                  <% if submission.user_admitted == false %>
 
-                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
                   <% end %>
                 <% end %>
               </ul>
@@ -251,7 +251,7 @@
               <ul class="unindented_ul">
 
                 <% @unapproved_submissions.each do |submission| %>
-                  <% if submission.user.admitted %>
+                  <% if submission.user_admitted %>
                   <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
                   <% end %>
 
