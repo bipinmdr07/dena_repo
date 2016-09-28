@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
   validates :title, :content, :user_id, presence: true
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
-  delegate :name, :email, :avatar, to: :user, prefix: true
+  delegate :name, :email, :avatar, :admitted, to: :user, prefix: true
 
   scope :unresolved, -> { where(resolved: false) }
   scope :student_post, -> { where(mentor_post: false) }
@@ -19,7 +19,7 @@ class Question < ActiveRecord::Base
   acts_as_votable
 
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks  
+  include Elasticsearch::Model::Callbacks
 
   def should_generate_new_friendly_id?
     title_changed? || super

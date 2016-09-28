@@ -91,7 +91,6 @@ gem 'bootstrap-social-rails'
 # SEO friendly
 gem 'meta-tags'
 
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
