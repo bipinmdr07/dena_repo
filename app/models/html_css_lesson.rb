@@ -5,33 +5,31 @@ class HtmlCssLesson < Lesson
 
 	PERIOD = "PREWORK"
 
+	chapter_1 = Chapter.new("Building Your first HTML/CSS Projects")
+	chapter_2 = Chapter.new("Build a Personal Resume Page")
+	chapter_3 = Chapter.new("Next Steps")
+
+	CHAPTERS = [
+		chapter_1,
+		chapter_2,
+		chapter_3
+	]
+
 	LESSONS = [
-		["Building Your first HTML/CSS Projects", 
-			[
-				[1, "Guidelines for Learning"],
-				[2, "Building Your First Two HTML/CSS Projects"]
-			]
-		],
-		["Build a Personal Resume Page", 
-			[
-				[3, "Introduction to HTML/CSS"],
-				[4, "Setting Up Your Environment"],				
-				[5, "Getting Started"],
-				[6, "Learning about Divs"],
-				[7, "Adding some Padding"],
-				[8, "Adding a Background Image"],
-				[9, "Creating a perfect background image"],
-				[10, "Adding Margins"],
-				[11, "Adding a Profile Picture"],
-				[12, "Making everything look nice"],
-				[13, "Adding Social Buttons"],
-				[14, "Final Touches"],
-			]
-		],
-		["Next Steps",
-			[
-				[15, "Congratulations"]
-			]
-		]
+		Lesson.new(1, "Guidelines for Learning", chapter_1),
+		Lesson.new(2, "Building Your First Two HTML/CSS Projects", chapter_1),
+		Lesson.new(3, "Introduction to HTML/CSS", chapter_2),
+		Lesson.new(4, "Setting Up Your Environment", chapter_2),				
+		Lesson.new(5, "Getting Started", chapter_2),
+		Lesson.new(6, "Learning about Divs", chapter_2),
+		Lesson.new(7, "Adding some Padding", chapter_2),
+		Lesson.new(8, "Adding a Background Image", chapter_2),
+		Lesson.new(9, "Creating a perfect background image", chapter_2),
+		Lesson.new(10, "Adding Margins", chapter_2),
+		Lesson.new(11, "Adding a Profile Picture", chapter_2),
+		Lesson.new(12, "Making everything look nice", chapter_2),
+		Lesson.new(13, "Adding Social Buttons", chapter_2),
+		Lesson.new(14, "Final Touches", chapter_2),
+		Lesson.new(15, "Congratulations", chapter_3)
 	]
 end

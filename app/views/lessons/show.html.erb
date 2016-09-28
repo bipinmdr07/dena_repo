@@ -23,9 +23,10 @@
 
       <%= render partial: '/cards/widget' %>
 
-      
+      <h1><%= title_for(controller_name.classify.constantize, params[:id].to_i) %></h1>
 
       <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
+      
       <br class = "clear">
 
       <%= render partial: 'layouts/hints' if @hints %>
