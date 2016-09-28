@@ -232,9 +232,8 @@
               <ul class="unindented_ul">
 
                 <% @unapproved_submissions.each do |submission| %>
-                  <% if submission.user_admitted == false %>
-
-                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
+                  <% if !submission.user_admitted %>
+                    <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
                   <% end %>
                 <% end %>
               </ul>
