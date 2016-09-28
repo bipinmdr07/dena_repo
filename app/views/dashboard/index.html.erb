@@ -197,12 +197,14 @@
         <div class="col-xs-12 col-md-6">
           <div class="panel">
             <div class="panel-heading text-center">
-              <h3><%= @unresolved_questions.count %> Unanswered Questions</h3>
+              <h3>Pre-work Students' <%= @unresolved_questions.count %> Unanswered Questions</h3>
             </div>
             <div class="panel-body">
               <ul class="unindented_ul">
                 <% @unresolved_questions.each do |question| %>
-                  <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                  <% if !User.find(question.user_id).admitted %>
+                    <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                  <% end %>
                 <% end %>
               </ul>
             </div>
@@ -212,12 +214,56 @@
         <div class="col-xs-12 col-md-6">
           <div class="panel">
             <div class="panel-heading text-center">
-              <h3><%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+              <h3>Admitted Students' <%= @unresolved_questions.count %> Unanswered Questions</h3>
             </div>
             <div class="panel-body">
               <ul class="unindented_ul">
+                <% @unresolved_questions.each do |question| %>
+                  <% if User.find(question.user_id).admitted %>
+                    <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3>Non Admitted students' <%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+
                 <% @unapproved_submissions.each do |submission| %>
+                  <% if User.find(submission.user_id).admitted == false %>
+
                   <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3>Admitted Students' <%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+
+                <% @unapproved_submissions.each do |submission| %>
+                  <% if User.find(submission.user_id).admitted %>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                  <% end %>
                 <% end %>
               </ul>
             </div>
