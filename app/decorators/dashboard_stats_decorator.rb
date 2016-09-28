@@ -11,8 +11,8 @@ class DashboardStatsDecorator
 	def build_stats
 		stats = []
 		stats << Stat.new(@lessons_completed_today, "#{'Lesson'.pluralize(@lessons_completed_today)}  Completed Today")
-		stats << Stat.new(@flashcards_completed_today, "#{'Flashcard'.pluralize(@flashcards_completed_today)} + Completed Today")
-		stats << Stat.new(@lessons_completed_this_week, "#{'Lesson'.pluralize(@lessons_completed_this_week)} + Completed This Week")
-		stats << Stat.new(@flashcards_completed_this_week, "#{'Flashcard'.pluralize(@flashcards_completed_this_week)} + Completed Today")
+		stats << Stat.new(@flashcards_completed_today, "#{'Flashcard'.pluralize(@flashcards_completed_today)}  Completed Today")
+		stats << Stat.new(@lessons_completed_this_week, "#{'Lesson'.pluralize(@lessons_completed_this_week)}  Completed This Week")
+		stats << Stat.new(@flashcards_completed_this_week, "#{'Flashcard'.pluralize(@flashcards_completed_this_week)}  Completed Today")
 	end
 end
