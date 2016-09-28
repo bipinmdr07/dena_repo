@@ -5,47 +5,41 @@ class RubyLesson < Lesson
 
   PERIOD = "1"
 
-  Chapter = Struct.new(:title)
-  Lesson = Struct.new(:number, :title, :chapter)
-
   LESSONS = []
 
-  Chapter
+  chapter_1 = Chapter.new("Ruby Fundamentals")
+  chapter_2 = Chapter.new("Object Oriented Programming")
+  chapter_3 = Chapter.new("Ruby Challenges")
+
+  CHAPTERS = [
+    chapter_1,
+    chapter_2,
+    chapter_3
+  ]
 
   LESSONS = [
-    ["Ruby Fundamentals", 
-      [
-        [1, "Introduction to Ruby"],
-        [2, "Setting up your environment"],
-        [3, "Super Basic Command Line Crash Course"],
-        [4, "Your First Ruby Program"],
-        [5, "Math is easy"],
-        [6, "Objects and Methods"],
-        [7, "Variables"],
-        [8, "Arrays"],
-        [9, "Hashes"],
-        [10, "Looping and Iterating"],
-        [11, "Defining our own methods"],
-        [12, "Conditionals and Logical Operators"]
-      ]
-    ],
-    ["Object Oriented Programming",
-      [
-        [13, "Introduction to Object Oriented Programming"],
-        [14, "Classes"],
-        [15, "Instance Variables"],
-        [16, "attr_reader and attr_writer"],
-        [17, "Instance Methods, Class Methods, and Encapsulation"],
-        [18, "Challenge: Building a Deck of Cards"]
-      ]
-    ],
-    ["Ruby Challenges",
-      [ 
-        [19, "Foobar Challenge"],
-        [20, "Test-First Ruby: Hello"],
-        [21, "Challenge: Temperature Conversion"] 
-      ]
-    ]
+      Lesson.new(1, "Introduction to Ruby", chapter_1),
+      Lesson.new(2, "Setting up your environment", chapter_1),
+      Lesson.new(3, "Super Basic Command Line Crash Course", chapter_1),
+      Lesson.new(4, "Your First Ruby Program", chapter_1),
+      Lesson.new(5, "Math is easy", chapter_1),
+      Lesson.new(6, "Objects and Methods", chapter_1),
+      Lesson.new(7, "Variables", chapter_1),
+      Lesson.new(8, "Arrays", chapter_1),
+      Lesson.new(9, "Hashes", chapter_1),
+      Lesson.new(10, "Looping and Iterating", chapter_1),
+      Lesson.new(11, "Defining our own methods", chapter_1),
+      Lesson.new(12, "Conditionals and Logical Operators", chapter_1),
+      Lesson.new(13, "Introduction to Object Oriented Programming", chapter_2),
+      Lesson.new(14, "Classes", chapter_2),
+      Lesson.new(15, "Instance Variables", chapter_2),
+      Lesson.new(16, "attr_reader and attr_writer", chapter_2),
+      Lesson.new(17, "Instance Methods, Class Methods, and Encapsulation", chapter_2),
+      Lesson.new(18, "Challenge: Building a Deck of Cards", chapter_2),
+      Lesson.new(19, "Foobar Challenge", chapter_3),
+      Lesson.new(20, "Test-First Ruby: Hello", chapter_3),
+      Lesson.new(21, "Challenge: Temperature Conversion", chapter_3)
   ]
+
 
 end
