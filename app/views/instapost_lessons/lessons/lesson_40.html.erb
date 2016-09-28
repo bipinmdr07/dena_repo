@@ -128,7 +128,7 @@ end
 
 <pre><code class="ruby">
 def index
-  @posts = Post.all.order('created_at DESC').includes(:comments, :user, comments: :user)
+  @posts = Post.all.order('created_at DESC').includes(:user, comments: :user)
 end	
 </code></pre>
 

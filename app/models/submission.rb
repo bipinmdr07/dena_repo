@@ -6,9 +6,7 @@ class Submission < ActiveRecord::Base
   validates :title, :content, :lesson_id, :user_id, :course_name, presence: true
   validates :course_name, uniqueness: { scope: [:lesson_id, :user_id] }
 
-  delegate :name, to: :user, prefix: true
-  delegate :email, to: :user, prefix: true
-  delegate :avatar, to: :user, prefix: true
+  delegate :name, :email, :avatar, to: :user, prefix: true
 
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }

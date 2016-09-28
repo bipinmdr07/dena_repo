@@ -11,11 +11,10 @@ class Question < ActiveRecord::Base
   validates :title, :content, :user_id, presence: true
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
-  delegate :name, to: :user, prefix: true
-  delegate :email, to: :user, prefix: true
-  delegate :avatar, to: :user, prefix: true
+  delegate :name, :email, :avatar, to: :user, prefix: true
 
   scope :unresolved, -> { where(resolved: false) }
+  scope :student_post, -> { where(mentor_post: false) }
 
   acts_as_votable
 
