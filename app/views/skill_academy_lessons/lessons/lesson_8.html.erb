@@ -1,0 +1,60 @@
+<h1><%= title_for(SkillAcademyLesson, 2, 4) %></h1> 
+
+<p>
+  Next, let's set up FactoryGirl.
+</p>
+
+<div class="task-box">
+  <h2>Tasks</h2>
+  <ul>
+    <li>Setup FactoryGirl</li>
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    The documentation for Factory Girl is <%= link_to 'here', 'https://github.com/thoughtbot/factory_girl_rails' %>. Open the documentation and take a second to read through it.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p> 
+    To install the gem, add the following line to your <code>Gemfile</code>:
+  </p>
+
+<pre><code class="ruby">
+gem 'factory_girl_rails'
+</code></pre>
+
+  <p>
+    Then run <code>bundle install</code>.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="1">
+  <p class="alert alert-danger">
+    Before we can start using FactoryGirl, we should set up a <code>factories</code> folder in the <code>spec</code> directory, according to the documentation.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="2">
+  <p>
+    In the documentation, it says the following:
+  </p>
+
+  <blockquote>
+    Default factories directory is test/factories, or spec/factories
+  </blockquote>
+
+  <p>
+    Inside of our <code>factories</code> folder, let's create a <code>factories.rb</code> file.
+  </p>
+
+  <p>
+    Inside of this new <code>factories.rb</code> file that we just created, we can write our new factories.
+  </p>
+</div>
+
+
+
+

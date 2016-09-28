@@ -28,7 +28,7 @@ end
   &lt;%= post.user.name %&gt;
   &lt;%= image_tag post.photo %&gt;
   &lt;%= post.description %&gt;
-  &lt;% if post.user_id == current_user.id %&gt;
+  &lt;% if post.user == current_user %&gt;
     &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
     &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
   &lt;% end %&gt;
@@ -44,7 +44,7 @@ end
 &lt;%= post.user.name %&gt;
 &lt;%= image_tag post.photo %&gt;
 &lt;%= post.description %&gt;
-&lt;% if post.user_id == current_user.id %&gt;
+&lt;% if post.user == current_user %&gt;
   &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
   &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
 &lt;% end %&gt;
@@ -59,7 +59,7 @@ end
 &lt;%= @post.user.name %&gt;
 &lt;%= image_tag @post.photo %&gt;
 &lt;%= @post.description %&gt;
-&lt;% if @post.user_id == current_user.id %&gt;
+&lt;% if @post.user == current_user %&gt;
   &lt;%= link_to 'Edit Post', edit_post_path(@post.id) %&gt;
   &lt;%= link_to 'Delete Post', post_path(@post.id), method: :delete %&gt;
 &lt;% end %&gt;
@@ -77,7 +77,7 @@ end
   &lt;%= post.description %&gt;
   &lt;!-- add this line below --&gt;
   &lt;%= link_to 'View Post', post_path(post.id) %&gt;
-  &lt;% if post.user_id == current_user.id %&gt;
+  &lt;% if post.user == current_user %&gt;
     &lt;%= link_to 'Edit Post', edit_post_path(post.id) %&gt;
     &lt;%= link_to 'Delete Post', post_path(post.id), method: :delete %&gt;
   &lt;% end %&gt;

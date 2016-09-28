@@ -23,14 +23,17 @@ class LessonsController < ApplicationController
                                                lesson_id: @current_lesson_id)
                                         .order("created_at DESC")
                                         .paginate(page: params[:page], per_page: 5)
+                                        .includes(:user)
 
     @current_lesson_submissions = Submission.where(course_name: current_controller, 
                                                    lesson_id: @current_lesson_id)
                                             .order("created_at DESC")
+                                            .includes(:user)
 
-    @paginated_submissions = @current_lesson_submissions.paginate(page: params[:page], per_page: 5)                                 
+    @paginated_submissions = @current_lesson_submissions.paginate(page: params[:page], per_page: 5)
+                                                        .includes(:user)                                 
 
-    @current_lesson_approved_submissions = @current_lesson_submissions.includes(:user).approved
+    @current_lesson_approved_submissions = @current_lesson_submissions.approved.includes(:user)
 
     @submission_by_current_user = current_user.submissions.find_by(lesson_id: @current_lesson_id, 
                                                                    course_name: current_controller)

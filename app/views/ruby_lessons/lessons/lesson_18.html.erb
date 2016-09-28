@@ -1,0 +1,38 @@
+<h1><%= title_for(RubyLesson, 2, 6) %></h1>
+
+<p>
+	To wrap up the OOP lessons, let's create a deck of cards using Object Oriented Programming. This is a common interview question that tests the applicants knowledge about object oriented programming. This one is quite challenging. Good luck!
+</p>
+
+<p><strong>Specifications</strong></p>
+<ul>
+	<li>A deck should have 52 cards</li> 
+	<li>We should be able to shuffle the deck</li>
+	<li>We should be able to deal the deck</li>
+</ul>
+
+<p><strong>How to do it</strong></p>
+<ul>
+	<li>Create a <code>Card</code> class and a <code>Deck</code> class</li>
+	<li>In the <code>initialize</code> method for the <code>Deck</code> class, build all 52 cards and store it in an instance variable array</li>
+	<li>Create a <code>shuffle</code> method for your <code>Deck</code> class</li>
+	<li>Create a <code>deal</code> method for your <code>Deck</code> class</li>
+</ul>
+
+<div class="well">
+	<h3>Hints</h3>
+
+	<p>
+		To shuffle the deck, you can use the <%= link_to 'shuffle', 'http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-shuffle-21', target: '_blank' %> method
+	</p>
+
+	<p>
+		To deal the deck (take the first card and remove it from the deck), you can use the <%= link_to 'shift', 'http://ruby-doc.org/core-2.2.0/Array.html#method-i-shift', target: '_blank' %> method.
+	</p>
+</div>
+
+<p class="alert alert-success">
+	Remember, this challenge is supposed to be difficult! Don't hesitate to reach out to the community for help!
+</p>
+
+<% @submission_form = true %>

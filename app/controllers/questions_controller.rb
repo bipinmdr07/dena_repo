@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
 
     if @question.save      
       send_email_notification!      
-      send_slack_notification!      
+      send_slack_notification!
     
       redirect_to question_path(@question.id)
     else
@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:replies).find(params[:id])
+    @question = Question.includes(:user, replies: :user).find(params[:id])
     @user = @question.user
   end
 

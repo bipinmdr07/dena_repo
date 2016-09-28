@@ -54,15 +54,19 @@ end
 </p>
 
 <p>
-  We need <code>post_id</code> because each comment will belong to a single photo. What I mean by this is that, let's say you post a comment to someone's post. That comment will only be shown for that particular post, and not any other post. Therefore, we need to store the <code>post_id</code> in the database to store which <code>Post</code> the <code>Comment</code> belongs to.
+  <strong>We need <code>post_id</code> because each comment will belong to a single photo.</strong>
+</p> 
+
+<p>
+  For example, let's say you post a comment to someone's post. That comment will only be shown for that particular post, and not any other post. Therefore, we need to store the <code>post_id</code> in the database to store which <code>Post</code> the <code>Comment</code> belongs to.
 </p>
 
 <p>
- Similarly, we also need <code>user_id</code> because each comment belongs to one single user.
+  <strong>Similarly, we also need <code>user_id</code> because each comment belongs to one single user.</strong>
 </p>
 
 <p>
-  Lastly, we need <code>text</code> because we need to store the contents of the comment.
+  <strong>Lastly, we need <code>text</code> because we need to store the contents of the comment.</strong>
 </p>
 
 <%= create_flashcard %>
@@ -76,7 +80,7 @@ HINT: <code>post_id</code> and <code>user_id</code> are foreign keys!
 </p>
 
 <p>
-  We need to add in indexes, like we did with the posts. It's going to look a little different than before:
+  <strong>We need to add in indexes</strong>, like we did with the posts. It's going to look a little different than before:
 </p>
 
 <pre><code class="ruby">

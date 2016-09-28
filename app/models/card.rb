@@ -13,7 +13,7 @@ class Card < ActiveRecord::Base
                     .where(["repetition_date <= ?", Date.today])
                     .order("repetition_date ASC") }
 
-  scope :unstudied, -> { where(repetition_date: nil) }                    
+  scope :unstudied, -> { where(repetition_date: nil) }     
 
   delegate :title, to: :deck, prefix: true      
 
@@ -27,7 +27,7 @@ class Card < ActiveRecord::Base
 
   def prev_in_deck
     Card.where(deck: deck).where("id < ?", id).last
-  end                      
+  end
 
   def update_code_syntax
     syntax_builder = SyntaxBuilder.new(self)

@@ -40,7 +40,7 @@ end
 </p>
 
 <p>
-  Another thing that is new is the <code>.merge(user_id: current_user.id)</code> thing. Before, we did things like <code>current_user.posts.create(post_params)</code> which hooked up the post and the <code>current_user</code>. But in this case, if we did something like this:
+  Another thing that is new is <code>.merge(user_id: current_user.id)</code>. Before, we did things like <code>current_user.posts.create(post_params)</code> which hooked up the post and the <code>current_user</code>. But in this case, if we did something like this:
 </p>
 
 <pre><code class="ruby">
@@ -49,7 +49,11 @@ end
 </code></pre>
 
 <p>
-  we can't do something like <code>current_user.@post.comments.create</code>. However, we can use this <code>merge</code> method to merge in the <code>user_id</code> and set it to <code>current_user.id</code>. That's what <code>.merge(user_id: current_user.id)</code> is doing right here.
+  since the comment belongs to a <code>Post</code> and a <code>User</code> as well, we can't chain the method like this: <code>current_user.@post.comments.create</code>.
+</p>
+
+<p>
+  However, we can use this <code>merge</code> method to merge in the <code>user_id</code> and set it to <code>current_user.id</code>. That's what <code>.merge(user_id: current_user.id)</code> is doing right here.
 </p>
 
 <%= create_flashcard %>

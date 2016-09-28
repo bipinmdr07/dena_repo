@@ -17,16 +17,22 @@
   </p> 
 
   <p>
+    You can create a new terminal window in C9 like this:
+  </p>
+
+  <%= image_tag 'ideator/new_terminal_window.png', class: 'img-responsive screenshot' %>
+
+  <p>
     One terminal will look like this, where you can type in commmands:
   </p>
 
-  <%= image_tag 'ideator/terminal.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ideator/terminal_window.png', class: 'img-responsive screenshot' %>
 
   <p>
     We also need another terminal window for running the server:
   </p>  
 
-  <%= image_tag 'ideator/server.png', class: 'img-responsive screenshot' %>
+  <%= image_tag 'ideator/server_window.png', class: 'img-responsive screenshot' %>
 
   <p>
     You'll notice that the terminal window that is running the server will not respond to anything that you type in. <strong>You can only execute commands in terminal windows that doesn't have a server running on it (the terminal window in the first screenshot).</strong>
@@ -46,7 +52,7 @@ git init .
 </p>
 
 <pre><code class="bash">
-Initialized empty Git repository in /Users/YourUsername/desktop/ideator
+Initialized empty Git repository in /home/ubuntu/workspace/.git/
 </code></pre>
 
 <p>
@@ -82,7 +88,7 @@ git commit -am “Initial commit”
 </p>
 
 <pre><code class="bash">
-git remote add origin git@github.com:YourGithubUsername/test.git
+git remote add origin git@github.com:YourGithubUsername/ideator.git
 </code></pre>
 
 <pre><code class="bash">
@@ -90,7 +96,7 @@ git push -u origin master
 </code></pre>
 
 <p class="alert alert-danger">
-  Make sure you replace <code>git@github.com:YourGithubUsername/test.git</code> with your username.
+  Make sure you replace <code>git@github.com:YourGithubUsername/ideator.git</code> with your username.
 </p>
 
 <p>

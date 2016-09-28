@@ -1,0 +1,356 @@
+<h1><%= title_for(RubyLesson, 2, 4) %></h1>
+
+<p>
+	Let's take a break from our Bill Generator program. In this lesson, let's build a Cat class. 
+</p>
+
+<p>
+	In C9, create a new file in your <code>ruby_fundamentals</code> directory called <code>cat.rb</code>. Open the file and create a new <code>Cat</code> class:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	
+end
+</code></pre>
+
+<p>
+	As we learned in previous lessons, for each class, we need an <code>initialize</code> method:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	def initialize
+	end
+end
+</code></pre>
+
+<p>
+	For each cat, let's store the <code>name</code> and the <code>age</code> of the cat. That means that when we create a new <code>Cat</code> object, we should be able to pass in the name and age as a parameter to the <code>new</code> method (<code>Cat.new(name, age)</code>).
+</p>
+
+<p>
+	Let's add the appropriate parameters to the <code>initialize</code> method and store the values as instance variables:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+end
+</code></pre>
+
+<p>
+	Now we can make a new instance of the <code>Cat</code> class:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+end
+
+cat = Cat.new("Cathy", 4)
+</code></pre>
+
+<p>
+	<strong>What if we want to change the <code>name</code> or the <code>age</code>?</strong> Right now, there's no way to change the attributes for the cat. Let's create <em>setter methods</em> that will allow us to do this.
+</p>
+
+<p class="alert alert-info">
+	<strong>Setter methods</strong> are methods that allow you to set the values of instance variables for the object. On the other hand, <strong>getter methods</strong> are methods that return the value of an instance variable. As we'll see in this lesson, Ruby doesn't require that you create these methods for the most part, but in languages like Java, creating these setter and getter methods can be seen quite often.
+</p>
+
+<pre><code class="ruby">
+class Cat
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+
+	def name=(name)
+		@name = name
+	end
+
+	def age=(age)
+		@age = age
+	end
+end
+
+cat = Cat.new("Cathy", 4)
+
+puts "Before: " + cat.inspect 
+
+cat.name = "Catherine"
+cat.age = 5
+
+puts "After: " + cat.inspect
+</code></pre>
+
+<p>
+	The output will look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/cat_1.png', class: 'img-responsive screenshot' %>
+
+<p>
+	As you can see, the <code>name</code> and <code>age</code> has changed.
+</p>
+
+<div class="well">
+	<h3>Defining setter methods</h3>
+
+	<p>
+		If you are confused about the weird syntax of having <code>=</code> in a method name - don't worry it's not too complicated.
+	</p>
+
+	<p>
+		When you execute <code>cat.name = "Catherine"</code>, you're actually executing a method that is named <code>name=</code>. That is why we created a method called <code>name=</code>:
+	</p>
+
+<pre><code class="ruby">
+def name=(name)
+	@name = name
+end	
+</code></pre>
+
+	<p>
+		In other words, <code>name =</code> is just another method. We can rename the method to something random and it would still work:
+	</p>
+
+<pre><code class="ruby">
+class Cat
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+
+	def coding_is_fun=(name)
+		@name = name
+	end
+
+	def age=(age)
+		@age = age
+	end
+end
+
+cat = Cat.new("Cathy", 4)
+
+# This will work now
+cat.coding_is_fun = "Catherine"
+
+# This will give an error since the method name = isn't defined anymore
+cat.name = "Cath"
+</code></pre>
+
+</div>
+
+<p>
+	Next, <strong>what if we want to get the <code>name</code> and the <code>age</code> of a cat?</strong> What we need to do next is define a <strong>getter</strong> method. A getter method is a method that returns the value of a particular instance variable.
+</p>
+
+<p>
+	Defining a getter method is easy:
+</p>
+
+
+<pre><code class="ruby">
+class Cat
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+
+	def name=(name)
+		@name = name
+	end
+
+	def age=(age)
+		@age = age
+	end
+
+	def name
+		@name
+	end
+
+	def age
+		@age
+	end
+end
+
+cat = Cat.new("Cathy", 4)
+
+puts "Before: " + cat.inspect 
+
+cat.name = "Catherine"
+cat.age = 5
+
+puts "After: " + cat.inspect
+
+puts "Name: " + cat.name
+puts "Age: " + cat.age
+</code></pre>
+
+<p>
+	The output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/cat_2.png', class: 'img-responsive screenshot' %>
+
+<p>
+	The methods we defined above return the instance variable when called.
+</p>
+
+<h3>A better way of defining getter and setter methods</h3>
+
+<p>
+	We learned how we can create setter and getter methods for our classes. However, if we need to create these methods for every single attribute for each object, things can get <em>repetitive</em> and <em>boring</em>.
+</p>
+
+<p>
+	<strong>Fortunately in Ruby, we can define these setter and getter methods in a much more concise way. Introducing <code>attr_reader</code> and <code>attr_writer</code>.</strong>
+</p>
+
+<p>
+	<strong><code>attr_reader</code> replaces the setter methods</strong>:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_reader :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+
+	# No need to define setter methods anymore!
+
+	# def name=(name)
+		# @name = name
+	# end
+
+	# def age=(age)
+		# @age = age
+	# end
+
+	def name
+		@name
+	end
+
+	def age
+		@age
+	end
+end
+</code></pre>
+
+<p>
+	<strong><code>attr_writer</code> replaces the getter methods:</strong>
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_reader :name, :age
+	attr_writer :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+
+	# No need to define setter methods anymore!
+
+	# def name=(name)
+		# @name = name
+	# end
+
+	# def age=(age)
+		# @age = age
+	# end
+
+	# No need to define getter methods anymore either!
+
+	# def name
+		# @name
+	# end
+
+	# def age
+		# @age
+	# end
+end
+</code></pre>
+
+<p>
+	Often times, we will use both <code>attr_writer</code> and <code>attr_reader</code>. To make things easier for us, Ruby also provides <code>attr_accessor</code>, which is a combination of <code>attr_writer</code> and <code>attr_reader</code>:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_accessor :name, :age
+
+	# attr_reader :name, :age
+	# attr_writer :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end
+
+	# No need to define setter methods anymore!
+
+	# def name=(name)
+		# @name = name
+	# end
+
+	# def age=(age)
+		# @age = age
+	# end
+
+	# No need to define getter methods anymore either!
+
+	# def name
+		# @name
+	# end
+
+	# def age
+		# @age
+	# end
+end
+</code></pre>
+
+<p>
+	The final code is this:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_accessor :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end	
+end
+</code></pre>
+
+<p>
+	Wow! Look how much less code we need to write! (Ruby is awesome.)
+</p>
+
+<h2>Overview</h2>
+
+<ul>
+	<li>To change the values in objects, we need to create <strong><em>setter methods</em></strong></li>
+	<li>To retrieve the values in objects, we need to create <strong><em>getter methods</em></strong></li>
+	<li>Getter methods can be defined with <code>attr_writer</code></li>
+	<li>Setter methods can be defined with <code>attr_reader</code></li>
+	<li><code>attr_accessor</code> combines <code>attr_reader</code> and <code>attr_writer</code></li>
+</ul>
+
+
+
+

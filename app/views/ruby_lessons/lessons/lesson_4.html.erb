@@ -1,200 +1,164 @@
 <h1><%= title_for(RubyLesson, 1, 4) %></h1>
 
 <p>
-  Now that you have some experience with Ruby codes, let's get familiar with some testing the ruby codes.
+  Let's write our first Ruby program!
 </p>
 
-<h3>Making First Test Pass</h3>
-  <p>
-    Given a bunch of tests, you need to write code such that every code passes the test. You should begin writing passing test for one failure at a time. This method is known as <strong>Test Driven Development</strong>.
-  </p>
+<p>
+  First, make sure you are in the <code>ruby_fundamentals</code> directory. You can do this by typing <code>pwd</code> (print working directory).
+</p>
 
-<div class="well">
-  <h3>Getting Started</h3>
+<p>
+  Next, let's make a new file called <code>hello.rb</code>.
+</p>
 
-  <p>First, go to C9 and create a new workspace. Fill out the Workspace name and description.</p>
+<%= image_tag 'ruby_lessons/hello.png', class: 'screenshot' %>
 
-  <p>
-    In the "Clone from Github or Mercurial URL" section, let's add the following <code>https://github.com/TECHRISE/ruby_fundamentals_challenges.git</code>.
-  </p>
+<p>
+  As you can see, you can create a Ruby files by saving the file with a <code>.rb</code> extension.
+</p>
 
-  <%= image_tag 'ruby_lessons/temperature/coding_challenge_workspace.png', class: 'img-responsive screenshot' %>
-
-  <p>
-    Select Ruby as the template: 
-  </p>
-
-  <%= image_tag 'ruby_lessons/temperature/coding_challenge_workspace_2.png', class: 'img-responsive screenshot' %>
-
-  <p>
-    Once you have created your workspace, let's navigate to the <code>temperature</code> directory. In the workspace terminal, type in the following command and press enter:
-  </p>
-
-<pre><code class="bash">
-cd hello
-</code></pre>
-
-  <p>
-    Next, type in the following command and press enter:
-  </p>
-
-<pre><code class="bash">
-bundle install
-</code></pre>
-
-  <p>
-    This command installs a bunch of packages and dependencies.
-  </p>
-
-  <p>
-    Next, let's run the following command:
-  </p>
-
-  <pre><code class="bash">
-rspec</code></pre>
-
-  <p>
-    This will run some tests to see if the code is working or not. Since you haven't written any code yet, you should see the failing tests.
-  </p>
-
-  <%= image_tag 'ruby_lessons/hello/failing_tests.png', class: 'img-responsive screenshot' %>
-
-  <p>Open the project in the sublime and open the <strong>hello.rb</strong> file.</p>
-
-  <p>The first failure you'll see is the <strong>NameError:</strong></p>
-
-<pre>
-  <code class="bash">
-1) #hello the hello function says hello
-Failure/Error: expect(hello).to eq("Hello!")
-
-NameError:
- undefined local variable or method `hello' for #<RSpec::ExampleGroups::StringCompressor::TheHelloFunction:0x00562eeffa3718>
-# ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'
-  </code>
-</pre>
-
-  <p>The first error is saying that the method is not defined. Let's define that method in our <strong>hello.rb</strong> file.</p>
+<p>
+  Inside the file, let's write the following lines of code:
+</p>
 
 <pre><code class="ruby">
-def hello
-
-end</code></pre>
-
-  <p>
-    Save the file and run rspec.
-  </p>
-
-<pre><code class="bash">
-1) #hello the hello function says hello
-     Failure/Error: expect(hello).to eq("Hello!")
-
-       expected: "Hello!"
-            got: nil
-
-       (compared using ==)
-     # ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'
+puts "Hello world"
 </code></pre>
 
-  <p>You should now see a different error. This means that while it found the file, and it found the function, it's not returning anything! ("nil" is the Ruby way of saying "not anything".)</p>
+<%= image_tag 'ruby_lessons/hello_world.png', class: 'screenshot' %>
 
-  <h3>Make it return something</h3>
-  <p>Inside the <strong>hello</strong> function, put a single line of string other than "hello".(Here we are simulating you making an honest mistake, so we can see what the error message looks like.)</p>
+<p>
+  <code>"Hello world"</code> is a <strong>String</strong> object, otherwise called a <code>string</code>. <strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong>
+</p>
+
+<p>
+  <code>puts</code> <strong>is a Ruby command that prints out the string with a line break.</strong>
+</p>
+
+<p>
+  Save the file. In the command line, let's type in the following:
+</p>  
 
 <pre><code class="ruby">
-def hello
-  "hpllo?"
-end</code></pre>
+ruby hello.rb
+</code></pre>
 
-  <p>Save it and run the test again.</p>
+<p>
+  You will see that <code>Hello world</code> is printed to the terminal!
+</p>
 
-  <h3>Watch it fail again.</h3>
-  <p>
-    You should now see the following error:
-  </p>
+<%= image_tag 'ruby_lessons/print_hello_world.png', class: 'screenshot' %>
+
+<p>
+  As you can see above, we can run ruby programs with the <code>ruby</code> command.
+</p>
+
+<h3>Error Messages</h3>
+
+<p>
+  Let's add a new line of code to our <code>hello.rb</code> file:
+</p>
+
+<pre><code class="ruby">
+put "Today's an awesome day for coding!"
+</code></pre>
+
+<p>
+  Your file should now look like this:
+</p>
+
+<pre><code class="ruby">
+puts "Hello world"
+put "Today's an awesome day for coding!"
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You will see an error message:
+</p>
+
+<%= image_tag 'ruby_lessons/hello_error.png', class: 'screenshot' %>
+
+<p>
+  As a programmer, <strong>you will see a lot of error messages</strong>. The important thing is to <strong>not freak out, stay calm, and solve the problem.</strong>
+</p>
+
+<p>
+  When the program reaches an error message, the program will stop at the location where it errored.
+</p>
+
+<p>
+  <strong>Error messages tell us a lot about what we are doing wrong in the program.</strong> Let's break down this error message:
+</p>
 
 <pre><code class="bash">
-1) #hello the hello function says hello
- Failure/Error: expect(hello).to eq("Hello!")
+hello.rb:2:in `&lt;main&gt;': undefined method `put' for main:Object (NoMethodError)
+</code></pre>
 
-   expected: "Hello!"
-        got: "hpllo?"
+<ul>
+  <li><code>hello.rb:2</code> - this is telling us that the error is on line 2 of the <code>hello.rb</code> file</li>
+  <li><code>undefined method `put'</code> - this is telling us that the program doesn't know the command <code>put</code> since it is undefined</li>
+</ul>
 
-   (compared using ==)
- # ./spec/hello_spec.rb:7:in `block (3 levels) in &lt;top (required)&gt;'</code></pre>
-
-  <p>
-    It is expecting "Hello!" but instead of that, it is getting "hpllo?". So let's fix that and run the test again.
-  </p>
+<p>
+  With this information, we can start debugging the program. The bug here is the <code>put</code> isn't a command in Ruby - instead it should be <code>puts</code>.
+</p>
 
 <pre><code class="ruby">
-def hello
-  "Hello!"
-end</code>
-</pre>
+puts "Hello world"
+puts "Today's an awesome day for coding!"
+</code></pre>
 
-  <h3>Watch it pass.</h3>
-  <%= image_tag 'ruby_lessons/hello/first_passing_test.png', class: 'img-responsive screenshot' %>
+<p>
+  Save the file and run the program again. You will see that the error message has gone away.
+</p>
 
-  <p>
-    The green dot on the top left represents that one out of three tests is passing.
-  </p>
+<p class="alert alert-info">
+  Debugging is a skill in itself. Even experienced developers face many bugs every day, and it is part of being a developer. The more bugs you debug, the faster you will be at debugging errors.
+</p>
 
-  <h3>Moving on to second test.</h3>
+<h3>Comments</h3>
 
-  <p>
-    Similarly, let's define a method named <strong>greet</strong>
-  </p>
+<p>
+  As a programmer, often times we want to leave notes for other programmers to read, or to leave a memo for yourself.
+</p>
 
-  <pre><code class="ruby">
-1) #hello the greet function says hello to someone
-     Failure/Error:
-       def greet
-       end
+<p>
+  Change <code>hello.rb</code> to look like this:
+</p>
 
-     ArgumentError:
-       wrong number of arguments (1 for 0)
-     # ./lib/hello.rb:5:in `greet'
-     # ./spec/hello_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</code></pre>
+<pre><code class="ruby">
+# this is a comment
+puts "Hello world"
+# text after hash tags cannot be seen
+put "Today's an awesome day for coding!"
+</code></pre>
 
-  <p>
-    You now encounter the <strong>ArgumentError:</strong>. Meaning that our test code is passing one argument to our code but code is not expecting any arguments. Change the code and run the test.
-  </p>
+<p>
+  Save the file and run the program. You will see that the program will not print out the text after the hash tags.
+</p>
 
-  <pre><code class="ruby">
-def greet(name)
-end</code></pre>
 
-  <p>
-    You should see different error message now.
-  </p>
+<h2>Conclusion</h2>
 
-<pre>
-  <code class="bash">
-1) #hello the greet function says hello to someone
-     Failure/Error: expect(greet("Alice")).to eq("Hello, Alice!")
+<ul>
+  <li>Ruby files are saved with a <code>.rb</code> extension</li>
+  <li><code>puts</code> is a command that prints out a string with a line break</li>
+  <li><strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong></li>
+  <li>You can run a Ruby program with the <code>ruby</code> command</li>
+  <li>Error messages tell us what we are doing wrong</li>
+  <li>As a programmer, you will face many error messages every day - the key is to be calm and tackle the problem</li>
+</ul>
 
-       expected: "Hello, Alice!"
-            got: nil
+<h2>Coding Challenge</h2>
 
-       (compared using ==)
-     # ./spec/hello_spec.rb:13:in `block (3 levels) in &lt;top (required)&gt;'</code>
-</pre>
+<ul>
+  <LI>Write a program that prints out a string <code>"I'm ready to become a ruby developer!"</code> to the console. </LI>
+  <li>The program should also have atleast 3 lines of comments.</li>
+  <li>Submit the code down below</li>
+</ul>
 
-  <h3>Let's make it pass.</h3>
 
-<pre>
-  <code class="ruby">
-def greet(name)
-	"Hello, #{name}!"
-end</code>
-</pre>
 
-  <p>
-    This <code>#{name}</code> , is known as <strong>string interpolation</strong>. <code>name</code> is replaced by the string passed onto the function.
-  </p>
+<% @submission_form = true %>
 
-  <p>Save the code and run the test.</p>
-
-  <%= image_tag 'ruby_lessons/hello/passing_tests.png', class: 'img-responsive screenshot' %>
-</div>

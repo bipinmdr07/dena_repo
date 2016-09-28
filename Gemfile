@@ -12,7 +12,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 # use puma as web server
 gem 'puma'
@@ -112,6 +111,8 @@ group :development, :test do
 end
 
 group :development do
+  # Detect N+1
+  gem "bullet"
   # preview emails
   gem "letter_opener"
 	gem 'pry-rails'

@@ -1,0 +1,359 @@
+<h1><%= title_for(RubyLesson, 1, 11) %></h1>
+
+<p>
+  In the previous lessons, we talked about how <strong>objects are things that receive commands, and methods are the commands that tell the object what to do.</strong>
+</p>
+
+<p> 
+  We saw many Array and String methods - but it turns out we can actually create methods ourselves as well.
+</p>
+
+<p>
+  Let's hop into C9. First, let's navigate to the <code>ruby_fundamentals</code> folder.
+</p>
+
+<pre><code class="bash">
+cd ruby_fundamentals
+</code></pre>
+
+<div class="well">
+  <h3>Gotchas</h3>
+
+  <p>
+    Before navigating to the <code>ruby_fundamentals</code> folder, make sure that you are not in <code>irb</code>. Your workspace terminal should look like this:
+  </p>
+
+  <%= image_tag 'ruby_lessons/blank_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Make sure your workspace does not look like this:
+  </p>  
+
+  <%= image_tag 'ruby_lessons/irb_workspace.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    If it does look like that, it means you are in your interactive ruby console. You can exit out easily by typing in <code>exit</code>:
+  </p>
+
+  <%= image_tag 'ruby_lessons/exit_irb.png', class: 'img-responsive screenshot' %>
+</div>
+
+<p>
+  Next, let's create a new file called <code>first_method.rb</code>.
+</p>
+
+<pre><code class="bash">
+touch first_method.rb
+</code></pre>
+
+<p>
+  Open the new file that we just created.
+</p>
+
+<p>
+  Inside this file, we are going to define our first method. Inside the file, let's add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+def hello_world
+
+end
+</code></pre>
+
+<p>
+  As we can see here, we can define a new method with <code>def</code>. <code>def</code> stands for <strong>define</strong>.
+</p>
+
+<div class="well">
+  <h3>Defining a new method</h3>
+
+<pre><code class="ruby">
+def method_name
+  # write code here
+end
+</code></pre>
+</div>
+
+<p>
+  As you can see, a Ruby method always starts with <code>def</code> and ends with <code>end</code>. 
+</p>
+
+<p>
+  Let's add the following line of code inside the method:
+</p>
+
+<pre><code class="ruby">
+puts "Hello world!"
+</code></pre>
+
+<p>
+  Your method should now look like this:
+</p>
+
+<pre><code class="ruby">
+def hello_world
+  puts "Hello world!"
+end
+</code></pre>
+
+<p>
+  Awesome! You've written your first Ruby method. Even though we have written our method, our method won't do naything until we call it. <strong>We can call the method by typing the method name</strong>:
+</p>
+
+<pre><code class="ruby">
+def hello_world
+  puts "Hello world!"
+end
+
+hello_world
+</code></pre>
+
+<p class="alert alert-info">
+  Calling the method is also called <strong>invoking the method</strong>.
+</p>
+
+<p>
+  Save the file. Let's run the ruby file. Type in the following command in your terminal and press enter:
+</p>
+
+<pre><code class="bash">
+ruby first_method.rb
+</code></pre>
+
+<p>
+  Your output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/first_method.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's write a more slightly more interesting program. Let's write a program that will greet the person depending on the name that is passed into the program.
+</p>
+
+<p>
+  Let's create a new file called <code>greet.rb</code>. In your terminal type in the following and press enter:
+</p>
+
+<pre><code class="bash">
+touch greet.rb
+</code></pre>
+
+<p>
+  This will create a new file called <code>greeting.rb</code>. Let's open this file up.
+</p>
+
+<p>
+  Inside this file, let's define a method called <code>greet</code>:
+</p>
+
+<pre><code class="ruby">
+def greet
+
+end
+</code></pre>
+
+<p>
+  Next, let's print out a greeting:
+</p>
+
+<pre><code class="ruby">
+def greet
+  puts "Greetings!"
+end
+</code></pre>
+
+<p>
+  The next step is to take in a <strong>parameter</strong>. <strong>Parameters are information passed into the method so that we can use that information inside that method.</strong>
+</p>
+
+<p>
+  We can specify a parameter like this:
+</p>
+
+<pre><code class="ruby">
+def greet(name)
+  puts "Greetings!"
+end
+</code></pre>
+
+<p>
+  Notice how after the method name <code>greet</code>, we added <code>(name)</code>. In this program, <code>name</code> is a parameter.
+</p>
+
+<p class="alert alert-info">
+  You might hear the word <em>argument</em> and <em>parameter</em> being used in the same context. They both mean the same thing and are synonyms.
+</p>
+
+<p>
+  We can use the parameter that is passed in inside of the program:
+</p>  
+
+<pre><code class="ruby">
+def greet(name)
+  puts "Greetings #{name}!"
+end
+</code></pre>
+
+<p>
+  As you can see here, <code>name</code> acts like a variable within the program. However, it is invalid outside of the program:
+</p>
+
+<pre><code class="ruby">
+def greet(name)
+  puts "Greetings #{name}!"
+end
+
+# outside of the method, name cannot be used
+puts name
+NameError: undefined local variable or method `name' for main:Object
+</code></pre>
+
+<p>
+  Let's call our new method. Again, to call the method, we simply write the method name:
+</p>
+
+<pre><code class="ruby">
+def greet(name)
+  puts "Greetings #{name}!"
+end
+
+greet
+</code></pre>
+
+<p>
+  But this time, we need to pass in a parameter. In otherwords, we need to pass in a name to the <code>greet</code> method:
+</p>
+
+<pre><code class="ruby">
+def greet(name)
+  puts "Greetings #{name}!"
+end
+
+greet("Jack")
+</code></pre>
+
+<p>
+  Save the file and run the ruby file:
+</p>
+
+<pre><code class="bash">
+ruby greet.rb
+</code></pre>
+
+<%= image_tag 'ruby_lessons/greetings_jack.png', class: 'img-responsive screenshot' %>
+
+<br>
+
+<div class="well">
+  <h3>Let's go over what we're doing here.</h3>
+
+  <ol>
+    <li>We defined a method called <code>greet</code></li>
+    <li>We added a parameter called <code>name</code></li>
+    <li>We are print out <code>"Greeting #{name}!"</code>. <code>#{name}</code> is the information passed in as a parameter</li>
+    <li>We end the method with <code>end</code></li>
+  </ol>
+</div>
+
+<p>
+  Let's create a new ruby file called <code>happy_birthday.rb</code>:
+</p>
+
+<pre><code class="bash">
+touch happy_birthday.rb
+</code></pre>
+
+<p>
+  We are going to create a method that congratulates a person's birthday!
+</p>
+
+<p>
+  First, let's define a method called <code>happy_birthday</code>:
+</p>
+
+<pre><code class="ruby">
+def happy_birthday
+
+end
+</code></pre>
+
+
+<p>
+  Next, let's set up two parameters this time, <code>name</code> and <code>age</code>:
+</p>
+
+<pre><code class="ruby">
+def happy_birthday(name, age)
+
+end
+</code></pre>
+
+<p>
+  <strong>As you can see, you can add multiple parameters by seperating them with <code>,</code>s.</strong>
+</p>
+
+<p>
+  Next, let's print out a sentence that congratulates them:
+</p>
+
+<pre><code class="ruby">
+def happy_birthday(name, age)
+  puts "Happy birthday #{name}, you're #{age}!"
+end
+</code></pre>
+
+<p>
+  Let's call this method a few times:
+</p>
+
+<pre><code class="ruby">
+def happy_birthday(name, age)
+  puts "Happy birthday #{name}, you're #{age}!"
+end
+
+happy_birthday("Adam", 30)
+happy_birthday("Tom", 10)
+happy_birthday("Peter", 23)
+</code></pre>
+
+<p>
+  Save the file and run the file:
+</p>
+
+<pre><code class="bash">
+ruby happy_birthday.rb
+</code></pre>
+
+<%= image_tag 'ruby_lessons/happy_birthday.png', class: 'img-responsive screenshot' %>
+
+<h2>Overview</h2>
+
+<ul>
+  <li>We can define methods with <code>def</code></li>
+  <li>Every method ends with <code>end</code></li>
+  <li>We can pass in parameters (arguments) into the method to use inside the method</li>
+  <li>We can pass in multiple parameters by seperating them with <code>,</code>s</li>
+  <li>In order to run the method, we need to invoke the method</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

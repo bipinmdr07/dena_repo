@@ -1,10 +1,5 @@
 <% lesson = activity.parameters[:course_name].split(/(?=[A-Z])/) %>
 <% lesson_name = lesson.join(" ").chomp("Lesson") %>
-<% activity_user_name = User.find(activity.owner_id).name %>
-<!-- <% display_name = "You" %> -->
-<!-- for later use <% activity_user_name = User.find(activity.owner_id).name %> -->
-
-<% owner = User.find(activity.owner_id) %>
 
 <div class="row">
   <div class="col-xs-1">
@@ -13,7 +8,7 @@
 
   <div class="col-xs-11">
     <span class="activity_time"><small><%= time_ago_in_words(activity.created_at) %> ago</small></span><br>
-    <strong><%= owner.name %> completed a lesson</strong><br>
-    <%= image_tag owner.avatar, class: 'prof_pic_xs' %><span class="activity_description">Lesson <%= activity.parameters[:lesson_id] %> in <%= lesson_name %></span>
+    <strong><%= activity.owner.name %> completed a lesson</strong><br>
+    <%= image_tag activity.owner.avatar, class: 'prof_pic_xs' %><span class="activity_description">Lesson <%= activity.parameters[:lesson_id] %> in <%= lesson_name %></span>
   </div>
 </div>

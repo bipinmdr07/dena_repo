@@ -1,0 +1,49 @@
+<h1><%= title_for(SkillAcademyLesson, 2, 3) %></h1> 
+
+<p>
+  Let's install RSpec into our application so that we can develop the application using TDD.
+</p>
+
+<div class="task-box">
+  <h2>Tasks</h2>
+  <ul>
+    <li>Install RSpec</li>
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    First, let's visit the documentation link <%= link_to 'here', 'https://github.com/rspec/rspec-rails' %>. We can see that installation is pretty straightforward.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+  In your gemfile, add the following:
+  </p>
+
+<pre><code class="ruby">
+group :development, :test do
+  gem 'rspec-rails', '~> 3.4'
+end
+</code></pre>
+
+  <p>
+    Then in your terminal, run <code>bundle install</code>. Next, run the following command in the terminal: 
+  </p>
+
+<pre><code class="bash">
+rails generate rspec:install
+</code></pre>
+
+  <p>
+    Make sure running this command generates 3 files: <code>.rspec</code>, <code>spec/spec_helper.rb</code>, <code>spec/rails_helper.rb</code>.
+  </p>
+
+  <p>
+    That's it! We're ready to start writing tests!
+  </p>
+</div>
+
+
+

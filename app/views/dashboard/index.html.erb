@@ -6,19 +6,7 @@
   </p>
 <% end %>
 
-<div class="row">
-  <div class="col-xs-12">
-    <% flash.each do |message_type, message| %>
-      <% if message_type == "notice" %>
-        <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></p>
-      <% elsif message_type == "alert" %>
-        <p class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %></p>
-      <% else %>
-        <div class="alert alert-<%= message_type %> alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= message %></div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<%= render "shared/flash_messages" %>
 
 <div class="row">
   <div class="col-xs-12 col-md-6">
@@ -202,9 +190,11 @@
             <div class="panel-body">
               <ul class="unindented_ul">
                 <% @unresolved_questions.each do |question| %>
-                  <% if !User.find(question.user_id).admitted %>
-                    <li><%= link_to question.title, question_path(question.id) %> by <%= User.find(question.user_id).name %></li>
+
+                  <% if !question.user.admitted %>
+                    <li><%= link_to question.title, question_path(question.id) %> by <%= question.user_name %></li>
                   <% end %>
+
                 <% end %>
               </ul>
             </div>
@@ -261,9 +251,10 @@
               <ul class="unindented_ul">
 
                 <% @unapproved_submissions.each do |submission| %>
-                  <% if User.find(submission.user_id).admitted %>
-                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= User.find(submission.user_id).name %></li>
+                  <% if submission.user.admitted %>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
                   <% end %>
+
                 <% end %>
               </ul>
             </div>

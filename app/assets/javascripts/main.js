@@ -1,99 +1,103 @@
-// $(document).ready(function() {
+var load_ace, summernote, fixed_header_scroll;
 
-//     /* ======= Twitter Bootstrap hover dropdown ======= */   
-//     /* Ref: https://github.com/CWSpear/bootstrap-hover-dropdown */ 
-//     /* apply dropdownHover to all elements with the data-hover="dropdown" attribute */
-    
-//     $('[data-hover="dropdown"]').dropdownHover();
-    
-//     /* ======= Fixed header when scrolled ======= */    
-//     $(window).on('scroll load', function() {
-         
-//          if ($(window).scrollTop() > 0) {
-//              $('#header').addClass('scrolled');
-//          }
-//          else {
-//              $('#header').removeClass('scrolled');
-             
-//          }
-//     });
-    
-    
-//     /* ======= jQuery Placeholder ======= */
-//     /* Ref: https://github.com/mathiasbynens/jquery-placeholder */
-    
-//     $('input, textarea').placeholder();    
-    
-//     /* ======= jQuery FitVids - Responsive Video ======= */
-//     /* Ref: https://github.com/davatron5000/FitVids.js/blob/master/README.md */
-    
-//     $(".video-container").fitVids();
-    
-//     /* ======= FAQ accordion ======= */
-//     function toggleIcon(e) {
-//     $(e.target)
-//         .prev('.panel-heading')
-//         .find('.panel-title a')
-//         .toggleClass('active')
-//         .find("i.fa")
-//         .toggleClass('fa-plus-square fa-minus-square');
-//     }
-//     $('.panel').on('hidden.bs.collapse', toggleIcon);
-//     $('.panel').on('shown.bs.collapse', toggleIcon);    
-    
-    
-//     /* ======= Header Background Slideshow - Flexslider ======= */    
-//     /* Ref: https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties */
-    
-//     $('.bg-slider').flexslider({
-//         animation: "fade",
-//         directionNav: false, //remove the default direction-nav - https://github.com/woothemes/FlexSlider/wiki/FlexSlider-Properties
-//         controlNav: false, //remove the default control-nav
-//         slideshowSpeed: 8000
-//     });
+/* ======= Fixed header when scrolled ======= */
+fixed_header_scroll = function(){
+  var toggle_scrolled;
   
-//   /* ======= Stop Video Playing When Close the Modal Window ====== */
-//     $("#modal-video .close").on("click", function() {
-//         $("#modal-video iframe").attr("src", $("#modal-video iframe").attr("src"));        
-//     });
-     
-    
-//      /* ======= Testimonial Bootstrap Carousel ======= */
-//      /* Ref: http://getbootstrap.com/javascript/#carousel */
-//     $('#testimonials-carousel').carousel({
-//       interval: 8000 
-//     });
-    
-    
-//     /* ======= Style Switcher ======= */    
-//     $('#config-trigger').on('click', function(e) {
-//         var $panel = $('#config-panel');
-//         var panelVisible = $('#config-panel').is(':visible');
-//         if (panelVisible) {
-//             $panel.hide();          
-//         } else {
-//             $panel.show();
-//         }
-//         e.preventDefault();
-//     });
-    
-//     $('#config-close').on('click', function(e) {
-//         e.preventDefault();
-//         $('#config-panel').hide();
-//     });
-    
-    
-//     $('#color-options a').on('click', function(e) { 
-//         var $styleSheet = $(this).attr('data-style');
-//     $('#theme-style').attr('href', $styleSheet);  
-        
-//     var $listItem = $(this).closest('li');
-//     $listItem.addClass('active');
-//     $listItem.siblings().removeClass('active');
-    
-//     e.preventDefault();
-    
-//   });
+  toggle_scrolled = function(){
+    if ($(window).scrollTop() > 0) {
+      $('#header').addClass('scrolled');
+    }
+    else {
+      $('#header').removeClass('scrolled');
+    }
+  }
+
+  $(window).on('scroll load', toggle_scrolled);  
+}
+
+/* summernote editor */
+summernote = function() {
+
+  var delete_episode_image, ready, upload_episode_image;
+
+  upload_episode_image = function(that, file) {
+    var data;
+    data = new FormData;
+    data.append('image[photo]', file);
+    return $.ajax({
+      data: data,
+      type: 'POST',
+      url: '/images',
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(data) {
+        var img;
+        img = document.createElement('IMG');
+        img.src = data.url;
+        img.setAttribute('id', data.image_id);
+        return $(that).summernote('insertNode', img);
+      }
+    });
+  };
+
+  delete_episode_image = function(file_id) {
+    return $.ajax({
+      type: 'DELETE',
+      url: "/images/" + file_id,
+      cache: false,
+      contentType: false,
+      processData: false
+    });
+  };
+
+  ready = function() {
+    return $('[data-provider="summernote"]').each(function() {
+      return $(this).summernote({
+        height: 250,
+        toolbar: [['style', ['style']], ['font', ['bold', 'italic', 'underline', 'clear']], ['fontname', ['fontname']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['table', ['table']], ['insert', ['link', 'picture', 'hr']], ['view', ['fullscreen', 'codeview']]],
+        prettifyHtml: false,
+        codemirror: {
+          lineNumbers: true,
+          tabSize: 2,
+          theme: "railscasts"
+        },
+        callbacks: {
+          onImageUpload: function(files) {
+            var img;
+            return img = upload_episode_image(this, files[0]);
+          },
+          onMediaDelete: function(target, editor, editable) {
+            var image_id;
+            image_id = target[0].id;
+            if (!!image_id) {
+              delete_episode_image(image_id);
+            }
+            return target.remove();
+          }
+        }
+      });
+    });      
+  };  
+  ready();
+}
+
+load_ace = function(){
+  if ($("div#editor").length > 0) {
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/idle_fingers");
+    editor.getSession().setMode("ace/mode/ruby");
+    document.getElementById('editor').style.fontSize='14px';
+    editor.setValue("\n\n\n\n\n\n\n\n\n");
+    editor.gotoLine(1);
+  }  
+}
+
+$(document).on('turbolinks:load', function() {    
+  fixed_header_scroll();
+  load_ace();    
+  summernote();
+});
 
 
-// });
