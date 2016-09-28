@@ -111,6 +111,8 @@ group :development, :test do
 end
 
 group :development do
+  # Detect N+1
+  gem "bullet"
   # preview emails
   gem "letter_opener"
 	gem 'pry-rails'

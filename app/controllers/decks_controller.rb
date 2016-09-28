@@ -2,7 +2,7 @@ class DecksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @decks = Deck.master
+    @decks = Deck.master.includes(:cards)
     render layout: "layouts/study"
   end
 

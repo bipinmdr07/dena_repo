@@ -97,6 +97,9 @@ GEM
       sass (~> 3.4)
       thor (~> 0.19)
     builder (3.2.2)
+    bullet (5.1.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.0.5)
     capybara (2.7.1)
       addressable
@@ -480,6 +483,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.10.0)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -510,6 +514,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bootstrap-social-rails
   bourbon
+  bullet
   byebug
   capybara
   carrierwave

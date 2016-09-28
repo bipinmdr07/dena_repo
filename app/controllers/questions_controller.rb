@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:replies, :user, replies: :user).find(params[:id])
+    @question = Question.includes(:user, replies: :user).find(params[:id])
     @user = @question.user
   end
 
