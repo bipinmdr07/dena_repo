@@ -5,6 +5,13 @@ class RubyLesson < Lesson
 
   PERIOD = "1"
 
+  Chapter = Struct.new(:title)
+  Lesson = Struct.new(:number, :title, :chapter)
+
+  LESSONS = []
+
+  Chapter
+
   LESSONS = [
     ["Ruby Fundamentals", 
       [
