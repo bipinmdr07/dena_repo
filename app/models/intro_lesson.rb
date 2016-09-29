@@ -5,17 +5,15 @@ class IntroLesson < Lesson
 
 	PERIOD = "PREWORK"
 
-	chapter_1 = Chapter.new("Introduction to TECHRISE")
-
 	CHAPTERS = [
-		chapter_1
+		Chapter.new("Introduction to TECHRISE")
 	]
 
 	LESSONS = [		
-		Lesson.new(1, "Welcome to TECHRISE", chapter_1),
-		Lesson.new(2, "Why use the TECHRISE Flashcard System?", chapter_1),
-		Lesson.new(3, "How to Embed Code with TECHRISE Flashcards", chapter_1),
-		Lesson.new(4, "Getting Started", chapter_1)
+		Lesson.new(1, "Welcome to TECHRISE", CHAPTERS[0]),
+		Lesson.new(2, "Why use the TECHRISE Flashcard System?", CHAPTERS[0]),
+		Lesson.new(3, "How to Embed Code with TECHRISE Flashcards", CHAPTERS[0]),
+		Lesson.new(4, "Getting Started", CHAPTERS[0])
 	]
 
 
