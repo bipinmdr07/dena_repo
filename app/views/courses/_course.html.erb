@@ -11,7 +11,8 @@
       link = course_link
       end 
 
-      unless controller_name.empty?
+      unless controller_name.empty?        
+        chapters = controller_name.classify.constantize::CHAPTERS
         lessons = controller_name.classify.constantize::LESSONS
         course_title = controller_name.classify.constantize::COURSE_TITLE
         lesson_link = controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
@@ -26,11 +27,11 @@
           <p><%= course_name %></p>
         <% else %>
           <ul class="unindented_ul">
-            <% lessons.each do |chapter| %>
+            <% chapters.each do |chapter| %>
                 <% if link.empty? %>
-                  <li><%= chapter[0] %></li>
+                  <li><%= chapter.title %></li>
                 <% else %>
-                  <%= link_to "<li>#{chapter[0]}</li>".html_safe, link + "/" + chapter[1][0][0].to_s %>
+                  <%= link_to "<li>#{chapter.title}</li>".html_safe, link + "/" + lessons.select{|lesson| lesson.chapter == chapter}.first.id.to_s %>
                 <% end %>
             <% end %>
           </ul>
