@@ -119,18 +119,62 @@ rake db:create:all
 rake db:migrate
 </code></pre>
 
-<!-- <div class="well">
-	<h3>No Rakefile found?</h3>
-	<p>
-		If you get an error saying <code>No Rakefile found</code>, chances are you didn't navigate to your <code>ideator</code> folder before running the <code>rake</code> commands.
-	</p>
+
+<div class="well">
+	<h3>Databases</h3>
 
 	<p>
-		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering the <code>rake</code> commands.
+		<strong>Databases are like a box that contains a bunch of information.</strong> In the database, we can <strong>store <em>various different types</em> of data</strong> and we can also <strong>pull out data</strong> from the database.
 	</p>
 
+	<P>
+		In Rails, we create different databases for different purposes:
+	</P>
+
+
+	<table class="table" style="background:white">
+		<tr>
+			<th>Environment</th>
+			<th>Purpose</th>
+		</tr>
+
+		<tr>
+			<td>development</td>
+			<td>We use the development environment to develop our applications.</td>
+		</tr>
+
+		<tr>
+			<td>production</td>
+			<td>This is the environment that will be used when released to the public.</td>
+		</tr>
+
+		<tr>
+			<td>test</td>
+			<td>This is the environment that you will be using when testing the functionality of your application.</td>
+		</tr>
+
+	</table>
+
+	<%= image_tag 'ideator/database_environments.png', class: 'screenshot' %>
 </div>
- -->
+
+<div class="well">
+	<h3>rake db:create:all</h3>
+
+	<p>
+		We run the <code>rake db:create:all</code> command to create a new database. This command creates a new database according to the information in the <code>database.yml</code> file.
+	</p>
+
+	<h3>database.yml</h3>
+
+	<p>
+		This file contains the database settings. Rails applications has different databases for each environment, so there are different configurations for each environment.
+	</p>
+
+	<%= image_tag 'ideator/database_yml.png', class: 'screenshot' %>
+</div>
+
+
 <p>
 	Now let’s fire up our rails server by entering this command in the terminal window.
 </p>
@@ -150,18 +194,6 @@ rails s -b $IP -p $PORT
 </p>
 
 <%= image_tag 'ideator/welcome_page.png', class: 'img-responsive screenshot', style: 'margin-bottom: 30px' %>
-<!-- 
-<div class="well">
-	<h3>Don't see a nice welcome page?</h3>
-	<p>
-		If the <code>rails server</code> command is giving you errors, chances are you didn't navigate to your <code>ideator</code> folder.
-	</p>
-
-	<p>
-		If you haven't done so, make sure to enter <code>cd ~/desktop/ideator</code> before entering <code>rails server</code>.
-	</p>
-
-</div> -->
 
 <p>
   Awesome! You're one step closer to finishing your first rails app!
