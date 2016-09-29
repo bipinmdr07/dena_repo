@@ -108,8 +108,8 @@ Rails.application.routes.draw do
   get 'bootstrap_lessons', to: 'bootstrap__lessons#index', as: 'bootstrap'
   get 'bootstrap_lessons/:id', to: 'bootstrap__lessons#show', as: 'bootstrap_lessons'
 
-  get 'ideator_lessons', to: 'ideator_lessons#index', as: 'ideator'
-  get 'ideator_lessons/:id', to: 'ideator_lessons#show', as: 'ideator_lessons'
+  get 'twitr_lessons', to: 'twitr_lessons#index', as: 'twitr'
+  get 'twitr_lessons/:id', to: 'twitr_lessons#show', as: 'twitr_lessons'
 
   get 'ruby_lessons', to: 'ruby_lessons#index', as: 'ruby'
   get 'ruby_lessons/:id', to: 'ruby_lessons#show', as: 'ruby_lessons'

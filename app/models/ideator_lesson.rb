@@ -1,4 +1,4 @@
-class IdeatorLesson < Lesson
+class TwitrLesson < Lesson
 	COURSE_TITLE = "Ideator - an Idea Sharing App"
 
 	DURATION = 25
