@@ -40,7 +40,7 @@
 
       <% if last_lesson %>
         <h5><strong>Currently On: </strong></h5>
-        <h5><label class="tag_label"><%= get_lesson_name(last_lesson.course_name, last_lesson.lesson_id) %></label></h5>
+        <h5><label class="tag_label"><%= get_lesson_title(last_lesson.course_name, last_lesson.lesson_id) %></label></h5>
         <h5 style="color: #d9534f"><%= last_lesson.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson") %> Lesson <%= last_lesson.lesson_id %></h5>
       <% end %>
 

@@ -4,7 +4,7 @@
 
 <% if @last_lesson %>
 
-  <% lesson_name = get_lesson_name(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]) %>
+  <% lesson_name = get_lesson_title(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]) %>
 
   <div class="row">
       <div class="col-xs-12">
