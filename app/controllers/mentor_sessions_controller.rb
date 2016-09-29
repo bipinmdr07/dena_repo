@@ -7,7 +7,7 @@ class MentorSessionsController < ApplicationController
                                     .order("created_at DESC")
                                     .includes(:student_session)
     @mentee = User.find(params[:mentee_id])
-    @last_mentor_session = MentorSession.where(user_id: params[:mentee_id]).order("created_at DESC").first
+    @last_mentor_session = @mentor_sessions.first
   end
 
   def show

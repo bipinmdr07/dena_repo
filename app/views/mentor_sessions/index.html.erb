@@ -44,7 +44,7 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-2">
                   <%= image_tag current_user.avatar, class: 'mentor_prof' %>
-                  <% if mentor_session.id == @last_mentor_session.id %>
+                  <% if mentor_session == @last_mentor_session %>
                     <div class="edit_post_links">
                       <%= link_to "Edit", edit_mentee_mentor_session_path(mentor_session.user_id, mentor_session.id), class: 'btn btn-sm btn-warning' %>
                     </div>

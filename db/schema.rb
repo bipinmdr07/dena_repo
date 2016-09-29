@@ -106,6 +106,18 @@ ActiveRecord::Schema.define(version: 20160919155256) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "student_question_id"
+    t.text     "content"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "comments", ["student_question_id"], name: "index_comments_on_student_question_id", using: :btree
+  add_index "comments", ["user_id", "student_question_id"], name: "index_comments_on_user_id_and_student_question_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -132,6 +144,12 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.datetime "updated_at",     null: false
     t.string   "featured_image"
     t.string   "signup_link"
+  end
+
+  create_table "forums", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -257,6 +275,16 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "simplified_type",        default: "file"
   end
 
+  create_table "student_questions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "student_questions", ["user_id"], name: "index_student_questions_on_user_id", using: :btree
+
   create_table "student_sessions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "mentor_id"
@@ -271,6 +299,19 @@ ActiveRecord::Schema.define(version: 20160919155256) do
   add_index "student_sessions", ["mentor_id"], name: "index_student_sessions_on_mentor_id", using: :btree
   add_index "student_sessions", ["mentor_session_id"], name: "index_student_sessions_on_mentor_session_id", using: :btree
   add_index "student_sessions", ["user_id"], name: "index_student_sessions_on_user_id", using: :btree
+
+  create_table "submission_comments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "lesson"
+    t.integer  "user_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "submission_id"
+    t.boolean  "approved",      default: false
+  end
+
+  add_index "submission_comments", ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
 
   create_table "submission_replies", force: :cascade do |t|
     t.integer  "user_id"
@@ -366,12 +407,12 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
-    t.boolean  "collaboration_access",      default: false, null: false
-    t.boolean  "skill_academy_access",      default: false, null: false
     t.string   "provider"
     t.string   "uid"
     t.text     "application_reasons"
     t.integer  "package"
+    t.boolean  "collaboration_access",      default: false, null: false
+    t.boolean  "skill_academy_access",      default: false, null: false
   end
 
   add_index "users", ["admitted"], name: "index_users_on_admitted", using: :btree
