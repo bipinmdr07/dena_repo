@@ -6,60 +6,48 @@ class RspecBlogLesson < Lesson
 
   PERIOD = "5 ~ 6"
 
+  CHAPTERS = [
+    Chapter.new("Introduction to RSpec"),
+    Chapter.new("Setting up Your App"),
+    Chapter.new("Setting up Posts"),
+    Chapter.new("TDD - Test Driven Development"),
+    Chapter.new("Testing our Rails Application"),
+    Chapter.new("Final Touches"),
+    Chapter.new("Wrapping Up")
+  ]
+
   LESSONS = [
-    ["Introduction to RSpec", 
-      [
-        [1, "Why test?"],
-        [2, "What is RSpec?"]
-      ]
-    ],
-    ["Setting up Your App", 
-      [
-        [3, "Self-Directed Lesson: Setting up your Web Dev Environment"],
-        [4, "Self-Directed Lesson: Setting Up Git"],
-        [5, "Self-Directed Lesson: Installing Bootstrap"],
-        [6, "Self-Directed Lesson: Installing Simple Form"],
-        [7, "Self Directed Lesson - Adding a Navbar"],
-        [8, "Installing RSpec"]
-      ]
-    ],
-    ["Setting up Posts",
-      [ 
-        [9, "Self-Directed Lesson: Creating the Posts Controller and Model"],
-        [10, "Self-Directed Lesson: Setting Up Routes"],
-        [11, "Self-Directed Lesson: Setting up CRUD Actions"]
-      ]
-    ],
-    ["TDD - Test Driven Development",
-      [
-        [12, "What is TDD?"]
-      ]
-    ],
-    ["Testing our Rails Application",
-      [
-        [13, "Testing the index action"],
-        [14, "Testing the show action"],
-        [15, "Self-Directed Lesson: Writing the show action"],
-        [16, "Testing the new action"],
-        [17, "Testing the create action - Part 1"],
-        [18, "Self-Directed Lesson: Setting Up Validations"],
-        [19, "Testing the create action - Part 2"],
-        [20, "Self-Directed Lesson: Testing the edit action"],
-        [21, "Testing the update action"],
-        [22, "Testing the destroy action"],
-        [23, "Model Tests"]
-      ]
-    ],
-    ["Final Touches",
-      [
-        [24, "Self-Directed Lesson: Tidying things up"]
-      ]
-    ],
-    ["Wrapping Up",
-      [
-        [25, "TDD: Final Thoughts"]
-      ]
-    ]
+    Lesson.new(1, "Why test?", CHAPTERS[0]),
+    Lesson.new(2, "What is RSpec?", CHAPTERS[0]),
+
+    Lesson.new(3, "Self-Directed Lesson: Setting up your Web Dev Environment", CHAPTERS[1]),
+    Lesson.new(4, "Self-Directed Lesson: Setting Up Git", CHAPTERS[1]),
+    Lesson.new(5, "Self-Directed Lesson: Installing Bootstrap", CHAPTERS[1]),
+    Lesson.new(6, "Self-Directed Lesson: Installing Simple Form", CHAPTERS[1]),
+    Lesson.new(7, "Self Directed Lesson - Adding a Navbar", CHAPTERS[1]),
+    Lesson.new(8, "Installing RSpec", CHAPTERS[1]),
+
+    Lesson.new(9, "Self-Directed Lesson: Creating the Posts Controller and Model", CHAPTERS[2]),
+    Lesson.new(10, "Self-Directed Lesson: Setting Up Routes", CHAPTERS[2]),
+    Lesson.new(11, "Self-Directed Lesson: Setting up CRUD Actions", CHAPTERS[2]),
+
+    Lesson.new(12, "What is TDD?", CHAPTERS[3]),
+
+    Lesson.new(13, "Testing the index action", CHAPTERS[4]),
+    Lesson.new(14, "Testing the show action", CHAPTERS[4]),
+    Lesson.new(15, "Self-Directed Lesson: Writing the show action", CHAPTERS[4]),
+    Lesson.new(16, "Testing the new action", CHAPTERS[4]),
+    Lesson.new(17, "Testing the create action - Part 1", CHAPTERS[4]),
+    Lesson.new(18, "Self-Directed Lesson: Setting Up Validations", CHAPTERS[4]),
+    Lesson.new(19, "Testing the create action - Part 2", CHAPTERS[4]),
+    Lesson.new(20, "Self-Directed Lesson: Testing the edit action", CHAPTERS[4]),
+    Lesson.new(21, "Testing the update action", CHAPTERS[4]),
+    Lesson.new(22, "Testing the destroy action", CHAPTERS[4]),
+    Lesson.new(23, "Model Tests", CHAPTERS[4]),
+
+    Lesson.new(24, "Self-Directed Lesson: Tidying things up", CHAPTERS[5]),
+
+    Lesson.new(25, "TDD: Final Thoughts", CHAPTERS[6])
   ]
 
 end
