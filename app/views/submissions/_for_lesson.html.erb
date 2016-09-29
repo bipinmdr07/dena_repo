@@ -4,10 +4,8 @@
     <div class="col-xs-12">
       <h3 class="question-header mentee_title text-center">
         <span class="back_to_dashboard">
-          <% if @user_submission %>
-            <%= link_to 'My Submission', submission_path(@user_submission.id), class: 'btn btn-back btn-default', :"data-no-turbolink" => true %>
-          <% else %>
-            <%= link_to 'Submit Your Work', new_submission_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-back btn-default' %>
+          <% if @submission_by_current_user %>
+            <%= link_to 'My Submission', submission_path(@submission_by_current_user.id), class: 'btn btn-back btn-default', :"data-no-turbolink" => true %>
           <% end %>
         </span>
          Submissions
@@ -19,7 +17,18 @@
 
   <%= render 'submissions/student_submissions' %>
   <hr>
+  
   <% @paginated_submissions.order("created_at DESC").each do |submission| %>
+    <%= render partial: 'submissions/submission', locals: {submission: submission} %>
+  <% end %>
+
+  <%= will_paginate @paginated_submissions, renderer: BootstrapPagination::Rails %>
+
+<% elsif (@submission_by_current_user && @submission_by_current_user.approved) %>
+  <%= render 'submissions/student_submissions' %>
+  <hr>
+
+  <% @current_lesson_approved_submissions.order("created_at DESC").each do |submission| %>
 
     <%= render partial: 'submissions/submission', locals: {submission: submission} %>
 
@@ -27,24 +36,11 @@
 
   <%= will_paginate @paginated_submissions, renderer: BootstrapPagination::Rails %>
 
-<% elsif (@user_submission && @user_submission.approved) %>
-  <%= render 'submissions/student_submissions' %>
-  <hr>
-
-  <% @submissions.order("created_at DESC").each do |submission| %>
-
-
-    <%= render partial: 'submissions/submission', locals: {submission: submission} %>
-
-  <% end %>
-
-  <%= will_paginate @paginated_submissions, renderer: BootstrapPagination::Rails %>
-
-<% elsif @user_submission %>
+<% elsif @submission_by_current_user %>
 
   <%= render 'submissions/student_submissions' %>
   <hr>
-  <h4><%= link_to @user_submission.title, submission_path(@user_submission.id) %> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe %>
+  <h4><%= link_to @submission_by_current_user.title, submission_path(@submission_by_current_user.id) %> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe %>
   </h4>
 
   <p class="alert alert-success">To view submissions by other students, have your submission approved by a mentor.</p>

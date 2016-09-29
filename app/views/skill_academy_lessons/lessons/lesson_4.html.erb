@@ -1,0 +1,54 @@
+<h1><%= title_for(SkillAcademyLesson, 1, 4) %></h1> 
+
+<p>
+  For this project, let's set up continuous integration so that we have automated builds and can make sure that everything is passing before we push it up live.
+</p>
+
+<div class="task-box">
+  <h2>Tasks</h2>
+  <ul>
+    <li>Integrate Travis CI</li>
+    <li>Write build script</li>
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    First, try <%= link_to 'visiting the documentation for Travis CI', 'https://docs.travis-ci.com/user/languages/ruby', target: "_blank" %>.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Hmm...it seems that the documentation is kind of confusing. In times like these, it's best to try to find your answer by googling. (Google phrases like "Travis CI rails tutorial")
+  </p>
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    Here is a sample build script:
+  </p>
+
+<pre><code class="yaml">
+language: ruby
+cache: bundler
+rvm:
+- 2.2.0
+env:
+- DB=postgresql
+script:
+- RAILS_ENV=test bundle exec rake db:reset db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec
+before_script:
+- psql -c 'create database skill_academy_test;' -U postgres
+services:
+- postgresql
+</code></pre>
+</div>
+
+<div class="gotcha" data-gotcha-id="1" data-hint-id="3">
+  <p>
+    Be careful of the <code>.travis.yml</code> settings. Is the database you are using the same as the one you are using for your app? (Postgresql)
+  </p>
+</div>

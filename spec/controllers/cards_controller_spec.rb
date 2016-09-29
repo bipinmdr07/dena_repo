@@ -14,20 +14,11 @@ RSpec.describe CardsController, type: :controller do
   end
 
   describe "GET #show" do
-    context "card owner is current_user" do
-      it "displays the card" do
-        card = FactoryGirl.create(:card, user_id: user.id)
-        get :show, id: card.id
-        expect(response).to render_template :show
-      end
-    end
-
-    context "card owner is not current_user" do
-      it "shouldn't display the card" do
-        card = FactoryGirl.create(:card, user_id: user.id + 1)
-        get :show, id: card.id
-        expect(response).to redirect_to cards_path
-      end
+    it "displays the card" do        
+      deck = FactoryGirl.create(:deck, master: true)
+      card = FactoryGirl.create(:card, master: true, deck_id: deck.id)
+      get :show, deck_id: deck.id, id: card.id
+      expect(response).to render_template :show
     end
   end
 

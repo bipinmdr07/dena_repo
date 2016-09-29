@@ -15,13 +15,15 @@
 
         <h1 class="title">Become a Web Developer in 2 Months<br>Experience The New Way of Learning</h2>
         <p class="intro">
-          An innovative Learning Platform combining 1-on-1 mentor training, project-based learning, and a friendly student community that will accelerate your path to becoming a web developer.
+          An innovative Learning Platform combining 1 on 1 mentor training, project-based learning, and a friendly student community that will accelerate your path to becoming a web developer.
         </p>
-        <p><a class="btn btn-cta btn-cta-primary" href="/users/sign_up">SIGN UP TO START PRE-WORK</a></p>
+        <p><a class="btn btn-cta btn-cta-primary" href="/apply">Start Your Web Development Career</a></p>
     </div><!--//container-->
 </section><!--//promo-->
 
 <div class="sections-wrapper">   
+
+  <%= render 'comparison_chart' %>
 
   <!-- ******Why Section****** -->
   <section id="why" class="section why">
@@ -47,7 +49,7 @@
                   </div><!--//quote-->                        
               </div><!--//content-->
               <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
-                  <%= image_tag 'landing_page/lesson_mac.png', class: 'img-responsive' %>
+                  <%= image_tag 'landing_page/techrise-lesson.png', class: 'img-responsive' %>
                   <figcaption class="figure-caption">Our Online Platform is optimized to Accelerate your Learning</figcaption>
               </figure>
           </div><!--//item-->
@@ -63,11 +65,11 @@
                   
                   <div class="quote">
                       <div class="quote-profile">
-                          <%= image_tag 'landing_page/aadesh.jpg', class: 'img-responsive img-circle' %>
+                          <%= image_tag 'landing_page/shreejana.jpg', class: 'img-responsive img-circle' %>
                       </div><!--//profile-->
                       <div class="quote-content">
-                          <blockquote><p>TECHRISE has been by far the best learning experience for me. My mentor, Takehiro, was very helpful during the course. He is very passionate when it comes to teaching, always willing to explain the concepts behind what we were doing.</p></blockquote>
-                          <p class="source">Aadesh Shrestha</p>
+                          <blockquote><p>One-on-one mentor sessions are a very strong part of TECHRISE. Whenever I get stuck, my mentor is always there to help me.</p></blockquote>
+                          <p class="source">Shreejana Poudel</p>
                       </div><!--//quote-content-->         
                   </div><!--//quote-->                        
               </div><!--//content-->
@@ -143,16 +145,19 @@
 
           <div class="col-xs-12 col-md-6">
             <ul class="skills_ul">
-              <li>Develop fully featured web applications</li>
-              <li>Learn how to use Github to collaborate with other developers</li>
+              <li>Learn HTML/CSS and Bootstrap to create attractive web interfaces</li>
+              <li>Learn and master the Ruby Language</li>
+              <li>Learn and develop multiple real-world web applications with Ruby on Rails</li>              
+              <li>Learn advanced skills such as Test Driven Development to ensure code quality</li>
               <!-- <li>Write complex algorithms and data structures</li> -->
             </ul>
           </div>
 
           <div class="col-xs-12 col-md-6">
             <ul class="skills_ul">
-              <!-- <li>Build an advanced web application as part of an agile team</li> -->
-              <li>Learn and apply Object Oriented Programming, MVC, and test driven development</li>
+              <li>Solve difficult real coding interview problems and build up your problem solving skills</li>
+              <li>Learn and apply Object Oriented Programming, MVC, and Test Driven Development</li>
+              <li>Learn how to use Github to collaborate with other developers</li>
               <li>Meet Like-minded Individuals who are passionate about coding</li>
             </ul>
           </div>
@@ -164,130 +169,168 @@
       </div>
   </section>
 
-  <section class="section details">
-    <div class="container text-center">
-
-      <hr>
-
-      <h3 class="title" style="padding-top: 80px;">Details</h3>
-
-      <div class="box">
-        <%= render 'details' %>
-      </div>
-
-      <div class="col-xs-12 text-center" style="margin-top:30px;">
-        <h3>Support System</h3>    
-      </div>
-
-      <ul class="skills_ul support_ul">
-        <div class="col-xs-12 col-md-6">     
-          <li>Weekly Mentor Sessions</li>
-          <p>
-            Receive code reviews or go through coding problems with your mentor. Having a mentor is proven to accelerate your learning speeds.
-          </p>
-          <li>Daily Office Hours</li>
-          <p>
-            Come into the office to chat about any problems you are stuck on or any concerns that you might have.
-          </p>
-        </div>
-
-        <div class="col-xs-12 col-md-6">
-          <li>Option to get hired as a TECHRISE Mentor</li>
-          <p>
-            Upon graduation, we invite exceptional students to work with us as a mentor at TECHRISE.
-          </p>
-          <li>Opportunity to get matched with foreign startups</li>
-          <p>
-            Upon graduation, we may have opportunities for exceptional students to be matched with foreign startups in need of good developers.
-          </p>
-        </div>
-      </ul>
-
-    </div>
-  </section>
+  
 
   <!-- ******Testimonials Section****** -->
   <section class="section testimonials">
       <div class="container">
-          <h2 class="title text-center">What are people saying about TECHRISE?</h2>
-          <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
-              <ol class="carousel-indicators">
-                  <li data-target="#testimonials-carousel" data-slide-to="0" class="active"></li>
-                  <li data-target="#testimonials-carousel" data-slide-to="1"></li>
-                  <li data-target="#testimonials-carousel" data-slide-to="2"></li>
-                  <li data-target="#testimonials-carousel" data-slide-to="3"></li>
-                  <li data-target="#testimonials-carousel" data-slide-to="4"></li>
-              </ol><!--//carousel-indicators-->
-              <div class="carousel-inner">
+          <h2 class="title text-center">What are our students saying about TECHRISE?</h2>
 
-                  <div class="item active">
-                      <figure class="profile"><%= image_tag 'landing_page/Aashik.jpg' %></figure>
-                      <div class="content">
-                          <blockquote>
-                          <i class="fa fa-quote-left"></i>
-                          <p>
-                            I always loved computers and wanted to become a great coder but <strong>I didn't know where to start</strong>. I spent hours on google, searching how to start my coding life and become a good coder but I never found one that fit. <strong>Sometimes I thought that I had made a mistake following my heart and choosing IT as my career.</strong> Then one day I finally found an ad on Facebook about TECHRISE and decided to enroll. Here <strong>I found my future and my passion</strong>. <strong>The way TECHRISE teaches is different, it's self-learning and much more goal oriented. I found my passionate family here. When I get stuck, my mentors are always there to help me. The group discussion on Slack is awesome. I really feel great to be here at TECHRISE, it changed my life. Thanks TECHRISE.</strong>
-                          </p>
-                          </blockquote>
-                          <p class="source">Aashik Yadav<br /><span class="title">Current Student at TECHRISE</span></p>
-                      </div><!--//content-->                         
-                  </div><!--//item-->  
+          <div class="row">
 
-                  <div class="item">
-                      <figure class="profile"><%= image_tag 'landing_page/rabin.jpg' %></figure>
-                      <div class="content">
-                          <blockquote>
-                          <i class="fa fa-quote-left"></i>
-                          <p>
-                            I am a BSC.CS.IT student. <strong>I love programming, and always thought of becoming a programmer.</strong> But there was a problem whenever I try to learn something new by myself, it was like I was missing something. <strong>When I got stuck there was no one to help me.</strong> I could search it on internet but the problem was I could not get all what I want. After I joined TECHRISE <strong>I am learning about new things everyday.</strong> It's a new experience integrating new technologies. I am really happy that I am with safe hands. <strong>Thank you TECHRISE for fulfilling my dream to be a good programmer.</strong>
-                          </p>
-                          </blockquote>
-                          <p class="source">Rabin Gaire<br /><span class="title">Current Student at TECHRISE</span></p>
-                      </div><!--//content-->                         
-                  </div><!--//item-->  
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/rabin.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Rabin Gaire</span><br>Current Student at TECHRISE</p>
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      I am a BSC.CS.IT student. <strong>I love programming, and always thought of becoming a programmer.</strong> But there was a problem whenever I try to learn something new by myself, it was like I was missing something. <strong>When I got stuck there was no one to help me.</strong> I could search it on internet but the problem was I could not get all what I want. After I joined TECHRISE <strong>I am learning about new things everyday.</strong> It's a new experience integrating new technologies. I am really happy that I am with safe hands. <strong>Thank you TECHRISE for fulfilling my dream to be a good programmer.</strong>
+                    </p>
+                    </blockquote>
 
-                  <div class="item">
-                      <figure class="profile"><%= image_tag 'landing_page/aadesh.jpg' %></figure>
-                      <div class="content">
-                          <blockquote>
-                          <i class="fa fa-quote-left"></i>
-                          <p>
-                            <strong>TECHRISE has been by far the best learning experience for me.</strong> My mentor, Takehiro, was very helpful during the course. He is very passionate when it comes to teaching, always willing to explain the concepts behind what we were doing. Having that understanding makes it possible to apply that knowledge in different places. <strong>These 3 months have been challenging but worth it.</strong>
-                          </p>
-                          </blockquote>
-                          <p class="source">Aadesh Shrestha<br /><span class="title">Hired as Software Engineer at äLuxuRē after graduation</span></p>
-                      </div><!--//content-->                         
-                  </div><!--//item-->  
+                    <h3 class="read-more">
+                      Check out web apps developed by Rabin
+                    </h3>
+                    <ul style="list-style-type: none;">
+                      <li><a href="https://immense-meadow-85860.herokuapp.com/" target="_blank">Ideator</a> - created in just his <strong>2nd week</strong> at TECHRISE.</li>     
+                      <li><a href="https://instapostnepal.herokuapp.com/users/sign_in" target="_blank">Instapost</a> - developed on <strong>Week 4</strong> at TECHRISE.</li>                 
+                    </ul>
+                    
+                </div><!--//content-->  
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->
 
-                  <div class="item">
-                      <figure class="profile"><%= image_tag 'landing_page/lakshman.jpg' %></figure>
-                      <div class="content">
-                          <blockquote>
-                          <i class="fa fa-quote-left"></i>
-                          <p>
-                            <strong>I was lost and was trying many courses on the internet.</strong> After joining TECHRISE, I got courses of my preference and suitable to the current market. <strong>Weekly mentor sessions, well presented, tested and clearly explained lessons and assignments' reviews were the best part learning here.</strong> Asking a lot of questions to my mentor, and discussing with other members in Slack enhanced fast understanding. Thank you TECHRISE for helping me build skills to make great apps.
-                          </p>
-                          </blockquote>
-                          <p class="source">Lakshman Basnet<br /><span class="title">Computer & Information Sciences Student at Tribhuvan University</span></p>
-                      </div><!--//content-->                         
-                  </div><!--//item-->     
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/swojeet.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Swojeet Kayastha</span><br />Current Student at TECHRISE</p>
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      <strong>Developing web applications has always been my passion.</strong> Building a user-friendly website is challenging, but I always aspired to become a good web developer. I took some online courses and watched some YouTube playlists but at some point or another, <strong>I would always get stuck even if I followed the instructions. Since I had no one to ask, I couldn't continue on with my course.</strong> <strong>But after I joined TECHRISE, everything took a turn.</strong> Yes, building a user-friendly website is still challenging, and yes, I still get stuck but my <strong>mentors are now here to help me clear any obstacles I encounter.</strong> Whenever I have some confusions, I can easily reach out to my mentors and other students on the TECHRISE slack channel. If I have a big problem, I can swing by the office where <strong>the TECHRISE team is happy to help me out.</strong> Moreover, the TECHRISE curriculum also includes <strong>building real world apps like Instagram</strong> which fired up my eagerness to learn more. I feel great to be one of the students here at TECHRISE!
+                    </p>
+                    </blockquote>
 
-                  <div class="item">
-                      <figure class="profile"><%= image_tag 'landing_page/sandeep.jpg' %></figure>
-                      <div class="content">
-                          <blockquote>
-                          <i class="fa fa-quote-left"></i>
-                          <p>
-                            I was not so good at coding and was unknown what to do so I can move with the flow of current world but after joining TECHRISE, I am good at coding and able to choose the right field to set my career. Thank you TECHRISE for providing guidance to build up my skill and confidence through lessons, weekly mentor section and assignments.
-                          </p>
-                          </blockquote>
-                          <p class="source">Sandeep Poudel<br /><span class="title">Computer & Information Sciences Student at Tribhuvan University</span></p>
-                      </div><!--//content-->                         
-                  </div><!--//item-->                       
-                  
-              </div><!--//carousel-inner-->
-              
-          </div><!--//carousel-->
+                     <h3 class="read-more"><a href="https://swojeet.github.io/swojeetkayastha_blog/2016/08/31/welcome-to-jekyll.html" target="_blank">Read about Swojeet's first month at TECHRISE</a></h3>
+                    
+                    
+                </div><!--//content--> 
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->
+
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/shreejana.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Shreejana Poudel</span><br />Current Student at TECHRISE</p>
+
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      I am very happy to say that TECHRISE is the best environment for me to learn. <strong>It has provided me with best of opportunities to enhance my potentials and build up my self-esteem.</strong> It is the perfect platform for anyone who wants to be different from the crowd. <strong>One-on-one mentor sessions are a very strong part of TECHRISE.</strong> Whenever I get stuck, my mentor is always there to help me. <strong>All the members of TECHRISE are very active and the group discussions online are amazing.</strong>
+                    </p>
+                    </blockquote>
+                    
+                </div><!--//content--> 
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->   
+
+
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/Aashik.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Aashik Yadav</span><br />Current Student at TECHRISE</p>
+
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      I always loved computers and wanted to become a great coder but <strong>I didn't know where to start</strong>. I spent hours on google, searching how to start my coding life and become a good coder but I never found one that fit. <strong>Sometimes I thought that I had made a mistake following my heart and choosing IT as my career.</strong> Then one day I finally found an ad on Facebook about TECHRISE and decided to enroll. Here <strong>I found my future and my passion</strong>. <strong>The way TECHRISE teaches is different, it's self-learning and much more goal oriented. I found my passionate family here. When I get stuck, my mentors are always there to help me. The group discussion on Slack is awesome. I really feel great to be here at TECHRISE, it changed my life. Thanks TECHRISE.</strong>
+                    </p>
+                    </blockquote>
+                    
+                </div><!--//content--> 
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->
+
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/sandeep.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Sandeep Poudel</span><br />Current Student at TECHRISE</p>
+
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      I was not so good at coding and was unknown what to do so I can move with the flow of current world but after joining TECHRISE, I am good at coding and able to choose the right field to set my career. Thank you TECHRISE for providing guidance to build up my skill and confidence through lessons, weekly mentor section and assignments.
+                    </p>
+                    </blockquote>
+                    
+                </div><!--//content-->       
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->
+
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/rina.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Rina Baral</span><br />Current Student at TECHRISE</p>
+
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      TECHRISE provides a platform on developing web-apps using Ruby on Rails. In my perspective, no one will regret by joining TECHRISE. Currently, I am working on Ideator, a web application where anyone can post their ideas. It feels confusing and frustrating when stuck that I want to stop coding. But no need to worry as there are our mentors who guide us and solve our problem. We receive almost instant replies to all of our questions whenever needed.
+                    </p>
+                    </blockquote>
+
+                    <h3 class="read-more"><a href="http://www.rinabaral.com.np/2016/08/23/first-month-at-techrise-ruby-on-rails-bootcamp/" target="_blank">Read about Rina's first month at TECHRISE</a></h3>
+                    
+                </div><!--//content-->       
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->
+
+                     
+
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'landing_page/aadesh.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Aadesh Shrestha</span><br />Hired as Software Engineer at äLuxuRē after graduation<br>Currently working at TECHRISE as a Software Engineer</p>
+
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      <strong>TECHRISE has been by far the best learning experience for me.</strong> My mentor, Takehiro, was very helpful during the course. He is very passionate when it comes to teaching, always willing to explain the concepts behind what we were doing. Having that understanding makes it possible to apply that knowledge in different places. <strong>These 3 months have been challenging but worth it.</strong>
+                    </p>
+                    </blockquote>
+                    
+                </div><!--//content-->                   
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->
+
+            <div class="col-xs-12 col-sm-6">
+              <div class="testimonial-card">
+                <figure class="profile"><%= image_tag 'lakshman.jpg' %></figure>
+                <div class="content">
+                    <p class="source"><span class="title">Lakshman Basnet</span><br />Hired at TECHRISE after graduation</p>
+
+                    <blockquote>
+                    <i class="fa fa-quote-left"></i>
+                    <p>
+                      <strong>I was lost and was trying many courses on the internet.</strong> After joining TECHRISE, I got courses of my preference and suitable to the current market. <strong>Weekly mentor sessions, well presented, tested and clearly explained lessons and assignments' reviews were the best part learning here.</strong> Asking a lot of questions to my mentor, and discussing with other members in Slack enhanced fast understanding. Thank you TECHRISE for helping me build skills to make great apps.
+                    </p>
+                    </blockquote>
+                    
+                </div><!--//content-->            
+              </div><!-- testimonial-card -->
+            </div><!-- col-xs-12 col-sm-6 -->            
+
+
+
+          </div><!-- row -->          
       </div><!--//container-->
   </section><!--//testimonials--> 
 

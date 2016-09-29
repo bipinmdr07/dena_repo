@@ -2,22 +2,24 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <h3 class="question-header mentee_title text-center"><span class="back_to_dashboard"><%= link_to '<i class="fa fa-question-circle" aria-hidden="true"></i> Ask Question'.html_safe, new_question_path(course_name: controller_name.classify, lesson_id: params[:id]), class: 'btn btn-back btn-default' %></span> Questions</h3>
+      <h3 class="question-header mentee_title text-center">Questions</h3>
     </div>
   </div>
 
-  <% if @questions.empty? %>
+
+  <%= render partial: 'shared/flash_messages' %>
+
+  <% if @current_lesson_questions.empty? %>
     <h5 class="text-center">
       There are no questions for this lesson yet!
     </h5>
   <% else %>
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+  <%= will_paginate @current_lesson_questions, renderer: BootstrapPagination::Rails %>
 
 
-      <% @questions.each do |question| %>
+      <% @current_lesson_questions.each do |question| %>
         <ul class="question_list">
-          <% user = User.find(question.user_id) %>
 
           <% if question.mentor_post %>
             <li class="question_container mentor_post">
@@ -34,7 +36,7 @@
                 </div><!-- votes-container-id-<%= question.id %> -->
 
                 <span class="col-xs-6">
-                  <%= image_tag user.avatar, class: 'community_prof_pic', style: "margin-top: 40px;" %>
+                  <%= image_tag question.user_avatar, class: 'community_prof_pic', style: "margin-top: 40px;" %>
                 </span><!-- col-xs-6 -->
               </div><!-- row -->
             </div><!-- col-xs-12 col-sm-4 -->
@@ -43,7 +45,7 @@
               <div class="question_content">
                 <h5 class="question_container_title"><%= link_to question.title, question_path(question) %></h5>
                 <div class="question_container_information">
-                  <span class="question_container_time"><%= time_ago_in_words(question.created_at) %> ago</span> by <span class="question_container_user"><%= user.name %></span>
+                  <span class="question_container_time"><%= time_ago_in_words(question.created_at) %> ago</span> by <span class="question_container_user"><%= question.user_name %></span>
                 </div><!-- question_container_information -->
               </div><!-- question_content -->
 
@@ -52,7 +54,7 @@
                   <label class="tag_label">MENTOR POST</label>
                 <% else %>
                   <a href="/<%= question.course_name.underscore %>s"><label class="tag_label"><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></label></a>
-                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id.to_i - 1][1] %></label></a>
+                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= get_lesson_name(question.course_name, question.lesson_id) %></label></a>
                 <% end %>
               </div><!-- question_tags -->
             </div><!-- col-xs-12 col-sm-2 -->
@@ -74,8 +76,42 @@
       </ul><!-- question_list -->
     <% end %>
 
-    <%= will_paginate @questions, renderer: BootstrapPagination::Rails %>
+    <%= will_paginate @current_lesson_questions, renderer: BootstrapPagination::Rails %>
 
+  <% end %>
+
+  <br>
+
+  <h2 class="text-center">Guidelines for Asking Good Questions</h2>
+  <ul>
+
+    <li><strong>Google your question first</strong></li>
+    <ul>
+      <li>Becoming a great googler and getting your own answers is an essential skill to become a competent developer. Google is smarter than anyone, ask it first, and if you still don't understand, seek for assistance.</li>
+    </ul>
+
+    <li><strong>Ask good questions</strong></li>
+    <ul>
+      <li>Bad questions will result in bad answers. Good questions are those which are specific, concise, and practical.</li>
+    </ul>
+
+    <li><strong>See previous questions</strong></li>
+    <ul>
+      <li>Has anyone else asked the same question? If so, read the answers to those questions first before seeking further assistance.</li>
+    </ul>
+
+  </ul>
+
+  <br>
+
+  <%= simple_form_for :question, url: questions_path, method: :post, input_html: {class: 'form-horizontal'} do |f| %>
+    <%= f.input :title, required: true %>
+    <%= f.input :content, as: :summernote, input_html: {rows: 6}, required: true %>
+    <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id]} %>
+    <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify} %>
+
+    <br>
+    <%= f.submit 'Submit Question', class: 'btn btn-cta-primary btn-block' %>
   <% end %>
 
 

@@ -1,8 +1,6 @@
-class RspecBlogLesson < ActiveRecord::Base
+class RspecBlogLesson < Lesson
 
   COURSE_TITLE = "Testing Rails Applications with RSpec"
-
-  LESSON_LENGTH = 24
 
   DURATION = 30
 

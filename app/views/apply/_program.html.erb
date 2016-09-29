@@ -1,0 +1,28 @@
+<div class="program-box">
+  <div class="row program-row">
+    <div class="col-xs-12 col-md-6">
+      <div class="program-content">
+        <div class="program-sub-title">
+          <h5><%= sub_title %></h5>
+        </div>
+
+        <div class="program-title">
+          <h2><%= title %></h2>
+        </div>
+
+        <div class="program-description">
+          <p><%= description %></p>
+        </div>
+      </div><!-- program-content -->
+    </div><!-- col-xs-12 col-md-6 -->
+
+    <div class="col-xs-12 col-md-6">
+      <div class="program-box-buttons-container">
+        <div class="program-box-buttons">
+          <%= link_to 'Details', detail_link, class: 'btn btn-cta-secondary btn-apply' %>
+          <%= link_to 'Apply', apply_link, class: 'btn btn-cta-primary btn-apply' %>
+        </div>
+      </div><!-- program-box-buttons -->
+    </div><!-- program-box-buttons-container -->
+  </div><!-- row -->
+</div><!-- program-box -->

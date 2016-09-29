@@ -1,7 +1,42 @@
-.btn-facebook {
-  background: #3b5998;
-  border: 2px solid #3b5998;
-  color: #fff;
+.devise-shared {
+  text-align: left;
+  margin-top: 50px;
+  border-top: 1px solid #ddd;
+  padding-top: 30px;
+  font-family: 'Lato';
+  font-size: 14px;
+}
+
+.btn-social:hover {
+  color: white !important;
+}
+
+tr {
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.8;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {   
+    line-height: 1.8;
+}
+
+.dropdown-toggle .fa-bell {
+  font-size: 18px;
+}
+
+
+// .btn-facebook {
+//   background: #3b5998;
+//   border: 2px solid #3b5998;
+//   color: #fff;
+// }
+
+.techrise_list {
+  list-style-type: none;
+  li {
+    padding: 10px;
+  }
 }
 
 .techrise_list {
@@ -10,6 +45,7 @@
     padding: 10px;
   }
 }
+
 
 .btn-fixed-archive {
   width: 90px;
@@ -332,7 +368,7 @@ span.radio.inline {
 }
 
 .badge {
-  background-color: #d9534f;
+  background-color: #ec6952;
 }
 
 #cke_1_floatingtools {
@@ -363,8 +399,13 @@ span.radio.inline {
     padding-left: 10px;
   }
   li {
-    font-size: 18px;
+    font-size: 16px;
     margin: 5px 0px;
+  }
+  p {
+    font-size: 17px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
   }
 }
 
@@ -386,6 +427,7 @@ span.radio.inline {
 
 #wrap {
   margin-bottom: 200px;
+  min-height: 65vh;
 }
 
 p {
@@ -429,12 +471,11 @@ pre {
 }
 
 .content {
-	padding: 100px 0px 150px 0px;
+	padding: 50px 0px 150px 0px;
 	p {
-		font-size: 18px;
-    color: #333;
-    margin-top: 2em;
-    margin-bottom: 2em;
+		font-size: 16px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 	}
 }
 

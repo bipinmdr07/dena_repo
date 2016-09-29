@@ -1,0 +1,164 @@
+<% title(get_lesson_name(controller_name.classify.underscore, params[:id]) + " | TECHRISE") %>
+
+<style type="text/css">
+.course_html {
+  background: white;
+}
+</style>
+
+
+<div class="row">
+  <!-- sidebar -->
+  <div class="col-lg-3 visible-lg">
+    <div style="width: 100%">
+      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
+        <%= render 'sidebar' %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 col-md-12">
+
+    <section class="lesson_content">
+
+      <%= render partial: '/cards/widget' %>
+
+      <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
+
+      <br class = "clear">
+
+      <div class="hint-prompt">
+        <h5>Think you have the solution?</h5>
+        <button class="btn" id="btn-gotcha" data-gotcha-id="1"><i class="fa fa-check" aria-hidden="true"></i> I've solved it myself</button>
+        <button class="btn" id="btn-hint" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Give me a hint!</button>
+        <button class="btn" id="btn-all-hints" data-hint-id="1"><i class="fa fa-question" aria-hidden="true"></i> Show all</button>
+      </div>
+
+      <br class = "clear">
+
+      <%= render 'lesson_nav_section' %>
+
+      <%= render partial: '/submissions/for_lesson' if @submission_form %>
+
+      <%= render partial: '/questions/for_lesson' %>
+
+      <%= render 'git_workflow_modal' %>
+
+    </section>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+var hints;
+hints = {
+  show_next_gotcha: function(el) {
+    var gotcha = $(".gotcha[data-gotcha-id=" + el.data("gotcha-id") + "]");
+
+    if (gotcha.length === 0) {
+      this.show_all();
+    } 
+    else {
+      this.show_hint(gotcha);
+      // display elements with data-hint-id that is <= el.data-hint-id  
+      this.show_preceding_hints(gotcha);
+      // - Increment btn-gotcha data-gotcha-id
+      // el.data("gotcha-id", el.data("gotcha-id") + 1);
+
+      if (!this.has_next("gotcha", el.data("gotcha-id"))) {
+        this.disable_button(el);
+      }    
+
+      console.log(el.data("hint-id"));
+      if(!this.has_next("hint", el.data("hint-id"))) {      
+        this.disable_button($("#btn-hint"));      
+      } 
+
+      this.scroll_to(gotcha);
+    }
+  },
+  show_next_hint: function(el) {
+    var hint = $(".hint[data-hint-id=" + el.data("hint-id") + "]");
+    this.show_preceding_hints(hint);
+
+    console.log(el.data("hint-id"));
+    if (!this.has_next("hint", el.data("hint-id"))) {
+      this.disable_button(el);
+    }
+
+    this.scroll_to(hint);
+  },
+  has_next: function(class_name, next_id){
+    return ($("." + class_name +  "[data-" + class_name + "-id=" + next_id + "]").length !== 0);
+  },
+  disable_button: function(el){    
+    el.prop("disabled", true);
+  },
+  show_preceding_hints: function(el){
+    var hints = $('[data-hint-id]').filter(function(){
+      return $(this).data("hint-id") <= el.data("hint-id");
+    }); 
+
+    var that = this;
+    $.each(hints, function(){      
+      that.show_hint( $(this) );
+      // if gotcha element was inside the displayed hints, updated btn-gotcha data-gotcha-id
+      if ($(this).attr("class").includes('gotcha')) {
+        $("#btn-gotcha").data("gotcha-id", $(this).data("gotcha-id") + 1);
+
+        if (!that.has_next("gotcha", $("#btn-gotcha").data("gotcha-id"))) {
+          that.disable_button($("#btn-gotcha"));
+        }
+      }
+    });
+     // - Increment btn-hint data-hint-id 
+    $("#btn-hint").data("hint-id", el.data("hint-id") + 1);  
+    $("#btn-gotcha").data("hint-id", el.data("hint-id") + 1);   
+  },
+  show_all: function(){
+    this.show_hint($(".hint"));
+    this.show_hint($(".gotcha"));
+    $("#btn-hint").prop("disabled", true);
+    $("#btn-gotcha").prop("disabled", true);
+    $("#btn-all-hints").prop("disabled", true);
+    this.scroll_to($(".hint")[0]);    
+    return;
+  },
+  show_hint: function(el){
+    el.fadeIn();
+    el.addClass("hint-activated");
+    window.setTimeout(function(){
+      el.removeClass("hint-activated");
+    }, 10000);
+  },
+  scroll_to: function(el) {
+    $('html,body').animate({ 
+        scrollTop: el.offset().top - 50
+    }, 800);
+  }
+}  
+
+$("#btn-gotcha").on("click", function(){
+  hints.show_next_gotcha($(this), "gotcha-id");  
+});
+
+$("#btn-hint").on("click", function(){
+  hints.show_next_hint($(this), "hint-id");
+});
+
+$("#btn-all-hints").on("click", function(){
+  hints.show_all();
+});
+
+
+$(document).on('turbolinks:load', show_page_trigger);
+
+$(document).on('turbolinks:load', function(){
+  if ($(".hint").length === 0) {
+    $("#btn-hint").prop('disabled', true);
+    $("#btn-gotcha").prop('disabled', true);
+    $("#btn-all-hints").prop('disabled', true);
+  }
+});
+</script>

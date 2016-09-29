@@ -5,11 +5,19 @@
 .handle {
   position: fixed;
   width: 50px;
-  height: 100%;
+  top: 130px;
   right: 0px;
 }
 
-.check_answer {
-  display: none;
+.fixed-handle {
+  top: 30px;
 }
 
+
+#check_answer {
+  visibility: hidden;
+  opacity: 1;
+  -webkit-transition: visibility 0.5s linear 1s, opacity 800ms;
+  -moz-transition: visibility 0.5s linear 1s, opacity 800ms;
+  transition: visibility 0.5s linear 1s, opacity 800ms;
+}

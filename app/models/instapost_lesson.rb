@@ -1,7 +1,5 @@
-class InstapostLesson < ActiveRecord::Base
+class InstapostLesson < Lesson
   COURSE_TITLE = "Instapost - Share your photos online"
-
-  LESSON_LENGTH = 39
 
   DURATION = 30
 
@@ -81,6 +79,12 @@ class InstapostLesson < ActiveRecord::Base
         [37, "Sending an AJAX Request"],
         [38, "Re-rendering the Page"],
         [39, "Final Touches"]
+      ]
+    ],
+    ["Refactoring to implement Best Practices",
+      [
+        [40, "Eager Loading and the N+1 Query Problem"],
+        [41, "The Law of Demeter and Delegation"]
       ]
     ]
   ]

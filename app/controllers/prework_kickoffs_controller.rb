@@ -11,7 +11,7 @@ class PreworkKickoffsController < ApplicationController
   private
 
   def check_already_started?
-    return if current_user.prework_start_time.nil? && current_user.prework_end_date.nil?
+    return unless current_user.has_started_prework?
     flash[:alert] = "You cannot start prework again."
     redirect_to dashboard_path
   end

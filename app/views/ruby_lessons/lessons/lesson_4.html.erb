@@ -1,0 +1,164 @@
+<h1><%= title_for(RubyLesson, 1, 4) %></h1>
+
+<p>
+  Let's write our first Ruby program!
+</p>
+
+<p>
+  First, make sure you are in the <code>ruby_fundamentals</code> directory. You can do this by typing <code>pwd</code> (print working directory).
+</p>
+
+<p>
+  Next, let's make a new file called <code>hello.rb</code>.
+</p>
+
+<%= image_tag 'ruby_lessons/hello.png', class: 'screenshot' %>
+
+<p>
+  As you can see, you can create a Ruby files by saving the file with a <code>.rb</code> extension.
+</p>
+
+<p>
+  Inside the file, let's write the following lines of code:
+</p>
+
+<pre><code class="ruby">
+puts "Hello world"
+</code></pre>
+
+<%= image_tag 'ruby_lessons/hello_world.png', class: 'screenshot' %>
+
+<p>
+  <code>"Hello world"</code> is a <strong>String</strong> object, otherwise called a <code>string</code>. <strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong>
+</p>
+
+<p>
+  <code>puts</code> <strong>is a Ruby command that prints out the string with a line break.</strong>
+</p>
+
+<p>
+  Save the file. In the command line, let's type in the following:
+</p>  
+
+<pre><code class="ruby">
+ruby hello.rb
+</code></pre>
+
+<p>
+  You will see that <code>Hello world</code> is printed to the terminal!
+</p>
+
+<%= image_tag 'ruby_lessons/print_hello_world.png', class: 'screenshot' %>
+
+<p>
+  As you can see above, we can run ruby programs with the <code>ruby</code> command.
+</p>
+
+<h3>Error Messages</h3>
+
+<p>
+  Let's add a new line of code to our <code>hello.rb</code> file:
+</p>
+
+<pre><code class="ruby">
+put "Today's an awesome day for coding!"
+</code></pre>
+
+<p>
+  Your file should now look like this:
+</p>
+
+<pre><code class="ruby">
+puts "Hello world"
+put "Today's an awesome day for coding!"
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You will see an error message:
+</p>
+
+<%= image_tag 'ruby_lessons/hello_error.png', class: 'screenshot' %>
+
+<p>
+  As a programmer, <strong>you will see a lot of error messages</strong>. The important thing is to <strong>not freak out, stay calm, and solve the problem.</strong>
+</p>
+
+<p>
+  When the program reaches an error message, the program will stop at the location where it errored.
+</p>
+
+<p>
+  <strong>Error messages tell us a lot about what we are doing wrong in the program.</strong> Let's break down this error message:
+</p>
+
+<pre><code class="bash">
+hello.rb:2:in `&lt;main&gt;': undefined method `put' for main:Object (NoMethodError)
+</code></pre>
+
+<ul>
+  <li><code>hello.rb:2</code> - this is telling us that the error is on line 2 of the <code>hello.rb</code> file</li>
+  <li><code>undefined method `put'</code> - this is telling us that the program doesn't know the command <code>put</code> since it is undefined</li>
+</ul>
+
+<p>
+  With this information, we can start debugging the program. The bug here is the <code>put</code> isn't a command in Ruby - instead it should be <code>puts</code>.
+</p>
+
+<pre><code class="ruby">
+puts "Hello world"
+puts "Today's an awesome day for coding!"
+</code></pre>
+
+<p>
+  Save the file and run the program again. You will see that the error message has gone away.
+</p>
+
+<p class="alert alert-info">
+  Debugging is a skill in itself. Even experienced developers face many bugs every day, and it is part of being a developer. The more bugs you debug, the faster you will be at debugging errors.
+</p>
+
+<h3>Comments</h3>
+
+<p>
+  As a programmer, often times we want to leave notes for other programmers to read, or to leave a memo for yourself.
+</p>
+
+<p>
+  Change <code>hello.rb</code> to look like this:
+</p>
+
+<pre><code class="ruby">
+# this is a comment
+puts "Hello world"
+# text after hash tags cannot be seen
+put "Today's an awesome day for coding!"
+</code></pre>
+
+<p>
+  Save the file and run the program. You will see that the program will not print out the text after the hash tags.
+</p>
+
+
+<h2>Conclusion</h2>
+
+<ul>
+  <li>Ruby files are saved with a <code>.rb</code> extension</li>
+  <li><code>puts</code> is a command that prints out a string with a line break</li>
+  <li><strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong></li>
+  <li>You can run a Ruby program with the <code>ruby</code> command</li>
+  <li>Error messages tell us what we are doing wrong</li>
+  <li>As a programmer, you will face many error messages every day - the key is to be calm and tackle the problem</li>
+</ul>
+
+<h2>Coding Challenge</h2>
+
+<ul>
+  <LI>Write a program that prints out a string <code>"I'm ready to become a ruby developer!"</code> to the console. </LI>
+  <li>The program should also have atleast 3 lines of comments.</li>
+  <li>Submit the code down below</li>
+</ul>
+
+
+
+<% @submission_form = true %>
+

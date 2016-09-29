@@ -1,0 +1,21 @@
+<div class="story">
+  <div class="story-title">
+    <h2><%= story_title %></h2>
+  </div>
+
+  <div class="story-wrapper">
+    <%= image_tag 'shared/prof.jpg', class: 'story-user-img' %>
+
+    <div class="story-panel">
+      <div class="story-user">
+        <div class="story-user-text">
+          <strong>takehiromouri</strong> commented
+        </div>
+      </div>
+
+      <div class="story-comment">
+        <%= yield %>
+      </div><!-- story-comment -->
+    </div><!-- story-content --> 
+  </div><!-- story-wrapper -->
+</div><!-- story -->

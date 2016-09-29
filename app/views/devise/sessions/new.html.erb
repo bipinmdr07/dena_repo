@@ -1,32 +1,61 @@
-<div class = "row">
-  <div class = "col-xs-10 col-xs-offset-1">
-    <h2 class="title text-center">Log in</h2>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="field">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Your email' %>
-      </div>
+<h2 class="title text-center">Log in</h2>                 
+<div class="row">
+    <div class="form-container col-md-5 col-sm-12 col-xs-12">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'login-form'}) do |f| %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, class: 'form-control login-email', placeholder: 'Your email' %>
+          </div>
 
-      <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Your password' %>
-      </div>
-      
-      <br>
-      <div class="actions">
-        <%= f.submit "Log in", class: 'btn btn-block btn-cta-primary' %>
-      </div>
+          <div class="field">
+            <%= f.label :password %><br />
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control login-password', placeholder: 'Your password' %>
+          </div>
+          
+          <br>
+          <div class="actions">
+            <%= f.submit "Log in", class: 'btn btn-block btn-cta-primary' %>
+          </div>
 
-      <% if devise_mapping.rememberable? -%>
-        <div class="field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end -%>
-    <% end %>
-    
-    <br>
-    <%= render "devise/shared/links" %>
-  </div>
-</div>
+          <br>
+          <% if devise_mapping.rememberable? -%>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end -%>
+        <% end %>
+                                        
+    </div><!--//form-container-->
+    <div class="social-btns col-md-5 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-sm-offset-0">  
+        <div class="divider"><span>Or</span></div>                      
+        <ul class="list-unstyled social-login">
+            <li>
+              <%= link_to user_facebook_omniauth_authorize_path do %>
+                <button class="facebook-btn btn" type="button"><i class="fa fa-facebook"></i>Log in with Facebook</button>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to user_github_omniauth_authorize_path do %>
+                <button class="github-btn btn" type="button"><i class="fa fa-github-alt"></i>Log in with Github</button>
+              <% end %>
+            </li>            
+        </ul>
+
+        <br>
+
+        <ul class="list-unstyled devise-shared">
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <li><%= link_to "Forgot your password?", new_password_path(resource_name) %></li>
+          <% end -%>
+
+          <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+            <li><%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %></li>
+          <% end -%>
+        </ul>
+
+        
+    </div><!--//social-btns-->
+</div><!--//row-->
+

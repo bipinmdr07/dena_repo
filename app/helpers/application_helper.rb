@@ -35,14 +35,13 @@ module ApplicationHelper
     if controller_name.empty?
       0.0
     else
-      ((current_user.progressions.where(course_name: controller_name).count.to_f / controller_name.constantize::LESSON_LENGTH.to_f) * 100).round(2)
+      ((current_user.progressions.where(course_name: controller_name).count.to_f / controller_name.constantize.lesson_length.to_f) * 100).round(2)
     end
   end
 
-  def lesson_completed(lesson_id, course_name=controller_name.classify.constantize)
-    if current_user.progressions.where(course_name: course_name, lesson_id: lesson_id).count > 0
-      '<i class="fa fa-check-circle progression_check" aria-hidden="true"></i>'.html_safe
-    end
+  def lesson_completed(bool)
+    return unless bool
+    '<i class="fa fa-check-circle progression_check" aria-hidden="true"></i>'.html_safe
   end
 
 	def title_for(course, chapter, lesson)

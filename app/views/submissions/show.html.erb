@@ -2,21 +2,13 @@
 
 <div class="devise_box forum_container">
 
-  <% flash.each do |message_type, message| %>
-    <% if message_type == "notice" %>
-      <p class="alert alert-info alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= notice %></p>
-    <% elsif message_type == "alert" %>
-      <p class="alert alert-danger alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= alert %></p>
-    <% else %>
-      <div class="alert alert-<%= message_type %> alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><%= message %></div>
-    <% end %>
-  <% end %>
+  <%= render "shared/flash_messages" %>
 
   <div class="row">
     <div class="col-xs-12 col-sm-2">
-      <%= image_tag @user.avatar, class: 'prof_pic_forum' %>
+      <%= image_tag @submission.user_avatar, class: 'prof_pic_forum' %>
       <div class="prof_name">
-        <%= @user.name %>
+        <%= @submission.user_name %>
       </div>
       <div class="prof_badge">
         <% if @user.mentor %>
@@ -24,11 +16,17 @@
         <% end %>
       </div>
       <div class="edit_post_links">
-        <% if current_user.id == @submission.user_id || current_user.admin %>
+        <% if current_user == @submission.user || current_user.admin %>
           <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_path(@submission), class: 'btn btn-sm btn-warning' %>
           <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_path(@submission.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
-        <% end %>
+        <% end %>        
       </div>
+
+
+      <% if current_user.admin %>
+        <hr>  
+        <%= link_to 'Admin', edit_admin_user_path(@submission.user_id), class: 'btn btn-sm btn-block btn-cta btn-cta-secondary' %>
+      <% end %>
     </div>
 
     <div class="col-xs-12 col-sm-10">
@@ -52,22 +50,21 @@
 
 
   <% @submission.submission_replies.order("created_at ASC").each do |reply| %>
-    <% user = User.find(reply.user_id) %>
     <div class="row">
       <div class="col-xs-12 col-sm-2">
-        <%= image_tag user.avatar, class: 'prof_pic_forum' %>
+        <%= image_tag reply.user_avatar, class: 'prof_pic_forum' %>
         <div class="prof_name">
-          <%= user.name %>
+          <%= reply.user_name %>
         </div>
         <div class="prof_badge">
-          <% if user.mentor %>
+          <% if reply.user.mentor %>
             <label class="label label-default">TECHRISE Mentor</label>
           <% end %>
         </div>
         <div class="edit_post_links">
-          <% if current_user.id == reply.user_id || current_user.admin %>
+          <% if current_user == reply.user || current_user.admin %>
             <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_submission_reply_path(@submission.id, reply.id), class: 'btn btn-sm btn-warning' %>
-            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_submission_reply_path(@submission.id, reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
+            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_reply_path(reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
           <% end %>
         </div>
       </div>
@@ -89,6 +86,6 @@
     <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 
     <br>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <%= f.submit 'Submit', class: 'btn btn-primary', data: {disable_with: "Submitting reply..."} %>
   <% end %>
 </div>

@@ -6,19 +6,21 @@
  * Twitter: @3rdwave_themes
 */
 /* ======= Base ======= */
+
 body {
   /*font-family: 'Roboto', arial, sans-serif;*/
   /*font-family: "Open Sans", sans-serif;*/
   font-family: 'Titillium Web', sans-serif;
   color: #444444;
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 p {
-  margin-bottom: 15px;
+  font-family: 'Lato', sans-serif;
   line-height: 1.5;
-  font-size: 18px;
+  font-size: 17px;
+  font-weight: 400;
 }
 a {
   color: #ec6952;
@@ -75,6 +77,15 @@ a.btn-cta-secondary:hover,
   border: 2px solid #ec6952;
   color: #fff;
 }
+
+.btn-cta-secondary .fa {
+  color: #ec6952 !important;
+}
+
+.btn-cta-secondary:hover .fa {
+  color: white !important;
+}
+
 a.btn-ghost,
 .btn-ghost {
   background: none;
@@ -496,6 +507,7 @@ select {
   margin: 0 auto;
   margin-bottom: 30px;
   font-weight: 500;
+  font-family: 'Titillium Web', sans-serif;
 }
 .promo .btn-cta {
   font-size: 18px;

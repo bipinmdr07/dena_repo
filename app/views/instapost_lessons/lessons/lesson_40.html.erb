@@ -1,0 +1,164 @@
+<h1><%= title_for(InstapostLesson, 10, 1) %></h1>
+
+<p>
+	Congratulations on coming this far! By now you understand how Ruby on Rails works and you can start making your own applications.
+</p>
+
+<p>
+	It's time to dive deeper and use some best practices.
+</p>
+
+<p>
+	In your <code>index.html.erb</code>, we display all of the comments for each post. We have written a loop like this:
+</p>
+
+<pre><code class="erb">
+&lt;% @posts.each do |post| %&gt;
+	&lt;%= image_tag post.user.photo, class: 'prof_pic_small' %&gt;
+	&lt;%= link_to post.user.name, user_path(post.user_id) %&gt;
+
+	&lt;% post.comments.each do |comment| %&gt;
+
+	  &lt;%= link_to comment.user.name,  user_path(comment.user_id) %&gt; &lt;%= comment.text %&gt;
+
+	&lt;% end %&gt;	
+
+	...
+
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+	Notice how <strong>we iterate through each post and for each post, we iterate through each comment in the post</strong>. We are also querying for the <code>user</code> of each <code>Post</code> and <code>Comment</code>.
+</p>
+
+<p>
+	Let's open our Instapost application and trigger the <code>posts#index</code> action (this should be your <CODE>root_path</CODE>). In other words, go to the root directory of your application.
+</p>
+
+<p>
+	Let's look at our Rails server to examine the performance:
+</p>
+
+<%= image_tag 'instapost/eager_1.png', class: 'screenshot img-responsive' %>
+
+<p>
+	Woah. Look at all of those requests! (As a side note, this request is querying for 13 posts that has 25 comments in total, created by 2 users.) 
+</p>
+
+<p>
+	The application is querying each <CODE>user</CODE> for each <code>post</code>, it's querying for all of the <code>comments</code> for each <code>post</code>, and it is querying for each <code>user</code> for each <code>comment</code>. This leads to a long list of queries and is often called the <strong>N+1 Problem</strong>.
+</p>
+
+<p>
+	<strong>The N+1 problem refers to making a query to fetch the parent, then any number of child queries to fetch the other records.</strong>
+</p>
+
+<p>
+	If the application is still a small application, this won't really affect anything, but once the application starts growing, we need ways to optimize this request.
+</p>
+
+<h3>Eager Loading</h3>
+
+<p>
+	One technique to accomplish this is <strong>eager loading</strong>. Eager loading refers to the practice of fetching all related records at once, instead of fetching them as the program encounters the queries. 
+</p>
+
+<p>
+	In other words, with eager loading, we can fetch all of the records that we need to query all at once. This is far more efficient and performant than trying to fetch all of the records one by one. <strong><em>Fetching 100 records in 1 query is faster than issuing 100 queries to fetch 1 query each.</em></strong>
+</p>
+
+<p>
+	One way to implement eager loading is by using the <code>includes</code> method. In our <code>posts_controller.rb</code>, let's modify the <code>index</code> method to implement this. First, let's eager load the <code>comments</code> for all of the posts:
+</p>
+
+<pre><code class="ruby">
+def index
+  @posts = Post.all.order('created_at DESC').includes(:comments)
+end	
+</code></pre>
+
+<p>
+	Save the file and render the index page again. Let's look at the differences in the performance:
+</p>
+
+<%= image_tag 'instapost/eager_2.png', class: 'screenshot img-responsive' %>
+
+<p>
+	Hmm...this is better, but it is still making a bunch of request. We can do better.
+</p>
+
+<p>
+	As we can see, the application is still querying for all of the users. This is because we are querying for the <CODE>user</CODE> of each post. For example, in this piece of code:
+</p>
+
+<pre><code class="erb">
+&lt;%= image_tag post.user.photo, class: 'prof_pic_small' %&gt;
+&lt;%= link_to post.user.name, user_path(post.user_id) %&gt;	
+</code></pre>
+
+<p>
+	Let's also eager load our <code>user</code> for each of our posts:
+</p>
+
+<pre><code class="ruby">
+def index
+  @posts = Post.all.order('created_at DESC').includes(:comments, :user)
+end	
+</code></pre>
+
+<p>
+	Save the file and refresh the page. Let's see the results:
+</p>
+
+<%= image_tag 'instapost/eager_3.png', class: 'screenshot img-responsive' %>
+
+<p>
+	Getting better! The requests are getting shorter and shorter. But it is still querying for a bunch of users. This is because each <code>comment</code> is also querying for the <code>user</code>:
+</p>
+
+<pre><code class="erb">
+&lt;%= link_to comment.user.name,  user_path(comment.user_id) %&gt; &lt;%= comment.text %&gt;	
+</code></pre>
+
+<p>
+	Lastly, let's eager load the <code>user</code> for the <code>comments</code>. We can do this by modifying the code like such:
+</p>
+
+
+<pre><code class="ruby">
+def index
+  @posts = Post.all.order('created_at DESC').includes(:user, comments: :user)
+end	
+</code></pre>
+
+<p>
+	Save the file and refresh the page.
+</p>
+
+<p>
+	<strong>Let's look at the results:</strong>
+</p>
+
+<%= image_tag 'instapost/eager_4.png', class: 'screenshot img-responsive' %>
+
+<p>
+	Wow! Compare this to what we had initially. As you can see, we clearly have a much smaller request and a more performant application.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 source 'http://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -12,7 +12,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 # use puma as web server
 gem 'puma'
@@ -43,9 +42,6 @@ gem "fog", '1.36.0'
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
-
-# code text editor
-gem 'ace-rails-ap'
 
 # tagging
 gem 'acts-as-taggable-on', '~> 3.4'
@@ -81,11 +77,24 @@ gem 'bonsai-elasticsearch-rails'
 # upvoting
 gem 'acts_as_votable', '~> 0.10.0'
 
+# better stylesheets
+gem 'bourbon'
+
+# omniauth
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-facebook'
+
+# social buttons
+gem 'bootstrap-social-rails'
+
+# SEO friendly
+gem 'meta-tags'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'rails_12factor', group: :production
+gem 'rails_12factor', group: [:production, :staging]
 
 group :test do
   gem 'selenium-webdriver'
@@ -101,6 +110,8 @@ group :development, :test do
 end
 
 group :development do
+  # Detect N+1
+  gem "bullet"
   # preview emails
   gem "letter_opener"
 	gem 'pry-rails'

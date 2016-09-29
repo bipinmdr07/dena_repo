@@ -28,5 +28,15 @@ module Techrise
     config.to_prepare { Devise::Mailer.layout "devise_mailer" }
     #error routes
     config.exceptions_app = self.routes
+
+    config.generators do |g|
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
+      g.view_specs false
+      g.helper_specs false
+      g.stylesheets = false
+      g.javascripts = false
+      g.helper = false
+    end
   end
 end

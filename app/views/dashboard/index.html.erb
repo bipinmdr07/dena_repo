@@ -1,0 +1,264 @@
+<% title("Dashboard | TECHRISE") %>
+
+<% unless current_user.mentor || current_user.admin || @last_mentor_session.nil? || @last_mentor_session.student_session.present? %>
+  <p class="alert alert-warning alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    You have an unlogged mentor session. Make sure you log your mentor session now so you can keep track of your progress. <br><%= link_to '<i class="fa fa-caret-right" aria-hidden="true"></i> Log Mentor Session'.html_safe, new_student_session_path(mentor_session_id: @last_mentor_session.id) %>
+  </p>
+<% end %>
+
+<%= render "shared/flash_messages" %>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <% if @last_lesson %>
+
+      <% lesson_name = get_lesson_name(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]) %>
+      <div class="panel">
+        <div class="panel-body text-center">
+          <div class="row">
+            <div class="col-xs-12">
+              <h5>In Progress</h5>
+
+              <div class="row">
+                <div class="col-sm-4 col-xs-12">
+                  <div class="lesson_well">
+                    <small>Lesson <%= @last_lesson.parameters[:lesson_id] %></small>
+                    <h4 style="margin-top: 0px;"><%= @last_lesson.parameters[:course_name].split(/(?=[A-Z])/).join(" ").chomp("Lesson") %></h4>
+                  </div>
+                </div>
+
+                <div class="col-sm-8 col-xs-12">
+                    <h3 style="text-align: left;"><i class="fa fa-code" style="color: #f29a8b;" aria-hidden="true"></i> <%= lesson_name %></h3>
+                </div>
+              </div><!-- row -->
+
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="progress_bar" style="border-top: none;">
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(@last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(@last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
+                        <%= progress(@last_lesson.parameters[:course_name]) %>% completed
+                      </div>
+                    </div>
+                  </div><!-- progress_bar -->
+                </div><!-- col-xs-12 -->
+              </div><!-- row -->
+
+
+              <div class="row" style="margin-top:20px;">
+                <div class="col-xs-12">
+                  <h3><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, get_lesson_url_string(@last_lesson.parameters[:course_name], @last_lesson.parameters[:lesson_id]), class: 'btn btn-cta-primary btn-block' %></h3>
+                </div>
+              </div><!-- row -->
+            </div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
+          </div><!-- row -->
+
+        </div><!-- panel-body -->
+      </div><!-- panel -->
+    <% end %>
+
+    <% if !current_user.remote? && !current_user.has_started_prework? && !current_user.has_access? %>
+      <div class="panel">
+        <div class="panel-heading-stats">
+          <h3><i class="fa fa-bar-chart" aria-hidden="true"></i> Start Your 4 Day Prework Period</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            By pressing the button below, your pre-work period of 4 days will start. If you were not able to finish all of the assignments by the end of the pre-work preiod, you will no longer be eligible for admission into TECHRISE.
+          </p>
+
+          <%= link_to 'START PREWORK', prework_kickoffs_path, method: :post, class: 'btn btn-lg btn-block btn-cta btn-cta-primary' %>
+
+        </div><!-- panel-heading-stats -->
+      </div><!-- panel -->
+    <% end %>
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3>My Stats</h3>
+      </div>
+      <div class="panel-body">
+
+        <div class="row">
+          <% @stats.each do |stat| %>
+            <div class="col-xs-12 col-md-6">
+              <div class="stat-box-dashboard text-center">
+                <div class="stat-box-dashboard-text">
+                  <%= stat.count %>
+                </div><!-- stat-box-text -->
+
+                <div class="stat-box-dashboard-label">
+                  <%= stat.text %>
+                </div><!-- stat-box-label -->
+              </div><!-- stat-box -->
+            </div><!-- col-xs-12 col-md-4 -->
+          <% end %>
+        </div><!-- row-->
+
+      </div><!-- panel-body -->
+    </div><!-- panel -->
+  </div><!-- col-xs-12 col-md-4 -->
+
+  <div class="col-xs-12 col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <%= image_tag current_user.avatar, class: 'prof_pic_sm' %>
+        <h3 class="text-center">You have <%= pluralize(@due_cards.count, 'card') %> to review today</h3>
+        <blockquote>
+          <%= @quote[0] %>
+          <small><%= @quote[1] %></small>
+        </blockquote>
+
+        <h3><%= link_to 'Study Flashcards', study_path, class: 'btn btn-cta-primary btn-block' %></h3>
+      </div><!-- panel-body -->
+    </div>
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3>Activity Log</h3>
+      </div>
+      <div class="panel-body" style="overflow: auto; max-height: 250px;">
+
+        <% @activities.each do |activity| %>
+          <div class="activity">
+            <%= render_activity activity %>
+          </div>
+        <% end %>
+
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3>My Questions</h3>
+      </div>
+      <div class="panel-body">
+
+        <ul class="unindented_ul">
+          <% @questions.each do |question| %>
+
+            <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+            <li><span class="question_list_title"><%= link_to question.title, question_path(question) %></span> in <span class="question_list_course_name"><%= course_name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if question.resolved %></li>
+          <% end %>
+        </ul>
+
+        <% if @questions.empty? %>
+          <p class="text-center">You haven't asked any questions yet.</p>
+        <% else %>
+          <h5 class="pull-right"><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View all'.html_safe, questions_path %></h5>
+        <% end %>
+
+      </div><!-- panel-heading-stats -->
+    </div><!-- panel -->
+
+    <div class="panel">
+      <div class="panel-heading-stats">
+        <h3>My Submissions</h3>
+      </div>
+      <div class="panel-body">
+
+        <ul class="unindented_ul">
+          <% @submissions.each do |submission| %>
+
+            <% course_name = get_lesson_name(submission.course_name, submission.lesson_id) %>
+
+            <li><span class="question_list_title"><%= link_to submission.title, submission_path(submission) %></span> in <span class="question_list_course_name"><%= course_name %></span> <%= '<i class="fa fa-check-circle" style="margin-left: 5px; color: #5cb85c;" aria-hidden="true"></i>'.html_safe if submission.approved %></li>
+          <% end %>
+        </ul>
+
+        <% if @submissions.empty? %>
+          <p class="text-center">You don't have any submissions yet.</p>
+        <% else %>
+          <h5 class="pull-right"><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> View all'.html_safe, submissions_path %></h5>
+        <% end %>
+
+      </div><!-- panel-body -->
+    </div><!-- panel -->
+
+  </div><!-- col-xs-12 col-md-6 -->
+</div><!-- row -->
+
+<% if current_user.admin %>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3>Pre-work Students' <%= @unresolved_questions.count %> Unanswered Questions</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unresolved_questions.each do |question| %>
+
+                  <% if !question.user_admitted %>
+                    <li><%= link_to question.title, question_path(question.id) %> by <%= question.user_name %></li>
+                  <% end %>
+
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3>Admitted Students' <%= @unresolved_questions.count %> Unanswered Questions</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+                <% @unresolved_questions.each do |question| %>
+                  <% if question.user_admitted %>
+                    <li><%= link_to question.title, question_path(question.id) %> by <%= question.user_name %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3>Non Admitted students' <%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+
+                <% @unapproved_submissions.each do |submission| %>
+                  <% if !submission.user_admitted %>
+                    <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+
+        <div class="col-xs-12 col-md-6">
+          <div class="panel">
+            <div class="panel-heading text-center">
+              <h3>Admitted Students' <%= pluralize @unapproved_submissions.count, "Submission" %> to Review</h3>
+            </div>
+            <div class="panel-body">
+              <ul class="unindented_ul">
+
+                <% @unapproved_submissions.each do |submission| %>
+                  <% if submission.user_admitted %>
+                  <li><%= link_to submission.title, submission_path(submission.id) %> by <%= submission.user_name %></li>
+                  <% end %>
+
+                <% end %>
+              </ul>
+            </div>
+          </div><!-- panel-body text-center -->
+        </div><!-- panel -->
+      </div>
+
+<% end %>

@@ -34,24 +34,24 @@
 </p>
 
 <p>
-  Next, inside of <code>index.html.erb</code>, let's move the following lines of code into the <code>_likes.html.erb</code> file:
+  Next, inside of <code>index.html.erb</code>, we have the following piece of code - let's move the following lines of code into the <code>_likes.html.erb</code> file:
 </p>
 
 
 <pre><code class="erb">
 &lt;% if user_signed_in? %&gt;
   &lt;span class="post_like"&gt;
-    &lt;% if current_user.voted_up_on? post %&gt;
-      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(post.id), method: :post, remote: true %&gt; 
+    &lt;% if current_user.voted_up_on? @post %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_downvotes_path(@post.id), method: :post, remote: true %&gt; 
     &lt;% else %&gt;
-      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(post.id), method: :post, remote: true %&gt;
+      &lt;%= link_to '&lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt;'.html_safe, post_upvotes_path(@post.id), method: :post, remote: true %&gt;
     &lt;% end %&gt;
 
-    &lt;%= pluralize post.get_likes.size, "like" %&gt;
+    &lt;%= pluralize @post.get_likes.size, "like" %&gt;
   &lt;/span&gt;
 &lt;% else %&gt;
   &lt;span class="post_like"&gt;
-    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize post.get_likes.size, "like" %&gt;
+    &lt;i class="fa fa-heart-o" aria-hidden="true"&gt;&lt;/i&gt; &lt;%= pluralize @post.get_likes.size, "like" %&gt;
   &lt;/span&gt;
 &lt;% end %&gt;
 </code></pre>

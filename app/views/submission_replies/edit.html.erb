@@ -13,13 +13,13 @@
 
   <h3>Edit</h3>
 
-  <%= simple_form_for @submission_reply, url: submission_submission_reply_path(params[:submission_id], params[:id]), method: :patch, input_html: {class: 'form-horizontal'} do |f|  %>
+  <%= simple_form_for current_submission_reply, url: submission_submission_reply_path(params[:submission_id], params[:id]), method: :patch, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
       <%= f.input :content, as: :summernote, label: 'Comment', required: true %>
     </div>
 
     <br>
-    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <%= f.submit 'Submit', class: 'btn btn-primary', data: {disable_with: "Updating reply..."} %>
   <% end %>
 
 </div>

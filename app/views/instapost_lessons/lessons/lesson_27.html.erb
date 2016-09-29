@@ -66,6 +66,7 @@ before_action :is_owner?, only: :destroy
 
 <pre><code class="ruby">
 def is_owner?
+  @comment = Comment.find(params[:id])
   if @comment.user != current_user
     redirect_to root_path
   end

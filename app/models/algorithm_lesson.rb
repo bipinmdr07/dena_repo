@@ -1,8 +1,6 @@
-class AlgorithmLesson < ActiveRecord::Base
+class AlgorithmLesson < Lesson
 
   COURSE_TITLE = "Understanding Data Structures and Algorithms"
-
-  LESSON_LENGTH = 2
 
   DURATION = 30
 
@@ -50,6 +48,15 @@ class AlgorithmLesson < ActiveRecord::Base
         [18, "Individual Post Pages"],
         [19, "Editing Posts"],
         [20, "Deleting Posts"]
+      ]
+    ],
+    ["Sorting Algorithms",
+      [
+        [21, "Bubble Sort"],        
+        [22, "Selection Sort"],
+        [23, "Insertion Sort"],
+        [24, "Quick Sort"],
+        [25, "Merge Sort"],
       ]
     ]
   ]

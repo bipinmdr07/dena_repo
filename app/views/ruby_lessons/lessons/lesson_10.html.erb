@@ -1,0 +1,550 @@
+<h1><%= title_for(RubyLesson, 1, 10) %></h1>
+
+<p>
+  Now that we've talked about arrays, let's talk about looping.
+</p>
+
+<h3>each</h3>
+
+<pre><code class="irb">
+numbers = [1,2,3,4,5]
+</code></pre>
+
+<p>
+  Here we have a <code>numbers</code> array. We can <em>iterate</em> through each item in the array with the <code>each</code> method. Programmers will use the word <em>iterate</em> a lot - it means to <strong>go through each item one by one</strong>. Let's look at an example:
+</p>
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5 
+=> [1, 2, 3, 4, 5]
+</code></pre>
+
+<p>
+  As you can see, the program is going through each number in the <code>numbers</code> array, and printing it out. There's a few new things we have never seen before. First, let's look at the <code>do</code> and <code>end</code>.
+</p>
+
+<p>
+  The code that is inbetween <code>do</code> and <code>end</code> is called a <strong>block</strong>. A block is a piece of code that can be executed. In our example, our block consists of <code>puts i</code>.
+</p>  
+
+<div class="well">
+  <h3>Blocks</h3>
+
+  <p>
+    Blocks in Ruby are a set of instructions that are passed around your program.
+  </p>
+
+  <p>
+    Blocks are created either with <code>do</code> and <code>end</code>, or with <code>{}</code>s. For example, these two pieces of code do the same thing:
+  </p>
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<pre><code class="irb">
+numbers.each {|i| puts i}
+</code></pre>
+
+  <p class="alert alert-info">
+    At first, converting these two syntaxes can be confusing. <strong>An easy way to remember the syntax</strong> is to replace <code>do</code> with <code>{</code> and <code>end</code> with <code>}</code> and vice-versa.
+  </p>
+
+  <p>
+    The <code>i</code> inbetween the <code>||</code>s is a <em>block argument</em>. <em>Block arguments</em> are basically variables that can be used within the block. The arguments can be named anything. The <code>||</code> characters are called pipe characters, and the variable inbetween them are the block arguments.
+  </p>
+</div>
+
+<p>
+  <code>|i|</code> is called a <em>block argument</em>. <strong>The block argument acts exactly like a regular variable, except it is only valid within the block.</strong>
+</p>
+
+<pre><code class="ruby">
+numbers.each do |i|
+  # i works inside this block
+  # Again, the block starts at 'do' and ends at 'end'
+  puts i
+end
+
+# i doesn't work outside of the block
+puts i
+=> NameError: undefined local variable or method `i' for main:Object
+</code></pre>
+
+<p>
+  <strong>Also, the block argument (the variable between the pipe characters) can be named anything</strong>:
+</p>
+
+<pre><code class="irb">
+numbers.each do |random_name|
+  puts random_name
+end
+</code></pre>
+
+<p>Even though we changed <code>i</code> to <code>random_name</code>, the result is still the same:</p>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5 
+=> [1, 2, 3, 4, 5]
+</code></pre>
+
+<p>
+  <strong>However, it is good practice to name variables in a way that it makes sense.</strong> In otherwords, instead of <code>random_name</code>, naming the variable something like <code>i</code> or <code>n</code> or <code>number</code> is more appropriate.
+</p>
+
+<p class="alert alert-info">
+  One of my teachers from college once said that naming variables is one of the hardest things about programming. I'm not sure if I completely agree, but it is true that naming variables is extremely important. <strong>To write good expressive code, it is important to name variables in a way that makes sense.</strong>
+</p>
+
+<p>
+  Let's take a look at this code once again:
+</p>  
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i
+end
+</code></pre>
+
+<p>
+  Here is how you should read the above code in English: <strong><em>For <code>each</code> item (<code>i</code>) in the <code>numbers</code> array, print out the item (<code>i</code>).</em></strong>
+</p>
+
+<p>
+  Inside the block, we can run any piece of code. Take a look at the following piece of code:
+</p>  
+
+
+<pre><code class="irb">
+numbers.each do |i|
+  puts i * 2
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+2
+4
+6
+8
+10
+=> [1, 2, 3, 4, 5]
+</code></pre>
+
+<p>
+  As you can see, the program printed out each number multiplied by 2.
+</p>
+
+<p>Let's take a look at another example. First, let's declare an array and push in some strings:</p>
+
+<pre><code class="ruby">
+countries = []
+countries.push("Nepal")
+countries.push("Japan")
+countries.push("Malaysia")
+</code></pre>
+
+<p class="alert alert-info">
+  To give you a refresher, the <code>push</code> array method pushes the element passed in as the parameter to the array.
+</p>
+
+<p>
+  Now let's <em>iterate</em> through each country:
+</p>
+
+<pre><code class="irb">
+countries.each do |country|
+  puts "#{country} is awesome!"
+end
+
+Nepal is awesome!
+Japan is awesome!
+Malaysia is awesome!
+</code></pre>
+
+<p>
+  Let's go over each step of this program.
+</p>
+
+<ul>
+  <li>First, we are iterating through each country in the <code>countries</code> array with the <code>each</code> method</li>
+  <li>Next, we are calling the block argument <code>country</code>. This way we can reference <code>country</code> inside the block</li>
+  <li>In the first iteration, <code>country</code> is equal to <code>"Nepal"</code></li>
+  <li>In the next iteration, <code>country</code> is equal to <code>"America"</code></li>
+  <li>In the final iteration, <code>country</code> is equal to <code>"Malaysia"</code></li>
+</ul>
+
+
+
+<h3>while loop</h3>
+
+<p>
+  Most languages have a <code>while</code> loop. While loops are pretty straightforward:
+</p>
+
+<pre><code class="irb">
+i = 0
+
+while (i &lt; 5) do
+  puts i
+  i += 1
+end
+</code></pre>
+
+<p>
+  Result:
+</p>
+
+<pre><code class="irb">
+0
+1
+2
+3
+4
+</code></pre>
+
+<p>
+  While loops execute the code inbetween <code>do</code> and <code>end</code> until the condition (in this case <code>i &lt; 5</code>) is <code>false</code>.
+</p>  
+
+<pre><code class="irb">
+while (condition_is_true) do
+  # execute code here
+end
+</code></pre>
+
+<h3>times loop</h3>
+
+<p>
+  Ruby has another way to loop, which is the <code>times</code> loop.
+</p>
+
+<pre><code class="irb">
+10.times do |i|
+  puts i
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+=> 10
+</code></pre>
+
+<p>
+  Another example:
+</p>
+
+<pre><code class="irb">
+5.times do
+  puts "this is spam"
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+this is spam
+this is spam
+this is spam
+this is spam
+this is spam
+=> 5
+</code></pre>
+
+<p>
+  Again, the code inbetween <code>do</code> and <code>end</code> are blocks.
+</p>  
+
+<h3>upto loop</h3>
+
+<p>
+  You can also loop using <code>upto</code>.
+</p>  
+
+<pre><code class="irb">
+1.upto(10) do |n|
+  puts n
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</code></pre>
+
+<h3>downto loop</h3>
+
+<p>
+  Similarly, there is a <code>downto</code> loop as well.
+</p>
+
+<pre><code class="irb">
+10.downto(0) do |n|
+  puts n
+end
+</code></pre>
+
+<p>Result:</p>
+
+<pre><code class="irb">
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+</code></pre>
+
+<h2>Coding Challenge</h2>
+
+<p>
+  Write a program the does the following:
+</p>
+
+<ul>
+  <li>Ask the user to input a sentence</li>
+  <li>Count the number of times each word in the sentence appears in the sentence</li>
+  <li><strong>The results should be case insensitive</strong></li>
+  <ul>
+    <li>For example, <code>"Pizza"</code> and <code>"pizza"</code> should be counted as the same word</li>
+  </ul>
+</ul> 
+
+<p>
+  The program should run like this:
+</p>
+
+<%= image_tag 'ruby_lessons/word_counter.png', class: 'img-responsive screenshot' %>
+
+<p><strong>This is a tricky problem!</strong> Good luck on this challenge!</p>
+
+<div class="well">
+  <h3>Hint</h3>
+  <p>
+    In this challenge, you will have to utilize a hash. To initialize a hash with a default value, you can initialize the hash with <code>Hash.new</code> and pass in the default value as such:
+  </p>
+
+<pre><code class="irb">
+new_hash = Hash.new(0)
+
+new_hash["key"]
+=> 0
+</code></pre>
+
+  <p>
+    This will allow you to do things like this:
+  </p>
+
+<pre><code class="irb">
+new_hash = Hash.new(0)
+
+# Since the default value for every key is 0, we can add 10 to it
+new_hash["key"] += 10
+=> 10
+
+# Set the default value of each key to 100
+another_hash = Hash.new(100)
+
+another_hash["another_key"] += 20
+=> 120
+
+
+# If we don't set a default value we will get an error
+# since a new key will not have a value. In otherwords, the value is nil by default
+error_hash = Hash.new
+
+error_hash["new_key"] += 2
+NoMethodError: undefined method `+' for nil:NilClass
+</code></pre>
+  
+  <p>
+    In the last example, since <code>error_hash</code> doesn't have a default value, we can't perform addition to it. It is telling us that we can't perform addition on a <code>NilClass</code>. 
+  </p>
+
+  <p class="alert alert-info">
+    nil represents nothing.
+  </p>
+
+</div>
+
+<div class="hint" data-hint-id="1">
+  <p>
+    First, let's prompt the user for a sentence using <code>puts</code>.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="2">
+  <p>
+    Next, let's prompt the user for a hint. We can get user input with <code>gets</code> and store the user input in a variable.
+  </p>
+</div>
+
+<div class="gotcha" data-hint-id="2" data-gotcha-id="1">
+  <p>
+    Make sure you <code>chomp</code> off the new line character from the user input.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="3">
+  <p>
+    Once you have the user input, let's split the sentences into words. What is a string method that can split strings?
+  </p>
+</div>
+
+<div class="hint" data-hint-id="4">
+  <p>
+    We can use the <code>split</code> method to split the sentences into words. Make sure to store the words into a variable so we can use them later.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="5">
+  <p>
+    Next, let's think about what we need to do to solve this problem.
+  </p>
+
+  <p>
+    The flow of the program would be something like this:
+  </p>  
+
+  <ul>
+    <li>Prompt user for input</li>
+    <li>Get user input</li>
+    <li>Split the user input into seperate words</li>
+    <li>For each word, see if the word has appeared yet in the sentence and keep track of how many times it has appeared</li>
+    <li>Print out the results</li>
+  </ul>
+</div>
+
+<div class="hint" data-hint-id="6">
+  <p><strong>For each word, see if the word has appeared yet in the sentence and keep track of how many times it has appeared.</strong> Let's look at what we could do to solve this.</p>
+
+  <p>
+    Since we need to keep track of the words that have appeared in the array and how many times it has appeared, we should either use an array or a hash, since it will allow us to store items easily.
+  </p>
+
+  <p> 
+    Which one should we use?
+  </p>
+</div>
+
+
+<div class="gotcha" data-gotcha-id="2" data-hint-id="7">
+  <p>
+    Should we use an array to solve this problem? If we use an array, this is what the logic would look like:
+  </p>
+
+  <ul>
+    <li>For each word</li>
+    <ul>
+      <li>Check if word is already in array</li>
+      <ul>
+        <li>If it isn't, push an array consisting of the word and also the integer <code>1</code> to keep track of how many times the word has appeared (for example, <code>["pizza", 1]</code>)</li>
+        <li>If it is, find the subarray containing the word and increment the second element which contains the number of times the word has appeared by <code>1</code></li>
+      </ul>
+    </ul>
+  </ul>
+
+  <p>
+    This can be more logic than is needed.
+  </p>
+
+  <p>
+    Instead, we can do this much easily with a hash. <strong>Since hashes don't allow duplicate keys, we don't have to check if the word already exists in the hash.</strong>
+  </p>
+</div>
+
+<div class="hint" data-hint-id="8">
+  <p> 
+    Let's create a new hash with a default value of <code>0</code>. 
+  </p>
+
+  <p>
+    Then, for every word in the sentence, we can add the word into the hash as a <em>key</em>, and store the frequency as the <em>value</em>.
+  </p>
+</div>
+
+<div class="gotcha" data-gotcha-id="3" data-hint-id="9">
+  <p>
+    Make sure that when you insert the word into the hash, you are making everything the same case (lowercase or uppercase) to make sure we count words like <code>"Pizza"</code> and <code>"pizza"</code> as the same word.
+  </p>
+</div>
+
+<div class="hint" data-hint-id="10">
+  <p>
+    Lastly, let's iterate through each key value pair in the hash and print it out. We can iterate through the hash like such:
+  </p>
+
+<pre><code class="irb">
+hash = {
+  "key_1" => "value_1",
+  "key_2" => "value_2",
+  "key_3" => "value_3"
+}
+
+hash.each do |key, value|
+  puts "key: #{key}, value: #{value}"
+end
+</code></pre>
+
+  <p>
+    Result:
+  </p>
+
+<pre><code class="irb">
+key: key_1, value: value_1
+key: key_2, value: value_2
+key: key_3, value: value_3
+</code></pre>
+</div>
+
+<% @hints = true %>
+
+<% @submission_form = true %>
+
+
+
+
+

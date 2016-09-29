@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="logo" style="padding-top: 13px;">
+    <h1 class="logo" style="padding-top: 13px; padding-left: 15px;">
         <a href="/"><span class="text" style="font-size: 40px;color: #EC6952;font-family:'Titillium Web', sans-serif;">TECHRISE</span></a>
     </h1><!--//logo-->
     <nav class="main-nav navbar-right" role="navigation">
@@ -34,14 +34,20 @@
 
                     <li class="nav-item page-scroll">
                       <%
-                        @cards = current_user.cards.where(archived: false, repetition_date: nil)
-                        @cards += current_user.cards.today
+                        @due_cards ||= current_user.cards.due                        
                       %>
-                      <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@cards.count}</span>".html_safe, study_path %>
+                      <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@due_cards.count}</span>".html_safe, study_path %>
+                    </li>
+
+                    <li class="nav-item dropdown" data-behavior="notifications">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  data-delay="0" data-close-others="true" data-behavior="notifications-link"> <i class="fa fa-bell"></i> <span data-behavior="unread-count"></span></a>
+                      <ul class="dropdown-menu notification-menu" data-behavior="notification-items">
+                        <li><span id="notification-header"><strong>Notifications</strong></span></li>
+                      </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#"><%= image_tag current_user.avatar, class: 'prof_pic_nav' %> <i class="fa fa-angle-down"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="true" href="#"><%= image_tag current_user.avatar, class: 'prof_pic_nav' %> <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
 
                             <% if current_user.start_date && current_user.graduation_date %>
@@ -86,43 +92,48 @@
                     </li><!--//dropdown-->
 
 
-                <% else %>
+                <% else %>                                        
 
-                    <li class="nav-item page-scroll">
-                      <a href="/contact_us">Contact Us</a>
-                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Programs <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                              <a href="/immersive"><i class="fa fa-code" aria-hidden="true"></i> TECHRISE Core Immersive</a>
+                            </li>
 
-                    <li class="nav-item page-scroll">
-                      <a href="/support">Support Us</a>
-                    </li>
-
-                    <li class="nav-item page-scroll">
-                      <a href="/blog">Blog</a>
+                            <li>
+                              <a href="/remote"><i class="fa fa-code" aria-hidden="true"></i> TECHRISE Core Remote</a>
+                            </li>   
+                        </ul>
                     </li>
 
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">About TECHRISE <i class="fa fa-angle-down"></i></a>
                         <ul class="dropdown-menu">
                             <li>
-                              <a href="/curriculum">Curriculum</a>
-                            </li>
-
-                            <li>
-                              <a href="/learn">Learn More</a>
-                            </li>
-
-                            <li>
-                              <a href="/pricing">Pricing</a>
-                            </li>
-
-                            <li>
                               <a href="/about">About</a>
                             </li>
+
+                            <li>
+                              <a href="/contact_us">Contact Us</a>
+                            </li>
+
+                            <li>
+                              <a href="/support">Support Us</a>
+                            </li>                            
 
                             <li>
                               <a href="/events">Events</a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/curriculum">Curriculum</a>
+                    </li>
+
+                    <li class="nav-item page-scroll">
+                      <a href="/blog">Blog</a>
                     </li>
 
                 <% end %>
@@ -132,10 +143,10 @@
                 </li>
 
                 <% unless user_signed_in? %>
-                    <li class="nav-item nav-item-cta last"><%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-cta btn-cta-secondary' %></li>
+                    <li class="nav-item nav-item-cta last"><%= link_to 'APPLY', apply_path, class: 'btn btn-cta btn-cta-secondary' %></li>
                 <% end %>
 
             </ul><!--//nav-->
-        </div><!--//navabr-collapse-->
+        </div><!--//navbar-collapse-->
     </nav><!--//main-nav-->
 </div><!--//container-->

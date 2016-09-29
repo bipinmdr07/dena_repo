@@ -2,44 +2,9 @@ success_sound.play();
 
 $('#progression_form').hide();
 $('#hidden_progression_form').hide();
-
 $('#hidden_delete_progression_form').show();
 
-<%
-@lesson_link = params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
-@course_title = params[:progression][:course_name].constantize::COURSE_TITLE
-@lessons = params[:progression][:course_name].constantize::LESSONS
-%>
-$('#sidebar_container').html('<%= escape_javascript render partial: "sidebar" %>');
+$('#sidebar_container').html('<%= escape_javascript render partial: "lessons/sidebar" %>');
 
-
-// add .active to current lesson
-var url = window.location;
-// Will only work if string in href matches with location
-$('ul.nav a[href="'+ url +'"]').parent().addClass('active');
-
-// Will also work for relative and absolute hrefs
-$('ul.nav a').filter(function() {
-    return this.href == url
-}).parent().addClass('active');
-// scroll to current lesson
-var ready;
-ready = function() {
-
-  var target = document.getElementsByClassName("active");
-  target[0].parentNode.scrollTop = target[0].offsetTop; 
-
-  $("#slider").slideReveal({
-    trigger: $(".trigger"),
-    position: "right",
-    width: 350,
-    speed: 700,
-    top: 70
-  });
-
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
-
+show_page_trigger();
 
