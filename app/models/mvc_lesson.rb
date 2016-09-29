@@ -6,29 +6,23 @@ class MvcLesson < Lesson
 
   PERIOD = "3 ~ 4"
 
+  CHAPTERS = [
+    Chapter.new("Introduction to MVC"),
+    Chapter.new("HTTP Methods"),
+    Chapter.new("Model Methods"),
+    Chapter.new("Migrations")
+  ]
+
   LESSONS = [
-    ["Introduction to MVC", 
-      [
-        [1, "What is MVC?"],
-        [2, "Overview of how everything works together"]
-      ]
-    ],
-    ["HTTP Methods", 
-      [
-        [3, "Overview of HTTP Methods"]
-      ]
-    ],
-    ["Model Methods", 
-      [
-        [4, "Rails for Zombies"]
-      ]
-    ],
-    ["Migrations",
-      [
-        [5, "What is schema.rb?"],
-        [6, "Adding and Updating Database Columns"]
-      ]
-    ]
+    Lesson.new(1, "What is MVC?", CHAPTERS[0]),
+    Lesson.new(2, "Overview of how everything works together", CHAPTERS[0]),
+
+    Lesson.new(3, "Overview of HTTP Methods", CHAPTERS[1]),
+
+    Lesson.new(4, "Rails for Zombies", CHAPTERS[2]),
+
+    Lesson.new(5, "What is schema.rb?", CHAPTERS[3]),
+    Lesson.new(6, "Adding and Updating Database Columns", CHAPTERS[3])
   ]
 
 end

@@ -1,6 +1,6 @@
 module LessonsHelper
-  def get_lesson_name(course_name, lesson_id)
-    Tags::LESSONS[course_name.underscore + 's'].keys[lesson_id.to_i - 1][1]
+  def get_lesson_title(course_name, lesson_id)
+    course_name.constantize::LESSONS[lesson_id.to_i - 1].title
   end
 
   def get_lesson_url_string(course_name, lesson_id)
@@ -11,11 +11,11 @@ module LessonsHelper
     if params[:id]
       forum = controller_name.classify.constantize.find(params[:id])
       course_name = forum.course_name.underscore + "s"
-      lesson_name = Tags::LESSONS[course_name].keys[forum.lesson_id - 1][1]
+      lesson_name = forum.course_name.constantize::LESSONS[forum.lesson_id - 1].title
       link_to ('<i class="fa fa-caret-left" aria-hidden="true"></i> ' + lesson_name).html_safe, "/" + course_name + "/" + forum.lesson_id.to_s, class: 'btn btn-back btn-default'
     else
       course_name = params[:course_name].underscore + "s"
-      lesson_name = Tags::LESSONS[course_name].keys[params[:lesson_id].to_i - 1][1]
+      lesson_name = params[:course_name].constantize::LESSONS[params[:lesson_id].to_i - 1].title
       link_to ('<i class="fa fa-caret-left" aria-hidden="true"></i> ' + lesson_name).html_safe, "/" + course_name + "/" + params[:lesson_id].to_s, class: 'btn btn-back btn-default'
     end
   end

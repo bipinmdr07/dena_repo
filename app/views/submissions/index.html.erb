@@ -3,7 +3,9 @@
   <div class="row">
     <div id="blog-mansonry" class="blog-list">
       <% @submissions.each do |submission| %>
-        <% course_name = Tags::LESSONS[submission.course_name.underscore + "s"].keys[submission.lesson_id - 1][1] %>
+      
+        <% course_name = submission.course_name.constantize::LESSONS[submission.lesson_id - 1] %>
+
         <article class="post col-md-4 col-sm-6 col-xs-12">
           <div class="post-inner">
             <div class="content">

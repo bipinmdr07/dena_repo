@@ -44,8 +44,8 @@ module ApplicationHelper
     '<i class="fa fa-check-circle progression_check" aria-hidden="true"></i>'.html_safe
   end
 
-	def title_for(course, chapter, lesson)
-		course::LESSONS[chapter - 1][1][lesson - 1][1]
+	def title_for(course, lesson_id)
+		course::LESSONS.select{|lesson| lesson.id == lesson_id}.first.title
 	end
 
   def has_access?(course_access)

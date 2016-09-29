@@ -9,12 +9,14 @@ class LessonsController < ApplicationController
     @progression_lesson_ids = current_user.progressions.where(course_name: controller_name.classify).pluck(:lesson_id)  
   end
 
-  def show
+  def show    
     current_controller = controller_name.classify
     
     @current_course_title = course_title
     @current_course_link = course_link
     @current_course_lessons = current_course_lessons
+    @current_course_chapters = current_course_chapters
+
     @current_course_length = current_controller.constantize.lesson_length  
     @current_course_name = current_controller + "s"
     @current_lesson_id = params[:id]    
@@ -52,6 +54,10 @@ class LessonsController < ApplicationController
   end
 
   private
+
+  def current_course_chapters
+    controller_name.classify.constantize::CHAPTERS
+  end
 
   def current_course_lessons
     controller_name.classify.constantize::LESSONS

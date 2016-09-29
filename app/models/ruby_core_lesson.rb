@@ -5,19 +5,17 @@ class RubyCoreLesson < Lesson
 
   PERIOD = "3 ~ 4"
 
+  CHAPTERS = [
+    Chapter.new("Ruby Core Training"),
+    Chapter.new("Coding Challenges")    
+  ]
+
   LESSONS = [
-    ["Ruby Core Training",
-      [
-        [1, "Practice, Practice, Practice"]
-      ]
-    ],
-    ["Coding Challenges",
-      [
-        [2, "Check Palindrome"],
-        [3, "String Compressor"],
-        [4, "Square Each Digits"]
-      ]
-    ]
+    Lesson.new(1, "Practice, Practice, Practice", CHAPTERS[0]),
+
+    Lesson.new(2, "Check Palindrome", CHAPTERS[1]),
+    Lesson.new(3, "String Compressor", CHAPTERS[1]),
+    Lesson.new(4, "Square Each Digits", CHAPTERS[1])
   ]
 
 end

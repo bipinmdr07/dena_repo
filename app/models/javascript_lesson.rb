@@ -5,18 +5,15 @@ class JavascriptLesson < Lesson
 
   PERIOD = "7"
 
+  CHAPTERS = [
+    Chapter.new("Basic Javascript"),
+    Chapter.new("Basic jQuery")
+  ]
+
   LESSONS = [
-    ["Basic JavaScript", 
-      [
-        [1, "Learning the Basics"]
-        
-      ]
-    ],
-    ["Basic jQuery",
-      [
-        [2, "Using jQuery"]
-      ]
-    ]
+    Lesson.new(1, "Learning the Basics", CHAPTERS[0]),
+    
+    Lesson.new(2, "Using jQuery", CHAPTERS[1])
   ]
 
 end
