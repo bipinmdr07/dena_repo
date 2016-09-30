@@ -9,6 +9,7 @@ RSpec.describe MenteesController, type: :controller do
       it "should give 200 OK" do
         sign_in mentor
         get :index
+
         expect(response).to render_template :index
       end
     end
@@ -17,6 +18,7 @@ RSpec.describe MenteesController, type: :controller do
       it "should redirect to root_path" do
         sign_in user
         get :index
+
         expect(response).to redirect_to root_path
       end
     end

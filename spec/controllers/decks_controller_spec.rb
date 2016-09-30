@@ -4,9 +4,10 @@ RSpec.describe DecksController, type: :controller do
   describe "GET #index" do
     it "assigns the master deck" do
       user = FactoryGirl.create(:user)
-      sign_in user
 
+      sign_in user
       get :index
+
       expect(assigns(:decks)).to eq(Deck.master)
     end
   end
@@ -15,9 +16,10 @@ RSpec.describe DecksController, type: :controller do
     it "assigns the correct deck" do
       user = FactoryGirl.create(:user)
       deck = FactoryGirl.create(:deck)
-      sign_in user
 
+      sign_in user
       get :show, id: deck.id
+      
       expect(assigns(:deck)).to eq(deck)
       expect(response).to render_template :show
     end
@@ -30,9 +32,9 @@ RSpec.describe DecksController, type: :controller do
   #       sign_in user
 
   #       expect {
-  #         post :create, deck: FactoryGirl.attributes_for(:deck, master: true)  
-  #       }.to change(Deck, :count).by(1)    
-  #       expect(response.status).to redirect_to admin_decks_path    
+  #         post :create, deck: FactoryGirl.attributes_for(:deck, master: true)
+  #       }.to change(Deck, :count).by(1)
+  #       expect(response.status).to redirect_to admin_decks_path
   #     end
   #   end
 
@@ -42,7 +44,7 @@ RSpec.describe DecksController, type: :controller do
   #       sign_in user
 
   #       expect {
-  #         post :create, deck: FactoryGirl.attributes_for(:deck, title: nil, master: true)  
+  #         post :create, deck: FactoryGirl.attributes_for(:deck, title: nil, master: true)
   #       }.to change(Deck, :count).by(0)
   #       expect(response.status).to render_template :new
   #     end

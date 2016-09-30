@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SubmissionRepliesController, type: :controller do
   describe "POST #create" do
-    context "when the attributes are valid" do    
+    context "when the attributes are valid" do
       it "creates a new submission reply" do
         setup_submission_by_current_user
 
@@ -16,7 +16,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
       it "redirects the user to the submission page" do
         setup_submission_by_current_user
 
-        sign_in @user        
+        sign_in @user
         post :create, submission_id: @submission.id, submission_reply: FactoryGirl.attributes_for(:submission_reply)
 
         expect(response).to redirect_to submission_path(@submission.id)
@@ -26,14 +26,14 @@ RSpec.describe SubmissionRepliesController, type: :controller do
         setup_submission_by_current_user
 
         sign_in @user
-        
+
         expect {
           post :create, submission_id: @submission.id, submission_reply: FactoryGirl.attributes_for(:submission_reply)
         }.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it "creates notification for involved users" do
-        setup_submission_by_current_user        
+        setup_submission_by_current_user
         user_1 = FactoryGirl.create(:user)
         user_2 = FactoryGirl.create(:user)
         FactoryGirl.create(:submission_reply, submission_id: @submission.id, user_id: user_1.id)
@@ -55,7 +55,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
         sign_in @user
 
         expect {
-          post :create, submission_id: @submission.id, 
+          post :create, submission_id: @submission.id,
           submission_reply: FactoryGirl.attributes_for(:invalid_submission_reply)
         }.to change(SubmissionReply, :count).by(0)
       end
@@ -65,7 +65,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
         build_reply_by_current_user
 
         sign_in @user
-        post :create, submission_id: @submission.id, 
+        post :create, submission_id: @submission.id,
           submission_reply: FactoryGirl.attributes_for(:invalid_submission_reply)
 
         expect(response).to redirect_to submission_path(@submission.id)
@@ -108,7 +108,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
           build_reply_by_current_user
 
           sign_in @user
-          put :update, submission_id: @submission.id, id: @reply.id, 
+          put :update, submission_id: @submission.id, id: @reply.id,
                        submission_reply: FactoryGirl.attributes_for(:reply, content: "New content!")
           @reply.reload
 
@@ -120,7 +120,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
           build_reply_by_current_user
 
           sign_in @user
-          put :update, submission_id: @submission.id, id: @reply.id, 
+          put :update, submission_id: @submission.id, id: @reply.id,
                        submission_reply: FactoryGirl.attributes_for(:reply, content: "New content!")
 
           expect(response).to redirect_to submission_path(@submission)
@@ -158,9 +158,9 @@ RSpec.describe SubmissionRepliesController, type: :controller do
 
         sign_in @user
 
-        put :update, submission_id: @submission.id, id: @reply.id, 
+        put :update, submission_id: @submission.id, id: @reply.id,
                      submission_reply: FactoryGirl.attributes_for(:reply, content: "New content!")
-                      
+
         expect(response).to redirect_to submission_path(@submission)
       end
     end
@@ -182,7 +182,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
       it "should redirect the user to the original lesson url" do
         setup_submission_by_current_user
         build_reply_by_current_user
-        
+
         sign_in @user
         delete :destroy, id: @reply.id
 
@@ -195,7 +195,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
         setup_submission_by_current_user
         build_reply_by_another_user
 
-        sign_in @user  
+        sign_in @user
         delete :destroy, id: @reply.id
 
         expect(response).to redirect_to submission_path(@submission)

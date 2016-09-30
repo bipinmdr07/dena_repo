@@ -6,8 +6,8 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
       it "should change the submission to approved" do
         user = FactoryGirl.create(:admin_user)
         submission = FactoryGirl.create(:submission, approved: false, user_id: 1)
-        sign_in user
 
+        sign_in user
         post :create, id: submission.id, format: :js
         submission.reload
 
@@ -16,8 +16,9 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
 
       it "creates notification for the user that submitted" do
         user = FactoryGirl.create(:admin_user)
-        recipient = FactoryGirl.create(:user)        
+        recipient = FactoryGirl.create(:user)
         submission = FactoryGirl.create(:submission, approved: false, user_id: recipient.id)
+
         sign_in user
 
         expect {
@@ -35,7 +36,7 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
 
         post :create, id: submission.id, format: :js
         submission.reload
-        
+
         expect(submission.approved).to be(false)
       end
     end

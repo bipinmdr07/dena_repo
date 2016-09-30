@@ -18,7 +18,7 @@ RSpec.describe RepliesController, type: :controller do
 
         sign_in @user
         post :create, question_id: @question.id, reply: FactoryGirl.attributes_for(:reply)
-        
+
         expect(response).to redirect_to question_path(@question)
       end
 
@@ -50,12 +50,12 @@ RSpec.describe RepliesController, type: :controller do
 
     context "when the attributes are invalid" do
       it "doesn't create a new question" do
-        setup_question_by_current_user        
+        setup_question_by_current_user
 
         sign_in @user
 
         expect {
-          post :create, question_id: @question.id, 
+          post :create, question_id: @question.id,
           reply: FactoryGirl.attributes_for(:invalid_reply)
         }.to change(Reply, :count).by(0)
       end
@@ -64,7 +64,7 @@ RSpec.describe RepliesController, type: :controller do
        setup_question_by_current_user
 
         sign_in @user
-        post :create, question_id: @question.id, 
+        post :create, question_id: @question.id,
           reply: FactoryGirl.attributes_for(:invalid_reply)
 
         expect(response).to redirect_to question_path(@question)
@@ -106,8 +106,8 @@ RSpec.describe RepliesController, type: :controller do
           build_reply_by_current_user
 
           sign_in @user
-          put :update, question_id: @question.id, 
-                       id: @reply.id, 
+          put :update, question_id: @question.id,
+                       id: @reply.id,
                        reply: FactoryGirl.attributes_for(:reply, content: "New content!")
           @reply.reload
 
@@ -119,8 +119,8 @@ RSpec.describe RepliesController, type: :controller do
           build_reply_by_current_user
 
           sign_in @user
-          put :update, question_id: @question.id, 
-                       id: @reply.id, 
+          put :update, question_id: @question.id,
+                       id: @reply.id,
                        reply: FactoryGirl.attributes_for(:reply, content: "New content!")
 
           expect(response).to redirect_to question_path(@question)
@@ -133,8 +133,8 @@ RSpec.describe RepliesController, type: :controller do
           build_reply_by_current_user
 
           sign_in @user
-          put :update, question_id: @question.id, 
-                       id: @reply.id, 
+          put :update, question_id: @question.id,
+                       id: @reply.id,
                        reply: FactoryGirl.attributes_for(:reply, content: nil)
           @question.reload
 
@@ -146,8 +146,8 @@ RSpec.describe RepliesController, type: :controller do
           build_reply_by_current_user
 
           sign_in @user
-          put :update, question_id: @question.id, 
-                       id: @reply.id, 
+          put :update, question_id: @question.id,
+                       id: @reply.id,
                        reply: FactoryGirl.attributes_for(:reply, content: nil)
 
           expect(response).to render_template :edit
@@ -161,8 +161,8 @@ RSpec.describe RepliesController, type: :controller do
         build_reply_by_another_user
 
         sign_in @user
-        put :update, question_id: @question.id, 
-                     id: @reply.id, 
+        put :update, question_id: @question.id,
+                     id: @reply.id,
                      reply: FactoryGirl.attributes_for(:reply, content: "New content!")
 
         expect(response).to redirect_to question_path(@question)
@@ -199,7 +199,7 @@ RSpec.describe RepliesController, type: :controller do
         setup_question_by_current_user
         build_reply_by_another_user
 
-        sign_in @user        
+        sign_in @user
         delete :destroy, id: @reply.id
 
         expect(response).to redirect_to question_path(@question)
@@ -209,7 +209,7 @@ RSpec.describe RepliesController, type: :controller do
 
   def setup_question_by_current_user
     @user = FactoryGirl.create(:user)
-    @question = FactoryGirl.create(:question, user_id: @user.id)    
+    @question = FactoryGirl.create(:question, user_id: @user.id)
   end
 
   def build_reply_by_current_user
@@ -220,5 +220,3 @@ RSpec.describe RepliesController, type: :controller do
     @reply = FactoryGirl.create(:reply, question_id: @question.id, user_id: @user.id + 1)
   end
 end
-
-

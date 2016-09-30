@@ -10,8 +10,9 @@ RSpec.describe MentorSessionsController, type: :controller do
 
   describe "GET #index" do
     context "when user is mentor" do
-      it "should give 200 OK" do        
+      it "should give 200 OK" do
         get :index, mentee_id: user.id
+
         expect(response).to render_template :index
       end
     end
@@ -20,6 +21,7 @@ RSpec.describe MentorSessionsController, type: :controller do
       it "should redirect to root_path" do
         sign_in user
         get :index, mentee_id: user.id
+
         expect(response).to redirect_to root_path
       end
     end
@@ -35,6 +37,7 @@ RSpec.describe MentorSessionsController, type: :controller do
   describe "GET #new" do
     it "should render new template" do
       get :new, mentee_id: user.id
+
       expect(response).to render_template :new
     end
   end
@@ -46,7 +49,7 @@ RSpec.describe MentorSessionsController, type: :controller do
           post :create, mentee_id: user.id, mentor_session: FactoryGirl.attributes_for(:mentor_session, user_id: user.id)
         }.to change(MentorSession, :count).by(1)
       end
-    end 
+    end
 
     context "when attributes are invalid" do
       it "shouldn't create a new mentor session" do
@@ -54,7 +57,7 @@ RSpec.describe MentorSessionsController, type: :controller do
           post :create, mentee_id: user.id, mentor_session: FactoryGirl.attributes_for(:invalid_mentor_session, user_id: user.id)
         }.to change(MentorSession, :count).by(0)
       end
-    end 
+    end
   end
 
 
