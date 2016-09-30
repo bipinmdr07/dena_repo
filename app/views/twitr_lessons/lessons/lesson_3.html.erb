@@ -1,0 +1,61 @@
+<p>
+  Time for a web application crash course!
+</p>
+
+<h3>Clients and Servers</h3>
+
+<p>
+	When a user accesses a website from a PC or a smartphone, it sends a <strong><em>request</em></strong> to the server. The server then sends a <strong><em>response</em></strong> back to the PC or smartphone.
+</p>
+
+<p>
+	In this model, PCs, smartphones, tablets, are called the <strong>client</strong>. <strong>The client sends a <em>request</em> to the server and the server sends a <em>response</em> back.</strong>
+</p>
+
+<%= image_tag 'twitr/client_server.png', class: 'img-responsive screenshot' %>
+
+<h2>MVC Framework</h2>
+
+<p>
+	Rails implements the <strong>MVC framework</strong> to organize the structure of the web application.
+</p>
+
+<p>
+  <strong>MVC stands for <em>Model</em>, <em>View</em>, <em>Controller</em>.</strong> MVC is a framework and a way of organizing how the application is structured. Many web applications use the MVC framework. <strong>Each component is responsible for handling different tasks.</strong>
+</p>
+
+<h3>Model</h3>
+
+<p>
+  The model is responsible for interacting with the database. It is responsible for things like fetching new information and storing information into the database. Every Rails application has a <code>app/models</code> directory, which holds all of the model files.
+</p>
+
+<h3>Views</h3>
+
+<p>
+  The views are responsible for displaying things to the user. In every Rails application, there is an <code>app/views</code> directory. This is the directory where <code>.html</code> files are stored. 
+</p>
+
+<h3>Controller</h3>
+
+<p>
+  The controller is responsible for interacting with both the views and the model. It is the middleman between the two. Every Rails application has a <code>app/controllers</code> directory, which holds all of the controller files.
+</p>
+
+<p>
+  <strong>There's also another important component, the router.</strong>
+</p>
+
+<h3>Router</h3> 
+
+<p>
+  The router is responsible for mapping requests to specific controller actions. In Rails applications, the routing is defined in the <code>routes.rb</code> file. We'll explain what controller actions are in later lessons.
+</p>
+
+<p>
+	For now, let's keep clients, servers, MVC, and the router in mind and keep on going. We'll explain how everything works together in later lessons.
+</p>
+
+
+
+  

@@ -1,0 +1,197 @@
+<p>
+  In this lesson, we're going to create our first Rails <em>controller</em> (more on controllers later on). 
+</p>
+
+<p>
+	In our C9 terminal (the terminal window that isn't running the rails server), run the following command:
+</p>
+
+<pre><code class="bash">
+rails g controller tweets
+</code></pre>
+
+<p>
+	This command generates a <code>controller</code> called <code>tweets</code> for you and will also generate a lot of files. (<code>g</code> stands for <strong>g</strong>enerate.)
+</p>
+
+<p>
+	Now let’s open up <code>tweets_controller.rb</code> (remember the little trick? Ctrl + P).
+</p>
+
+<p>
+	Inside <code>tweets_controller.rb</code>, let’s add an <code>index</code> method like this. 
+</p>
+
+<pre><code class="ruby">
+class TweetsController &lt; ApplicationController
+  def index
+  end
+end
+</code></pre>
+
+<p>
+	When we ran <code>rails generate controller tweets</code>, a folder called <code>tweets</code> was generated in the <code>app/views</code> folder.
+</p>
+
+<p>
+	Let’s right click on the <code>tweets</code> folder inside of the <code>app/views</code> directory and create a new file. Let’s save that file as <code>index.html.erb</code>.
+</p>
+
+<p class="alert alert-success">
+	<code>erb</code> stands for Embedded Ruby. By making the file extension, <code>html.erb</code> we can embed ruby code in our HTML files. We will see how this works in the next few lessons.
+</p>
+
+<p>
+	Inside <code>index.html.erb</code>, let’s add this:
+</p>
+
+<pre><code class="erb">
+&lt;h1&gt;This is my first app ever and I’m super excited to become a coder&lt;/h1&gt;
+</code></pre>
+
+<p>Awesome! Now let’s hop back into our browser and refresh our application on C9.</p>
+
+<%= image_tag 'twitr/c9_start_server.png', class: 'img-responsive screenshot' %>
+
+
+<p>...nothing has changed. It's still on the Ruby on Rails Welcome Page. Hmm.</p>
+
+<p>
+	It turns out that you have tell Rails where your default homepage should be. As we discussed in the last lesson, the <code>routes.rb</code> is responsible for mapping requests. We need to edit <code>routes.rb</code> to configure how the application should handle the requests to the server.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  Let’s open up <code>routes.rb</code>.
+</p>
+
+<p>
+	Inside this file, let’s delete <code># root 'welcome#index'</code> and instead replace it with <code>root 'tweets#index'</code>.
+</p>
+
+<p>
+	Your <code>routes.rb</code> should now look something like this:
+</p>
+
+<pre><code class="ruby">
+Rails.application.routes.draw do
+  root 'tweets#index'
+end
+</code></pre>
+
+<p>
+	Here, we are telling rails that when the user accesses the 'root' of the application (the homepage), it will trigger the <code>index</code> action (another word for method) in the <code>tweets_controller.rb</code>. 
+</p>
+
+<div class="well">
+  <h3>Routes, Controllers, Views</h3>
+
+  <p>
+    First, a request is sent from the client. The browser URL should look like this:
+  </p>
+
+  <%= image_tag 'twitr/url_path.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    As you can see, each request has a path. The router responds to the path. In this case, the path is <code>/</code>.
+  </p>
+
+  <p>
+    Then the router finds the appropriate <em>controller action</em> for that path. If you run <code>rake routes</code> in your terminal, you can see how the router is mapping the path and the controller actions:
+  </p>
+
+  <%= image_tag 'twitr/rake_routes.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    As we can see, <code>/</code> is mapped to the <code>tweets#index</code> controller action. <strong><code>tweets</code> is the controller, and <code>index</code> is the action.</strong>
+  </p>
+
+  <p>
+    We see this mapping because we defined it as such in the <code>routes.rb</code> file:
+  </p>
+
+  <%= image_tag 'twitr/controller_action.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    Rails then tries to find the appropriate controller and action:
+  </p>
+
+  <%= image_tag 'twitr/controller_action_2.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    In this case, Rails tries to find the <code>index</code> action inside of <code>TweetsController</code>.
+  </p>
+
+  <p>
+    Lastly, Rails looks inside <code>app/views</code> directory, tries to find a folder with the same controller name, then tries to find a file with the same controller action name.
+  </p>
+
+  <%= image_tag 'twitr/controller_action_3.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    By default, when a controller action is triggered in the controller (in this case, the <code>index</code> method is triggered), then Rails will try to find an <code>html</code> file that has the same name as the method (in this case <code>index</code>) to display to the user in the <code>views</code> directory under the controller name's folder (Rails will also try to look into the inherited controller's folder, but let's not get into this right now).
+  </p>
+
+  <%= create_flashcard %>
+
+  <p>
+    To clear things up, this is what happens:
+  </p>
+
+  <ul>
+    <li>A user accesses the root page (the homepage)</li>
+    <ul>
+      <li>A request is sent to the server</li>
+    </ul>
+    <li>Rails looks at the routing to see which controller action to trigger</li>
+    <li>The <code>index</code> action in <code>tweets_controller.rb</code> is triggered</li>
+    <li>Rails tries to find an <code>html</code> file that is named <code>index</code> in the <code>views/tweets</code> directory</li>
+    <li>Rails finds the <code>idea.html.erb</code> file</li>
+    <li>Rails displays the file</li>
+  </ul>
+
+</div>
+
+
+
+<p>
+	Now let’s refresh our web application and see what happens.
+</p>
+
+<p>
+	Boom! You should now see “This is my first app ever and I’m super excited to become a coder”.
+</p>
+
+<p>
+	Congratulations on making it this far. You have written your first page on Ruby on Rails!
+</p>
+
+<p>
+	Let’s now commit this to GitHub. "Committing to Github" is another way of saying, "uploading our code up to Github".
+</p>
+
+<%= create_flashcard %>
+
+<p>We’re first going to add all the files that we just updated:</p>
+
+<pre><code class="bash">
+git add .
+</code></pre>
+
+<p>Then we’re going to add a commit message describing what we just updated:</p>
+
+<pre><code class="bash">
+git commit -am “Add tweets controller and set tweets#index as root”
+</code></pre>
+
+<p>And finally, push up to GitHub.</p>
+
+<pre><code class="bash">
+git push origin master
+</code></pre>
+
+<p><strong>You’ll be doing this quite a lot and it will become second nature!</strong></p>
+
+
+

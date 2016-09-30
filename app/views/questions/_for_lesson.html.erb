@@ -111,7 +111,7 @@
     <%= f.input :course_name, as: :hidden, input_html: { value: controller_name.classify} %>
 
     <br>
-    <%= f.submit 'Submit Question', class: 'btn btn-cta-primary btn-block' %>
+    <%= f.submit 'Submit Question', class: 'btn btn-cta-primary btn-block', data: { disable_with: "Submitting question..." } %>
   <% end %>
 
 

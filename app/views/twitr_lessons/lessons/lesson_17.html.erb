@@ -1,0 +1,116 @@
+
+
+<p>
+  If we look back at our wireframes, we see that we still have to build out the "About" and "Random" page. To give you a refresher on what we are trying to build here, the "About" page will be a page that will be used to describe what the web page is all about. The "Random" page will be a page that displays an idea that will be chosen randomly.
+</p>
+
+<p>
+  To create these new pages, let's create a new controller called <code>static_pages</code>. In the terminal, let's type in the following command:
+</p>
+
+<pre><code class="bash">
+rails generate controller static_pages
+</code></pre>
+
+<p>
+  This should generate the <code>static_pages</code> controller. Inside this controller, we are going to create two methods, the <code>about</code> method and the <code>random</code> method.
+</p>
+
+<p>
+  In your <code>static_pages_controller.rb</code> file, let's add in the following lines:
+</p>
+
+<pre><code class="ruby">
+class StaticPagesController &lt; ApplicationController
+  def about
+
+  end
+
+  def random
+
+  end
+end
+</code></pre>
+
+<p>
+  We will see why we set up these routes in a bit, so hang tight.
+</p>
+
+<p>
+  Next, let's set up some <code>routes</code> for these pages.
+</p>
+
+<p>
+  Let's go into our console and type <code>rake routes</code> to display our routing.
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         tweets#index
+    tweets GET    /tweets(.:format)          tweets#index
+          POST   /tweets(.:format)          tweets#create
+ new_idea GET    /tweets/new(.:format)      tweets#new
+edit_idea GET    /tweets/:id/edit(.:format) tweets#edit
+     idea GET    /tweets/:id(.:format)      tweets#show
+          PATCH  /tweets/:id(.:format)      tweets#update
+          PUT    /tweets/:id(.:format)      tweets#update
+          DELETE /tweets/:id(.:format)      tweets#destroy
+</code></pre>
+
+<p>
+  We see that we don't have any paths that we can use for the "About" and "Random" pages. Let's go ahead and set these up.
+</p>
+
+<p>
+  Let's go into our <code>routes.rb</code> file, which is where we can specify how the pages are routed, to hook up our new pages.
+
+<p>
+  Right now, we only have two lines, <code>root 'tweets#index'</code> and <code>resources :tweets</code>. If we recall, <code>root 'tweets#index'</code> sets the root page, or the home page, to the index action of tweets. Additionally, <code>resources :tweets</code> automatically provided us with a bunch of useful links that we could use.
+</p>
+
+<p class="alert alert-success">
+View this <%=link_to 'this lesson', '/twitr_lessons/12' %> to review what <code>resources</code> do in the <code>routes.rb</code> file.
+</p>
+
+<p>
+  For the "About" and "Random" pages, we need to add these routes in manually. To do this, under <code>resources :tweets</code>, add the following lines:
+</p>
+
+<pre><code class="ruby">
+get 'about' =&gt; 'static_pages#about'
+get 'random' =&gt; 'static_pages#random'
+</code></pre>
+
+<p>
+  Let's run the <code>rake routes</code> command.
+</p>  
+
+<pre><code class="bash">
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         tweets#index
+    tweets GET    /tweets(.:format)          tweets#index
+          POST   /tweets(.:format)          tweets#create
+ new_idea GET    /tweets/new(.:format)      tweets#new
+edit_idea GET    /tweets/:id/edit(.:format) tweets#edit
+     idea GET    /tweets/:id(.:format)      tweets#show
+          PATCH  /tweets/:id(.:format)      tweets#update
+          PUT    /tweets/:id(.:format)      tweets#update
+          DELETE /tweets/:id(.:format)      tweets#destroy
+    about GET    /about(.:format)          static_pages#about
+   random GET    /random(.:format)         static_pages#random
+</code></pre>
+
+<p>
+  Notice how in the last two lines, the routes for the <code>about</code> and <code>random</code> page were added.
+</p>
+
+<p>
+  Now what will happen is, when a user goes to a URL with the <code>/about</code> URI pattern, it will trigger the <code>about</code> action in the <code>static_pages</code> controller. Similarly, when a user goes to a URL with the <code>/random</code> URI pattern, it will trigger the <code>random</code> action in the <code>static_pages</code> controller. 
+</p>
+
+<p>
+  Now that we've set up these routes, let's go into our controller and set up the view for these two routes in the next lesson.
+</p>
+
+<%= standard_git_workflow %>
+

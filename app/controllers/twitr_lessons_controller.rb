@@ -1,0 +1,3 @@
+class TwitrLessonsController < LessonsController
+
+end

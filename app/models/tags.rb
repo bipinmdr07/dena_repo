@@ -83,7 +83,7 @@ class Tags < ActiveRecord::Base
       [3, "Coding Challenge: String Compressor"] => %w(ruby),
       [4, "Coding Challenge: Square Each Digits"] => %w(ruby)
     },
-    "ideator_lessons" => {
+    "twitr_lessons" => {
       [1, "Setting up your Web Dev Environment"] => %w(),
       [2, "Setting Up Git"] => %w(),
       [3, "Creating Wireframes"] => %w(),

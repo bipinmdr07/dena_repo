@@ -1,0 +1,216 @@
+
+
+<p>
+	Now that we’ve got a navbar, let’s go ahead and make it sexy.
+</p>
+
+<p>
+	First, if you haven’t done so, let’s change the Brand name in the navbar. To do this, let's replace the “Brand” text in the navbar with “Twitr”.
+</p>
+
+<pre><code class="erb">
+&lt;div class="navbar-header"&gt;
+  &lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"&gt;
+    &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+    &lt;span class="icon-bar"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;a class="navbar-brand" href="/"&gt;Twitr&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>
+	Now that we have our new brand name in there, let's make it look nicer. We can do this by changing the font. In order to make this font sexy, we’re going to be using a custom font.
+</p>
+
+<p>
+	There are many websites that allow you to install fonts to your website. One of the easiest ways to implement a font is to use <strong>Google Fonts</strong>. So let’s go ahead and do that.
+</p>
+
+<p>
+	If we go to <a href = "https://www.google.com/fonts" target = "_blank">Google Fonts</a>, we can see that there are a bunch of fonts that we can use. "Open Sans" is a great font that looks great. Let's search for Open Sans in the search bar.
+</p>
+
+<p>
+	Once we do that, we should be taken to a screen that looks like the image below. Click on the plus button.
+</p>
+
+<%= image_tag 'twitr/fonts_1.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's also search for a font called "dosis". Once you have searched the font, click the plus button once again. You should now see 2 fonts selected. Click on the panel.
+</p>
+
+<%= image_tag 'twitr/fonts_2.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Now you should see a screen like this:
+</p>
+
+<%= image_tag 'twitr/fonts_3.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's load various different weights (thickness) for this font. Scroll down a little bit and check the checkboxes as shown below:
+</p>
+
+<%= image_tag 'twitr/fonts_4.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Next, scroll up and copy and paste the code provided:
+</p>
+
+<%= image_tag 'twitr/fonts_5.png', class: 'img-responsive screenshot' %>
+
+<p>
+	Open <code>application.html.erb</code>. In your &lt;head&gt; section, add in the code. It should look something like this:
+</p>
+
+<pre><code class="erb">
+&lt;link href="https://fonts.googleapis.com/css?family=Dosis|Open+Sans:300,400,600,700" rel="stylesheet"&gt;
+</code></pre>
+
+<p>
+	Great! Just like that, the font can be used in our application.
+</p>
+
+<p>
+  Let's create a new <code>scss</code> file to store our styling. In sublime, create a new file in <code>app/assets/stylesheets</code> called <code>master.scss</code>. We will put all of our CSS styling in this folder.
+</p>
+
+<div class="well">
+  <h3>What is SCSS?</h3>
+
+  <p>
+    SCSS files are CSS files that enables developers to write CSS in a more elegant way. SCSS stands for <strong>Sassy CSS</strong>. Rails uses SCSS by default. You can use the normal CSS syntax in these SCSS files as you would with CSS files.
+  </p>
+
+  <p>
+    We will implement some of the features of SCSS when we are making this application.
+  </p>
+
+  <ul>
+    <li><%= link_to 'http://sass-lang.com/guide' %></li>
+    <li><%= link_to 'https://css-tricks.com/sass-style-guide/' %></li>
+  </ul>
+</div>
+
+<p>
+  One of the features of SCSS is that <strong>we can set variables for our CSS attributes</strong>. Let's set our first SCSS variable.
+</p>
+
+<p>
+  In this lesson, we have imported two Google Fonts. Let's set SCSS variables for each of these colors:
+</p>
+
+<p>
+  Open your <code>master.scss</code> and add the following lines of code:
+</p>
+
+<pre><code class="css">
+$primary-font: 'Open Sans', sans-serif;  
+$secondary-font: 'Dosis', sans-serif;  
+</code></pre>
+
+<p>
+	Next, in <code>master.scss</code>, let’s apply the <code>$secondary-font</code> to our navigation by adding this line:
+</p>
+
+<pre><code class = "css">
+.navbar-default {
+  font-family: $secondary-font;
+}
+</code></pre>
+
+<p>
+  Your <code>master.scss</code> file should now look like this:
+</p>
+
+<pre><code class = "css">
+$primary-font: 'Open Sans', sans-serif;  
+$secondary-font: 'Dosis', sans-serif;  
+
+.navbar-default {
+  font-family: $secondary-font;
+}
+</code></pre>
+
+<p>
+  As you can see, we can use the variables we define in the SCSS file very easily.
+</p>
+ 
+<p>
+	Let’s go back into our browser and refresh our web application. Awesome! It looks great.
+</p>
+
+<p>
+	Now that we’ve got our brand name looking pretty awesome, let's change the color of the navbar itself. If we go into Google Chrome and right click on the navbar and select inspect, it will open up Google Developer Tools.
+</p>
+
+<p>
+	Try to find the section where the navbar’s color is being determined.
+</p>
+
+
+<p>
+	If you found correctly, the <code>.navbar-default</code> class is responsible for the color of the navbar. Let's change the background color of <code>.navbar-default</code> to white.
+</p>
+
+<p>Let’s go into our <code>master.scss</code> and add this in.</p>
+
+<pre><code class = "css">
+.navbar-default {
+  font-family: $secondary-font;
+  background-color: white;
+}
+</code></pre>
+
+<p>
+	Cool, now we’ve got a nice simple color. The other thing I want to do now is change how the font is styled in the navbar.
+</p>
+
+<p>
+	Let's add some styling to the navigation bar. Let's add the following to <code>master.scss</code>:
+</p>
+
+<pre><code class = "css">
+.navbar-default .navbar-brand {
+  font-weight: 100; 
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #337ab7;
+}
+</code></pre>
+
+<p>
+  Since we are going to be using the same color in the application, let's put this in a variable as well. On the top of the <code>master.scss</code>, let's add a new variable:
+</p>
+
+<pre><code class="css">
+$main-blue: #337ab7;  
+</code></pre>
+
+<p>
+  Then let's change the <code>.navbar-default .navbar-brand</code> css to the following:
+</p>
+
+<pre><code class = "css">
+.navbar-default .navbar-brand {
+  font-weight: 100;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: $main-blue;
+}
+</code></pre>
+
+<p>
+  Let’s now commit this to GitHub so we don’t lose any of the changes. From now on, we'll call this the <strong>standard git workflow</strong>.
+</p>
+
+<pre><code class="bash">
+git add .
+git commit -am “Style navbar”
+git push origin master
+</code></pre>
+
+
