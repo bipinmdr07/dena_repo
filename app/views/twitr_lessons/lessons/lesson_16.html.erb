@@ -1,69 +1,249 @@
 
 
 <p>
-  Now that we have put in the <code>update</code> functionality, let's now add in functionality for deleting tweets.
+  Up until now we've added our tweets through the <code>rails console</code>, but that's a little bit inconvenient. Instead, let's create a form to add more tweets.
+</p>
+
+<h3>Setting Up Routes</h3>
+<p>
+  The first thing we need to do is set up our <code>routes</code>. What we write in <code>routes.rb</code> defines how the web application is hooked up, or routed. 
 </p>
 
 <p>
-  To do this, let's add a <code>destroy</code> method in <code>tweets_controller.rb</code>. Add the following method right after the <code>update</code> method.
+  If we go to the terminal and type in <code>rake routes</code>, we can see all of our routes that are set up. Right now, all you should see is this:
 </p>
 
-<pre><code class="ruby">
-def destroy
-  @tweet = Tweet.find(params[:id])
-  @tweet.destroy
-  redirect_to root_path
-end
+<pre><code>
+Prefix Verb URI Pattern Controller#Action
+  root GET  /           tweets#index
 </code></pre>
-
-<p>
-  Let's walk through this. First, we are saying again to find the idea with the <code>id</code> of <code>params[:id]</code> and then to store that idea in <code>@tweet</code>.
-</p>
-
-<p>
-  Then we are saying <code>.destroy</code> that <code>@tweet</code>. Lastly, we are telling it to redirect to <code>root_path</code>.
-</p>
-
-<p>
-  We've added the <code>destroy</code> method, but how do we call this method from the application? We're going to do that by creating a link to destroy tweets. Go into <code>index.html.erb</code> and let's add a delete link.
-</p>
 
 <div class="well">
+  <h3>rake routes</h3>
 
-      <h3>How do I make a link in Rails though?</h3>
+  <p>
+    <code>rake routes</code> is a command that you will be using a lot. The <code>rake routes</code> command displays how the application is mapped out. For example, let's take a look at the following:
+  </p>
 
-      <p>
-        In rails, we can make a link with <code>link_to</code>. In your HTML file, we've seen that you can put in ruby code by putting the ruby code inside <code>&lt;%= %&gt;</code>. We can construct <code>link_to</code>s like this:
-      </p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Any text here', link_path_here, any_other_option_here %&gt;
+<pre><code>
+Prefix Verb URI Pattern Controller#Action
+  root GET  /           tweets#index
 </code></pre>
 
-      <p>
-        To figure out the link path, you simply type in <code>rake routes</code> and find the corresponding <code>prefix</code>, such as <code>edit_idea</code> or <code>idea</code>, and then add <code>_path</code> after that. For example <code>edit_idea_path</code> and <code>idea_path</code>.
-      </p>
+  <p>
+    This is the routing for the home directory. As we talked about before, when a user accesses the home page, the <code>index</code> method of <code>tweets_controller.rb</code> is triggered.
+  </p>
+  
+  <p>
+    We see four different terms above:
+  </p>
 
-      <p>
-        Let's take the <code>index</code> action for example. If we look at <code>rake routes</code> and look at the right most column, we see <code>tweets#index</code>. If we look all the way to the left on that row, we see the <code>prefix</code> of <code>tweets</code>. Therefore the <code>link_to</code> in this case would look something like this:
-      </p>
+  <ul>
+    <li>Prefix</li>
+    <li>Verb</li>
+    <li>URI Pattern</li>
+    <li>Controller#Action</li>
+  </ul>
+
+  <p>
+    Let's go through what each of these terms mean.
+  </p>
+
+  <h3>Embedded Ruby</h3>
+
+  <p>
+    Ruby on Rails uses <code>erb</code> by default. Notice how <code>index.html.erb</code> has <code>.erb</code> in the end instead of just <code>.html</code>. 
+  </p>
+
+  <p>
+    <code>erb</code> stands for <strong>embedded ruby</strong>. The idea is that you can write ruby code inside your HTML code.
+  </p>
+
+  <p>
+    You can write ruby code by enclosing the code with <code>&lt;%</code> <code>%&gt;</code>. You can display the value of ruby code by enclosing the code with <code>&lt;%=</code> <code>%&gt;</code>. For example, you could have an <code>erb</code> file like this:
+  </p>
 
 <pre><code class="erb">
-&lt;%= link_to 'Link Title', tweets_path %&gt;
+&lt;h1&gt;Hello World&lt;/h1&gt;
+
+&lt;% result = 1 + 2 %&gt;
+
+&lt;p&gt;1 + 2 = &lt;%= result %&gt;.&lt;/p&gt;
 </code></pre>
 
-      <p>
-        If we want to add in any other options, like adding a CSS <code>class</code> or <code>style</code> to it, we can do that like this:
-      </p>
+  <p>
+    We stored <code>1 + 2</code> inside a ruby variable called <code>result</code>. We then displayed the value of the variable by enclosing the code inside <code>&lt;%=</code> <code>%&gt;</code>.
+  </p>
+
+  <%= create_flashcard %>
+
+<h3>link_to</h3>
+
+
+  <p>
+    With HTML, you can create links like this:
+  </p>
+
+<pre><code class="html">
+&lt;a href="http://www.google.com"&gt;Google&lt;/a&gt;
+</code></pre> 
+
+  <p>
+    In <code>erb</code> files, we can create links with <code>link_to</code>. For example, we can make the same exact link as above like this:
+  </p>
 
 <pre><code class="erb">
-&lt;%= link_to 'Link Title', tweets_path, class: 'my_class_here class_2', style: 'my_style_here style_2' %&gt;
+&lt;%= link_to 'Google', 'http://www.google.com' %&gt;
 </code></pre>
+
+  <p>
+    These two pieces of code will produce the same exact link.
+  </p>
+
+  <h3>Prefix</h3>
+
+  <p>
+    In ruby on rails, you can use the <code>Prefix</code> to create links with <code>link_to</code>. We see above that we have a prefix called <code>root</code>. For example, if we want to create a link to the home directory, we can write code like this:
+  </p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Home Page', root_path %&gt;
+</code></pre>
+
+  <p>
+    This will produce HTML code that looks like this:
+  </p>
+
+<pre><code class="html">
+&lt;a href="/"&gt;Home Page&lt;/a&gt;
+</code></pre> 
+
+  <p>
+    By attaching <code>_path</code> to the prefix inside the <code>link_to</code> block, you can create a link easily.
+  </p>
+
+  <h3>URI Pattern</h3>
+
+  <p>
+    Notice how <code>root_path</code> resulted in creating a link with the <code>href</code> of <code>"/"</code>.
+  </p>
+
+  <p>
+    If we look back to the result of running <code>rake routes</code>, we can see that the <code>URI Pattern</code> is <code>/</code>. When a user accesses a URL that matches the <code>URI Pattern</code>, the <code>Controller#Action</code> is triggered.
+  </p>
+
+  <h3 id="controller_action">Controller#Action</h3>
+
+  <p>
+    The <code>Action</code> (another word for method) of the <code>Controller</code> is triggered when a user makes a request to a URL that matches the <code>URI Pattern</code>.
+  </p>
+
+  <p>
+    For example, when a user goes to <code>http://localhost:3000/</code>, the URL matches the <code>/</code> URI Pattern. At this point, the <code>index</code> action of the <code>Tweets</code> Controller is triggered.
+  </p>
+
+  <p>
+    <strong>When a controller action is triggered, Rails will try to find an <code>html.erb</code> file with the name of the controller action inside the <code>apps/views/controller_name</code> directory.</strong>
+  </p>
+
+  <p>
+    For example, when the <code>index</code> action of the <code>Tweets</code> Controller is triggered, Rails will try to find a filed called <code>index.html.erb</code> inside the <code>apps/views/tweets</code> directory.
+  </p>
+
+  <%= create_flashcard %>
+
+  <h3>Verb</h3>
+
+  <p>
+    We won't go too deep in to this topic right now, we will go over this topic in later lessons.
+  </p>
+
+  <p>
+    There are five different HTTP methods:
+  </p>
+
+  <ul>
+    <li>GET</li>
+    <li>POST</li>
+    <li>DESTROY</li>
+    <li>PUT</li>
+    <li>PATCH</li>
+  </ul>
+
+  <p>
+    Here's what each of the methods do in short (there is a whole chapter on this later on in the course):
+  </p>
+
+<ul>
+  <li><code>GET</code> requests are used to retrieve data. When you vist a web page, you are making a <code>GET</code> request.</li>
+  <ul>
+    <li>When you type in <code>https://www.facebook.com</code> in your browser and press enter, you are making a <code>GET</code> request to Facebook's servers.</li>
+  </ul>
+  <li><code>POST</code> requests are used to create new objects.</li>
+  <ul>
+    <li>When you create a Facebook post, you are making a <code>POST</code> request to Facebook's servers</li>
+  </ul>
+  <li><code>DELETE</code> requests are used to delete objects.</li>
+  <ul>
+    <li>When you delete a Facebook post, you are making a <code>DELETE</code> request to Facebook's servers</li>
+  </ul>
+  <li><code>PATCH</code> requests are used to update objects.</li>
+  <ul>
+    <li>When you update a Facebook post, you are making a <code>PATCH</code> request to Facebook's servers</li>
+  </ul>
+  <li><code>PUT</code> requests are not used anymore, use <code>PATCH</code> requests instead.</li>
+</ul>
+
+  <p>
+    When a user types in a URL in the browser and presses enter, the user is making a <code>GET</code> request - the user is trying to retrieve data from the server.
+  </p>
+
+  <p>
+    For example, when a user accesses <code>http://localhost:3000/</code>, the user is making a <code>GET</code> request to <code>http://localhost:3000/</code>.
+  </p>
+
+  <h3>Overview</h3>
+
+  <p>
+    When we run <code>rake routes</code>, a bunch of information is displayed. We learned about what each of the terms mean.
+  </p>
+
+  <p>
+    When a user makes a request to <code>http://localhost:3000/</code>, here's what happens:
+  </p>
+
+  <ol>
+    <li>The server sees it's a <code>GET</code> request</li>
+    <li>The URI Pattern is <code>/</code></li>
+    <li>Rails looks at the information in <code>routes.rb</code> and finds the route that is a <code>GET</code> request and has a URI Pattern of <code>/</code></li>
+    <li>Rails finds the route and knows that it is mapped to <code>tweets#index</code></li>
+    <li>Rails triggers the <code>index</code> action in the <code>Tweets</code> controller</li>
+    <li>Rails looks for a file called <code>index.html.erb</code> inside the <code>app/views/tweets</code> directory</li>
+    <li>Rails displays <code>index.html.erb</code></li>
+  </ol>
 
 </div>
 
 <p>
-  First, let's go into terminal and type in <code>rake routes</code>.
+  What we want to do is set up routes for creating new tweets, deleting new tweets, editing new tweets, etc. Rails provides a super convenient way to do this. Here's what we need to do.
+</p>
+
+<p>
+  Let's go in to <code>routes.rb</code> and under <code>root 'tweets#index'</code>, let's put <code>resources :tweets</code> and make your file look like the following:
+</p>
+
+<pre><code class="ruby">
+Rails.application.routes.draw do
+
+  root 'tweets#index'
+
+  resources :tweets
+
+end
+</code></pre>
+
+<p>
+  Save the file and run <code>rake routes</code> in the terminal. Just like that, the output should now be this:
 </p>
 
 <pre><code>
@@ -80,200 +260,247 @@ edit_idea GET    /tweets/:id/edit(.:format) tweets#edit
 </code></pre>
 
 <p>
-  Let's look for the link to the <code>destroy</code> method. Let's look for the <code>destroy</code> method.
+  By putting in <code>resources :tweets</code>, rails generated all of these routes for us!
+</p> 
+
+<div class="well">
+  <h3>resources</h3>
+
+  <p>
+    Web applications are made up of mainly the following components:
+  </p>
+
+  <ul>
+    <li><strong>The Index Page</strong> - the page displays all of the records</li>
+    <ul>
+      <li>When you go on to Facebook, it displays all of your friend's posts. This is the index page.</li>
+      <li>This is a <code>GET</code> request</li>
+    </ul>
+    <li><strong>The Show Page</strong> - the page that displays one individual record</li>
+    <ul>  
+      <li>In the index page, all of your friend's posts are displayed. When you click on a post, you can view the individual post alone. This is the show page.</li>
+      <li>This is a <code>GET</code> request</li>
+    </ul>
+    <li><strong>The New Page</strong> - the page where you typically fill out a form to create a new record</li>
+    <ul>
+      <li>In Facebook, there is no New page since you can create a Facebook post from the front page. If there was a page only for creating a Facebook post, that would be the new page.</li>
+      <li>This is a <code>GET</code> request - we aren't actually posting to the server, this page typically just displays a form</li>
+    </ul>
+    <li><strong>The Create Action</strong> - the backend process that creates and saves a new record to the database</li>
+    <ul>
+      <li>When you create a Facebook post, the create action is triggered. The create action takes care of creating the new post and saving it to the Facebook servers.</li>
+      <li>This is a <code>POST</code> request</li>
+    </ul>
+    <li><strong>The Edit Page</strong> - the page where there is typically a form where you can edit the record</li>
+    <ul>
+      <li>In Facebook, there is no page for just editting a Facebook post. If there was, that would be the edit page.</li>
+      <li>This is a <code>GET</code> request</li>
+    </ul>
+    <li><strong>The Update Action</strong> - the backend process that updates a record into the database</li>
+    <ul>
+      <li>When you edit a Facebook post and press submit, the update action is triggered.</li>
+      <li>This is a <code>PATCH</code> request</li>
+      <li>It is also mapped to <code>PUT</code>, but it is not used vey often</li>
+    </ul>
+    <li><strong>The Destroy action</strong> - the backend process that deletes a record from the database</li>
+    <ul>
+      <li>When you delete a naughty Facebook post, the destroy action is triggered and deletes the post from Facebook's server.</li>
+      <li>This is a <code>DELETE</code> request</li>
+    </ul>
+  </ul>
+
+  <p>
+    Since these components are so common, Ruby on Rails made it super easy to create the routes for these actions.
+  </p>
+
+  <p>
+    When you add <code>resources :controller_name</code> to <code>routes.rb</code>, it automatically creates routes for the following actions that we talked about above:
+  </p>
+
+  <ul>
+    <li>index</li>
+    <li>show</li>
+    <li>new</li>
+    <li>create</li>
+    <li>edit</li>
+    <li>update</li>
+    <li>destroy</li>
+  </ul>
+
+  <p>
+    We can use these actions to create various features in our web application.
+  </p>
+</div>
+
+<h3>Adding a Form</h3>
+
+<p>
+  In order to add tweets through a form, we need to tell rails what to do when the form is submitted and tries to create an idea. What we need is a <code>create</code> method which will be responsible for creating our tweets and saving them to our database.
 </p>
 
-<pre><code>
-          DELETE /tweets/:id(.:format)      tweets#destroy
+<p>
+  In our <code>tweets_controller</code>, let's make a <code>create</code> method.
+</p>
+
+<pre><code class = "ruby">
+class TweetsController &lt; ApplicationController
+  def index
+    @tweets = Tweet.all
+  end
+
+  def create
+  end
+end
 </code></pre>
 
 <p>
-
+  Inside this <code>create</code> method, we're going to <code>.create</code> an <code>Tweet</code>.
 </p>
 
-<pre><code class = "erb">
-&lt;%= link_to 'Delete', idea_path(idea) %&gt;
+<p>
+  When we <code>create</code> our <code>Tweet</code>, we're also going to give it some information to work with. We call these <strong>parameters</strong>. In this case, <strong>when we tell rails to create our idea, we also need to give rails some information about what the idea is all about.</strong> Without giving rails that information, or in other words, those <strong><i>parameters</i></strong>, rails is just going to say, <i>"Okay, you want me to make an idea, but you're not giving me any information on what kind of idea you want me to make."</i> By giving rails those parameters, rails can say <strong><i>"Cool! You want me to make an idea using this information that you've provided me."</i></strong> The information provides in the form will be passed in as paramters.
+</p>
+
+<p class="alert alert-info">
+  Refer back to <%= link_to 'this lesson', '/twitr_lessons/10' %> for a review of this topic.
+</p>
+
+<p>
+  We can pass in a parameter for <code>.create</code> by adding <code>()</code>s like <code>.create()</code> and then passing in information between them. In rails, it is best practice to also use <strong>strong parameters</strong>, which you don't need to worry about learning too deeply right now. <strong>In short, strong params are basically a security measure to make sure bad people don't input bad things to do bad things.</strong> If you want to find out more, you can read more <a href="http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters" target ="_blank">here</a>.
+</p>
+
+<p>
+  We can implement strong params by creating a <code>private</code> method called <code>idea_params</code> and then saying, <code>require</code> an <code>idea</code> and only <code>permit</code> the <code>description</code> and <code>author</code> for the tweets. By doing this, if a user tries to be clever and attempts to pass in a <code>:color</code> or some random parameter like that, rails will not accept it. The code for doing this looks like below:
+</p>
+
+<pre><code class="ruby">
+params.require(:idea).permit(:description, :author)
 </code></pre>
 
-<p>Let's insert this into <code>index.html.erb</code> like this:</p>
+<p>
+  Again, we are saying here that we are only permitting <code>description</code>s and <code>author</code>s for each idea. Let's add put the above code in a method called <code>idea_params</code> like below:
+</p>
 
-<pre><code class="erb">
-&lt;% @tweets.each do |idea| %&gt;
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-      &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea) %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+<pre><code class = "ruby">
+class TweetsController &lt; ApplicationController
+  def index
+    @tweets = Tweet.all
+  end
+
+  def create
+    @tweet = Tweet.create(idea_params)
+  end
+
+  private
+
+  def idea_params
+    params.require(:idea).permit(:description, :author)
+  end
+end
+</code></pre>
+
+<p>
+  Awesome! Now that we've got the params set up, we need to tell rails what to do after we create the idea. What we need to do is redirect the user to a page (or else rails will give us an error). So after creating the idea, let's tell rails to redirect to the home page. We can do this by adding <code>redirect_to root_path</code>.
+</p>
+
+<pre><code class = "ruby">
+class TweetsController &lt; ApplicationController
+  def index
+    @tweets = Tweet.all
+  end
+
+  def create
+    @tweet = Tweet.create(idea_params)
+    redirect_to root_path
+  end
+
+  private
+
+  def idea_params
+    params.require(:idea).permit(:description, :author)
+  end
+end
+</code></pre>
+
+<p>
+  So basically what we just did is this: we told rails that when we trigger the <code>create</code> method, we are going to create an idea using some information passed in as <strong>parameters</strong>, and then once that's done, we're going to redirect our browser to the home page.
+</p>
+
+<p>
+  Cool, let's get going. Now that we've got a <code>create</code> method, we can now go ahead and create a form for this.
+</p>
+
+<p>
+  We're going to use a <code>gem</code> called <code>simple_form</code> that makes making forms super easy for us.
+</p>
+
+<p>
+  First, go to the documentation <a href="https://github.com/plataformatec/simple_form" target="_blank">here</a>. Let's go ahead and follow the instructions.
+</p>
+
+<p>
+  The first thing it tells us to do is to add the gem to your <code>Gemfile</code>. So in your <code>Gemfile</code>, add this line:
+</p>
+
+<pre><code class="ruby">
+gem 'simple_form'
+</code></pre>
+
+<p>
+  Then run the following command in the terminal to install it:
+</p>
+
+<pre><code class="bash">
+bundle install
+</code></pre>
+
+<p>
+  If we look at the documentation, we see that there are several options on how to run the simple form generator. In our case, we are going to run the generator that integrates simple form with bootstrap. So let's run this command.
+</p>
+
+<pre><code class="bash">
+rails generate simple_form:install --bootstrap
+</code></pre>
+
+<p>
+  Awesome. Remember, every time we run <code>bundle install</code>, we should restart the server. Let's go ahead and do that.
+</p>
+
+<p>
+  Now that we've got simple form installed, let's go ahead and try to use it. At the top of <code>index.html.erb</code>, let's add this piece of code:
+</p>
+
+<pre><code class="ruby">
+&lt;%= simple_form_for Tweet.new do |f| %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.input :author %&gt;
+  &lt;%= f.submit 'Submit' %&gt;
 &lt;% end %&gt;
 </code></pre>
 
 <p>
-  The <code>idea</code> in between the ()s after <code>idea_path</code> refer to the <code>idea</code> declared by the <code>each</code> loop. It is just another parameter that we need to pass through to let rails know which idea we are destroying.
+  Let's go back into our browser and look at how it looks now. You should have a form just like that!
 </p>
 
 <p>
-  With this link unfortunately, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as <code>GET</code>, <code>PATCH</code>, <code>PUT</code>. 
+  However, the buttons look really ugly, so let's add some bootstrap buttons on there to make them look nicer. What we can do is add a <code>btn btn-primary</code> class to the Submit button. We can do this by adding <code>class: 'btn btn-primary'</code> to the Submit button code like below (make sure to put the <code>,</code> between <code>'Submit'</code> and <code>class:</code>)
 </p>
 
-<pre><code>
-     idea GET    /tweets/:id(.:format)      tweets#show
-          PATCH  /tweets/:id(.:format)      tweets#update
-          PUT    /tweets/:id(.:format)      tweets#update
-          DELETE /tweets/:id(.:format)      tweets#destroy
-</code></pre>
-
-<p>
-  By default, <code>link_to</code> will create links that make <code>GET</code> requests. To make a <code>DELETE</code> request, we need to specify that in our <code>link_to</code>. We can do this by adding <code>method: :delete</code> as an option like this:
-</p>
-
-
-<pre><code class = "erb">
-&lt;%= link_to 'Delete', idea_path(idea), method: :delete %&gt;
-</code></pre>
-
-<p>
-  Save the file and refresh the page. We now have a working delete button. Now let's just add some design by giving it some bootstrap buttons and then pulling it all the way to the right:
-</p>
-
-<pre><code class = "erb">
-&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger' %&gt;
-</code></pre>
-
-<p>
-  Finally, we want to alert the user that they are deleting an idea. We want to display some sort of pop up. We can do this by adding <code>data: {confirm: "Are you sure?"}</code> like this:
-</p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-</code></pre>
-
-<p>
-  Awesome! Let's now add this link for each of our tweets. In <code>index.html.erb</code>, let's insert the link we just created, like this:
-</p>
-
-<pre><code class="erb">
-&lt;% @tweets.each do |idea| %&gt;
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-      &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+<pre><code class="ruby">
+&lt;%= simple_form_for Tweet.new do |f| %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.input :author %&gt;
+  &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
 &lt;% end %&gt;
 </code></pre>
 
 <p>
-  Save the file and refresh the page. If we click on the delete button, we see that a button saying "Are you sure?" pops up. Awesome.
+  Save the file and refresh the browser. We now see prettier buttons! Awesome!
 </p>
 
 <p>
-  While we're at it, let's also add a link to edit tweets. I'm going to call this button "Revise" instead of "Edit", just because I think it sounds cooler :)
+   Now let's test this out. Enter an idea and an author and press 'Submit'. Voila! You should see your idea on your page, just like that!
 </p>
-
-<p>
-  If we go back to <code>rake routes</code>, we see that the <code>prefix</code> is <code>edit_idea</code>. That means our <code>link_to</code> is going to look something like this:
-</p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Revise', edit_idea_path(idea) %&gt;
-</code></pre>
-
-<p>
-  Let's paste that code under the delete button and refresh the page.
-</p>
-
-
-<pre><code class="erb">
-&lt;% @tweets.each do |idea| %&gt;
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-      &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-      &lt;%= link_to 'Revise', edit_idea_path(idea) %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;% end %&gt;
-</code></pre>
-
-<p>
-  We see that the link is there, but it would probably look better if this link also had a button to it. Let's give it the same class as the delete button and add <code>class: 'btn btn-sm btn-success'</code> to look like the following:
-</p>
-
-<pre><code class="erb">
-&lt;% @tweets.each do |idea| %&gt;
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-      &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;% end %&gt;
-</code></pre>
-
-<p>
-  Lastly, to make these buttons look nicer, let's put these buttons in a bootstrap button group. We can do this by wrapping the 2 links we have just created in a <code>btn-group</code> div like this:
-</p>
-
-<pre><code class="erb">
-&lt;% @tweets.each do |idea| %&gt;
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-      &lt;br&gt;
-      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;% end %&gt;
-</code></pre><pre><code class="erb">
-&lt;% @tweets.each do |idea| %&gt;
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-      &lt;br&gt;
-
-      &lt;div class="btn-group" role="group"&gt;
-        &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-        &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;% end %&gt;
-</code></pre>
-
-<p>
-  If we refresh the page, we see that the buttons are now neatly aligned.
-</p>
-
-<p>
-  Awesome, let's move on to the next lesson.
-</p>
-
 
 <%= standard_git_workflow %>
-
 

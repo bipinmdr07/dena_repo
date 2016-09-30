@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
+
     set_mentor_post        
 
     if @question.save      

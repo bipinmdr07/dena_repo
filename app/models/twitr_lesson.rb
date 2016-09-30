@@ -8,6 +8,7 @@ class TwitrLesson < Lesson
 	CHAPTERS = [
 		Chapter.new("Setting Up Your App"),
 		Chapter.new("First Steps"),
+		Chapter.new("Adding User Authentication"),
 		Chapter.new("Making the Site Look Good"),
 		Chapter.new("Dynamically Adding Ideas"),
 		Chapter.new("Updating and Deleting Ideas"),
@@ -28,22 +29,27 @@ class TwitrLesson < Lesson
 		Lesson.new(7, "Styling the Navbar", CHAPTERS[2]),
 		Lesson.new(8, "Adding a Footer", CHAPTERS[2]),
 
-		Lesson.new(9, "Creating a Model", CHAPTERS[3]),
-		Lesson.new(10, "Adding an Idea", CHAPTERS[3]),
-		Lesson.new(11, "Styling our Index Page", CHAPTERS[3]),
-		Lesson.new(12, "Creating a Form", CHAPTERS[3]),
-		Lesson.new(13, "Moving the Form into a Modal", CHAPTERS[3]),
+		Lesson.new(9, "Installing Devise", CHAPTERS[3]),
+		Lesson.new(10, "Adding Log in/Log Out/Sign Up Links", CHAPTERS[3]),
+		Lesson.new(11, "Setting Up User Forms", CHAPTERS[3]),
+		Lesson.new(12, "Making the forms look nice", CHAPTERS[3]),
 
-		Lesson.new(14, "Editing and Updating Ideas", CHAPTERS[4]),
-		Lesson.new(15, "Validate User Input - Validations", CHAPTERS[4]),
-		Lesson.new(16, "Deleting Ideas and Adding Links", CHAPTERS[4]),	
+		Lesson.new(13, "Creating a Model", CHAPTERS[4]),
+		Lesson.new(14, "Adding an Idea", CHAPTERS[4]),
+		Lesson.new(15, "Styling our Index Page", CHAPTERS[4]),
+		Lesson.new(16, "Creating a Form", CHAPTERS[4]),
+		Lesson.new(17, "Moving the Form into a Modal", CHAPTERS[4]),
+
+		Lesson.new(18, "Editing and Updating Ideas", CHAPTERS[5]),
+		Lesson.new(19, "Validate User Input - Validations", CHAPTERS[5]),
+		Lesson.new(20, "Deleting Ideas and Adding Links", CHAPTERS[5]),	
 		
-		Lesson.new(17, "Setting Up the Static Pages Controller", CHAPTERS[5]),
-		Lesson.new(18, "Adding the About Page", CHAPTERS[5]),
-		Lesson.new(19, "Configuring the Random Page", CHAPTERS[5]),
+		Lesson.new(21, "Setting Up the Static Pages Controller", CHAPTERS[6]),
+		Lesson.new(22, "Adding the About Page", CHAPTERS[6]),
+		Lesson.new(23, "Configuring the Random Page", CHAPTERS[6]),
 		
-		Lesson.new(20, "Adding Pagination", CHAPTERS[6]),
-		Lesson.new(21, "Last Few Tweaks", CHAPTERS[6]),
-		Lesson.new(22, "Congratulations!", CHAPTERS[6])
+		Lesson.new(24, "Adding Pagination", CHAPTERS[7]),
+		Lesson.new(25, "Last Few Tweaks", CHAPTERS[7]),
+		Lesson.new(26, "Congratulations!", CHAPTERS[7])
 	]
 end

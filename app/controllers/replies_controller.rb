@@ -4,7 +4,7 @@ class RepliesController < ApplicationController
 
 	def create    
 	  @reply = current_user.replies.create(reply_params)
-
+    
 		if @reply.valid?			
       create_notifications!
 			

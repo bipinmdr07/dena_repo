@@ -1,112 +1,279 @@
 
 
 <p>
-  The first thing we are going to add on to our app is <strong>pagination</strong> to our <code>index</code> page. Basically the gist is, when we display all of our tweets on the <code>index</code> page, when we have 100 tweets on there, users have to scroll forever to get to the bottom of the page. Instead, we probably want to divide them into seperate pages, or in other words, <em>paginate</em> them.
+  Now that we have put in the <code>update</code> functionality, let's now add in functionality for deleting tweets.
 </p>
 
 <p>
-  Luckily, rails provides a gem for this that makes this super easy. We're going to be using a gem called <code>will_paginate</code>.
-</p>
-
-<p>
-  Go to the documentation page <a href="https://github.com/mislav/will_paginate" target="_blank">here</a>. We're going to be following the instructions from here.
-</p>
-
-<p>
-  The first thing they tell us to do is to add this line in the Gemfile:
+  To do this, let's add a <code>destroy</code> method in <code>tweets_controller.rb</code>. Add the following method right after the <code>update</code> method.
 </p>
 
 <pre><code class="ruby">
-gem 'will_paginate', '~> 3.1.0'
-</code></pre>
-
-<p>
-  Let's go ahead and add that into your Gemfile, then run <code>bundle install</code> in the terminal to install it. After we do that, what should we do?
-</p>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "Restart the server ;)", number: 1 } %>
-
-<br class="clear">
-
-<p>
-  Now if we look at the documentation under "Basic will_paginate use", it looks like implementing this is pretty simple.
-</p>
-
-<p>
-  Basically, we can just stick <code>.paginate(:page => params[:page], :per_page => 30)</code> after <code>@tweets = Tweet.all</code> in our <code>tweets_controller.rb</code>and it will work perfectly. We can also adjust the <code>:per_page</code> option to set the number of objects per page it displays. For example, if we set <code>:per_page</code> to <code>10</code>, it would only display 10 tweets per page. 
-</p>
-
-<p>
-  In our <code>tweets_controller.rb</code>, let's modify our code in the <code>index</code> method.
-</p>  
-
-<pre><code class="ruby">
-def index
-  @tweets = Tweet.all.paginate(:page => params[:page], :per_page => 10)
+def destroy
+  @tweet = Tweet.find(params[:id])
+  @tweet.destroy
+  redirect_to root_path
 end
 </code></pre>
 
 <p>
-  While we're at it, right now if you add an idea, it isn't displayed at the top. We should make it so that the newest tweets are displayed first. <strong>We can do this by ordering it by the time it was created at.</strong>
+  Let's walk through this. First, we are saying again to find the idea with the <code>id</code> of <code>params[:id]</code> and then to store that idea in <code>@tweet</code>.
 </p>
 
 <p>
-  Inside the <code>index</code> method, let's modify the code so that it looks like this:
+  Then we are saying <code>.destroy</code> that <code>@tweet</code>. Lastly, we are telling it to redirect to <code>root_path</code>.
 </p>
 
-<pre><code class="ruby">
-def index
-  @tweets = Tweet.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
-end
+<p>
+  We've added the <code>destroy</code> method, but how do we call this method from the application? We're going to do that by creating a link to destroy tweets. Go into <code>index.html.erb</code> and let's add a delete link.
+</p>
+
+<div class="well">
+
+      <h3>How do I make a link in Rails though?</h3>
+
+      <p>
+        In rails, we can make a link with <code>link_to</code>. In your HTML file, we've seen that you can put in ruby code by putting the ruby code inside <code>&lt;%= %&gt;</code>. We can construct <code>link_to</code>s like this:
+      </p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Any text here', link_path_here, any_other_option_here %&gt;
+</code></pre>
+
+      <p>
+        To figure out the link path, you simply type in <code>rake routes</code> and find the corresponding <code>prefix</code>, such as <code>edit_idea</code> or <code>idea</code>, and then add <code>_path</code> after that. For example <code>edit_idea_path</code> and <code>idea_path</code>.
+      </p>
+
+      <p>
+        Let's take the <code>index</code> action for example. If we look at <code>rake routes</code> and look at the right most column, we see <code>tweets#index</code>. If we look all the way to the left on that row, we see the <code>prefix</code> of <code>tweets</code>. Therefore the <code>link_to</code> in this case would look something like this:
+      </p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Link Title', tweets_path %&gt;
+</code></pre>
+
+      <p>
+        If we want to add in any other options, like adding a CSS <code>class</code> or <code>style</code> to it, we can do that like this:
+      </p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Link Title', tweets_path, class: 'my_class_here class_2', style: 'my_style_here style_2' %&gt;
+</code></pre>
+
+</div>
+
+<p>
+  First, let's go into terminal and type in <code>rake routes</code>.
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         tweets#index
+    tweets GET    /tweets(.:format)          tweets#index
+          POST   /tweets(.:format)          tweets#create
+ new_idea GET    /tweets/new(.:format)      tweets#new
+edit_idea GET    /tweets/:id/edit(.:format) tweets#edit
+     idea GET    /tweets/:id(.:format)      tweets#show
+          PATCH  /tweets/:id(.:format)      tweets#update
+          PUT    /tweets/:id(.:format)      tweets#update
+          DELETE /tweets/:id(.:format)      tweets#destroy
 </code></pre>
 
 <p>
-  Awesome, now let's go back into the documentation. It also tells us how to render the page links in the view:
-</p> 
+  Let's look for the link to the <code>destroy</code> method. Let's look for the <code>destroy</code> method.
+</p>
 
-<pre><code class="ruby">
-## perform a paginated query:
-@posts = Post.paginate(:page => params[:page])
-
-# or, use an explicit "per page" limit:
-Post.paginate(:page => params[:page], :per_page => 30)
-
-## render page links in the view:
-&lt;%= will_paginate @posts %&gt;
+<pre><code>
+          DELETE /tweets/:id(.:format)      tweets#destroy
 </code></pre>
 
 <p>
-  Let's go ahead and implement this in our views. Go into <code>index.html.erb</code> and add this in to the very bottom of the page:
+
+</p>
+
+<pre><code class = "erb">
+&lt;%= link_to 'Delete', idea_path(idea) %&gt;
+</code></pre>
+
+<p>Let's insert this into <code>index.html.erb</code> like this:</p>
+
+<pre><code class="erb">
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea) %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  The <code>idea</code> in between the ()s after <code>idea_path</code> refer to the <code>idea</code> declared by the <code>each</code> loop. It is just another parameter that we need to pass through to let rails know which idea we are destroying.
+</p>
+
+<p>
+  With this link unfortunately, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as <code>GET</code>, <code>PATCH</code>, <code>PUT</code>. 
+</p>
+
+<pre><code>
+     idea GET    /tweets/:id(.:format)      tweets#show
+          PATCH  /tweets/:id(.:format)      tweets#update
+          PUT    /tweets/:id(.:format)      tweets#update
+          DELETE /tweets/:id(.:format)      tweets#destroy
+</code></pre>
+
+<p>
+  By default, <code>link_to</code> will create links that make <code>GET</code> requests. To make a <code>DELETE</code> request, we need to specify that in our <code>link_to</code>. We can do this by adding <code>method: :delete</code> as an option like this:
+</p>
+
+
+<pre><code class = "erb">
+&lt;%= link_to 'Delete', idea_path(idea), method: :delete %&gt;
+</code></pre>
+
+<p>
+  Save the file and refresh the page. We now have a working delete button. Now let's just add some design by giving it some bootstrap buttons and then pulling it all the way to the right:
+</p>
+
+<pre><code class = "erb">
+&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger' %&gt;
+</code></pre>
+
+<p>
+  Finally, we want to alert the user that they are deleting an idea. We want to display some sort of pop up. We can do this by adding <code>data: {confirm: "Are you sure?"}</code> like this:
 </p>
 
 <pre><code class="erb">
-&lt;%= will_paginate @tweets %&gt;
+&lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
 </code></pre>
 
 <p>
-  Let's hop back into our browser and go to the home page to see if this actually worked.
-</p>
-
-<p>
-  You might notice that nothing shows up. This is probably because you don't have 10 tweets in the database right now. You can either add 10 tweets, or change the <code>:per_page</code> in your <code>tweets_controller.rb</code> to something smaller to a number like 3.
-</p>
-
-<p>
-  Once you do that, it should be fully working. Let's refresh the page.
-</p>
-
-<p>
-  We see now that the pagination links are there at the bottom of the page, but they aren't centered. Let's go ahead and center them. We can do this by using bootstrap's <code>text-center</code> class. Change your code to look like this:
+  Awesome! Let's now add this link for each of our tweets. In <code>index.html.erb</code>, let's insert the link we just created, like this:
 </p>
 
 <pre><code class="erb">
-&lt;div class = "text-center"&gt;
-  &lt;%= will_paginate @tweets %&gt;
-&lt;/div&gt;
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
 </code></pre>
 
 <p>
-  Refresh the page and you should see that the page links are now centered. Cool!
+  Save the file and refresh the page. If we click on the delete button, we see that a button saying "Are you sure?" pops up. Awesome.
 </p>
+
+<p>
+  While we're at it, let's also add a link to edit tweets. I'm going to call this button "Revise" instead of "Edit", just because I think it sounds cooler :)
+</p>
+
+<p>
+  If we go back to <code>rake routes</code>, we see that the <code>prefix</code> is <code>edit_idea</code>. That means our <code>link_to</code> is going to look something like this:
+</p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Revise', edit_idea_path(idea) %&gt;
+</code></pre>
+
+<p>
+  Let's paste that code under the delete button and refresh the page.
+</p>
+
+
+<pre><code class="erb">
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea) %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  We see that the link is there, but it would probably look better if this link also had a button to it. Let's give it the same class as the delete button and add <code>class: 'btn btn-sm btn-success'</code> to look like the following:
+</p>
+
+<pre><code class="erb">
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Lastly, to make these buttons look nicer, let's put these buttons in a bootstrap button group. We can do this by wrapping the 2 links we have just created in a <code>btn-group</code> div like this:
+</p>
+
+<pre><code class="erb">
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+      &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+      &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre><pre><code class="erb">
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt;
+      &lt;br&gt;
+
+      &lt;div class="btn-group" role="group"&gt;
+        &lt;%= link_to 'Delete', idea_path(idea), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
+        &lt;%= link_to 'Revise', edit_idea_path(idea), class: 'btn btn-sm btn-success' %&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  If we refresh the page, we see that the buttons are now neatly aligned.
+</p>
+
+<p>
+  Awesome, let's move on to the next lesson.
+</p>
+
 
 <%= standard_git_workflow %>
+
+

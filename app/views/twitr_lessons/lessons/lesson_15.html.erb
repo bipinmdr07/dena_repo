@@ -1,62 +1,48 @@
 
 
 <p>
-  In our form, let's think about what we want to do if a user enters invalid data. For example, if a user tries to enter an idea without specifying an <code>author</code>, we should probably not accept that. We should also not accept an idea that doesn't contain a <code>description</code>.
+  Our <code>index</code> page looks pretty ugly right now. Let's make this look a little bit nicer.
 </p>
 
 <p>
-  In Ruby on Rails, we can make sure that these kinds of invalid data do not get stored in the database by using <strong>validations</strong>.
-</p>
-
-<%= create_flashcard %>
-
-<p>
-  There are different kinds of validations that you can use in rails (read about them <a href="http://guides.rubyonrails.org/active_record_validations.html" target="_blank">here</a>).
+  We're going to be using bootstrap again. Let's go to the bootstrap website again and look for panels. <a href = "http://getbootstrap.com/components/#panels" target = "_blank">This link</a> should take you to the right place in case you couldn't find it. What we're going to do is use these panels to display our tweets.
 </p>
 
 <p>
-  For now, let's write a validatation to make sure that the <code>description</code> and <code>author</code> exists for every <code>Tweet</code>.
+  If we look at the bootstrap website, we see that there is a <strong>Basic example</strong> for the bootstrap panels. It looks like something we could use, so let's copy and paste this code at the top of <code>index.html.erb</code>.
 </p>
 
-<p>
-  <strong>Validations are added inside the model file.</strong> Open <code>idea.rb</code>. This is the model file for <code>idea</code>, since it is located inside the <code>app/models</code> directory. This is where we can add our validation. Inside your <code>idea.rb</code>, let's add the following piece of code to look like this:
-</p>
-
-<pre><code class="ruby">
-class Tweet &lt; ActiveRecord::Base
-  validates :description, :author, presence: true
-end
+<pre><code class="erb">
+&lt;div class="panel panel-default"&gt;
+  &lt;div class="panel-body"&gt;
+    Basic panel example
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <p>
-  So here we are saying that we want to validate that the <code>presence</code> is <code>true</code> for <code>:description</code> and <code>:author</code>.
+  Save the file and refresh the page. You'll see that one panel is now implemented, but there's no content inside of it. What we want to do is create a new panel for each of our tweets. We can do this by using an <code>each</code> loop to iterate through each idea in <code>@tweets</code>.Make your <code>index.html.erb</code> look like this:
 </p>
 
-<p>
-  Let's take another look at the <code>update</code> method:
-</p>
-
-<pre><code class="ruby">
-def update
-  @tweet = Tweet.find(params[:id])
-  if @tweet.update(idea_params)
-    redirect_to root_path
-  else
-    redirect_to edit_idea_path(params[:id])
-  end
-end
+<pre><code class="erb">
+&lt;% @tweets.each do |idea| %&gt;
+  &lt;div class="panel panel-default"&gt;
+    &lt;div class="panel-body"&gt;
+      &lt;blockquote&gt;
+        &lt;p&gt;&lt;%= idea.description %&gt;&lt;/p&gt;
+        &lt;small&gt;by &lt;%= idea.author %&gt;&lt;/small&gt;
+      &lt;/blockquote&gt; 
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;
 </code></pre>
 
 <p>
-  When a validation fails, the data is not saved into the database and will return a value of <code>false</code>.
+  Save the file and refresh the page. You should now see that each of the tweets have their own panel, this is pretty cool! 
 </p>
 
 <p>
-  If a user passes in invalid data, (in this case not filling in the <code>author</code> or <code>description</code>), then the validation we just added will cause <code>@tweet.update(idea_params)</code> to return <code>false</code>, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
-</p>
-
-<p>
- Awesome. Congratulations on writing your first validation!
+  Let's go back into the browser and refresh the page. Awesome! You should now see each idea wrapped around in a panel.
 </p>
 
 <%= standard_git_workflow %>

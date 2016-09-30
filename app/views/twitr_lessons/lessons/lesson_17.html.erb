@@ -1,116 +1,163 @@
 
 
 <p>
-  If we look back at our wireframes, we see that we still have to build out the "About" and "Random" page. To give you a refresher on what we are trying to build here, the "About" page will be a page that will be used to describe what the web page is all about. The "Random" page will be a page that displays an idea that will be chosen randomly.
+  If we look back at our wireframes, we see that we wanted the form to be in a pop up which is triggered when a user presses a button. Implementing this manually would be a pain in the butt, but thankfully we can do this easily by using bootstrap (again).
 </p>
 
 <p>
-  To create these new pages, let's create a new controller called <code>static_pages</code>. In the terminal, let's type in the following command:
+ 	We can use bootstrap's <code>modal.js</code> which can be found <a href="http://getbootstrap.com/javascript/#modals" target="_blank">here</a>. Go here and and let's look at some examples.
 </p>
 
-<pre><code class="bash">
-rails generate controller static_pages
+<p>
+  We see that the <strong>"Live Demo"</strong> in the documentation looks like the kind of thing we want. Like always, let's rip the example code and then modify it to our liking.
+</p>
+
+<p>
+  Let's go ahead and copy the entire code and then paste it into the very top of <code>index.html.erb</code>.
+</p>
+
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Launch demo modal
+&lt;/button&gt;
+
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;
+        ...
+      &lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+        &lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <p>
-  This should generate the <code>static_pages</code> controller. Inside this controller, we are going to create two methods, the <code>about</code> method and the <code>random</code> method.
+  Now let's configure it so that it works for our purposes. First let's change the button text "Launch demo modal" to something like "Add Tweet". Next, let's copy and paste our entire simple form code right inside the <code>&lt;div&gt; class="modal-body"&gt;&lt;div&gt;</code>.
 </p>
 
-<p>
-  In your <code>static_pages_controller.rb</code> file, let's add in the following lines:
-</p>
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Add Tweet
+&lt;/button&gt;
 
-<pre><code class="ruby">
-class StaticPagesController &lt; ApplicationController
-  def about
-
-  end
-
-  def random
-
-  end
-end
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;
+        &lt;%= simple_form_for Tweet.new do |f| %&gt;
+          &lt;%= f.input :description %&gt;
+          &lt;%= f.input :author %&gt;
+          &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+        &lt;% end %&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+        &lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <p>
-  We will see why we set up these routes in a bit, so hang tight.
+  Save the file and refresh the page.
 </p>
 
 <p>
-  Next, let's set up some <code>routes</code> for these pages.
+  We can see now that the form has been added, but now we have two buttons, a "Submit" button and a "Save changes" button. We probably want to replace the "Submit" button with the "Save changes button". So let's go ahead and do that.
 </p>
 
 <p>
-  Let's go into our console and type <code>rake routes</code> to display our routing.
+  Copy and paste <code>&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;</code> and replace this code: <code>&lt;button type="button" class="btn btn-primary">Save changes&lt;/button&gt;</code>.
 </p>
 
-<pre><code>
-   Prefix Verb   URI Pattern               Controller#Action
-     root GET    /                         tweets#index
-    tweets GET    /tweets(.:format)          tweets#index
-          POST   /tweets(.:format)          tweets#create
- new_idea GET    /tweets/new(.:format)      tweets#new
-edit_idea GET    /tweets/:id/edit(.:format) tweets#edit
-     idea GET    /tweets/:id(.:format)      tweets#show
-          PATCH  /tweets/:id(.:format)      tweets#update
-          PUT    /tweets/:id(.:format)      tweets#update
-          DELETE /tweets/:id(.:format)      tweets#destroy
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Add Tweet
+&lt;/button&gt;
+
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;
+        &lt;%= simple_form_for Tweet.new do |f| %&gt;
+          &lt;%= f.input :description %&gt;
+          &lt;%= f.input :author %&gt;
+          
+        &lt;% end %&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+        &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <p>
-  We see that we don't have any paths that we can use for the "About" and "Random" pages. Let's go ahead and set these up.
+  However, <code>&lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;</code> is outside of <code>&lt;%= simple_form_for Tweet.new do |f| %&gt;</code> and <code>&lt;% end %&gt;</code>. This will give us an error since we need to write all of our code for the form before the <code>&lt;% end %&gt;</code>. We can fix the code by changing where we put <code>&lt;%= simple_form_for Tweet.new do |f| %&gt;</code> and <code>&lt;% end %&gt;</code>.
 </p>
 
-<p>
-  Let's go into our <code>routes.rb</code> file, which is where we can specify how the pages are routed, to hook up our new pages.
+<pre><code class="erb">
+<!-- Button trigger modal -->
+&lt;button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"&gt;
+  Add Tweet
+&lt;/button&gt;
 
-<p>
-  Right now, we only have two lines, <code>root 'tweets#index'</code> and <code>resources :tweets</code>. If we recall, <code>root 'tweets#index'</code> sets the root page, or the home page, to the index action of tweets. Additionally, <code>resources :tweets</code> automatically provided us with a bunch of useful links that we could use.
-</p>
-
-<p class="alert alert-success">
-View this <%=link_to 'this lesson', '/twitr_lessons/12' %> to review what <code>resources</code> do in the <code>routes.rb</code> file.
-</p>
-
-<p>
-  For the "About" and "Random" pages, we need to add these routes in manually. To do this, under <code>resources :tweets</code>, add the following lines:
-</p>
-
-<pre><code class="ruby">
-get 'about' =&gt; 'static_pages#about'
-get 'random' =&gt; 'static_pages#random'
+<!-- Modal -->
+&lt;div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"&gt;
+  &lt;div class="modal-dialog" role="document"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;button type="button" class="close" data-dismiss="modal" aria-label="Close">&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;
+        &lt;h4 class="modal-title" id="myModalLabel">Modal title&lt;/h4&gt;
+      &lt;/div&gt;
+      &lt;%= simple_form_for Tweet.new do |f| %&gt;
+        &lt;div class="modal-body"&gt;
+          &lt;%= f.input :description %&gt;
+          &lt;%= f.input :author %&gt;
+        &lt;/div&gt;      
+        &lt;div class="modal-footer"&gt;
+          &lt;button type="button" class="btn btn-default" data-dismiss="modal">Close&lt;/button&gt;
+          &lt;%= f.submit 'Submit', class: 'btn btn-primary' %&gt;
+        &lt;/div&gt;
+      &lt;% end %&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
 
 <p>
-  Let's run the <code>rake routes</code> command.
-</p>  
-
-<pre><code class="bash">
-   Prefix Verb   URI Pattern               Controller#Action
-     root GET    /                         tweets#index
-    tweets GET    /tweets(.:format)          tweets#index
-          POST   /tweets(.:format)          tweets#create
- new_idea GET    /tweets/new(.:format)      tweets#new
-edit_idea GET    /tweets/:id/edit(.:format) tweets#edit
-     idea GET    /tweets/:id(.:format)      tweets#show
-          PATCH  /tweets/:id(.:format)      tweets#update
-          PUT    /tweets/:id(.:format)      tweets#update
-          DELETE /tweets/:id(.:format)      tweets#destroy
-    about GET    /about(.:format)          static_pages#about
-   random GET    /random(.:format)         static_pages#random
-</code></pre>
-
-<p>
-  Notice how in the last two lines, the routes for the <code>about</code> and <code>random</code> page were added.
-</p>
-
-<p>
-  Now what will happen is, when a user goes to a URL with the <code>/about</code> URI pattern, it will trigger the <code>about</code> action in the <code>static_pages</code> controller. Similarly, when a user goes to a URL with the <code>/random</code> URI pattern, it will trigger the <code>random</code> action in the <code>static_pages</code> controller. 
-</p>
-
-<p>
-  Now that we've set up these routes, let's go into our controller and set up the view for these two routes in the next lesson.
+  Now let's refresh the page and see what happens. You should see a perfect modal that is fully functional. This app is starting to look really cool!
 </p>
 
 <%= standard_git_workflow %>
+
+
+
+
 

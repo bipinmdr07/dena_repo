@@ -1,195 +1,62 @@
 
 
 <p>
-  Now that we've got the "About" page, let's add the final page - the "Random" page. On this page, we want to display one random idea from our database, and everytime a user refreshes the page, we want it to generate another random idea.
+  In our form, let's think about what we want to do if a user enters invalid data. For example, if a user tries to enter an idea without specifying an <code>author</code>, we should probably not accept that. We should also not accept an idea that doesn't contain a <code>description</code>.
 </p>
 
 <p>
-  For the first few steps, let's do exactly what we did for the about page.
+  In Ruby on Rails, we can make sure that these kinds of invalid data do not get stored in the database by using <strong>validations</strong>.
+</p>
+
+<%= create_flashcard %>
+
+<p>
+  There are different kinds of validations that you can use in rails (read about them <a href="http://guides.rubyonrails.org/active_record_validations.html" target="_blank">here</a>).
 </p>
 
 <p>
-  We're first going to create a file called <code>random.html.erb</code> inside <code>/app/views/static_pages</code>.
+  For now, let's write a validatation to make sure that the <code>description</code> and <code>author</code> exists for every <code>Tweet</code>.
 </p>
 
 <p>
-  Then we're going to go into our <code>static_pages_controller.rb</code> and add the <code>random</code> method. In this method, we're going to try to store a random <code>Tweet</code> into an instance variable so that we can use it in our <code>random.html.erb</code>.
-</p>
-
-<p>
-  It turns out that you can do this easily by doing this:
+  <strong>Validations are added inside the model file.</strong> Open <code>idea.rb</code>. This is the model file for <code>idea</code>, since it is located inside the <code>app/models</code> directory. This is where we can add our validation. Inside your <code>idea.rb</code>, let's add the following piece of code to look like this:
 </p>
 
 <pre><code class="ruby">
-@tweet = Tweet.order("RANDOM()").first
-</code></pre>
-
-<p>
-  What we are doing here is first ordering all of our tweets randomly. Then we are grabbing the first idea off of the randomly ordered tweets, and then storing it into <code>@tweet</code>. 
-</p>
-
-<p>
-  Let's now add modify the <code>random</code> method to in the <code>static_pages_controller.rb</code> to look like this:
-</p>
-
-<pre><code class="ruby">
-def random
-  @tweet = Tweet.order("RANDOM()").first
+class Tweet &lt; ActiveRecord::Base
+  validates :description, :author, presence: true
 end
 </code></pre>
 
 <p>
-  Like we've explained before, with this method called <code>random</code>, we can now use the instance variable <code>@tweet</code> in our <code>views</code>. With this piece of code, <code>@tweet</code> will now give us a random idea, so let's go into our <code>random.html.erb</code> and display this. In <code>random.html.erb</code>, add the following piece of code:
+  So here we are saying that we want to validate that the <code>presence</code> is <code>true</code> for <code>:description</code> and <code>:author</code>.
 </p>
 
-<pre><code class="erb">
-&lt;%= @tweet.description %&gt;
-&lt;%= @tweet.author %&gt;
+<p>
+  Let's take another look at the <code>update</code> method:
+</p>
+
+<pre><code class="ruby">
+def update
+  @tweet = Tweet.find(params[:id])
+  if @tweet.update(idea_params)
+    redirect_to root_path
+  else
+    redirect_to edit_idea_path(params[:id])
+  end
+end
 </code></pre>
 
 <p>
-  Here, we are displaying the <code>description</code> and <code>author</code> of the <code>@tweet</code>. Remember, here <code>@tweet</code> is assigned a random <code>Tweet</code>.
+  When a validation fails, the data is not saved into the database and will return a value of <code>false</code>.
 </p>
 
 <p>
-  If we go to <code>http://localhost:3000/random</code>, we see an idea and every time we refresh the page, a new idea comes up. Awesome!
+  If a user passes in invalid data, (in this case not filling in the <code>author</code> or <code>description</code>), then the validation we just added will cause <code>@tweet.update(idea_params)</code> to return <code>false</code>, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
 </p>
 
 <p>
-  Now we just want to put this in a bootstrap panel, like we did on the index page. We're just going to pull the code from <code>index.html.erb</code> and tweak it a little bit. Replace the code in <code>random.html.erb</code> with this:
-</p>
-
-<pre><code class="erb">
-&lt;div class="panel panel-default"&gt;
-  &lt;div class="panel-body"&gt;
-    &lt;blockquote&gt;
-      &lt;p&gt;&lt;%= @tweet.description %&gt;&lt;/p&gt;
-      &lt;small&gt;by &lt;%= @tweet.author %&gt;&lt;/small&gt;
-    &lt;/blockquote&gt;
-      
-    &lt;br&gt;
-
-    &lt;div class="btn-group" role="group"&gt;
-      &lt;%= link_to 'Delete', idea_path(@tweet), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-      &lt;%= link_to 'Revise', edit_idea_path(@tweet), class: 'btn btn-sm btn-success' %&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
-
-<p>
-  If we refresh the page, we see that it's nicely displayed now.
-</p>
-
-<p>
-  Now let's add a button above the panel that will refresh the page for us each time we press the button.
-</p>
-
-<p>
-  On the very top of <code>random.html.erb</code>, let's add a link to the random page (<code>random_path</code>) and give it some bootstrap button classes.
-</p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Inspire Me', random_path, class: 'btn btn-primary btn-block' %&gt;
-</code></pre>
-
-<p>
-  Save the file. Now if we refresh the page, we see the button! If we click on it, another idea is displayed. Awesome!
-</p>
-
-<p>
-  There's one little gotcha for this page though. The page will actually give us an error that the <code>@tweet</code> is <code>nil</code> if we don't have any tweets yet. This isn't good and it means that we need to tinker with the code here.
-</p>
-
-<p>
-  What we can do is use an <code>if else</code> statement and say, if <code>@tweet</code> is present, then we display the button and the random idea, otherwise display some message saying there are no tweets.
-</p>
-
-<p>
-  We can actually do this pretty simply in our views.
-</p>
-
-<pre><code class="erb">
-
-&lt;% if @tweet.present? %&gt;
-  &lt;%= link_to 'Inspire Me', random_path, class: 'btn btn-primary btn-block' %&gt;
-    
-  &lt;div class="panel panel-default"&gt;
-    &lt;div class="panel-body"&gt;
-      &lt;blockquote&gt;
-        &lt;p&gt;&lt;%= @tweet.description %&gt;&lt;/p&gt;
-        &lt;small&gt;by &lt;%= @tweet.author %&gt;&lt;/small&gt;
-      &lt;/blockquote&gt;
-        
-      &lt;br&gt;
-
-      &lt;div class="btn-group" role="group"&gt;
-        &lt;%= link_to 'Delete', idea_path(@tweet), method: :delete, class: 'btn btn-sm btn-danger', data: {confirm: "Are you sure?"} %&gt;
-        &lt;%= link_to 'Revise', edit_idea_path(@tweet), class: 'btn btn-sm btn-success' %&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  
-  &lt;h4&gt;No tweets have been shared. Add one &lt;%= link_to 'here', root_path %&gt;&lt;/h4&gt;
-
-&lt;% end %&gt;
-</code></pre>
-
-<div class="well">
-  <h3>Conditionals in the Views</h3>
-
-  <p>
-    We've talked about how we can use <code>&lt;%= %&gt;</code> and <code>&lt;% %&gt;</code> to embed ruby code into our <code>erb</code> files.
-  </p>
-
-  <p>
-    In the code above, we used an <code>if</code> statement in the <code>erb</code> file. This is just another example of ruby being used inside the <code>erb</code> file. It works just like ruby, if a condition is true, the HTML code inside of the block is displayed, otherwise, it is not.
-  </p>
-
-  <%= create_flashcard %>
-</div>
-
-<p>
-  Sweet, you've now added all of the pages succesfully! The final step in this lesson is to add a link to the random page in the navbar.
-</p>
-
-<p>
-  Go to <code>application.html.erb</code> in Sublime and above the link to the "About" page, add the "Random" page link. I named my page the "Inspire Me" page, just because it sounds cooler :D
-</p>
-
-
-<p>
-  Again, let's try to generate this link yourself. A hint is to look into your <code>rake routes</code>!
-</p>
-
-<%= render partial: '/shared/quizzes', locals: { question: 'Show me the answer!', answer: "\<%= link_to 'Inspire Me', random_path %\>", number: 1 } %>
-
-<br class="clear">
-
-<p>
-  If you did it correctly, it should look like this:
-</p>
-
-<pre><code class="erb">
-&lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"&gt;
-  &lt;ul class="nav navbar-nav navbar-right"&gt;
-    &lt;li&gt;&lt;%= link_to 'All Tweets', root_path %&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;%= link_to 'Inspire Me', random_path %&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;%= link_to 'About', about_path %&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;&lt;!-- /.navbar-collapse --&gt;
-</code></pre>
-
-<p>
-  Congratulations! You've now officially built a fully functional app! The next few steps will be the final touches to get your app fully in shape :)
+ Awesome. Congratulations on writing your first validation!
 </p>
 
 <%= standard_git_workflow %>
-
-
-
-
-
-
-
-

@@ -5,7 +5,7 @@ class SubmissionRepliesController < ApplicationController
 
 	def create
 		@reply = current_user.submission_replies.create(reply_params)
-
+    
 		if @reply.valid?
       create_notifications!      
       send_email_notification!
