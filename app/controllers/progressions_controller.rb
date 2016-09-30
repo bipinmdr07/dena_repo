@@ -7,6 +7,7 @@ class ProgressionsController < ApplicationController
     @current_course_link = current_course_link
     @current_course_title = current_course_title
     @current_course_lessons = current_course_lessons
+    @current_course_chapters = current_course_chapters
     @progression_lesson_ids = current_user.progressions.where(course_name: params[:progression][:course_name]).pluck(:lesson_id)  
 
     respond_to do |format|
@@ -25,6 +26,7 @@ class ProgressionsController < ApplicationController
     @current_course_link = current_course_link
     @current_course_title = current_course_title
     @current_course_lessons = current_course_lessons
+    @current_course_chapters = current_course_chapters
     @progression_lesson_ids = current_user.progressions.where(course_name: params[:progression][:course_name]).pluck(:lesson_id)  
 
     respond_to do |format|
@@ -37,6 +39,10 @@ class ProgressionsController < ApplicationController
   end
 
   private
+
+  def current_course_chapters
+    params[:progression][:course_name].constantize::CHAPTERS
+  end
 
   def current_course_link
     params[:progression][:course_name].split(/(?=[A-Z])/).join("_").downcase + "s"
