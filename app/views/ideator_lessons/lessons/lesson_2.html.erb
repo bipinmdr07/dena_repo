@@ -128,5 +128,207 @@ origin  git@github.com:YourGithubUsername/ideator.git (push)
 	You’re all set! Your GitHub is set up and ready to go!
 </p>
 
+<h3>Setting Up Heroku</h3>
+
+<p>
+  Heroku is a service that let's you deploy your application live extremely easily. Professional teams use Heroku because of how easy it is to use it. It allows you to push your code live in no time!
+</p>
+
+<p>
+  <strong>First, go to <%= link_to 'Heroku', 'http://heroku.com/', target: '_blank' %> and create a new Heroku account.</strong>
+</p>
+
+<p>
+  Next, in your C9 terminal, enter the following command:
+</p>
+
+<pre><code class="bash">
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh 
+</code></pre>
+
+<p>
+  This command will install and update the Heroku Toolbet, which is necessary to deploy your applications on to Heroku from the command line.
+</p>
+
+<p>
+  Once it is finished installing, open up your <code>Gemfile</code> in C9. You can find this file by pressing <CODE>CTRL + P</CODE> or <code>CMD + P</code> on Mac, then typing <code>Gemfile</code>.
+</p>
+
+<%= image_tag 'ideator/ctrl_p.png', class: 'img-responsive screenshot' %> 
+
+<p>
+  There are several types of databases, such as MySql, sqlite3, Postgresql. Heroku only supports Postgresql, so we need to change our settings so that our application runs on Postgresql.
+</p>
+
+<p>
+  In the <code>Gemfile</code>, find the following lines of code:
+</p>
+
+<pre><code class="ruby">
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'  
+</code></pre>
+
+<p>
+  Replace <code>sqlite3</code> with <code>pg</code>. Your <code>Gemfile</code> should now look like this:
+</p>
+
+<pre><code class="ruby">
+# Use pg as the database for Active Record
+gem 'pg'  
+</code></pre>
+
+<p>
+  Next, in your terminal window, run <code>bundle install</code>.
+</p>
+
+<%= image_tag 'ideator/bundle_install.png', class: 'img-responsive screenshot' %> 
+
+<p>
+  The <code>bundle install</code> command will install the <em>gems</em> included in the <code>Gemfile</code> (more on gems later).
+</p>
+
+<p>
+  <strong>Next, open your <code>database.yml</code> file</strong>. Again, <CODE>database.yml</CODE> holds the database configuration for your application. 
+</p>
+
+<p>
+  Replace the file contents with the following lines of code:
+</p>
+
+<pre><code class="yaml">
+default: &default
+      adapter: postgresql
+      encoding: unicode
+      pool: 5
+      username: username
+      password: password
+      host:     &lt;%= ENV['IP'] %&gt;
+
+development:
+  &lt;&lt;: *default
+  database: ideator_development
+
+test:
+  &lt;&lt;: *default
+  database: ideator_test
+
+production:
+  &lt;&lt;: *default
+  database: ideator_production
+</code></pre>
+
+<p>
+  Next, in your terminal window, run the following command (make sure there is a dollar sign):
+</p>
+
+<pre><code class="bash">
+sudo service postgresql start  
+</code></pre>
+
+<p>
+  Next, run this command:
+</p>
+
+<pre><code class="bash">
+sudo sudo -u postgres psql  
+</code></pre>
+
+<p>
+  You will see a new console appear. Instead of the <code>$</code> sign, you should see <code>postgres=#</code>
+</p>
+
+<%= image_tag 'ideator/psql.png', class: 'img-responsive screenshot' %> 
+
+<p>
+  Inside this console, type in the following command:
+</p>
+
+<pre><code class="bash">
+CREATE USER username SUPERUSER PASSWORD 'password';
+</code></pre>
+
+<p>
+  Next, type in the following commands:
+</p>
+
+<pre><code class="bash">
+UPDATE pg_database SET datistemplate = FALSE WHERE datname = 'template1';  
+DROP DATABASE template1;
+CREATE DATABASE template1 WITH TEMPLATE = template0 ENCODING = 'UNICODE';
+UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
+\c template1
+VACUUM FREEZE;
+</code></pre>
+
+<p>
+  Next, quit of of the postgres console by running this command:
+</p>
+
+<pre><code class="bash">
+\q  
+</code></pre>
+
+<p>
+  Once we've finished these steps, we're ready to deploy our new application to Heroku.
+</p>
+
+<p>
+  To create a new application, we can run the <code>heroku create</code> command.
+</p>
+
+<pre><code class="bash">
+heroku create app_name  
+</code></pre>
+
+<p>
+  Change <code>app_name</code> to the name of the application. 
+</p>
+
+<p>
+  If it asks you for your Heroku credentials, enter your email address and password.
+</p>
+
+<%= image_tag 'ideator/heroku_create.png', class: 'img-responsive screenshot' %>  
+
+<p>
+  As you can see, it creates a url that anyone can visit. For example, take a look at the above screenshot (<code>https://techrise-ideator.herokuapp.com/</code>).
+</p>
+
+<p>
+  <strong>Now let's push our application to Heroku.</strong>
+</p>
+
+<p>
+  In the terminal, enter the following command:
+</p>
+
+<pre><code class="bash">
+git push heroku master  
+</code></pre>
+
+<p>
+  It will take some time for everything to be uploaded to the Heroku server. Once it has finished uploading, we need to migrate our database. In the terminal, enter the following command:
+</p>
+
+<pre><code class="bash">
+heroku run rake db:migrate  
+</code></pre>
+
+<p>
+  After this step is finished, our last step is to restart our server. We can do this by running the following command in the terminal:  
+</p>
+
+<pre><code class="bash">
+heroku restart  
+</code></pre>
+
+<p>
+  Now if you go to the application URL, you should see a new Rails application deployed. Congratulations, you've deployed your first Rails application!
+</p>
+
+
+
+
 
 
