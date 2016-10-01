@@ -1,7 +1,7 @@
 
 
 <p>
-	Now that we’ve got a navbar, let’s go ahead and make it sexy.
+	Now that we’ve got a navbar, let’s go ahead and make it look nice.
 </p>
 
 <p>
@@ -21,62 +21,73 @@
 </code></pre>
 
 <p>
-	Now that we have our new brand name in there, let's make it look nicer. We can do this by changing the font. In order to make this font sexy, we’re going to be using a custom font.
+  Now that we have our new brand name in there, let's make it look nicer. We can do this by changing the font. In order to make this font sexy, we’re going to be using a custom font.
 </p>
 
 <p>
-	There are many websites that allow you to install fonts to your website. One of the easiest ways to implement a font is to use <strong>Google Fonts</strong>. So let’s go ahead and do that.
+  There are many websites that allow you to install fonts to your website. One of the easiest ways to implement a font is to use <strong>Google Fonts</strong>. So let’s go ahead and do that.
 </p>
 
 <p>
-	If we go to <a href = "https://www.google.com/fonts" target = "_blank">Google Fonts</a>, we can see that there are a bunch of fonts that we can use. I like the font “Pacifico” so I’m going to go ahead and search for “Pacifico” in the search bar.
+  If we go to <a href = "https://www.google.com/fonts" target = "_blank">Google Fonts</a>, we can see that there are a bunch of fonts that we can use. "Open Sans" is a great font that looks clean. Let's search for Open Sans in the search bar.
 </p>
 
 <p>
-	Once we do that, we should be taken to a screen that looks like the image below. Click on the button with the arrow in the bottom right hand corner.
+  Once we do that, we should be taken to a screen that looks like the image below. Click on the plus button.
 </p>
 
-<%= image_tag 'googlefonts.png', class: 'screenshot' %>
+<%= image_tag 'ideator/fonts_1.png', class: 'img-responsive screenshot' %>
 
 <p>
-	If we scroll down to <strong>“3. Add this code to your website:”</strong>, you can see that it gives us ways to import the font into the website.
+  Let's also search for a font called "dosis". Once you have searched the font, click the plus button once again. You should now see 2 fonts selected. Click on the panel.
 </p>
 
-<%= image_tag 'googlefonts2.png', class: "screenshot" %>
-<p>
-	We’re just going to copy and paste the code that they have here and put it in our <code>&lt;head&gt;</code> section in <code>application.html.erb</code>.
-</p>
+<%= image_tag 'ideator/fonts_2.png', class: 'img-responsive screenshot' %>
 
 <p>
-	So let’s go ahead and go into sublime and open up <code>application.html.erb</code>. In your &lt;head&gt; section, add in the code. It should look something like this:
+  Now you should see a screen like this:
+</p>
+
+<%= image_tag 'ideator/fonts_3.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's load various different weights (thickness) for this font. Scroll down a little bit and check the checkboxes as shown below:
+</p>
+
+<%= image_tag 'ideator/fonts_4.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Next, scroll up and copy and paste the code provided:
+</p>
+
+<%= image_tag 'ideator/fonts_5.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Open <code>application.html.erb</code>. In your &lt;head&gt; section, add in the code. It should look something like this:
 </p>
 
 <pre><code class="erb">
-&lt;link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'&gt;
+&lt;link href="https://fonts.googleapis.com/css?family=Dosis|Open+Sans:300,400,600,700" rel="stylesheet"&gt;
 </code></pre>
 
 <p>
-	Great! Just like that, the font can be used in our application.
+  Great! Just like that, the font can be used in our application.
 </p>
 
 <p>
-	To use this font for the brand name in the navbar, we need to specify the font using CSS. If we go back to the bootstrap navbar we implemented and look at which CSS class the brand text belongs to, we notice that it belongs to a <code>navbar-brand</code> class. This means that we can apply CSS styling to <code>.navbar-brand</code> to apply our new font.
-</p>
-
-<p>
-  Let's create a new <code>SCSS</code> file to store our styling. In sublime, create a new file in <code>app/assets/stylesheets</code> called <code>master.scss</code>. We will put all of our CSS styling in this folder.
+  Let's create a new <code>scss</code> file to store our styling. In sublime, create a new file in <code>app/assets/stylesheets</code> called <code>master.scss</code>. We will put all of our CSS styling in this folder.
 </p>
 
 <div class="well">
   <h3>What is SCSS?</h3>
 
   <p>
-    SCSS files are CSS files that with super powers. SCSS stands for <strong>Sassy CSS</strong>. Rails uses SCSS by default. You can use the normal CSS syntax in these SCSS files as you would with CSS files.
+    SCSS files are CSS files that enables developers to write CSS in a more elegant way. SCSS stands for <strong>Sassy CSS</strong>. Rails uses SCSS by default. You can use the normal CSS syntax in these SCSS files as you would with CSS files.
   </p>
 
   <p>
-    We won't get into how you can use SCSS here (we'll do that in another lesson), but if you want to learn about SCSS, here are a few resources to get you started:
-  </p>  
+    We will implement some of the features of SCSS when we are making this application.
+  </p>
 
   <ul>
     <li><%= link_to 'http://sass-lang.com/guide' %></li>
@@ -85,77 +96,112 @@
 </div>
 
 <p>
-	In <code>master.scss</code>, let’s apply the font to our brand by adding this line:
+  One of the features of SCSS is that <strong>we can set variables for our CSS attributes</strong>. Let's set our first SCSS variable.
+</p>
+
+<p>
+  In this lesson, we have imported two Google Fonts. Let's set SCSS variables for each of these colors:
+</p>
+
+<p>
+  Open your <code>master.scss</code> and add the following lines of code:
+</p>
+
+<pre><code class="css">
+$primary-font: 'Open Sans', sans-serif;  
+$secondary-font: 'Dosis', sans-serif;  
+</code></pre>
+
+<p>
+  Next, in <code>master.scss</code>, let’s apply the <code>$secondary-font</code> to our navigation by adding this line:
 </p>
 
 <pre><code class = "css">
-.navbar-brand {
-  font-family: 'Pacifico'
+.navbar-default {
+  font-family: $secondary-font;
 }
 </code></pre>
+
+<p>
+  Your <code>master.scss</code> file should now look like this:
+</p>
+
+<pre><code class = "css">
+$primary-font: 'Open Sans', sans-serif;  
+$secondary-font: 'Dosis', sans-serif;  
+
+.navbar-default {
+  font-family: $secondary-font;
+}
+</code></pre>
+
+<p>
+  As you can see, we can use the variables we define in the SCSS file very easily.
+</p>
  
 <p>
-	Let’s go back into our browser and refresh our <code>localhost:3000</code>. Awesome! It looks great.
+  Let’s go back into our browser and refresh our web application. Awesome! It looks great.
 </p>
 
 <p>
-	Now that we’ve got our brand name looking pretty awesome, I want to change the color of the navbar itself. If we go into Google Chrome and right click on the navbar and select inspect, it will open up Google Developer Tools.
+  Now that we’ve got our brand name looking pretty awesome, <strong>let's change the color of the navbar itself</strong>. If we go into Google Chrome and right click on the navbar and select inspect, it will open up Google Developer Tools.
 </p>
 
 <p>
-	Try to find the section where the navbar’s color is being determined.
+  Try to find the section where the navbar’s color is being determined.
 </p>
 
 
-<!-- Add video here -->
-
 <p>
-	If you found correctly, the <code>.navbar-default</code> class is responsible for the color of the navbar. Since I want a clean looking site, I’m going to change the background color of <code>.navbar-default</code> to white.
+  If you found correctly, the <code>.navbar-default</code> class is responsible for the color of the navbar. Let's change the background color of <code>.navbar-default</code> to white.
 </p>
 
 <p>Let’s go into our <code>master.scss</code> and add this in.</p>
 
 <pre><code class = "css">
 .navbar-default {
+  font-family: $secondary-font;
   background-color: white;
 }
 </code></pre>
 
 <p>
-	Cool, now we’ve got a nice simple color. The other thing I want to do now is change how the font is styled in the navbar.
+  Cool, now we’ve got a nice simple color. The other thing I want to do now is change how the font is styled in the navbar.
 </p>
 
 <p>
-	We can play around with the font styles by adding something like this to our <code>master.scss</code>
+  Let's add some styling to the navigation bar. Let's add the following to <code>master.scss</code>:
+</p>
+
+<pre><code class = "css">
+.navbar-default .navbar-brand {
+  font-weight: 100; 
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #337ab7;
+}
+</code></pre>
+
+<p>
+  Since we are going to be using the same color in the application, let's put this in a variable as well. On the top of the <code>master.scss</code>, let's add a new variable:
+</p>
+
+<pre><code class="css">
+$main-blue: #337ab7;  
+</code></pre>
+
+<p>
+  Then let's replace the HEX color with our new SCSS variable. Your <code>.navbar-default .navbar-brand</code> should now like this:
 </p>
 
 <pre><code class = "css">
 .navbar-default .navbar-brand {
   font-weight: 100;
   font-size: 30px;
+  letter-spacing: 2px;
+  color: $main-blue;
 }
 </code></pre>
-
-<!-- <div class="well">
-  <h3>Font Styles</h3>
-
-  <p>
-    There are a number of different ways to style fonts. By applying different styles to fonts, you can drastically change the look and style of your website! Here are some of my favorites:
-  </p>
-
-  <p>
-    <code>font-weight</code>: This changes the "weight" of your font, or how skinny or fat your font is. It ranges from <code>100</code> (skinniest) to <code>600</code> (bold). Keep in mind that some fonts only have a few variations of font-weights so you won't be able to change the font-weights for those.
-  </p>
-
-  <p>
-    <code>letter-spacing</code>: This changes the amount of space between each letter. For example <span style="letter-spacing:3px;">a letter-spacing of 3px is applied to this text</span> and <span style="letter-spacing:10px;">a letter-spacing of 10px is applied to this text</span>. Pretty cool stuff :)
-  </p>
-
-  <p>
-    There a bunch more that you could use, but personally I like to play around with these two properties to achieve different styles.
-  </p>
-
-</div> -->
 
 <p>
   Let’s now commit this to GitHub so we don’t lose any of the changes. From now on, we'll call this the <strong>standard git workflow</strong>.
@@ -166,5 +212,3 @@ git add .
 git commit -am “Style navbar”
 git push origin master
 </code></pre>
-
-
