@@ -18,7 +18,7 @@ class DashboardController < ApplicationController
 
     @activities = PublicActivity::Activity.order('created_at DESC').limit(20).includes(:owner)
   
-    @stats = DashboardStatsDecorator.new(@lessons, @flashcards).build_stats
+    @stats = DashboardStatsDecorator.new(lessons: @lessons, flashcards: @flashcards).build_stats
 
     if current_user.admin
       @unresolved_questions = Question.unresolved.includes(:user)
