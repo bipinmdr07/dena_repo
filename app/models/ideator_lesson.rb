@@ -43,7 +43,8 @@ class IdeatorLesson < Lesson
 		Lesson.new(19, "Configuring the Random Page", CHAPTERS[5]),
 		
 		Lesson.new(20, "Adding Pagination", CHAPTERS[6]),
-		Lesson.new(21, "Last Few Tweaks", CHAPTERS[6]),
-		Lesson.new(22, "Congratulations!", CHAPTERS[6])
+		Lesson.new(21, "Adding Flash Messages", CHAPTERS[6]),
+		Lesson.new(22, "Last Few Tweaks", CHAPTERS[6]),
+		Lesson.new(23, "Congratulations!", CHAPTERS[6])
 	]
 end

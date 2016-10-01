@@ -1,35 +1,53 @@
-
-
-<!-- 16:9 aspect ratio -->
-<div class="embed-responsive embed-responsive-16by9 embed_video">
-  <iframe src="https://player.vimeo.com/video/174306507" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-</div>
-
 <p>
-  Congratulations! You've completed your first Ruby on Rails application! You've successfully created an app from scratch and you kind of understand how these apps are built now.
+  You're almost done! The final step is to tweak the front end to make the app look amazing.
 </p>
 
 <p>
-  You should now be pretty comfortable with tweaking HTML and CSS, and you should be starting to get a feel for how to do things in rails.
+  One thing we could improve is how the ideas are being displayed. Right now, the width of the panels are too wide.
 </p>
 
 <p>
-  Don't worry if everything doesn't make sense to you right now. As you progress, everything will start to come together. Right now, the important thing is to celebrate the fact that you've built your first app!
+  We can fix this by wrapping the content in bootstrap columns. In <code>application.html.erb</code>, change the code around <code>&lt;%= yield %&gt;</code> to look like this:
+</p>  
+
+<pre><code class="erb">
+&lt;!-- HTML code above --&gt;
+  &lt;div class = "container"&gt;
+    &lt;div class = "row"&gt;
+      &lt;div class = "col-xs-12 col-md-6 col-md-offset-3"&gt;
+        &lt;%= yield %&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;!-- HTML code below --&gt;
+</code></pre>
+
+<p>
+  Here, we have set the width of the content to <code>12</code> when the screen is small, and to <code>6</code> when the screen is larger than medium sized. 
+</p>  
+
+<p>
+  If we refresh the page, our application looks much cleaner!
 </p>
 
 <p>
-  <strong>Submit your app down below by pasting a link to your GitHub below! Congratulations on your hard work!</strong>
+  The rest of this lesson is going to be a <strong>self guided lesson</strong>. Make the app look exactly how you want it!
 </p>
-
-<h3>Bonus Challenge</h3>
 
 <p>
-  If you want to deploy your application live on the internet, you can follow the links below. Try and figure it out! :)
+  Here are a few tips:
 </p>
 
-<ol>
-  <li><%= link_to 'https://devcenter.heroku.com/articles/sqlite3#running-rails-on-postgres', 'https://devcenter.heroku.com/articles/sqlite3#running-rails-on-postgres' %></li>
-  <li><%= link_to 'https://devcenter.heroku.com/articles/git#creating-a-heroku-remote', 'https://devcenter.heroku.com/articles/git#creating-a-heroku-remote' %></li>
-</ol>
+<ul>
+<li>Play around with <code>font-weight</code></li>
+<li>Play around with <code>letter-spacing</code></li>
+<li>Play around with <code>font-size</code></li>
+<li>Play around with the <code>background-color</code> of <code>.panel_body</code></li>
+</ul>
 
-<% @submission_form = true %>
+<p>
+  Spend some time to really try to customize your app to look like how you think it should look. Doing things yourself is where you'll learn the most. <strong>Google Chrome's Developer Tools</strong> will become super handy! Review how you can use developer tools to test out new looks for your app.
+</p>
+
+
+<%= standard_git_workflow %>

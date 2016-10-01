@@ -1,53 +1,47 @@
 <p>
-  You're almost done! The final step is to tweak the front end to make the app look amazing.
+  <strong>Whenever we create an idea, update an idea, or delete an idea, it is a good idea to notify the user that the operation was completed successfully. On the other hand, it is also a good idea to notify the user if the operation failed.</strong>
 </p>
 
 <p>
-  One thing we could improve is how the ideas are being displayed. Right now, the width of the panels are too wide.
+  We can achieve this using <em>flash messages</em>.
+</p>
+
+<p> 
+  In your <code>ideas_controller.rb</code>, let's set up these flash messages.
+</p>
+
+
+<p>
+  Let's create a new partial file inside of our <code>app/views/shared</code> directory called <code>_flash_messages.html.erb</code>.
 </p>
 
 <p>
-  We can fix this by wrapping the content in bootstrap columns. In <code>application.html.erb</code>, change the code around <code>&lt;%= yield %&gt;</code> to look like this:
-</p>  
+  Inside of this file, copy and paste the following code:
+</p>
 
 <pre><code class="erb">
-&lt;!-- HTML code above --&gt;
-  &lt;div class = "container"&gt;
-    &lt;div class = "row"&gt;
-      &lt;div class = "col-xs-12 col-md-6 col-md-offset-3"&gt;
-        &lt;%= yield %&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;!-- HTML code below --&gt;
+&lt;% flash.each do |message_type, message| %&gt;
+  &lt;% if message_type == "notice" %&gt;
+    &lt;p class="alert alert-info alert-dismissible text-center"&gt;&lt;button type="button" class="close" data-dismiss="alert" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;&lt;%= notice %&gt;&lt;/p&gt;
+  &lt;% elsif message_type == "alert" %&gt;
+    &lt;p class="alert alert-danger alert-dismissible text-center"&gt;&lt;button type="button" class="close" data-dismiss="alert" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;&lt;%= alert %&gt;&lt;/p&gt;
+  &lt;% else %&gt;
+    &lt;div class="alert alert-&lt;%= message_type %&gt; alert-dismissible text-center"&gt;&lt;button type="button" class="close" data-dismiss="alert" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;&lt;%= message %&gt;&lt;/div&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
 </code></pre>
 
 <p>
-  Here, we have set the width of the content to <code>12</code> when the screen is small, and to <code>6</code> when the screen is larger than medium sized. 
-</p>  
 
-<p>
-  If we refresh the page, our application looks much cleaner!
-</p>
-
-<p>
-  The rest of this lesson is going to be a <strong>self guided lesson</strong>. Make the app look exactly how you want it!
-</p>
-
-<p>
-  Here are a few tips:
-</p>
-
-<ul>
-<li>Play around with <code>font-weight</code></li>
-<li>Play around with <code>letter-spacing</code></li>
-<li>Play around with <code>font-size</code></li>
-<li>Play around with the <code>background-color</code> of <code>.panel_body</code></li>
-</ul>
-
-<p>
-  Spend some time to really try to customize your app to look like how you think it should look. Doing things yourself is where you'll learn the most. <strong>Google Chrome's Developer Tools</strong> will become super handy! Review how you can use developer tools to test out new looks for your app.
 </p>
 
 
-<%= standard_git_workflow %>
+
+
+
+
+
+
+
+
+
