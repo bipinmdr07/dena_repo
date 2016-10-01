@@ -96,7 +96,7 @@
 </div>
 
 <p>
-  One of the features of SCSS is that <strong>we can set variables for our CSS attributes</strong>. Let's set our first SCSS variable.
+  One of the features of SCSS is that <strong>we can set variables for our CSS attributes</strong>. Using variables will allow us to <strong>reuse</strong> commonly used attributes easily. Let's set our first SCSS variable.
 </p>
 
 <p>
@@ -138,7 +138,17 @@ $secondary-font: 'Dosis', sans-serif;
 <p>
   As you can see, we can use the variables we define in the SCSS file very easily.
 </p>
+
+<p>
+  Let's also set the default font for the entire application to <code>$primary-font</code>:
+</p>
  
+<pre><code class = "css">
+html, body {
+  font-family: $primary-font;
+}
+</code></pre>
+
 <p>
   Let’s go back into our browser and refresh our web application. Awesome! It looks great.
 </p>

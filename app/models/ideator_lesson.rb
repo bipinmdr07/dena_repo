@@ -18,7 +18,7 @@ class IdeatorLesson < Lesson
 	LESSONS = [
 
 		Lesson.new(1, "Setting up your Web Dev Environment", CHAPTERS[0]),
-		Lesson.new(2, "Setting Up Git", CHAPTERS[0]),
+		Lesson.new(2, "Setting Up Git and Heroku", CHAPTERS[0]),
 
 		Lesson.new(3, "Web Application Crash Course", CHAPTERS[1]),
 		Lesson.new(4, "Creating your First Page", CHAPTERS[1]),
