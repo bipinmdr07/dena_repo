@@ -545,13 +545,13 @@ Idea.create(description: params[:idea][:description], author: params[:idea][:aut
 </code></pre>
 
 <p>
-  <strong>Both will work fine.</strong> However, writing <code>Idea.create(params[:idea])</code> is shorter and more concise.
+  As we can see, writing <code>Idea.create(params[:idea])</code> is shorter and more concise.
 </p>
 
 <h3>Security Issues</h3>
 
 <p>
-  <strong>However, if we write <code>Idea.create(params[:idea])</code>, this exposes a set of security issues.</strong>
+  <strong>However, if we write <code>Idea.create(params[:idea])</code>, this exposes a set of security issues.</strong> That's why this code won't work - Rails detects that there's a security issue and prevents developers from doing this.
 </p>
 
 <p>
