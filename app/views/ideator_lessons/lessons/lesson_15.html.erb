@@ -56,6 +56,26 @@ end
 </p>
 
 <p>
+  Let's edit the <code>create</code> method to check if the idea being created is valid or not. We'll implement the details later on in the course.
+</p>
+
+<p>
+  We can use the <code>valid?</code> method to see if the idea passes all of the validations:
+</p>
+
+<pre><code class="ruby">
+def create
+  @idea = Idea.create(idea_params)
+  if @idea.valid?
+    # Implement later
+  else
+    # Implement later
+  end
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
  Awesome. Congratulations on writing your first validation!
 </p>
 

@@ -7,12 +7,54 @@
 </p>
 
 <p> 
-  In your <code>ideas_controller.rb</code>, let's set up these flash messages.
+  In your <code>ideas_controller.rb</code>, let's set up these flash messages for the <code>create</code>, <code>update</code>, and <code>destroy</code> actions.
 </p>
 
+<p>
+  We can set up <code>flash</code> messages by assigning a <code>string</code> values to different keys like this:
+</p>
+
+<pre><code class="ruby">
+class IdeasController < ApplicationController
+  ...
+
+  def create    
+    @idea = Idea.create(idea_params)
+    if @idea.valid?
+      flash[:success] = "Your idea has been posted!"
+    else
+      flash[:alert] = "Woops! Looks like there has been an error!"
+    end
+    redirect_to root_path
+  end
+
+  ...
+
+  def update
+    @idea = Idea.find(params[:id])
+    if @idea.update(idea_params)
+      flash[:success] = "The idea has been updated!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Woops! Looks like there has been an error!"
+      redirect_to edit_idea_path(params[:id])
+    end
+  end
+
+  def destroy
+    @idea = Idea.find(params[:id])
+    @idea.destroy
+    flash[:success] = "The idea was successfully deleted!"
+    redirect_to root_path
+  end
+
+  ...
+end
+
+</code></pre>
 
 <p>
-  Let's create a new partial file inside of our <code>app/views/shared</code> directory called <code>_flash_messages.html.erb</code>.
+  To display the flash messages, let's create a new partial file inside of our <code>app/views/shared</code> directory called <code>_flash_messages.html.erb</code>.
 </p>
 
 <p>
@@ -32,9 +74,19 @@
 </code></pre>
 
 <p>
-
+  Next, in your <code>application.html.erb</code> add the <code>_flash_messages.html.erb</code> partial above <code>&lt;%= yield &gt;</code>:
 </p>
 
+<pre><code class="erb">
+&lt;!-- HTML code above --&gt;
+  &lt;= render 'shared/flash_messages' %&gt;
+  &lt;%= yield %&gt;
+&lt;!-- HTML code below --&gt;
+</code></pre>
+
+<p>
+  Now if you create a new idea, update an idea, or delete an idea, your flash message should be displayed on to the screen!
+</p>
 
 
 
