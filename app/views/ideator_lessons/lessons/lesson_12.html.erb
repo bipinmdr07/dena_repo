@@ -49,33 +49,6 @@ Prefix Verb URI Pattern Controller#Action
     Let's go through what each of these terms mean.
   </p>
 
-  <h3>Embedded Ruby</h3>
-
-  <p>
-    Ruby on Rails uses <code>erb</code> by default. Notice how <code>index.html.erb</code> has <code>.erb</code> in the end instead of just <code>.html</code>. 
-  </p>
-
-  <p>
-    <code>erb</code> stands for <strong>embedded ruby</strong>. The idea is that you can write ruby code inside your HTML code.
-  </p>
-
-  <p>
-    You can write ruby code by enclosing the code with <code>&lt;%</code> <code>%&gt;</code>. You can display the value of ruby code by enclosing the code with <code>&lt;%=</code> <code>%&gt;</code>. For example, you could have an <code>erb</code> file like this:
-  </p>
-
-<pre><code class="erb">
-&lt;h1&gt;Hello World&lt;/h1&gt;
-
-&lt;% result = 1 + 2 %&gt;
-
-&lt;p&gt;1 + 2 = &lt;%= result %&gt;.&lt;/p&gt;
-</code></pre>
-
-  <p>
-    We stored <code>1 + 2</code> inside a ruby variable called <code>result</code>. We then displayed the value of the variable by enclosing the code inside <code>&lt;%=</code> <code>%&gt;</code>.
-  </p>
-
-  <%= create_flashcard %>
 
 <h3>link_to</h3>
 
@@ -120,6 +93,14 @@ Prefix Verb URI Pattern Controller#Action
 
   <p>
     By attaching <code>_path</code> to the prefix inside the <code>link_to</code> block, you can create a link easily.
+  </p>
+
+  <p>
+    As a side note, appending <code>_path</code> to the <code>Prefix</code> will generate the <em>relative path</em> - for example <code>/</code>.
+  </p>
+
+  <p>
+    On the other hand, you can also generate an <em>absolute path</em> by appending <code>_url</code> to the <code>Prefix</code>. For example, <code>root_url</code> will result in the full URL: <code>https://techrise-ideator.herokuapp.com/</code>
   </p>
 
   <h3>URI Pattern</h3>
@@ -175,23 +156,23 @@ Prefix Verb URI Pattern Controller#Action
   </p>
 
 <ul>
-  <li><code>GET</code> requests are used to retrieve data. When you vist a web page, you are making a <code>GET</code> request.</li>
+  <li><strong><code>GET</code> requests are used to retrieve data. When you vist a web page, you are making a <code>GET</code> request.</strong></li>
   <ul>
     <li>When you type in <code>https://www.facebook.com</code> in your browser and press enter, you are making a <code>GET</code> request to Facebook's servers.</li>
   </ul>
-  <li><code>POST</code> requests are used to create new objects.</li>
+  <li><strong><code>POST</code> requests are used to create new objects.</strong></li>
   <ul>
     <li>When you create a Facebook post, you are making a <code>POST</code> request to Facebook's servers</li>
   </ul>
-  <li><code>DELETE</code> requests are used to delete objects.</li>
+  <li><strong><code>DELETE</code> requests are used to delete objects.</strong></li>
   <ul>
     <li>When you delete a Facebook post, you are making a <code>DELETE</code> request to Facebook's servers</li>
   </ul>
-  <li><code>PATCH</code> requests are used to update objects.</li>
+  <li><strong><code>PATCH</code> requests are used to update objects.</strong></li>
   <ul>
     <li>When you update a Facebook post, you are making a <code>PATCH</code> request to Facebook's servers</li>
   </ul>
-  <li><code>PUT</code> requests are not used anymore, use <code>PATCH</code> requests instead.</li>
+  <li><strong><code>PUT</code> requests are not used anymore, use <code>PATCH</code> requests instead.</strong></li>
 </ul>
 
   <p>
@@ -199,28 +180,8 @@ Prefix Verb URI Pattern Controller#Action
   </p>
 
   <p>
-    For example, when a user accesses <code>http://localhost:3000/</code>, the user is making a <code>GET</code> request to <code>http://localhost:3000/</code>.
+    For example, when a user accesses <code>https://www.facebook.com</code>, the user is making a <code>GET</code> request to the Facebook servers.
   </p>
-
-  <h3>Overview</h3>
-
-  <p>
-    When we run <code>rake routes</code>, a bunch of information is displayed. We learned about what each of the terms mean.
-  </p>
-
-  <p>
-    When a user makes a request to <code>http://localhost:3000/</code>, here's what happens:
-  </p>
-
-  <ol>
-    <li>The server sees it's a <code>GET</code> request</li>
-    <li>The URI Pattern is <code>/</code></li>
-    <li>Rails looks at the information in <code>routes.rb</code> and finds the route that is a <code>GET</code> request and has a URI Pattern of <code>/</code></li>
-    <li>Rails finds the route and knows that it is mapped to <code>ideas#index</code></li>
-    <li>Rails triggers the <code>index</code> action in the <code>Ideas</code> controller</li>
-    <li>Rails looks for a file called <code>index.html.erb</code> inside the <code>app/views/ideas</code> directory</li>
-    <li>Rails displays <code>index.html.erb</code></li>
-  </ol>
 
 </div>
 
@@ -354,11 +315,7 @@ end
 </code></pre>
 
 <p>
-  Inside this <code>create</code> method, we're going to <code>.create</code> an <code>Idea</code>.
-</p>
-
-<p>
-  When we <code>create</code> our <code>Idea</code>, we're also going to give it some information to work with. We call these <strong>parameters</strong>. In this case, <strong>when we tell rails to create our idea, we also need to give rails some information about what the idea is all about.</strong> Without giving rails that information, or in other words, those <strong><i>parameters</i></strong>, rails is just going to say, <i>"Okay, you want me to make an idea, but you're not giving me any information on what kind of idea you want me to make."</i> By giving rails those parameters, rails can say <strong><i>"Cool! You want me to make an idea using this information that you've provided me."</i></strong> The information provides in the form will be passed in as paramters.
+  Inside this <code>create</code> method, we're going to call the <code>create</code> method on <code>Idea</code>.
 </p>
 
 <p class="alert alert-info">
