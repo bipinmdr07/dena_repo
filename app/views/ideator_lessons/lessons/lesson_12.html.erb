@@ -4,6 +4,113 @@
   Up until now we've added our ideas through the <code>rails console</code>, but that's a little bit inconvenient. Instead, let's create a form to add more ideas.
 </p>
 
+
+<h3>Adding a Form</h3>
+
+<p>
+  We're going to use a <code>gem</code> called <code>simple_form</code> that makes making forms super easy for us.
+</p>
+
+<p>
+  First, go to the documentation <a href="https://github.com/plataformatec/simple_form" target="_blank">here</a>. Let's go ahead and follow the instructions.
+</p>
+
+<p>
+  The first thing it tells us to do is to add the gem to your <code>Gemfile</code>. So in your <code>Gemfile</code>, add this line:
+</p>
+
+<pre><code class="ruby">
+gem 'simple_form'
+</code></pre>
+
+<p>
+  Then run the following command in the terminal to install it:
+</p>
+
+<pre><code class="bash">
+bundle install
+</code></pre>
+
+<p>
+  If we look at the documentation, we see that there are several options on how to run the simple form generator. In our case, we are going to run the generator that integrates simple form with bootstrap. So let's run this command.
+</p>
+
+<pre><code class="bash">
+rails generate simple_form:install --bootstrap
+</code></pre>
+
+<p>
+  Awesome. Remember, every time we run <code>bundle install</code>, we should restart the server. Let's go ahead and do that.
+</p>
+
+<p>
+  Now that we've got simple form installed, let's go ahead and try to use it. At the top of <code>index.html.erb</code>, let's add this piece of code:
+</p>
+
+<pre><code class="ruby">
+&lt;%= simple_form_for Idea.new do |f| %&gt;
+  &lt;%= f.input :description %&gt;
+  &lt;%= f.input :author %&gt;
+  &lt;%= f.submit 'Submit' %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  <strong>Simple form will detect what data type the form inputs should take in and generate HTML automatically.</strong>
+</p>
+
+<p>
+  The HTML that is generated will look something like this (some parts are abbreviated):
+</p>
+
+<pre><code class="erb">
+&lt;form class="simple_form new_idea" id="new_idea" action="/ideas" method="post"&gt;
+  &lt;div class="form-group text required idea_description"&gt;
+    &lt;label class="text required control-label" for="idea_description"&gt;&lt;abbr title="required"&gt;*&lt;/abbr&gt; Description&lt;/label&gt;
+    &lt;textarea class="text required form-control" name="idea[description]" id="idea_description"&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group string required idea_author"&gt;
+    &lt;label class="string required control-label" for="idea_author"&gt;&lt;abbr title="required"&gt;*&lt;/abbr&gt; Author&lt;/label&gt;
+    &lt;input class="string required form-control" type="text" name="idea[author]" id="idea_author"&gt;
+  &lt;/div&gt;
+  &lt;input type="submit" name="commit" value="Submit"&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>
+  <strong>Notice how <code>textarea</code> was chosen for <code>description</code>, since <code>description</code> is a <code>text</code> data type, and a <code>string</code> input field was chosen for <code>author</code>, since <code>author</code> is a <code>string</code> data type.</strong> Simple Form detects the datatypes for each form input and creates the appropriate input types.
+</p>
+
+<p>
+  Next, let's take a look at the first line of the form:
+</p>  
+
+<pre><code class="erb">
+&lt;form class="simple_form new_idea" id="new_idea" action="/ideas" method="post"&gt;
+</code></pre>
+
+<p>
+  Notice how the <code>action</code> is automatically set to <code>"/ideas"</code> and the <code>method</code> is set to <code>"post"</code>. Simple form also automatically detects <em>where</em> we want to send (<code>action</code>) the form and <em>how</em> (<code>method</code>).
+</p>
+
+<p>
+  <strong>The <code>action</code> is where the form data will be sent to when the user presses the submit button.</strong>
+</p>
+
+<p>
+  <strong>The <code>method</code> is the HTTP method that will be used when sending the data to the server.</strong> In this case, it is specified as <code>"post"</code>. As mentioned in previous lessons, <strong>POST</strong> requests are used to create new instances.
+</p>
+
+<p>
+  So to recap, when a user presses submit on this form, the form will be sent to <code>/ideas</code> path as a <code>POST</code> request.
+</p>
+
+<p>
+  However, since we haven't created an <code>/ideas</code> path in our application, if we try to submit the form, it will just give us an error.
+</p>
+
+<%= image_tag 'ideator/form.png', class: 'img-responsive screenshot' %>
+
 <h3>Setting Up Routes</h3>
 <p>
   The first thing we need to do is set up our <code>routes</code>. What we write in <code>routes.rb</code> defines how the web application is hooked up, or routed. 
@@ -50,7 +157,7 @@ Prefix Verb URI Pattern Controller#Action
   </p>
 
 
-<h3>link_to</h3>
+<!-- <h3>link_to</h3>
 
 
   <p>
@@ -72,31 +179,12 @@ Prefix Verb URI Pattern Controller#Action
   <p>
     These two pieces of code will produce the same exact link.
   </p>
+ -->
 
   <h3>Prefix</h3>
 
   <p>
-    In ruby on rails, you can use the <code>Prefix</code> to create links with <code>link_to</code>. We see above that we have a prefix called <code>root</code>. For example, if we want to create a link to the home directory, we can write code like this:
-  </p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Home Page', root_path %&gt;
-</code></pre>
-
-  <p>
-    This will produce HTML code that looks like this:
-  </p>
-
-<pre><code class="html">
-&lt;a href="/"&gt;Home Page&lt;/a&gt;
-</code></pre> 
-
-  <p>
-    By attaching <code>_path</code> to the prefix inside the <code>link_to</code> block, you can create a link easily.
-  </p>
-
-  <p>
-    As a side note, appending <code>_path</code> to the <code>Prefix</code> will generate the <em>relative path</em> - for example <code>/</code>.
+    Appending <code>_path</code> to the <code>Prefix</code> will generate the <em>relative path</em> - for example <code>root_path</code> will generate <code>/</code>.
   </p>
 
   <p>
@@ -106,7 +194,7 @@ Prefix Verb URI Pattern Controller#Action
   <h3>URI Pattern</h3>
 
   <p>
-    Notice how <code>root_path</code> resulted in creating a link with the <code>href</code> of <code>"/"</code>.
+    Notice how <code>root_path</code> resulted in creating a relative path of <code>"/"</code>. 
   </p>
 
   <p>
@@ -120,7 +208,7 @@ Prefix Verb URI Pattern Controller#Action
   </p>
 
   <p>
-    For example, when a user goes to <code>http://localhost:3000/</code>, the URL matches the <code>/</code> URI Pattern. At this point, the <code>index</code> action of the <code>Ideas</code> Controller is triggered.
+    For example, when a user goes to <code>https://techrise-ideator.herokuapp.com/</code>, the URL matches the <code>/</code> URI Pattern. At this point, the <code>index</code> action of the <code>Ideas</code> Controller is triggered.
   </p>
 
   <p>
@@ -186,11 +274,15 @@ Prefix Verb URI Pattern Controller#Action
 </div>
 
 <p>
-  What we want to do is set up routes for creating new ideas, deleting new ideas, editing new ideas, etc. Rails provides a super convenient way to do this. Here's what we need to do.
+  Let's go back to our problem. What we are trying to do right now is to create routes for the <code>/ideas</code> path as a <code>POST</code> request, so that we have a place to send the form data to.
 </p>
 
 <p>
-  Let's go in to <code>routes.rb</code> and under <code>root 'ideas#index'</code>, let's put <code>resources :ideas</code> and make your file look like the following:
+  Rails provides a convenient method called <code>resources</code> that allows us to generate routes that are most commonly used in web applications. Let's implement this and see how it works.
+</p>
+
+<p>
+  Go in to <code>routes.rb</code> and under <code>root 'ideas#index'</code> and put <code>resources :ideas</code>. Your file should look like the following:
 </p>
 
 <pre><code class="ruby">
@@ -204,7 +296,7 @@ end
 </code></pre>
 
 <p>
-  Save the file and run <code>rake routes</code> in the terminal. Just like that, the output should now be this:
+  Save the file and run <code>rake routes</code> in the terminal. The output should now be this:
 </p>
 
 <pre><code>
@@ -221,7 +313,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </code></pre>
 
 <p>
-  By putting in <code>resources :ideas</code>, rails generated all of these routes for us!
+  By putting in <code>resources :ideas</code>, rails generated all of these routes for us! Notice how now we have a <code>/ideas</code> path that handles <code>POST</code> requests.
 </p> 
 
 <div class="well">
@@ -293,7 +385,26 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
   </p>
 </div>
 
-<h3>Adding a Form</h3>
+<p>
+  Now that we have our routing set up, we can send the form data to the <code>/ideas</code> path. If we look back at the output of <code>rake routes</code>, we see that a <code>POST</code> request to the <code>/ideas</code> path triggers the <code>create</code> action inside of <code>ideas_controller.rb</code>:
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+    ideas POST   /ideas(.:format)          ideas#create
+</code></pre>
+
+<p>
+  Right now, we don't have a <code>create</code> action inside of the <code>ideas_controller.rb</code> file. 
+</p>
+
+<p>
+  Right now, when we trigger the form, the form data will be sent to the <code>/ideas</code> path and trigger the <code>create</code> action, but since we haven't create a create action, the form will not properly work.
+</p>
+
+<%= image_tag 'ideator/missing_create.png', class: 'img-responsive screenshot' %>
+
+<h3>Setting up the Backend</h3>
 
 <p>
   In order to add ideas through a form, we need to tell rails what to do when the form is submitted and tries to create an idea. What we need is a <code>create</code> method which will be responsible for creating our ideas and saving them to our database.
@@ -315,7 +426,7 @@ end
 </code></pre>
 
 <p>
-  Inside this <code>create</code> method, we're going to call the <code>create</code> method on <code>Idea</code>.
+  Inside this <code>create</code> action, we're going to call the <code>create</code> method on <code>Idea</code>.
 </p>
 
 <p class="alert alert-info">
@@ -323,19 +434,183 @@ end
 </p>
 
 <p>
-  We can pass in a parameter for <code>.create</code> by adding <code>()</code>s like <code>.create()</code> and then passing in information between them. In rails, it is best practice to also use <strong>strong parameters</strong>, which you don't need to worry about learning too deeply right now. <strong>In short, strong params are basically a security measure to make sure bad people don't input bad things to do bad things.</strong> If you want to find out more, you can read more <a href="http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters" target ="_blank">here</a>.
+  When requests are sent in through forms, the data that is being sent looks like this:
 </p>
 
-<p>
-  We can implement strong params by creating a <code>private</code> method called <code>idea_params</code> and then saying, <code>require</code> an <code>idea</code> and only <code>permit</code> the <code>description</code> and <code>author</code> for the ideas. By doing this, if a user tries to be clever and attempts to pass in a <code>:color</code> or some random parameter like that, rails will not accept it. The code for doing this looks like below:
-</p>
-
-<pre><code class="ruby">
-params.require(:idea).permit(:description, :author)
+<pre><code class="bash">
+Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ew3W9K6QmcSG7HFTqhXbt0FUQOTYhG50Dm5ixVvxyeXIVm+dD1/g59ThIMI5IZ9OTh/rbaWO/7zt081/J/B1xA==", "idea"=>{"description"=>"Apples are better than pears.", "author"=>"Fruit Expert"}, "commit"=>"Submit"}
 </code></pre>
 
 <p>
-  Again, we are saying here that we are only permitting <code>description</code>s and <code>author</code>s for each idea. Let's add put the above code in a method called <code>idea_params</code> like below:
+  As we can see, the data being sent to the server is a <strong>hash</strong>. To review, hashes contains key value pairs. What we need to do is grab the values of the <code>idea</code> key and create an <code>Idea</code> object using those values.
+</p>
+
+<%= image_tag 'ideator/form_data.png', class: 'img-responsive screenshot' %>
+
+<p>
+  <strong>We can access this data inside our controller with <code>params</code>.</strong> We can access the <code>ideas</code> with <code>params[:ideas]</code>.
+</p>
+
+<p>
+  <strong>In other words, we are accessing the <em>values</em> for the <code>idea</code> key in the <code>params</code> hash:</strong>
+</p> 
+
+<pre><code class="ruby">
+params
+=> {"utf8"=>"✓", "authenticity_token"=>"Ew3W9K6QmcSG7HFTqhXbt0FUQOTYhG50Dm5ixVvxyeXIVm+dD1/g59ThIMI5IZ9OTh/rbaWO/7zt081/J/B1xA==", "idea"=>{"description"=>"Apples are better than pears.", "author"=>"Fruit Expert"}, "commit"=>"Submit"}
+
+params[:idea]
+=> {"description"=>"Apples are better than pears.", "author"=>"Fruit Expert"}
+</code></pre>
+
+<p>
+  As you can see, <code>params[:idea]</code> returns another hash.
+</p>
+
+<p>
+  To access the <code>description</code> and <code>author</code>, we can access the value for the <code>description</code> key, and access the value for the <code>author</code> key:
+</p>  
+
+<pre><code class="ruby">
+params[:idea][:description]
+=> "Apples are better than pears."
+
+params[:idea][:author]
+=> "Fruit Expert"
+</code></pre>
+
+<p>
+  Now that we know how to retrieve data that is sent in to the server, we can use this data to create a new <code>Idea</code> and save it into the database.
+</p>
+
+<p>
+  Inside <code>ideas_controller.rb</code>, make the file look like the following:
+</p>
+
+<pre><code class = "ruby">
+class IdeasController &lt; ApplicationController
+  def index
+    @ideas = Idea.all
+  end
+
+  def create
+    @idea = Idea.create(description: params[:idea][:description], author: params[:idea][:author])
+  end
+end
+</code></pre>
+
+<p>
+  If we submit the form, you will see that it works. However, <strong>we can refactor this code</strong>.
+</p>
+
+<p>
+  Let's take a look at the parameters we are passing into the <code>create</code> method:
+</p>
+
+<pre><code class = "ruby">
+description: params[:idea][:description], author: params[:idea][:author]
+</code></pre>
+
+<p>
+  As we can see, we are passing in <em>key value pairs</em>.
+</p>  
+
+<p>
+  When we submit a form with the description of "Apples are better than pears" and the author being "Fruit Expert", then the parameters will look like this:
+</p>
+
+<pre><code class = "ruby">
+description: "Apples are better than pears.", author: "Fruit Expert"
+</code></pre>
+
+<p>
+  If we take a step back, <strong>this set of key value pairs are the same as if we ran <code>params[:idea]</code>.</strong>
+</p>  
+
+<p>
+  In other words, this code:
+</p>
+
+<pre><code class="ruby">
+Idea.create(params[:idea])
+</code></pre>
+
+<p>
+  will run the same as this code:
+</p>
+
+
+<pre><code class="ruby">
+Idea.create(description: params[:idea][:description], author: params[:idea][:author])
+</code></pre>
+
+<p>
+  <strong>Both will work fine.</strong> However, writing <code>Idea.create(params[:idea])</code> is shorter and more concise.
+</p>
+
+<h3>Security Issues</h3>
+
+<p>
+  <strong>However, if we write <code>Idea.create(params[:idea])</code>, this exposes a set of security issues.</strong>
+</p>
+
+<p>
+  For example, let's say we had a boolean database column called <code>admin</code> for a <code>users</code> table.
+
+<p>
+  A hacker could try and send data to the server like such:
+</p>
+
+<pre><code class="ruby">
+{"user"=>{"name"=>"Hacker :D", "admin"=>"true"}}
+</code></pre>
+
+<p>
+  Then, inside our <code>users_controller.rb</code>, let's say we had the following code:
+</p>
+
+<pre><code class="ruby">
+class UsersController &lt; ApplicationController
+  def create
+    User.create(params[:user])
+  end
+end
+</code></pre>
+
+<p>
+  Since <code>User.create(params[:user])</code> will create a <code>User</code> object based on the data passed in to the server, the hacker can successfully create an admin account:
+</p>
+
+<pre><code class="ruby">
+User.create(name: "Hacker :D", admin: true)
+</code></pre>
+
+<p>
+  To prevent this, we need to implement <strong>strong parameters</strong>.
+</p>
+
+<p>
+  <strong>We can implement strong parameters by creating a method that whitelists only certain attributes.</strong>
+</p>
+
+<p>
+  We can do this by creating a private method called <code>ideas_params</code>:
+</p>
+
+<pre><code class="ruby">
+private
+
+def idea_params
+  params.require(:idea).permit(:description, :author)
+end
+</code></pre>
+
+<p>
+  The code above whitelists <code>description</code> and <code>author</code> and will prevent users from sending in malicious data to the server. 
+</p>
+
+<p>
+  The final step is to replace <code>ideas[:params]</code> with <code>idea_params</code>.
 </p>
 
 <pre><code class = "ruby">
@@ -357,8 +632,42 @@ end
 </code></pre>
 
 <p>
-  Awesome! Now that we've got the params set up, we need to tell rails what to do after we create the idea. What we need to do is redirect the user to a page (or else rails will give us an error). So after creating the idea, let's tell rails to redirect to the home page. We can do this by adding <code>redirect_to root_path</code>.
+  <strong>When handling information in the server, you should always use strong parameters to whitelist what data can go into your application.</strong>
 </p>
+
+<p>
+  Awesome! Next, we need to tell rails what to do after we create the idea.
+</p>
+
+<p>
+  <strong>This is what we want to do:</strong>
+</p>
+
+<ul>
+  <li>Create a new Idea and save it to the database</li>
+  <li>Redirect the user to the home page</li>
+</ul> 
+
+<p>
+  We can redirect the user with the <code>redirect_to</code> method.
+</p>
+
+<div class="well">
+  <h3>redirect_to</h3>
+
+  <p>
+    You can redirect users to a certain page in your application with <code>redirect_to</code>.
+  </p>
+
+<pre><code class="ruby">
+redirect_to root_path
+</code></pre>
+  
+  <p>
+    The code above will redirect the user to <code>root_path</code>.
+  </p>  
+
+</div>
 
 <pre><code class = "ruby">
 class IdeasController &lt; ApplicationController
@@ -380,67 +689,13 @@ end
 </code></pre>
 
 <p>
-  So basically what we just did is this: we told rails that when we trigger the <code>create</code> method, we are going to create an idea using some information passed in as <strong>parameters</strong>, and then once that's done, we're going to redirect our browser to the home page.
+   Now let's test this out. Enter an idea and an author and press 'Submit'. Voila! You should see your idea on your page, just like that!
 </p>
 
-<p>
-  Cool, let's get going. Now that we've got a <code>create</code> method, we can now go ahead and create a form for this.
-</p>
+<h3>Styling the Form Buttons</h3>
 
 <p>
-  We're going to use a <code>gem</code> called <code>simple_form</code> that makes making forms super easy for us.
-</p>
-
-<p>
-  First, go to the documentation <a href="https://github.com/plataformatec/simple_form" target="_blank">here</a>. Let's go ahead and follow the instructions.
-</p>
-
-<p>
-  The first thing it tells us to do is to add the gem to your <code>Gemfile</code>. So in your <code>Gemfile</code>, add this line:
-</p>
-
-<pre><code class="ruby">
-gem 'simple_form'
-</code></pre>
-
-<p>
-  Then run the following command in the terminal to install it:
-</p>
-
-<pre><code class="bash">
-bundle install
-</code></pre>
-
-<p>
-  If we look at the documentation, we see that there are several options on how to run the simple form generator. In our case, we are going to run the generator that integrates simple form with bootstrap. So let's run this command.
-</p>
-
-<pre><code class="bash">
-rails generate simple_form:install --bootstrap
-</code></pre>
-
-<p>
-  Awesome. Remember, every time we run <code>bundle install</code>, we should restart the server. Let's go ahead and do that.
-</p>
-
-<p>
-  Now that we've got simple form installed, let's go ahead and try to use it. At the top of <code>index.html.erb</code>, let's add this piece of code:
-</p>
-
-<pre><code class="ruby">
-&lt;%= simple_form_for Idea.new do |f| %&gt;
-  &lt;%= f.input :description %&gt;
-  &lt;%= f.input :author %&gt;
-  &lt;%= f.submit 'Submit' %&gt;
-&lt;% end %&gt;
-</code></pre>
-
-<p>
-  Let's go back into our browser and look at how it looks now. You should have a form just like that!
-</p>
-
-<p>
-  However, the buttons look really ugly, so let's add some bootstrap buttons on there to make them look nicer. What we can do is add a <code>btn btn-primary</code> class to the Submit button. We can do this by adding <code>class: 'btn btn-primary'</code> to the Submit button code like below (make sure to put the <code>,</code> between <code>'Submit'</code> and <code>class:</code>)
+  Since the buttons look really ugly, let's add some bootstrap buttons on there to make them look nicer. What we can do is add a <code>btn btn-primary</code> class to the Submit button. We can do this by adding <code>class: 'btn btn-primary'</code> to the Submit button code like below (make sure to put the <code>,</code> between <code>'Submit'</code> and <code>class:</code>)
 </p>
 
 <pre><code class="ruby">
@@ -453,10 +708,6 @@ rails generate simple_form:install --bootstrap
 
 <p>
   Save the file and refresh the browser. We now see prettier buttons! Awesome!
-</p>
-
-<p>
-   Now let's test this out. Enter an idea and an author and press 'Submit'. Voila! You should see your idea on your page, just like that!
 </p>
 
 <%= standard_git_workflow %>
