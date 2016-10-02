@@ -57,19 +57,19 @@ class LessonsController < ApplicationController
   private
 
   def current_course_chapters
-    controller_name.classify.constantize::CHAPTERS
+    @current_course_chapters ||= controller_name.classify.constantize::CHAPTERS
   end
 
   def current_course_lessons
-    controller_name.classify.constantize::LESSONS
+    @current_course_lessons ||= controller_name.classify.constantize::LESSONS
   end
 
   def course_title
-    controller_name.classify.constantize::COURSE_TITLE
+    @course_title ||= controller_name.classify.constantize::COURSE_TITLE
   end
 
   def course_link
-    controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
+    @course_link ||= controller_name.classify.split(/(?=[A-Z])/).join("_").downcase + "s"
   end
 
   def check_access!
