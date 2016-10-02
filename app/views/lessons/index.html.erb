@@ -2,7 +2,7 @@
 
 <h1 class="curriculum_title"><%= @current_course_title %></h1>
 
-  <% @current_course_lessons.each_with_index do |chapter, i| %>
+  <% @current_course_chapters.each_with_index do |chapter, i| %>
     <% if (i + 1) % 3 == 0 %>
       <div class = "row">
     <% end %>
@@ -10,12 +10,12 @@
     <div class = "col-xs-12 col-md-4">
       <div class="course_box">
 
-        <h3 class = "underlined-header"><%= chapter[0] %></h3>
+        <h3 class = "underlined-header"><%= chapter.title %></h3>
         <ul class = "unindented_ul">
 
         <div class="course_description">
-          <% chapter[1].each do |lesson| %>
-            <%= link_to "<li> Lesson #{lesson[0]} - #{lesson[1]} #{lesson_completed(@progression_lesson_ids.include?(lesson[0]))}</li>".html_safe, "/#{@current_course_link}/#{(lesson[0])}" %>
+          <% @current_course_lessons.select{|lesson| lesson.chapter == chapter}.each do |lesson| %>          
+            <%= link_to "<li> Lesson #{lesson.id} - #{lesson.title} #{lesson_completed(@progression_lesson_ids.include?(lesson.id))}</li>".html_safe, "/#{@current_course_link}/#{(lesson.id)}" %>
           <% end %>
         </div><!-- course_description -->
       </div><!-- course_box -->

@@ -4,6 +4,7 @@ class LessonsController < ApplicationController
 
   def index
     @current_course_lessons = current_course_lessons
+    @current_course_chapters = current_course_chapters
     @current_course_title = course_title
     @current_course_link = course_link
     @progression_lesson_ids = current_user.progressions.where(course_name: controller_name.classify).pluck(:lesson_id)  
