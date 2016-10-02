@@ -222,3 +222,31 @@ git add .
 git commit -am “Style navbar”
 git push origin master
 </code></pre>
+
+<h3>Deploying to Heroku</h3>
+
+<p>
+  Let's deploy all of the new changes that we have made to Heroku!
+</p>
+
+<p>
+  Every time we push to Heroku, we should run migrations on the production server:
+</p>
+
+<pre><code class="bash">
+heroku run rake db:migrate
+</code></pre>
+
+<p>
+  Then we should restart the server:
+</p>
+
+<pre><code class="bash">
+heroku restart
+</code></pre>
+
+
+
+
+
+

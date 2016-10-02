@@ -157,6 +157,32 @@
 
 <%= standard_git_workflow %>
 
+<h3>Deploying to Heroku</h3>
+
+<p>
+  After going through the standard git workflow, let's deploy all of the new changes that we have made to Heroku.
+</p>
+
+<pre><code class="bash">
+git push heroku master
+</code></pre>
+
+<p>
+  Every time we push to Heroku, we should run migrations on the production server:
+</p>
+
+<pre><code class="bash">
+heroku run rake db:migrate
+</code></pre>
+
+<p>
+  Then we should restart the server:
+</p>
+
+<pre><code class="bash">
+heroku restart
+</code></pre>
+
 
 
 
