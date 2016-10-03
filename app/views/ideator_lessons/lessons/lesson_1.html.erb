@@ -1,7 +1,7 @@
 
 
 <p>
-	Get ready to embark on a new journey in your web development career! From this lesson, we'll be creating rails applications together, where you'll learn how to create full featured applications.
+	Get ready to embark on a new journey in your web development career! From this lesson, we'll be creating rails applications together, where you'll learn how to create full-featured applications.
 </p>
 
 <div class="well">
@@ -10,7 +10,7 @@
 	<ul>
 		<li><strong>Don't copy and paste</strong> - it is always better to actually type the code yourself. <strong>Muscle memory</strong> is really important when learning how to code!</li>
 		<li><strong>Ask Questions</strong> - whenever something doesn't make sense to you, first google, then ask for help! We are always here to help out.</li>
-		<li><strong>Don't be frustrated</strong> - some of these lessons might be difficult for you, but don't be frustrated, it's part of learning and it is important to relax and keep on going.</li>
+		<li><strong>Don't be frustrated</strong> - some of these lessons might be difficult for you, but don't be frustrated, it's part of learning, and it is important to relax and keep on going.
 	</ul>
 </div>
 
@@ -34,7 +34,7 @@
 <h2>Setting Up Your Cloud9 Environment</h2>
 
 <p>
-	Installing Ruby on Rails, Ruby, git, and everything else takes so much time and it can be extremely frustrating. We don't want you to get stuck on this part - we'd rather have you start coding immediately :) That's why we provide Cloud9 accounts for all of our students, so that any student can start coding right away.
+	Installing Ruby on Rails, Ruby, git, and everything else takes so much time, and it can be extremely frustrating. We don't want you to get stuck on this part - <strong>we'd rather have you start coding immediately</strong>. That's why we provide Cloud9 accounts for all of our students, so that any student can start coding right away.
 </p>
 
 <p class="alert alert-success">
@@ -86,7 +86,7 @@
 	<h3>How to create a new Rails application</h3>
 
 	<p>
-		When using C9, you don't have to create a new Rails application - C9 does that all for you. But if you want to install Ruby on Rails and Ruby on your system and create a new Rails application, this is what you should do.
+		<strong>When using C9, you don't have to create a new Rails application - C9 does that all for you.</strong> But if you want to install Ruby on Rails and Ruby on your system and create a new Rails application, this is what you should do.
 	</p>
 
 	<p>
@@ -104,7 +104,7 @@ rails new app_name
 	<%= create_flashcard %>
 
 	<p>
-		Running the command should create a bunch of files and you shouldn’t get any errors.
+		Running the command should create a bunch of files, and you shouldn’t get any errors.
 	</p>
 
 
@@ -115,8 +115,7 @@ rails new app_name
 </p>
 
 <pre><code class="bash">
-rake db:create:all
-rake db:migrate
+rake db:create
 </code></pre>
 
 
@@ -124,7 +123,7 @@ rake db:migrate
 	<h3>Databases</h3>
 
 	<p>
-		<strong>Databases are like a box that contains a bunch of information.</strong> In the database, we can <strong>store <em>various different types</em> of data</strong> and we can also <strong>pull out data</strong> from the database.
+		<strong>Databases are like a box that contains a bunch of information.</strong> In the database, we can <strong>store <em>various types</em> of data</strong> and we can also <strong>pull out data</strong> from the database.
 	</p>
 
 	<P>
@@ -159,7 +158,7 @@ rake db:migrate
 </div>
 
 <div class="well">
-	<h3>rake db:create:all</h3>
+	<h3>rake db:create</h3>
 
 	<p>
 		We run the <code>rake db:create:all</code> command to create a new database. This command creates a new database according to the information in the <code>database.yml</code> file.
@@ -168,7 +167,7 @@ rake db:migrate
 	<h3>database.yml</h3>
 
 	<p>
-		This file contains the database settings. Rails applications has different databases for each environment, so there are different configurations for each environment.
+		This file contains the database settings. Rails applications have different databases for each environment, so there are different configurations for each environment.
 	</p>
 
 	<%= image_tag 'ideator/database_yml.png', class: 'screenshot' %>

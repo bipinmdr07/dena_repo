@@ -15,7 +15,7 @@
 </p>
 
 <p>
-  For now, let's write a validatation to make sure that the <code>description</code> and <code>author</code> exists for every <code>Idea</code>.
+  For now, let's write a validation to make sure that the <code>description</code> and <code>author</code> exists for every <code>Idea</code>.
 </p>
 
 <p>
@@ -54,6 +54,26 @@ end
 <p>
   If a user passes in invalid data, (in this case not filling in the <code>author</code> or <code>description</code>), then the validation we just added will cause <code>@idea.update(idea_params)</code> to return <code>false</code>, thus it will go to the <code>else</code> statement and redirect you to the editing page once again.
 </p>
+
+<p>
+  Let's edit the <code>create</code> method to check if the idea being created is valid or not. We'll implement the details later on in the course.
+</p>
+
+<p>
+  We can use the <code>valid?</code> method to see if the idea passes all of the validations:
+</p>
+
+<pre><code class="ruby">
+def create
+  @idea = Idea.create(idea_params)
+  if @idea.valid?
+    # Implement later
+  else
+    # Implement later
+  end
+  redirect_to root_path
+end
+</code></pre>
 
 <p>
  Awesome. Congratulations on writing your first validation!

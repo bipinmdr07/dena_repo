@@ -18,9 +18,9 @@ class IdeatorLesson < Lesson
 	LESSONS = [
 
 		Lesson.new(1, "Setting up your Web Dev Environment", CHAPTERS[0]),
-		Lesson.new(2, "Setting Up Git", CHAPTERS[0]),
+		Lesson.new(2, "Setting Up Git and Heroku", CHAPTERS[0]),
 
-		Lesson.new(3, "Creating Wireframes", CHAPTERS[1]),
+		Lesson.new(3, "Web Application Crash Course", CHAPTERS[1]),
 		Lesson.new(4, "Creating your First Page", CHAPTERS[1]),
 
 		Lesson.new(5, "Installing Bootstrap", CHAPTERS[2]),
@@ -43,7 +43,8 @@ class IdeatorLesson < Lesson
 		Lesson.new(19, "Configuring the Random Page", CHAPTERS[5]),
 		
 		Lesson.new(20, "Adding Pagination", CHAPTERS[6]),
-		Lesson.new(21, "Last Few Tweaks", CHAPTERS[6]),
-		Lesson.new(22, "Congratulations!", CHAPTERS[6])
+		Lesson.new(21, "Adding Flash Messages", CHAPTERS[6]),
+		Lesson.new(22, "Last Few Tweaks", CHAPTERS[6]),
+		Lesson.new(23, "Congratulations!", CHAPTERS[6])
 	]
 end

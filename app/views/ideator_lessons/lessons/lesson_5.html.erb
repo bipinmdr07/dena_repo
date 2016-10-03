@@ -11,11 +11,11 @@
 <div class="well">
   <h3>What are gems?</h3>
   <p>
-    <strong>Gems are basically super useful packages of code that solve common problems</strong>, for instance installing bootstrap in this case. 
+    <strong>Gems are packages of code</strong> that often times solve common problems, for instance installing bootstrap in this case. 
   </p>
 
   <p>
-    There are gems for mostly every common problem - forms, user log in/authentication, messagers, etc. <strong>Smart people have created these solutions for us already so it’s stupid to reinvent the wheel most of the time.</strong>
+    Many common problems have been solved with gems, so it's usually a good idea to just implement the gems instead of re-implementing it yourself.
   </p>
 
   <%= create_flashcard %>
@@ -37,7 +37,7 @@
   </p>
 
   <p>
-    As a web developer, you will spend a lot of time reading documentation to try to figure out how to use various tools. That's why it's super important to get used to reading documentation.
+    As a web developer, you will spend a lot of time reading the documentation to try to figure out how to use various tools.  That's why it's super important to get used to reading documentation.
   </p>
 </div>
 
@@ -83,7 +83,7 @@ bundle install
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 </code></pre>
 
-<p>The commmand above will rename the <code>application.css</code> file to <code>application.scss</code>.</p>
+<p>The command above will rename the <code>application.css</code> file to <code>application.scss</code>.</p>
 
 <p>Next, inside <code>application.scss</code>, let’s copy and paste the following code like this:</p>
 
@@ -141,7 +141,7 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 @import "bootstrap";
 </code></pre>
 
-<p>Next it tells us to copy and paste this into <code>application.js</code></p>
+<p>Next, it tells us to copy and paste this into <code>application.js</code></p>
 
 <pre><code class="bash">
 //= require jquery
@@ -158,16 +158,16 @@ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scs
 //= require_tree .
 </code></pre>
 
-<p>In the documentation, it says to make sure that <code>//= require bootstrap-sprockets</code> doesn't come before <code>//= require jquery</code>. Let's make sure the order of everything is just like above so we don't get any errors.</p>
+<p>In the documentation, it says to make sure that <code>//= require bootstrap-sprockets</code> doesn't come before <code>//= require jquery</code>. Let's make sure the order of everything is just like above, so we don't get any errors.</p>
 
 <p>Awesome. You should now be set.</p>
 
-<p>Refresh <code>localhost:3000</code> and your font should have changed into a different font. That means your bootstrap has been installed! Great job!</p>
+<p>Refresh your page and your font should have changed into a different font. That means your bootstrap has been installed! Great job!</p>
 
 <div class="well">
   <h3>Not working?</h3>
   <p>
-    Whenever your app is not behaving like it should be after installing a gem or changing something, you want to make sure that you <strong>restart the server</strong>. Restarting the server will fix a lot of problems when dealing with Rails.
+    Whenever your app is not behaving as it should be after installing a gem or changing something, you want to make sure that you <strong>restart the server</strong>. Restarting the server will fix a lot of problems when dealing with Rails.
   </p>
 </div>
 
