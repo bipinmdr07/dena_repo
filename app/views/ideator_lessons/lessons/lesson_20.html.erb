@@ -1,7 +1,7 @@
 
 
 <p>
-  The first thing we are going to add on to our app is <strong>pagination</strong> to our <code>index</code> page. Basically the gist is, when we display all of our ideas on the <code>index</code> page, when we have 100 ideas on there, users have to scroll forever to get to the bottom of the page. Instead, we probably want to divide them into seperate pages, or in other words, <em>paginate</em> them.
+  The first thing we are going to add on to our app is <strong>pagination</strong> to our <code>index</code> page. Basically the gist is, when we display all of our ideas on the <code>index</code> page, when we have 100 ideas on there, users have to scroll forever to get to the bottom of the page. Instead, we probably want to divide them into separate pages, or in other words, <em>paginate</em> them.
 </p>
 
 <p>
@@ -76,7 +76,7 @@ Post.paginate(:page => params[:page], :per_page => 30)
 </code></pre>
 
 <p>
-  Let's go ahead and implement this in our views. Go into <code>index.html.erb</code> and add this in to the very bottom of the page:
+  Let's go ahead and implement this in our views. Go into <code>index.html.erb</code> and add this into the very bottom of the page:
 </p>
 
 <pre><code class="erb">
