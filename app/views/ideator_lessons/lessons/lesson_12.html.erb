@@ -224,7 +224,7 @@ Prefix Verb URI Pattern Controller#Action
   <h3>Verb</h3>
 
   <p>
-    We won't go too deep in to this topic right now, we will go over this topic in later lessons.
+    We won't go too deep into this topic right now, we will go over this topic in later lessons.
   </p>
 
   <p>
@@ -282,7 +282,7 @@ Prefix Verb URI Pattern Controller#Action
 </p>
 
 <p>
-  Go in to <code>routes.rb</code> and under <code>root 'ideas#index'</code> and put <code>resources :ideas</code>. Your file should look like the following:
+  Go into <code>routes.rb</code>, and under <code>root 'ideas#index'</code>, put <code>resources :ideas</code>. Your file should look like the following:
 </p>
 
 <pre><code class="ruby">
@@ -336,7 +336,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
     </ul>
     <li><strong>The New Page</strong> - the page where you typically fill out a form to create a new record</li>
     <ul>
-      <li>In Facebook, there is no New page since you can create a Facebook post from the front page. If there was a page only for creating a Facebook post, that would be the new page.</li>
+      <li>In Facebook, there is no New page since you can create a Facebook post from the front page. If there were a page only for creating a Facebook post, that would be the new page.</li>
       <li>This is a <code>GET</code> request - we aren't actually posting to the server, this page typically just displays a form</li>
     </ul>
     <li><strong>The Create Action</strong> - the backend process that creates and saves a new record to the database</li>
@@ -346,7 +346,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
     </ul>
     <li><strong>The Edit Page</strong> - the page where there is typically a form where you can edit the record</li>
     <ul>
-      <li>In Facebook, there is no page for just editting a Facebook post. If there was, that would be the edit page.</li>
+      <li>In Facebook, there is no page for just editing a Facebook post. If there was, that would be the edit page.</li>
       <li>This is a <code>GET</code> request</li>
     </ul>
     <li><strong>The Update Action</strong> - the backend process that updates a record into the database</li>
@@ -399,7 +399,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </p>
 
 <p>
-  Right now, when we trigger the form, the form data will be sent to the <code>/ideas</code> path and trigger the <code>create</code> action, but since we haven't create a create action, the form will not properly work.
+  Right now, when we trigger the form, the form data will be sent to the <code>/ideas</code> path and trigger the <code>create</code> action, but since we haven't created a create action, the form will not properly work.
 </p>
 
 <%= image_tag 'ideator/missing_create.png', class: 'img-responsive screenshot' %>
@@ -442,7 +442,7 @@ Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ew3W9K6QmcSG7HFTqhXbt0FUQOTYh
 </code></pre>
 
 <p>
-  As we can see, the data being sent to the server is a <strong>hash</strong>. To review, hashes contains key value pairs. What we need to do is grab the values of the <code>idea</code> key and create an <code>Idea</code> object using those values.
+  As we can see, the data being sent to the server is a <strong>hash</strong>. To review, hashes contain key value pairs. What we need to do is grab the values of the <code>idea</code> key and create an <code>Idea</code> object using those values.
 </p>
 
 <%= image_tag 'ideator/form_data.png', class: 'img-responsive screenshot' %>
@@ -480,7 +480,7 @@ params[:idea][:author]
 </code></pre>
 
 <p>
-  Now that we know how to retrieve data that is sent in to the server, we can use this data to create a new <code>Idea</code> and save it into the database.
+  Now that we know how to retrieve data that is sent into the server, we can use this data to create a new <code>Idea</code> and save it into the database.
 </p>
 
 <p>
@@ -524,7 +524,7 @@ description: "Apples are better than pears.", author: "Fruit Expert"
 </code></pre>
 
 <p>
-  If we take a step back, <strong>this set of key value pairs are the same as if we ran <code>params[:idea]</code>.</strong>
+  If we take a step back, <strong>this set of key-value pairs are the same as if we ran <code>params[:idea]</code>.</strong>
 </p>  
 
 <p>
@@ -578,7 +578,7 @@ end
 </code></pre>
 
 <p>
-  Since <code>User.create(params[:user])</code> will create a <code>User</code> object based on the data passed in to the server, the hacker can successfully create an admin account:
+  Since <code>User.create(params[:user])</code> will create a <code>User</code> object based on the data passed into the server, the hacker can successfully create an admin account:
 </p>
 
 <pre><code class="ruby">
