@@ -1,434 +1,11 @@
-<h1><%= title_for(IdeatorLesson, 4, 4) %></h1>
+
 
 <p>
   Up until now we've added our ideas through the <code>rails console</code>, but that's a little bit inconvenient. Instead, let's create a form to add more ideas.
 </p>
 
-<h3>Setting Up Routes</h3>
-<p>
-  The first thing we need to do is set up our <code>routes</code>. What we write in <code>routes.rb</code> defines how the web application is hooked up, or routed. 
-</p>
-
-<p>
-  If we go to the terminal and type in <code>rake routes</code>, we can see all of our routes that are set up. Right now, all you should see is this:
-</p>
-
-<pre><code>
-Prefix Verb URI Pattern Controller#Action
-  root GET  /           ideas#index
-</code></pre>
-
-<div class="well">
-  <h3>rake routes</h3>
-
-  <p>
-    <code>rake routes</code> is a command that you will be using a lot. The <code>rake routes</code> command displays how the application is mapped out. For example, let's take a look at the following:
-  </p>
-
-<pre><code>
-Prefix Verb URI Pattern Controller#Action
-  root GET  /           ideas#index
-</code></pre>
-
-  <p>
-    This is the routing for the home directory. As we talked about before, when a user accesses the home page, the <code>index</code> method of <code>ideas_controller.rb</code> is triggered.
-  </p>
-  
-  <p>
-    We see four different terms above:
-  </p>
-
-  <ul>
-    <li>Prefix</li>
-    <li>Verb</li>
-    <li>URI Pattern</li>
-    <li>Controller#Action</li>
-  </ul>
-
-  <p>
-    Let's go through what each of these terms mean.
-  </p>
-
-  <h3>Embedded Ruby</h3>
-
-  <p>
-    Ruby on Rails uses <code>erb</code> by default. Notice how <code>index.html.erb</code> has <code>.erb</code> in the end instead of just <code>.html</code>. 
-  </p>
-
-  <p>
-    <code>erb</code> stands for <strong>embedded ruby</strong>. The idea is that you can write ruby code inside your HTML code.
-  </p>
-
-  <p>
-    You can write ruby code by enclosing the code with <code>&lt;%</code> <code>%&gt;</code>. You can display the value of ruby code by enclosing the code with <code>&lt;%=</code> <code>%&gt;</code>. For example, you could have an <code>erb</code> file like this:
-  </p>
-
-<pre><code class="erb">
-&lt;h1&gt;Hello World&lt;/h1&gt;
-
-&lt;% result = 1 + 2 %&gt;
-
-&lt;p&gt;1 + 2 = &lt;%= result %&gt;.&lt;/p&gt;
-</code></pre>
-
-  <p>
-    We stored <code>1 + 2</code> inside a ruby variable called <code>result</code>. We then displayed the value of the variable by enclosing the code inside <code>&lt;%=</code> <code>%&gt;</code>.
-  </p>
-
-  <%= create_flashcard %>
-
-<h3>link_to</h3>
-
-
-  <p>
-    With HTML, you can create links like this:
-  </p>
-
-<pre><code class="html">
-&lt;a href="http://www.google.com"&gt;Google&lt;/a&gt;
-</code></pre> 
-
-  <p>
-    In <code>erb</code> files, we can create links with <code>link_to</code>. For example, we can make the same exact link as above like this:
-  </p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Google', 'http://www.google.com' %&gt;
-</code></pre>
-
-  <p>
-    These two pieces of code will produce the same exact link.
-  </p>
-
-  <h3>Prefix</h3>
-
-  <p>
-    In ruby on rails, you can use the <code>Prefix</code> to create links with <code>link_to</code>. We see above that we have a prefix called <code>root</code>. For example, if we want to create a link to the home directory, we can write code like this:
-  </p>
-
-<pre><code class="erb">
-&lt;%= link_to 'Home Page', root_path %&gt;
-</code></pre>
-
-  <p>
-    This will produce HTML code that looks like this:
-  </p>
-
-<pre><code class="html">
-&lt;a href="/"&gt;Home Page&lt;/a&gt;
-</code></pre> 
-
-  <p>
-    By attaching <code>_path</code> to the prefix inside the <code>link_to</code> block, you can create a link easily.
-  </p>
-
-  <h3>URI Pattern</h3>
-
-  <p>
-    Notice how <code>root_path</code> resulted in creating a link with the <code>href</code> of <code>"/"</code>.
-  </p>
-
-  <p>
-    If we look back to the result of running <code>rake routes</code>, we can see that the <code>URI Pattern</code> is <code>/</code>. When a user accesses a URL that matches the <code>URI Pattern</code>, the <code>Controller#Action</code> is triggered.
-  </p>
-
-  <h3 id="controller_action">Controller#Action</h3>
-
-  <p>
-    The <code>Action</code> (another word for method) of the <code>Controller</code> is triggered when a user makes a request to a URL that matches the <code>URI Pattern</code>.
-  </p>
-
-  <p>
-    For example, when a user goes to <code>http://localhost:3000/</code>, the URL matches the <code>/</code> URI Pattern. At this point, the <code>index</code> action of the <code>Ideas</code> Controller is triggered.
-  </p>
-
-  <p>
-    <strong>When a controller action is triggered, Rails will try to find an <code>html.erb</code> file with the name of the controller action inside the <code>apps/views/controller_name</code> directory.</strong>
-  </p>
-
-  <p>
-    For example, when the <code>index</code> action of the <code>Ideas</code> Controller is triggered, Rails will try to find a filed called <code>index.html.erb</code> inside the <code>apps/views/ideas</code> directory.
-  </p>
-
-  <%= create_flashcard %>
-
-  <h3>Verb</h3>
-
-  <p>
-    We won't go too deep in to this topic right now, we will go over this topic in later lessons.
-  </p>
-
-  <p>
-    There are five different HTTP methods:
-  </p>
-
-  <ul>
-    <li>GET</li>
-    <li>POST</li>
-    <li>DESTROY</li>
-    <li>PUT</li>
-    <li>PATCH</li>
-  </ul>
-
-  <p>
-    Here's what each of the methods do in short (there is a whole chapter on this later on in the course):
-  </p>
-
-<ul>
-  <li><code>GET</code> requests are used to retrieve data. When you vist a web page, you are making a <code>GET</code> request.</li>
-  <ul>
-    <li>When you type in <code>https://www.facebook.com</code> in your browser and press enter, you are making a <code>GET</code> request to Facebook's servers.</li>
-  </ul>
-  <li><code>POST</code> requests are used to create new objects.</li>
-  <ul>
-    <li>When you create a Facebook post, you are making a <code>POST</code> request to Facebook's servers</li>
-  </ul>
-  <li><code>DELETE</code> requests are used to delete objects.</li>
-  <ul>
-    <li>When you delete a Facebook post, you are making a <code>DELETE</code> request to Facebook's servers</li>
-  </ul>
-  <li><code>PATCH</code> requests are used to update objects.</li>
-  <ul>
-    <li>When you update a Facebook post, you are making a <code>PATCH</code> request to Facebook's servers</li>
-  </ul>
-  <li><code>PUT</code> requests are not used anymore, use <code>PATCH</code> requests instead.</li>
-</ul>
-
-  <p>
-    When a user types in a URL in the browser and presses enter, the user is making a <code>GET</code> request - the user is trying to retrieve data from the server.
-  </p>
-
-  <p>
-    For example, when a user accesses <code>http://localhost:3000/</code>, the user is making a <code>GET</code> request to <code>http://localhost:3000/</code>.
-  </p>
-
-  <h3>Overview</h3>
-
-  <p>
-    When we run <code>rake routes</code>, a bunch of information is displayed. We learned about what each of the terms mean.
-  </p>
-
-  <p>
-    When a user makes a request to <code>http://localhost:3000/</code>, here's what happens:
-  </p>
-
-  <ol>
-    <li>The server sees it's a <code>GET</code> request</li>
-    <li>The URI Pattern is <code>/</code></li>
-    <li>Rails looks at the information in <code>routes.rb</code> and finds the route that is a <code>GET</code> request and has a URI Pattern of <code>/</code></li>
-    <li>Rails finds the route and knows that it is mapped to <code>ideas#index</code></li>
-    <li>Rails triggers the <code>index</code> action in the <code>Ideas</code> controller</li>
-    <li>Rails looks for a file called <code>index.html.erb</code> inside the <code>app/views/ideas</code> directory</li>
-    <li>Rails displays <code>index.html.erb</code></li>
-  </ol>
-
-</div>
-
-<p>
-  What we want to do is set up routes for creating new ideas, deleting new ideas, editing new ideas, etc. Rails provides a super convenient way to do this. Here's what we need to do.
-</p>
-
-<p>
-  Let's go in to <code>routes.rb</code> and under <code>root 'ideas#index'</code>, let's put <code>resources :ideas</code> and make your file look like the following:
-</p>
-
-<pre><code class="ruby">
-Rails.application.routes.draw do
-
-  root 'ideas#index'
-
-  resources :ideas
-
-end
-</code></pre>
-
-<p>
-  Save the file and run <code>rake routes</code> in the terminal. Just like that, the output should now be this:
-</p>
-
-<pre><code>
-   Prefix Verb   URI Pattern               Controller#Action
-     root GET    /                         ideas#index
-    ideas GET    /ideas(.:format)          ideas#index
-          POST   /ideas(.:format)          ideas#create
- new_idea GET    /ideas/new(.:format)      ideas#new
-edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
-     idea GET    /ideas/:id(.:format)      ideas#show
-          PATCH  /ideas/:id(.:format)      ideas#update
-          PUT    /ideas/:id(.:format)      ideas#update
-          DELETE /ideas/:id(.:format)      ideas#destroy
-</code></pre>
-
-<p>
-  By putting in <code>resources :ideas</code>, rails generated all of these routes for us!
-</p> 
-
-<div class="well">
-  <h3>resources</h3>
-
-  <p>
-    Web applications are made up of mainly the following components:
-  </p>
-
-  <ul>
-    <li><strong>The Index Page</strong> - the page displays all of the records</li>
-    <ul>
-      <li>When you go on to Facebook, it displays all of your friend's posts. This is the index page.</li>
-      <li>This is a <code>GET</code> request</li>
-    </ul>
-    <li><strong>The Show Page</strong> - the page that displays one individual record</li>
-    <ul>  
-      <li>In the index page, all of your friend's posts are displayed. When you click on a post, you can view the individual post alone. This is the show page.</li>
-      <li>This is a <code>GET</code> request</li>
-    </ul>
-    <li><strong>The New Page</strong> - the page where you typically fill out a form to create a new record</li>
-    <ul>
-      <li>In Facebook, there is no New page since you can create a Facebook post from the front page. If there was a page only for creating a Facebook post, that would be the new page.</li>
-      <li>This is a <code>GET</code> request - we aren't actually posting to the server, this page typically just displays a form</li>
-    </ul>
-    <li><strong>The Create Action</strong> - the backend process that creates and saves a new record to the database</li>
-    <ul>
-      <li>When you create a Facebook post, the create action is triggered. The create action takes care of creating the new post and saving it to the Facebook servers.</li>
-      <li>This is a <code>POST</code> request</li>
-    </ul>
-    <li><strong>The Edit Page</strong> - the page where there is typically a form where you can edit the record</li>
-    <ul>
-      <li>In Facebook, there is no page for just editting a Facebook post. If there was, that would be the edit page.</li>
-      <li>This is a <code>GET</code> request</li>
-    </ul>
-    <li><strong>The Update Action</strong> - the backend process that updates a record into the database</li>
-    <ul>
-      <li>When you edit a Facebook post and press submit, the update action is triggered.</li>
-      <li>This is a <code>PATCH</code> request</li>
-      <li>It is also mapped to <code>PUT</code>, but it is not used vey often</li>
-    </ul>
-    <li><strong>The Destroy action</strong> - the backend process that deletes a record from the database</li>
-    <ul>
-      <li>When you delete a naughty Facebook post, the destroy action is triggered and deletes the post from Facebook's server.</li>
-      <li>This is a <code>DELETE</code> request</li>
-    </ul>
-  </ul>
-
-  <p>
-    Since these components are so common, Ruby on Rails made it super easy to create the routes for these actions.
-  </p>
-
-  <p>
-    When you add <code>resources :controller_name</code> to <code>routes.rb</code>, it automatically creates routes for the following actions that we talked about above:
-  </p>
-
-  <ul>
-    <li>index</li>
-    <li>show</li>
-    <li>new</li>
-    <li>create</li>
-    <li>edit</li>
-    <li>update</li>
-    <li>destroy</li>
-  </ul>
-
-  <p>
-    We can use these actions to create various features in our web application.
-  </p>
-</div>
 
 <h3>Adding a Form</h3>
-
-<p>
-  In order to add ideas through a form, we need to tell rails what to do when the form is submitted and tries to create an idea. What we need is a <code>create</code> method which will be responsible for creating our ideas and saving them to our database.
-</p>
-
-<p>
-  In our <code>ideas_controller</code>, let's make a <code>create</code> method.
-</p>
-
-<pre><code class = "ruby">
-class IdeasController &lt; ApplicationController
-  def index
-    @ideas = Idea.all
-  end
-
-  def create
-  end
-end
-</code></pre>
-
-<p>
-  Inside this <code>create</code> method, we're going to <code>.create</code> an <code>Idea</code>.
-</p>
-
-<p>
-  When we <code>create</code> our <code>Idea</code>, we're also going to give it some information to work with. We call these <strong>parameters</strong>. In this case, <strong>when we tell rails to create our idea, we also need to give rails some information about what the idea is all about.</strong> Without giving rails that information, or in other words, those <strong><i>parameters</i></strong>, rails is just going to say, <i>"Okay, you want me to make an idea, but you're not giving me any information on what kind of idea you want me to make."</i> By giving rails those parameters, rails can say <strong><i>"Cool! You want me to make an idea using this information that you've provided me."</i></strong> The information provides in the form will be passed in as paramters.
-</p>
-
-<p class="alert alert-info">
-  Refer back to <%= link_to 'this lesson', '/ideator_lessons/10' %> for a review of this topic.
-</p>
-
-<p>
-  We can pass in a parameter for <code>.create</code> by adding <code>()</code>s like <code>.create()</code> and then passing in information between them. In rails, it is best practice to also use <strong>strong parameters</strong>, which you don't need to worry about learning too deeply right now. <strong>In short, strong params are basically a security measure to make sure bad people don't input bad things to do bad things.</strong> If you want to find out more, you can read more <a href="http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters" target ="_blank">here</a>.
-</p>
-
-<p>
-  We can implement strong params by creating a <code>private</code> method called <code>idea_params</code> and then saying, <code>require</code> an <code>idea</code> and only <code>permit</code> the <code>description</code> and <code>author</code> for the ideas. By doing this, if a user tries to be clever and attempts to pass in a <code>:color</code> or some random parameter like that, rails will not accept it. The code for doing this looks like below:
-</p>
-
-<pre><code class="ruby">
-params.require(:idea).permit(:description, :author)
-</code></pre>
-
-<p>
-  Again, we are saying here that we are only permitting <code>description</code>s and <code>author</code>s for each idea. Let's add put the above code in a method called <code>idea_params</code> like below:
-</p>
-
-<pre><code class = "ruby">
-class IdeasController &lt; ApplicationController
-  def index
-    @ideas = Idea.all
-  end
-
-  def create
-    @idea = Idea.create(idea_params)
-  end
-
-  private
-
-  def idea_params
-    params.require(:idea).permit(:description, :author)
-  end
-end
-</code></pre>
-
-<p>
-  Awesome! Now that we've got the params set up, we need to tell rails what to do after we create the idea. What we need to do is redirect the user to a page (or else rails will give us an error). So after creating the idea, let's tell rails to redirect to the home page. We can do this by adding <code>redirect_to root_path</code>.
-</p>
-
-<pre><code class = "ruby">
-class IdeasController &lt; ApplicationController
-  def index
-    @ideas = Idea.all
-  end
-
-  def create
-    @idea = Idea.create(idea_params)
-    redirect_to root_path
-  end
-
-  private
-
-  def idea_params
-    params.require(:idea).permit(:description, :author)
-  end
-end
-</code></pre>
-
-<p>
-  So basically what we just did is this: we told rails that when we trigger the <code>create</code> method, we are going to create an idea using some information passed in as <strong>parameters</strong>, and then once that's done, we're going to redirect our browser to the home page.
-</p>
-
-<p>
-  Cool, let's get going. Now that we've got a <code>create</code> method, we can now go ahead and create a form for this.
-</p>
 
 <p>
   We're going to use a <code>gem</code> called <code>simple_form</code> that makes making forms super easy for us.
@@ -479,11 +56,646 @@ rails generate simple_form:install --bootstrap
 </code></pre>
 
 <p>
-  Let's go back into our browser and look at how it looks now. You should have a form just like that!
+  <strong>Simple form will detect what data type the form inputs should take in and generate HTML automatically.</strong>
 </p>
 
 <p>
-  However, the buttons look really ugly, so let's add some bootstrap buttons on there to make them look nicer. What we can do is add a <code>btn btn-primary</code> class to the Submit button. We can do this by adding <code>class: 'btn btn-primary'</code> to the Submit button code like below (make sure to put the <code>,</code> between <code>'Submit'</code> and <code>class:</code>)
+  The HTML that is generated will look something like this (some parts are abbreviated):
+</p>
+
+<pre><code class="erb">
+&lt;form class="simple_form new_idea" id="new_idea" action="/ideas" method="post"&gt;
+  &lt;div class="form-group text required idea_description"&gt;
+    &lt;label class="text required control-label" for="idea_description"&gt;&lt;abbr title="required"&gt;*&lt;/abbr&gt; Description&lt;/label&gt;
+    &lt;textarea class="text required form-control" name="idea[description]" id="idea_description"&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group string required idea_author"&gt;
+    &lt;label class="string required control-label" for="idea_author"&gt;&lt;abbr title="required"&gt;*&lt;/abbr&gt; Author&lt;/label&gt;
+    &lt;input class="string required form-control" type="text" name="idea[author]" id="idea_author"&gt;
+  &lt;/div&gt;
+  &lt;input type="submit" name="commit" value="Submit"&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>
+  <strong>Notice how <code>textarea</code> was chosen for <code>description</code>, since <code>description</code> is a <code>text</code> data type, and a <code>string</code> input field was chosen for <code>author</code>, since <code>author</code> is a <code>string</code> data type.</strong> Simple Form detects the datatypes for each form input and creates the appropriate input types.
+</p>
+
+<p>
+  Next, let's take a look at the first line of the form:
+</p>  
+
+<pre><code class="erb">
+&lt;form class="simple_form new_idea" id="new_idea" action="/ideas" method="post"&gt;
+</code></pre>
+
+<p>
+  Notice how the <code>action</code> is automatically set to <code>"/ideas"</code> and the <code>method</code> is set to <code>"post"</code>. Simple form also automatically detects <em>where</em> we want to send (<code>action</code>) the form and <em>how</em> (<code>method</code>).
+</p>
+
+<p>
+  <strong>The <code>action</code> is where the form data will be sent to when the user presses the submit button.</strong>
+</p>
+
+<p>
+  <strong>The <code>method</code> is the HTTP method that will be used when sending the data to the server.</strong> In this case, it is specified as <code>"post"</code>. As mentioned in previous lessons, <strong>POST</strong> requests are used to create new instances.
+</p>
+
+<p>
+  So to recap, when a user presses submit on this form, the form will be sent to <code>/ideas</code> path as a <code>POST</code> request.
+</p>
+
+<p>
+  However, since we haven't created an <code>/ideas</code> path in our application, if we try to submit the form, it will just give us an error.
+</p>
+
+<%= image_tag 'ideator/form.png', class: 'img-responsive screenshot' %>
+
+<h3>Setting Up Routes</h3>
+<p>
+  The first thing we need to do is set up our <code>routes</code>. What we write in <code>routes.rb</code> defines how the web application is hooked up, or routed. 
+</p>
+
+<p>
+  If we go to the terminal and type in <code>rake routes</code>, we can see all of our routes that are set up. Right now, all you should see is this:
+</p>
+
+<pre><code>
+Prefix Verb URI Pattern Controller#Action
+  root GET  /           ideas#index
+</code></pre>
+
+<div class="well">
+  <h3>rake routes</h3>
+
+  <p>
+    <code>rake routes</code> is a command that you will be using a lot. The <code>rake routes</code> command displays how the application is mapped out. For example, let's take a look at the following:
+  </p>
+
+<pre><code>
+Prefix Verb URI Pattern Controller#Action
+  root GET  /           ideas#index
+</code></pre>
+
+  <p>
+    This is the routing for the home directory. As we talked about before, when a user accesses the home page, the <code>index</code> method of <code>ideas_controller.rb</code> is triggered.
+  </p>
+  
+  <p>
+    We see four different terms above:
+  </p>
+
+  <ul>
+    <li>Prefix</li>
+    <li>Verb</li>
+    <li>URI Pattern</li>
+    <li>Controller#Action</li>
+  </ul>
+
+  <p>
+    Let's go through what each of these terms mean.
+  </p>
+
+
+<!-- <h3>link_to</h3>
+
+
+  <p>
+    With HTML, you can create links like this:
+  </p>
+
+<pre><code class="html">
+&lt;a href="http://www.google.com"&gt;Google&lt;/a&gt;
+</code></pre> 
+
+  <p>
+    In <code>erb</code> files, we can create links with <code>link_to</code>. For example, we can make the same exact link as above like this:
+  </p>
+
+<pre><code class="erb">
+&lt;%= link_to 'Google', 'http://www.google.com' %&gt;
+</code></pre>
+
+  <p>
+    These two pieces of code will produce the same exact link.
+  </p>
+ -->
+
+  <h3>Prefix</h3>
+
+  <p>
+    Appending <code>_path</code> to the <code>Prefix</code> will generate the <em>relative path</em> - for example <code>root_path</code> will generate <code>/</code>.
+  </p>
+
+  <p>
+    On the other hand, you can also generate an <em>absolute path</em> by appending <code>_url</code> to the <code>Prefix</code>. For example, <code>root_url</code> will result in the full URL: <code>https://techrise-ideator.herokuapp.com/</code>
+  </p>
+
+  <h3>URI Pattern</h3>
+
+  <p>
+    Notice how <code>root_path</code> resulted in creating a relative path of <code>"/"</code>. 
+  </p>
+
+  <p>
+    If we look back to the result of running <code>rake routes</code>, we can see that the <code>URI Pattern</code> is <code>/</code>. When a user accesses a URL that matches the <code>URI Pattern</code>, the <code>Controller#Action</code> is triggered.
+  </p>
+
+  <h3 id="controller_action">Controller#Action</h3>
+
+  <p>
+    The <code>Action</code> (another word for method) of the <code>Controller</code> is triggered when a user makes a request to a URL that matches the <code>URI Pattern</code>.
+  </p>
+
+  <p>
+    For example, when a user goes to <code>https://techrise-ideator.herokuapp.com/</code>, the URL matches the <code>/</code> URI Pattern. At this point, the <code>index</code> action of the <code>Ideas</code> Controller is triggered.
+  </p>
+
+  <p>
+    <strong>When a controller action is triggered, Rails will try to find an <code>html.erb</code> file with the name of the controller action inside the <code>apps/views/controller_name</code> directory.</strong>
+  </p>
+
+  <p>
+    For example, when the <code>index</code> action of the <code>Ideas</code> Controller is triggered, Rails will try to find a filed called <code>index.html.erb</code> inside the <code>apps/views/ideas</code> directory.
+  </p>
+
+  <%= create_flashcard %>
+
+  <h3>Verb</h3>
+
+  <p>
+    We won't go too deep into this topic right now, we will go over this topic in later lessons.
+  </p>
+
+  <p>
+    There are five different HTTP methods:
+  </p>
+
+  <ul>
+    <li>GET</li>
+    <li>POST</li>
+    <li>DESTROY</li>
+    <li>PUT</li>
+    <li>PATCH</li>
+  </ul>
+
+  <p>
+    Here's what each of the methods do in short (there is a whole chapter on this later on in the course):
+  </p>
+
+<ul>
+  <li><strong><code>GET</code> requests are used to retrieve data. When you vist a web page, you are making a <code>GET</code> request.</strong></li>
+  <ul>
+    <li>When you type in <code>https://www.facebook.com</code> in your browser and press enter, you are making a <code>GET</code> request to Facebook's servers.</li>
+  </ul>
+  <li><strong><code>POST</code> requests are used to create new objects.</strong></li>
+  <ul>
+    <li>When you create a Facebook post, you are making a <code>POST</code> request to Facebook's servers</li>
+  </ul>
+  <li><strong><code>DELETE</code> requests are used to delete objects.</strong></li>
+  <ul>
+    <li>When you delete a Facebook post, you are making a <code>DELETE</code> request to Facebook's servers</li>
+  </ul>
+  <li><strong><code>PATCH</code> requests are used to update objects.</strong></li>
+  <ul>
+    <li>When you update a Facebook post, you are making a <code>PATCH</code> request to Facebook's servers</li>
+  </ul>
+  <li><strong><code>PUT</code> requests are not used anymore, use <code>PATCH</code> requests instead.</strong></li>
+</ul>
+
+  <p>
+    When a user types in a URL in the browser and presses enter, the user is making a <code>GET</code> request - the user is trying to retrieve data from the server.
+  </p>
+
+  <p>
+    For example, when a user accesses <code>https://www.facebook.com</code>, the user is making a <code>GET</code> request to the Facebook servers.
+  </p>
+
+</div>
+
+<p>
+  Let's go back to our problem. What we are trying to do right now is to create routes for the <code>/ideas</code> path as a <code>POST</code> request, so that we have a place to send the form data to.
+</p>
+
+<p>
+  Rails provides a convenient method called <code>resources</code> that allows us to generate routes that are most commonly used in web applications. Let's implement this and see how it works.
+</p>
+
+<p>
+  Go into <code>routes.rb</code>, and under <code>root 'ideas#index'</code>, put <code>resources :ideas</code>. Your file should look like the following:
+</p>
+
+<pre><code class="ruby">
+Rails.application.routes.draw do
+
+  root 'ideas#index'
+
+  resources :ideas
+
+end
+</code></pre>
+
+<p>
+  Save the file and run <code>rake routes</code> in the terminal. The output should now be this:
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+     root GET    /                         ideas#index
+    ideas GET    /ideas(.:format)          ideas#index
+          POST   /ideas(.:format)          ideas#create
+ new_idea GET    /ideas/new(.:format)      ideas#new
+edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
+     idea GET    /ideas/:id(.:format)      ideas#show
+          PATCH  /ideas/:id(.:format)      ideas#update
+          PUT    /ideas/:id(.:format)      ideas#update
+          DELETE /ideas/:id(.:format)      ideas#destroy
+</code></pre>
+
+<p>
+  By putting in <code>resources :ideas</code>, rails generated all of these routes for us! Notice how now we have a <code>/ideas</code> path that handles <code>POST</code> requests.
+</p> 
+
+<div class="well">
+  <h3>resources</h3>
+
+  <p>
+    Web applications are made up of mainly the following components:
+  </p>
+
+  <ul>
+    <li><strong>The Index Page</strong> - the page displays all of the records</li>
+    <ul>
+      <li>When you go on to Facebook, it displays all of your friend's posts. This is the index page.</li>
+      <li>This is a <code>GET</code> request</li>
+    </ul>
+    <li><strong>The Show Page</strong> - the page that displays one individual record</li>
+    <ul>  
+      <li>In the index page, all of your friend's posts are displayed. When you click on a post, you can view the individual post alone. This is the show page.</li>
+      <li>This is a <code>GET</code> request</li>
+    </ul>
+    <li><strong>The New Page</strong> - the page where you typically fill out a form to create a new record</li>
+    <ul>
+      <li>In Facebook, there is no New page since you can create a Facebook post from the front page. If there were a page only for creating a Facebook post, that would be the new page.</li>
+      <li>This is a <code>GET</code> request - we aren't actually posting to the server, this page typically just displays a form</li>
+    </ul>
+    <li><strong>The Create Action</strong> - the backend process that creates and saves a new record to the database</li>
+    <ul>
+      <li>When you create a Facebook post, the create action is triggered. The create action takes care of creating the new post and saving it to the Facebook servers.</li>
+      <li>This is a <code>POST</code> request</li>
+    </ul>
+    <li><strong>The Edit Page</strong> - the page where there is typically a form where you can edit the record</li>
+    <ul>
+      <li>In Facebook, there is no page for just editing a Facebook post. If there was, that would be the edit page.</li>
+      <li>This is a <code>GET</code> request</li>
+    </ul>
+    <li><strong>The Update Action</strong> - the backend process that updates a record into the database</li>
+    <ul>
+      <li>When you edit a Facebook post and press submit, the update action is triggered.</li>
+      <li>This is a <code>PATCH</code> request</li>
+      <li>It is also mapped to <code>PUT</code>, but it is not used vey often</li>
+    </ul>
+    <li><strong>The Destroy action</strong> - the backend process that deletes a record from the database</li>
+    <ul>
+      <li>When you delete a naughty Facebook post, the destroy action is triggered and deletes the post from Facebook's server.</li>
+      <li>This is a <code>DELETE</code> request</li>
+    </ul>
+  </ul>
+
+  <p>
+    Since these components are so common, Ruby on Rails made it super easy to create the routes for these actions.
+  </p>
+
+  <p>
+    When you add <code>resources :controller_name</code> to <code>routes.rb</code>, it automatically creates routes for the following actions that we talked about above:
+  </p>
+
+  <ul>
+    <li>index</li>
+    <li>show</li>
+    <li>new</li>
+    <li>create</li>
+    <li>edit</li>
+    <li>update</li>
+    <li>destroy</li>
+  </ul>
+
+  <p>
+    We can use these actions to create various features in our web application.
+  </p>
+</div>
+
+<p>
+  Now that we have our routing set up, we can send the form data to the <code>/ideas</code> path. If we look back at the output of <code>rake routes</code>, we see that a <code>POST</code> request to the <code>/ideas</code> path triggers the <code>create</code> action inside of <code>ideas_controller.rb</code>:
+</p>
+
+<pre><code>
+   Prefix Verb   URI Pattern               Controller#Action
+    ideas POST   /ideas(.:format)          ideas#create
+</code></pre>
+
+<p>
+  Right now, we don't have a <code>create</code> action inside of the <code>ideas_controller.rb</code> file. 
+</p>
+
+<p>
+  Right now, when we trigger the form, the form data will be sent to the <code>/ideas</code> path and trigger the <code>create</code> action, but since we haven't created a create action, the form will not properly work.
+</p>
+
+<%= image_tag 'ideator/missing_create.png', class: 'img-responsive screenshot' %>
+
+<h3>Setting up the Backend</h3>
+
+<p>
+  In order to add ideas through a form, we need to tell rails what to do when the form is submitted and tries to create an idea. What we need is a <code>create</code> method which will be responsible for creating our ideas and saving them to our database.
+</p>
+
+<p>
+  In our <code>ideas_controller</code>, let's make a <code>create</code> method.
+</p>
+
+<pre><code class = "ruby">
+class IdeasController &lt; ApplicationController
+  def index
+    @ideas = Idea.all
+  end
+
+  def create
+  end
+end
+</code></pre>
+
+<p>
+  Inside this <code>create</code> action, we're going to call the <code>create</code> method on <code>Idea</code>.
+</p>
+
+<p class="alert alert-info">
+  Refer back to <%= link_to 'this lesson', '/ideator_lessons/10' %> for a review of this topic.
+</p>
+
+<p>
+  When requests are sent in through forms, the data that is being sent looks like this:
+</p>
+
+<pre><code class="bash">
+Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ew3W9K6QmcSG7HFTqhXbt0FUQOTYhG50Dm5ixVvxyeXIVm+dD1/g59ThIMI5IZ9OTh/rbaWO/7zt081/J/B1xA==", "idea"=>{"description"=>"Apples are better than pears.", "author"=>"Fruit Expert"}, "commit"=>"Submit"}
+</code></pre>
+
+<p>
+  As we can see, the data being sent to the server is a <strong>hash</strong>. To review, hashes contain key value pairs. What we need to do is grab the values of the <code>idea</code> key and create an <code>Idea</code> object using those values.
+</p>
+
+<%= image_tag 'ideator/form_data.png', class: 'img-responsive screenshot' %>
+
+<p>
+  <strong>We can access this data inside our controller with <code>params</code>.</strong> We can access the <code>ideas</code> with <code>params[:ideas]</code>.
+</p>
+
+<p>
+  <strong>In other words, we are accessing the <em>values</em> for the <code>idea</code> key in the <code>params</code> hash:</strong>
+</p> 
+
+<pre><code class="ruby">
+params
+=> {"utf8"=>"✓", "authenticity_token"=>"Ew3W9K6QmcSG7HFTqhXbt0FUQOTYhG50Dm5ixVvxyeXIVm+dD1/g59ThIMI5IZ9OTh/rbaWO/7zt081/J/B1xA==", "idea"=>{"description"=>"Apples are better than pears.", "author"=>"Fruit Expert"}, "commit"=>"Submit"}
+
+params[:idea]
+=> {"description"=>"Apples are better than pears.", "author"=>"Fruit Expert"}
+</code></pre>
+
+<p>
+  As you can see, <code>params[:idea]</code> returns another hash.
+</p>
+
+<p>
+  To access the <code>description</code> and <code>author</code>, we can access the value for the <code>description</code> key, and access the value for the <code>author</code> key:
+</p>  
+
+<pre><code class="ruby">
+params[:idea][:description]
+=> "Apples are better than pears."
+
+params[:idea][:author]
+=> "Fruit Expert"
+</code></pre>
+
+<p>
+  Now that we know how to retrieve data that is sent into the server, we can use this data to create a new <code>Idea</code> and save it into the database.
+</p>
+
+<p>
+  Inside <code>ideas_controller.rb</code>, make the file look like the following:
+</p>
+
+<pre><code class = "ruby">
+class IdeasController &lt; ApplicationController
+  def index
+    @ideas = Idea.all
+  end
+
+  def create
+    @idea = Idea.create(description: params[:idea][:description], author: params[:idea][:author])
+  end
+end
+</code></pre>
+
+<p>
+  If we submit the form, you will see that it works. However, <strong>we can refactor this code</strong>.
+</p>
+
+<p>
+  Let's take a look at the parameters we are passing into the <code>create</code> method:
+</p>
+
+<pre><code class = "ruby">
+description: params[:idea][:description], author: params[:idea][:author]
+</code></pre>
+
+<p>
+  As we can see, we are passing in <em>key value pairs</em>.
+</p>  
+
+<p>
+  When we submit a form with the description of "Apples are better than pears" and the author being "Fruit Expert", then the parameters will look like this:
+</p>
+
+<pre><code class = "ruby">
+description: "Apples are better than pears.", author: "Fruit Expert"
+</code></pre>
+
+<p>
+  If we take a step back, <strong>this set of key-value pairs are the same as if we ran <code>params[:idea]</code>.</strong>
+</p>  
+
+<p>
+  In other words, this code:
+</p>
+
+<pre><code class="ruby">
+Idea.create(params[:idea])
+</code></pre>
+
+<p>
+  will run the same as this code:
+</p>
+
+
+<pre><code class="ruby">
+Idea.create(description: params[:idea][:description], author: params[:idea][:author])
+</code></pre>
+
+<p>
+  As we can see, writing <code>Idea.create(params[:idea])</code> is shorter and more concise.
+</p>
+
+<h3>Security Issues</h3>
+
+<p>
+  <strong>However, if we write <code>Idea.create(params[:idea])</code>, this exposes a set of security issues.</strong> That's why this code won't work - Rails detects that there's a security issue and prevents developers from doing this.
+</p>
+
+<p>
+  For example, let's say we had a boolean database column called <code>admin</code> for a <code>users</code> table.
+
+<p>
+  A hacker could try and send data to the server like such:
+</p>
+
+<pre><code class="ruby">
+{"user"=>{"name"=>"Hacker :D", "admin"=>"true"}}
+</code></pre>
+
+<p>
+  Then, inside our <code>users_controller.rb</code>, let's say we had the following code:
+</p>
+
+<pre><code class="ruby">
+class UsersController &lt; ApplicationController
+  def create
+    User.create(params[:user])
+  end
+end
+</code></pre>
+
+<p>
+  Since <code>User.create(params[:user])</code> will create a <code>User</code> object based on the data passed into the server, the hacker can successfully create an admin account:
+</p>
+
+<pre><code class="ruby">
+User.create(name: "Hacker :D", admin: true)
+</code></pre>
+
+<p>
+  To prevent this, we need to implement <strong>strong parameters</strong>.
+</p>
+
+<p>
+  <strong>We can implement strong parameters by creating a method that whitelists only certain attributes.</strong>
+</p>
+
+<p>
+  We can do this by creating a private method called <code>ideas_params</code>:
+</p>
+
+<pre><code class="ruby">
+private
+
+def idea_params
+  params.require(:idea).permit(:description, :author)
+end
+</code></pre>
+
+<p>
+  The code above whitelists <code>description</code> and <code>author</code> and will prevent users from sending in malicious data to the server. 
+</p>
+
+<p>
+  The final step is to replace <code>ideas[:params]</code> with <code>idea_params</code>.
+</p>
+
+<pre><code class = "ruby">
+class IdeasController &lt; ApplicationController
+  def index
+    @ideas = Idea.all
+  end
+
+  def create
+    @idea = Idea.create(idea_params)
+  end
+
+  private
+
+  def idea_params
+    params.require(:idea).permit(:description, :author)
+  end
+end
+</code></pre>
+
+<p>
+  <strong>When handling information in the server, you should always use strong parameters to whitelist what data can go into your application.</strong>
+</p>
+
+<p>
+  Awesome! Next, we need to tell rails what to do after we create the idea.
+</p>
+
+<p>
+  <strong>This is what we want to do:</strong>
+</p>
+
+<ul>
+  <li>Create a new Idea and save it to the database</li>
+  <li>Redirect the user to the home page</li>
+</ul> 
+
+<p>
+  We can redirect the user with the <code>redirect_to</code> method.
+</p>
+
+<div class="well">
+  <h3>redirect_to</h3>
+
+  <p>
+    You can redirect users to a certain page in your application with <code>redirect_to</code>.
+  </p>
+
+<pre><code class="ruby">
+redirect_to root_path
+</code></pre>
+  
+  <p>
+    The code above will redirect the user to <code>root_path</code>.
+  </p>  
+
+</div>
+
+<pre><code class = "ruby">
+class IdeasController &lt; ApplicationController
+  def index
+    @ideas = Idea.all
+  end
+
+  def create
+    @idea = Idea.create(idea_params)
+    redirect_to root_path
+  end
+
+  private
+
+  def idea_params
+    params.require(:idea).permit(:description, :author)
+  end
+end
+</code></pre>
+
+<p>
+   Now let's test this out. Enter an idea and an author and press 'Submit'. Voila! You should see your idea on your page, just like that!
+</p>
+
+<h3>Styling the Form Buttons</h3>
+
+<p>
+  Since the buttons look really ugly, let's add some bootstrap buttons on there to make them look nicer. What we can do is add a <code>btn btn-primary</code> class to the Submit button. We can do this by adding <code>class: 'btn btn-primary'</code> to the Submit button code like below (make sure to put the <code>,</code> between <code>'Submit'</code> and <code>class:</code>)
 </p>
 
 <pre><code class="ruby">
@@ -496,10 +708,6 @@ rails generate simple_form:install --bootstrap
 
 <p>
   Save the file and refresh the browser. We now see prettier buttons! Awesome!
-</p>
-
-<p>
-   Now let's test this out. Enter an idea and an author and press 'Submit'. Voila! You should see your idea on your page, just like that!
 </p>
 
 <%= standard_git_workflow %>

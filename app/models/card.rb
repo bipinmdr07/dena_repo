@@ -5,7 +5,7 @@ class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :deck
 
-  before_save :update_code_syntax
+  before_save :update_code_syntax!
 
   validates :question, :answer, presence: true
 
@@ -29,13 +29,13 @@ class Card < ActiveRecord::Base
     Card.where(deck: deck).where("id < ?", id).last
   end
 
-  def update_code_syntax
+  def update_code_syntax!
     syntax_builder = SyntaxBuilder.new(self)
     self.question = syntax_builder.question
     self.answer = syntax_builder.answer
   end  
 
   def update_interval!(quality_response)
-    IntervalUpdater.new(self, quality_response).update_card!
+    IntervalUpdater.new(card: self, quality_response: quality_response).update_card!
   end
 end

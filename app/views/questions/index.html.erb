@@ -16,7 +16,7 @@
                     <li class="post-time post_date date updated"><%= display_date(question.created_at) %></li>
 
                     <% unless question.mentor_post %>
-                      <% course_name = Tags::LESSONS[question.course_name.underscore + "s"].keys[question.lesson_id - 1][1] %>
+                      <% course_name = question.course_name.constantize::LESSONS[question.lesson_id - 1] %>
                       <li class="post-author"><%= link_to course_name, '/' + question.course_name.underscore + "s/" + question.lesson_id.to_s %></a></li>
                     <% end %>
                 </ul><!--//meta-list-->                             

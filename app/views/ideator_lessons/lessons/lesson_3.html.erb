@@ -1,81 +1,61 @@
-<h1><%= title_for(IdeatorLesson, 2, 1) %></h1>
+<p>
+  Time for a web application crash course!
+</p>
+
+<h3>Clients and Servers</h3>
 
 <p>
-	The app that we are going to be developing together called Ideator, is going to be an app where anyone can post ideas on to the website and they are automatically updated. It will also have the ability to show ideas randomly as well. In order to start making this website, we have to start visualizing what we want it to look like.
+  When a user accesses a website from a PC or a smartphone, it sends a <strong><em>request</em></strong> to the server. The server then sends a <strong><em>response</em></strong> back to the PC or smartphone.
 </p>
 
 <p>
-	In every app, we want to create wireframes so we have guidance on how we want the app to look and how we want it to function. The simplest way in my opinion is to do it by hand.
+  In this model, PCs, smartphones, tablets, are called the <strong>client</strong>. <strong>The client sends a <em>request</em> to the server and the server sends a <em>response</em> back.</strong>
+</p>
+
+<%= image_tag 'ideator/client_server.png', class: 'img-responsive screenshot' %>
+
+<h2>MVC Framework</h2>
+
+<p>
+  Rails implements the <strong>MVC framework</strong> to organize the structure of the web application.
 </p>
 
 <p>
-	So here’s what I did for this app. I took out a piece of paper and just drew up some rough sketches for the app like this:
+  <strong>MVC stands for <em>Model</em>, <em>View</em>, <em>Controller</em>.</strong> MVC is a framework and a way of organizing how the application is structured. Many web applications use the MVC framework. <strong>Each component is responsible for handling different tasks.</strong>
 </p>
 
-<%= image_tag 'ideator/ideator_wireframes.jpg', class: 'img-responsive screenshot', style: 'width: 40%; margin: 0 auto;' %>
+<h3>Model</h3>
 
 <p>
-	As you can see, the wireframes don't have to be perfect, it just needs to get the job done. Especially for smaller applications like Ieator, the key here is to visualize what features you want on your web application so that it's easier to think through how to build your web application.
+  The model is responsible for interacting with the database. It is responsible for things like fetching new information and storing information into the database. Every Rails application has an <code>app/models</code> directory, which holds all of the model files.
 </p>
 
-<div class="well">
-	<h3>Wireframing Applications</h3>
-
-	<p>
-		There are multiple applications to draw up mock ups such as <%= link_to 'Balsamic', 'https://balsamiq.com/', target: '_blank' %>, Mockingbird, and many more. These applications are fantastic tools that you can use to draw simple mocks for your application. 
-	</p>
-
-	<p>
-		While using these applications are effective, often times drawing them out on a whiteboard or on a piece of paper gets the job done. However, ultimately, it's up to you on what tools you want to use.
-	</p>
-</div>
-
-<h3>What kind of information do we need to store?</h3>
+<h3>Views</h3>
 
 <p>
-	Along with these mock ups, let's specify what kind of data we want to store in my database.
+  The views are responsible for displaying things to the user. In every Rails application, there is an <code>app/views</code> directory. This is the directory where <code>.html</code> files are stored. 
+</p>
+
+<h3>Controller</h3>
+
+<p>
+  The controller is responsible for interacting with both the views and the model. It is the middleman between the two. Every Rails application has an <code>app/controllers</code> directory, which holds all of the controller files.
 </p>
 
 <p>
-	In our app, we want to be able to <strong>post ideas</strong> on to the application. In order to do that, we need to store the ideas into a database.
+  <strong>There's also another important component, the router.</strong>
+</p>
+
+<h3>Router</h3> 
+
+<p>
+  The router is responsible for mapping requests to specific controller actions. In Rails applications, the routing is defined in the <code>routes.rb</code> file. We'll explain what controller actions are in later lessons.
 </p>
 
 <p>
-	Let’s think about what pieces of information we want to store for this app. 
+  For now, let's keep clients, servers, MVC, and the router in mind and keep on going. We'll explain how everything works together in later lessons.
 </p>
 
-<ul>
-	<li>One piece of information we need is a <strong>description</strong> of what the idea is</li>
-	<li>Another piece of information we need is the <strong>author</strong> of the idea</li>
-</ul>
-
-<p>
-	In other words, each idea will have two pieces of information attached to it, a <code>description</code> and an <code>author</code>. So when we save our ideas into the database, we are saving the author of the idea and the description of the idea. We can then retreive the idea and show who thought of the idea and what the idea is all about.
-</p>
-
-<p>
-	Whenever you are creating an application, it is useful to think about what kind of information you need to store. In this case, we want to store ideas into the database, and for each idea, we want to store the description and author of the idea.
-</p>
-
-<div class="well">
-	<h3>How to Progress Through the Lessons</h3>
-
-	<p>
-		Many things in this course will not make sense to you right now. Don't worry this is by design :)
-	</p>
-
-	<p>
-		For this first application we are making, we want to give you the experience of actually building a web application. You don't need to understand 100% of the things covered in the lessons right now. <strong>It usually takes around 3 ~ 8 weeks, or even mor</strong> to start understanding everything we are going to do in the following lessons.
-	</p>
-
-	<p>
-		You will probably feel like you kind of understand the material, but if you were to do it yourself, it would be impossible. <strong>This is OK, there is no need to worry :)</strong> As you build applications throughout the TECHRISE curriculum and as you ask more and more questions, you will slowly start to understand how everything works.
-	</p>
-
-	<p>
-		For the first application, let's focus on having fun and building an actual application.
-	</p>
-</div>
 
 
-
+  

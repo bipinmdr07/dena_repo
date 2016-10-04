@@ -1,10 +1,10 @@
 $(document).ready(function() {
     
-    /* ======= Blog Featured Post Slideshow - Flexslider ======= */ 
-    $('.blog-slider').flexslider({
-        animation: "fade",
-        slideshowSpeed: 8000
-    });
+    // /* ======= Blog Featured Post Slideshow - Flexslider ======= */ 
+    // $('.blog-slider').flexslider({
+    //     animation: "fade",
+    //     slideshowSpeed: 8000
+    // });
     
    
     /* ======= Blog page masonry ======= */

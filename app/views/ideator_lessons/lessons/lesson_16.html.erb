@@ -1,4 +1,4 @@
-<h1><%= title_for(IdeatorLesson, 5, 3) %></h1>
+
 
 <p>
   Now that we have put in the <code>update</code> functionality, let's now add in functionality for deleting ideas.
@@ -117,7 +117,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 </p>
 
 <p>
-  With this link unfortunately, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as <code>GET</code>, <code>PATCH</code>, <code>PUT</code>. 
+  Unfortunately with this link, we can't tell rails to destroy the idea. If you take a look at <code>rake routes</code>, we see that <code>idea_path</code> is shared by other VERBs such as <code>GET</code>, <code>PATCH</code>, <code>PUT</code>. 
 </p>
 
 <pre><code>
@@ -277,3 +277,28 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
 <%= standard_git_workflow %>
 
 
+<h3>Deploying to Heroku</h3>
+
+<p>
+  After going through the standard git workflow, let's deploy all of the new changes that we have made to Heroku.
+</p>
+
+<pre><code class="bash">
+git push heroku master
+</code></pre>
+
+<p>
+  Every time we push to Heroku, we should run migrations on the production server:
+</p>
+
+<pre><code class="bash">
+heroku run rake db:migrate
+</code></pre>
+
+<p>
+  Then we should restart the server:
+</p>
+
+<pre><code class="bash">
+heroku restart
+</code></pre>

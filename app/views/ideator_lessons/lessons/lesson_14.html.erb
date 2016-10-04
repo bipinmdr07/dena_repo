@@ -1,4 +1,4 @@
-<h1><%= title_for(IdeatorLesson, 5, 1) %></h1>
+
 
 <p>
   Now that we're able to create our ideas smoothly, let's work on writing code so that users can <code>edit</code> and <code>update</code> the ideas.
@@ -8,11 +8,13 @@
   First, let's go into <code>ideas_controller.rb</code>. Inside the file, let's add an <code>edit</code> method. In <code>ideas_controller.rb</code>, add the following code <strong>right under your <code>create</code> method</strong>.
 </p>
 
-<p class="alert">
+<p class="alert alert-info">
   Make sure you don't put it under <code>private</code>. Code written under <code>private</code> will make the code private, meaning that they won't be accessible outside of the class.
 </p>
 
 <pre><code class="ruby">
+# end of create method
+
 def edit
 end
 </code></pre>
@@ -73,7 +75,7 @@ Idea.all
   </p>
 
   <p>
-    <strong>When you create an object in Rails, it will give the object a unique <code>id</code> automatically.</strong> These <code>id</code>s can be used to retreive objects.
+    <strong>When you create an object in Rails, it will give the object a unique <code>id</code> automatically.</strong> These <code>id</code>s can be used to retrieve objects.
   </p>
 
   <p>
@@ -89,7 +91,7 @@ Idea.find(1)
   </p>
 
   <p>
-    The <code>find</code> method can be used to retreive an object that has the <code>id</code> passed in as a parameter:
+    The <code>find</code> method can be used to retrieve an object that has the <code>id</code> passed in as a parameter:
   </p>
 
 <pre><code class="ruby">
@@ -102,7 +104,7 @@ Idea.find(1)
   </p>
 
   <p>
-    The <code>find</code> method can be used to retreive an object that has the <code>id</code> passed in as a parameter:
+    The <code>find</code> method can be used to retrieve an object that has the <code>id</code> passed in as a parameter:
   </p>
 
 <pre><code class="ruby">
@@ -252,7 +254,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
   </p> 
 
   <p>
-    For example, when a user makes a <code>GET</code> request to a URL like <code>http://localhost:3000/ideas/1/edit</code>, the <code>edit</code> action of the <code>ideas</code> controller is triggered. <code>id</code> is sent to the server as a paramter as well.
+    For example, when a user makes a <code>GET</code> request to a URL like <code>https://www.techrise-ideator.herokuapp.com/ideas/1/edit</code>, the <code>edit</code> action of the <code>ideas</code> controller is triggered. <code>id</code> is sent to the server as a parameter as well.
   </p>
 
   <%= create_flashcard %>
@@ -321,7 +323,7 @@ end
 </p>
 
 <p>
-  Then we are saying if <code>@idea</code> updates successfully, then <code>redirect_to</code> the <code>root_path</code> (the home page). If it doesn't update succcessfully, then <code>redirect_to</code> the <code>edit</code> page that we were just on so that you can enter the correct information.
+  Then we are saying if <code>@idea</code> updates successfully, then <code>redirect_to</code> the <code>root_path</code> (the home page). If it doesn't update successfully, then <code>redirect_to</code> the <code>edit</code> page that we were just on so that you can enter the correct information.
 </p>
 
 <p>

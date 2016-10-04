@@ -25,6 +25,8 @@ class StudentSessionsController < ApplicationController
   private
 
   def student_session_params
-    params.require(:student_session).permit(:user_id, :private_details, :public_details, :motivation_level, :mentor_session_id).merge(user_id: current_user.id, mentor_id: current_user.mentor_id)
+    params.require(:student_session).permit(:user_id, :private_details, :public_details, 
+                                            :motivation_level, :mentor_session_id)
+                                    .merge(user_id: current_user.id, mentor_id: current_user.mentor_id)
   end 
 end

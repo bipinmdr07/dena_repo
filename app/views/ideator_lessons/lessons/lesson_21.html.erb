@@ -1,27 +1,99 @@
-<h1><%= title_for(IdeatorLesson, 7, 2) %></h1>
-
 <p>
-  You're almost done! The final step is to tweak the front end to make the app look amazing.
+  <strong>Whenever we create an idea, update an idea, or delete an idea, it is a good idea to notify the user that the operation was completed successfully. On the other hand, it is also a good idea to notify the user if the operation failed.</strong>
 </p>
 
 <p>
-  This is going to be a <strong>self guided lesson</strong>. Make the app look exactly how you want it!
+  We can achieve this using <em>flash messages</em>.
+</p>
+
+<p> 
+  In your <code>ideas_controller.rb</code>, let's set up these flash messages for the <code>create</code>, <code>update</code>, and <code>destroy</code> actions.
 </p>
 
 <p>
-  Here are a few tips:
+  We can setup <code>flash</code> messages by assigning a <code>string</code> values to different keys like this:
 </p>
 
-<ul>
-<li>Play around with <code>font-weight</code></li>
-<li>Play around with <code>letter-spacing</code></li>
-<li>Play around with <code>font-size</code></li>
-<li>Play around with the <code>background-color</code> of <code>.panel_body</code></li>
-</ul>
+<pre><code class="ruby">
+class IdeasController < ApplicationController
+  ...
+
+  def create    
+    @idea = Idea.create(idea_params)
+    if @idea.valid?
+      flash[:success] = "Your idea has been posted!"
+    else
+      flash[:alert] = "Woops! Looks like there has been an error!"
+    end
+    redirect_to root_path
+  end
+
+  ...
+
+  def update
+    @idea = Idea.find(params[:id])
+    if @idea.update(idea_params)
+      flash[:success] = "The idea has been updated!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Woops! Looks like there has been an error!"
+      redirect_to edit_idea_path(params[:id])
+    end
+  end
+
+  def destroy
+    @idea = Idea.find(params[:id])
+    @idea.destroy
+    flash[:success] = "The idea was successfully deleted!"
+    redirect_to root_path
+  end
+
+  ...
+end
+
+</code></pre>
 
 <p>
-  Spend some time to really try to customize your app to look like how you think it should look. Doing things yourself is where you'll learn the most. <strong>Google Chrome's Developer Tools</strong> will become super handy! Review how you can use developer tools to test out new looks for your app.
+  To display the flash messages, let's create a new partial file inside of our <code>app/views/shared</code> directory called <code>_flash_messages.html.erb</code>.
+</p>
+
+<p>
+  Inside of this file, copy and paste the following code:
+</p>
+
+<pre><code class="erb">
+&lt;% flash.each do |message_type, message| %&gt;
+  &lt;% if message_type == "notice" %&gt;
+    &lt;p class="alert alert-info alert-dismissible text-center"&gt;&lt;button type="button" class="close" data-dismiss="alert" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;&lt;%= notice %&gt;&lt;/p&gt;
+  &lt;% elsif message_type == "alert" %&gt;
+    &lt;p class="alert alert-danger alert-dismissible text-center"&gt;&lt;button type="button" class="close" data-dismiss="alert" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;&lt;%= alert %&gt;&lt;/p&gt;
+  &lt;% else %&gt;
+    &lt;div class="alert alert-&lt;%= message_type %&gt; alert-dismissible text-center"&gt;&lt;button type="button" class="close" data-dismiss="alert" aria-label="Close"&gt;&lt;span aria-hidden="true"&gt;&times;&lt;/span&gt;&lt;/button&gt;&lt;%= message %&gt;&lt;/div&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></pre>
+
+<p>
+  Next, in your <code>application.html.erb</code> add the <code>_flash_messages.html.erb</code> partial above <code>&lt;%= yield &gt;</code>:
+</p>
+
+<pre><code class="erb">
+&lt;!-- HTML code above --&gt;
+  &lt;= render 'shared/flash_messages' %&gt;
+  &lt;%= yield %&gt;
+&lt;!-- HTML code below --&gt;
+</code></pre>
+
+<p>
+  Now if you create a new idea, update an idea, or delete an idea, your flash message should be displayed on to the screen!
 </p>
 
 
-<%= standard_git_workflow %>
+
+
+
+
+
+
+
+

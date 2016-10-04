@@ -1,11 +1,9 @@
-<h1><%= title_for(IdeatorLesson, 4, 1) %></h1>
-
 <p>
   Now that we've got a nice front end, let's work on the backend and actually get the app to do something.
 </p>
 
 <p>
-  The first thing we are going to do is to create a <code>model</code>. In short, <strong>the role of models are to interact with the database</strong>. We'll go into the details of the role of models in future lessons, so let's not dive deep into the topics of models just yet. For now, let's focus on getting this app running.
+  The first thing we are going to do is to create a <code>model</code>. To review, <strong>the role of models are to interact with the database</strong>, such as fetching information from the database and storing information intro the database.
 </p>
 
 <p>
@@ -36,12 +34,12 @@ rails generate model Idea
   </p>
 
   <p>
-    Not following this convention could lead to bugs, so whenever you create a model or controller, make sure to be careful of the singular or plural form.
+    <strong>Not following this convention will lead to bugs, so whenever you create a model or controller, make sure to be careful of the singular or plural form.</strong>
   </p>
 
   <ul>
-    <li>Models - Singular (for example, <code>Post</code>, <code>Article</code>)</li>
-    <li>Controllers - Plural (for example, <code>Posts</code>, <code>Articles</code>)</li>
+    <li><strong>Models - Singular</strong> (for example, <code>Post</code>, <code>Article</code>)</li>
+    <li><strong>Controllers - Plural</strong> (for example, <code>Posts</code>, <code>Articles</code>)</li>
   </ul>
 
   <%= create_flashcard %>
@@ -100,22 +98,24 @@ rails generate model Idea
 </div>
 
 <p>
-  If you remember back to when we built the wireframes, we also drew out what our database columns were going to consist of. We figured out that <strong>for each of our ideas, we want to store the <code>description</code> and the <code>author</code> of the idea.
+  Go into C9 and press <code>Command + P</code> and type in "create ideas" and it should find your migration file that looks like <code>xxxxxxxxx_create_ideas.rb</code>. Inside this file, we can specify the database columns we want to add.
 </p>
 
 <p>
-  In order to tell rails to create columns in the database for storing the <code>author</code> and <code>description</code> of the ideas, we have to tell it what kind of data they are going to be. <strong>Is the database column going to store numbers? Text? Booleans? We need to specify this when we create our migration files.</strong> Here we are going to tell rails that the <code>description</code> column is going to be the data type of <code>text</code>, and the <code>author</code> column is going to be the data type of <code>string</code></strong>. 
+  <strong>What we are going to add into the database:</strong>
 </p>
 
-<p>
-  Go into Sublime and hit <code>Command + P</code> and type in "create ideas" and it should find your migration file that looks like <code>xxxxxxxxx_create_ideas.rb</code>. Open the file that looks like <code>xxxxxxxxx_create_ideas.rb</code>. We can specify the database columns like we talked about above by making the migration file look like the following.
-</p>
+<ul>
+  <li>A <code>ideas</code> table</li>
+  <li><code>content</code> column inside of <code>ideas</code> table (<code>text</code> type)</li>
+  <li><code>author</code> column inside of <code>ideas</code> table (<code>string</code> type)</li>
+</ul>
 
 <pre><code class="ruby">
 class CreateIdeas &lt; ActiveRecord::Migration
   def change
     create_table :ideas do |t|
-      t.text :description
+      t.text :content
       t.string :author
       t.timestamps null: false
     end
@@ -128,7 +128,7 @@ end
 </p>
 
 <p>
-  Now that we have edited our migration file, we have to tell rails to migrate these columns. Type in the following command in the terminal and press enter:
+  Now that we have edited our migration file, we have to tell Rails to migrate these columns. Type in the following command in the terminal and press enter:
 </p>
 
 <pre><code class="bash">
@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 20160113000616) do
   enable_extension "plpgsql"
 
   create_table "ideas", force: :cascade do |t|
-    t.text     "description"
+    t.text     "content"
     t.string   "author"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -202,22 +202,6 @@ ActiveRecord::Schema.define(version: 20160113000616) do
 end
   </code></pre>
 
-  <p>
-    Let's focus on this part of the code:
-  </p>
-
-  <pre><code class="ruby">
-create_table "ideas", force: :cascade do |t|
-  t.text     "description"
-  t.string   "author"
-  t.datetime "created_at",  null: false
-  t.datetime "updated_at",  null: false
-end
-  </code></pre>
-
-  <p>
-    Here, it is saying that we have an <code>ideas</code> table, and inside that table, we have a<code>description</code> column which is a <code>text</code> column, an <code>author</code> column which is a <code>string</code>, a <code>created_at</code> column which is a <code>datetime</code>, and an <code>updated_at</code> column which is a <code>datetime</code>.
-  </p>
 
   <p>
     <code>schema.rb</code> is updated automatically every time you run a migration to reflect the new changes to the database.
@@ -226,6 +210,9 @@ end
   <p>
     In short, <code>schema.rb</code> <strong>specifies what database tables and columns are included in the application.</strong>
   </p>
+
+    <%= image_tag 'ideator/migrations.png', class: 'img-responsive screenshot' %>
+
 
   <%= create_flashcard %>
 </div>

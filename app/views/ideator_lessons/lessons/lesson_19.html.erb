@@ -1,4 +1,4 @@
-<h1><%= title_for(IdeatorLesson, 6, 3) %></h1>
+
 
 <p>
   Now that we've got the "About" page, let's add the final page - the "Random" page. On this page, we want to display one random idea from our database, and everytime a user refreshes the page, we want it to generate another random idea.
@@ -52,7 +52,7 @@ end
 </p>
 
 <p>
-  If we go to <code>http://localhost:3000/random</code>, we see an idea and every time we refresh the page, a new idea comes up. Awesome!
+  If we go to <code>/random</code>, we see an idea and every time we refresh the page, a new idea comes up. Awesome!
 </p>
 
 <p>
@@ -150,7 +150,7 @@ end
 </div>
 
 <p>
-  Sweet, you've now added all of the pages succesfully! The final step in this lesson is to add a link to the random page in the navbar.
+  Sweet, you've now added all of the pages successfully! The final step in this lesson is to add a link to the random page in the navbar.
 </p>
 
 <p>
@@ -185,6 +185,32 @@ end
 </p>
 
 <%= standard_git_workflow %>
+
+<h3>Deploying to Heroku</h3>
+
+<p>
+  After going through the standard git workflow, let's deploy all of the new changes that we have made to Heroku.
+</p>
+
+<pre><code class="bash">
+git push heroku master
+</code></pre>
+
+<p>
+  Every time we push to Heroku, we should run migrations on the production server:
+</p>
+
+<pre><code class="bash">
+heroku run rake db:migrate
+</code></pre>
+
+<p>
+  Then we should restart the server:
+</p>
+
+<pre><code class="bash">
+heroku restart
+</code></pre>
 
 
 

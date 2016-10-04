@@ -1,4 +1,4 @@
-<h1><%= title_for(IdeatorLesson, 4, 2) %></h1>
+
 
 <p>
   Now that we've got a model and a controller for our Ideas, we can start interacting with the database. Get ready to do some web developerly things!
@@ -12,7 +12,7 @@
   <h3>Rails Console</h3>
 
   <p>
-    The rails console is used to execute ruby commands. However, you can not run commands such as <code>git add .</code> or <code>rake routes</code> since they are not commands written in the ruby language.
+    The rails console is used to execute ruby commands. However, you cannot run commands such as <code>git add .</code> or <code>rake routes</code> since they are not commands written in the ruby language.
   </p>
 
   <p>
@@ -25,7 +25,7 @@ exit
 </div>
 
 <p>
-  First, let's create an Idea in our app through the console. Type in the following in the rails console:
+  First, let's create an idea in our database through the console. Type in the following in the rails console:
 </p>
 
 <pre><code class="ruby">
@@ -33,7 +33,7 @@ Idea.create(description: "This is the greatest idea ever", author: "Me")
 </code></pre>
 
 <p>
-  Press enter to create the idea and save it into the database. Here we are saying, create an idea with the following information <code>(description: "This is the greatest idea ever", author: "Me")</code>.
+  Press enter to create the idea and save it into the database.
 </p>
 
 <div class="well">
@@ -44,7 +44,7 @@ Idea.create(description: "This is the greatest idea ever", author: "Me")
   </p>
 
   <p>
-    Rails offers a method called <code>create</code>. The <code>create</code> method will create a new instance of the object and save it into the database.
+    Rails offers a method called <code>create</code>. <strong>The <code>create</code> method will create a new instance of the object and save it into the database.</strong>
   </p>
 
   <%= create_flashcard %>
@@ -58,7 +58,7 @@ Idea.create
 </code></pre>
 
   <p>
-    However, this will create an <code>Idea</code> object that is empty.<strong> Since we made a database migration to create a column for <code>description</code> and <code>author</code> for each idea, we need to tell Rails what we should store for each of the columns. In order to specify the information for the idea we need to pass in the information as parameters.</strong> Take a look at the following code we just executed above:
+    However, this will create an <code>Idea</code> object that is <strong><em>empty</em></strong>.
   </p>
 
 <pre><code class="ruby">
@@ -68,6 +68,9 @@ Idea.create(description: "This is the greatest idea ever", author: "Me")
   <p>
     In this case, we are passing in <code>description: "This is the greatest idea ever", author: "Me"</code> as the parameters. By passing these values as parameters, we are telling Rails what the description should be and who the author should be for the idea.
   </p>
+
+  <%= image_tag 'ideator/create.png', class: 'img-responsive screenshot' %>
+
 
   <%= create_flashcard %>
 
@@ -139,6 +142,8 @@ Idea.create(description: "Apples are almost pears.", author: "Fruit Expert")
 exit
 </code></pre>
 
+<h3>Fetching Records from the Controller</h3>
+
 <p>
   Next, let's go into our <code>ideas_controller.rb</code> and see what we can do.
 </p>
@@ -154,43 +159,11 @@ end
 </code></pre>
 
 <p>
-  Here we are assigning all ideas stored in an instance variable called <code>ideas</code>.
-</p>
-
-<div class="well">
-  <h3>How Controllers and Views Work Together in Rails</h3>
-  <p>
-    In rails, the methods in the <code>controller</code> correspond to the files with the same name in the <code>view</code> folder. What that means is, if you have a method called <code>index</code> in your <code>ideas_controller.rb</code> and you also have a file called <code>index.html.erb</code> under <code>/views/ideas/index.html.erb</code>, then you can tell how <code>index.html.erb</code> should behave in the <code>index</code> method of <code>IdeasController</code>.
-  </p>
-
-  <p>
-    When you define an instance variable in the controller, you can use that instance variable in the corresponsing view file.
-  </p>
-
-  <p>
-    Let's take a look at our case:
-  </p>
-
-  <ul>
-    <li>We are defining an instance variable in the the <code>index</code> method of <code>ideas_controller.rb</code></li>
-    <li>The corresponding view file is located in <code>app/views/ideas/index.html.erb</code></li>
-    <ul>
-      <li>Notice how the <code>index</code> method and <code>index.html.erb</code> both have the same name</li>
-    </ul>
-    <li>We can use the instance variable in <code>index.html.erb</code></li>
-  </ul>
-
-  <p>
-    You can read more about how controllers and views interact <a href="http://guides.rubyonrails.org/layouts_and_rendering.html" target="_blank">here</a>.
-  </p>
-</div>
-
-<p>
-  So what we've done by adding <code>@ideas = Idea.all</code> is, we've created an instance variable that can be used inside <code>index.html.erb</code>.
+  Here we are assigning <strong>all ideas stored in the database into an instance variable</strong> called <code>@ideas</code>.
 </p>
 
 <p>
-  To better understand what all this means let's implement and see what it does. Let's go into <code>index.html.erb</code> and change it to look like the following.
+  Next, let's go into <code>index.html.erb</code> inside the <code>app/ideas</code> directory and change it to look like the following. We'll go over what we are doing and the new syntax right after this.
 </p>
 
 <pre><code class="erb">
@@ -201,22 +174,117 @@ end
 </code></pre>
 
 <p>
-  Let's go back into our browser and refresh the page. You should now see all of your ideas listed out. Let's go through what is happening.
+  Let's go back into our browser and refresh the page. You should now see all of your ideas listed out.
 </p>
 
+<p>
+  It seems the things we stored in the database are now being displayed. <strong>There's a bunch of new things here, but don't panic</strong> - let's go over them step by step.
+</p>
+
+<div class="well">
+  <h3>How Models, Controllers, and Views Work Together in Rails</h3>
+  
+  <p>
+    Let's take a look at the MVC diagram from previous lessons:
+  </p>
+
+  <%= image_tag 'ideator/mvc.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    To review:
+  </p>
+
+  <ul>
+    <li><strong>Models</strong>: responsible for fetching data from the database and storing data into the database</li>
+    <li><strong>Views</strong>: responsible for presenting information</li>
+    <li><strong>Controllers</strong>: responsible for being the bridge between the model and the views</li>
+  </ul>
+
+  <p>
+    Let's take a look at how our application is working.
+  </p>  
+
+  <p> 
+    <strong>First</strong>, when we visit our webpage, it makes a request to the server. 
+  </p>
+
+  <p>
+    <strong>Next</strong>, the <strong>router</strong> determines which <strong>controller action</strong> to trigger. In this case, the <code>index</code> action of <code>ideas_controller.rb</code> is triggered (refer back to previous lessons to review).
+  </p>
+
+  <p>
+    Inside <code>ideas_controller.rb</code>, <strong>we fetch all <code>Idea</code> objects in the database and store it into an instance variable @ideas</strong>.
+  </p>
+
+  <p>
+    <strong>When we fetch all of the <code>Idea</code> objects in the database, the <strong><em>model</em></strong> is performing that task</strong> (<strong>Models</strong>: responsible for fetching data from the database and storing data into the database).
+  </p>
+
+  <%= image_tag 'ideator/mvc_1.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    <strong>Instance variables declared in controller actions can be used in the view file:</strong> 
+  </p>
+
+  <%= image_tag 'ideator/mvc_2.png', class: 'img-responsive screenshot' %>  
+
+  <p> 
+    Here's a diagram that shows how everything is working together:
+  </p>
+
+  <%= image_tag 'ideator/mvc_3.png', class: 'img-responsive screenshot' %>  
+
+</div>
+
+<h3>What's this new syntax <% %>?</h3>
+
+<p>
+  So far, we have saved all of our view files as <code>filename.html.erb</code>. <code>erb</code> stands for <strong>Embedded Ruby</strong>. As mentioned briefly in a previous lesson, <strong>using the <code>erb</code> file extension enables us to embed ruby code into HTML.</strong>
+</p>
+
+<p>
+  We can embed ruby code with the <code>&lt;% %&gt;</code> syntax. To display the result of running the ruby code to the HTML, we use <code>&lt;%= %&gt;</code>. 
+</p>
+
+<p>
+  For example:
+</p>
+
+<pre><code class="erb">
+&lt;!-- without the %=, it won't display the result of running the ruby code to the user --&gt;
+&lt;% number = 1 + 1 %&gt;
+
+&lt;!-- with %= it will display the result of running the ruby code to the user --&gt;
+&lt;%= number %&gt;
+</code></pre>
+
+<p>
+  The above code will result in the following HTML:
+</p>
+
+<pre><code class="html">
+2
+</code></pre>
+
+<h3>Overview</h3>
+
 <ul>
-  <li>We defined an instance variable called <code>@ideas</code> which stores a collection of all of our ideas in <code>ideas_controller.rb</code></li>
+  <li>We tell the <strong>model</strong> to fetch all records of <code>Idea</code> in the database</li>
+  <li>The <strong>model queries the database</strong> for all records of <code>Idea</code></li>
+  <li>The model then returns back all records to the <strong>controller</strong></li>
+  <li>The returned records are stored inside an instance variable called <code>@ideas</code> inside the controller</li>
   <li>Inside <code>index.html.erb</code></li>
   <ul>
-    <li>We can use <code>@ideas</code> defined in the controller</li>
-    <li>We can iterate through each idea in <code>@ideas</code></li>
+    <li>We use the <code>@ideas</code> variable defined in the controller</li>
+    <li><code>@idea</code> holds all of the <code>Idea</code> objects in the database</li>
+    <li>We iterate through each idea in <code>@ideas</code></li>
     <li>For each idea, print out the <code>description</code> and <code>author</code></li>
   </ul>
 </ul>
 
 
 <p>
-  Don't worry if this all doesn't make sense yet. The main focus here is to keep on building to create that momentum for you to learn faster. :)
+  Don't worry if this all doesn't make sense yet. With enough practice, all of this will become second-hand nature!
 </p>
 
 <%= standard_git_workflow %>
