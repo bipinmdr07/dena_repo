@@ -102,7 +102,7 @@ RSpec.describe User, type: :model do
 
       context "user has 4 more days left" do
         it "has title containing 4 days" do
-          user = FactoryGirl.create(:prework_student, admitted: false, prework_end_date: DateTime.now + 4.days)          
+          user = FactoryGirl.create(:prework_student, admitted: false, prework_end_date: DateTime.now + 4.days)
 
           user.send_prework_reminders
 
@@ -201,7 +201,7 @@ RSpec.describe User, type: :model do
     context "when user is not admitted" do
       it "should return true if user's prework_end_time is after today" do
         user = FactoryGirl.create(:user, admitted: false, prework_start_time: Date.today, prework_end_date: Date.today + 2.weeks)
-        
+
         expect(user.has_access?).to be(true)
       end
     end

@@ -1,13 +1,13 @@
 feature "Submission links" do
 
   scenario "User has not made any submissions yet" do
-    user = FactoryGirl.create(:user)    
+    user = FactoryGirl.create(:user)
     another_user = FactoryGirl.create(:user)
-    submission_by_another_user = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user.id, 
+    submission_by_another_user = FactoryGirl.create(:submission,
+      lesson_id: 15,
+      user_id: another_user.id,
       approved: true,
-      title: "Submission by Another User")    
+      title: "Submission by Another User")
 
     login_as(user, scope: :user)
     visit '/html_css_lessons/15'
@@ -23,14 +23,14 @@ feature "Submission links" do
     submission_by_user = FactoryGirl.create(:submission, lesson_id: 15, user_id: user.id, approved: false)
     another_user = FactoryGirl.create(:user)
     another_user_2 = FactoryGirl.create(:user)
-    submission_by_another_user = FactoryGirl.create(:submission, 
-                                                    lesson_id: 15, 
-                                                    user_id: another_user.id, 
+    submission_by_another_user = FactoryGirl.create(:submission,
+                                                    lesson_id: 15,
+                                                    user_id: another_user.id,
                                                     approved: true,
                                                     title: "Submission by Another User")
-    submission_by_another_user_2 = FactoryGirl.create(:submission, 
-                                                      lesson_id: 15, 
-                                                      user_id: another_user_2.id, 
+    submission_by_another_user_2 = FactoryGirl.create(:submission,
+                                                      lesson_id: 15,
+                                                      user_id: another_user_2.id,
                                                       approved: true,
                                                       title: "Submission by Another User 2")
 
@@ -47,9 +47,9 @@ feature "Submission links" do
     user = FactoryGirl.create(:user)
     submission_by_user = FactoryGirl.create(:submission, lesson_id: 15, user_id: user.id, approved: true)
     another_user = FactoryGirl.create(:user)
-    submission_by_another_user = FactoryGirl.create(:submission, 
-                                                    lesson_id: 15, 
-                                                    user_id: another_user.id, 
+    submission_by_another_user = FactoryGirl.create(:submission,
+                                                    lesson_id: 15,
+                                                    user_id: another_user.id,
                                                     approved: true,
                                                     title: "Submission by Another User")
 
@@ -62,23 +62,23 @@ feature "Submission links" do
   end
 
   scenario "User is an admin" do
-    user = FactoryGirl.create(:user, admin: true)    
+    user = FactoryGirl.create(:user, admin: true)
     another_user = FactoryGirl.create(:user)
     another_user_2 = FactoryGirl.create(:user)
     another_user_3 = FactoryGirl.create(:user)
-    submission_by_another_user = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user.id, 
+    submission_by_another_user = FactoryGirl.create(:submission,
+      lesson_id: 15,
+      user_id: another_user.id,
       approved: true,
       title: "Submission by Another User")
-    submission_by_another_user_2 = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user_2.id, 
+    submission_by_another_user_2 = FactoryGirl.create(:submission,
+      lesson_id: 15,
+      user_id: another_user_2.id,
       approved: true,
       title: "Submission by Another User 2")
-    submission_by_another_user_3 = FactoryGirl.create(:submission, 
-      lesson_id: 15, 
-      user_id: another_user_3.id, 
+    submission_by_another_user_3 = FactoryGirl.create(:submission,
+      lesson_id: 15,
+      user_id: another_user_3.id,
       approved: false,
       title: "Submission by Another User 3")
 
@@ -96,7 +96,7 @@ feature "Submission links" do
 
     login_as(user, scope: :user)
     visit '/html_css_lessons/15'
-    
+
     expect(page).to have_content "No submissions have been made for this assignment yet."
   end
 end
