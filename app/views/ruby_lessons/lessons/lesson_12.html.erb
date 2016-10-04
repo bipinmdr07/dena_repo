@@ -472,7 +472,7 @@ ruby is_even.rb
     We can use a <strong>while loop</strong>. While a condition is true, the program should keep on prompting the user for orders.
   </p>
 
-  <p>Before we jump into writing code, it's a good idea to write <em>pseudocode</em>. </p>
+  <p>Before we jump into writing code, it's a good idea to write <em>pseudocode</em>.</p>
 
   <blockquote>
     <p>Pseudocode (pronounced SOO-doh-kohd) is a detailed yet readable description of what a computer program or algorithm must do, expressed in a formally-styled natural language rather than in a programming language. </p>
@@ -522,8 +522,8 @@ ruby is_even.rb
 
 <div class="hint" data-hint-id="5">
 <pre><code class="ruby">
-# initialize an empty hash so we can store the order and the price and store it into a variable called orders
-orders = {}
+# initialize an empty hash and set the default value to 0so we can store the order and add the price
+orders = Hash.new(0)
 
 # Prompt user for food item
 puts "Enter the food menu you have ordered:" 
@@ -544,7 +544,7 @@ while(true) do
   price = gets.chomp.to_i
 
   # store the order as the key and price as the value in the orders hash
-  orders[order] = price
+  orders[order] += price
 
   # prompt user for another food item, or type exit to generate a bill
   puts "Enter another food item or type exit to generate a bill:"
@@ -558,7 +558,23 @@ end
     <p>You can break out of a <code>while</code> loop inside of the loop with <code>break</code>. The program will exit the loop and resume the program after the end of the while loop.</p>
   </div>
 
-  <p>Notice how I compare the <code>downcase</code> of <code>order</code> to <code>"exit"</code>. This is so that the program will exit the loop both when the user inputs "Exit" or "exit".</p>
+  <p>
+    <strong>We first initialize an empty hash with a default value of 0.</strong> This is important, since if we add 2 of the same food items, we need to increment the value. For example:
+  </p>
+
+<pre><code class="ruby">
+# First order of pizza
+orders["pizza"] = 200
+
+# Second order of pizza
+orders["pizza"] = 200
+
+# However, the value of pizza is 200, when it should be 400
+orders["pizza"]
+=> 200
+</code></pre>
+
+  <p>Also, notice how I compare the <code>downcase</code> of <code>order</code> to <code>"exit"</code>. This is so that the program will exit the loop both when the user inputs "Exit" or "exit".</p>
 
   <p>Let's move on to the next step. Try writing pseudocode for the next step before viewing the next hint.</p>
 </div>
@@ -667,7 +683,7 @@ puts "Total: #{total_price}"
   </p>
 
 <pre><code class="ruby">
-orders = {}
+orders = Hash.new(0)
 
 puts "Enter the food menu you have ordered:" 
 while(true) do
@@ -679,7 +695,7 @@ while(true) do
     puts "Enter the price of the order:"
     price = gets.chomp.to_i
     
-    orders[order] = price
+    orders[order] += price
     
     puts "Enter another food item or type exit to generate a bill:"
 end
