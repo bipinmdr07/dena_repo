@@ -42,7 +42,7 @@
   <%= render '/layouts/audio' %>
 
   <script type="text/javascript">
-  ready = function() {
+  addActive = function() {
     $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
     var url = window.location;
     // Will only work if string in href matches with location
@@ -52,14 +52,14 @@
         return this.href == url;
     }).parent().addClass('active');
   }
-  $(document).ready(ready);
-  $(document).on('page:load', ready);
-  $(document).on('page:change',  function() {
-    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-  });
-  $(document).on('page:restore', function() {
-    $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
-  });
+  $(document).on('turbolinks:load', addActive);
+  // $(document).on('page:load', ready);
+  // $(document).on('page:change',  function() {
+  //   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  // });
+  // $(document).on('page:restore', function() {
+  //   $('pre code').each(function(i, e) {hljs.highlightBlock(e)});
+  // });
 
 
   // ---

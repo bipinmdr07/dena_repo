@@ -2,8 +2,6 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
-  Reply = Struct.new(:reply, :user)
-
   def index
     @questions = current_user.questions.all.order("created_at DESC")
   end
@@ -65,8 +63,13 @@ class QuestionsController < ApplicationController
 
   def create_replies_array
     @replies = []
-    @question.replies.each do |reply|
-      @replies << Reply.new(reply, reply.user)
+    @question.replies.order("created_at ASC").each do |reply|
+      @replies << {reply: reply, 
+                   user_is_mentor: reply.user_mentor, 
+                   user_avatar_url: reply.user_avatar.url, 
+                   user_name: reply.user_name,
+                   display_post_links: current_user == reply.user || current_user.admin,
+                   content: MarkdownParser.new(reply.content).parsed}
     end
   end
 

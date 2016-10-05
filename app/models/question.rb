@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
   validates :title, :content, :user_id, presence: true
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
-  delegate :name, :email, :avatar, :admitted, to: :user, prefix: true
+  delegate :name, :email, :avatar, :admitted, :mentor, to: :user, prefix: true
 
   scope :unresolved, -> { where(resolved: false) }
   scope :student_post, -> { where(mentor_post: false) }

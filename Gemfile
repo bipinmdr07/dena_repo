@@ -94,6 +94,10 @@ gem 'meta-tags'
 # React
 gem 'react-rails'
 
+# Markdown + Syntax Highlighting
+gem 'redcarpet'
+# gem 'coderay'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

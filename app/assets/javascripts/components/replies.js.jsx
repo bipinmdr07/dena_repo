@@ -9,10 +9,13 @@ let Replies = React.createClass({
   render(){
     let replies = this.state.replies.map((reply) => {
       return (
-        <Reply key={reply[0].id}
-               reply={reply[0]}
-               user={reply[1]}
-               display_post_links={ this.state.current_user == reply.user || this.state.current_user.admin }
+        <Reply key={reply["reply"].id}
+               reply={reply["reply"]}
+               content={reply["content"]}
+               user_avatar_url={reply["user_avatar_url"]}
+               user_is_mentor={reply["user_is_mentor"]}
+               user_name={reply["user_name"]}               
+               display_post_links={reply["display_post_links"] }
                />
       )
     });

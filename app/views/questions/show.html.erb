@@ -1,3 +1,16 @@
+<!--
+  this CSS is necessary for proper padding for syntax highlighting.
+  The syntax highlighting format for the lesson files are slightly differently
+  because of indentation etc. 
+  In short, don't remove this unless necessary 
+-->
+<style type="text/css">
+.hljs {
+  padding: 20px !important;
+}
+</style>
+<!-- end -->
+
 <% unless @question.mentor_post %>
   <%= back_to_lesson %>
 <% end %>
@@ -7,23 +20,19 @@
   <%= render "shared/flash_messages" %>
 
   <%= react_component 'Question', { question: @question, 
-                                    user: @question.user, 
+                                    content: markdown(@question.content),
+                                    user_avatar_url: @question.user_avatar.url, 
+                                    user_is_mentor: @question.user_mentor,
+                                    user_name: @question.user_name,
                                     display_post_links: current_user == @question.user || current_user.admin } %>
 
   <hr>
 
-  <%= react_component 'Replies', { replies: @question.replies.order("created_at ASC").zip(@question.replies.map{|reply| reply.user}), current_user: current_user} %>
+  <%= react_component 'Replies', { replies: @replies, current_user: current_user } %>
 
-  <%= react_component 'QuestionForm' %>
 
-  <%= simple_form_for :reply, url: question_replies_path(@question.id), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-    <div data-no-turbolink>
-      <%= f.input :content, as: :summernote, label: 'Comment', required: true %>
-    </div>
-    <%= f.input :user_id, as: :hidden, input_html:{ value: current_user.id } %>
+  <%= react_component 'QuestionForm', { question_id: @question.id, 
+                                        authenticity_token: form_authenticity_token } %>
 
-    <br>
-    <%= f.submit 'Submit', class: 'btn btn-primary', data: {disable_with: "Submitting reply..."} %>
-  <% end %>
 
 </div>

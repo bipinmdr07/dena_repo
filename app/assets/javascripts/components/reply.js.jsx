@@ -1,21 +1,19 @@
 let Reply = React.createClass({
   getInitialState() {
       return {
-        reply: this.props.reply,
-        user: this.props.user,
-        editing: false,
-        display_post_links: this.props.display_post_links     
+        editing: false
       };
   },
 
   prof_badge(){
-    if (this.props.user.mentor == "true") {
-      return (
+    let prof_badge;
+    if (this.props.user_is_mentor === true) {
+      prof_badge = 
         <div className="prof_badge">
           <label className="label label-default">TECHRISE Mentor</label>
         </div>
-      )
     }
+    return prof_badge;
   },
 
   edit_post_links(){
@@ -33,19 +31,22 @@ let Reply = React.createClass({
 
   render() {
     return(
-      <div className="row">
-        <div className="col-xs-12 col-sm-2">
-          <img src={this.props.user.avatar.url} className="prof_pic_forum"/>
-          <div className="prof_name">
-            {this.props.user.name}
+      <div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-2">
+            <img src={this.props.user_avatar_url} className="prof_pic_forum"/>
+            <div className="prof_name">
+              {this.props.user_name}
+            </div>            
+            {this.prof_badge()}
+            {this.edit_post_links()}
           </div>
-          {this.prof_badge()}
-          {this.edit_post_links()}
-        </div>
 
-        <div className="col-xs-12 col-sm-10">
-          <div dangerouslySetInnerHTML={{__html: this.props.reply.content}} />
+          <div className="col-xs-12 col-sm-10">
+            <div dangerouslySetInnerHTML={{__html: this.props.content}} />
+          </div>        
         </div>
+        <hr />
       </div>
     )
   }

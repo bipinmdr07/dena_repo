@@ -11,10 +11,20 @@ class RepliesController < ApplicationController
       send_email_notifications!			
 
 			send_slack_notifications!
+
+      respond_to do |format|
+        format.json { render json: @reply }
+        format.html { redirect_to question_path(current_question) }
+      end
 		else
 			flash[:alert] = "Invalid attributes, please try again."
+      
+      respond_to do |format|
+        format.json { render json: @reply.errors, status: :unprocessable_entity }
+        format.html { redirect_to question_path(current_question) }
+      end
 		end
-		redirect_to question_path(current_question)
+		
 	end
 
 	def edit
