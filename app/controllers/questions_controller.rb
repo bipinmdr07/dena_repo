@@ -2,8 +2,18 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
+  Reply = Struct.new(:reply, :user)
+
   def index
     @questions = current_user.questions.all.order("created_at DESC")
+  end
+
+  def show
+    @question = Question.includes(:user, replies: :user).find(params[:id])  
+    
+    create_replies_array
+    
+    @user = @question.user
   end
 
   def new
@@ -23,12 +33,7 @@ class QuestionsController < ApplicationController
       flash[:alert] = "Invalid attributes, please try again."
       redirect_to new_question_path(lesson_id: question_params[:lesson_id], course_name: question_params[:course_name])
     end
-  end
-
-  def show
-    @question = Question.includes(:user, replies: :user).find(params[:id])
-    @user = @question.user
-  end
+  end  
 
   def edit
 
@@ -57,6 +62,13 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def create_replies_array
+    @replies = []
+    @question.replies.each do |reply|
+      @replies << Reply.new(reply, reply.user)
+    end
+  end
 
   def set_mentor_post
     @question.mentor_post = true if current_user.mentor

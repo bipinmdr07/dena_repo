@@ -1,10 +1,10 @@
-let Question = React.createClass({
+let Reply = React.createClass({
   getInitialState() {
       return {
-        question: this.props.question,
+        reply: this.props.reply,
         user: this.props.user,
-        display_post_links: this.props.display_edit_post_links,
-        editing: false
+        editing: false,
+        display_post_links: this.props.display_post_links     
       };
   },
 
@@ -32,8 +32,6 @@ let Question = React.createClass({
   },
 
   render() {
-
-
     return(
       <div className="row">
         <div className="col-xs-12 col-sm-2">
@@ -46,7 +44,7 @@ let Question = React.createClass({
         </div>
 
         <div className="col-xs-12 col-sm-10">
-          <div dangerouslySetInnerHTML={{__html: this.props.question.content}} />
+          <div dangerouslySetInnerHTML={{__html: this.props.reply.content}} />
         </div>
       </div>
     )

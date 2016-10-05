@@ -8,41 +8,13 @@
 
   <%= react_component 'Question', { question: @question, 
                                     user: @question.user, 
-                                    display_post_links: current_user == @question.user || current_user.admin }, 
-                                    {prerender: true} %>
+                                    display_post_links: current_user == @question.user || current_user.admin } %>
 
   <hr>
 
-  <%= react_component 'Replies', { replies: @question.replies.order("created_at ASC")}
+  <%= react_component 'Replies', { replies: @question.replies.order("created_at ASC").zip(@question.replies.map{|reply| reply.user}), current_user: current_user} %>
 
-  <% @question.replies.order("created_at ASC").each do |reply| %>    
-    <div class="row">
-      <div class="col-xs-2">
-        <%= image_tag reply.user_avatar, class: 'prof_pic_forum' %>
-        <div class="prof_name">
-          <%= reply.user_name %>
-        </div>
-        <div class="prof_badge">
-          <% if reply.user.mentor %>
-            <label class="label label-default">TECHRISE Mentor</label>
-          <% end %>
-        </div>
-        <div class="edit_post_links">
-          <% if current_user == reply.user || current_user.admin %>
-            <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_question_reply_path(@question.id, reply.id), class: 'btn btn-sm btn-warning' %>
-            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, question_reply_path(@question.id, reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="col-xs-10">
-        <small><%= display_date(reply.created_at) %></small>
-        <br>
-        <%= sanitize raw(reply.content) %>
-      </div>
-    </div>
-    <hr>
-  <% end %>
+  <%= react_component 'QuestionForm' %>
 
   <%= simple_form_for :reply, url: question_replies_path(@question.id), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
     <div data-no-turbolink>
