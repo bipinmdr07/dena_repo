@@ -38,5 +38,8 @@ module Techrise
       g.javascripts = false
       g.helper = false
     end
+
+    # enable react addons
+    config.react.addons = true
   end
 end
