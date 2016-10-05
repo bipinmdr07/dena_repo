@@ -8,13 +8,12 @@
 
   <%= react_component 'Question', { question: @question, 
                                     user: @question.user, 
-                                    user_img_src: image_url(@user.avatar),
-                                    display_post_links: current_user == @question.user || current_user.admin } %>
-
-  
+                                    display_post_links: current_user == @question.user || current_user.admin }, 
+                                    {prerender: true} %>
 
   <hr>
 
+  <%= react_component 'Replies', { replies: @question.replies.order("created_at ASC")}
 
   <% @question.replies.order("created_at ASC").each do |reply| %>    
     <div class="row">
