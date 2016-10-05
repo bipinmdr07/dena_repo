@@ -19,20 +19,14 @@
 
   <%= render "shared/flash_messages" %>
 
-  <%= react_component 'Question', { question: @question, 
+  <%= react_component 'Questions', {authenticity_token: form_authenticity_token,
+                                    question: @question, 
                                     content: markdown(@question.content),
                                     user_avatar_url: @question.user_avatar.url, 
                                     user_is_mentor: @question.user_mentor,
                                     user_name: @question.user_name,
-                                    display_post_links: current_user == @question.user || current_user.admin } %>
-
-  <hr>
-
-  <%= react_component 'Replies', { replies: @replies, current_user: current_user } %>
-
-
-  <%= react_component 'QuestionForm', { question_id: @question.id, 
-                                        authenticity_token: form_authenticity_token } %>
+                                    display_post_links: current_user == @question.user || current_user.admin,
+                                    replies: @replies } %>
 
 
 </div>

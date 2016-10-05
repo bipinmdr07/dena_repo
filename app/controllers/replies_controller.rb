@@ -13,7 +13,12 @@ class RepliesController < ApplicationController
 			send_slack_notifications!
 
       respond_to do |format|
-        format.json { render json: @reply }
+        format.json { render json: {reply: @reply, 
+                                    user_is_mentor: @reply.user_mentor, 
+                                    user_avatar_url: @reply.user_avatar.url, 
+                                    user_name: @reply.user_name,
+                                    display_post_links: current_user == @reply.user || current_user.admin,
+                                    content: MarkdownParser.new(@reply.content).parsed}.to_json }
         format.html { redirect_to question_path(current_question) }
       end
 		else
@@ -32,8 +37,14 @@ class RepliesController < ApplicationController
 
 	def update
     if current_reply.update(reply_params)
-      flash[:success] = "Updated!"
-      redirect_to question_path(current_reply.question)
+      respond_to do |format|        
+        format.json { render json: MarkdownParser.new(current_reply.content).parsed.to_json }
+        format.html do
+          flash[:success] = "Updated!"
+          redirect_to question_path(current_reply.question)
+        end
+      end
+      
     else
       flash[:alert] = "Woops! It looks like there has been an error. Please try again."
       render :edit
@@ -42,7 +53,10 @@ class RepliesController < ApplicationController
 
   def destroy
     current_reply.destroy
-    redirect_to question_path(current_reply.question)
+    respond_to do |format|
+      format.json { head :no_content }
+      format.html { redirect_to question_path(current_reply.question) }
+    end
   end
 
 	private
