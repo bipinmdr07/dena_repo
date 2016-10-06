@@ -55,7 +55,7 @@ end
 </p>
 
 <pre><code class="ruby">
-orders = {}
+orders = Hash.new(0)
 
 puts "Enter the food menu you have ordered:" 
 while(true) do
@@ -67,7 +67,7 @@ while(true) do
     puts "Enter the price of the order:"
     price = gets.chomp.to_i
     
-    orders[order] = price
+    orders[order] += price
     
     puts "Enter another food item or type exit to generate a bill:"
 end
@@ -99,7 +99,7 @@ puts "Total: #{total_price}"
 
 
 <pre><code class="ruby">
-orders = {}
+orders = Hash.new(0)
 
 # Input the order
 puts "Enter the food menu you have ordered:" 
@@ -112,7 +112,7 @@ while(true) do
     puts "Enter the price of the order:"
     price = gets.chomp.to_i
     
-    orders[order] = price
+    orders[order] += price
     
     puts "Enter another food item or type exit to generate a bill:"
 end
@@ -242,7 +242,7 @@ cathy.count
 
 <pre><code class="ruby">
 # We no longer need this hash, since we are storing all of our orders in @orders
-orders = {}
+orders = Hash.new(0)
 
 # Input the order
 puts "Enter the food menu you have ordered:" 
@@ -255,7 +255,7 @@ while(true) do
     
     # Instead of storing the order information in a hash
     # We can create a new Order object and push the object inside of @orders
-    orders[order] = price
+    orders[order] += price
     
     puts "Enter another food item or type exit to generate a bill:"
 end	
@@ -546,6 +546,9 @@ end
 	Now that we've refactored our procedural code into objected oriented code, we have a much more organized codebase. We've also split methods into seperate methods. 
 </p>
 
+<p>
+	Now to run the code, we can add the following lines of code:
+</p>
 
 <pre><code class="ruby">
 bill_calculator = BillCalculator.new
@@ -557,9 +560,7 @@ bill_calculator.calculate_total_price
 	Notice how our code makes a lot more sense now, and we have methods that even a person who knows nothing about programming can understand.
 </p>
 
-<p>
-	Now to run the code, we can add the following lines of code:
-</p>
+
 
 <p>
 	Congratulations! We've successfully refactored our code with OOP (Object Oriented Programming)!
