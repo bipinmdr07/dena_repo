@@ -27,7 +27,8 @@ let Questions = React.createClass({
                   user_avatar_url={this.props.user_avatar_url} 
                   user_is_mentor={this.props.question.user_mentor}
                   user_name={this.props.user_name}
-                  display_post_links={this.props.display_post_links}/>
+                  display_post_links={this.props.display_post_links}
+                  handleDeleteQuestion={this.handleDeleteQuestion}/>
 
         <hr />
 

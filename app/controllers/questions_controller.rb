@@ -25,11 +25,19 @@ class QuestionsController < ApplicationController
     if @question.save      
       send_email_notification!      
       send_slack_notification!
-    
-      redirect_to question_path(@question.id)
+
+      respond_to do |format|
+        format.json { render json: @question }
+        format.html { redirect_to question_path(@question.id) }
+      end    
     else
       flash[:alert] = "Invalid attributes, please try again."
-      redirect_to new_question_path(lesson_id: question_params[:lesson_id], course_name: question_params[:course_name])
+
+      respond_to do |format|
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_question_path(lesson_id: question_params[:lesson_id], 
+                                                    course_name: question_params[:course_name]) }
+      end      
     end
   end  
 
@@ -38,25 +46,39 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)
-      flash[:success] = "Updated!"
-      redirect_to question_path(@question.id)
+    if @question.update(question_params)      
+      respond_to do |format|        
+        format.json { render json: MarkdownParser.new(@question.content).parsed.to_json }
+        format.html do
+          flash[:success] = "Updated!"
+          redirect_to question_path(@question.id)
+        end
+      end      
     else
-      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
-      render :edit
+      respond_to do |format|        
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+          render :edit
+        end
+      end       
     end
   end
 
   def destroy  
     @question.destroy
 
-    if @question.mentor_post
-      redirect_to community_path
-    else
-      back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
-      redirect_to back_to_lesson_url 
-    end    
-
+    respond_to do |format|
+      format.json { head :no_content }
+      format.html do 
+        if @question.mentor_post
+          redirect_to community_path
+        else
+          back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
+          redirect_to back_to_lesson_url 
+        end    
+      end
+    end
   end
 
   private

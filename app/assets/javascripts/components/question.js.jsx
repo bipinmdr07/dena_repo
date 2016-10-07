@@ -1,7 +1,9 @@
 let Question = React.createClass({
   getInitialState() {
       return {
-        editing: false
+        content: this.props.content,
+        unparsedContent: this.props.question.content,
+        edit: false
       };
   },
 
@@ -15,8 +17,85 @@ let Question = React.createClass({
     }
   },
 
+  handleToggle(e) {
+    e.preventDefault();
+    this.setState({edit: !this.state.edit});  
+    let that = this;
+    setTimeout(function (){
+      that.highlightSyntax();
+    }, 1);
+  },
+
+  handleEdit(e){
+    e.preventDefault();
+    $.ajax({
+      url: `/questions/${this.props.question.id}`,
+      dataType: 'JSON',
+      type: 'PUT',
+      context: this,
+      data: {
+        question: { content: this.refs.content.value }
+      },
+      success: function(data) {
+        this.setState({edit: false, content: data, unparsedContent: this.refs.content.value});   
+        this.highlightSyntax();   
+      }
+    })
+  },
+
+  handleDelete(e) {
+    e.preventDefault();
+    if (confirm("Are you sure?")){
+      $.ajax({
+        url: `/questions/${this.props.question.id}`,
+        type: 'DELETE',
+        dataType: 'JSON',
+        context: this,
+        success(e) {
+          this.props.handleDeleteQuestion(this.props.question);
+        }
+      });
+    }
+  },
+
+  highlightSyntax(){
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });   
+  },
+
+  content(){
+    return (
+      <div dangerouslySetInnerHTML={{__html: this.state.content}} />
+    )    
+  },
+
+  editForm(){
+    return (
+      <form className="forum-forms">
+        <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
+        <textarea name="content" defaultValue={this.state.unparsedContent} ref="content" className="form-control" rows="10" />
+
+        <br />
+
+        <div className="btn-group">
+          <button className="btn btn-cta-primary" onClick={this.handleEdit}>Submit</button>
+          <button className="btn btn-cta-secondary" onClick={this.handleToggle}>Cancel</button>
+        </div>
+      </form>
+    )
+  },
+
+  questionBody(){
+    if (this.state.edit) {
+      return this.editForm();
+    } else {
+      return this.content();
+    }
+  },
+
   edit_post_links(){
-    let edit_button = this.props.display_post_links ? <button className="btn btn-sm btn-warning" onClick={this.handleEdit}>Edit</button> : '';
+    let edit_button = this.props.display_post_links ? <button className="btn btn-sm btn-warning" onClick={this.handleToggle}>Edit</button> : '';
     let delete_button = this.props.display_post_links ? <button className="btn btn-sm btn-danger" onClick={this.handleDelete}>Delete</button> : '';
     return (
       <div className="edit_post_links">
@@ -43,7 +122,7 @@ let Question = React.createClass({
         </div>
 
         <div className="col-xs-12 col-sm-10">
-          <div dangerouslySetInnerHTML={{__html: this.props.content}} />
+          {this.questionBody()}
         </div>
       </div>
     )

@@ -43,11 +43,15 @@ class RepliesController < ApplicationController
           flash[:success] = "Updated!"
           redirect_to question_path(current_reply.question)
         end
-      end
-      
+      end      
     else
-      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
-      render :edit
+      respond_to do |format|        
+        format.json { render json: current_reply.errors, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+          render :edit
+        end
+      end             
     end
   end
 
