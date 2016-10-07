@@ -100,7 +100,7 @@ class QuestionsController < ApplicationController
   end
 
   def send_email_notification!
-    UserMailer.new_question(@question).deliver_now
+    UserMailer.new_question(@question).deliver_later
   end
 
   def send_slack_notification!

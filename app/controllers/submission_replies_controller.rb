@@ -44,7 +44,7 @@ class SubmissionRepliesController < ApplicationController
   end 
 
   def send_email_notification!
-    UserMailer.new_submission_reply(current_submission, current_submission.user_email).deliver_now      
+    UserMailer.new_submission_reply(submission: current_submission, email: current_submission.user_email).deliver_now      
   end
 
   def create_notifications!

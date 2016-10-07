@@ -11,7 +11,7 @@
 </style>
 <!-- end -->
 
-<% unless @question.mentor_post %>
+<% unless @question.mentor_post && @question.lesson_id.nil? && @question.course_name.nil? %>
   <%= back_to_lesson %>
 <% end %>
 

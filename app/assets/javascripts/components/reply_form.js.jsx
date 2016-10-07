@@ -35,8 +35,8 @@ let ReplyForm = React.createClass({
   },  
 
   handleSubmit(e){
-    e.preventDefault();
     this.setState({btnDisabled: true});
+    e.preventDefault();    
     $.ajax({
       url: `/questions/${this.props.question_id}/replies`,
       type: 'POST',

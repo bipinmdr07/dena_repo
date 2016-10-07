@@ -73,7 +73,7 @@ class RepliesController < ApplicationController
   end
 
   def send_email_notifications!
-    UserMailer.new_reply(current_question, current_question.user_email).deliver_now
+    UserMailer.new_reply(question: current_question, email: current_question.user_email).deliver_later
   end
 
   def create_notifications!

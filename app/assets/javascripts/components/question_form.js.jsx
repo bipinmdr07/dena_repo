@@ -40,13 +40,21 @@ let QuestionForm = React.createClass({
   },  
 
   handleSubmit(e){
-    e.preventDefault();
     this.setState({btnDisabled: true});
+    e.preventDefault();
     $.ajax({
       url: `/questions/`,
       type: 'POST',
       dataType: 'JSON',
-      data: { question: { content: this.state.content, title: this.state.title } },
+      data: 
+            { 
+              question: { 
+                content: this.state.content, 
+                title: this.state.title, 
+                lesson_id: this.props.lesson_id,
+                course_name: this.props.course_name
+              } 
+            },
       context: this,
       success(data) {
         this.setState(this.getInitialState());
@@ -67,10 +75,10 @@ let QuestionForm = React.createClass({
                    name='authenticity_token' 
                    value={this.props.authenticity_token} />
             <input type='hidden'                    
-                   name='lesson_id' 
+                   name='lesson_id'                    
                    value={this.props.lesson_id} />
             <input type='hidden'                    
-                   name='course_name' 
+                   name='course_name'                    
                    value={this.props.course_name} />
 
             <input type="text" 
@@ -87,7 +95,7 @@ let QuestionForm = React.createClass({
                       onChange={this.handleContentChange} 
                       rows="10"
                       placeholder="Write your reply in Markdown" />
-            <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || this.btnDisabled}>Submit</button>
+            <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || !this.state.title || this.btnDisabled}>Submit</button>
           </form>
         </div>
 

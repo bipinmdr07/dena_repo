@@ -1,5 +1,11 @@
 <div class = "forum_section">
 
+  <%= react_component 'QuestionForm', { authenticity_token: form_authenticity_token,
+                                        lesson_id: params[:id],
+                                        course_name: controller_name.classify } %>
+
+  <hr>                                        
+
   <div class="row">
     <div class="col-xs-12">
       <h3 class="question-header mentee_title text-center">Questions</h3>
@@ -81,7 +87,7 @@
   <% end %>
 
   <br>
-
+<!-- 
   <h2 class="text-center">Guidelines for Asking Good Questions</h2>
   <ul>
 
@@ -100,13 +106,7 @@
       <li>Has anyone else asked the same question? If so, read the answers to those questions first before seeking further assistance.</li>
     </ul>
 
-  </ul>
-
-  <br>
-
-  <%= react_component 'QuestionForm', { authenticity_token: form_authenticity_token,
-                                        lesson_id: params[:id],
-                                        course_name: controller_name.classify } %>
+  </ul> -->
 
 
 </div>
