@@ -36,9 +36,9 @@ let Questions = React.createClass({
         {replies}
 
 
-        <QuestionForm question_id={this.props.question.id}
-                      authenticity_token={this.props.authenticity_token}
-                      handleNewReply={this.handleNewReply} />
+        <ReplyForm question_id={this.props.question.id}
+                   authenticity_token={this.props.authenticity_token}
+                   handleNewReply={this.handleNewReply} />
       </div>
     )
   },

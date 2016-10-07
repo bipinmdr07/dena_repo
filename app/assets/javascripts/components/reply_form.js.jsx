@@ -1,10 +1,9 @@
-let QuestionForm = React.createClass({
+let ReplyForm = React.createClass({
   getInitialState() {
       return {
           content: '',
-          title: '',
           preview: '',
-          btnDisabled: false  
+          btnDisabled: false
       };
   },
 
@@ -30,11 +29,7 @@ let QuestionForm = React.createClass({
     });   
   },
 
-  handleTitleChange(e){
-    this.setState({title: e.target.value});
-  }, 
-
-  handleContentChange(e){
+  handleChange(e){
     this.setState({content: e.target.value});
     this.loadPreview();
   },  
@@ -43,14 +38,15 @@ let QuestionForm = React.createClass({
     e.preventDefault();
     this.setState({btnDisabled: true});
     $.ajax({
-      url: `/questions/`,
+      url: `/questions/${this.props.question_id}/replies`,
       type: 'POST',
       dataType: 'JSON',
-      data: { question: { content: this.state.content, title: this.state.title } },
+      data: { reply: { content: this.state.content } },
       context: this,
       success(data) {
         this.setState(this.getInitialState());
-        this.props.handleNewQuestion(data);
+        this.props.handleNewReply(data);
+        this.highlightSyntax();
         this.setState({btnDisabled: false});
       }
     })
@@ -61,21 +57,12 @@ let QuestionForm = React.createClass({
       <div className="row">
         <div className="col-xs-12 col-md-6"> 
           <form className="forum-forms">
-            <input type='hidden'                    
-                   name='authenticity_token' 
-                   value={this.props.authenticity_token} />
-
-            <input type="text" 
-                   className="form-control" 
-                   name="title"                                       
-                   placeholder="Title of Your Question"
-                   onChange={this.handleTitleChange}/>
-
+            <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
             <textarea name="content" 
                       value={this.state.content} 
                       ref="content" 
                       className="form-control" 
-                      onChange={this.handleContentChange} 
+                      onChange={this.handleChange} 
                       rows="10"
                       placeholder="Write your reply in Markdown" />
             <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || this.btnDisabled}>Submit</button>
@@ -85,7 +72,6 @@ let QuestionForm = React.createClass({
         <div className="col-xs-12 col-md-6"> 
           <div id="preview">
             <h5>Preview</h5>
-            <h3>{this.state.title}</h3>
             <div dangerouslySetInnerHTML={{__html: this.state.preview}} />            
           </div>
         </div>
