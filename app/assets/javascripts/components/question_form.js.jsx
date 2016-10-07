@@ -1,25 +1,53 @@
 let QuestionForm = React.createClass({
   getInitialState() {
       return {
-          content: ''  
+          content: '',
+          preview: '',
+          btnDisabled: false
       };
+  },
+
+  loadPreview: _.debounce(function(){
+    $.ajax({
+      url: '/markdown_previews',
+      type: 'POST',
+      dataType: 'JSON',
+      data: { preview: { content: this.state.content }},
+      context: this,
+      success(data) {
+        this.setState({preview: data});
+        $("#preview").find("code").each(function(_, block) {
+          hljs.highlightBlock(block);
+        });
+      } 
+    });
+  }, 300),
+
+  highlightSyntax(){
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });   
   },
 
   handleChange(e){
     this.setState({content: e.target.value});
-  },
+    this.loadPreview();
+  },  
 
   handleSubmit(e){
     e.preventDefault();
+    this.setState({btnDisabled: true});
     $.ajax({
       url: `/questions/${this.props.question_id}/replies`,
       type: 'POST',
       dataType: 'JSON',
-      data: { reply: this.state },
+      data: { reply: { content: this.state.content } },
       context: this,
       success(data) {
         this.setState(this.getInitialState());
         this.props.handleNewReply(data);
+        this.highlightSyntax();
+        this.setState({btnDisabled: false});
       }
     })
   },
@@ -27,7 +55,7 @@ let QuestionForm = React.createClass({
   render() {
     return (
       <div className="row">
-        <div className="col-xs-12 col-md-6 col-md-offset-3"> 
+        <div className="col-xs-12 col-md-6"> 
           <form className="forum-forms">
             <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
             <textarea name="content" 
@@ -35,10 +63,17 @@ let QuestionForm = React.createClass({
                       ref="content" 
                       className="form-control" 
                       onChange={this.handleChange} 
-                      rows="5"
+                      rows="10"
                       placeholder="Write your reply in Markdown" />
-            <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content}>Submit</button>
+            <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || this.btnDisabled}>Submit</button>
           </form>
+        </div>
+
+        <div className="col-xs-12 col-md-6"> 
+          <div id="preview">
+            <h5>Preview</h5>
+            <div dangerouslySetInnerHTML={{__html: this.state.preview}} />            
+          </div>
         </div>
       </div>
     )

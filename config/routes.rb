@@ -61,6 +61,8 @@ Rails.application.routes.draw do
     patch :archive
   end
 
+  resources :markdown_previews, only: :create
+
   resources :posts, only: [:index, :show]
   resources :events, only: [:index, :show]
 
