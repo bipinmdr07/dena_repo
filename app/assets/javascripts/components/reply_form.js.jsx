@@ -47,7 +47,7 @@ let ReplyForm = React.createClass({
         this.setState(this.getInitialState());
         this.props.handleNewReply(data);
         this.highlightSyntax();
-        this.setState({btnDisabled: false});
+        this.setState({btnDisabled: false});        
       }
     })
   },
@@ -71,7 +71,7 @@ let ReplyForm = React.createClass({
 
         <div className="col-xs-12 col-md-6"> 
           <div id="preview">
-            <h5>Preview</h5>
+            <h5>Preview</h5>            
             <div dangerouslySetInnerHTML={{__html: this.state.preview}} />            
           </div>
         </div>

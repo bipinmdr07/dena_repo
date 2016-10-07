@@ -50,8 +50,10 @@ let QuestionForm = React.createClass({
       context: this,
       success(data) {
         this.setState(this.getInitialState());
-        this.props.handleNewQuestion(data);
         this.setState({btnDisabled: false});
+        if (data.redirect) {
+          window.location = data.redirect;
+        }
       }
     })
   },
@@ -64,8 +66,15 @@ let QuestionForm = React.createClass({
             <input type='hidden'                    
                    name='authenticity_token' 
                    value={this.props.authenticity_token} />
+            <input type='hidden'                    
+                   name='lesson_id' 
+                   value={this.props.lesson_id} />
+            <input type='hidden'                    
+                   name='course_name' 
+                   value={this.props.course_name} />
 
             <input type="text" 
+                   value={this.state.title}
                    className="form-control" 
                    name="title"                                       
                    placeholder="Title of Your Question"

@@ -23,11 +23,11 @@ class QuestionsController < ApplicationController
     set_mentor_post        
 
     if @question.save      
-      send_email_notification!      
+      # send_email_notification!      
       send_slack_notification!
 
       respond_to do |format|
-        format.json { render json: @question }
+        format.json { render :json => { redirect: question_url(@question.id) } }
         format.html { redirect_to question_path(@question.id) }
       end    
     else
