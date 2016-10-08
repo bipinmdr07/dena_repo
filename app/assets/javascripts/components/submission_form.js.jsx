@@ -1,4 +1,4 @@
-let QuestionForm = React.createClass({
+let SubmissionForm = React.createClass({
   getInitialState() {
       return {
           content: '',
@@ -43,12 +43,12 @@ let QuestionForm = React.createClass({
     this.setState({btnDisabled: true});
     e.preventDefault();
     $.ajax({
-      url: `/questions/`,
+      url: `/submissions/`,
       type: 'POST',
       dataType: 'JSON',
       data: 
             { 
-              question: { 
+              submission: { 
                 content: this.state.content, 
                 title: this.state.title, 
                 lesson_id: this.props.lesson_id,
@@ -85,7 +85,7 @@ let QuestionForm = React.createClass({
                    value={this.state.title}
                    className="form-control" 
                    name="title"                                       
-                   placeholder="Title of Your Question"
+                   placeholder="Title of Your Submission"
                    onChange={this.handleTitleChange}/>
 
             <textarea name="content" 
@@ -94,7 +94,7 @@ let QuestionForm = React.createClass({
                       className="form-control" 
                       onChange={this.handleContentChange} 
                       rows="10"
-                      placeholder="Write your question in Markdown" />
+                      placeholder="Write your submission in Markdown" />
             <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || !this.state.title || this.btnDisabled}>Submit</button>
           </form>
         </div>

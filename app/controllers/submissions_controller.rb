@@ -7,6 +7,14 @@ class SubmissionsController < ApplicationController
     @submissions = current_user.submissions.all.order("created_at DESC")
   end
 
+  def show
+    @submission = Submission.includes(:user, submission_replies: :user).find(params[:id])
+
+    create_replies_array
+
+    @user = @submission.user
+  end
+
   def new
     @submission = Submission.new
   end
@@ -17,45 +25,74 @@ class SubmissionsController < ApplicationController
     if @submission.valid?      
       send_email_notification!
       send_slack_notification!      
-      redirect_to submission_path(@submission.id)
+      respond_to do |format|
+        format.json { render json: { redirect: submission_url(@submission.id) } }
+        format.html { redirect_to submission_path(@submission.id) }
+      end
     else
       flash[:alert] = "Invalid, please try again."
-      redirect_to new_submission_path(
-        course_name: submission_params[:course_name], 
-        lesson_id: submission_params[:lesson_id])
+      respond_to do |format|
+        format.json { render json: @submission.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_submission_path( course_name: submission_params[:course_name], 
+                                                       lesson_id: submission_params[:lesson_id]) }
+      end
     end
-  end
-
-  def show
-    @submission = Submission.includes(:user, submission_replies: :user).find(params[:id])
-    @user = @submission.user
-  end
+  end  
 
   def edit
   end
 
   def update
-    if @submission.update(submission_params)
-      flash[:success] = "Updated!"
-      redirect_to submission_path(@submission.id)
+    if @submission.update(submission_params)      
+      respond_to do |format|        
+        format.json { render json: MarkdownParser.new(@submission.content).parsed.to_json }
+        format.html do
+          flash[:success] = "Updated!"
+          redirect_to question_path(@submission.id)
+        end
+      end      
     else
-      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
-      render :edit
+      respond_to do |format|        
+        format.json { render json: @submission.errors, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+          render :edit
+        end
+      end       
     end
   end
 
-  def destroy
-    back_to_lesson_url = PreviousLessonUrlBuilder.new(@submission).url     
-
+  def destroy  
     @submission.destroy
-    
-    redirect_to back_to_lesson_url
+
+    respond_to do |format|
+      format.json do 
+        render json: { redirect: back_to_lesson_url }
+        head :no_content
+      end
+      format.html do 
+        back_to_lesson_url = PreviousLessonUrlBuilder.new(@submission).url      
+        redirect_to back_to_lesson_url   
+      end
+    end
   end
 
   private
 
+  def create_replies_array
+    @replies = []
+    @submission.submission_replies.order("created_at ASC").each do |reply|
+      @replies << {reply: reply, 
+                   user_is_mentor: reply.user_mentor, 
+                   user_avatar_url: reply.user_avatar.url, 
+                   user_name: reply.user_name,
+                   display_post_links: current_user == reply.user || current_user.admin,
+                   content: MarkdownParser.new(reply.content).parsed}
+    end
+  end
+
   def send_email_notification!
-    UserMailer.new_submission(@submission).deliver_now
+    UserMailer.new_submission(@submission).deliver_later
   end
 
   def send_slack_notification!

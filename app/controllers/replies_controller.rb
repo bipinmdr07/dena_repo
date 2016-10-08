@@ -6,10 +6,8 @@ class RepliesController < ApplicationController
 	  @reply = current_user.replies.create(reply_params)
 
 		if @reply.valid?			
-      create_notifications!
-			
+      create_notifications!			
       send_email_notifications!			
-
 			send_slack_notifications!
 
       respond_to do |format|

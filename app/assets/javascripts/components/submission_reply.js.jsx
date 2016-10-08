@@ -1,4 +1,4 @@
-let Reply = React.createClass({
+let SubmissionReply = React.createClass({
   getInitialState() {
       return {
         content: this.props.content,
@@ -43,12 +43,12 @@ let Reply = React.createClass({
   handleEdit(e){
     e.preventDefault();
     $.ajax({
-      url: `/questions/${this.props.reply.question_id}/replies/${this.props.reply.id}`,
+      url: `/submissions/${this.props.reply.submission_id}/submission_replies/${this.props.reply.id}`,
       dataType: 'JSON',
       type: 'PUT',
       context: this,
       data: {
-        reply: { content: this.refs.content.value }
+        submission_reply: { content: this.refs.content.value }
       },
       success: function(data) {
         this.setState({edit: false, content: data, unparsedContent: this.refs.content.value});   
@@ -61,7 +61,7 @@ let Reply = React.createClass({
     e.preventDefault();
     if (confirm("Are you sure?")){
       $.ajax({
-        url: `/replies/${this.props.reply.id}`,
+        url: `/submission_replies/${this.props.reply.id}`,
         type: 'DELETE',
         dataType: 'JSON',
         context: this,

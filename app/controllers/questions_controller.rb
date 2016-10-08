@@ -23,7 +23,7 @@ class QuestionsController < ApplicationController
     set_mentor_post        
 
     if @question.save      
-      # send_email_notification!      
+      send_email_notification!      
       send_slack_notification!
 
       respond_to do |format|
@@ -69,7 +69,10 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.json { head :no_content }
+      format.json do 
+        render json: { redirect: back_to_lesson_url }
+        head :no_content
+      end
       format.html do 
         if @question.mentor_post
           redirect_to community_path

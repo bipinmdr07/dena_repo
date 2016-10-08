@@ -1,4 +1,4 @@
-let ReplyForm = React.createClass({
+let SubmissionReplyForm = React.createClass({
   getInitialState() {
       return {
           content: '',
@@ -38,10 +38,10 @@ let ReplyForm = React.createClass({
     this.setState({btnDisabled: true});
     e.preventDefault();    
     $.ajax({
-      url: `/questions/${this.props.question_id}/replies`,
+      url: `/submissions/${this.props.submission_id}/submission_replies`,
       type: 'POST',
       dataType: 'JSON',
-      data: { reply: { content: this.state.content } },
+      data: { submission_reply: { content: this.state.content } },
       context: this,
       success(data) {
         this.setState(this.getInitialState());

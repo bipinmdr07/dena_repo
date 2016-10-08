@@ -1,4 +1,4 @@
-let Questions = React.createClass({
+let Submissions = React.createClass({
   getInitialState() {
       return {
           replies: this.props.replies  
@@ -8,7 +8,7 @@ let Questions = React.createClass({
   render(){
     let replies = this.state.replies.map((reply) => {
       return (
-        <QuestionReply key={reply["reply"].id}
+        <SubmissionReply key={reply["reply"].id}
                reply={reply["reply"]}
                content={reply["content"]}
                user_avatar_url={reply["user_avatar_url"]}
@@ -22,10 +22,10 @@ let Questions = React.createClass({
 
     return (
       <div>
-        <Question question={this.props.question}
+        <Submission submission={this.props.submission}
                   content={this.props.content}
                   user_avatar_url={this.props.user_avatar_url} 
-                  user_is_mentor={this.props.question.user_mentor}
+                  user_is_mentor={this.props.submission.user_mentor}
                   user_name={this.props.user_name}
                   display_post_links={this.props.display_post_links}
                   handleDeleteQuestion={this.handleDeleteQuestion}/>
@@ -36,7 +36,7 @@ let Questions = React.createClass({
         {replies}
 
 
-        <ReplyForm question_id={this.props.question.id}
+        <SubmissionReplyForm submission_id={this.props.submission.id}
                    authenticity_token={this.props.authenticity_token}
                    handleNewReply={this.handleNewReply} />
       </div>

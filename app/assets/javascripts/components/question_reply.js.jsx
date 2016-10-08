@@ -1,20 +1,34 @@
-let Question = React.createClass({
+let QuestionReply = React.createClass({
   getInitialState() {
       return {
         content: this.props.content,
-        unparsedContent: this.props.question.content,
+        unparsedContent: this.props.reply.content,
         edit: false
       };
   },
 
   prof_badge(){
-    if (this.props.user_is_mentor) {
-      return (
+    let prof_badge;
+    if (this.props.user_is_mentor === true) {
+      prof_badge = 
         <div className="prof_badge">
           <label className="label label-default">TECHRISE Mentor</label>
         </div>
-      )
     }
+    return prof_badge;
+  },
+
+  edit_post_links(){
+    let edit_button = this.props.display_post_links ? <button className="btn btn-sm btn-warning" onClick={this.handleToggle}>Edit</button> : '';
+    let delete_button = this.props.display_post_links ? <button className="btn btn-sm btn-danger" onClick={this.handleDelete}>Delete</button> : '';
+    return (
+      <div className="edit_post_links">
+        <div className="btn-group">
+          {edit_button}
+          {delete_button}
+        </div>
+      </div>
+    )
   },
 
   handleToggle(e) {
@@ -29,12 +43,12 @@ let Question = React.createClass({
   handleEdit(e){
     e.preventDefault();
     $.ajax({
-      url: `/questions/${this.props.question.id}`,
+      url: `/questions/${this.props.reply.question_id}/replies/${this.props.reply.id}`,
       dataType: 'JSON',
       type: 'PUT',
       context: this,
       data: {
-        question: { content: this.refs.content.value }
+        reply: { content: this.refs.content.value }
       },
       success: function(data) {
         this.setState({edit: false, content: data, unparsedContent: this.refs.content.value});   
@@ -47,15 +61,12 @@ let Question = React.createClass({
     e.preventDefault();
     if (confirm("Are you sure?")){
       $.ajax({
-        url: `/questions/${this.props.question.id}`,
+        url: `/replies/${this.props.reply.id}`,
         type: 'DELETE',
         dataType: 'JSON',
         context: this,
-        success(data) {
-          this.props.handleDeleteQuestion(this.props.question);
-          if (data.redirect) {
-            window.location = data.redirect;
-          }
+        success(e) {
+          this.props.handleDeleteReply(this.props.reply);
         }
       });
     }
@@ -89,7 +100,7 @@ let Question = React.createClass({
     )
   },
 
-  questionBody(){
+  replyBody(){
     if (this.state.edit) {
       return this.editForm();
     } else {
@@ -97,36 +108,24 @@ let Question = React.createClass({
     }
   },
 
-  edit_post_links(){
-    let edit_button = this.props.display_post_links ? <button className="btn btn-sm btn-warning" onClick={this.handleToggle}>Edit</button> : '';
-    let delete_button = this.props.display_post_links ? <button className="btn btn-sm btn-danger" onClick={this.handleDelete}>Delete</button> : '';
-    return (
-      <div className="edit_post_links">
-        <div className="btn-group">
-          {edit_button}
-          {delete_button}
-        </div>
-      </div>
-    )
-  },
-
   render() {
-
-
     return(
-      <div className="row">
-        <div className="col-xs-12 col-sm-2">
-          <img src={this.props.user_avatar_url} className="prof_pic_forum"/>
-          <div className="prof_name">
-            {this.props.user_name}
+      <div>
+        <div className="row">
+          <div className="col-xs-12 col-sm-2">
+            <img src={this.props.user_avatar_url} className="prof_pic_forum"/>
+            <div className="prof_name">
+              {this.props.user_name}
+            </div>            
+            {this.prof_badge()}
+            {this.edit_post_links()}
           </div>
-          {this.prof_badge()}
-          {this.edit_post_links()}
-        </div>
 
-        <div className="col-xs-12 col-sm-10">
-          {this.questionBody()}
+          <div className="col-xs-12 col-sm-10">
+            {this.replyBody()}
+          </div>        
         </div>
+        <hr />
       </div>
     )
   }

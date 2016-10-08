@@ -1,8 +1,8 @@
-let Question = React.createClass({
+let Submission = React.createClass({
   getInitialState() {
       return {
         content: this.props.content,
-        unparsedContent: this.props.question.content,
+        unparsedContent: this.props.submission.content,
         edit: false
       };
   },
@@ -29,12 +29,12 @@ let Question = React.createClass({
   handleEdit(e){
     e.preventDefault();
     $.ajax({
-      url: `/questions/${this.props.question.id}`,
+      url: `/submissions/${this.props.submission.id}`,
       dataType: 'JSON',
       type: 'PUT',
       context: this,
       data: {
-        question: { content: this.refs.content.value }
+        submission: { content: this.refs.content.value }
       },
       success: function(data) {
         this.setState({edit: false, content: data, unparsedContent: this.refs.content.value});   
@@ -47,12 +47,12 @@ let Question = React.createClass({
     e.preventDefault();
     if (confirm("Are you sure?")){
       $.ajax({
-        url: `/questions/${this.props.question.id}`,
+        url: `/submissions/${this.props.submission.id}`,
         type: 'DELETE',
         dataType: 'JSON',
         context: this,
         success(data) {
-          this.props.handleDeleteQuestion(this.props.question);
+          this.props.handleDeleteQuestion(this.props.submission);
           if (data.redirect) {
             window.location = data.redirect;
           }
@@ -89,7 +89,7 @@ let Question = React.createClass({
     )
   },
 
-  questionBody(){
+  submissionBody(){
     if (this.state.edit) {
       return this.editForm();
     } else {
@@ -125,7 +125,7 @@ let Question = React.createClass({
         </div>
 
         <div className="col-xs-12 col-sm-10">
-          {this.questionBody()}
+          {this.submissionBody()}
         </div>
       </div>
     )
