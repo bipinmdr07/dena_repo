@@ -31,7 +31,7 @@ let Submission = React.createClass({
     $.ajax({
       url: `/submissions/${this.props.submission.id}`,
       dataType: 'JSON',
-      type: 'PUT',
+      type: 'PATCH',
       context: this,
       data: {
         submission: { content: this.refs.content.value }

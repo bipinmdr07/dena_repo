@@ -31,7 +31,7 @@ let Question = React.createClass({
     $.ajax({
       url: `/questions/${this.props.question.id}`,
       dataType: 'JSON',
-      type: 'PUT',
+      type: 'PATCH',
       context: this,
       data: {
         question: { content: this.refs.content.value }
