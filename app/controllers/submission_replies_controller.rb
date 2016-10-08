@@ -9,11 +9,25 @@ class SubmissionRepliesController < ApplicationController
 		if @reply.valid?
       create_notifications!      
       send_email_notification!
-			send_slack_notification!			
+			send_slack_notification!
+
+      respond_to do |format|
+        format.json { render json: {reply: @reply, 
+                                    user_is_mentor: @reply.user_mentor, 
+                                    user_avatar_url: @reply.user_avatar.url, 
+                                    user_name: @reply.user_name,
+                                    display_post_links: current_user == @reply.user || current_user.admin,
+                                    content: MarkdownParser.new(@reply.content).parsed}.to_json }
+        format.html { redirect_to submission_path(current_submission) }
+      end			
 		else
 			flash[:alert] = "Invalid attributes, please try again."
+
+      respond_to do |format|
+        format.json { render json: @reply.errors, status: :unprocessable_entity }
+        format.html { redirect_to submission_path(current_submission) }
+      end
 		end
-		redirect_to submission_path(current_submission)
 	end
 
 	def edit
@@ -21,17 +35,30 @@ class SubmissionRepliesController < ApplicationController
 
 	def update
     if current_submission_reply.update(reply_params)
-      flash[:success] = "Updated!"
-      redirect_to submission_path(current_submission_reply.submission_id)
+      respond_to do |format|        
+        format.json { render json: MarkdownParser.new(current_submission_reply.content).parsed.to_json }
+        format.html do
+          flash[:success] = "Updated!"
+          redirect_to submission_path(current_submission_reply.submission)
+        end
+      end      
     else
-      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
-      render :edit
+      respond_to do |format|        
+        format.json { render json: current_submission_reply.errors, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+          render :edit
+        end
+      end             
     end
   end
 
   def destroy
     current_submission_reply.destroy
-    redirect_to submission_path(current_submission_reply.submission_id)
+    respond_to do |format|
+      format.json { head :no_content }
+      format.html { redirect_to submission_path(current_submission_reply.submission_id) }
+    end    
   end
 
 	private
@@ -44,7 +71,7 @@ class SubmissionRepliesController < ApplicationController
   end 
 
   def send_email_notification!
-    UserMailer.new_submission_reply(current_submission, current_submission.user_email).deliver_now      
+    UserMailer.new_submission_reply(submission: current_submission, email: current_submission.user_email).deliver_later
   end
 
   def create_notifications!

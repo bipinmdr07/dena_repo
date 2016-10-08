@@ -4,5 +4,5 @@ class Reply < ActiveRecord::Base
 
   validates :question_id, :user_id, :content, presence: true
 
-  delegate :name, :email, :avatar, to: :user, prefix: true
+  delegate :name, :email, :avatar, :mentor, to: :user, prefix: true
 end

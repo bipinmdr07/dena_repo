@@ -1,4 +1,17 @@
-<% unless @question.mentor_post %>
+<!--
+  this CSS is necessary for proper padding for syntax highlighting.
+  The syntax highlighting format for the lesson files are slightly differently
+  because of indentation etc. 
+  In short, don't remove this unless necessary 
+-->
+<style type="text/css">
+.hljs {
+  padding: 20px !important;
+}
+</style>
+<!-- end -->
+
+<% unless @question.mentor_post && @question.lesson_id.nil? && @question.course_name.nil? %>
   <%= back_to_lesson %>
 <% end %>
 
@@ -6,81 +19,14 @@
 
   <%= render "shared/flash_messages" %>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-2">
-      <%= image_tag @user.avatar, class: 'prof_pic_forum' %>
-      <div class="prof_name">
-        <%= @user.name %>
-      </div>
-      <div class="prof_badge">
-        <% if @user.mentor %>
-          <label class="label label-default">TECHRISE Mentor</label>
-        <% end %>
-      </div>
-      <div class="edit_post_links">
-        <% if current_user == @question.user || current_user.admin %>
-          <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_question_path(@question.id), class: 'btn btn-sm btn-warning'  %>
-          <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, question_path(@question.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
-        <% end %>
-      </div>
-    </div>
+  <%= react_component 'Questions', {authenticity_token: form_authenticity_token,
+                                    question: @question, 
+                                    content: markdown(@question.content),
+                                    user_avatar_url: @question.user_avatar.url, 
+                                    user_is_mentor: @question.user_mentor,
+                                    user_name: @question.user_name,
+                                    display_post_links: current_user == @question.user || current_user.admin,
+                                    replies: @replies } %>
 
-    <div class="col-xs-12 col-sm-10">
-      <h3><%= @question.title %></h3>
-      <small><%= display_date(@question.created_at) %></small>
-      <br>
-      <%= sanitize raw(@question.content) %>
-      <p class = "pull-right" ></p>
-      <br class = "clear">
-
-      <% if current_user.admin || @question.user == current_user %>
-        <div id="question_solved_form_container">
-          <%= render partial: 'question_solved_form' %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <hr>
-
-
-  <% @question.replies.order("created_at ASC").each do |reply| %>    
-    <div class="row">
-      <div class="col-xs-2">
-        <%= image_tag reply.user_avatar, class: 'prof_pic_forum' %>
-        <div class="prof_name">
-          <%= reply.user_name %>
-        </div>
-        <div class="prof_badge">
-          <% if reply.user.mentor %>
-            <label class="label label-default">TECHRISE Mentor</label>
-          <% end %>
-        </div>
-        <div class="edit_post_links">
-          <% if current_user == reply.user || current_user.admin %>
-            <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_question_reply_path(@question.id, reply.id), class: 'btn btn-sm btn-warning' %>
-            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, question_reply_path(@question.id, reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="col-xs-10">
-        <small><%= display_date(reply.created_at) %></small>
-        <br>
-        <%= sanitize raw(reply.content) %>
-      </div>
-    </div>
-    <hr>
-  <% end %>
-
-  <%= simple_form_for :reply, url: question_replies_path(@question.id), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-    <div data-no-turbolink>
-      <%= f.input :content, as: :summernote, label: 'Comment', required: true %>
-    </div>
-    <%= f.input :user_id, as: :hidden, input_html:{ value: current_user.id } %>
-
-    <br>
-    <%= f.submit 'Submit', class: 'btn btn-primary', data: {disable_with: "Submitting reply..."} %>
-  <% end %>
 
 </div>

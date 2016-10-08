@@ -6,6 +6,14 @@ class QuestionsController < ApplicationController
     @questions = current_user.questions.all.order("created_at DESC")
   end
 
+  def show
+    @question = Question.includes(:user, replies: :user).find(params[:id])  
+    
+    create_replies_array
+    
+    @user = @question.user
+  end
+
   def new
     @question = Question.new
   end
@@ -17,53 +25,85 @@ class QuestionsController < ApplicationController
     if @question.save      
       send_email_notification!      
       send_slack_notification!
-    
-      redirect_to question_path(@question.id)
+
+      respond_to do |format|
+        format.json { render :json => { redirect: question_url(@question.id) } }
+        format.html { redirect_to question_path(@question.id) }
+      end    
     else
       flash[:alert] = "Invalid attributes, please try again."
-      redirect_to new_question_path(lesson_id: question_params[:lesson_id], course_name: question_params[:course_name])
-    end
-  end
 
-  def show
-    @question = Question.includes(:user, replies: :user).find(params[:id])
-    @user = @question.user
-  end
+      respond_to do |format|
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.html { redirect_to new_question_path(lesson_id: question_params[:lesson_id], 
+                                                    course_name: question_params[:course_name]) }
+      end      
+    end
+  end  
 
   def edit
 
   end
 
   def update
-    if @question.update(question_params)
-      flash[:success] = "Updated!"
-      redirect_to question_path(@question.id)
+    if @question.update(question_params)      
+      respond_to do |format|        
+        format.json { render json: MarkdownParser.new(@question.content).parsed.to_json }
+        format.html do
+          flash[:success] = "Updated!"
+          redirect_to question_path(@question.id)
+        end
+      end      
     else
-      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
-      render :edit
+      respond_to do |format|        
+        format.json { render json: @question.errors, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+          render :edit
+        end
+      end       
     end
   end
 
   def destroy  
     @question.destroy
 
-    if @question.mentor_post
-      redirect_to community_path
-    else
-      back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
-      redirect_to back_to_lesson_url 
-    end    
-
+    respond_to do |format|
+      format.json do 
+        render json: { redirect: back_to_lesson_url }
+        head :no_content
+      end
+      format.html do 
+        if @question.mentor_post
+          redirect_to community_path
+        else
+          back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
+          redirect_to back_to_lesson_url 
+        end    
+      end
+    end
   end
 
   private
+
+  def create_replies_array
+    @replies = []
+    @question.replies.order("created_at ASC").each do |reply|
+      @replies << {reply: reply, 
+                   user_is_mentor: reply.user_mentor, 
+                   user_avatar_url: reply.user_avatar.url, 
+                   user_name: reply.user_name,
+                   display_post_links: current_user == reply.user || current_user.admin,
+                   content: MarkdownParser.new(reply.content).parsed}
+    end
+  end
 
   def set_mentor_post
     @question.mentor_post = true if current_user.mentor
   end
 
   def send_email_notification!
-    UserMailer.new_question(@question).deliver_now
+    UserMailer.new_question(@question).deliver_later
   end
 
   def send_slack_notification!

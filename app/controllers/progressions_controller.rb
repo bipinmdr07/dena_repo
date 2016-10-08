@@ -57,6 +57,6 @@ class ProgressionsController < ApplicationController
   end
 
   def progression_params
-    params.require(:progression).permit(:lesson_id, :course_name).merge(user_id: current_user.id) # I don't know why this + 0 works but it prevents a bug with RankedModel
+    params.require(:progression).permit(:lesson_id, :course_name).merge(user_id: current_user.id)
   end
 end

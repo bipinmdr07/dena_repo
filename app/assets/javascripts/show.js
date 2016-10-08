@@ -61,5 +61,5 @@ show_page_trigger = function(){
   scroll_sidebar();
   add_active_to_nav();
   slider_init();
-  add_offset();
+  add_offset();  
 }

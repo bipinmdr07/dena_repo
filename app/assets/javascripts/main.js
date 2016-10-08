@@ -98,6 +98,9 @@ $(document).on('turbolinks:load', function() {
   fixed_header_scroll();
   load_ace();    
   summernote();
+  $('pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  }); 
 });
 
 

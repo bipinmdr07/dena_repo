@@ -1,6 +1,5 @@
 class Progression < ActiveRecord::Base
   include PublicActivity::Model
-  # include RankedModel
 
   belongs_to :user
 
@@ -9,7 +8,6 @@ class Progression < ActiveRecord::Base
   validates :course_name, uniqueness: { scope: [:lesson_id, :user_id] }
 
   scope :today, -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
-  # ranks :user_id
 
   private
 

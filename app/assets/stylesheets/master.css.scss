@@ -1,3 +1,28 @@
+#preview {
+  background: whitesmoke;
+  padding: 20px;
+  min-height: 200px;
+}
+
+.forum-forms {
+  .btn-group {
+    position: relative;
+    float: right;
+    margin-top: 20px;
+  }
+
+  .submit-btn {
+    position: relative;
+    float: right;
+    margin-top: 20px;
+  }
+}
+
+textarea {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px !important;
+}
+
 .devise-shared {
   text-align: left;
   margin-top: 50px;

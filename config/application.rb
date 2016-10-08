@@ -38,5 +38,11 @@ module Techrise
       g.javascripts = false
       g.helper = false
     end
+
+    # enable react addons
+    config.react.addons = true
+
+    # Load services
+    config.autoload_paths << Rails.root.join('services')
   end
 end

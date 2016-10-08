@@ -6,15 +6,28 @@ class RepliesController < ApplicationController
 	  @reply = current_user.replies.create(reply_params)
 
 		if @reply.valid?			
-      create_notifications!
-			
+      create_notifications!			
       send_email_notifications!			
-
 			send_slack_notifications!
+
+      respond_to do |format|
+        format.json { render json: {reply: @reply, 
+                                    user_is_mentor: @reply.user_mentor, 
+                                    user_avatar_url: @reply.user_avatar.url, 
+                                    user_name: @reply.user_name,
+                                    display_post_links: current_user == @reply.user || current_user.admin,
+                                    content: MarkdownParser.new(@reply.content).parsed}.to_json }
+        format.html { redirect_to question_path(current_question) }
+      end
 		else
 			flash[:alert] = "Invalid attributes, please try again."
+      
+      respond_to do |format|
+        format.json { render json: @reply.errors, status: :unprocessable_entity }
+        format.html { redirect_to question_path(current_question) }
+      end
 		end
-		redirect_to question_path(current_question)
+		
 	end
 
 	def edit
@@ -22,17 +35,30 @@ class RepliesController < ApplicationController
 
 	def update
     if current_reply.update(reply_params)
-      flash[:success] = "Updated!"
-      redirect_to question_path(current_reply.question)
+      respond_to do |format|        
+        format.json { render json: MarkdownParser.new(current_reply.content).parsed.to_json }
+        format.html do
+          flash[:success] = "Updated!"
+          redirect_to question_path(current_reply.question)
+        end
+      end      
     else
-      flash[:alert] = "Woops! It looks like there has been an error. Please try again."
-      render :edit
+      respond_to do |format|        
+        format.json { render json: current_reply.errors, status: :unprocessable_entity }
+        format.html do
+          flash[:alert] = "Woops! It looks like there has been an error. Please try again."
+          render :edit
+        end
+      end             
     end
   end
 
   def destroy
     current_reply.destroy
-    redirect_to question_path(current_reply.question)
+    respond_to do |format|
+      format.json { head :no_content }
+      format.html { redirect_to question_path(current_reply.question) }
+    end
   end
 
 	private
@@ -45,7 +71,7 @@ class RepliesController < ApplicationController
   end
 
   def send_email_notifications!
-    UserMailer.new_reply(current_question, current_question.user_email).deliver_now
+    UserMailer.new_reply(question: current_question, email: current_question.user_email).deliver_later
   end
 
   def create_notifications!

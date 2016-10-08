@@ -1,91 +1,29 @@
+<!--
+  this CSS is necessary for proper padding for syntax highlighting.
+  The syntax highlighting format for the lesson files are slightly differently
+  because of indentation etc. 
+  In short, don't remove this unless necessary 
+-->
+<style type="text/css">
+.hljs {
+  padding: 20px !important;
+}
+</style>
+<!-- end -->
+
 <%= back_to_lesson %>
 
 <div class="devise_box forum_container">
 
   <%= render "shared/flash_messages" %>
 
-  <div class="row">
-    <div class="col-xs-12 col-sm-2">
-      <%= image_tag @submission.user_avatar, class: 'prof_pic_forum' %>
-      <div class="prof_name">
-        <%= @submission.user_name %>
-      </div>
-      <div class="prof_badge">
-        <% if @user.mentor %>
-          <label class="label label-default">TECHRISE Mentor</label>
-        <% end %>
-      </div>
-      <div class="edit_post_links">
-        <% if current_user == @submission.user || current_user.admin %>
-          <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_path(@submission), class: 'btn btn-sm btn-warning' %>
-          <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_path(@submission.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
-        <% end %>        
-      </div>
+  <%= react_component 'Submissions', {authenticity_token: form_authenticity_token,
+                                    submission: @submission, 
+                                    content: markdown(@submission.content),
+                                    user_avatar_url: @submission.user_avatar.url, 
+                                    user_is_mentor: @submission.user_mentor,
+                                    user_name: @submission.user_name,
+                                    display_post_links: current_user == @submission.user || current_user.admin,
+                                    replies: @replies } %>
 
-
-      <% if current_user.admin %>
-        <hr>  
-        <%= link_to 'Admin', edit_admin_user_path(@submission.user_id), class: 'btn btn-sm btn-block btn-cta btn-cta-secondary' %>
-      <% end %>
-    </div>
-
-    <div class="col-xs-12 col-sm-10">
-      <h3><%= @submission.title %></h3>
-      <small><%= display_date(@submission.created_at) %></small>
-      <br>
-
-      <%= sanitize raw(@submission.content) %>
-      <p class = "pull-right" ></p>
-      <br class = "clear">
-
-      <% if current_user.admin || @submission.user_id == current_user %>
-        <div id="approval_form_container">
-          <%= render partial: 'approval_form' %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <hr>
-
-
-  <% @submission.submission_replies.order("created_at ASC").each do |reply| %>
-    <div class="row">
-      <div class="col-xs-12 col-sm-2">
-        <%= image_tag reply.user_avatar, class: 'prof_pic_forum' %>
-        <div class="prof_name">
-          <%= reply.user_name %>
-        </div>
-        <div class="prof_badge">
-          <% if reply.user.mentor %>
-            <label class="label label-default">TECHRISE Mentor</label>
-          <% end %>
-        </div>
-        <div class="edit_post_links">
-          <% if current_user == reply.user || current_user.admin %>
-            <%= link_to '<i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit'.html_safe, edit_submission_submission_reply_path(@submission.id, reply.id), class: 'btn btn-sm btn-warning' %>
-            <%= link_to '<i class="fa fa-trash" aria-hidden="true"></i> Delete'.html_safe, submission_reply_path(reply.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-warning' %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="col-xs-12 col-sm-10">
-        <small><%= display_date(reply.created_at) %></small>
-        <br>
-        <%= sanitize raw(reply.content) %>
-      </div>
-    </div>
-    <hr>
-  <% end %>
-
-
-  <%= simple_form_for :submission_reply, url: submission_submission_replies_path(params[:id]), method: :post, input_html: {class: 'form-horizontal'} do |f|  %>
-    <div data-no-turbolink="true">
-      <%= f.input :content, as: :summernote, label: 'Comment', required: true %>
-    </div>
-    <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
-
-    <br>
-    <%= f.submit 'Submit', class: 'btn btn-primary', data: {disable_with: "Submitting reply..."} %>
-  <% end %>
 </div>
