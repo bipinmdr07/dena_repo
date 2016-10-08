@@ -52,7 +52,6 @@ let Submission = React.createClass({
         dataType: 'JSON',
         context: this,
         success(data) {
-          this.props.handleDeleteQuestion(this.props.submission);
           if (data.redirect) {
             window.location = data.redirect;
           }

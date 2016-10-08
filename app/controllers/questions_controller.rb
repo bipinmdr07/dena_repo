@@ -66,18 +66,17 @@ class QuestionsController < ApplicationController
   end
 
   def destroy  
+    back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
     @question.destroy
 
     respond_to do |format|
       format.json do 
-        render json: { redirect: back_to_lesson_url }
-        head :no_content
+        render json: { redirect: back_to_lesson_url }        
       end
       format.html do 
         if @question.mentor_post
           redirect_to community_path
-        else
-          back_to_lesson_url = PreviousLessonUrlBuilder.new(@question).url      
+        else          
           redirect_to back_to_lesson_url 
         end    
       end

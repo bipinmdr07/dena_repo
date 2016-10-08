@@ -64,14 +64,13 @@ class SubmissionsController < ApplicationController
 
   def destroy  
     @submission.destroy
+    back_to_lesson_url = PreviousLessonUrlBuilder.new(@submission).url      
 
     respond_to do |format|
       format.json do 
-        render json: { redirect: back_to_lesson_url }
-        head :no_content
+        render json: { redirect: back_to_lesson_url }        
       end
-      format.html do 
-        back_to_lesson_url = PreviousLessonUrlBuilder.new(@submission).url      
+      format.html do         
         redirect_to back_to_lesson_url   
       end
     end

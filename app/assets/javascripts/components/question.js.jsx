@@ -52,7 +52,6 @@ let Question = React.createClass({
         dataType: 'JSON',
         context: this,
         success(data) {
-          this.props.handleDeleteQuestion(this.props.question);
           if (data.redirect) {
             window.location = data.redirect;
           }
