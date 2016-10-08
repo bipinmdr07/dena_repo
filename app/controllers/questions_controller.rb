@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
       send_slack_notification!
 
       respond_to do |format|
-        format.json { render :json => { redirect: question_url(@question.id) } }
+        format.json { render json: { redirect: question_url(@question.id) } }
         format.html { redirect_to question_path(@question.id) }
       end    
     else
