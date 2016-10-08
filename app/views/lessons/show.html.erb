@@ -11,17 +11,15 @@
   <!-- sidebar -->
   <div class="col-lg-3 visible-lg">
     <div style="width: 100%">
-      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
+      <div class="sidebar_container sidebar_container_left" data-spy="affix" data-offset-bottom="40">
         <%= render 'sidebar' %>
       </div>
     </div>
   </div>
 
-  <div class="col-lg-9 col-md-12">
+  <div class="col-lg-8 col-md-12">
 
     <section class="lesson_content">
-
-      <%= render partial: '/cards/widget' %>
 
       <h1><%= title_for(controller_name.classify.constantize, params[:id].to_i) %></h1>
 
@@ -43,6 +41,13 @@
 
     </section>
 
+  </div>
+
+  <div class="col-lg-1">
+      <%= react_component 'SidebarRight', { authenticity_token: form_authenticity_token, 
+                                            lesson_id: params[:id], 
+                                            course_name: controller_name.classify,
+                                            lesson_url: request.original_url } %>
   </div>
 
 </div>

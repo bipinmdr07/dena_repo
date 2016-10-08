@@ -4,7 +4,7 @@ show_page_trigger = function(){
 
   scroll_sidebar = function() {
     var sidebar, position_sidebar;
-    sidebar = $("#sidebar_container");
+    sidebar = $(".sidebar_container");
 
     position_sidebar = function(){
       if (76 - $(window).scrollTop() > 0) {        
@@ -49,13 +49,13 @@ show_page_trigger = function(){
 
   // scroll to current lesson
   slider_init = function() {
-    $("#slider").slideReveal({
-      trigger: $(".trigger"), 
-      position: "right",
-      width: 350,
-      speed: 700,
-      top: 0
-    });
+    // $("#sidebar-flashcard-form").slideReveal({
+    //   trigger: $("#flashcard-trigger"), 
+    //   position: "right",
+    //   width: 350,
+    //   speed: 700,
+    //   top: 0
+    // });
   };  
 
   scroll_sidebar();

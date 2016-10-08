@@ -1,0 +1,17 @@
+.sidebar-form {
+  width: 360px;
+  position: absolute;
+  right: 0px;
+  padding: 20px;
+  display: inline-block;
+  border-left: 2px solid #161616;
+  min-height: 100vh;
+  h3 {
+    margin-top: 0px;
+    padding: 10px 0px 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    border-bottom: 2px solid #191919;
+  }
+}
