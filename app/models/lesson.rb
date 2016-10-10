@@ -1,4 +1,4 @@
-class Lesson < ActiveRecord::Base
+class Lesson < ApplicationRecord
   Chapter = Struct.new(:title)
   Lesson = Struct.new(:id, :title, :chapter)
 

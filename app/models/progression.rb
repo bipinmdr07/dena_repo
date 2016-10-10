@@ -1,4 +1,4 @@
-class Progression < ActiveRecord::Base
+class Progression < ApplicationRecord
   include PublicActivity::Model
 
   belongs_to :user

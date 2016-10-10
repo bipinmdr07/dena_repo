@@ -1,4 +1,4 @@
-class Card < ActiveRecord::Base
+class Card < ApplicationRecord
   acts_as_taggable
   include PublicActivity::Model
 

@@ -1,4 +1,4 @@
-class Tags < ActiveRecord::Base
+class Tags < ApplicationRecord
 
   def self.get_links(tag)
     links = []
