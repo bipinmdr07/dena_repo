@@ -169,6 +169,11 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.string   "photo"
   end
 
+  create_table "intros", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "mentor_sessions", force: :cascade do |t|
     t.integer  "mentor_id"
     t.integer  "user_id"

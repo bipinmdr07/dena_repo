@@ -18,7 +18,7 @@ Rails.application.configure do
   config.cache_classes = false
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  config.assets.quiet = false
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -68,4 +68,6 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
+
+  Rails.application.config.action_cable.allowed_request_origins = ['http://localhost:3000']
 end

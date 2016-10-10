@@ -76,6 +76,7 @@ class RepliesController < ApplicationController
 
   def create_notifications!
     (current_question.users.uniq + [current_question.user] - [current_user]).each do |user|
+      binding.pry
       Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_question)
     end
   end

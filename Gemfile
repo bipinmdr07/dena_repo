@@ -3,6 +3,8 @@ source 'http://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+# sprockets
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -106,6 +108,9 @@ gem 'rails-controller-testing'
 # gem 'capistrano-rails', group: :development
 
 gem 'rails_12factor', group: [:production, :staging]
+
+
+gem 'redis', '~> 3.0'
 
 group :test do
   gem 'selenium-webdriver'
