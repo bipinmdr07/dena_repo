@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919155256) do
+ActiveRecord::Schema.define(version: 20161010105022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,11 +24,10 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "author_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
   end
-
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id"
@@ -42,11 +40,10 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "recipient_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+    t.index ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+    t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
   end
-
-  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
-  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
-  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -61,10 +58,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.index ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "cards", force: :cascade do |t|
     t.integer  "user_id"
@@ -83,12 +79,11 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.boolean  "archived",            default: false
     t.boolean  "master",              default: false, null: false
     t.integer  "deck_id"
+    t.index ["archived", "user_id"], name: "index_cards_on_archived_and_user_id", using: :btree
+    t.index ["deck_id"], name: "index_cards_on_deck_id", using: :btree
+    t.index ["master"], name: "index_cards_on_master", using: :btree
+    t.index ["user_id"], name: "index_cards_on_user_id", using: :btree
   end
-
-  add_index "cards", ["archived", "user_id"], name: "index_cards_on_archived_and_user_id", using: :btree
-  add_index "cards", ["deck_id"], name: "index_cards_on_deck_id", using: :btree
-  add_index "cards", ["master"], name: "index_cards_on_master", using: :btree
-  add_index "cards", ["user_id"], name: "index_cards_on_user_id", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
@@ -101,10 +96,23 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+    t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
-  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
-  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+  create_table "comments", force: :cascade do |t|
+    t.integer  "forum_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "lesson"
+    t.integer  "user_id"
+    t.boolean  "resolved",    default: false
+    t.string   "course_name"
+    t.index ["forum_id"], name: "index_comments_on_forum_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -117,10 +125,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["master"], name: "index_decks_on_master", using: :btree
+    t.index ["user_id"], name: "index_decks_on_user_id", using: :btree
   end
-
-  add_index "decks", ["master"], name: "index_decks_on_master", using: :btree
-  add_index "decks", ["user_id"], name: "index_decks_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.text     "overview"
@@ -134,18 +141,23 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "signup_link"
   end
 
+  create_table "forums", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "images", force: :cascade do |t|
     t.string   "image_id"
@@ -166,10 +178,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.datetime "session_date"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["mentor_id"], name: "index_mentor_sessions_on_mentor_id", using: :btree
+    t.index ["user_id"], name: "index_mentor_sessions_on_user_id", using: :btree
   end
-
-  add_index "mentor_sessions", ["mentor_id"], name: "index_mentor_sessions_on_mentor_id", using: :btree
-  add_index "mentor_sessions", ["user_id"], name: "index_mentor_sessions_on_user_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
@@ -180,13 +191,12 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "notifiable_type"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id", using: :btree
+    t.index ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
+    t.index ["recipient_id", "created_at"], name: "index_notifications_on_recipient_id_and_created_at", using: :btree
+    t.index ["recipient_id", "read_at"], name: "index_notifications_on_recipient_id_and_read_at", using: :btree
+    t.index ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   end
-
-  add_index "notifications", ["actor_id"], name: "index_notifications_on_actor_id", using: :btree
-  add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
-  add_index "notifications", ["recipient_id", "created_at"], name: "index_notifications_on_recipient_id_and_created_at", using: :btree
-  add_index "notifications", ["recipient_id", "read_at"], name: "index_notifications_on_recipient_id_and_read_at", using: :btree
-  add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
@@ -196,10 +206,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "slug"
+    t.index ["slug"], name: "index_posts_on_slug", using: :btree
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
   end
-
-  add_index "posts", ["slug"], name: "index_posts_on_slug", using: :btree
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "progressions", force: :cascade do |t|
     t.integer  "user_id"
@@ -207,12 +216,11 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "course_name"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["course_name"], name: "index_progressions_on_course_name", using: :btree
+    t.index ["lesson_id"], name: "index_progressions_on_lesson_id", using: :btree
+    t.index ["user_id", "lesson_id", "course_name"], name: "index_progressions_on_user_id_and_lesson_id_and_course_name", using: :btree
+    t.index ["user_id"], name: "index_progressions_on_user_id", using: :btree
   end
-
-  add_index "progressions", ["course_name"], name: "index_progressions_on_course_name", using: :btree
-  add_index "progressions", ["lesson_id"], name: "index_progressions_on_lesson_id", using: :btree
-  add_index "progressions", ["user_id", "lesson_id", "course_name"], name: "index_progressions_on_user_id_and_lesson_id_and_course_name", using: :btree
-  add_index "progressions", ["user_id"], name: "index_progressions_on_user_id", using: :btree
 
   create_table "questions", force: :cascade do |t|
     t.string   "title"
@@ -225,13 +233,51 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.boolean  "resolved",    default: false
     t.boolean  "mentor_post", default: false
     t.string   "slug"
+    t.index ["course_name", "lesson_id"], name: "index_questions_on_course_name_and_lesson_id", using: :btree
+    t.index ["course_name"], name: "index_questions_on_course_name", using: :btree
+    t.index ["lesson_id"], name: "index_questions_on_lesson_id", using: :btree
+    t.index ["slug"], name: "index_questions_on_slug", unique: true, using: :btree
+    t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
 
-  add_index "questions", ["course_name", "lesson_id"], name: "index_questions_on_course_name_and_lesson_id", using: :btree
-  add_index "questions", ["course_name"], name: "index_questions_on_course_name", using: :btree
-  add_index "questions", ["lesson_id"], name: "index_questions_on_lesson_id", using: :btree
-  add_index "questions", ["slug"], name: "index_questions_on_slug", unique: true, using: :btree
-  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
+  create_table "quiz_categories", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "lesson_id"
+    t.string   "course_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["lesson_id"], name: "index_quiz_categories_on_lesson_id", using: :btree
+  end
+
+  create_table "quiz_category_ratings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_category_id"
+    t.float    "score"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
+    t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
+    t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
+    t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
+  end
+
+  create_table "quiz_options", force: :cascade do |t|
+    t.integer  "quiz_problem_id"
+    t.string   "content"
+    t.boolean  "correct"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["quiz_problem_id"], name: "index_quiz_options_on_quiz_problem_id", using: :btree
+  end
+
+  create_table "quiz_problems", force: :cascade do |t|
+    t.integer  "lesson_id"
+    t.string   "course_name"
+    t.string   "question"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["course_name", "lesson_id"], name: "index_quiz_problems_on_course_name_and_lesson_id", using: :btree
+  end
 
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id"
@@ -239,10 +285,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "content"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["user_id", "question_id"], name: "index_replies_on_user_id_and_question_id", using: :btree
+    t.index ["user_id"], name: "index_replies_on_user_id", using: :btree
   end
-
-  add_index "replies", ["user_id", "question_id"], name: "index_replies_on_user_id_and_question_id", using: :btree
-  add_index "replies", ["user_id"], name: "index_replies_on_user_id", using: :btree
 
   create_table "rich_rich_files", force: :cascade do |t|
     t.datetime "created_at"
@@ -266,11 +311,22 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.integer  "mentor_session_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["mentor_id"], name: "index_student_sessions_on_mentor_id", using: :btree
+    t.index ["mentor_session_id"], name: "index_student_sessions_on_mentor_session_id", using: :btree
+    t.index ["user_id"], name: "index_student_sessions_on_user_id", using: :btree
   end
 
-  add_index "student_sessions", ["mentor_id"], name: "index_student_sessions_on_mentor_id", using: :btree
-  add_index "student_sessions", ["mentor_session_id"], name: "index_student_sessions_on_mentor_session_id", using: :btree
-  add_index "student_sessions", ["user_id"], name: "index_student_sessions_on_user_id", using: :btree
+  create_table "submission_comments", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "lesson"
+    t.integer  "user_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "submission_id"
+    t.boolean  "approved",      default: false
+    t.index ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
+  end
 
   create_table "submission_replies", force: :cascade do |t|
     t.integer  "user_id"
@@ -278,10 +334,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "submission_id"
+    t.index ["submission_id"], name: "index_submission_replies_on_submission_id", using: :btree
+    t.index ["user_id", "submission_id"], name: "index_submission_replies_on_user_id_and_submission_id", using: :btree
   end
-
-  add_index "submission_replies", ["submission_id"], name: "index_submission_replies_on_submission_id", using: :btree
-  add_index "submission_replies", ["user_id", "submission_id"], name: "index_submission_replies_on_user_id_and_submission_id", using: :btree
 
   create_table "submissions", force: :cascade do |t|
     t.string   "name"
@@ -293,12 +348,11 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.integer  "lesson_id"
     t.integer  "user_id"
     t.boolean  "approved",    default: false
+    t.index ["course_name", "lesson_id"], name: "index_submissions_on_course_name_and_lesson_id", using: :btree
+    t.index ["course_name"], name: "index_submissions_on_course_name", using: :btree
+    t.index ["lesson_id"], name: "index_submissions_on_lesson_id", using: :btree
+    t.index ["user_id"], name: "index_submissions_on_user_id", using: :btree
   end
-
-  add_index "submissions", ["course_name", "lesson_id"], name: "index_submissions_on_course_name_and_lesson_id", using: :btree
-  add_index "submissions", ["course_name"], name: "index_submissions_on_course_name", using: :btree
-  add_index "submissions", ["lesson_id"], name: "index_submissions_on_lesson_id", using: :btree
-  add_index "submissions", ["user_id"], name: "index_submissions_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -308,17 +362,22 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.string   "tagger_type"
     t.string   "context",       limit: 128
     t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context", using: :btree
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
   end
-
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                     default: "",    null: false
@@ -366,19 +425,18 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
-    t.boolean  "collaboration_access",      default: false, null: false
-    t.boolean  "skill_academy_access",      default: false, null: false
     t.string   "provider"
     t.string   "uid"
     t.text     "application_reasons"
     t.integer  "package"
+    t.boolean  "collaboration_access",      default: false, null: false
+    t.boolean  "skill_academy_access",      default: false, null: false
+    t.index ["admitted"], name: "index_users_on_admitted", using: :btree
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["mentor_id"], name: "index_users_on_mentor_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["admitted"], name: "index_users_on_admitted", using: :btree
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["mentor_id"], name: "index_users_on_mentor_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"
@@ -390,9 +448,9 @@ ActiveRecord::Schema.define(version: 20160919155256) do
     t.integer  "vote_weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
-
+  add_foreign_key "quiz_options", "quiz_problems"
 end
