@@ -1,7 +1,7 @@
 require_relative 'boot'
 
 require 'rails/all'
-require 'sprockets/railtie'
+# require 'sprockets/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -46,6 +46,8 @@ module Techrise
     # Load services
     config.autoload_paths << Rails.root.join('services')
 
-    config.action_cable.mount_path = '/cable'
+    config.action_cable.disable_request_forgery_protection = true
   end
 end
+
+

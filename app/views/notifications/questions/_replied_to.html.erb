@@ -1,0 +1,7 @@
+<li data-read-at='<%=notification.read_at %>'>
+  <a href='<%= "/" + notification.notifiable.class.to_s.underscore.humanize.downcase + "s/" + (notification.notifiable_id).to_s %>'>
+    <img src='<%= notification.actor.avatar.url %>' class='notification-prof'> <%=notification.actor.name %> <%=notification.action%> <%= "your #{notification.notifiable.class.to_s.underscore.humanize.downcase}" %>
+    <br>
+    <time class='timeago' datetime='<%=notification.created_at.to_time.iso8601%>'><%=notification.created_at%></time>
+  </a>
+</li>
