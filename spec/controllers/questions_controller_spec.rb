@@ -25,12 +25,12 @@ RSpec.describe QuestionsController, type: :controller do
 
       it "sends an email to the user" do
         user = FactoryGirl.create(:user)
+        message_delivery = instance_double(ActionMailer::MessageDelivery)
 
         sign_in user
-
-        expect {
-          post :create, question: FactoryGirl.attributes_for(:question)
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect(UserMailer).to receive(:new_question).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_later)
+        post :create, question: FactoryGirl.attributes_for(:question)        
       end
     end
 
@@ -78,13 +78,13 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it "sends an email to the user" do
+        message_delivery = instance_double(ActionMailer::MessageDelivery)
         mentor = FactoryGirl.create(:user, mentor: true)
 
         sign_in mentor
-
-        expect {
-          post :create, question: FactoryGirl.attributes_for(:question)
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect(UserMailer).to receive(:new_question).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_later)
+        post :create, question: FactoryGirl.attributes_for(:question) 
       end
     end
   end

@@ -23,13 +23,14 @@ RSpec.describe SubmissionRepliesController, type: :controller do
       end
 
       it "sends an email" do
+        message_delivery = instance_double(ActionMailer::MessageDelivery)
         setup_submission_by_current_user
 
         sign_in @user
 
-        expect {
-          post :create, submission_id: @submission.id, submission_reply: FactoryGirl.attributes_for(:submission_reply)
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect(UserMailer).to receive(:new_submission_reply).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_later)
+        post :create, submission_id: @submission.id, submission_reply: FactoryGirl.attributes_for(:submission_reply)
       end
 
       it "creates notification for involved users" do

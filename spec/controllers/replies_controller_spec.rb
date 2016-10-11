@@ -23,13 +23,14 @@ RSpec.describe RepliesController, type: :controller do
       end
 
       it "sends an email" do
+        message_delivery = instance_double(ActionMailer::MessageDelivery)
         setup_question_by_current_user
 
         sign_in @user
 
-        expect {
-          post :create, question_id: @question.id, reply: FactoryGirl.attributes_for(:reply)
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect(UserMailer).to receive(:new_reply).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_later)
+        post :create, question_id: @question.id, reply: FactoryGirl.attributes_for(:reply)
       end
 
       it "creates notification for involved users" do

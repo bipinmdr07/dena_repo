@@ -1,4 +1,4 @@
-class Event < ActiveRecord::Base
+class Event < ApplicationRecord
   mount_uploader :featured_image, AvatarUploader
 
   validates :title, :overview, :signup_link, :datetime, :venue, presence: true

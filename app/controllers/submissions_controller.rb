@@ -48,7 +48,7 @@ class SubmissionsController < ApplicationController
         format.json { render json: MarkdownParser.new(@submission.content).parsed.to_json }
         format.html do
           flash[:success] = "Updated!"
-          redirect_to question_path(@submission.id)
+          redirect_to submission_path(@submission.id)
         end
       end      
     else

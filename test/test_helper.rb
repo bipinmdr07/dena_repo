@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'capybara/rails'
 
 class ActiveSupport::TestCase
+  include ActiveJob::TestHelper 
 	# include Devise::TestHelpers
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   # fixtures :all

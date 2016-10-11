@@ -1,4 +1,4 @@
-class SubmissionReply < ActiveRecord::Base
+class SubmissionReply < ApplicationRecord
 	belongs_to :submission
   belongs_to :user
 
