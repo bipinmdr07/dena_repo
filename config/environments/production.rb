@@ -102,7 +102,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  config.active_job.queue_adapter = :delayed_job
+  # config.active_job.queue_adapter = :delayed_job
 
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
