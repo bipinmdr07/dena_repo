@@ -1,4 +1,4 @@
-let SidebarRight = React.createClass({
+let SidebarLeft = React.createClass({
   getInitialState() {
       return {
           showFlashcard: false,
@@ -61,24 +61,24 @@ let SidebarRight = React.createClass({
 
   render(){
     return(
-      <div className="sidebar_container sidebar_container_right" data-spy="affix" data-offset-bottom="40" style={{ width: $(window).width() / 8.88 + 360 - 30 }}>
-        <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-right" style={{ width: $(window).width() / 8.88 - 30 }}>
+      <div className="sidebar_container sidebar_container_left" data-spy="affix" data-offset-bottom="40">
+        <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-left">
           <li className={this.state.showFlashcard ? "sidebar-active" : "" } onClick={this.toggleFlashcard}>
-            <i className="fa fa-pencil-square-o" aria-hidden="true"></i><br />
-            Create New Flashcard
-          </li>
-          <li className={this.state.showQuestion ? "sidebar-active" : "" }  onClick={this.toggleQuestion}>
-            <i className="fa fa-question-circle" aria-hidden="true"></i><br />
-            Ask Question
+            <i className="fa fa-bars" aria-hidden="true"></i>
           </li>
           <li>
-            <i className="fa fa-check-square" aria-hidden="true"></i><br />
-            Quizzes
+            <i className="fa fa-bell" aria-hidden="true"></i><br />
+          </li>
+          <li>
+            <i className="fa fa-users" aria-hidden="true"></i><br />
+          </li>
+          <li>
+            <i className="fa fa-search" aria-hidden="true"></i>            
           </li>
         </ul>
 
         {this.sidebarForm()}
-
+                
       </div>
     )
   }

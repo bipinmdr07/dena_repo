@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20161008175705) do
+ActiveRecord::Schema.define(version: 20161010105022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,21 +113,6 @@ ActiveRecord::Schema.define(version: 20161008175705) do
     t.index ["forum_id"], name: "index_comments_on_forum_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
-
-  create_table "comments", force: :cascade do |t|
-    t.integer  "forum_id"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "lesson"
-    t.integer  "user_id"
-    t.boolean  "resolved",    default: false
-    t.string   "course_name"
-  end
-
-  add_index "comments", ["forum_id"], name: "index_comments_on_forum_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -300,49 +284,6 @@ ActiveRecord::Schema.define(version: 20161008175705) do
     t.index ["course_name", "lesson_id"], name: "index_quiz_problems_on_course_name_and_lesson_id", using: :btree
   end
 
-  create_table "quiz_categories", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "lesson_id"
-    t.string   "course_name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "quiz_categories", ["lesson_id"], name: "index_quiz_categories_on_lesson_id", using: :btree
-
-  create_table "quiz_category_ratings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "quiz_category_id"
-    t.float    "score"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "quiz_category_ratings", ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
-  add_index "quiz_category_ratings", ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
-  add_index "quiz_category_ratings", ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
-  add_index "quiz_category_ratings", ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
-
-  create_table "quiz_options", force: :cascade do |t|
-    t.integer  "quiz_problem_id"
-    t.string   "content"
-    t.boolean  "correct"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "quiz_options", ["quiz_problem_id"], name: "index_quiz_options_on_quiz_problem_id", using: :btree
-
-  create_table "quiz_problems", force: :cascade do |t|
-    t.integer  "lesson_id"
-    t.string   "course_name"
-    t.string   "question"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "quiz_problems", ["course_name", "lesson_id"], name: "index_quiz_problems_on_course_name_and_lesson_id", using: :btree
-
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -391,19 +332,6 @@ ActiveRecord::Schema.define(version: 20161008175705) do
     t.boolean  "approved",      default: false
     t.index ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
   end
-
-  create_table "submission_comments", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "lesson"
-    t.integer  "user_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "submission_id"
-    t.boolean  "approved",      default: false
-  end
-
-  add_index "submission_comments", ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
 
   create_table "submission_replies", force: :cascade do |t|
     t.integer  "user_id"
@@ -508,14 +436,11 @@ ActiveRecord::Schema.define(version: 20161008175705) do
     t.integer  "package"
     t.boolean  "collaboration_access",      default: false, null: false
     t.boolean  "skill_academy_access",      default: false, null: false
-<<<<<<< HEAD
-=======
     t.index ["admitted"], name: "index_users_on_admitted", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["mentor_id"], name: "index_users_on_mentor_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
->>>>>>> 68071211cbad5e32d55d636b60492ddf15e4245e
   end
 
   create_table "votes", force: :cascade do |t|
@@ -532,11 +457,5 @@ ActiveRecord::Schema.define(version: 20161008175705) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
-<<<<<<< HEAD
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
-
-=======
->>>>>>> 68071211cbad5e32d55d636b60492ddf15e4245e
   add_foreign_key "quiz_options", "quiz_problems"
 end

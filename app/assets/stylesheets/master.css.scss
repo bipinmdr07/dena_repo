@@ -1,3 +1,10 @@
+body {
+  transition: margin 700ms ease;
+  -webkit-transition: margin 700ms ease;
+  -moz-transition: margin 700ms ease;
+  -o-transition: margin 700ms ease;
+}
+
 #preview {
   background: whitesmoke;
   padding: 20px;

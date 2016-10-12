@@ -9,15 +9,16 @@
 
 <div class="row">
   <!-- sidebar -->
-  <div class="col-lg-3 visible-lg">
-    <div style="width: 100%">
-      <div class="sidebar_container sidebar_container_left" data-spy="affix" data-offset-bottom="40">
-        <%= render 'sidebar' %>
-      </div>
-    </div>
-  </div>
+  <ul class="nav nav-pills nav-stacked" id="sidebar-left-trigger">
+    <li onclick="sidebar.toggleNav()">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </li>
+  </ul>
+  <div class="sidebar_container sidebar_container_left" id="sidebar-reveal-container" data-spy="affix" data-offset-bottom="40">
+    <%= render 'sidebar' %>
+  </div>    
 
-  <div class="col-lg-8 col-md-12">
+  <div class="col-lg-11 col-md-12">
 
     <section class="lesson_content">
 
@@ -43,7 +44,7 @@
 
   </div>
 
-  <div class="col-lg-1">
+  <div class="col-lg-1 visible-lg">
       <%= react_component 'SidebarRight', { authenticity_token: form_authenticity_token, 
                                             lesson_id: params[:id], 
                                             course_name: controller_name.classify,

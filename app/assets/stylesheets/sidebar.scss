@@ -1,3 +1,19 @@
+$sidebar-border: #323232;
+
+@mixin color_hover {
+  transition: color 700ms ease;
+  -webkit-transition: color 700ms ease;
+  -moz-transition: color 700ms ease;
+  -o-transition: color 700ms ease;
+}
+
+@mixin slide_transition($property) {
+  transition: $property 700ms ease;
+  -webkit-transition: $property 700ms ease;
+  -moz-transition: $property 700ms ease;
+  -o-transition: $property 700ms ease;
+} 
+
 .sidebar-form {
   width: 360px;
   position: absolute;
@@ -13,5 +29,129 @@
     font-weight: 600;
     font-size: 16px;
     border-bottom: 2px solid #191919;
+  }
+}
+
+.sidebar .nav {
+  max-width: 95% !important;
+}
+
+.sidebar-active {
+  background: #161616;
+  color: #d9614c !important;
+}
+
+.sidebar {
+  padding-right: 0;
+  position: relative;
+  white-space: normal;
+  overflow: auto;
+
+  li {
+    border-bottom-width:1px;
+    border-bottom: 2px solid #161616;
+  }
+}
+
+.sidebar-right {
+  width: 90px;
+  display: inline-block;
+}
+
+.sidebar-left {
+  width: 300px;  
+}
+
+#sidebar-left-trigger {
+  @include slide_transition(left);
+
+  background: #202020;
+  width: 45px;
+  position: fixed;
+  top: 76px;
+  left: 0px;
+  cursor: pointer;
+  z-index: 1;
+  border-top: 2px solid #323232;
+  border-bottom: 2px solid #323232;
+  border-right: 2px solid #323232;
+  border-bottom-right-radius: 4px;
+
+  li {
+    @include color_hover;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: white;
+
+    .fa {      
+      font-size: 24px;
+      margin-bottom: 0px;
+    }
+
+    &:hover {
+      color: #EC6952;
+    }
+  }
+}
+
+
+@mixin sidebar_container {
+  position: fixed;
+  background: rgb(32, 32, 32);
+  height: 100%;
+  overflow: scroll;
+  border-top: 2px solid $sidebar-border;
+  transition: width 700ms ease;
+
+  li {
+    color: white;
+  }
+}
+
+.sidebar_container_left {
+  @include sidebar_container;
+
+  left: 0px;
+
+  li {
+    .fa {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
+.sidebar_container_right {
+  @include sidebar_container;
+
+  @include slide_transition(right);
+
+  right: -360px;
+  width: 450px;
+  border-left: 2px solid $sidebar-border;
+
+  li {
+    padding: 20px;
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    cursor: pointer;
+
+    .fa {
+      font-size: 30px;
+      margin-bottom: 5px;
+    }  
+  }
+}
+
+#sidebar-reveal-container {
+  width: 0px;
+  top: 0px;
+}
+
+.chapter-ul {
+  li:last-child {
+    border-bottom: none;
   }
 }

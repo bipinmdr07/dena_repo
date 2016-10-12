@@ -1,3 +1,7 @@
+.navbar-brand, .navbar-nav > li > a {
+  text-shadow: none;
+}
+
 .left-submenu {
   li {
     font-size: 14px;
@@ -15,6 +19,13 @@
   -moz-opacity: 1;
   opacity: 1;
 }
+
+@media screen and (max-width: 720px) {
+  .header.scrolled_nav .main-nav .nav .nav-item a {
+    color: white;
+  }
+}
+
 .header.scrolled_nav .main-nav .nav .nav-item.nav-item-cta a.btn-cta-secondary {
   background: #ec6952;
   border-color: #ec6952;
@@ -65,72 +76,9 @@
   font-size: 16px;
 }
 
-
-.sidebar {
-  padding-right: 0;
-  position: relative;
-  white-space: normal;
-  overflow: auto;
-}
-
-.sidebar-right {
-  width: 90px;
-  display: inline-block;
-}
-
-.sidebar-active {
-  background: #161616;
-  color: #d9614c !important;
-}
-
-.sidebar-left {
-  width: 300px;
-}
-
-.sidebar_container_right {
-  right: -360px;
-  width: 450px;
-  border-left: 2px solid #323232;
-  transition: all 700ms ease;
-  li {
-    color: white;
-    padding: 20px;
-    font-size: 12px;
-    font-family: 'Lato', sans-serif;
-    text-align: center;
-    cursor: pointer;
-
-    .fa {
-      font-size: 30px;
-      margin-bottom: 5px;
-    }
-  }
-}
-
-.sidebar_container_left {
-  left: 0px;
-  border-right: 2px solid #323232;
-}
-
-.sidebar_container {
-  position: fixed;
-  background: rgb(32, 32, 32);
-  height: 100%;
-  overflow: scroll;
-  border-top: 2px solid #323232;
-}
-
 .nav-stacked > li > a:hover, .nav-stacked > li > a:focus {
   text-decoration: none;
   background-color: inherit;
-}
-
-.sidebar .nav {
-  max-width: 95% !important;
-}
-.sidebar li {
-  border-bottom-width:1px;
-  border-bottom: 2px solid #161616;
 }
 
 /* collapsed sidebar styles */
