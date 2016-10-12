@@ -1,4 +1,4 @@
-class Quote < ActiveRecord::Base
+class Quote < ApplicationRecord
   ARRAY = [
     ["Life isn’t about getting and having, it’s about giving and being.", "Kevin Kruse"],
     ["Whatever the mind of man can conceive and believe, it can achieve.", "Napoleon Hill"],

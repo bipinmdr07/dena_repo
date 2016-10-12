@@ -1,0 +1,7 @@
+<li data-read-at='<%=notification.read_at %>'>
+  <a href='<%= notification.url %>'>
+    <img src='<%=notification.actor_photo_url%>' class='notification-prof'> <%=notification.actor%> <%=notification.action%> <%=notification.notifiable.type%>
+    <br>
+    <time class='timeago' datetime='<%=notification.created_at%>'><%=notification.created_at%></time>
+  </a>
+</li>

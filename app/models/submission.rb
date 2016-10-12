@@ -1,4 +1,4 @@
-class Submission < ActiveRecord::Base
+class Submission < ApplicationRecord
   belongs_to :user
 	has_many :submission_replies, dependent: :destroy
   has_many :users, through: :submission_replies

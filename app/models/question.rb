@@ -1,6 +1,6 @@
 require 'elasticsearch/model'
 
-class Question < ActiveRecord::Base
+class Question < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders]
 

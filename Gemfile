@@ -2,7 +2,9 @@ source 'http://rubygems.org'
 source 'http://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '>= 5.0.0.rc2', '< 5.1'
+# sprockets
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -10,20 +12,20 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 # use puma as web server
 gem 'puma'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.x'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
@@ -42,9 +44,11 @@ gem "fog", '1.36.0'
 # active admin
 gem 'activeadmin', github: 'activeadmin'
 gem 'active_skin'
+# dependency for activeadmin
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
 # tagging
-gem 'acts-as-taggable-on', '~> 3.4'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 # social media buttons
 gem 'rails-assets-RRSSB'
@@ -56,7 +60,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'public_activity'
 
 # rankings
-gem 'ranked-model', :git => 'https://github.com/mixonic/ranked-model.git'
+# gem 'ranked-model', :git => 'https://github.com/mixonic/ranked-model.git'
 
 # inline CSS for emails
 gem 'premailer-rails'
@@ -96,12 +100,16 @@ gem 'react-rails'
 
 # Markdown + Syntax Highlighting
 gem 'redcarpet'
+
+gem 'rails-controller-testing'
 # gem 'coderay'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem 'rails_12factor', group: [:production, :staging]
+
+gem 'redis'
 
 group :test do
   gem 'selenium-webdriver'
@@ -127,4 +135,7 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'listen', '~> 3.0.5'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end

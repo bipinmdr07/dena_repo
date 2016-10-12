@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     sign_up: ''
   }
 
+  mount ActionCable.server => '/cable'
+
   # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
   #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
   # end

@@ -11,8 +11,8 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
-    @cards = current_deck.cards.order("id ASC")
-    @card_position = @cards.index(@card) + 1
+    @card_ids = current_deck.cards.all.order("id ASC").pluck(:id)
+    @card_position = @card_ids.index(@card.id) + 1
     @card_count = current_deck.cards.count    
   end
 

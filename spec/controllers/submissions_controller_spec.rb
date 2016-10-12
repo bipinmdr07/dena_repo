@@ -23,13 +23,14 @@ RSpec.describe SubmissionsController, type: :controller do
       end
 
       it "sends an email to the user" do
+        message_delivery = instance_double(ActionMailer::MessageDelivery)
         user = FactoryGirl.create(:user)
 
         sign_in user
 
-        expect {
-          post :create, submission: FactoryGirl.attributes_for(:submission)
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect(UserMailer).to receive(:new_submission).and_return(message_delivery)
+        expect(message_delivery).to receive(:deliver_later)
+        post :create, submission: FactoryGirl.attributes_for(:submission)
       end
     end
 

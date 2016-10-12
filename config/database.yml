@@ -61,3 +61,12 @@ production:
   username: postgres
   password: password
   host: localhost
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: techrise_staging
+  pool: 5
+  username: postgres
+  password: password
+  host: localhost
