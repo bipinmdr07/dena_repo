@@ -1,0 +1,25 @@
+.option_form_container {
+  border-top: 2px solid #161616;
+  padding-top: 20px;
+  color: white;
+  position: relative;
+
+  .delete_option {
+    position: absolute;
+    top: 6px;
+    right: 0px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+}
+
+.btn-add-option {  
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.quiz-buttons {
+  border-top: 2px solid #161616;
+  padding-top: 20px;
+}

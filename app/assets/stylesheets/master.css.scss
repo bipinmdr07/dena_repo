@@ -1,8 +1,12 @@
-body {
+@mixin margin_transition {
   transition: margin 700ms ease;
   -webkit-transition: margin 700ms ease;
   -moz-transition: margin 700ms ease;
   -o-transition: margin 700ms ease;
+}
+
+body {
+  @include margin_transition;
 }
 
 #preview {
@@ -413,6 +417,8 @@ span.radio.inline {
   background-color: white;
   padding: 60px 0px;
   margin: 0px;
+  
+  @include margin_transition;
 
   h1 {
     border-left: 6px solid #ec6952;

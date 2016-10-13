@@ -4,6 +4,7 @@ let SidebarRight = React.createClass({
           showFlashcard: false,
           showQuestion: false,
           showQuiz: false,
+          showAdminQuiz: false,
           showNav: false
       };
   },
@@ -11,9 +12,8 @@ let SidebarRight = React.createClass({
   slideWidth: "350px",
 
   slide(){
-    if (this.state.showFlashcard || this.state.showQuestion || this.state.showQuiz || this.state.showNav) {
+    if (this.state.showFlashcard || this.state.showQuestion || this.state.showQuiz || this.state.showAdminQuiz || this.state.showNav) {
       $('.lesson_content').css('margin-right', this.slideWidth); 
-      $('.lesson_content').css('transition', 'all 700ms ease');
       $('.sidebar_container_right').css('right', '0px');
     } else {
       $('.lesson_content').css('margin-right', "0px");
@@ -23,22 +23,28 @@ let SidebarRight = React.createClass({
   },
 
   toggleFlashcard(){
-    this.setState({showFlashcard: !this.state.showFlashcard, showQuestion: false, showQuiz: false, showNav: false}, () => {
+    this.setState({showFlashcard: !this.state.showFlashcard, showQuestion: false, showQuiz: false, showAdminQuiz: false, showNav: false}, () => {
       this.slide();
     });    
     
   },
 
   toggleQuestion(){
-    this.setState({showQuestion: !this.state.showQuestion, showFlashcard: false, showQuiz: false, showNav: false}, () => {
+    this.setState({showQuestion: !this.state.showQuestion, showFlashcard: false, showQuiz: false, showAdminQuiz: false, showNav: false}, () => {
       this.slide();
     });    
   },
 
   toggleQuiz(){
-    this.setState({showQuiz: !this.state.showQuiz, showQuestion: false, showFlashcard: false, showNav: false}, () => {
+    this.setState({showQuiz: !this.state.showQuiz, showQuestion: false, showFlashcard: false, showAdminQuiz: false, showNav: false}, () => {
       this.slide();
     });    
+  },
+
+  toggleAdminQuiz(){
+    this.setState({showAdminQuiz: !this.state.showAdminQuiz, showQuiz: false, showQuestion: false, showFlashcard: false, showNav: false}, () => {
+      this.slide();
+    }); 
   },
 
   toggleNav(){
@@ -70,6 +76,14 @@ let SidebarRight = React.createClass({
                               course_name={this.props.course_name}
                               handleSubmit={this.toggleQuiz} />
       )
+    } else if (this.state.showAdminQuiz) {
+      return (
+        <AdminQuizForm authenticity_token={this.props.authenticity_token} 
+                              lesson_id={this.props.lesson_id}
+                              course_name={this.props.course_name}
+                              handleSubmit={this.toggleAdminQuiz}
+                               />
+      )
     }
   },
 
@@ -81,13 +95,20 @@ let SidebarRight = React.createClass({
             <i className="fa fa-pencil-square-o" aria-hidden="true"></i><br />
             Create New Flashcard
           </li>
+
           <li className={this.state.showQuestion ? "sidebar-active" : "" }  onClick={this.toggleQuestion}>
             <i className="fa fa-question-circle" aria-hidden="true"></i><br />
             Ask Question
           </li>
+
           <li className={this.state.showQuiz ? "sidebar-active" : "" } onClick={this.toggleQuiz}>
             <i className="fa fa-check-square" aria-hidden="true"></i><br />
             Quizzes
+          </li>
+
+          <li className={this.state.showAdminQuiz ? "sidebar-active" : "" } onClick={this.toggleAdminQuiz}>
+            <i className="fa fa-plus" aria-hidden="true"></i><br />
+            Add Quiz
           </li>
         </ul>
 

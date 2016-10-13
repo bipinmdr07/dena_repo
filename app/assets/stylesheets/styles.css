@@ -59,6 +59,14 @@ a.btn-cta-primary,
   border: 2px solid #ec6952;
   color: #fff;
 }
+
+a.btn-cta-primary:focus,
+.btn-cta-primary:focus {
+  background: #ec6952;
+  border: 2px solid #ec6952;
+  color: #fff;
+}
+
 a.btn-cta-primary:hover,
 .btn-cta-primary:hover {
   background: #e9553b;
@@ -76,6 +84,13 @@ a.btn-cta-secondary:hover,
   background: #ec6952;
   border: 2px solid #ec6952;
   color: #fff;
+}
+
+a.btn-cta-secondary:focus,
+.btn-cta-secondary:focus {
+  background: none;
+  border: 2px solid #ec6952;
+  color: #ec6952;
 }
 
 .btn-cta-secondary .fa {
