@@ -38,7 +38,7 @@ let QuizOptionForm = React.createClass({
         <br />
         <div className="checkbox">
           <label><input type="checkbox" name="correct" value="true" />Correct</label><br />
-          <label><input type="checkbox" name="correct" value="false" checked />Incorrect</label>
+          <label><input type="checkbox" name="correct" value="false" defaultChecked />Incorrect</label>
         </div>    
 
       </div>

@@ -50,9 +50,4 @@ show_page_trigger = function(){
   add_active_to_nav();
   add_offset();  
 
-  window.onresize = function(){
-    $(".sidebar_container_right").css("width", $(window).width() / 8.88 + 360 - 30);
-    $(".sidebar-right").css("width", $(window).width() / 8.88 - 30);
-  }
-
 }

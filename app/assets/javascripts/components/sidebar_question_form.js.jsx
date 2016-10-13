@@ -48,9 +48,13 @@ let SidebarQuestionForm = React.createClass({
     })
   },
 
+  sidebarFormStyles(){
+    return { width: this.props.sidebarFormWidth }
+  },
+
   render() {
     return (
-      <form id="sidebar-question-form" className="sidebar-form">
+      <form id="sidebar-question-form" className="sidebar-form" style={this.sidebarFormStyles()}>
         <h3>Ask Question</h3>
 
         <input type='hidden'                    

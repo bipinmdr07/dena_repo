@@ -6,7 +6,20 @@ let AdminQuizForm = React.createClass({
           quizOptions: [<QuizOptionForm key={1} 
                                         id={1}
                                         handleAddOption={this.handleAddOption}
-                                        handleDeleteOption={this.handleDeleteOption}/>],
+                                        handleDeleteOption={this.handleDeleteOption}/>,
+                        <QuizOptionForm key={2} 
+                                        id={2}
+                                        handleAddOption={this.handleAddOption}
+                                        handleDeleteOption={this.handleDeleteOption}/>,
+                        <QuizOptionForm key={3} 
+                                        id={3}
+                                        handleAddOption={this.handleAddOption}
+                                        handleDeleteOption={this.handleDeleteOption}/>,
+                        <QuizOptionForm key={4} 
+                                        id={4}
+                                        handleAddOption={this.handleAddOption}
+                                        handleDeleteOption={this.handleDeleteOption}/>
+                                        ],
           btnDisabled: false  
       };
   },
@@ -81,10 +94,14 @@ let AdminQuizForm = React.createClass({
     this.setState({quizOptions: quizOptions});
   },
 
+  sidebarFormStyles(){
+    return { width: this.props.sidebarFormWidth }
+  },
+
   render() {
 
     return (
-      <form id="sidebar-question-form" className="sidebar-form">
+      <form id="sidebar-question-form" className="sidebar-form" style={this.sidebarFormStyles()}>
         <h3>Add Quiz</h3>
 
         <input type='hidden'                    

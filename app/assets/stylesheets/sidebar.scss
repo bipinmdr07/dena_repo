@@ -15,7 +15,6 @@ $sidebar-border: #323232;
 } 
 
 .sidebar-form {
-  width: 360px;
   position: absolute;
   right: 0px;
   padding: 20px;
@@ -129,8 +128,6 @@ $sidebar-border: #323232;
 
   @include slide_transition(right);
 
-  right: -360px;
-  width: 450px;
   border-left: 2px solid $sidebar-border;
 
   li {
@@ -139,6 +136,14 @@ $sidebar-border: #323232;
     font-family: 'Lato', sans-serif;
     text-align: center;
     cursor: pointer;
+
+    @media screen and (max-width: 776px) {
+      padding: 5px;
+    }
+
+    @media screen and (max-width: 992px) {
+      padding: 10px;
+    }
 
     .fa {
       font-size: 30px;

@@ -36,9 +36,13 @@ let SidebarFlashcardForm = React.createClass({
     })
   },
 
+  sidebarFormStyles(){
+    return { width: this.props.sidebarFormWidth }
+  },
+
   render(){
     return(
-      <form id="sidebar-flashcard-form" className="sidebar-form">
+      <form id="sidebar-flashcard-form" className="sidebar-form" style={this.sidebarFormStyles()}>
         <h3>Create New Flashcard</h3>
         <input type='hidden'                    
                name='authenticity_token' 
