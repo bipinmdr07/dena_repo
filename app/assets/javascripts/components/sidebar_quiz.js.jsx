@@ -2,6 +2,7 @@ let SidebarQuiz = React.createClass({
   getInitialState() {
     return {
       quizProblems: [],
+      checkedOptionIds: [],
       current_position: 0
     };
   },
@@ -16,6 +17,34 @@ let SidebarQuiz = React.createClass({
         this.setState({quizProblems: data});
       }
     })
+  },
+
+  handleChange(e){
+    let id = e.target.value;
+    
+    if (this.state.checkedOptionIds.indexOf(id) === -1) {
+      let checkedOptionIds = React.addons.update(this.state.checkedOptionIds, {$push: [id]});
+      this.setState({checkedOptionIds: checkedOptionIds});
+    }
+  },
+
+  handleSubmit(e){
+    e.preventDefault();
+
+    $.ajax({
+      dataType: 'JSON',
+      type: 'POST',
+      url: '',
+      data: {
+              quiz_submission: {
+                quiz_problem_id: this.state.quizProblems[this.state.current_position],
+                checked_options: this.state.checkedOptionIds
+              }
+            },
+      success(data){
+        this.setState({checkedOptionIds: [], current_position: this.state.current_position + 1})
+      }
+    });
   },
 
   sidebarFormStyles(){
@@ -35,6 +64,7 @@ let SidebarQuiz = React.createClass({
                   <input type="checkbox" 
                          name={this.state.quizProblems[this.state.current_position].id} 
                          value={option.id} 
+                         handleChange={this.handleChange}
                          />
                   {option.content}
             </label>
