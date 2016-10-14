@@ -10,7 +10,7 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
           sign_in admin
 
           expect {
-            post :create, quiz_problem: quiz_problem_with_4_options, format: :json  
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_options), format: :json  
           }.to change(QuizProblem, :count).by(1)         
         end
 
@@ -20,7 +20,7 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
           sign_in admin
 
           expect {
-            post :create, quiz_problem: quiz_problem_with_4_options, format: :json  
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_options), format: :json  
           }.to change(QuizOption, :count).by(4)   
         end
 
@@ -28,9 +28,37 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
           admin = FactoryGirl.create(:admin_user)
 
           sign_in admin
-          post :create, quiz_problem: quiz_problem_with_4_options, format: :json  
+          post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_options), format: :json  
 
           expect(response.body).to eq(QuizProblem.last.to_json)
+        end
+      end
+
+      context "there are no options" do
+        it "does not create a new quiz problem" do
+          admin = FactoryGirl.create(:admin_user)
+
+          sign_in admin
+
+          expect {
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem), format: :json  
+          }.to change(QuizProblem, :count).by(0)          
+          expect(response.status).to eq(422)
+          expect(JSON.parse(response.body)['errors'].length).to eq(1)
+        end
+      end
+
+      context "there are no correct options" do
+        it "does not create a new quiz problem" do
+          admin = FactoryGirl.create(:admin_user)
+
+          sign_in admin
+
+          expect {
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_all_false_options), format: :json  
+          }.to change(QuizProblem, :count).by(0)
+          expect(response.status).to eq(422)
+          expect(JSON.parse(response.body)['errors'].length).to eq(1)
         end
       end
 
@@ -41,9 +69,10 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
           sign_in admin
 
           expect {
-            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem, question: nil, lesson_id: nil, course_name: nil), format: :json  
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem, question: nil, lesson_id: nil, course_name: nil).merge(mock_options), format: :json  
           }.to change(QuizProblem, :count).by(0)
-          expect(response.body).to eq(:unprocessable_entity.to_json)
+          expect(response.status).to eq(422)
+          expect(JSON.parse(response.body)['errors'].length).to eq(3)
         end
       end
     end
@@ -53,7 +82,7 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
         user = FactoryGirl.create(:user)
 
         sign_in user
-        post :create, quiz_problem: quiz_problem_with_4_options, format: :json  
+        post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_options), format: :json  
 
         expect(response).to redirect_to dashboard_path
       end
@@ -61,11 +90,20 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
   end
 end
 
-def quiz_problem_with_4_options
-  FactoryGirl.attributes_for(:quiz_problem).merge(options: [FactoryGirl.attributes_for(:quiz_option), 
-                                                            FactoryGirl.attributes_for(:quiz_option), 
-                                                            FactoryGirl.attributes_for(:quiz_option), 
-                                                            FactoryGirl.attributes_for(:quiz_option)])
+def mock_options
+  {options: [{content: 'content', correct: "false"},
+             {content: 'content', correct: "false"},
+             {content: 'content', correct: "true"},
+             {content: 'content', correct: "false"}
+            ].to_json}
+end
+
+def mock_all_false_options
+  {options: [{content: 'content', correct: "false"},
+             {content: 'content', correct: "false"},
+             {content: 'content', correct: "false"},
+             {content: 'content', correct: "false"}
+            ].to_json}
 end
 
 
