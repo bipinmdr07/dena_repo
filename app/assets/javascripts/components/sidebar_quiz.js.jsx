@@ -44,22 +44,29 @@ let SidebarQuiz = React.createClass({
 
       return (
         <div>
-          <h3>{this.state.quizProblems[this.state.current_position].question}</h3>
+          <div className="row">
+            <div className="col-xs-12">
+              <div dangerouslySetInnerHTML={{__html: this.state.quizProblems[this.state.current_position].question}} />
+            </div>
+          </div>
 
           <div className="row">
+            <div className="col-xs-12 col-md-offset-8 col-md-4">
+              <small className="pull-right">
+                {this.state.quizProblems.length - this.state.current_position} problems left!
+              </small>
+            </div>
             <div className="col-xs-12">
               {options}
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-xs-4">
-              {this.state.quizProblems.length - this.state.current_position} problems left!
-            </div>
-
-            <div className="col-xs-8 col-md-offset-4 col-md-4">
+          <div className="row">        
+            <div className="col-md-offset-8 col-md-4">
               <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit}>Submit Answer</button>
             </div>
+
+            
           </div>
         </div>
       )
