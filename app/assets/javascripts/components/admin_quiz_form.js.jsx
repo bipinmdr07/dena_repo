@@ -3,6 +3,7 @@ let AdminQuizForm = React.createClass({
       return {
           question: '',
           preview: '',
+          errorMessages: [],
           quizOptionIds: [1,2,3,4],
           btnDisabled: false  
       };
@@ -64,8 +65,15 @@ let AdminQuizForm = React.createClass({
           idArray.push((this.state.quizOptionIds.slice(-1)[0]) + i);
         }
 
-        this.setState({question: '', preview: '', btnDisabled: false, quizOptionIds: idArray})
+        this.setState({question: '', preview: '', errorMessages: [], btnDisabled: false, quizOptionIds: idArray})
         ok_sound.play();
+      },
+      error(xhr) {
+        errorMessages = xhr.responseJSON.errors.map((error) => {
+          return error
+        });
+
+        this.setState({errorMessages: errorMessages});
       }
     })
   },
@@ -87,6 +95,16 @@ let AdminQuizForm = React.createClass({
     return { width: this.props.sidebarFormWidth }
   },
 
+  displayErrorMessages(){
+    if (this.state.errorMessages.length >= 0) {
+      let errorMessages = this.state.errorMessages.map((message) => {
+        return <ErrorFlash key={message} errorMessage={message} />
+      });
+
+      return errorMessages;
+    }
+  },
+
   render() {
     let options = this.state.quizOptionIds.map((id) => {
       return <QuizOptionForm key={id}
@@ -98,6 +116,8 @@ let AdminQuizForm = React.createClass({
 
     return (
       <form id="sidebar-question-form" className="sidebar-form" style={this.sidebarFormStyles()}>
+        {this.displayErrorMessages()}
+
         <h3>Add Quiz</h3>
 
         <input type='hidden'                    
@@ -129,6 +149,8 @@ let AdminQuizForm = React.createClass({
           </div>
         </div>
         <br />
+
+        <QuizCategoryForm />                    
 
         {options}
 

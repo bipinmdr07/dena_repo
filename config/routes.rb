@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     resources :decks
     resources :cards
     resources :quiz_problems
+    resources :quiz_categories
   end
 
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'

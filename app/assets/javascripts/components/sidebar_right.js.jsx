@@ -122,7 +122,7 @@ let SidebarRight = React.createClass({
         <AdminQuizForm authenticity_token={this.props.authenticity_token} 
                               lesson_id={this.props.lesson_id}
                               course_name={this.props.course_name}
-                              sidebarFormWidth={this.state.sidebarFormWidth}
+                              sidebarFormWidth={this.state.sidebarFormWidth}                              
                                />
       )
     }
@@ -179,19 +179,16 @@ let SidebarRight = React.createClass({
 
           <li className={this.state.showQuestion ? "sidebar-active" : "" }  onClick={this.toggleQuestion} style={this.sidebarLiWidth()}>
             <i className="fa fa-question-circle" aria-hidden="true"></i>
-
             {this.questionText()}
           </li>
 
           <li className={this.state.showQuiz ? "sidebar-active" : "" } onClick={this.toggleQuiz} style={this.sidebarLiWidth()}>
             <i className="fa fa-check-square" aria-hidden="true"></i>
-
             {this.quizText()}
           </li>
 
           <li className={this.state.showAdminQuiz ? "sidebar-active" : "" } onClick={this.toggleAdminQuiz} style={this.sidebarLiWidth()}>
             <i className="fa fa-plus" aria-hidden="true"></i>
-
             {this.adminQuizText()}
           </li>
         </ul>

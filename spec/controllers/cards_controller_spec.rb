@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CardsController, type: :controller do
-  # let(:user) { FactoryGirl.create(:user) }
-  # before :each do
-  #   sign_in user
-  # end
 
   describe "GET #index" do
     it "renders the index view" do
@@ -49,7 +45,7 @@ RSpec.describe CardsController, type: :controller do
         sign_in user
 
         expect {
-          post :create, card: FactoryGirl.attributes_for(:card, user_id: user.id), format: :js
+          post :create, card: FactoryGirl.attributes_for(:card, user_id: user.id), format: :json
         }.to change(Card, :count).by(1)
       end
     end
@@ -61,7 +57,7 @@ RSpec.describe CardsController, type: :controller do
         sign_in user
 
         expect {
-          post :create, card: FactoryGirl.attributes_for(:card, question: nil), format: :js
+          post :create, card: FactoryGirl.attributes_for(:card, question: nil), format: :json
         }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end

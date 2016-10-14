@@ -23,7 +23,7 @@ class CardsController < ApplicationController
   def create    
     @card = current_user.cards.new(card_params)
 
-    if @card.save
+    if @card.save!
       @card.tag_list.add(card_params[:tag_list])
       respond_to do |format|
         format.json { render json: @card }

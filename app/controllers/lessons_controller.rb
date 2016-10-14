@@ -41,6 +41,8 @@ class LessonsController < ApplicationController
     @submission_by_current_user = current_user.submissions.find_by(lesson_id: @current_lesson_id, 
                                                                    course_name: current_controller)
     
+    @quiz_categories = QuizCategory.all.pluck(:name) if current_user.admin
+
     @next_lesson = @current_lesson_id.to_i + 1    
 
     if @current_lesson_id == 1 

@@ -22,7 +22,7 @@ module Techrise
     # config.i18n.default_locale = :de
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    # config.active_record.raise_in_transactional_callbacks = true
 
     config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
 

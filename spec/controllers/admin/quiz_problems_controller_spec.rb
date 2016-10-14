@@ -44,7 +44,21 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
             post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem), format: :json  
           }.to change(QuizProblem, :count).by(0)          
           expect(response.status).to eq(422)
-          expect(JSON.parse(response.body)['errors'].length).to eq(1)
+          expect(JSON.parse(response.body)['errors'].length).to_not eq(0)
+        end
+      end
+
+      context "there are no options with valid attributes" do
+        it "does not create a new quiz problem" do
+          admin = FactoryGirl.create(:admin_user)
+
+          sign_in admin
+
+          expect {
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_invalid_options), format: :json  
+          }.to change(QuizProblem, :count).by(0)          
+          expect(response.status).to eq(422)
+          expect(JSON.parse(response.body)['errors'].length).to_not eq(0)
         end
       end
 
@@ -58,7 +72,7 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
             post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_all_false_options), format: :json  
           }.to change(QuizProblem, :count).by(0)
           expect(response.status).to eq(422)
-          expect(JSON.parse(response.body)['errors'].length).to eq(1)
+          expect(JSON.parse(response.body)['errors'].length).to_not eq(0)
         end
       end
 
@@ -72,7 +86,7 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
             post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem, question: nil, lesson_id: nil, course_name: nil).merge(mock_options), format: :json  
           }.to change(QuizProblem, :count).by(0)
           expect(response.status).to eq(422)
-          expect(JSON.parse(response.body)['errors'].length).to eq(3)
+          expect(JSON.parse(response.body)['errors'].length).to_not eq(0)
         end
       end
     end
@@ -103,6 +117,14 @@ def mock_all_false_options
              {content: 'content', correct: "false"},
              {content: 'content', correct: "false"},
              {content: 'content', correct: "false"}
+            ].to_json}
+end
+
+def mock_invalid_options
+  {options: [{content: '', correct: "true"},
+             {content: '', correct: "false"},
+             {content: '', correct: "false"},
+             {content: '', correct: "false"}
             ].to_json}
 end
 

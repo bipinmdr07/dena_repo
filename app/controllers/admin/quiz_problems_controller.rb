@@ -1,13 +1,17 @@
+require 'exceptions'
+
 class Admin::QuizProblemsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authenticate_admin!
+  before_action :authenticate_admin!  
 
-  def create
+  rescue_from ::Exceptions::MustHaveCorrectAnswerException, with: :quiz_problem_exception_handler
+  rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
+  
+  def create    
     @quiz_problem = QuizProblem.new(quiz_problem_params.except(:options))
+    @option_builder = QuizOptionBuilder.new(quiz_problem: @quiz_problem, quiz_problem_params: quiz_problem_params)
 
-    if options_exist? && build_quiz_options && @quiz_problem.save      
-      @quiz_problem.quiz_options.map(&:save)      
-
+    if @option_builder.build!
       respond_to do |format|
         format.json { render json: @quiz_problem }        
       end   
@@ -20,27 +24,15 @@ class Admin::QuizProblemsController < ApplicationController
 
   private
 
-  def options_exist?
-    return true unless quiz_problem_params[:options].nil?
-    @quiz_problem.errors.add(:quiz_options, "must exist.")
-    false
+  def quiz_problem_exception_handler(error)
+    render json: {errors: error.message}, status: :unprocessable_entity
   end
 
-  def build_quiz_options
-    has_correct_answer = false
-
-    JSON.parse(quiz_problem_params[:options]).each do |option|   
-      next if option["content"].nil? || option["correct"].nil?
-      @quiz_problem.quiz_options.build(option)
-      has_correct_answer = true if option["correct"] == "true"
-    end
-
-    return true if has_correct_answer
-    @quiz_problem.errors.add(:quiz_options, "must have at least one correct answer.")
-    false
+  def exception_handler(error)
+    render json: {errors: error.message}, status: :unprocessable_entity
   end
 
   def quiz_problem_params
-    params.require(:quiz_problem).permit(:question, :course_name, :lesson_id, :options)
+    params.require(:quiz_problem).permit(:question, :course_name, :lesson_id, :quiz_category_id, :options)
   end
 end
