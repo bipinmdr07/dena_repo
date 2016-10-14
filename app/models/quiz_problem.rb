@@ -20,10 +20,11 @@ class QuizProblem < ActiveRecord::Base
     has_correct_answer = false
 
     JSON.parse(quiz_problem_params[:options]).each do |option|   
-      next if option["content"].blank? || option["correct"].blank?
-      self.quiz_options.create!(content: option["content"], correct: option["correct"])
+      next if option["content"].blank? || option["correct"].blank?    
+      correct = option["correct"] == "correct"
+      self.quiz_options.create!(content: option["content"], correct: correct)
 
-      has_correct_answer = true if option["correct"] == "true"
+      has_correct_answer = true if correct
     end
 
     return true if has_correct_answer

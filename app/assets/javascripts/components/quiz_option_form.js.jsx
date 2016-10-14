@@ -44,8 +44,8 @@ let QuizOptionForm = React.createClass({
 
             <br />
             <div className="radio" onChange={this.handleToggleCorrect}>
-              <label className="radio-inline"><input type="radio" name={"correct_" + this.props.id} value="true" />Correct</label>
-              <label className="radio-inline"><input type="radio" name={"correct_" + this.props.id} value="false" defaultChecked />Incorrect</label>
+              <label className="radio-inline"><input type="radio" name={"correct_" + this.props.id} value="correct" />Correct</label>
+              <label className="radio-inline"><input type="radio" name={"correct_" + this.props.id} value="incorrect" defaultChecked />Incorrect</label>
             </div>    
           </div>
         </div>

@@ -7,6 +7,11 @@ class Admin::QuizProblemsController < ApplicationController
   rescue_from ::Exceptions::MustHaveCorrectAnswerException, with: :quiz_problem_exception_handler
   rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
 
+  def index
+    @quiz_problems = QuizProblem.where(lesson_id: params[:lesson_id], course_name: params[:course_name])
+                               .includes(:quiz_options)                                  
+  end
+
   def create    
     @quiz_problem = QuizProblem.new(quiz_problem_params.except(:options))
     @option_builder = QuizOptionBuilder.new(quiz_problem: @quiz_problem, quiz_problem_params: quiz_problem_params)
