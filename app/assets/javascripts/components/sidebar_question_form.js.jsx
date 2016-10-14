@@ -8,6 +8,22 @@ let SidebarQuestionForm = React.createClass({
       };
   },
 
+  loadPreview: _.debounce(function(){
+    $.ajax({
+      url: '/markdown_previews',
+      type: 'POST',
+      dataType: 'JSON',
+      data: { preview: { content: this.state.content }},
+      context: this,
+      success(data) {
+        this.setState({preview: data});
+        $("#previewSidebarQuestion").find("code").each(function(_, block) {
+          hljs.highlightBlock(block);
+        });
+      } 
+    });
+  }, 300),
+
   highlightSyntax(){
     $('pre code').each(function(i, block) {
       hljs.highlightBlock(block);
@@ -20,6 +36,7 @@ let SidebarQuestionForm = React.createClass({
 
   handleContentChange(e){
     this.setState({content: e.target.value});
+    this.loadPreview();
   },  
 
   handleSubmit(e){
@@ -67,24 +84,45 @@ let SidebarQuestionForm = React.createClass({
                name='course_name'                    
                value={this.props.course_name} />
 
-        <input type="text" 
-               value={this.state.title}
-               className="form-control" 
-               name="title"                                       
-               placeholder="Title of Your Question"
-               onChange={this.handleTitleChange}/>
+        <div className="row">
+          <div className="col-xs-12">
+            <input type="text" 
+                   value={this.state.title}
+                   className="form-control" 
+                   name="title"                                       
+                   placeholder="Title of Your Question"
+                   onChange={this.handleTitleChange}/>
+          </div>
+        </div>    
+
+        <br />    
+
+        <div className="row">
+          <div className="col-xs-12 col-md-6">      
+            <textarea name="content" 
+                      value={this.state.content} 
+                      ref="content" 
+                      className="form-control" 
+                      onChange={this.handleContentChange} 
+                      rows="10"
+                      placeholder="Write your question in Markdown" />
+          </div>
+
+          <div className="col-xs-12 col-md-6"> 
+            <div id="previewSidebarQuestion" className="preview">
+              <h5>Preview</h5>
+              <div dangerouslySetInnerHTML={{__html: this.state.preview}} />            
+            </div>
+          </div>
+        </div>
+
         <br />
 
-        <textarea name="content" 
-                  value={this.state.content} 
-                  ref="content" 
-                  className="form-control" 
-                  onChange={this.handleContentChange} 
-                  rows="10"
-                  placeholder="Write your question in Markdown" />
-        <br />
-
-        <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || !this.state.title || this.btnDisabled}>Submit</button>
+        <div className="row">
+          <div className="col-xs-12">
+            <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit} disabled={!this.state.content || !this.state.title || this.btnDisabled}>Submit</button>
+          </div>
+        </div>
       </form>        
     )
   }

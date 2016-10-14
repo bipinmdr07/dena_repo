@@ -1,7 +1,8 @@
 let QuizOptionForm = React.createClass({
   getInitialState() {
       return {
-          content: ''
+          content: '',
+          correct: false
       };
   },
 
@@ -21,26 +22,33 @@ let QuizOptionForm = React.createClass({
     }  
   },
 
+  handleToggleCorrect(e){
+    this.setState({correct: e.target.value})
+  },
+
   render() {
     return (
-      <div className="option_form_container">
-        <a className="delete_option" onClick={this.handleDeleteOption}><i className="fa fa-minus-circle" aria-hidden="true"></i></a>        
-        <br/>
-        <textarea name="content" 
-                  value={this.state.content} 
-                  ref="content" 
-                  className="form-control" 
-                  onChange={this.handleChange} 
-                  rows="2"
-                  placeholder="Option for quiz" />
+      <div className="row">
+        <div className="col-xs-12">
+          <div className="option_form_container">
+            <a className="delete_option" onClick={this.handleDeleteOption}><i className="fa fa-minus-circle" aria-hidden="true"></i></a>        
+            <br/>
+            <textarea name="content" 
+                      value={this.state.content} 
+                      ref="content" 
+                      className="form-control" 
+                      onChange={this.handleChange} 
+                      rows="2"
+                      placeholder="Option for quiz" />
 
 
-        <br />
-        <div className="checkbox">
-          <label><input type="checkbox" name="correct" value="true" />Correct</label><br />
-          <label><input type="checkbox" name="correct" value="false" defaultChecked />Incorrect</label>
-        </div>    
-
+            <br />
+            <div className="radio" onChange={this.handleToggleCorrect}>
+              <label className="radio-inline"><input type="radio" name={"correct_" + this.props.id} value="true" />Correct</label>
+              <label className="radio-inline"><input type="radio" name={"correct_" + this.props.id} value="false" defaultChecked />Incorrect</label>
+            </div>    
+          </div>
+        </div>
       </div>
     )
   }

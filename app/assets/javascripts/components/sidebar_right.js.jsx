@@ -133,7 +133,7 @@ let SidebarRight = React.createClass({
     if (this.state.initialDisplayWidth > 70) {
       return (
         <div>
-          <br />Create New Flashcard
+          Create New Flashcard
         </div>
       )
     }
@@ -143,7 +143,7 @@ let SidebarRight = React.createClass({
     if (this.state.initialDisplayWidth > 70) {
       return (
         <div>
-          <br />Ask Question
+          Ask Question
         </div>
       )
     }
@@ -153,7 +153,7 @@ let SidebarRight = React.createClass({
     if (this.state.initialDisplayWidth > 70) {
       return (
         <div>
-          <br />Quizzes
+          Quizzes
         </div>
       )
     }
@@ -163,7 +163,7 @@ let SidebarRight = React.createClass({
     if (this.state.initialDisplayWidth > 70) {
       return (
         <div>
-          <br />Add Quiz
+          Add Quiz
         </div>
       )
     }

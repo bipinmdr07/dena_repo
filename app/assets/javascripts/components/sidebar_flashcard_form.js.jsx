@@ -3,13 +3,39 @@ let SidebarFlashcardForm = React.createClass({
       return {
           question: '',
           answer: '',
-          tags: ''
+          tags: '',
+          previewquestion: '',
+          previewanswer: ''
       };
+  },
+
+  loadPreview: _.debounce(function(args){
+    $.ajax({
+      url: '/markdown_previews',
+      type: 'POST',
+      dataType: 'JSON',
+      data: { preview: { content: args.value }},
+      context: this,
+      success(data) {
+        this.setState({["preview" + args.name]: data});
+        $(".previewFlashcard").find("code").each(function(_, block) {
+          hljs.highlightBlock(block);
+        });
+      } 
+    });
+  }, 300),
+
+  highlightSyntax(){
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });   
   },
 
   handleChange(e) {
     let name = e.target.name;
-    this.setState({[name]: e.target.value});
+    let value = e.target.value;
+    this.setState({[name]: value});
+    this.loadPreview({value: value, name: name});
   },
 
   handleSubmit(e){
@@ -48,24 +74,51 @@ let SidebarFlashcardForm = React.createClass({
                name='authenticity_token' 
                value={this.props.authenticity_token} />
 
-        <textarea name="question" 
-                  className="form-control"
-                  placeholder="Flashcard Question (Write in Markdown)" 
-                  rows="5"
-                  onChange={this.handleChange} />
+        <div className="row">
+          <div className="col-xs-12 col-md-6">
+            <textarea name="question" 
+                      className="form-control"
+                      placeholder="Flashcard Question (Write in Markdown)" 
+                      rows="9"
+                      onChange={this.handleChange} />
+          </div>
+
+          <div className="col-xs-12 col-md-6">
+            <div className="preview previewFlashcard">
+              <h5>Preview</h5>
+              <div dangerouslySetInnerHTML={{__html: this.state.previewquestion}} />  
+            </div>
+          </div>
+        </div>
+
         <br />                  
 
-        <textarea name="answer" 
-                  className="form-control"
-                  placeholder="Answer (Write in Markdown)" 
-                  rows="5"
-                  onChange={this.handleChange} />
+        <div className="row">
+          <div className="col-xs-12 col-md-6">
+            <textarea name="answer" 
+                      className="form-control"
+                      placeholder="Answer (Write in Markdown)" 
+                      rows="9"
+                      onChange={this.handleChange} />
+          </div>
+
+          <div className="col-xs-12 col-md-6">
+            <div className="preview previewFlashcard">
+              <h5>Preview</h5>
+              <div dangerouslySetInnerHTML={{__html: this.state.previewanswer}} />  
+            </div>
+          </div>
+        </div>
         <br />
 
-        <input type="text"
-               className="form-control"
-               placeholder='Tags (separate tags with single comma ",")'
-               onChange={this.handleChange} />
+        <div className="row">
+          <div className="col-xs-12">
+            <input type="text"
+                   className="form-control"
+                   placeholder='Tags (separate tags with single comma ",")'
+                   onChange={this.handleChange} />
+          </div>
+        </div>
         <br />
 
         <input type='hidden'                    
@@ -78,9 +131,13 @@ let SidebarFlashcardForm = React.createClass({
                name='course_name'                    
                value={this.props.course_name} />
 
-        <button className="btn btn-cta-primary submit-btn" 
-                onClick={this.handleSubmit} 
-                disabled={!this.state.question || !this.state.answer}>Submit</button>
+        <div className="row">
+          <div className="col-xs-12">
+            <button className="btn btn-cta-primary submit-btn" 
+                    onClick={this.handleSubmit} 
+                    disabled={!this.state.question || !this.state.answer}>Submit</button>
+          </div>
+        </div>
       </form>
     )
   }

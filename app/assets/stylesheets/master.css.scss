@@ -5,14 +5,26 @@
   -o-transition: margin 700ms ease;
 }
 
+@mixin preview {
+  background: whitesmoke;
+  padding: 20px;
+  min-height: 200px;
+}
+
 body {
   @include margin_transition;
 }
 
+.form-control {
+  border-radius: 2px;
+}
+
+.preview {
+  @include preview;
+}
+
 #preview {
-  background: whitesmoke;
-  padding: 20px;
-  min-height: 200px;
+  @include preview;
 }
 
 .forum-forms {
