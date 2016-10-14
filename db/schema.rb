@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014175702) do
+ActiveRecord::Schema.define(version: 20161014201133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,9 +254,10 @@ ActiveRecord::Schema.define(version: 20161014175702) do
   create_table "quiz_category_ratings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "quiz_category_id"
-    t.float    "score"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.float    "score",            default: 0.0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "submission_count", default: 0
     t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
     t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
     t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
@@ -281,6 +282,16 @@ ActiveRecord::Schema.define(version: 20161014175702) do
     t.integer  "quiz_category_id"
     t.index ["course_name", "lesson_id"], name: "index_quiz_problems_on_course_name_and_lesson_id", using: :btree
     t.index ["quiz_category_id"], name: "index_quiz_problems_on_quiz_category_id", using: :btree
+  end
+
+  create_table "quiz_submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_problem_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["quiz_problem_id"], name: "index_quiz_submissions_on_quiz_problem_id", using: :btree
+    t.index ["user_id", "quiz_problem_id"], name: "index_quiz_submissions_on_user_id_and_quiz_problem_id", using: :btree
+    t.index ["user_id"], name: "index_quiz_submissions_on_user_id", using: :btree
   end
 
   create_table "replies", force: :cascade do |t|
@@ -457,4 +468,6 @@ ActiveRecord::Schema.define(version: 20161014175702) do
   end
 
   add_foreign_key "quiz_options", "quiz_problems"
+  add_foreign_key "quiz_submissions", "quiz_problems"
+  add_foreign_key "quiz_submissions", "users"
 end

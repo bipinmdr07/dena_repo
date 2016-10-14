@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :mentor_sessions
   has_many :student_sessions  
   has_many :notifications, foreign_key: :recipient_id
+  has_many :quiz_submissions
 
   validates :first_name, :last_name, presence: true
   validates :package, presence: true, if: :is_student?

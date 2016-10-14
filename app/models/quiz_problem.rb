@@ -3,6 +3,7 @@ require 'exceptions'
 class QuizProblem < ActiveRecord::Base
   belongs_to :quiz_category
   has_many :quiz_options, dependent: :destroy
+  has_many :quiz_submissions, dependent: :destroy
 
   validates :question, :lesson_id, :course_name, :quiz_category_id, presence: true
 
