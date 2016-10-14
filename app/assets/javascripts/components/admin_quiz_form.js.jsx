@@ -3,6 +3,7 @@ let AdminQuizForm = React.createClass({
       return {
           question: '',
           preview: '',
+          quiz_category_id: '',
           errorMessages: [],
           quizOptionIds: [1,2,3,4],
           btnDisabled: false  
@@ -54,6 +55,7 @@ let AdminQuizForm = React.createClass({
                 question: this.state.question, 
                 lesson_id: this.props.lesson_id,
                 course_name: this.props.course_name,
+                quiz_category_id: this.state.quiz_category_id,
                 options: JSON.stringify(options)
               } 
             },
@@ -89,6 +91,10 @@ let AdminQuizForm = React.createClass({
       return id !== deletedOptionId;
     });
     this.setState({quizOptionIds: quizOptionIds});
+  },
+
+  handleCategoryChange(category_id){
+    this.setState({quiz_category_id: category_id});
   },
 
   sidebarFormStyles(){
@@ -150,7 +156,7 @@ let AdminQuizForm = React.createClass({
         </div>
         <br />
 
-        <QuizCategoryForm />                    
+        <QuizCategoryForm handleCategoryChange={this.handleCategoryChange}/>                    
 
         {options}
 

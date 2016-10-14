@@ -6,18 +6,18 @@ class Admin::QuizProblemsController < ApplicationController
 
   rescue_from ::Exceptions::MustHaveCorrectAnswerException, with: :quiz_problem_exception_handler
   rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
-  
+
   def create    
     @quiz_problem = QuizProblem.new(quiz_problem_params.except(:options))
     @option_builder = QuizOptionBuilder.new(quiz_problem: @quiz_problem, quiz_problem_params: quiz_problem_params)
 
     if @option_builder.build!
       respond_to do |format|
-        format.json { render json: @quiz_problem }        
+        format.json { render json: @quiz_problem }
       end   
     else
       respond_to do |format|
-        format.json { render json: {errors: @quiz_problem.errors.full_messages}, status: :unprocessable_entity }        
+        format.json { render json: {errors: @quiz_problem.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end

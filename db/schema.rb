@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014113848) do
+ActiveRecord::Schema.define(version: 20161014175702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,11 +247,8 @@ ActiveRecord::Schema.define(version: 20161014113848) do
 
   create_table "quiz_categories", force: :cascade do |t|
     t.string   "name"
-    t.integer  "lesson_id"
-    t.string   "course_name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["lesson_id"], name: "index_quiz_categories_on_lesson_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "quiz_category_ratings", force: :cascade do |t|

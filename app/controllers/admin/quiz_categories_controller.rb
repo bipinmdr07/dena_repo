@@ -1,7 +1,7 @@
 class Admin::QuizCategoriesController < ApplicationController
   def index
     respond_to do |format|
-      format.json { render json: QuizCategory.all.pluck(:name) }
+      format.json { render json: QuizCategory.all.to_json }
     end
   end
 
@@ -10,7 +10,7 @@ class Admin::QuizCategoriesController < ApplicationController
 
     if @quiz_category.save
       respond_to do |format|
-        format.json { render json: @quiz_category }
+        format.json { render json: @quiz_category.to_json}
       end
     else 
       respond_to do |format|
