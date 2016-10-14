@@ -3,27 +3,7 @@ let AdminQuizForm = React.createClass({
       return {
           question: '',
           preview: '',
-          quizOptions: [<QuizOptionForm key={1} 
-                                        id={1}
-                                        ref="optionForm_1"
-                                        handleAddOption={this.handleAddOption}
-                                        handleDeleteOption={this.handleDeleteOption}/>,
-                        <QuizOptionForm key={2} 
-                                        id={2}
-                                        ref="optionForm_2"
-                                        handleAddOption={this.handleAddOption}
-                                        handleDeleteOption={this.handleDeleteOption}/>,
-                        <QuizOptionForm key={3} 
-                                        id={3}
-                                        ref="optionForm_3"
-                                        handleAddOption={this.handleAddOption}
-                                        handleDeleteOption={this.handleDeleteOption}/>,
-                        <QuizOptionForm key={4} 
-                                        id={4}
-                                        ref="optionForm_4"
-                                        handleAddOption={this.handleAddOption}
-                                        handleDeleteOption={this.handleDeleteOption}/>
-                                        ],
+          quizOptionIds: [1,2,3,4],
           btnDisabled: false  
       };
   },
@@ -60,8 +40,8 @@ let AdminQuizForm = React.createClass({
     e.preventDefault();
 
     let options = []
-    _.each(this.state.quizOptions, (option) => {
-      options.push({ content: this.refs[option.ref].state.content, correct: this.refs[option.ref].state.correct });
+    _.each(this.state.quizOptionIds, (id) => {
+      options.push({ content: this.refs["optionForm_" + id].state.content, correct: this.refs["optionForm_" + id].state.correct });
     });
 
     $.ajax({
@@ -69,7 +49,7 @@ let AdminQuizForm = React.createClass({
       type: 'POST',
       dataType: 'JSON',
       data: { 
-              quiz_questions: { 
+              quiz_problem: { 
                 question: this.state.question, 
                 lesson_id: this.props.lesson_id,
                 course_name: this.props.course_name,
@@ -78,31 +58,29 @@ let AdminQuizForm = React.createClass({
             },
       context: this,
       success(data) {
-        this.setState(this.getInitialState());
-        this.setState({btnDisabled: false});
+        // build new set of quizOptionIds to re-render
+        let idArray = [] 
+        for(var i = 1; i <= 4; i++){
+          idArray.push((this.state.quizOptionIds.slice(-1)[0]) + i);
+        }
+
+        this.setState({question: '', preview: '', btnDisabled: false, quizOptionIds: idArray})
         ok_sound.play();
-        this.props.handleSubmit();
       }
     })
   },
 
   handleAddOption(e){
     e.preventDefault();
-
-    let quizOptionForm = <QuizOptionForm key={this.state.quizOptions.length + 1}
-                                         id={this.state.quizOptions.length + 1} 
-                                         ref={"optionForm_" + this.state.quizOptions.length + 1}
-                                         handleAddOption={this.handleAddOption}
-                                         handleDeleteOption={this.handleDeleteOption}/>
-    let quizOptions = React.addons.update(this.state.quizOptions, {$push: [quizOptionForm]});
-    this.setState({quizOptions: quizOptions});
+    let quizOptionIds = React.addons.update(this.state.quizOptionIds, {$push: [(this.state.quizOptionIds.slice(-1)[0]) + 1]});
+    this.setState({quizOptionIds: quizOptionIds});
   },
 
   handleDeleteOption(deletedOptionId){    
-    let quizOptions = this.state.quizOptions.filter(function(option) {      
-      return option.props.id !== deletedOptionId;
+    let quizOptionIds = this.state.quizOptionIds.filter(function(id) {      
+      return id !== deletedOptionId;
     });
-    this.setState({quizOptions: quizOptions});
+    this.setState({quizOptionIds: quizOptionIds});
   },
 
   sidebarFormStyles(){
@@ -110,6 +88,13 @@ let AdminQuizForm = React.createClass({
   },
 
   render() {
+    let options = this.state.quizOptionIds.map((id) => {
+      return <QuizOptionForm key={id}
+                             id={id} 
+                             ref={"optionForm_" + id}
+                             handleAddOption={this.handleAddOption}
+                             handleDeleteOption={this.handleDeleteOption}/>
+    });
 
     return (
       <form id="sidebar-question-form" className="sidebar-form" style={this.sidebarFormStyles()}>
@@ -145,7 +130,7 @@ let AdminQuizForm = React.createClass({
         </div>
         <br />
 
-        {this.state.quizOptions}
+        {options}
 
         <div className="quiz-buttons">
           <button className="btn btn-cta-secondary btn-sm btn-add-option" onClick={this.handleAddOption}>

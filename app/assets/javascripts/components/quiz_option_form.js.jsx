@@ -2,7 +2,7 @@ let QuizOptionForm = React.createClass({
   getInitialState() {
       return {
           content: '',
-          correct: false
+          correct: ''
       };
   },
 

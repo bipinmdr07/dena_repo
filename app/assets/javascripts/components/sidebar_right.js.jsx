@@ -122,7 +122,6 @@ let SidebarRight = React.createClass({
         <AdminQuizForm authenticity_token={this.props.authenticity_token} 
                               lesson_id={this.props.lesson_id}
                               course_name={this.props.course_name}
-                              handleSubmit={this.toggleAdminQuiz}
                               sidebarFormWidth={this.state.sidebarFormWidth}
                                />
       )
