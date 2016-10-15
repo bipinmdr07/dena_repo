@@ -38,7 +38,7 @@ let SidebarQuiz = React.createClass({
       data: {
               quiz_submission: {
                 quiz_problem_id: this.state.quizProblems[this.state.current_position],
-                checked_options: this.state.checkedOptionIds
+                checked_option_ids: this.state.checkedOptionIds
               }
             },
       success(data){

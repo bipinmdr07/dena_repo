@@ -3,4 +3,6 @@ class QuizOption < ActiveRecord::Base
 
   validates :quiz_problem_id, :content, presence: true
   validates_inclusion_of :correct, in: [true, false]
+
+  scope :correct, -> { where(correct: true) }
 end

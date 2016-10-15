@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014201133) do
+ActiveRecord::Schema.define(version: 20161015042602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,10 +254,10 @@ ActiveRecord::Schema.define(version: 20161014201133) do
   create_table "quiz_category_ratings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "quiz_category_id"
-    t.float    "score",            default: 0.0
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "submission_count", default: 0
+    t.float    "score",                  default: 0.0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "quiz_submissions_count", default: 0
     t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
     t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
     t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
