@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe QuizSubmission, type: :model do
   describe "#calculate_score" do
     context "user answers correctly" do 
-      it "returns 1.0" do
+      it "returns 100" do
         user = FactoryGirl.create(:user)
         quiz_problem = FactoryGirl.create(:quiz_problem)
         quiz_submission = FactoryGirl.create(:quiz_submission, user: user, quiz_problem: quiz_problem)
@@ -13,12 +13,12 @@ RSpec.describe QuizSubmission, type: :model do
         quiz_option_4 = FactoryGirl.create(:quiz_option, id: 4, correct: false, quiz_problem: quiz_problem)
         checked_option_ids = [1, 2]
 
-        expect(quiz_submission.calculate_score(checked_option_ids: checked_option_ids)).to eq(1.0)
+        expect(quiz_submission.calculate_score(checked_option_ids: checked_option_ids)).to eq(100)
       end
     end
 
     context "2 out of 4 options are correct and user answers only 1 correctly" do
-      it "returns 0.50" do
+      it "returns 50" do
         user = FactoryGirl.create(:user)
         quiz_problem = FactoryGirl.create(:quiz_problem)
         quiz_submission = FactoryGirl.create(:quiz_submission, user: user, quiz_problem: quiz_problem)
@@ -28,7 +28,7 @@ RSpec.describe QuizSubmission, type: :model do
         quiz_option_4 = FactoryGirl.create(:quiz_option, id: 4, correct: false, quiz_problem: quiz_problem)
         checked_option_ids = [1, 2]
 
-        expect(quiz_submission.calculate_score(checked_option_ids: checked_option_ids)).to eq(0.50)
+        expect(quiz_submission.calculate_score(checked_option_ids: checked_option_ids)).to eq(50)
       end
     end
   end

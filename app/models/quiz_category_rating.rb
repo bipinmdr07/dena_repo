@@ -4,6 +4,7 @@ class QuizCategoryRating < ActiveRecord::Base
   has_many :quiz_submissions
 
   validates :user, :quiz_category, presence: true
+  validates :quiz_category, uniqueness: { scope: :user_id }
 
   def self.create_or_rank!(args)
     current_user = args.fetch(:current_user)
@@ -12,10 +13,11 @@ class QuizCategoryRating < ActiveRecord::Base
 
     quiz_category = quiz_submission.quiz_category
     current_score = quiz_submission.calculate_score(checked_option_ids: checked_option_ids)
+    quiz_category_rating = current_user.quiz_category_ratings.find_by(quiz_category: quiz_category)
 
-    if quiz_category_rating = current_user.quiz_category_ratings.where(quiz_category: quiz_category).any?
+    if quiz_category_rating
 
-      score = calculate_mean_score(quiz_category_rating: quiz_category_rating, current_score: current_score)
+      score = self.calculate_mean_score(quiz_category_rating: quiz_category_rating, current_score: current_score)
 
       quiz_category_rating.update(score: score)
 
@@ -28,7 +30,7 @@ class QuizCategoryRating < ActiveRecord::Base
   end
 
 
-  def calculate_mean_score(args)
+  def self.calculate_mean_score(args)
     quiz_category_rating = args.fetch(:quiz_category_rating)
     current_score = args.fetch(:current_score)
 

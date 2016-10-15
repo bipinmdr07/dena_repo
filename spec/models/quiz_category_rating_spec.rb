@@ -35,7 +35,7 @@ RSpec.describe QuizCategoryRating, type: :model do
         checked_option_ids = [1, 2]
 
         expect(quiz_submission).to receive(:quiz_category).and_return(quiz_category)
-        expect(quiz_submission).to receive(:calculate_score).and_return(1)
+        expect(quiz_submission).to receive(:calculate_score).and_return(100)
 
         QuizCategoryRating.create_or_rank!(current_user: user, quiz_submission: quiz_submission, 
                                                                checked_option_ids: checked_option_ids)

@@ -8,6 +8,6 @@ class QuizSubmission < ApplicationRecord
   def calculate_score(args)
     checked_options = QuizOption.find(args.fetch(:checked_option_ids)) 
 
-    checked_options.select{|o| o.correct }.count.to_f / quiz_problem.quiz_options.correct.count.to_f    
+    (checked_options.select{|o| o.correct }.count.to_f / quiz_problem.quiz_options.correct.count.to_f) * 100
   end
 end
