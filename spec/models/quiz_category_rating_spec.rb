@@ -12,11 +12,11 @@ RSpec.describe QuizCategoryRating, type: :model do
         quiz_category = FactoryGirl.create(:quiz_category)
 
         expect(quiz_submission).to receive(:quiz_category).and_return(quiz_category)
-        expect(quiz_submission).to receive(:calculate_score).and_return(1)
 
         expect {
-          QuizCategoryRating.create_or_rank!(current_user: user, quiz_submission: quiz_submission, 
-                                                               checked_option_ids: checked_option_ids)
+          QuizCategoryRating.create_or_rank!(current_user: user, 
+                                             quiz_submission: quiz_submission, 
+                                             current_score: 100)
         }.to change(QuizCategoryRating, :count).by(1)
       end
     end
@@ -31,14 +31,13 @@ RSpec.describe QuizCategoryRating, type: :model do
                                                                          score: 80, 
                                                                          quiz_submissions_count: 2)        
         quiz_submission = FactoryGirl.create(:quiz_submission, user_id: user.id, 
-                                                               quiz_problem_id: quiz_problem.id)                
-        checked_option_ids = [1, 2]
+                                                               quiz_problem_id: quiz_problem.id)                        
 
         expect(quiz_submission).to receive(:quiz_category).and_return(quiz_category)
-        expect(quiz_submission).to receive(:calculate_score).and_return(100)
 
-        QuizCategoryRating.create_or_rank!(current_user: user, quiz_submission: quiz_submission, 
-                                                               checked_option_ids: checked_option_ids)
+        QuizCategoryRating.create_or_rank!(current_user: user, 
+                                           quiz_submission: quiz_submission, 
+                                           current_score: 100)
         expect(quiz_category_rating.reload.score).to eq(60)
       end
     end

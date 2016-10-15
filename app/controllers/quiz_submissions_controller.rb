@@ -5,9 +5,11 @@ class QuizSubmissionsController < ApplicationController
     @quiz_submission = current_user.quiz_submissions.new(quiz_submission_params.except(:checked_option_ids))
 
     if @quiz_submission.save
+      current_score = @quiz_submission.calculate_score(checked_option_ids: quiz_submission_params[:checked_option_ids])
+
       QuizCategoryRating.create_or_rank!(current_user: current_user, 
                                          quiz_submission: @quiz_submission, 
-                                         checked_option_ids: quiz_submission_params[:checked_option_ids])
+                                         current_score: current_score)
       respond_to do |format|
         format.json { render json: @quiz_submission}
       end        

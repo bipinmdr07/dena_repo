@@ -9,10 +9,9 @@ class QuizCategoryRating < ActiveRecord::Base
   def self.create_or_rank!(args)
     current_user = args.fetch(:current_user)
     quiz_submission = args.fetch(:quiz_submission)
-    checked_option_ids = args.fetch(:checked_option_ids)
+    current_score = args.fetch(:current_score)
 
     quiz_category = quiz_submission.quiz_category
-    current_score = quiz_submission.calculate_score(checked_option_ids: checked_option_ids)    
 
     if quiz_category_rating = current_user.quiz_category_ratings.find_by(quiz_category: quiz_category)
 
