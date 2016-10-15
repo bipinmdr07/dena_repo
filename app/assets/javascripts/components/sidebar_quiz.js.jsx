@@ -1,21 +1,7 @@
 let SidebarQuiz = React.createClass({
-  getInitialState() {
-    return {
-      quizProblems: [],
-      checkedOptionIds: [],
-      current_position: 0,
-      showAnswers: false,
-      total_score: 0
-    };
-  },
-
   handleChange(e){
     let id = e.target.value;
-    
-    if (this.state.checkedOptionIds.indexOf(id) === -1) {
-      let checkedOptionIds = React.addons.update(this.state.checkedOptionIds, {$push: [id]});
-      this.setState({checkedOptionIds: checkedOptionIds});
-    }
+    this.props.handleCheckedOptionIdsChange(id);
   },
 
   handleSubmit(e){
@@ -28,13 +14,12 @@ let SidebarQuiz = React.createClass({
       context: this,
       data: {
               quiz_submission: {
-                quiz_problem_id: this.props.quizProblems[this.state.current_position].id,
-                checked_option_ids: this.state.checkedOptionIds
+                quiz_problem_id: this.props.quizProblems[this.props.current_position].id,
+                checked_option_ids: this.props.checkedOptionIds
               }
             },
       success(data){
-        totalScore = (this.state.totalScore + data.score) / this.state.current_position + 1;
-        this.setState({checkedOptionIds: [], showAnswers: true, totalScore: totalScore});
+        this.props.handleQuizSubmission(data);        
       }
     });
   },
@@ -44,7 +29,7 @@ let SidebarQuiz = React.createClass({
   },
 
   optionStyles(option){
-    if (this.state.showAnswers) {
+    if (this.props.showAnswers) {
       if (option.correct && this.refs["option_" + option.id].checked) {
         return { border: "1px solid green" }
       } else {
@@ -55,7 +40,7 @@ let SidebarQuiz = React.createClass({
 
   handleNextQuestion(e){
     e.preventDefault();
-    this.setState({current_position: this.state.current_position + 1, showAnswers: false});
+    this.props.handleNextQuestion();
   },
 
   formContent(){
@@ -64,12 +49,12 @@ let SidebarQuiz = React.createClass({
         <h3>There are no quizzes for this lesson!</h3>
       )
     } else {
-      let options = this.props.quizProblems[this.state.current_position].quiz_options.map((option) => {
+      let options = this.props.quizProblems[this.props.current_position].quiz_options.map((option) => {
         return (
           <div key={option.id} className="checkbox" style={this.optionStyles(option)}>
             <label>
                   <input type="checkbox" 
-                         name={this.props.quizProblems[this.state.current_position].id} 
+                         name={this.props.quizProblems[this.props.current_position].id} 
                          value={option.id} 
                          ref={"option_" + option.id}
                          onChange={this.handleChange}                         
@@ -81,8 +66,8 @@ let SidebarQuiz = React.createClass({
       });
 
       let actionButton;
-      if (this.state.showAnswers) {
-        actionButton = <button className="btn btn-cta-primary submit-btn" onClick={this.handleNextQuestion}>Next</button>
+      if (this.props.showAnswers) {
+        actionButton = <button className="btn btn-cta-primary pull-right" onClick={this.handleNextQuestion}>Next</button>
       }
       else {
         actionButton = <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit}>Submit Answer</button>            
@@ -92,14 +77,14 @@ let SidebarQuiz = React.createClass({
         <div>
           <div className="row">
             <div className="col-xs-12">
-              <div dangerouslySetInnerHTML={{__html: this.props.quizProblems[this.state.current_position].question}} />
+              <div dangerouslySetInnerHTML={{__html: this.props.quizProblems[this.props.current_position].question}} />
             </div>
           </div>
 
           <div className="row">
             <div className="col-xs-12 col-md-offset-8 col-md-4">
               <small className="pull-right">
-                {this.props.quizProblems.length - this.state.current_position} problems left!
+                {this.props.quizProblems.length - this.props.current_position} problems left!
               </small>
             </div>
             <div className="col-xs-12">
@@ -107,8 +92,18 @@ let SidebarQuiz = React.createClass({
             </div>
           </div>
 
-          <div className="row">        
-            <div className="col-md-offset-8 col-md-4">
+          <div className="row">
+            <div className="col-xs-12 col-md-8">
+
+              <div className="progress">
+                <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+                aria-valuemin="0" aria-valuemax="100" style={{width: this.props.totalScore + "%"}}>
+                  {Math.round(this.props.totalScore)}%
+                </div>
+              </div>
+              
+            </div>
+            <div className="col-xs-12 col-md-4">
               {actionButton}
             </div>
           </div>

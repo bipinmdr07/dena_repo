@@ -10,7 +10,11 @@ let SidebarRight = React.createClass({
           containerRight: this.positionRight(),
           initialDisplayWidth: this.initialDisplayWidth(),
           sidebarFormWidth: this.sidebarFormWidth(),
-          quizProblems: []
+          quizProblems: [],
+          checkedOptionIds: [],
+          current_position: 0,
+          showAnswers: false,
+          totalScore: 0
       };
   },
 
@@ -127,7 +131,14 @@ let SidebarRight = React.createClass({
                               course_name={this.props.course_name}
                               handleSubmit={this.toggleQuiz}
                               sidebarFormWidth={this.state.sidebarFormWidth}
-                              quizProblems={this.state.quizProblems} />
+                              quizProblems={this.state.quizProblems}
+                              checkedOptionIds={this.state.checkedOptionIds}
+                              current_position={this.state.current_position}
+                              showAnswers={this.state.showAnswers}
+                              totalScore={this.state.totalScore}
+                              handleCheckedOptionIdsChange={this.handleCheckedOptionIdsChange}
+                              handleQuizSubmission={this.handleQuizSubmission}
+                              handleNextQuestion={this.handleNextQuestion} />
       )
     } else if (this.state.showAdminQuiz) {
       return (
@@ -178,6 +189,28 @@ let SidebarRight = React.createClass({
         </div>
       )
     }
+  },
+
+  handleCheckedOptionIdsChange(id){
+    if (this.state.checkedOptionIds.indexOf(id) === -1) {
+      let checkedOptionIds = React.addons.update(this.state.checkedOptionIds, {$push: [id]});
+      this.setState({checkedOptionIds: checkedOptionIds});
+    } else {
+      let checkedOptionIds = this.state.checkedOptionIds.filter((optionId) => {
+        return optionId !== id; 
+      });
+      this.setState({checkedOptionIds: checkedOptionIds});
+    }
+  },
+
+  handleQuizSubmission(data){
+    totalScore = (this.state.totalScore + data.score) / (this.state.current_position + 1);
+    console.log("TS: " + this.state.totalScore + "  Score: " + data.score + " CP: " + this.state.current_position);
+    this.setState({checkedOptionIds: [], showAnswers: true, totalScore: totalScore});
+  },
+
+  handleNextQuestion(){
+    this.setState({current_position: this.state.current_position + 1, showAnswers: false});
   },
 
   render(){
