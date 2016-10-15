@@ -4,20 +4,9 @@ let SidebarQuiz = React.createClass({
       quizProblems: [],
       checkedOptionIds: [],
       current_position: 0,
-      showAnswers: false
+      showAnswers: false,
+      total_score: 0
     };
-  },
-
-  componentDidMount() {
-    $.ajax({
-      dataType: 'JSON',
-      url: '/admin/quiz_problems.json',
-      data: {lesson_id: this.props.lesson_id, course_name: this.props.course_name},
-      context: this,
-      success(data) {
-        this.setState({quizProblems: data});
-      }
-    })
   },
 
   handleChange(e){
@@ -39,12 +28,13 @@ let SidebarQuiz = React.createClass({
       context: this,
       data: {
               quiz_submission: {
-                quiz_problem_id: this.state.quizProblems[this.state.current_position].id,
+                quiz_problem_id: this.props.quizProblems[this.state.current_position].id,
                 checked_option_ids: this.state.checkedOptionIds
               }
             },
-      success(data){        
-        this.setState({checkedOptionIds: [], showAnswers: true});        
+      success(data){
+        totalScore = (this.state.totalScore + data.score) / this.state.current_position + 1;
+        this.setState({checkedOptionIds: [], showAnswers: true, totalScore: totalScore});
       }
     });
   },
@@ -69,17 +59,17 @@ let SidebarQuiz = React.createClass({
   },
 
   formContent(){
-    if (this.state.quizProblems.length == 0) {
+    if (this.props.quizProblems.length == 0) {
       return (
         <h3>There are no quizzes for this lesson!</h3>
       )
     } else {
-      let options = this.state.quizProblems[this.state.current_position].quiz_options.map((option) => {
+      let options = this.props.quizProblems[this.state.current_position].quiz_options.map((option) => {
         return (
           <div key={option.id} className="checkbox" style={this.optionStyles(option)}>
             <label>
                   <input type="checkbox" 
-                         name={this.state.quizProblems[this.state.current_position].id} 
+                         name={this.props.quizProblems[this.state.current_position].id} 
                          value={option.id} 
                          ref={"option_" + option.id}
                          onChange={this.handleChange}                         
@@ -102,14 +92,14 @@ let SidebarQuiz = React.createClass({
         <div>
           <div className="row">
             <div className="col-xs-12">
-              <div dangerouslySetInnerHTML={{__html: this.state.quizProblems[this.state.current_position].question}} />
+              <div dangerouslySetInnerHTML={{__html: this.props.quizProblems[this.state.current_position].question}} />
             </div>
           </div>
 
           <div className="row">
             <div className="col-xs-12 col-md-offset-8 col-md-4">
               <small className="pull-right">
-                {this.state.quizProblems.length - this.state.current_position} problems left!
+                {this.props.quizProblems.length - this.state.current_position} problems left!
               </small>
             </div>
             <div className="col-xs-12">

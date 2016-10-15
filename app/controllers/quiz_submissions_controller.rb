@@ -11,7 +11,7 @@ class QuizSubmissionsController < ApplicationController
                                          quiz_submission: @quiz_submission, 
                                          current_score: current_score)
       respond_to do |format|
-        format.json { render json: @quiz_submission}
+        format.json { render json: {score: current_score} }
       end        
     else
       respond_to do |format|

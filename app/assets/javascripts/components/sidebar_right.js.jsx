@@ -9,12 +9,23 @@ let SidebarRight = React.createClass({
           containerWidth: this.halfWindowWidth(),
           containerRight: this.positionRight(),
           initialDisplayWidth: this.initialDisplayWidth(),
-          sidebarFormWidth: this.sidebarFormWidth()
+          sidebarFormWidth: this.sidebarFormWidth(),
+          quizProblems: []
       };
   },
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
+
+    $.ajax({
+      dataType: 'JSON',
+      url: '/admin/quiz_problems.json',
+      data: {lesson_id: this.props.lesson_id, course_name: this.props.course_name},
+      context: this,
+      success(data) {
+        this.setState({quizProblems: data});
+      }
+    });
   },
 
   halfWindowWidth(){
@@ -115,7 +126,8 @@ let SidebarRight = React.createClass({
                               lesson_id={this.props.lesson_id}
                               course_name={this.props.course_name}
                               handleSubmit={this.toggleQuiz}
-                              sidebarFormWidth={this.state.sidebarFormWidth} />
+                              sidebarFormWidth={this.state.sidebarFormWidth}
+                              quizProblems={this.state.quizProblems} />
       )
     } else if (this.state.showAdminQuiz) {
       return (
