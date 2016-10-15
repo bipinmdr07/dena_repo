@@ -91,6 +91,8 @@ Rails.application.routes.draw do
     resources :quiz_categories
   end
 
+  resources :quiz_submissions
+
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 
   post 'question_downvotes/:id(.:format)', to: 'question_downvotes#create', as: 'question_downvote'

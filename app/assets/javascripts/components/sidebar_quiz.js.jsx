@@ -3,7 +3,8 @@ let SidebarQuiz = React.createClass({
     return {
       quizProblems: [],
       checkedOptionIds: [],
-      current_position: 0
+      current_position: 0,
+      showAnswers: false
     };
   },
 
@@ -34,21 +35,37 @@ let SidebarQuiz = React.createClass({
     $.ajax({
       dataType: 'JSON',
       type: 'POST',
-      url: '',
+      url: '/quiz_submissions',
+      context: this,
       data: {
               quiz_submission: {
-                quiz_problem_id: this.state.quizProblems[this.state.current_position],
+                quiz_problem_id: this.state.quizProblems[this.state.current_position].id,
                 checked_option_ids: this.state.checkedOptionIds
               }
             },
-      success(data){
-        this.setState({checkedOptionIds: [], current_position: this.state.current_position + 1})
+      success(data){        
+        this.setState({checkedOptionIds: [], showAnswers: true});        
       }
     });
   },
 
   sidebarFormStyles(){
     return { width: this.props.sidebarFormWidth }
+  },
+
+  optionStyles(option){
+    if (this.state.showAnswers) {
+      if (option.correct && this.refs["option_" + option.id].checked) {
+        return { border: "1px solid green" }
+      } else {
+        return { border: "1px solid red" }
+      }
+    } 
+  },
+
+  handleNextQuestion(e){
+    e.preventDefault();
+    this.setState({current_position: this.state.current_position + 1, showAnswers: false});
   },
 
   formContent(){
@@ -59,18 +76,27 @@ let SidebarQuiz = React.createClass({
     } else {
       let options = this.state.quizProblems[this.state.current_position].quiz_options.map((option) => {
         return (
-          <div key={option.id} className="checkbox">
+          <div key={option.id} className="checkbox" style={this.optionStyles(option)}>
             <label>
                   <input type="checkbox" 
                          name={this.state.quizProblems[this.state.current_position].id} 
                          value={option.id} 
-                         handleChange={this.handleChange}
+                         ref={"option_" + option.id}
+                         onChange={this.handleChange}                         
                          />
                   {option.content}
             </label>
           </div>
         )
       });
+
+      let actionButton;
+      if (this.state.showAnswers) {
+        actionButton = <button className="btn btn-cta-primary submit-btn" onClick={this.handleNextQuestion}>Next</button>
+      }
+      else {
+        actionButton = <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit}>Submit Answer</button>            
+      }      
 
       return (
         <div>
@@ -93,10 +119,8 @@ let SidebarQuiz = React.createClass({
 
           <div className="row">        
             <div className="col-md-offset-8 col-md-4">
-              <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit}>Submit Answer</button>
+              {actionButton}
             </div>
-
-            
           </div>
         </div>
       )
