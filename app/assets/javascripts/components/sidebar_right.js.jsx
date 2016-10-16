@@ -14,7 +14,8 @@ let SidebarRight = React.createClass({
           checkedOptionIds: [],
           currentPosition: 0,
           showAnswers: false,
-          totalScore: 0
+          totalScore: 0,
+          averageScore: 0
       };
   },
 
@@ -135,7 +136,7 @@ let SidebarRight = React.createClass({
                               checkedOptionIds={this.state.checkedOptionIds}
                               currentPosition={this.state.currentPosition}
                               showAnswers={this.state.showAnswers}
-                              totalScore={this.state.totalScore}
+                              averageScore={this.state.averageScore}
                               handleCheckedOptionIdsChange={this.handleCheckedOptionIdsChange}
                               handleQuizSubmission={this.handleQuizSubmission}
                               handleNextQuestion={this.handleNextQuestion} />
@@ -204,9 +205,10 @@ let SidebarRight = React.createClass({
   },
 
   handleQuizSubmission(data){
-    totalScore = (this.state.totalScore + data.score) / (this.state.currentPosition + 1);
+    totalScore = this.state.totalScore + data.score
+    averageScore = totalScore / (this.state.currentPosition + 1);
     console.log("TS: " + this.state.totalScore + "  Score: " + data.score + " CP: " + this.state.currentPosition);
-    this.setState({checkedOptionIds: [], showAnswers: true, totalScore: totalScore});
+    this.setState({checkedOptionIds: [], showAnswers: true, averageScore: averageScore, totalScore: totalScore});
   },
 
   handleNextQuestion(){

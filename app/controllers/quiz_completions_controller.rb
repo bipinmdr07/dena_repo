@@ -2,6 +2,8 @@ class QuizCompletionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    return if current_user.quiz_completions.find_by(quiz_completion_params)
+    
     @quiz_completion = current_user.quiz_completions.new(quiz_completion_params)
 
     if @quiz_completion.save

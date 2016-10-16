@@ -3,7 +3,8 @@ var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 let SidebarQuiz = React.createClass({
   getInitialState() {
     return{
-      errorMessages: []
+      errorMessages: [],
+      disabled: false
     };
   },
 
@@ -14,6 +15,7 @@ let SidebarQuiz = React.createClass({
 
   handleSubmit(e){
     e.preventDefault();
+    this.setState({disabled: true});
 
     $.ajax({
       dataType: 'JSON',
@@ -44,7 +46,7 @@ let SidebarQuiz = React.createClass({
 
   handleFinishQuiz(){
     console.log("Finishing quiz...");
-    if (this.props.totalScore >= 90) {
+    if (this.props.averageScore >= 90) {
       $.ajax({
         dataType: 'JSON',
         type: 'POST',
@@ -79,6 +81,7 @@ let SidebarQuiz = React.createClass({
 
   handleNextQuestion(e){
     e.preventDefault();
+    this.setState({disabled: false});
     this.props.handleNextQuestion();
   },
 
@@ -106,9 +109,9 @@ let SidebarQuiz = React.createClass({
                                    transitionAppearTimeout={500}
                                    transitionEnterTimeout={500} 
                                    transitionLeaveTimeout={500}>
-            <h3 key={"totalScore_" + this.props.totalScore}>Total Score</h3>
+            <h3 key={"average_score_" + this.props.averageScore}>Score</h3>
           
-            <h2 key={"score_" + this.props.totalScore}>You scored {Math.round(this.props.totalScore)}%!</h2>
+            <h2 key={"score_" + this.props.averageScore}>You scored {Math.round(this.props.averageScore)}%!</h2>
           </ReactCSSTransitionGroup>
         </div>
       )
@@ -135,7 +138,7 @@ let SidebarQuiz = React.createClass({
         actionButton = <button className="btn btn-cta-primary pull-right" onClick={this.handleNextQuestion}>Next</button>
       }
       else {
-        actionButton = <button className="btn btn-cta-primary submit-btn" onClick={this.handleSubmit}>Submit Answer</button>            
+        actionButton = <button className="btn btn-cta-primary submit-btn pull-right" onClick={this.handleSubmit} disabled={(this.state.disabled)? "disabled" : ""}>Submit Answer</button>            
       }     
 
       let problemsLeft = this.props.quizProblems.length - this.props.currentPosition; 
@@ -166,8 +169,8 @@ let SidebarQuiz = React.createClass({
 
                 <div className="progress">
                   <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-                  aria-valuemin="0" aria-valuemax="100" style={{width: this.props.totalScore + "%"}}>
-                    {Math.round(this.props.totalScore)}%
+                  aria-valuemin="0" aria-valuemax="100" style={{width: this.props.averageScore + "%"}}>
+                    {Math.round(this.props.averageScore)}%
                   </div>
                 </div>
                 

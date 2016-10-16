@@ -53,7 +53,7 @@ class LessonsController < ApplicationController
 
     @progression_lesson_ids = current_user.progressions.where(course_name: current_controller).pluck(:lesson_id)  
 
-    @quiz_completion = current_user.quiz_completions.find_by(course_name: current_controller, lesson_id: @current_lesson_id)
+    @quiz_completed = !current_user.quiz_completions.find_by(course_name: current_controller, lesson_id: @current_lesson_id).nil? || QuizProblem.where(course_name: current_controller, lesson_id: @current_lesson_id).empty?
 
     render layout: "layouts/lesson"
   end
