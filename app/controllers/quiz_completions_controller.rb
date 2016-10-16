@@ -6,7 +6,7 @@ class QuizCompletionsController < ApplicationController
 
     if @quiz_completion.save
       respond_to do |format|
-        format.json { render json: @quiz_completion }
+        format.json { render 'quiz_completions/update_lesson_nav.js.erb' }
       end
     else
       respond_to do |format|

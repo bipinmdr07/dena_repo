@@ -28,7 +28,7 @@
     </p>
   <% end %>
 
-  <% if @quiz_completion || current_user.progressions.where(course_name: controller_name.classify.constantize, lesson_id: params[:id]).count > 0 %>
+  <% if quiz_completion || current_user.progressions.where(course_name: controller_name.classify.constantize, lesson_id: params[:id]).count > 0 %>
 
     <%= simple_form_for :progression, url: progression_path, html: {id: 'delete_progression_form'}, method: :delete, remote: true do |f| %>
       <%= f.input :lesson_id, as: :hidden, input_html: { value: params[:id] } %>

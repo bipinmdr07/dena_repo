@@ -28,7 +28,7 @@ class Admin::QuizProblemsController < ApplicationController
   private
 
   def parse_problem
-    @quiz_problem.problem = MarkdownParser.new(@quiz_problem.question).parse
+    @quiz_problem.question = MarkdownParser.new(@quiz_problem.question).parsed
   end
 
   def quiz_problem_exception_handler(error)

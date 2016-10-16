@@ -32,7 +32,7 @@
 
       <%= render partial: 'layouts/hints' if @hints %>
 
-      <%= render 'lesson_nav_section' %>
+      <%= render partial: 'lesson_nav_section', locals: {quiz_completion: @quiz_completion} %>
 
       <%= render partial: '/submissions/for_lesson' if @submission_form %>
 

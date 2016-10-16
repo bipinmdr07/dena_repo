@@ -6,7 +6,7 @@ let SidebarQuiz = React.createClass({
       errorMessages: []
     };
   },
-  
+
   handleChange(e){
     let id = e.target.value;
     this.props.handleCheckedOptionIdsChange(id);
@@ -27,7 +27,10 @@ let SidebarQuiz = React.createClass({
         }
       },
       success(data){
-        this.props.handleQuizSubmission(data);        
+        this.props.handleQuizSubmission(data); 
+        if (this.props.quizProblems.length == (this.props.currentPosition + 1)) {
+          this.handleFinishQuiz();
+        }        
       },
       error(xhr) {
         errorMessages = xhr.responseJSON.errors.map((error) => {
@@ -40,6 +43,7 @@ let SidebarQuiz = React.createClass({
   },
 
   handleFinishQuiz(){
+    console.log("Finishing quiz...");
     if (this.props.totalScore >= 90) {
       $.ajax({
         dataType: 'JSON',
