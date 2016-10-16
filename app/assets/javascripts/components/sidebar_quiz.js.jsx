@@ -58,7 +58,7 @@ let SidebarQuiz = React.createClass({
           }
         },
         success(data){
-          this.props.handleQuizSubmission(data);        
+          success_sound.play();
         }
       });
     }
@@ -186,13 +186,18 @@ let SidebarQuiz = React.createClass({
     }
   },
 
-  render(){
-    
+  render(){    
     return (
       <form className="sidebar-form" style={this.sidebarFormStyles()}>
         {this.displayErrorMessages()}
         {this.formContent()}
       </form>
-    )
+    )    
+  },
+
+  componentDidMount(){
+    $(".sidebar-form").find("pre code").each(function(_, block) {
+      hljs.highlightBlock(block);
+    });
   }
 });

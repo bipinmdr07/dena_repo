@@ -7,6 +7,7 @@ class QuizCompletionsController < ApplicationController
     @quiz_completion = current_user.quiz_completions.new(quiz_completion_params)
 
     build_variables_for_lesson_show_page
+    @quiz_completed = true
 
     if @quiz_completion.save
       respond_to do |format|
