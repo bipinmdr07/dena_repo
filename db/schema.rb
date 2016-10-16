@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016054500) do
+ActiveRecord::Schema.define(version: 20161016184108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,6 +282,21 @@ ActiveRecord::Schema.define(version: 20161016054500) do
     t.index ["quiz_problem_id"], name: "index_quiz_options_on_quiz_problem_id", using: :btree
   end
 
+  create_table "quiz_problem_cards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_problem_id"
+    t.float    "prev_ef",             default: 2.5
+    t.float    "prev_interval",       default: 0.0
+    t.float    "quality_response"
+    t.float    "calculated_interval"
+    t.float    "calculated_ef"
+    t.datetime "repetition_date"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["quiz_problem_id"], name: "index_quiz_problem_cards_on_quiz_problem_id", using: :btree
+    t.index ["user_id"], name: "index_quiz_problem_cards_on_user_id", using: :btree
+  end
+
   create_table "quiz_problems", force: :cascade do |t|
     t.integer  "lesson_id"
     t.string   "course_name"
@@ -478,6 +493,8 @@ ActiveRecord::Schema.define(version: 20161016054500) do
 
   add_foreign_key "quiz_completions", "users"
   add_foreign_key "quiz_options", "quiz_problems"
+  add_foreign_key "quiz_problem_cards", "quiz_problems"
+  add_foreign_key "quiz_problem_cards", "users"
   add_foreign_key "quiz_submissions", "quiz_problems"
   add_foreign_key "quiz_submissions", "users"
 end
