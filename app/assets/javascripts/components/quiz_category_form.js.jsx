@@ -55,6 +55,7 @@ let QuizCategoryForm = React.createClass({
           <div className="form-group" onChange={this.handleCategoryChange}>
             <label>Select category</label>
             <select className="form-control" id="quiz_category">
+              <option></option>
               {quizCategories}
             </select>
           </div>

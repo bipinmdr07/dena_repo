@@ -15,7 +15,8 @@ let SidebarRight = React.createClass({
           currentPosition: 0,
           showAnswers: false,
           totalScore: 0,
-          averageScore: 0
+          averageScore: 0,
+          quizCompleted: this.props.quizCompleted
       };
   },
 
@@ -139,7 +140,9 @@ let SidebarRight = React.createClass({
                               averageScore={this.state.averageScore}
                               handleCheckedOptionIdsChange={this.handleCheckedOptionIdsChange}
                               handleQuizSubmission={this.handleQuizSubmission}
-                              handleNextQuestion={this.handleNextQuestion} />
+                              handleNextQuestion={this.handleNextQuestion}
+                              handleFinishQuiz={this.handleFinishQuiz}
+                              quizCompleted={this.state.quizCompleted} />
       )
     } else if (this.state.showAdminQuiz) {
       return (
@@ -211,6 +214,11 @@ let SidebarRight = React.createClass({
     this.setState({checkedOptionIds: [], showAnswers: true, averageScore: averageScore, totalScore: totalScore});
   },
 
+  handleFinishQuiz(){
+    this.setState({quizCompleted: true});
+    console.log("Hi");
+  },
+
   handleNextQuestion(){
     this.setState({currentPosition: this.state.currentPosition + 1, showAnswers: false});
   },
@@ -229,7 +237,7 @@ let SidebarRight = React.createClass({
             {this.questionText()}
           </li>
 
-          <li className={this.state.showQuiz ? "sidebar-active" : "" } onClick={this.toggleQuiz} style={this.sidebarLiWidth()}>
+          <li className={this.state.showQuiz ? "sidebar-active" : "" } onClick={this.toggleQuiz} style={Object.assign(this.sidebarLiWidth(), {color: this.state.quizCompleted ? "#ffffff" : "#ec6952"})}>
             <i className="fa fa-check-square" aria-hidden="true"></i>
             {this.quizText()}
           </li>

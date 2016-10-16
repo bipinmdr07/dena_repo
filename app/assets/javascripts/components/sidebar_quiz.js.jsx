@@ -59,6 +59,7 @@ let SidebarQuiz = React.createClass({
         },
         success(data){
           success_sound.play();
+          this.props.handleFinishQuiz();
         }
       });
     }

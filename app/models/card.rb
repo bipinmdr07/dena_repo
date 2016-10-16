@@ -1,19 +1,14 @@
 class Card < ApplicationRecord
   acts_as_taggable
   include PublicActivity::Model
+  include IntervalUpdatable
 
   belongs_to :user
   belongs_to :deck
 
   before_save :update_code_syntax!
 
-  validates :question, :answer, presence: true
-
-  scope :today, -> { where(archived: false)
-                    .where(["repetition_date <= ?", Date.today])
-                    .order("repetition_date ASC") }
-
-  scope :unstudied, -> { where(repetition_date: nil) }     
+  validates :question, :answer, presence: true  
 
   delegate :title, to: :deck, prefix: true      
 
@@ -30,12 +25,7 @@ class Card < ApplicationRecord
   end
 
   def update_code_syntax!
-    syntax_builder = SyntaxBuilder.new(self)
-    self.question = syntax_builder.question
-    self.answer = syntax_builder.answer
+    self.question = MarkdownParser.new(question).parsed
+    self.answer = MarkdownParser.new(answer).parsed
   end  
-
-  def update_interval!(quality_response)
-    IntervalUpdater.new(card: self, quality_response: quality_response).update_card!
-  end
 end

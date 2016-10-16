@@ -5,43 +5,14 @@ RSpec.describe Card, type: :model do
   it { should validate_presence_of :answer }
 
   describe "update_code_syntax" do
-    context "when `ruby` is present" do
-      it "should change code syntax" do
-        question = "What is this?\n`ruby`\nif 1 == 2\n  puts 'Hi'\nelse\n  puts 'Bye'\nend\n`end`"
-        answer = "`ruby`\nputs 'Bye'\n`end`"
-        card = Card.create(user_id: 1, question: question, answer: answer)
+    it "parses into markdown" do
+      card = Card.new(question: "question", answer: "answer", user_id: 1)
 
-        expect(card.question).to eq(
-          "What is this?\n<pre><code class='ruby'>\nif 1 == 2\n  puts &#39;Hi&#39;\nelse\n  puts &#39;Bye&#39;\nend\n</code></pre>"
-        )
-        expect(card.answer).to eq(
-          "<pre><code class='ruby'>\nputs &#39;Bye&#39;\n</code></pre>"
-        )
-      end
-    end
+      card.save
+      card.reload
 
-    context "when `` is not present" do
-      it "should not change the text" do
-        card = Card.create(user_id: 1, question: "Hi", answer: "Hi")
-
-        expect(card.question).to eq("Hi")
-        expect(card.answer).to eq("Hi")
-      end
-    end
-
-    context "when 'ruby' but 'end' is not present" do
-      it "should close the code tags" do
-        question = "What is this?\n`ruby`\nif 1 == 2\n  puts 'Hi'\nelse\n  puts 'Bye'\nend\n"
-        answer = "`ruby`\nputs 'Bye'\n"
-        card = Card.create(user_id: 1, question: question, answer: answer)
-
-        expect(card.question).to eq(
-          "What is this?\n<pre><code class='ruby'>\nif 1 == 2\n  puts &#39;Hi&#39;\nelse\n  puts &#39;Bye&#39;\nend\n</code></pre>"
-        )
-        expect(card.answer).to eq(
-          "<pre><code class='ruby'>\nputs &#39;Bye&#39;\n</code></pre>"
-        )
-      end
+      expect(card.question).to eq("<p>question</p>\n")
+      expect(card.answer).to eq("<p>answer</p>\n")
     end
   end
 end
