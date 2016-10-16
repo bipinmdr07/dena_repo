@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :notifications, foreign_key: :recipient_id
   has_many :quiz_submissions, dependent: :destroy
   has_many :quiz_category_ratings, dependent: :destroy
+  has_many :quiz_completions, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :package, presence: true, if: :is_student?

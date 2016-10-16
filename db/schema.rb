@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015042602) do
+ActiveRecord::Schema.define(version: 20161016054500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -264,6 +264,15 @@ ActiveRecord::Schema.define(version: 20161015042602) do
     t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
   end
 
+  create_table "quiz_completions", force: :cascade do |t|
+    t.integer  "lesson_id"
+    t.string   "course_name"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_quiz_completions_on_user_id", using: :btree
+  end
+
   create_table "quiz_options", force: :cascade do |t|
     t.integer  "quiz_problem_id"
     t.string   "content"
@@ -467,6 +476,7 @@ ActiveRecord::Schema.define(version: 20161015042602) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
+  add_foreign_key "quiz_completions", "users"
   add_foreign_key "quiz_options", "quiz_problems"
   add_foreign_key "quiz_submissions", "quiz_problems"
   add_foreign_key "quiz_submissions", "users"

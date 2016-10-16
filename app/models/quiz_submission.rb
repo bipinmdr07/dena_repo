@@ -6,8 +6,18 @@ class QuizSubmission < ApplicationRecord
   delegate :quiz_category, to: :quiz_problem, allow_nil: false
 
   def calculate_score(args)
-    checked_options = QuizOption.find(args.fetch(:checked_option_ids)) 
+    checked_option_ids = args.fetch(:checked_option_ids)
 
-    (checked_options.select{|o| o.correct }.count.to_f / quiz_problem.quiz_options.correct.count.to_f) * 100
+    checked_options = QuizOption.where(id: checked_option_ids)
+
+    correct_option_count = quiz_problem.quiz_options.correct.count.to_f
+
+    if checked_options.empty? && correct_option_count == 0
+      return 100
+    elsif checked_options.empty? && correct_option_count != 0
+      return 0
+    else
+      (checked_options.select{|o| o.correct }.count.to_f / quiz_problem.quiz_options.correct.count.to_f) * 100
+    end
   end
 end

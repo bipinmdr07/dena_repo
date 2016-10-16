@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   end
 
   resources :quiz_submissions
+  resources :quiz_problems
 
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 

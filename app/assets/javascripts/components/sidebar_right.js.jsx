@@ -12,7 +12,7 @@ let SidebarRight = React.createClass({
           sidebarFormWidth: this.sidebarFormWidth(),
           quizProblems: [],
           checkedOptionIds: [],
-          current_position: 0,
+          currentPosition: 0,
           showAnswers: false,
           totalScore: 0
       };
@@ -23,7 +23,7 @@ let SidebarRight = React.createClass({
 
     $.ajax({
       dataType: 'JSON',
-      url: '/admin/quiz_problems.json',
+      url: '/quiz_problems.json',
       data: {lesson_id: this.props.lesson_id, course_name: this.props.course_name},
       context: this,
       success(data) {
@@ -133,7 +133,7 @@ let SidebarRight = React.createClass({
                               sidebarFormWidth={this.state.sidebarFormWidth}
                               quizProblems={this.state.quizProblems}
                               checkedOptionIds={this.state.checkedOptionIds}
-                              current_position={this.state.current_position}
+                              currentPosition={this.state.currentPosition}
                               showAnswers={this.state.showAnswers}
                               totalScore={this.state.totalScore}
                               handleCheckedOptionIdsChange={this.handleCheckedOptionIdsChange}
@@ -204,13 +204,13 @@ let SidebarRight = React.createClass({
   },
 
   handleQuizSubmission(data){
-    totalScore = (this.state.totalScore + data.score) / (this.state.current_position + 1);
-    console.log("TS: " + this.state.totalScore + "  Score: " + data.score + " CP: " + this.state.current_position);
+    totalScore = (this.state.totalScore + data.score) / (this.state.currentPosition + 1);
+    console.log("TS: " + this.state.totalScore + "  Score: " + data.score + " CP: " + this.state.currentPosition);
     this.setState({checkedOptionIds: [], showAnswers: true, totalScore: totalScore});
   },
 
   handleNextQuestion(){
-    this.setState({current_position: this.state.current_position + 1, showAnswers: false});
+    this.setState({currentPosition: this.state.currentPosition + 1, showAnswers: false});
   },
 
   render(){

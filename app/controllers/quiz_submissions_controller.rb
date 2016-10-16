@@ -15,7 +15,7 @@ class QuizSubmissionsController < ApplicationController
       end        
     else
       respond_to do |format|
-        format.json { render status: :unprocessable_entity }
+        format.json { render json: {errors: @quiz_submission.errors.full_messages}, status: :unprocessable_entity }
       end
     end
   end

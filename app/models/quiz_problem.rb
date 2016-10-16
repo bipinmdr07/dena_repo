@@ -7,6 +7,8 @@ class QuizProblem < ActiveRecord::Base
 
   validates :question, :lesson_id, :course_name, :quiz_category_id, presence: true
 
+  scope :randomize, -> { order('random()') }
+
   def save_and_create_quiz_options!(quiz_problem_params)
     self.transaction do
       self.save!

@@ -5,4 +5,5 @@ class QuizOption < ActiveRecord::Base
   validates_inclusion_of :correct, in: [true, false]
 
   scope :correct, -> { where(correct: true) }
+  scope :randomize, -> { order('random()') }
 end

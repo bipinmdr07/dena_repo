@@ -7,13 +7,11 @@ class Admin::QuizProblemsController < ApplicationController
   rescue_from ::Exceptions::MustHaveCorrectAnswerException, with: :quiz_problem_exception_handler
   rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
 
-  def index
-    @quiz_problems = QuizProblem.where(lesson_id: params[:lesson_id], course_name: params[:course_name])
-                               .includes(:quiz_options)                                  
-  end
-
   def create    
     @quiz_problem = QuizProblem.new(quiz_problem_params.except(:options))
+
+    parse_problem
+
     @option_builder = QuizOptionBuilder.new(quiz_problem: @quiz_problem, quiz_problem_params: quiz_problem_params)
 
     if @option_builder.build!
@@ -28,6 +26,10 @@ class Admin::QuizProblemsController < ApplicationController
   end
 
   private
+
+  def parse_problem
+    @quiz_problem.problem = MarkdownParser.new(@quiz_problem.question).parse
+  end
 
   def quiz_problem_exception_handler(error)
     render json: {errors: error.message}, status: :unprocessable_entity
