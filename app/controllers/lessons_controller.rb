@@ -14,6 +14,7 @@ class LessonsController < ApplicationController
     current_controller = controller_name.classify
     
     @current_course_title = course_title
+    @current_course_name = course_name
     @current_course_link = course_link
     @current_course_lessons = current_course_lessons
     @current_course_chapters = current_course_chapters
@@ -51,6 +52,8 @@ class LessonsController < ApplicationController
       @prev_lesson = @current_lesson_id.to_i - 1
     end
 
+    @current_lesson_progression = current_user.progressions.find_by(course_name: @course_name, lesson_id: @current_lesson_id)
+
     @progression_lesson_ids = current_user.progressions.where(course_name: current_controller).pluck(:lesson_id)  
 
     @quiz_completed = !current_user.quiz_completions.find_by(course_name: current_controller, lesson_id: @current_lesson_id).nil? || QuizProblem.where(course_name: current_controller, lesson_id: @current_lesson_id).empty?
@@ -59,6 +62,10 @@ class LessonsController < ApplicationController
   end
 
   private
+
+  def course_name
+    @course_name ||= controller_name.classify.constantize
+  end
 
   def current_course_chapters
     @current_course_chapters ||= controller_name.classify.constantize::CHAPTERS

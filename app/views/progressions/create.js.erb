@@ -1,10 +1,7 @@
 success_sound.play();
 
-$('#progression_form').hide();
-$('#hidden_progression_form').hide();
-$('#hidden_delete_progression_form').show();
-
-$('#sidebar_container').html('<%= escape_javascript render partial: "lessons/sidebar" %>');
+$('#lesson_nav_container').html("<%= escape_javascript render partial: 'lessons/lesson_nav_section.html.erb' %>");
+$('#sidebar-reveal-container').html('<%= escape_javascript render partial: "lessons/sidebar" %>');
 
 show_page_trigger();
 

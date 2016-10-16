@@ -32,7 +32,27 @@
 
       <%= render partial: 'layouts/hints' if @hints %>
 
-      <%= render partial: 'lesson_nav_section', locals: {quiz_completed: @quiz_completed} %>
+      <% if @submission_form && @submission_by_current_user.nil? %>
+        <div class="well">
+          <%= render partial: 'shared/flash_messages' %>
+
+          <h2>Submit your work</h2>
+          <p>
+            Awesome work! Follow the directions on the lesson and submit your work. We'll get back to you soon and give you feedback or code review.
+          </p>
+
+          <p>
+            (P.S Give it an awesome title name just for fun :D )
+          </p>
+
+          <%= react_component 'SubmissionForm', { lesson_id: params[:id], course_name: controller_name.classify } %>
+
+        </div>
+      <% end %>
+
+      <div id="lesson_nav_container">
+        <%= render partial: 'lesson_nav_section', locals: {quiz_completed: @quiz_completed, current_lesson_progression: @current_lesson_progression} %>
+      </div>
 
       <%= render partial: '/submissions/for_lesson' if @submission_form %>
 

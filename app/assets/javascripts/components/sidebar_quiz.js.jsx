@@ -45,10 +45,9 @@ let SidebarQuiz = React.createClass({
   },
 
   handleFinishQuiz(){
-    console.log("Finishing quiz...");
     if (this.props.averageScore >= 90) {
       $.ajax({
-        dataType: 'JSON',
+        dataType: 'script',
         type: 'POST',
         url: '/quiz_completions',
         context: this,

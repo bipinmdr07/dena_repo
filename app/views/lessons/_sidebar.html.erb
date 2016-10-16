@@ -11,11 +11,7 @@
 
         <ul class="nav nav-stacked collapse left-submenu chapter-ul" id="chapter_<%= i %>" style="position: relative;">
           <% @current_course_lessons.select{|lesson| lesson.chapter == chapter}.each do |lesson| %>
-            <% if controller_name.classify == "Progression" %>          
               <li><%= link_to "#{lesson.id}. #{lesson.title} #{lesson_completed(@progression_lesson_ids.include?(lesson.id))}".html_safe, "/#{@current_course_link}/#{(lesson.id)}" %></li>
-            <% else %>
-              <li><%= link_to "#{lesson.id}. #{lesson.title} #{lesson_completed(@progression_lesson_ids.include?(lesson.id))}".html_safe, "/#{@current_course_link}/#{(lesson.id)}" %></li>
-            <% end %>
           <% end %>
         </ul>
       </li>
