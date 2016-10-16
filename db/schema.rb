@@ -245,45 +245,6 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
 
-  create_table "quiz_categories", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "lesson_id"
-    t.string   "course_name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["lesson_id"], name: "index_quiz_categories_on_lesson_id", using: :btree
-  end
-
-  create_table "quiz_category_ratings", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "quiz_category_id"
-    t.float    "score"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
-    t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
-    t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
-    t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
-  end
-
-  create_table "quiz_options", force: :cascade do |t|
-    t.integer  "quiz_problem_id"
-    t.string   "content"
-    t.boolean  "correct"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["quiz_problem_id"], name: "index_quiz_options_on_quiz_problem_id", using: :btree
-  end
-
-  create_table "quiz_problems", force: :cascade do |t|
-    t.integer  "lesson_id"
-    t.string   "course_name"
-    t.string   "question"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["course_name", "lesson_id"], name: "index_quiz_problems_on_course_name_and_lesson_id", using: :btree
-  end
-
   create_table "replies", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "question_id"
@@ -430,12 +391,12 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
+    t.boolean  "collaboration_access",      default: false, null: false
+    t.boolean  "skill_academy_access",      default: false, null: false
     t.string   "provider"
     t.string   "uid"
     t.text     "application_reasons"
     t.integer  "package"
-    t.boolean  "collaboration_access",      default: false, null: false
-    t.boolean  "skill_academy_access",      default: false, null: false
     t.index ["admitted"], name: "index_users_on_admitted", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -457,5 +418,4 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
-  add_foreign_key "quiz_options", "quiz_problems"
 end
