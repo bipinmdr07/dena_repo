@@ -12,6 +12,10 @@ class Card < ApplicationRecord
 
   delegate :title, to: :deck, prefix: true      
 
+  scope :today, -> { where(archived: false)
+                    .where(["repetition_date <= ?", Date.today])
+                    .order("repetition_date ASC") }
+
   def self.due
     self.today | self.unstudied
   end            
