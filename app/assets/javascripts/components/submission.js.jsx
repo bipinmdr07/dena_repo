@@ -100,11 +100,11 @@ let Submission = React.createClass({
     if (this.props.user_is_mentor) {
       if (this.props.approved) {
         return (        
-          <button className="btn btn-cta-primary pull-right" onClick={this.props.toggleApprove}>Unapprove</button>
+          <button className="btn btn-cta-secondary pull-right" onClick={this.props.toggleApproved}>Unapprove</button>
         )
       } else {
         return (
-          <button className="btn btn-cta-primary pull-right" onClick={this.props.toggleApprove}>Approve</button>          
+          <button className="btn btn-cta-primary pull-right" onClick={this.props.toggleApproved}>Approve</button>          
         )
       }
     }

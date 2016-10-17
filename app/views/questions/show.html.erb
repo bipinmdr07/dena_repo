@@ -24,6 +24,7 @@
                                     content: markdown(@question.content),
                                     user_avatar_url: @question.user_avatar.url, 
                                     user_is_mentor: @question.user_mentor,
+                                    current_user_is_mentor: current_user.mentor,
                                     user_name: @question.user_name,
                                     display_post_links: current_user == @question.user || current_user.admin,
                                     replies: @replies } %>

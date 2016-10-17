@@ -2,8 +2,6 @@ class SubmissionApprovalsController < ApplicationController
   before_action :authenticate_user!
   before_action :check_if_admin
 
-  respond_to :js, :html, :json
-
   def create
     @submission = Submission.find(params[:id])
     
@@ -16,7 +14,7 @@ class SubmissionApprovalsController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.json {}
+      format.json { render json: 200 }
     end
 
   end

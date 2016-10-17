@@ -26,7 +26,7 @@ let Submissions = React.createClass({
         <Submission submission={this.props.submission}
                   content={this.props.content}
                   user_avatar_url={this.props.user_avatar_url} 
-                  user_is_mentor={this.props.submission.user_mentor}
+                  user_is_mentor={this.props.user_is_mentor}
                   user_name={this.props.user_name}
                   display_post_links={this.props.display_post_links}
                   handleDeleteQuestion={this.handleDeleteQuestion}
@@ -48,9 +48,10 @@ let Submissions = React.createClass({
 
   toggleApproved(){
     $.ajax({
-      url: '/submission_approvals',
+      url: `/submission_approvals/${this.props.submission.id}`,
       type: 'POST',
-      data: { id: this.props.submission.id },
+      dataType: 'JSON',
+      context: this,
       success(){
         this.setState({approved: !this.state.approved});
       }

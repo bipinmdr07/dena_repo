@@ -14,7 +14,7 @@ class QuestionStatusesController < ApplicationController
 
     respond_to do |format|
       format.html {}
-      format.js {}
+      format.js { render json: 200 }
     end
 
   end
