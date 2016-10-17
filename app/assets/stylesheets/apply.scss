@@ -1,3 +1,6 @@
+$orange: #ec6952;
+$darkblue: #253340;
+
 .apply {
   background: whitesmoke;
 }
@@ -163,12 +166,12 @@
   .explore-program-box {
     @include program-box-text-styles;
     background: white;
-    border: 2px solid #ec6952;
+    border: 2px solid $darkblue;
     border-radius: 4px;
   }
 
   .explore-programs-title {
-    color: #ec6952;
+    color: $darkblue;
     font-weight: 700;
     font-family: 'Titillium web';
   }
@@ -178,10 +181,10 @@
   }
 
   .program-box-title {
-    border-bottom: 2px solid #ec6952;
+    border-bottom: 2px solid $darkblue;
     text-align: center;
     padding: 10px 0px;
-    background: #ec6952;
+    background: $darkblue;
     color: white;
     h4 {
       font-size: 24px;    
@@ -192,13 +195,13 @@
   }
 
   .program-box-highlights {
-    border-bottom: 1px solid #ec6952;
+    border-bottom: 1px solid $darkblue;
     text-align: center;
     padding-bottom: 10px;
     h3 {
       font-size: 40px;
       font-weight: 900;       
-      color: #ec6952; 
+      color: $darkblue; 
     }
     h5 {
       font-weight: 900;
@@ -224,7 +227,7 @@
         font-weight: normal;
         text-decoration: inherit;
         margin-right: 10px;
-        color: #ec6952;
+        color: $darkblue;
       }  
     }    
   }
@@ -238,25 +241,25 @@
 }
 
 .immersive-box {
-  border: 2px solid #253340 !important;
+  border: 2px solid $orange !important;
 
   .program-box-title {
-    border-bottom: 1px solid #253340;
-    background: #253340;    
+    border-bottom: 1px solid $orange;
+    background: $orange;    
   }
 
   .explore-programs-title {
-    color: #253340;
+    color: $orange;
   }
 
   .program-box-highlights {
-    border-bottom: 1px solid #253340;
+    border-bottom: 1px solid $orange;
     text-align: center;
     padding-bottom: 10px;
     h3 {
       font-size: 40px;
       font-weight: 900;       
-      color: #253340;
+      color: $orange;
     }
   }  
 
@@ -264,7 +267,7 @@
 
 .immersive-box .program-box-details {
     li:before {
-      color: #253340 !important;
+      color: $orange !important;
     }
   }  
 
