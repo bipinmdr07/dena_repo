@@ -73,7 +73,7 @@ let SidebarQuiz = React.createClass({
 
   optionStyles(option){
     if (this.props.showAnswers) {
-      if (option.correct && this.refs["option_" + option.id].checked) {
+      if (option.correct && this.refs["options_" + option.id] && this.refs["option_" + option.id].checked) {
         return { boxShadow: "inset 0 0 0 3px #5cb85c", }
       } else {
         return { boxShadow: "inset 0 0 0 3px #ec6952", }
