@@ -142,7 +142,8 @@ let SidebarRight = React.createClass({
                               handleQuizSubmission={this.handleQuizSubmission}
                               handleNextQuestion={this.handleNextQuestion}
                               handleFinishQuiz={this.handleFinishQuiz}
-                              quizCompleted={this.state.quizCompleted} />
+                              quizCompleted={this.state.quizCompleted}
+                              handleRetakeQuiz={this.handleRetakeQuiz} />
       )
     } else if (this.state.showAdminQuiz) {
       return (
@@ -216,11 +217,14 @@ let SidebarRight = React.createClass({
 
   handleFinishQuiz(){
     this.setState({quizCompleted: true});
-    console.log("Hi");
   },
 
   handleNextQuestion(){
     this.setState({currentPosition: this.state.currentPosition + 1, showAnswers: false});
+  },
+
+  handleRetakeQuiz(){
+    this.setState({currentPosition: 0, showAnswers: false, totalScore: 0, averageScore: 0})
   },
 
   render(){

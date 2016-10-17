@@ -8,6 +8,8 @@ let SidebarQuiz = React.createClass({
     };
   },
 
+  passingGrade: 85,
+
   handleChange(e){
     let id = e.target.value;
     this.props.handleCheckedOptionIdsChange(id);
@@ -45,7 +47,7 @@ let SidebarQuiz = React.createClass({
   },
 
   handleFinishQuiz(){
-    if (this.props.averageScore >= 90) {
+    if (this.props.averageScore >= this.passingGrade) {
       $.ajax({
         dataType: 'script',
         type: 'POST',
@@ -109,9 +111,26 @@ let SidebarQuiz = React.createClass({
                                    transitionAppearTimeout={500}
                                    transitionEnterTimeout={500} 
                                    transitionLeaveTimeout={500}>
-            <h3 key={"average_score_" + this.props.averageScore}>Score</h3>
+            <h3 key={"average_score_" + this.props.averageScore}>
+              Score
+            </h3>
           
-            <h2 key={"score_" + this.props.averageScore}>You scored {Math.round(this.props.averageScore)}%!</h2>
+            <h2 key={"score_" + this.props.averageScore}>
+              You scored {Math.round(this.props.averageScore)}%!
+            </h2>
+
+            <hr />
+
+            <p key={"message_" + this.props.averageScore}>
+              {this.props.averageScore >= this.passingGrade ? "Congratulations! You've passed the quizzes." : `You must score at least ${this.passingGrade} to pass. Take the quiz again to mark this lesson as completed!`}
+            </p>
+
+            <br />
+
+            <button onClick={this.props.handleRetakeQuiz} className="btn btn-cta-primary pull-right">
+              <i className="fa fa-repeat" aria-hidden="true"></i> Retake Quiz
+            </button>
+
           </ReactCSSTransitionGroup>
         </div>
       )
