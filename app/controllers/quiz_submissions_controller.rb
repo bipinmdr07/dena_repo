@@ -7,9 +7,11 @@ class QuizSubmissionsController < ApplicationController
     if @quiz_submission.save
       @current_score = @quiz_submission.calculate_score(checked_option_ids: quiz_submission_params[:checked_option_ids])
 
-      QuizCategoryRating.create_or_rank!(current_user: current_user, 
-                                         quiz_submission: @quiz_submission, 
-                                         current_score: @current_score)
+      quiz_category_rating = QuizCategoryRating.create_or_rank!(current_user: current_user, 
+                                                                quiz_submission: @quiz_submission, 
+                                                                current_score: @current_score)
+
+      @quiz_submission.update(quiz_category_rating: quiz_category_rating)
 
       update_quiz_problem_card_or_build!
 

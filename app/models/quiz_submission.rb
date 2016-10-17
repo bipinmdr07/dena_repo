@@ -1,9 +1,11 @@
 class QuizSubmission < ApplicationRecord
   belongs_to :user
   belongs_to :quiz_problem
-  belongs_to :quiz_category_ranking, counter_cache: true
+  belongs_to :quiz_category_rating, counter_cache: true
     
   delegate :quiz_category, to: :quiz_problem, allow_nil: false
+
+  validates :quiz_problem, :user, presence: true
 
   def calculate_score(args)
     checked_option_ids = args.fetch(:checked_option_ids)

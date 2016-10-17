@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016184108) do
+ActiveRecord::Schema.define(version: 20161017050254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,7 +258,9 @@ ActiveRecord::Schema.define(version: 20161016184108) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "quiz_submissions_count", default: 0
+    t.integer  "quiz_submission_id"
     t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
+    t.index ["quiz_submission_id"], name: "index_quiz_category_ratings_on_quiz_submission_id", using: :btree
     t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
     t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
     t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
@@ -311,8 +313,10 @@ ActiveRecord::Schema.define(version: 20161016184108) do
   create_table "quiz_submissions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "quiz_problem_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "quiz_category_rating_id"
+    t.index ["quiz_category_rating_id"], name: "index_quiz_submissions_on_quiz_category_rating_id", using: :btree
     t.index ["quiz_problem_id"], name: "index_quiz_submissions_on_quiz_problem_id", using: :btree
     t.index ["user_id", "quiz_problem_id"], name: "index_quiz_submissions_on_user_id_and_quiz_problem_id", using: :btree
     t.index ["user_id"], name: "index_quiz_submissions_on_user_id", using: :btree
@@ -495,6 +499,7 @@ ActiveRecord::Schema.define(version: 20161016184108) do
   add_foreign_key "quiz_options", "quiz_problems"
   add_foreign_key "quiz_problem_cards", "quiz_problems"
   add_foreign_key "quiz_problem_cards", "users"
+  add_foreign_key "quiz_submissions", "quiz_category_ratings"
   add_foreign_key "quiz_submissions", "quiz_problems"
   add_foreign_key "quiz_submissions", "users"
 end
