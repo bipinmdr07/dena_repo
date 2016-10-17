@@ -8,7 +8,7 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
         submission = FactoryGirl.create(:submission, approved: false, user_id: 1)
 
         sign_in user
-        post :create, id: submission.id, format: :js
+        post :create, id: submission.id, format: :json
         submission.reload
 
         expect(submission.approved).to be(true)
@@ -22,7 +22,7 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
         sign_in user
 
         expect {
-          post :create, id: submission.id, format: :js
+          post :create, id: submission.id, format: :json
         }.to change(Notification, :count).by(1)
         expect(Notification.last.actor).to eq(user)
         expect(Notification.last.recipient).to eq(recipient)
@@ -34,7 +34,7 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
         user = FactoryGirl.create(:user)
         submission = FactoryGirl.create(:submission, approved: false, user_id: 1)
 
-        post :create, id: submission.id, format: :js
+        post :create, id: submission.id, format: :json
         submission.reload
 
         expect(submission.approved).to be(false)
