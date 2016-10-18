@@ -4,7 +4,7 @@ let SubmissionForm = React.createClass({
           content: '',
           title: '',
           preview: '',
-          btnDisabled: false  
+          btnDisabled: false 
       };
   },
 

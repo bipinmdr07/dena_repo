@@ -196,6 +196,17 @@ let SidebarRight = React.createClass({
     }
   },
 
+  adminQuiz(){
+    if (this.props.user_is_admin) {
+      return (
+        <li className={this.state.showAdminQuiz ? "sidebar-active" : "" } onClick={this.toggleAdminQuiz} style={this.sidebarLiWidth()}>
+          <i className="fa fa-plus" aria-hidden="true"></i>
+          {this.adminQuizText()}
+        </li>
+      )
+    }
+  },
+
   handleCheckedOptionIdsChange(id){
     if (this.state.checkedOptionIds.indexOf(id) === -1) {
       let checkedOptionIds = React.addons.update(this.state.checkedOptionIds, {$push: [id]});
@@ -246,10 +257,8 @@ let SidebarRight = React.createClass({
             {this.quizText()}
           </li>
 
-          <li className={this.state.showAdminQuiz ? "sidebar-active" : "" } onClick={this.toggleAdminQuiz} style={this.sidebarLiWidth()}>
-            <i className="fa fa-plus" aria-hidden="true"></i>
-            {this.adminQuizText()}
-          </li>
+          {this.adminQuiz()}
+          
         </ul>
 
         {this.sidebarForm()}

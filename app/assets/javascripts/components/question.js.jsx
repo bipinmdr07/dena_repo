@@ -75,7 +75,7 @@ let Question = React.createClass({
   editForm(){
     return (
       <form className="forum-forms">
-        <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
+        <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />        
         <textarea name="content" defaultValue={this.state.unparsedContent} ref="content" className="form-control" rows="10" />
 
         <br />
@@ -109,6 +109,20 @@ let Question = React.createClass({
     )
   },
 
+  approvalButton(){
+    if (this.props.current_user_is_mentor && !this.state.edit) {
+      if (this.props.resolved) {
+        return (        
+          <button className="btn btn-cta-secondary pull-right" onClick={this.props.toggleResolved}>Mark as Unresolved</button>
+        )
+      } else {
+        return (
+          <button className="btn btn-cta-primary pull-right" onClick={this.props.toggleResolved}>Mark as Resolved</button>          
+        )
+      }
+    }
+  },
+
   render() {
 
 
@@ -124,7 +138,9 @@ let Question = React.createClass({
         </div>
 
         <div className="col-xs-12 col-sm-10">
+          <h1>{this.props.question.title}</h1>
           {this.questionBody()}
+          {this.approvalButton()}
         </div>
       </div>
     )

@@ -73,7 +73,7 @@ let SidebarQuiz = React.createClass({
 
   optionStyles(option){
     if (this.props.showAnswers) {
-      if (option.correct && this.refs["options_" + option.id] && this.refs["option_" + option.id].checked) {
+      if (option.correct && this.refs["option_" + option.id] !== undefined && this.refs["option_" + option.id].checked) {
         return { boxShadow: "inset 0 0 0 3px #5cb85c", }
       } else {
         return { boxShadow: "inset 0 0 0 3px #ec6952", }
@@ -81,10 +81,17 @@ let SidebarQuiz = React.createClass({
     } 
   },
 
+  highlightSyntax(){
+    $(".sidebar-form").find("pre code").each(function(_, block) {
+      hljs.highlightBlock(block);
+    });
+  },
+
   handleNextQuestion(e){
     e.preventDefault();
     this.setState({disabled: false});
     this.props.handleNextQuestion();
+    this.highlightSyntax();
   },
 
   displayErrorMessages(){
@@ -172,7 +179,7 @@ let SidebarQuiz = React.createClass({
                            transitionAppearTimeout={500}
                            transitionEnterTimeout={500} 
                            transitionLeaveTimeout={500}>
-                    <div style={{position: "absolute", top: "10px"}} key={"container_" + this.props.currentPosition}>
+                    <div style={{position: "absolute", top: "10px", right: "20px", left: "20px"}} key={"container_" + this.props.currentPosition}>
                     
                       <div dangerouslySetInnerHTML={{__html: this.props.quizProblems[this.props.currentPosition].question}} key={this.props.currentPosition}/>
 
@@ -216,8 +223,6 @@ let SidebarQuiz = React.createClass({
   },
 
   componentDidMount(){
-    $(".sidebar-form").find("pre code").each(function(_, block) {
-      hljs.highlightBlock(block);
-    });
+    this.highlightSyntax();
   }
 });

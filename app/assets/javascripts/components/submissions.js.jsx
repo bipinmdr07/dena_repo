@@ -1,7 +1,8 @@
 let Submissions = React.createClass({
   getInitialState() {
       return {
-          replies: this.props.replies  
+          replies: this.props.replies,
+          approved: this.props.submission.approved
       };
   },
 
@@ -25,10 +26,12 @@ let Submissions = React.createClass({
         <Submission submission={this.props.submission}
                   content={this.props.content}
                   user_avatar_url={this.props.user_avatar_url} 
-                  user_is_mentor={this.props.submission.user_mentor}
+                  user_is_mentor={this.props.user_is_mentor}
                   user_name={this.props.user_name}
                   display_post_links={this.props.display_post_links}
-                  handleDeleteQuestion={this.handleDeleteQuestion}/>
+                  handleDeleteQuestion={this.handleDeleteQuestion}
+                  approved={this.state.approved}
+                  toggleApproved={this.toggleApproved}/>
 
         <hr />
 
@@ -41,6 +44,18 @@ let Submissions = React.createClass({
                    handleNewReply={this.handleNewReply} />
       </div>
     )
+  },
+
+  toggleApproved(){
+    $.ajax({
+      url: `/submission_approvals/${this.props.submission.id}`,
+      type: 'POST',
+      dataType: 'JSON',
+      context: this,
+      success(){
+        this.setState({approved: !this.state.approved});
+      }
+    })
   },
 
   handleNewReply(reply){

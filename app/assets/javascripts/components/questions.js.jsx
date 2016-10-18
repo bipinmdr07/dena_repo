@@ -1,7 +1,8 @@
 let Questions = React.createClass({
   getInitialState() {
       return {
-          replies: this.props.replies  
+          replies: this.props.replies,
+          resolved: this.props.question.resolved
       };
   },
 
@@ -25,10 +26,13 @@ let Questions = React.createClass({
         <Question question={this.props.question}
                   content={this.props.content}
                   user_avatar_url={this.props.user_avatar_url} 
-                  user_is_mentor={this.props.question.user_mentor}
+                  current_user_is_mentor={this.props.current_user_is_mentor}
+                  user_is_mentor={this.props.user_is_mentor}
                   user_name={this.props.user_name}
                   display_post_links={this.props.display_post_links}
-                  handleDeleteQuestion={this.handleDeleteQuestion}/>
+                  handleDeleteQuestion={this.handleDeleteQuestion}
+                  resolved={this.state.resolved}
+                  toggleResolved={this.toggleResolved}/>
 
         <hr />
 
@@ -41,6 +45,18 @@ let Questions = React.createClass({
                    handleNewReply={this.handleNewReply} />
       </div>
     )
+  },
+
+  toggleResolved(){
+    $.ajax({
+      url: `/question_statuses/${this.props.question.id}`,
+      type: 'PATCH',
+      dataType: 'JSON',
+      context: this,
+      success(){
+        this.setState({resolved: !this.state.resolved});
+      }
+    })
   },
 
   handleNewReply(reply){

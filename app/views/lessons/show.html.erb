@@ -69,7 +69,8 @@
                                         lesson_id: params[:id], 
                                         course_name: controller_name.classify,
                                         lesson_url: request.original_url,
-                                        quizCompleted: @quiz_completed } %>
+                                        quizCompleted: @quiz_completed,
+                                        user_is_admin: current_user.admin } %>
 
 
 </div>

@@ -96,6 +96,20 @@ let Submission = React.createClass({
     }
   },
 
+  approvalButton(){
+    if (this.props.user_is_mentor) {
+      if (this.props.approved) {
+        return (        
+          <button className="btn btn-cta-secondary pull-right" onClick={this.props.toggleApproved}>Unapprove</button>
+        )
+      } else {
+        return (
+          <button className="btn btn-cta-primary pull-right" onClick={this.props.toggleApproved}>Approve</button>          
+        )
+      }
+    }
+  },
+
   edit_post_links(){
     let edit_button = this.props.display_post_links ? <button className="btn btn-sm btn-warning" onClick={this.handleToggle}>Edit</button> : '';
     let delete_button = this.props.display_post_links ? <button className="btn btn-sm btn-danger" onClick={this.handleDelete}>Delete</button> : '';
@@ -124,7 +138,9 @@ let Submission = React.createClass({
         </div>
 
         <div className="col-xs-12 col-sm-10">
+          <h1>{this.props.submission.title}</h1>
           {this.submissionBody()}
+          {this.approvalButton()}
         </div>
       </div>
     )
