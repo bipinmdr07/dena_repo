@@ -4,7 +4,9 @@ let SidebarQuiz = React.createClass({
   getInitialState() {
     return{
       errorMessages: [],
-      disabled: false
+      stats: [],
+      disabled: false,
+      showStats: false
     };
   },
 
@@ -102,6 +104,23 @@ let SidebarQuiz = React.createClass({
 
       return errorMessages;
     }
+  },
+
+  getStats(){
+    $.ajax({
+      dataType: 'JSON',
+      url: '/quiz_category_ratings.json',
+      context: this,
+      success(data) {
+        this.setState({stats: data})
+      }
+    });
+  },
+
+  handleToggleStats(e){
+    e.preventDefault();
+    this.setState({showStats: !this.state.showStats});
+    this.getStats();
   },
 
   formContent(){
@@ -206,6 +225,7 @@ let SidebarQuiz = React.createClass({
               </div>
               <div className="col-xs-12 col-md-4">
                 {actionButton}
+                <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">Stats</button>
               </div>
             </div>
           </div>        
@@ -214,12 +234,24 @@ let SidebarQuiz = React.createClass({
   },
 
   render(){    
-    return (
-      <form className="sidebar-form" style={this.sidebarFormStyles()}>
-        {this.displayErrorMessages()}
-        {this.formContent()}
-      </form>
-    )    
+    let stats = this.state.stats.map((stat) => {
+      return <SidebarStat key={stat.id} stat={stat}/>
+    });
+
+    if (this.state.showStats){
+      return (
+        <form className="sidebar-form" style={this.sidebarFormStyles()}>
+          {stats}
+        </form> 
+      )
+    } else {
+      return (
+        <form className="sidebar-form" style={this.sidebarFormStyles()}>
+          {this.displayErrorMessages()}
+          {this.formContent()}
+        </form>
+      )    
+    }
   },
 
   componentDidMount(){

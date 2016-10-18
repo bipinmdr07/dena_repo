@@ -6,6 +6,8 @@ class QuizCategoryRating < ActiveRecord::Base
   validates :user, :quiz_category, presence: true
   validates :quiz_category, uniqueness: { scope: :user_id }
 
+  delegate :name, to: :quiz_category, prefix: true
+
   def self.create_or_rank!(args)
     current_user = args.fetch(:current_user)
     quiz_submission = args.fetch(:quiz_submission)
