@@ -6,12 +6,19 @@ let SidebarStat = React.createClass({
   },
 
   componentDidMount() {
+    this.increaseWidth();
+  },
+
+  componentDidUpdate(prevProps, prevState) {    
+    this.increaseWidth();
+  },
+
+  increaseWidth(){
     var that = this;
     var increaseWidth = setInterval(function () {
       if(that.state.width > that.props.stat.score) {
         clearInterval(increaseWidth)
       } else {
-        console.log(that.state.width);
         that.setState({width: that.state.width + 1});
       }      
     }, 10);
@@ -20,7 +27,6 @@ let SidebarStat = React.createClass({
   barGraphStyle(){
     let backgroundColor;
     if (0 <= this.props.stat.score && this.props.stat.score <= 50) {
-      console.log(this.props.stat.score);
       backgroundColor = "#ff0000";
     } else if (50 < this.props.stat.score && this.props.stat.score <= 70) {
       backgroundColor = "#ec6952";

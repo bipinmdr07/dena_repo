@@ -1,7 +1,6 @@
 let SidebarStats = React.createClass({
   render(){
-    let sortedStats = _.sortBy(this.props.stats, (stat) => { let scores = stat.score; return -scores; })
-    let stats = sortedStats.map((stat) => {
+    let stats = this.props.stats.map((stat) => {
       return <SidebarStat key={stat.id} stat={stat}/>
     });
 

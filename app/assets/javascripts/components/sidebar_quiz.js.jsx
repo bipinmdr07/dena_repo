@@ -143,7 +143,7 @@ let SidebarQuiz = React.createClass({
           
             <h2 key={"score_" + this.props.averageScore}>
               You scored {Math.round(this.props.averageScore)}%!
-              
+
               <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">
                 <i className="fa fa-bars" aria-hidden="true"></i> Stats
               </button>
@@ -266,16 +266,16 @@ let SidebarQuiz = React.createClass({
     if (this.state.showStats){
       return (
         <ReactCSSTransitionGroup transitionName='quiz' 
-                           transitionAppear={true} 
-                           transitionAppearTimeout={500}
-                           transitionEnterTimeout={500} 
-                           transitionLeaveTimeout={500}>
+                                 transitionAppear={true} 
+                                 transitionAppearTimeout={500}
+                                 transitionEnterTimeout={500} 
+                                 transitionLeaveTimeout={500}>
           <SidebarStats key={this.state.stats.length}
-                       sidebarFormStyles={this.sidebarFormStyles()} 
-                       sortStatsByLowest={this.sortStatsByLowest} 
-                       sortStatsByHighest={this.sortStatsByHighest} 
-                       stats={this.state.stats}
-                       goBack={this.goBack}/>        
+                        sidebarFormStyles={this.sidebarFormStyles()} 
+                        sortStatsByLowest={this.sortStatsByLowest} 
+                        sortStatsByHighest={this.sortStatsByHighest} 
+                        stats={this.state.stats}
+                        goBack={this.goBack}/>        
         </ReactCSSTransitionGroup>
       )
     } else {
