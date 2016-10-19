@@ -222,7 +222,6 @@ let SidebarRight = React.createClass({
   handleQuizSubmission(data){
     totalScore = this.state.totalScore + data.score
     averageScore = totalScore / (this.state.currentPosition + 1);
-    console.log("TS: " + this.state.totalScore + "  Score: " + data.score + " CP: " + this.state.currentPosition);
     this.setState({checkedOptionIds: [], showAnswers: true, averageScore: averageScore, totalScore: totalScore});
   },
 

@@ -6,7 +6,8 @@ let SidebarQuiz = React.createClass({
       errorMessages: [],
       stats: [],
       disabled: false,
-      showStats: false
+      showStats: false,
+      submitted: false
     };
   },
 
@@ -34,6 +35,7 @@ let SidebarQuiz = React.createClass({
       },
       success(data){
         this.props.handleQuizSubmission(data); 
+        this.setState({submitted: true});
         if (this.props.quizProblems.length == (this.props.currentPosition + 1)) {
           this.handleFinishQuiz();
         }        
@@ -73,16 +75,6 @@ let SidebarQuiz = React.createClass({
     return { width: this.props.sidebarFormWidth }
   },
 
-  optionStyles(option){
-    if (this.props.showAnswers) {
-      if (option.correct && this.refs["option_" + option.id] !== undefined && this.refs["option_" + option.id].checked) {
-        return { boxShadow: "inset 0 0 0 3px #5cb85c", }
-      } else {
-        return { boxShadow: "inset 0 0 0 3px #ec6952", }
-      }
-    } 
-  },
-
   highlightSyntax(){
     $(".sidebar-form").find("pre code").each(function(_, block) {
       hljs.highlightBlock(block);
@@ -91,7 +83,7 @@ let SidebarQuiz = React.createClass({
 
   handleNextQuestion(e){
     e.preventDefault();
-    this.setState({disabled: false});
+    this.setState({disabled: false, submitted: false});
     this.props.handleNextQuestion();
     this.highlightSyntax();
   },
@@ -168,17 +160,7 @@ let SidebarQuiz = React.createClass({
     else {
       let options = this.props.quizProblems[this.props.currentPosition].quiz_options.map((option) => {
         return (
-          <div key={option.id} className="checkbox quiz-options" style={this.optionStyles(option)}>
-            <label>
-                  <input type="checkbox" 
-                         name={this.props.quizProblems[this.props.currentPosition].id} 
-                         value={option.id} 
-                         ref={"option_" + option.id}
-                         onChange={this.handleChange}                         
-                         />
-                  {option.content}
-            </label>
-          </div>
+          <QuizOption option={option} submitted={this.state.submitted} showAnswers={this.props.showAnswers} handleChange={this.handleChange} quizProblem={this.props.quizProblems[this.props.currentPosition].id}/>          
         )
       });
 
