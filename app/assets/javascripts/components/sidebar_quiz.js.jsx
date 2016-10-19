@@ -143,6 +143,10 @@ let SidebarQuiz = React.createClass({
           
             <h2 key={"score_" + this.props.averageScore}>
               You scored {Math.round(this.props.averageScore)}%!
+              
+              <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">
+                <i className="fa fa-bars" aria-hidden="true"></i> Stats
+              </button>
             </h2>
 
             <hr />
@@ -155,7 +159,7 @@ let SidebarQuiz = React.createClass({
 
             <button onClick={this.props.handleRetakeQuiz} className="btn btn-cta-primary pull-right">
               <i className="fa fa-repeat" aria-hidden="true"></i> Retake Quiz
-            </button>
+            </button>            
 
           </ReactCSSTransitionGroup>
         </div>
@@ -225,7 +229,15 @@ let SidebarQuiz = React.createClass({
               </div>
               <div className="col-xs-12 col-md-4">
                 {actionButton}
-                <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">Stats</button>
+                
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-xs-12">
+                <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">
+                  <i className="fa fa-bars" aria-hidden="true"></i> Stats
+                </button>
               </div>
             </div>
           </div>        
@@ -245,31 +257,26 @@ let SidebarQuiz = React.createClass({
     this.setState({stats: stats});
   },
 
-  render(){    
-    let stats = this.state.stats.map((stat) => {
-      return <SidebarStat key={stat.id} stat={stat}/>
-    });
+  goBack(e){
+    e.preventDefault();
+    this.setState({showStats: false})
+  },
 
+  render(){
     if (this.state.showStats){
       return (
-        <form className="sidebar-form" style={this.sidebarFormStyles()}>
-          <h3>Your Stats</h3>
-          <div className="dropdown sort-menu pull-right">
-            <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <i className="fa fa-bars" style={{"color": "#333"}} aria-hidden="true"></i>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li onClick={this.sortStatsByHighest}>
-                Highest Scores                  
-              </li>
-              <li onClick={this.sortStatsByLowest}>
-                Lowest Scores                
-              </li>
-            </ul>
-          </div>
-          
-          {stats}
-        </form> 
+        <ReactCSSTransitionGroup transitionName='quiz' 
+                           transitionAppear={true} 
+                           transitionAppearTimeout={500}
+                           transitionEnterTimeout={500} 
+                           transitionLeaveTimeout={500}>
+          <SidebarStats key={this.state.stats.length}
+                       sidebarFormStyles={this.sidebarFormStyles()} 
+                       sortStatsByLowest={this.sortStatsByLowest} 
+                       sortStatsByHighest={this.sortStatsByHighest} 
+                       stats={this.state.stats}
+                       goBack={this.goBack}/>        
+        </ReactCSSTransitionGroup>
       )
     } else {
       return (

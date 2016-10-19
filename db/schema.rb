@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017050254) do
+ActiveRecord::Schema.define(version: 20161019085241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,7 +244,7 @@ ActiveRecord::Schema.define(version: 20161017050254) do
     t.index ["slug"], name: "index_questions_on_slug", unique: true, using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
   end
-  
+
   create_table "quiz_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -468,12 +468,12 @@ ActiveRecord::Schema.define(version: 20161017050254) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
-    t.boolean  "collaboration_access",      default: false, null: false
-    t.boolean  "skill_academy_access",      default: false, null: false
     t.string   "provider"
     t.string   "uid"
     t.text     "application_reasons"
     t.integer  "package"
+    t.boolean  "collaboration_access",      default: false, null: false
+    t.boolean  "skill_academy_access",      default: false, null: false
     t.index ["admitted"], name: "index_users_on_admitted", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -495,11 +495,11 @@ ActiveRecord::Schema.define(version: 20161017050254) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
-  add_foreign_key "quiz_completions", "users"
-  add_foreign_key "quiz_options", "quiz_problems"
-  add_foreign_key "quiz_problem_cards", "quiz_problems"
-  add_foreign_key "quiz_problem_cards", "users"
-  add_foreign_key "quiz_submissions", "quiz_category_ratings"
-  add_foreign_key "quiz_submissions", "quiz_problems"
-  add_foreign_key "quiz_submissions", "users"
+  add_foreign_key "quiz_completions", "users", on_delete: :cascade
+  add_foreign_key "quiz_options", "quiz_problems", on_delete: :cascade
+  add_foreign_key "quiz_problem_cards", "quiz_problems", on_delete: :cascade
+  add_foreign_key "quiz_problem_cards", "users", on_delete: :cascade
+  add_foreign_key "quiz_submissions", "quiz_category_ratings", on_delete: :cascade
+  add_foreign_key "quiz_submissions", "quiz_problems", on_delete: :cascade
+  add_foreign_key "quiz_submissions", "users", on_delete: :cascade
 end

@@ -33,4 +33,3 @@ class QuizProblem < ActiveRecord::Base
     raise ::Exceptions::MustHaveCorrectAnswerException.new "Must have at least one correct answer"
   end
 end
-
