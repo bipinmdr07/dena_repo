@@ -2,8 +2,8 @@ class QuizCompletionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    return if current_user.quiz_completions.find_by(quiz_completion_params)
-
+    check_existing_quiz_completion
+    
     @quiz_completion = current_user.quiz_completions.new(quiz_completion_params)
 
     build_variables_for_lesson_show_page
@@ -11,8 +11,7 @@ class QuizCompletionsController < ApplicationController
 
     if @quiz_completion.save
       respond_to do |format|
-        format.js {}
-        format.json {}
+        format.json { render json: 200 }
       end
     else
       respond_to do |format|
@@ -22,6 +21,14 @@ class QuizCompletionsController < ApplicationController
   end
 
   private
+
+  def check_existing_quiz_completion
+    if current_user.quiz_completions.find_by(quiz_completion_params)
+      respond_to do |format|
+        format.json { render json: 200 && return }
+      end      
+    end
+  end
 
   def build_variables_for_lesson_show_page
     @course_name = quiz_completion_params[:course_name].constantize

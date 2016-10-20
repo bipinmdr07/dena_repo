@@ -99,7 +99,7 @@ RSpec.describe CardsController, type: :controller do
         patch :update, id: card.id, card: FactoryGirl.attributes_for(:card, user_id: user.id, question: "Has this changed?")
         card.reload
 
-        expect(card.question).to eq("Has this changed?")
+        expect(card.question).to eq("<p>Has this changed?</p>\n")
       end
     end
 
@@ -112,7 +112,7 @@ RSpec.describe CardsController, type: :controller do
         patch :update, id: card.id, card: FactoryGirl.attributes_for(:card, user_id: user.id, question: "Has this changed?")
         card.reload
 
-        expect(card.question).to_not eq("Has this changed?")
+        expect(card.question).to_not eq("<p>Has this changed?</p>\n")
       end
     end
   end

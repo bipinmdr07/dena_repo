@@ -123,106 +123,24 @@ let SidebarQuiz = React.createClass({
     } 
     else if (this.props.quizProblems.length == this.props.currentPosition) {
       return (
-        <div>
-          <ReactCSSTransitionGroup transitionName='score' 
-                                   transitionAppear={true} 
-                                   transitionAppearTimeout={500}
-                                   transitionEnterTimeout={500} 
-                                   transitionLeaveTimeout={500}>
-            <h3 key={"average_score_" + this.props.averageScore}>
-              Score
-            </h3>
-          
-            <h2 key={"score_" + this.props.averageScore}>
-              You scored {Math.round(this.props.averageScore)}%!
-
-              <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">
-                <i className="fa fa-bars" aria-hidden="true"></i> Stats
-              </button>
-            </h2>
-
-            <hr />
-
-            <p key={"message_" + this.props.averageScore}>
-              {this.props.averageScore >= this.passingGrade ? "Congratulations! You've passed the quizzes." : `You must score at least ${this.passingGrade} to pass. Take the quiz again to mark this lesson as completed!`}
-            </p>
-
-            <br />
-
-            <button onClick={this.props.handleRetakeQuiz} className="btn btn-cta-primary pull-right">
-              <i className="fa fa-repeat" aria-hidden="true"></i> Retake Quiz
-            </button>            
-
-          </ReactCSSTransitionGroup>
-        </div>
+        <FinishQuiz averageScore={this.props.averageScore} 
+                    handleToggleStats={this.handleToggleStats} 
+                    handleRetakeQuiz={this.props.handleRetakeQuiz} />
       )
     }
     else {
-      let options = this.props.quizProblems[this.props.currentPosition].quiz_options.map((option) => {
-        return (
-          <QuizOption option={option} submitted={this.state.submitted} showAnswers={this.props.showAnswers} handleChange={this.handleChange} quizProblem={this.props.quizProblems[this.props.currentPosition].id}/>          
-        )
-      });
-
-      let actionButton;
-      if (this.props.showAnswers) {
-        actionButton = <button className="btn btn-cta-primary pull-right" onClick={this.handleNextQuestion}>Next</button>
-      }
-      else {
-        actionButton = <button className="btn btn-cta-primary submit-btn pull-right" onClick={this.handleSubmit} disabled={(this.state.disabled)? "disabled" : ""}>Submit Answer</button>            
-      }     
-
-      let problemsLeft = this.props.quizProblems.length - this.props.currentPosition; 
-
       return (
-          <div>
-            <div className="row">
-              <div className="col-xs-12">
-                <div className="quiz-container">
-                  <ReactCSSTransitionGroup transitionName='quiz' 
-                           transitionAppear={true} 
-                           transitionAppearTimeout={500}
-                           transitionEnterTimeout={500} 
-                           transitionLeaveTimeout={500}>
-                    <div style={{position: "absolute", top: "10px", right: "20px", left: "20px"}} key={"container_" + this.props.currentPosition}>
-                    
-                      <div dangerouslySetInnerHTML={{__html: this.props.quizProblems[this.props.currentPosition].question}} key={this.props.currentPosition}/>
-
-                      {options}
-                    </div>
-                  </ReactCSSTransitionGroup>
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-xs-12 col-md-8">
-
-                <div className="progress">
-                  <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-                  aria-valuemin="0" aria-valuemax="100" style={{width: this.props.averageScore + "%"}}>
-                    {Math.round(this.props.averageScore)}%
-                  </div>
-                </div>
-                
-                <small className="pull-right">
-                  {problemsLeft + " " + (problemsLeft !== 1 ? "problems" : "problem")}  left!
-                </small>
-              </div>
-              <div className="col-xs-12 col-md-4">
-                {actionButton}
-                
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-xs-12">
-                <button onClick={this.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">
-                  <i className="fa fa-bars" aria-hidden="true"></i> Stats
-                </button>
-              </div>
-            </div>
-          </div>        
+        <QuizProblem quizProblems={this.props.quizProblems}
+                     quizProblem={this.props.quizProblems[this.props.currentPosition]} 
+                     submitted={this.state.submitted}
+                     showAnswers={this.props.showAnswers}
+                     handleChange={this.handleChange}
+                     handleNextQuestion={this.handleNextQuestion}
+                     handleSubmit={this.handleSubmit}
+                     disabled={this.state.disabled}
+                     currentPosition={this.props.currentPosition}
+                     averageScore={this.props.averageScore}
+                     handleToggleStats={this.handleToggleStats}/>
       )
     }
   },

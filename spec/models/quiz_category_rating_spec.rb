@@ -37,8 +37,8 @@ RSpec.describe QuizCategoryRating, type: :model do
 
         QuizCategoryRating.create_or_rank!(current_user: user, 
                                            quiz_submission: quiz_submission, 
-                                           current_score: 100)
-        expect(quiz_category_rating.reload.score).to eq(60)
+                                           current_score: 50)
+        expect(quiz_category_rating.reload.score).to eq(70)
       end
     end
   end

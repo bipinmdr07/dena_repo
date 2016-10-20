@@ -9,7 +9,7 @@ RSpec.describe QuizCompletionsController, type: :controller do
         sign_in user
 
         expect {
-          post :create, quiz_completion: { lesson_id: 1, course_name: "IntroLesson" }
+          post :create, quiz_completion: { lesson_id: 1, course_name: "IntroLesson" }, format: :json
         }.to change(QuizCompletion, :count).by(1)
       end
     end
@@ -18,10 +18,11 @@ RSpec.describe QuizCompletionsController, type: :controller do
       it "does not create new quiz completion" do
         user = FactoryGirl.create(:user)
         quiz_completion = FactoryGirl.create(:quiz_completion, lesson_id: 1, course_name: "IntroLesson", user_id: user.id)
+        
         sign_in user
 
         expect {
-          post :create, quiz_completion: { lesson_id: 1, course_name: "IntroLesson" }
+          post :create, quiz_completion: { lesson_id: 1, course_name: "IntroLesson" }, format: :json
         }.to change(QuizCompletion, :count).by(0)
       end
     end

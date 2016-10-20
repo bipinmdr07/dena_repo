@@ -21,7 +21,7 @@ let SidebarStat = React.createClass({
       } else {
         that.setState({width: that.state.width + 1});
       }      
-    }, 10);
+    }, 50);
   },
 
   barGraphStyle(){
