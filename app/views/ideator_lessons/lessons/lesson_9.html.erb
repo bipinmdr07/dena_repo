@@ -107,7 +107,7 @@ rails generate model Idea
 
 <ul>
   <li>A <code>ideas</code> table</li>
-  <li><code>content</code> column inside of <code>ideas</code> table (<code>text</code> type)</li>
+  <li><code>description</code> column inside of <code>ideas</code> table (<code>text</code> type)</li>
   <li><code>author</code> column inside of <code>ideas</code> table (<code>string</code> type)</li>
 </ul>
 
@@ -115,7 +115,7 @@ rails generate model Idea
 class CreateIdeas &lt; ActiveRecord::Migration
   def change
     create_table :ideas do |t|
-      t.text :content
+      t.text :description
       t.string :author
       t.timestamps null: false
     end
@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 20160113000616) do
   enable_extension "plpgsql"
 
   create_table "ideas", force: :cascade do |t|
-    t.text     "content"
+    t.text     "description"
     t.string   "author"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
