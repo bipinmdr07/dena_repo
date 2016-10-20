@@ -8,6 +8,8 @@ class QuizOption < ActiveRecord::Base
 
   def self.randomize
     random = order('random()')
+    return random if random.length <= 4
+
     correct = random.find{|option| option == option.correct }
     return random.select{|option| option != correct }[0..3]
   end
