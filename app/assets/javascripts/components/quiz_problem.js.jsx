@@ -23,7 +23,8 @@ let QuizProblem = React.createClass({
                     submitted={this.props.submitted} 
                     showAnswers={this.props.showAnswers} 
                     handleChange={this.props.handleChange} 
-                    quizProblem={this.props.quizProblem.id}/>          
+                    quizProblem={this.props.quizProblem.id}
+                    checkedOptionIds={this.props.checkedOptionIds}/>          
       )
     });
 
@@ -51,11 +52,9 @@ let QuizProblem = React.createClass({
                   <div dangerouslySetInnerHTML={{__html: this.props.quizProblem.question}} key={this.props.currentPosition}/>
 
                   {options}
-                </div>
 
-
-
-                {this.lessonLink()}
+                  {this.lessonLink()}
+                </div>                
 
                 <p style={{"fontWeight": 600, "color": "white"}}>
                   Percentage Correct <small style={{"color": "#666"}}>{`Problem ${this.props.currentPosition + 1} out of ${this.props.quizProblems.length}`}</small>
@@ -74,7 +73,6 @@ let QuizProblem = React.createClass({
                   <i className="fa fa-bar-chart" aria-hidden="true"></i>
                 </button>
               </div>
-
               
             </ReactCSSTransitionGroup>
           </div>

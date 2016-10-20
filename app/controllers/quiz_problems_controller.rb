@@ -8,9 +8,9 @@ class QuizProblemsController < ApplicationController
                                          .today
                                          .map{|card| QuizProblemCardDecorator.new(card)}
 
-    current_quiz_problems = QuizProblem.where(lesson_id: params[:lesson_id], course_name: params[:course_name])
-                                       .includes(:quiz_options)
+    current_quiz_problems = QuizProblem.where(lesson_id: params[:lesson_id], course_name: params[:course_name])                                       
                                        .randomize
+                                       .includes(:quiz_options)
 
     @quiz_problems = due_quiz_problem_cards + current_quiz_problems
   end

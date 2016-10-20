@@ -5,9 +5,13 @@ let QuizOption = React.createClass({
     };
   },
 
+  checked(){      
+    return _.contains(this.props.checkedOptionIds, String(this.props.option.id)) || this.state.checked;
+  },
+
   optionStyles(option){
     if (this.props.showAnswers) {
-      if (option.correct || (this.state.checked && this.state.correct) ) {
+      if (option.correct || (this.checked() && this.state.correct) ) {
         return { boxShadow: "inset 0 0 0 3px #5cb85c", }
       } else {
         return { boxShadow: "inset 0 0 0 3px #ec6952", }
@@ -16,13 +20,9 @@ let QuizOption = React.createClass({
   },
 
   handleChange(e){
-    if (this.props.submitted) {
-      return;
-    } else {
+    if (!this.props.submitted) {
       var id = e.target.value;
-
       this.setState({checked: !this.state.checked});
-      
       this.props.handleChange(id);
     }
   },
@@ -35,8 +35,8 @@ let QuizOption = React.createClass({
                      name={this.props.quizProblem} 
                      value={this.props.option.id} 
                      ref={"option_" + this.props.option.id}
-                     onChange={this.handleChange}    
-                     checked={this.state.checked}                     
+                     onClick={this.handleChange}    
+                     checked={this.checked()}                     
                      />
               {this.props.option.content}
         </label>

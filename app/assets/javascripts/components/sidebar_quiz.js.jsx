@@ -139,7 +139,8 @@ let SidebarQuiz = React.createClass({
                      disabled={this.state.disabled}
                      currentPosition={this.props.currentPosition}
                      averageScore={this.props.averageScore}
-                     handleToggleStats={this.handleToggleStats}/>
+                     handleToggleStats={this.handleToggleStats}
+                     checkedOptionIds={this.props.checkedOptionIds}/>
       )
     }
   },
