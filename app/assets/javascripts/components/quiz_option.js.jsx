@@ -7,7 +7,7 @@ let QuizOption = React.createClass({
 
   optionStyles(option){
     if (this.props.showAnswers) {
-      if (option.correct && this.state.checked) {
+      if (option.correct || (this.state.checked && this.state.correct) ) {
         return { boxShadow: "inset 0 0 0 3px #5cb85c", }
       } else {
         return { boxShadow: "inset 0 0 0 3px #ec6952", }
@@ -15,12 +15,15 @@ let QuizOption = React.createClass({
     } 
   },
 
-  handleChange(){
+  handleChange(e){
     if (this.props.submitted) {
       return;
     } else {
+      var id = e.target.value;
+
       this.setState({checked: !this.state.checked});
-      this.props.handleChange();
+      
+      this.props.handleChange(id);
     }
   },
 

@@ -13,8 +13,7 @@ let SidebarQuiz = React.createClass({
 
   passingGrade: 85,
 
-  handleChange(e){
-    let id = e.target.value;
+  handleChange(id){
     this.props.handleCheckedOptionIdsChange(id);
   },
 

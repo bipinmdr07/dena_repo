@@ -2,7 +2,12 @@ let QuizProblem = React.createClass({
   render(){
     let options = this.props.quizProblem.quiz_options.map((option) => {
       return (
-        <QuizOption key={option.id} option={option} submitted={this.props.submitted} showAnswers={this.props.showAnswers} handleChange={this.props.handleChange} quizProblem={this.props.quizProblem.id}/>          
+        <QuizOption key={option.id} 
+                    option={option} 
+                    submitted={this.props.submitted} 
+                    showAnswers={this.props.showAnswers} 
+                    handleChange={this.props.handleChange} 
+                    quizProblem={this.props.quizProblem.id}/>          
       )
     });
 

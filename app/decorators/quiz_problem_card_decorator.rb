@@ -7,6 +7,10 @@ class QuizProblemCardDecorator
     @quiz_problem_card.quiz_problem.id
   end
 
+  def quiz_problem
+    @quiz_problem_card.quiz_problem
+  end
+
   def question
     @quiz_problem_card.quiz_problem.question
   end

@@ -48,6 +48,20 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
         end
       end
 
+      context "there are less than 4 options" do
+        it "does not create a new quiz problem" do
+          admin = FactoryGirl.create(:admin_user)
+
+          sign_in admin
+
+          expect {
+            post :create, quiz_problem: FactoryGirl.attributes_for(:quiz_problem).merge(mock_2_options), format: :json  
+          }.to change(QuizProblem, :count).by(0)   
+          expect(response.status).to eq(422)
+          expect(JSON.parse(response.body)['errors'].length).to_not eq(0)
+        end
+      end
+
       context "there are no options with valid attributes" do
         it "does not create a new quiz problem" do
           admin = FactoryGirl.create(:admin_user)
@@ -88,6 +102,12 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
       end
     end
   end
+end
+
+def mock_2_options
+  {options: [{content: 'content', correct: "incorrect"},
+             {content: 'content', correct: "correct"}             
+            ].to_json}
 end
 
 def mock_options

@@ -7,7 +7,9 @@ class Admin::QuizProblemsController < ApplicationController
   rescue_from ::Exceptions::MustHaveCorrectAnswerException, with: :quiz_problem_exception_handler
   rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
 
-  def create    
+  def create
+    return unless atleast_4_options_exist?
+
     @quiz_problem = QuizProblem.new(quiz_problem_params.except(:options))
 
     parse_problem
@@ -26,6 +28,18 @@ class Admin::QuizProblemsController < ApplicationController
   end
 
   private
+
+  def atleast_4_options_exist?
+    options = quiz_problem_params[:options]
+
+    return true unless options.nil? || JSON.parse(options).length < 4
+    
+    respond_to do |format|
+      format.json { render json: {errors: ["There must be at least 4 options for each problem."]}, status: :unprocessable_entity } 
+    end    
+
+    false
+  end
 
   def parse_problem
     @quiz_problem.question = MarkdownParser.new(@quiz_problem.question).parsed

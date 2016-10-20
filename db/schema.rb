@@ -258,9 +258,7 @@ ActiveRecord::Schema.define(version: 20161019085241) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "quiz_submissions_count", default: 0
-    t.integer  "quiz_submission_id"
     t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
-    t.index ["quiz_submission_id"], name: "index_quiz_category_ratings_on_quiz_submission_id", using: :btree
     t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
     t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
     t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
