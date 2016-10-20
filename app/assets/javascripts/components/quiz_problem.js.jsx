@@ -1,4 +1,20 @@
 let QuizProblem = React.createClass({
+  lessonLink(){
+    let lesson_id = this.props.quizProblem.lesson_id;
+    let course_name = this.props.quizProblem.course_name.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+
+    if (this.props.showAnswers) {
+      return (
+        <a href={`/${course_name}s/${lesson_id}`} 
+           target="_blank" 
+           className="btn btn-sm btn-success"
+           style={{"position": "absolute", "left": "20px", "bottom": "10px"}}>
+          <i className="fa fa-graduation-cap" aria-hidden="true"></i> Review Lesson
+        </a>
+      )
+    }    
+  },
+
   render(){
     let options = this.props.quizProblem.quiz_options.map((option) => {
       return (
@@ -25,48 +41,42 @@ let QuizProblem = React.createClass({
       <div>
         <div className="row">
           <div className="col-xs-12">
-            <div className="quiz-container">
-              <ReactCSSTransitionGroup transitionName='quiz' 
-                       transitionAppear={true} 
-                       transitionAppearTimeout={500}
-                       transitionEnterTimeout={500} 
-                       transitionLeaveTimeout={500}>
-                <div style={{position: "absolute", top: "10px", right: "20px", left: "20px"}} key={"container_" + this.props.currentPosition}>
-                
+            <ReactCSSTransitionGroup transitionName='quiz' 
+                     transitionAppear={true} 
+                     transitionAppearTimeout={500}
+                     transitionEnterTimeout={500} 
+                     transitionLeaveTimeout={500}>
+              <div className="quiz-container" key={"container_" + this.props.currentPosition}>
+                <div className="quiz-container-inner">
                   <div dangerouslySetInnerHTML={{__html: this.props.quizProblem.question}} key={this.props.currentPosition}/>
 
                   {options}
                 </div>
-              </ReactCSSTransitionGroup>
-            </div>
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col-xs-12 col-md-8">
 
-            <div className="progress">
-              <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
-              aria-valuemin="0" aria-valuemax="100" style={{width: this.props.averageScore + "%"}}>
-                {Math.round(this.props.averageScore)}%
+
+                {this.lessonLink()}
+
+                <p style={{"fontWeight": 600, "color": "white"}}>
+                  Percentage Correct <small style={{"color": "#666"}}>{`Problem ${this.props.currentPosition + 1} out of ${this.props.quizProblems.length}`}</small>
+                </p>
+
+                <div className="progress">
+                  <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50"
+                  aria-valuemin="0" aria-valuemax="100" style={{width: this.props.averageScore + "%"}}>
+                    {Math.round(this.props.averageScore)}%
+                  </div>
+                </div>
+
+                {actionButton}
+
+                <button onClick={this.props.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-left">
+                  <i className="fa fa-bar-chart" aria-hidden="true"></i>
+                </button>
               </div>
-            </div>
-            
-            <small className="pull-right">
-              {problemsLeft + " " + (problemsLeft !== 1 ? "problems" : "problem")}  left!
-            </small>
-          </div>
-          <div className="col-xs-12 col-md-4">
-            {actionButton}
-            
-          </div>
-        </div>
 
-        <div className="row">
-          <div className="col-xs-12">
-            <button onClick={this.props.handleToggleStats} className="btn btn-sm btn-cta-secondary pull-right">
-              <i className="fa fa-bars" aria-hidden="true"></i> Stats
-            </button>
+              
+            </ReactCSSTransitionGroup>
           </div>
         </div>
       </div>        

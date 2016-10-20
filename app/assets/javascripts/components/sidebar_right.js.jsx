@@ -57,17 +57,30 @@ let SidebarRight = React.createClass({
     return { width: this.state.initialDisplayWidth };
   },
 
-  handleResize(){    
-    this.setState({
-      containerWidth: this.halfWindowWidth(),
-      containerRight: this.positionRight(),
-      initialDisplayWidth: this.initialDisplayWidth(),
-      sidebarFormWidth: this.sidebarFormWidth()
-    })
+  sidebarDisplayed(){
+    return (this.state.showFlashcard || this.state.showQuestion || this.state.showQuiz || this.state.showAdminQuiz || this.state.showNav);
+  },
+
+  handleResize(){ 
+    if (this.sidebarDisplayed()){
+      this.setState({
+        containerWidth: this.halfWindowWidth(),
+        initialDisplayWidth: this.initialDisplayWidth(),
+        sidebarFormWidth: this.sidebarFormWidth()
+      });
+      $('.lesson_content').css('margin-right', this.sidebarFormWidth() + "px"); 
+    } else {
+      this.setState({
+        containerWidth: this.halfWindowWidth(),
+        containerRight: this.positionRight(),
+        initialDisplayWidth: this.initialDisplayWidth(),
+        sidebarFormWidth: this.sidebarFormWidth()
+      });
+    }
   },
 
   slide(){
-    if (this.state.showFlashcard || this.state.showQuestion || this.state.showQuiz || this.state.showAdminQuiz || this.state.showNav) {
+    if (this.sidebarDisplayed()) {
       $('.lesson_content').css('margin-right', this.sidebarFormWidth() + "px"); 
       $('.sidebar_container_right').css('right', '0px');
     } else {
