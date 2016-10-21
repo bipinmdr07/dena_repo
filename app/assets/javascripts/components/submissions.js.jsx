@@ -27,6 +27,7 @@ let Submissions = React.createClass({
                   content={this.props.content}
                   user_avatar_url={this.props.user_avatar_url} 
                   user_is_mentor={this.props.user_is_mentor}
+                  current_user_is_mentor={this.props.current_user_is_mentor}
                   user_name={this.props.user_name}
                   display_post_links={this.props.display_post_links}
                   handleDeleteQuestion={this.handleDeleteQuestion}
