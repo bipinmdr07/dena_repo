@@ -1,0 +1,151 @@
+<p> 
+  Now that you understand how Ruby on Rails works at a basic level, it's time for you to apply your new knowledge and skills!
+</p>
+
+<p>
+  Here's how you <em>probably</em> feel like right now:
+</p>
+
+<blockquote>
+  <p>
+    I understand mostly what's going on, but there's no way I could do this on my own...
+  </p>
+
+  <small><%= current_user.name %></small>
+</blockquote>
+
+<p>
+  And indeed, this is how you <em>should</em> feel. This is <strong>perfectly normal</strong> - it takes time and lots of practice to get to a point where you a fluent in the language and framework.
+</p>
+
+<p>
+  <strong>Following tutorials isn't enough</strong> - you have to <em>build</em> things on your own to truly internalize your new knowledge. 
+</p>
+
+<p>
+  We are going to give you a challenge - <strong>build an application all on your own.</strong>
+</p>
+
+<p>
+  What you're going to be building is a simple finance tracking application. The app should function like this <a href="https://simple-accounting-techrise.herokuapp.com/" target="_blank">sample application</a>.
+</p>  
+
+<p>
+  We are going to use <strong><em>user stories</em></strong> to communicate the specifications.
+</p>
+
+<div class="well">
+  <h3>User Stories</h3>
+
+  <p>
+    Many modern software development teams use <em>user stories</em> to communicate what features need to be built in the application.
+  </p>
+
+  <p>
+    A user story is a tool used to capture a description of a feature from an end-user perspective. User stories describe the type of user, what they want, and why. A user story helps to create a simplified description of a requirement.
+  </p>
+
+  <p>
+    User stories usually follow a format like this:
+  </p>
+
+  <blockquote>
+    <p>As a *type of user*, I want to be able to *some goal* so that *some reason*.</p>
+  </blockquote>
+
+  <p>
+    By writing specifications in this way, not only is it more clear why we are building the feature, it also helps spark up conversations within the team about how the feature should be built.
+  </p>
+
+  <p>
+    To get you used to user stories, we will use user stories to set some specifications for this application that you are going to build.
+  </p>
+
+</div>
+
+<p>
+  Here are the user stories you need to build:
+</p>
+
+
+<%= render layout: 'shared/story', locals: {story_title: "As a user, I want to have a page where I can fill out a form to post a record of my finances"} do %>
+  <ul>
+    <li>Each record should have a <code>title</code>, <code>date</code>, and an <code>amount</code>.</li>
+  </ul> 
+<% end %>
+
+<%= render layout: 'shared/story', locals: {story_title: "As a user, I want to be able to edit and update my records"} do %>
+  <ul>
+    <li>After a record is updated, let's display a flash message saying "Your record has been updated!"</li>
+  </ul> 
+<% end %>
+
+<%= render layout: 'shared/story', locals: {story_title: "As a user, I want to be able to delete records"} do %>
+  <ul>
+    <li>After a record is deleted, let's display a flash message saying "A record has been deleted!"</li>
+  </ul> 
+<% end %>
+
+<%= render layout: 'shared/story', locals: {story_title: "As a user, I want to have a page where I can view all records as well as balance, debt, and total sum of the amounts"} do %>
+  <ul> 
+    <li>You can use a <code>where</code> clause to find the balance and debt</li>
+    <li>Google for how you can get the total sum of an attribute in a collection of ActiveRecord objects</li>
+  </ul> 
+<% end %>
+
+<div class="well">
+  <h3>Summary</h3>
+  <ul>
+    <li><strong>As a user, I want to have a page where I can fill out a form to post a record of my finances</strong></li>
+    <li><strong>As a user, I want to be able to edit and update my records</strong></li>
+    <li><strong>As a user, I want to be able to delete records</strong></li>
+    <li><strong>As a user, I want to have a page where I can view all records as well as balance, debt, and total sum of the amounts</strong></li>  
+  </ul>
+</div>
+
+<p>
+  Although it's completely up to you how you implement the code, <strong>we expect you to refer back to the Ideator and MVC lessons, ask questions, and struggle with this project.</strong> It is not meant to be something that you will be able to do quickly, but at the same time it is essential for you to be able to create a simple application like this.
+</p>  
+
+<p>
+  A capable developer would be able to create this application in a matter of 20-30 minutes - eventually, that's the speed you should be aiming for in the future.
+</p>
+
+<p>
+  Again, <strong>don't hesitate to ask questions to the TECHRISE Mentors.</strong> Here's how you can get good answers from your mentors:
+</p>
+
+<ol>
+  <li><Strong>Tell your mentor what you are trying to achieve</strong></li>
+  <li><Strong>Tell your mentor what you have tried</strong></li>
+  <li><Strong>Tell your mentor the specific error message or problem that you are facing</strong></li>
+</ol>
+
+<p>
+  Good luck with this challenge <%= current_user.first_name %>! <strong>Submit your a link to your Github repository and a link to the application deployed to Heroku down below.</strong>
+</p>
+
+<% @submission_form = true %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

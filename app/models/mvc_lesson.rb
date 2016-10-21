@@ -2,7 +2,7 @@ class MvcLesson < Lesson
 
   COURSE_TITLE = "Understand MVC"
 
-  DURATION = 5
+  DURATION = 10
 
   PERIOD = "3 ~ 4"
 
@@ -10,7 +10,8 @@ class MvcLesson < Lesson
     Chapter.new("Introduction to MVC"),
     Chapter.new("HTTP Methods"),
     Chapter.new("Model Methods"),
-    Chapter.new("Migrations")
+    Chapter.new("Migrations"),
+    Chapter.new("Applying what you have learned")
   ]
 
   LESSONS = [
@@ -22,7 +23,8 @@ class MvcLesson < Lesson
     Lesson.new(4, "Rails for Zombies", CHAPTERS[2]),
 
     Lesson.new(5, "What is schema.rb?", CHAPTERS[3]),
-    Lesson.new(6, "Adding and Updating Database Columns", CHAPTERS[3])
+    Lesson.new(6, "Adding and Updating Database Columns", CHAPTERS[3]),
+    Lesson.new(7, "Your turn!", CHAPTERS[4])
   ]
 
 end
