@@ -97,7 +97,7 @@ let Submission = React.createClass({
   },
 
   approvalButton(){
-    if (this.props.current_user_is_mentor) {
+    if (this.props.current_user_is_mentor && !this.state.edit) {
       if (this.props.approved) {
         return (        
           <button className="btn btn-cta-secondary pull-right" onClick={this.props.toggleApproved}>Unapprove</button>
