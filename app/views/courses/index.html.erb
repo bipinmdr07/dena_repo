@@ -79,7 +79,7 @@
 
 <div class = "row">
 
-  
+  <%= render partial: 'course', locals: {course: 'Microposts', course_name: '', available: true, course_link: microposts_path, course_access: 'microposts', controller_name: 'MicropostsLesson'} %>  
 
   <%= render partial: 'course', locals: {course: 'Ruby Core Training', course_name: 'Strengthen your Ruby skills by going through various coding challenges. Sharpen your thinking skills and become a more proficient web developer.', available: true, course_link: ruby_core_path, course_access: 'ruby_core', controller_name: 'RubyCoreLesson'} %>
 

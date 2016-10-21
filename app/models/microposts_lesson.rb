@@ -1,6 +1,6 @@
 class MicropostsLesson < Lesson
   COURSE_TITLE = "Microposts"
-  DURATION = 10
+  DURATION = 5
 
   PERIOD = "3"
 
