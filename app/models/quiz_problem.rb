@@ -25,7 +25,7 @@ class QuizProblem < ActiveRecord::Base
       next if option["content"].blank? || option["correct"].blank?    
       self.quiz_options.create!(option)
 
-      has_correct_answer = true if option["correct"]
+      has_correct_answer = true if option["correct"] == true
     end
 
     return true if has_correct_answer
