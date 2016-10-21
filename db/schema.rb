@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010105022) do
+ActiveRecord::Schema.define(version: 20161021053706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,11 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.index ["user_id"], name: "index_mentor_sessions_on_user_id", using: :btree
   end
 
+  create_table "microposts_lessons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
     t.integer  "actor_id"
@@ -243,6 +248,83 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.index ["lesson_id"], name: "index_questions_on_lesson_id", using: :btree
     t.index ["slug"], name: "index_questions_on_slug", unique: true, using: :btree
     t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
+  end
+
+  create_table "quiz_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quiz_category_ratings", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_category_id"
+    t.float    "score",                  default: 0.0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "quiz_submissions_count", default: 0
+    t.integer  "quiz_submission_id"
+    t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
+    t.index ["quiz_submission_id"], name: "index_quiz_category_ratings_on_quiz_submission_id", using: :btree
+    t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
+    t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
+    t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
+  end
+
+  create_table "quiz_completions", force: :cascade do |t|
+    t.integer  "lesson_id"
+    t.string   "course_name"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_quiz_completions_on_user_id", using: :btree
+  end
+
+  create_table "quiz_options", force: :cascade do |t|
+    t.integer  "quiz_problem_id"
+    t.string   "content"
+    t.boolean  "correct",         null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["quiz_problem_id"], name: "index_quiz_options_on_quiz_problem_id", using: :btree
+  end
+
+  create_table "quiz_problem_cards", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_problem_id"
+    t.float    "prev_ef",             default: 2.5
+    t.float    "prev_interval",       default: 0.0
+    t.float    "quality_response"
+    t.float    "calculated_interval"
+    t.float    "calculated_ef"
+    t.datetime "repetition_date"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["quiz_problem_id"], name: "index_quiz_problem_cards_on_quiz_problem_id", using: :btree
+    t.index ["user_id"], name: "index_quiz_problem_cards_on_user_id", using: :btree
+  end
+
+  create_table "quiz_problems", force: :cascade do |t|
+    t.integer  "lesson_id"
+    t.string   "course_name"
+    t.string   "question"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "quiz_category_id"
+    t.index ["course_name", "lesson_id"], name: "index_quiz_problems_on_course_name_and_lesson_id", using: :btree
+    t.index ["quiz_category_id"], name: "index_quiz_problems_on_quiz_category_id", using: :btree
+  end
+
+  create_table "quiz_submissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "quiz_problem_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "quiz_category_rating_id"
+    t.index ["quiz_category_rating_id"], name: "index_quiz_submissions_on_quiz_category_rating_id", using: :btree
+    t.index ["quiz_problem_id"], name: "index_quiz_submissions_on_quiz_problem_id", using: :btree
+    t.index ["user_id", "quiz_problem_id"], name: "index_quiz_submissions_on_user_id_and_quiz_problem_id", using: :btree
+    t.index ["user_id"], name: "index_quiz_submissions_on_user_id", using: :btree
   end
 
   create_table "replies", force: :cascade do |t|
@@ -391,12 +473,13 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
-    t.boolean  "collaboration_access",      default: false, null: false
-    t.boolean  "skill_academy_access",      default: false, null: false
     t.string   "provider"
     t.string   "uid"
     t.text     "application_reasons"
     t.integer  "package"
+    t.boolean  "collaboration_access",      default: false, null: false
+    t.boolean  "skill_academy_access",      default: false, null: false
+    t.boolean  "microposts_access",         default: false
     t.index ["admitted"], name: "index_users_on_admitted", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -418,4 +501,11 @@ ActiveRecord::Schema.define(version: 20161010105022) do
     t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
 
+  add_foreign_key "quiz_completions", "users", on_delete: :cascade
+  add_foreign_key "quiz_options", "quiz_problems", on_delete: :cascade
+  add_foreign_key "quiz_problem_cards", "quiz_problems", on_delete: :cascade
+  add_foreign_key "quiz_problem_cards", "users", on_delete: :cascade
+  add_foreign_key "quiz_submissions", "quiz_category_ratings", on_delete: :cascade
+  add_foreign_key "quiz_submissions", "quiz_problems", on_delete: :cascade
+  add_foreign_key "quiz_submissions", "users", on_delete: :cascade
 end
