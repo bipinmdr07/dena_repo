@@ -21,7 +21,8 @@
                                     submission: @submission, 
                                     content: markdown(@submission.content),
                                     user_avatar_url: @submission.user_avatar.url, 
-                                    user_is_mentor: current_user.mentor,
+                                    user_is_mentor: @submission.user_mentor,
+                                    current_user_is_mentor: current_user.mentor,
                                     user_name: @submission.user_name,
                                     display_post_links: current_user == @submission.user || current_user.admin,
                                     replies: @replies } %>
