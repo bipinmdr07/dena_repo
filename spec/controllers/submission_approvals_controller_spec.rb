@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe SubmissionApprovalsController, type: :controller do
   describe "POST #create" do
-    context "user is an admin" do
+    context "user is a mentor" do
       it "should change the submission to approved" do
-        user = FactoryGirl.create(:admin_user)
+        user = FactoryGirl.create(:mentor)
         submission = FactoryGirl.create(:submission, approved: false, user_id: 1)
 
         sign_in user
@@ -15,7 +15,7 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
       end
 
       it "creates notification for the user that submitted" do
-        user = FactoryGirl.create(:admin_user)
+        user = FactoryGirl.create(:mentor)
         recipient = FactoryGirl.create(:user)
         submission = FactoryGirl.create(:submission, approved: false, user_id: recipient.id)
 
@@ -29,7 +29,7 @@ RSpec.describe SubmissionApprovalsController, type: :controller do
       end
     end
 
-    context "user is not an admin" do
+    context "user is not a mentor" do
       it "should not change the submission to approved" do
         user = FactoryGirl.create(:user)
         submission = FactoryGirl.create(:submission, approved: false, user_id: 1)
