@@ -1,6 +1,6 @@
 class QuestionStatusesController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_if_admin_or_questioner
+  before_action :check_if_mentor_or_questioner
 
   respond_to :js, :html, :json
 
@@ -21,8 +21,8 @@ class QuestionStatusesController < ApplicationController
 
   private
 
-  def check_if_admin_or_questioner
-    return if current_user.admin || @question.user == current_user
+  def check_if_mentor_or_questioner
+    return if current_user.mentor || @question.user == current_user
     flash[:alert] = "Unauthorized."
     redirect_to root_path
   end

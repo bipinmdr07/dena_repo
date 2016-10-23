@@ -1,6 +1,6 @@
 class SubmissionApprovalsController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_if_admin
+  before_action :check_if_mentor
 
   def create
     @submission = Submission.find(params[:id])
@@ -28,8 +28,8 @@ class SubmissionApprovalsController < ApplicationController
                           notifiable: @submission)
   end
 
-  def check_if_admin
-    return if current_user.admin
+  def check_if_mentor
+    return if current_user.mentor
     flash[:alert] = "Unauthorized."
     redirect_to root_path
   end
