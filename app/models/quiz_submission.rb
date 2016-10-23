@@ -10,7 +10,7 @@ class QuizSubmission < ApplicationRecord
   def calculate_score(args)
     checked_option_ids = args.fetch(:checked_option_ids)
 
-    return 0 if checked_option_ids.empty?
+    return 0 if checked_option_ids.nil? || checked_option_ids.empty?
 
     checked_options = QuizOption.where(id: checked_option_ids)
 

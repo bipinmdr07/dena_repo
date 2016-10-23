@@ -26,7 +26,7 @@ RSpec.describe QuizSubmission, type: :model do
         quiz_option_2 = FactoryGirl.create(:quiz_option, id: 2, correct: false, quiz_problem: quiz_problem)
         quiz_option_3 = FactoryGirl.create(:quiz_option, id: 3, correct: false, quiz_problem: quiz_problem)
         quiz_option_4 = FactoryGirl.create(:quiz_option, id: 4, correct: false, quiz_problem: quiz_problem)
-        checked_option_ids = []
+        checked_option_ids = nil
 
         expect(quiz_submission.calculate_score(checked_option_ids: checked_option_ids)).to eq(0)
       end
