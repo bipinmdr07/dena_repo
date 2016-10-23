@@ -28,41 +28,13 @@ class QuizSubmissionsController < ApplicationController
   private
 
   def update_quiz_problem_card_or_build!
-    quality_response = calculate_quality_response
+    quality_response = QuizQualityResponseCalculator.new(current_score: @current_score, 
+                                                         quiz_submission: @quiz_submission, 
+                                                         user: current_user)
+                                                    .calculate!
 
     quiz_problem_card = current_user.quiz_problem_cards.find_or_create_by(quiz_problem: @quiz_submission.quiz_problem)      
     quiz_problem_card.update_interval!(quality_response)  
-  end
-
-  def calculate_quality_response
-    quiz_category_rating_weight = 0.3
-    current_score_weight = 0.7
-
-    quiz_problem = @quiz_submission.quiz_problem
-
-    quiz_category_rating = QuizCategoryRating.find_by(user: current_user, quiz_category: @quiz_submission.quiz_category)
-    quiz_category_rating_score = quiz_category_rating.try(:score) ? quiz_category_rating.score : 100
-
-    weighted_average = quiz_category_rating_score * quiz_category_rating_weight + @current_score * current_score_weight
-
-    case
-      when weighted_average.between?(0, 50)
-        quality_response = 0
-      when weighted_average.between?(51, 60)
-        quality_response = 1
-      when weighted_average.between?(61, 70)
-        quality_response = 2
-      when weighted_average.between?(71, 80)
-        quality_response = 3
-      when weighted_average.between?(81, 90)
-        quality_response = 4
-      when weighted_average.between?(91, 100)
-        quality_response = 5
-      else
-        quality_response = 0
-    end
-
-    return quality_response
   end
 
   def quiz_submission_params

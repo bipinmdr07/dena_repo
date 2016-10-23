@@ -105,32 +105,32 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
 end
 
 def mock_2_options
-  {options: [{content: 'content', correct: "incorrect"},
-             {content: 'content', correct: "correct"}             
+  {options: [{content: 'content', correct: "false"},
+             {content: 'content', correct: "true"}             
             ].to_json}
 end
 
 def mock_options
-  {options: [{content: 'content', correct: "incorrect"},
-             {content: 'content', correct: "incorrect"},
-             {content: 'content', correct: "correct"},
-             {content: 'content', correct: "incorrect"}
+  {options: [{content: 'content', correct: "false"},
+             {content: 'content', correct: "false"},
+             {content: 'content', correct: "true"},
+             {content: 'content', correct: "false"}
             ].to_json}
 end
 
 def mock_all_false_options
-  {options: [{content: 'content', correct: "incorrect"},
-             {content: 'content', correct: "incorrect"},
-             {content: 'content', correct: "incorrect"},
-             {content: 'content', correct: "incorrect"}
+  {options: [{content: 'content', correct: "false"},
+             {content: 'content', correct: "false"},
+             {content: 'content', correct: "false"},
+             {content: 'content', correct: "false"}
             ].to_json}
 end
 
 def mock_invalid_options
-  {options: [{content: '', correct: "correct"},
-             {content: '', correct: "incorrect"},
-             {content: '', correct: "incorrect"},
-             {content: '', correct: "incorrect"}
+  {options: [{content: '', correct: "true"},
+             {content: '', correct: "false"},
+             {content: '', correct: "false"},
+             {content: '', correct: "false"}
             ].to_json}
 end
 

@@ -8,10 +8,10 @@ class QuizCategoryRating < ActiveRecord::Base
 
   delegate :name, to: :quiz_category, prefix: true
 
-  def self.create_or_rank!(args)
-    current_user = args.fetch(:current_user)
-    quiz_submission = args.fetch(:quiz_submission)
-    current_score = args.fetch(:current_score)
+  def self.create_or_rank!(current_user:, quiz_submission:, current_score:)
+    current_user = current_user
+    quiz_submission = quiz_submission
+    current_score = current_score
 
     quiz_category = quiz_submission.quiz_category
 
@@ -30,9 +30,9 @@ class QuizCategoryRating < ActiveRecord::Base
 
   private
 
-  def self.calculate_mean_score(args)
-    quiz_category_rating = args.fetch(:quiz_category_rating)
-    current_score = args.fetch(:current_score)
+  def self.calculate_mean_score(quiz_category_rating:, current_score:)
+    quiz_category_rating = quiz_category_rating
+    current_score = current_score
 
     prev_total = (quiz_category_rating.score * quiz_category_rating.quiz_submissions_count)
 

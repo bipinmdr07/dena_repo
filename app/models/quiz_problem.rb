@@ -21,15 +21,20 @@ class QuizProblem < ActiveRecord::Base
 
   def build_quiz_options(quiz_problem_params)
     has_correct_answer = false
+
     JSON.parse(quiz_problem_params[:options]).each do |option|   
+
       next if option["content"].blank? || option["correct"].blank?    
+
       self.quiz_options.create!(option)
 
-      has_correct_answer = true if option["correct"] == true
+      has_correct_answer = true if option["correct"] == "true"
     end
 
     return true if has_correct_answer
+
     self.errors.add(:quiz_options, "must have at least one correct answer.")
+
     raise ::Exceptions::MustHaveCorrectAnswerException.new "Must have at least one correct answer"
   end
 end
