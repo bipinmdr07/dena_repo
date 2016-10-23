@@ -6,28 +6,22 @@ RSpec.describe QuizQualityResponseCalculator do
         quiz_problem = FactoryGirl.create(:quiz_problem)
         quiz_submission = FactoryGirl.create(:quiz_submission, quiz_problem: quiz_problem, user: user)
 
-        current_score = 20
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 20)
         expect(calculator.calculate!).to eq(0)
 
-        current_score = 52
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 52)
         expect(calculator.calculate!).to eq(1)
 
-        current_score = 61
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 61)
         expect(calculator.calculate!).to eq(2)
 
-        current_score = 72
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 72)
         expect(calculator.calculate!).to eq(3)
 
-        current_score = 90
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 90)
         expect(calculator.calculate!).to eq(4)
 
-        current_score = 100
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 100)
         expect(calculator.calculate!).to eq(5)
       end
     end
@@ -40,13 +34,11 @@ RSpec.describe QuizQualityResponseCalculator do
         quiz_category = FactoryGirl.create(:quiz_category)
         quiz_category_rating = FactoryGirl.create(:quiz_category_rating, user: user, quiz_category: quiz_category, score: 100)
 
-        current_score = 50
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 50)
         expect(calculator.calculate!).to eq(2)
-
-        current_score = 100
-        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
-        expect(calculator.calculate!).to eq(2)
+        
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: 100)
+        expect(calculator.calculate!).to eq(5)
       end
     end
   end
