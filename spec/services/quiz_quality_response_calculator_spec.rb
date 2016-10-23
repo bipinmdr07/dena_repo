@@ -4,7 +4,7 @@ RSpec.describe QuizQualityResponseCalculator do
       it "calculates the weighted average based on only the current score" do
         user = FactoryGirl.create(:user)
         quiz_problem = FactoryGirl.create(:quiz_problem)
-        quiz_submission = FactoryGirl.create(:quiz_submission, quiz_problem: quiz_problem)
+        quiz_submission = FactoryGirl.create(:quiz_submission, quiz_problem: quiz_problem, user: user)
 
         current_score = 20
         calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
@@ -34,7 +34,19 @@ RSpec.describe QuizQualityResponseCalculator do
 
     context "there is QuizCategoryRating for the user and quiz_category" do
       it "calculates the weighted averaged based on the score of the quiz category rating" do
+        user = FactoryGirl.create(:user)
+        quiz_problem = FactoryGirl.create(:quiz_problem)
+        quiz_submission = FactoryGirl.create(:quiz_submission, quiz_problem: quiz_problem, user: user)
+        quiz_category = FactoryGirl.create(:quiz_category)
+        quiz_category_rating = FactoryGirl.create(:quiz_category_rating, user: user, quiz_category: quiz_category, score: 100)
 
+        current_score = 50
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        expect(calculator.calculate!).to eq(2)
+
+        current_score = 100
+        calculator = QuizQualityResponseCalculator.new(user: user, quiz_submission: quiz_submission, current_score: current_score)
+        expect(calculator.calculate!).to eq(2)
       end
     end
   end
