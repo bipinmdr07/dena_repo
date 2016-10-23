@@ -6,16 +6,27 @@ class QuizQualityResponseCalculator
     @current_score = current_score
     @quiz_submission = quiz_submission
     @user = user
-
-    @quiz_problem = @quiz_submission.quiz_problem
   end
 
   def calculate!
     quiz_category_rating = QuizCategoryRating.find_by(user: @user, quiz_category: @quiz_submission.quiz_category)
-    quiz_category_rating_score = quiz_category_rating.try(:score) ? quiz_category_rating.score : 100
+    @quiz_category_rating_score = quiz_category_rating.try(:score) ? quiz_category_rating.score : 0
+    weighted_average = calculate_weighted_average
 
-    weighted_average = quiz_category_rating_score * QUIZ_CATEGORY_RATING_WEIGHT + @current_score * CURRENT_SCORE_WEIGHT
+    calculate_quality_response(weighted_average: weighted_average)    
+  end
 
+  private
+
+  def calculate_weighted_average
+    if @quiz_category_rating_score == 0
+      @current_score
+    else
+      @quiz_category_rating_score * QUIZ_CATEGORY_RATING_WEIGHT + @current_score * CURRENT_SCORE_WEIGHT
+    end
+  end
+
+  def calculate_quality_response(weighted_average:)
     case
       when weighted_average.between?(0, 50)
         quality_response = 0
@@ -32,7 +43,6 @@ class QuizQualityResponseCalculator
       else
         quality_response = 0
     end
-
-    return quality_response
   end
+
 end
