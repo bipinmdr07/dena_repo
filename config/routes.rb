@@ -89,6 +89,7 @@ Rails.application.routes.draw do
     resources :cards
     resources :quiz_problems
     resources :quiz_categories
+    resources :quiz_options, only: [:update, :destroy]
   end
 
   resources :quiz_submissions
