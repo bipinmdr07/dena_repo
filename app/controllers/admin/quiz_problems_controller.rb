@@ -7,6 +7,10 @@ class Admin::QuizProblemsController < ApplicationController
   rescue_from ::Exceptions::MustHaveCorrectAnswerException, with: :quiz_problem_exception_handler
   rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
 
+  def index
+    @quiz_problems = QuizProblem.order(:lesson_id).group_by(&:course_name)
+  end
+
   def create
     return unless atleast_4_options_exist?
 

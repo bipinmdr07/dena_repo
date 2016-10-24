@@ -1,0 +1,7 @@
+<% @quiz_problems.each do |course_name, problems| %>
+  <h3><%= course_name %></h3>
+
+  <% problems.each do |problem| %>
+    <%= problem.question %>
+  <% end %>
+<% end %>
