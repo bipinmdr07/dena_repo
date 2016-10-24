@@ -12,7 +12,6 @@ let AdminQuizProblems = React.createClass({
       context: this,
       success(data) {
         this.setState({quizProblems: data});
-        console.log(this.state.quizProblems);
       }
     });
   },
@@ -21,6 +20,7 @@ let AdminQuizProblems = React.createClass({
     let quizProblems = [];
 
     this.state.quizProblems.forEach((object) => {
+      quizProblems.push(<h1 className="text-center" style={{"clear": "both"}}>{object.course_name}</h1>);
       object.quiz_problems.map((quiz_problem) => {
         quizProblems.push(<AdminQuizProblem key={quiz_problem.id} quizProblem={quiz_problem} />);
       })

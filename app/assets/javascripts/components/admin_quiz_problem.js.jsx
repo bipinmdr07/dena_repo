@@ -2,7 +2,8 @@ let AdminQuizProblem = React.createClass({
   getInitialState() {
     return {
       edit: false,
-      question: this.props.quizProblem.question
+      question: this.props.quizProblem.question,
+      showOptions: false
     };
   },
 
@@ -46,19 +47,35 @@ let AdminQuizProblem = React.createClass({
     }
   },
 
+  options(){
+    if (this.state.showOptions) {
+      let options = this.props.quizProblem.quiz_options.map((option) => {
+        return <AdminQuizOption key={option.id} quizOption={option} />
+      });
+
+      return options;
+    }
+  },
+
+  toggleShowOptions(e){
+    e.preventDefault();
+    this.setState({showOptions: !this.state.showOptions});
+  },
+
   render(){
-    let options = this.props.quizProblem.quiz_options.map((option) => {
-      return <AdminQuizOption key={option.id} quizOption={option} />
-    });
+    
 
     return (
       <div className="col-xs-12 col-md-4">
         <div className="admin-quiz-problem">
+          <p className="pull-right"><small>Lesson {this.props.quizProblem.lesson_id}</small></p>
           {this.quizProblem()}
+
+          <button className="btn btn-sm btn-cta-primary" onClick={this.toggleShowOptions}>Options</button>
 
           <hr />
           <ul>
-            {options}
+            {this.options()}
           </ul>
         </div>
       </div>
