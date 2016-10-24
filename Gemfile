@@ -111,6 +111,9 @@ gem 'rails_12factor', group: [:production, :staging]
 
 gem 'redis'
 
+# A/B Testing
+gem 'split', require: 'split/dashboard'
+
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
