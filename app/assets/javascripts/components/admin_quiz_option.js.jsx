@@ -14,7 +14,7 @@ let AdminQuizOption = React.createClass({
   handleEdit(e){
     e.preventDefault();
     $.ajax({
-      url: `/admin/quiz_option/${this.props.quizOption.id}`,
+      url: `/admin/quiz_options/${this.props.quizOption.id}`,
       dataType: 'JSON',
       type: 'PATCH',
       context: this,
@@ -22,6 +22,7 @@ let AdminQuizOption = React.createClass({
         quiz_option: { content: this.refs.content.value }
       },
       success: function(data) {
+        console.log(data);
         this.setState({edit: false, content: data});   
       }
     })
@@ -41,15 +42,15 @@ let AdminQuizOption = React.createClass({
       )
     } else {
       return (
-        <p onClick={this.handleToggle}>{this.props.quizOption.content}</p>
+        <p onClick={this.handleToggle}>{this.state.content}</p>
       )
     }
-  }
+  },
 
   render(){
     return (
       <div>        
-        {this.quizOption}
+        {this.quizOption()}
       </div>
     )
   }
