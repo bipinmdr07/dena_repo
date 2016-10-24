@@ -31,6 +31,20 @@ class Admin::QuizProblemsController < ApplicationController
     end
   end
 
+  def update
+    @quiz_problem = QuizProblem.find(params[:id])
+
+    if @quiz_problem.update(quiz_problem_params)
+      respond_to do |format|
+        format.json { render json: @quiz_problem.question.to_json }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: @quiz_problem.errors}, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def atleast_4_options_exist?

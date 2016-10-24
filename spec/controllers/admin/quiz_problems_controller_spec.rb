@@ -102,6 +102,37 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
       end
     end
   end
+
+  describe "PATCH #update" do
+    context "attributes are valid" do
+      it "updates the problem" do
+        admin = FactoryGirl.create(:admin_user)
+        quiz_problem = FactoryGirl.create(:quiz_problem)
+
+        sign_in admin
+        patch :update, id: quiz_problem.id, quiz_problem: {question: "Is this correct?"}, format: :json
+        quiz_problem.reload
+
+        expect(quiz_problem.question).to eq("Is this correct?")
+        expect(response.body).to eq(quiz_problem.question.to_json)
+      end
+    end
+
+    context "attributes are invalid" do
+      it "doesn't update the problem" do
+        admin = FactoryGirl.create(:admin_user)
+        quiz_problem = FactoryGirl.create(:quiz_problem, question: "Is this wrong?")
+
+        sign_in admin
+        patch :update, id: quiz_problem.id, quiz_problem: {question: nil}, format: :json
+        quiz_problem.reload
+
+        expect(quiz_problem.question).to eq("Is this wrong?")
+        expect(response.status).to eq(422)
+        expect(JSON.parse(response.body)['errors'].length).to_not eq(0)
+      end
+    end
+  end
 end
 
 def mock_2_options
