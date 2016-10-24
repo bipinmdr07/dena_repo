@@ -56,7 +56,10 @@ let AdminQuizProblem = React.createClass({
         <div className="admin-quiz-problem">
           {this.quizProblem()}
 
-          {options}
+          <hr />
+          <ul>
+            {options}
+          </ul>
         </div>
       </div>
     )

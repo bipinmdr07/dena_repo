@@ -2,7 +2,8 @@ let AdminQuizOption = React.createClass({
   getInitialState() {
     return {
       edit: false,
-      content: this.props.quizOption.content
+      content: this.props.quizOption.content,
+      correct: this.props.quizOption.correct
     };
   },
 
@@ -19,13 +20,17 @@ let AdminQuizOption = React.createClass({
       type: 'PATCH',
       context: this,
       data: {
-        quiz_option: { content: this.refs.content.value }
+        quiz_option: { content: this.refs.content.value, correct: this.state.correct }
       },
       success: function(data) {
         console.log(data);
-        this.setState({edit: false, content: data});   
+        this.setState({edit: false, content: data.content});   
       }
     })
+  },
+
+  handleToggleCorrect(e) {
+    this.setState({correct: !this.state.correct});
   },
 
   quizOption(){
@@ -33,6 +38,11 @@ let AdminQuizOption = React.createClass({
       return (
         <form>
           <input type="text" defaultValue={this.state.content} ref="content" className="form-control" />
+
+          <div className="radio" onChange={this.handleToggleCorrect}>
+            <label className="radio-inline"><input type="radio" value="true" checked={this.state.correct == true}/>Correct</label>
+            <label className="radio-inline"><input type="radio" value="false" checked={this.state.correct == false}/>Incorrect</label>
+          </div>
 
           <div className="btn-group">
             <button className="btn btn-cta-primary" onClick={this.handleEdit}>Submit</button>
@@ -42,7 +52,7 @@ let AdminQuizOption = React.createClass({
       )
     } else {
       return (
-        <p onClick={this.handleToggle}>{this.state.content}</p>
+        <li onClick={this.handleToggle}>{this.state.content} {this.state.correct}</li>
       )
     }
   },

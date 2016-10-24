@@ -6,7 +6,7 @@ class Admin::QuizOptionsController < ApplicationController
 
     if @quiz_option.update(quiz_option_params)
       respond_to do |format|
-        format.json { render json: @quiz_option.content.to_json }
+        format.json { render json: @quiz_option.to_json }
       end
     else
       respond_to do |format|
@@ -18,6 +18,6 @@ class Admin::QuizOptionsController < ApplicationController
   private
 
   def quiz_option_params
-    params.require(:quiz_option).permit(:content)
+    params.require(:quiz_option).permit(:content, :correct)
   end
 end
