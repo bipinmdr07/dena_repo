@@ -62,6 +62,21 @@ let AdminQuizProblem = React.createClass({
     this.setState({showOptions: !this.state.showOptions});
   },
 
+  handleDelete(e) {
+    e.preventDefault();
+    if (confirm("Are you sure?")){
+      $.ajax({
+        url: `/admin/quiz_problems/${this.props.quizProblem.id}`,
+        type: 'DELETE',
+        dataType: 'JSON',
+        context: this,
+        success(e) {
+          this.props.handleDeleteQuiz(this.props.quizProblem);
+        }
+      });
+    }
+  },
+
   render(){
     
 
@@ -72,7 +87,7 @@ let AdminQuizProblem = React.createClass({
           {this.quizProblem()}
 
           <button className="btn btn-sm btn-cta-primary" onClick={this.toggleShowOptions}>Options</button>
-
+          <button className="btn btn-sm btn-cta-secondary" onClick={this.handleDelete}>Delete</button>
           <hr />
           <ul>
             {this.options()}

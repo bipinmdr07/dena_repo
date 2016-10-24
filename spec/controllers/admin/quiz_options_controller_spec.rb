@@ -13,7 +13,7 @@ RSpec.describe Admin::QuizOptionsController, type: :controller do
         quiz_option.reload
 
         expect(quiz_option.content).to eq("Hello")
-        expect(response.body).to eq(quiz_option.content.to_json)
+        expect(response.body).to eq(quiz_option.to_json)
       end
     end
 

@@ -133,6 +133,20 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    it "deletes the problem" do
+      admin = FactoryGirl.create(:admin_user)
+      quiz_problem = FactoryGirl.create(:quiz_problem)
+
+      sign_in admin
+
+      expect {
+        delete :destroy, id: quiz_problem.id, format: :json
+      }.to change(QuizProblem, :count).by(-1)
+    end
+  end
+
 end
 
 def mock_2_options

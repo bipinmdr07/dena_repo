@@ -45,6 +45,15 @@ class Admin::QuizProblemsController < ApplicationController
     end
   end
 
+  def destroy
+    @quiz_problem = QuizProblem.find(params[:id])
+    @quiz_problem.destroy
+
+    respond_to do |format|
+      format.json { render json: 204 }
+    end
+  end
+
   private
 
   def atleast_4_options_exist?
