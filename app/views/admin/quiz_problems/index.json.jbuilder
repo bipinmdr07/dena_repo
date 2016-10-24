@@ -1,5 +1,5 @@
 json.array! @quiz_problems do |course_name, quiz_problems|
-  json.course_name course_name
+  json.course_name course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson")
   json.quiz_problems do
     json.array! quiz_problems do |quiz_problem|
       json.id quiz_problem.id
