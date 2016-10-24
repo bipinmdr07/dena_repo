@@ -114,6 +114,8 @@ gem 'redis'
 # A/B Testing
 gem 'split', require: 'split/dashboard'
 
+gem 'sinatra', github: 'sinatra/sinatra'
+
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
