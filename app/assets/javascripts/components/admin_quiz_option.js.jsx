@@ -45,8 +45,8 @@ let AdminQuizOption = React.createClass({
           </div>
 
           <div className="btn-group">
-            <button className="btn btn-cta-primary" onClick={this.handleEdit}>Submit</button>
-            <button className="btn btn-cta-secondary" onClick={this.handleToggle}>Cancel</button>
+            <button className="btn btn-sm btn-cta-primary" onClick={this.handleEdit}>Submit</button>
+            <button className="btn btn-sm btn-cta-secondary" onClick={this.handleToggle}>Cancel</button>
           </div>
         </form>
       )
