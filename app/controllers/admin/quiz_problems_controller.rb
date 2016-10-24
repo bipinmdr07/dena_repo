@@ -49,9 +49,9 @@ class Admin::QuizProblemsController < ApplicationController
     @quiz_problem = QuizProblem.find(params[:id])
     @quiz_problem.destroy
 
-    respond_to do |format|
-      format.json { render json: 204 }
-    end
+    flash[:alert] = "Quiz deleted"
+    redirect_to admin_quiz_problems_path 
+
   end
 
   private

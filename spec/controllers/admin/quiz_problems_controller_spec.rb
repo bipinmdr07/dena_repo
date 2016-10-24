@@ -142,8 +142,9 @@ RSpec.describe Admin::QuizProblemsController, type: :controller do
       sign_in admin
 
       expect {
-        delete :destroy, id: quiz_problem.id, format: :json
+        delete :destroy, id: quiz_problem.id
       }.to change(QuizProblem, :count).by(-1)
+      expect(response).to redirect_to admin_quiz_problems_path
     end
   end
 

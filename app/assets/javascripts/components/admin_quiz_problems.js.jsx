@@ -16,23 +16,6 @@ let AdminQuizProblems = React.createClass({
     });
   },
 
-  handleDeleteQuiz(deletedQuiz) {
-    console.log(deletedQuiz.course_name);
-    console.log(this.state.quizProblems);
-
-    let quizProblemObj = _.find(this.state.quizProblems, (problem) => {
-      return problem.course_name == deletedQuiz.course_name;
-    });
-
-    console.log(quizProblemObj);
-
-    let quizProblems = quizProblemObj.quiz_problems.filter((quiz_problem) => {
-      return quiz_problem.id !== deletedQuiz.id;
-    });
-
-    this.setState({quizProblems: quizProblems});
-  },
-
   render(){
     let quizProblems = [];
 
