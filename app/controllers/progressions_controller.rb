@@ -43,8 +43,8 @@ class ProgressionsController < ApplicationController
 
   private
 
-  def build_variables_for_lesson_show_page
-    @quiz_completed = !current_user.quiz_completions.find_by(progression_params).nil? || QuizProblem.where(progression_params).empty?
+  def build_variables_for_lesson_show_page    
+    @quiz_completed = !current_user.quiz_completions.find_by(progression_params).nil? || QuizProblem.where(progression_params.except(:user_id)).empty?
     @course_name = progression_params[:course_name].constantize
     @current_lesson_id = progression_params[:lesson_id]
 
