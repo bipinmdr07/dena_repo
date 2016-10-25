@@ -13,9 +13,10 @@
     <div class="container text-center">       
         <%= render "shared/flash_messages" %>
 
-        <h1 class="title">Coding Bootcamp in Nepal<br>The Fast Track to Learning Web Development</h2>
+        <h1 class="title">The Fast Track to Learning Web Development</h1>
+        <h2>Coding Bootcamp in Nepal</h2>
         <p class="intro">
-          Learn Ruby on Rails, one of the most popular web development frameworks in the world, through our interactive platform combining 1 on 1 mentor sessions, project based learning, and a supportive online community.
+          Learn Ruby on Rails through our interactive platform combining 1 on 1 mentor sessions, project based learning, and a supportive online community.
         </p>
         <p>
           <a class="btn btn-cta btn-cta-primary" href="/apply">
@@ -30,15 +31,24 @@
   <!-- ******Why Section****** -->
   <section id="why" class="section why">
       <div class="container">
-          <h2 class="title text-center">Your Learning Experience at TECHRISE</h2>
-          <p class="intro text-center">We make sure that our methodology is effective and keeps you motivated.</p>
+          <h2 class="title text-center">Why Choose TECHRISE</h2>
+          <p class="intro text-center">Experience the New Way of Learning</p>
           <div class="row item">
               <div class="content col-md-4 col-sm-12 col-xs-12">
                   <h3 class="title">Learn By Building</h3>
                   <div class="desc">
-                      <p>
+                    <ul>
+                      <li>Build Your Portfolio</li>
+                      <p>Develop several fully functional web applications and build your portfolio.</p>
+                      <li>Learn Practical Skills</li>
+                      <p>Learn practical skills necessary to thrive in the market.</p>
+                      <li>Become a Problem Solver</li>
+                      <p>Develop problem solving skills to become an in-demand software engineer.</p>
+
+                    </ul>
+                      <!-- <p>
                           Most online courses teaches you how to write syntax, but not how to build things. At TECHRISE, you will be developing multiple fully functioning web applications. Learning by building not only helps you develop technical skills, but also makes you think and solve problems like a software engineer. 
-                      </p>
+                      </p> -->
                   </div>
                   <div class="quote">
                       <div class="quote-profile">
@@ -60,9 +70,17 @@
               <div class="content col-md-4 col-sm-12 col-xs-12 col-md-push-8 col-sm-push-0 col-xs-push-0">
                   <h3 class="title">Learn With a Mentor</h3>
                   <div class="desc">
-                      <p>
+                    <ul>
+                      <li>Personal 1 on 1 mentor sessions</li>
+                      <p>Ask questions individually, and tackle challenging problems with your mentor.</p>
+                      <li>Personalized Support</li>
+                      <p>We make sure you achieve your goals by assining a personal mentor.</p>
+                      <li>Non-technical advice and guidance</li>
+                      <p>Our mentors will help you get through rough times to make sure you stay motivated.</p>
+                    </ul>
+                      <!-- <p>
                           Speed up your learning with the help of your personal mentor. Ask questions individually, and tackle challenging problems with the support from your mentor. They are there to take your learning to the next level. 
-                      </p>
+                      </p> -->
                   </div>
                   
                   <div class="quote">
@@ -82,15 +100,22 @@
           
           
           <div class="row item last-item">
-              <div class="content col-md-4 col-sm-12 col-xs-12 col-md-push-8 col-sm-push-0 col-xs-push-0">
+                <div class="content col-md-4 col-sm-12 col-xs-12">
                   <h3 class="title">Real time support</h3>
                   <div class="desc">
-                      <p>
+                    <ul>
+                      <li>Community Support</li>
+                      <p>Join a community of peers to help you overcome challenges</p>
+                      <li>Real-time Troubleshooting</li>
+                      <p>Post questions anytime, anywhere, 7 days a week, and get real-time support</p>
+                      <li>Regular Code Reviews</li>
+                      <p>Get all of your apps and code submissions reviewed. Receive constant feedback to improve your coding quality.</p>
+                    </ul>
+                      <!-- <p>
                           It's natural that you get stuck with bugs and errors along the way. That's why we have our friendly online community that can help you overcome these challenges. Post questions to our online community anytime, anywhere, and get the real time support you need. 
-                      </p>
+                      </p> -->
                       
                   </div>
-                  
                   <div class="quote">
                       <div class="quote-profile">
                           <%= image_tag 'landing_page/Aashik.jpg', class: 'img-responsive img-circle' %>
@@ -101,7 +126,7 @@
                       </div><!--//quote-content-->
                   </div><!--//quote-->
               </div><!--//content-->
-              <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-pull-4 col-sm-pull-0 col-xs-pull-0">
+              <figure class="figure col-md-6 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
                   <%= image_tag 'landing_page/figure-4.png', class: 'img-responsive flaticon' %>                        
               </figure>
           </div><!--//item-->
@@ -164,8 +189,8 @@
             </ul>
           </div>
 
-          <div class="col-xs-12">
-            <p><a class="btn btn-cta btn-cta-secondary center-block" href="curriculum.html" style="margin: 30px auto;">Take a look at the TECHRISE Curriculum</a></p>
+          <div class="col-xs-12 col-md-4 col-md-offset-4">
+            <p><a class="btn btn-cta btn-cta-primary center-block" href="curriculum.html" style="margin: 30px auto;">Take a look at the TECHRISE Curriculum</a></p>
           </div>
 
       </div>
@@ -300,6 +325,24 @@
 
   <section class="section testimonials-section">
     <div class="container text-center">
+        <div class="item" style="margin-top:40px;">
+          <div class="row">
+            <div class="col-xs-12 col-md-4">
+              <%= image_tag 'landing_page/lizanderson.jpg', class: 'prof_pic' %>
+            </div>
+            <div class="col-xs-12 col-md-8">
+                <blockquote>
+                <i class="fa fa-quote-left" style="float: left; margin-right: 5px;"></i>
+                <p style="text-align: justify;">
+                  TECHRISE is more than a coding camp - it's <strong>a vehicle</strong> for empowering the youth of Nepal with the knowledge and tools they need to <strong>unlock their true economic and personal potential.</strong> Because the TECHRISE model provides former students to also become teachers, the organization is creating a <strong>network effect for sustainable and long-term transformative change</strong>. One student at a time, <strong>TECHRISE is not only changing lives at an individual level, but is also building a highly skilled workforce that has the potential to grow Nepal's economic stability as a whole.</strong>
+                </p>
+
+                </blockquote>
+                <p class="source" style="color:#333;"> Liz Anderson<br /><small>Director of Engagement, Beeck Center for Social Impact + Innovation at Georgetown University</small></p>
+            </div><!--col-xs-12 col-md-8-->                         
+          </div>
+        </div><!--//item-->
+        
         <div class="item">
           <div class="row">
             <div class="col-xs-12 col-md-4">
