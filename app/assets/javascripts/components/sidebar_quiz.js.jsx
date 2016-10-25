@@ -7,7 +7,8 @@ let SidebarQuiz = React.createClass({
       stats: [],
       disabled: false,
       showStats: false,
-      submitted: false
+      submitted: false,
+      scores: []
     };
   },
 
@@ -34,7 +35,8 @@ let SidebarQuiz = React.createClass({
       },
       success(data){
         this.props.handleQuizSubmission(data); 
-        this.setState({submitted: true});
+        let scores = React.addons.update(this.state.scores, {$push: [data.score]});
+        this.setState({submitted: true, scores: scores});
         if (this.props.quizProblems.length == (this.props.currentPosition + 1)) {
           this.handleFinishQuiz();
         }        
@@ -114,6 +116,11 @@ let SidebarQuiz = React.createClass({
     this.getStats();
   },
 
+  handleRetakeQuiz(e) {
+    e.preventDefault();
+    this.props.handleRetakeQuiz();
+  },
+
   formContent(){
     if (this.props.quizProblems.length == 0) {
       return (
@@ -124,7 +131,7 @@ let SidebarQuiz = React.createClass({
       return (
         <FinishQuiz averageScore={this.props.averageScore} 
                     handleToggleStats={this.handleToggleStats} 
-                    handleRetakeQuiz={this.props.handleRetakeQuiz} />
+                    handleRetakeQuiz={this.handleRetakeQuiz} />
       )
     }
     else {
@@ -140,7 +147,8 @@ let SidebarQuiz = React.createClass({
                      currentPosition={this.props.currentPosition}
                      averageScore={this.props.averageScore}
                      handleToggleStats={this.handleToggleStats}
-                     checkedOptionIds={this.props.checkedOptionIds}/>
+                     checkedOptionIds={this.props.checkedOptionIds}
+                     scores={this.state.scores}/>
       )
     }
   },

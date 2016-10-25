@@ -15,6 +15,29 @@ let QuizProblem = React.createClass({
     }    
   },
 
+  score(){
+    if (this.props.showAnswers) {
+      let score = this.props.scores[this.props.scores.length - 1];
+      let styles;
+
+      if (score <= 50) {
+        styles = {"color": "#ff0000"};
+      } else if (50 < score && score <= 70) {
+        styles = {"color": "#ec6952"};
+      } else if (70 < score && score <= 80) {
+        styles = {"color": "#2e6da4"};
+      } else if (80 < score && score <= 90) {
+        styles = {"color": "#337ab7"};
+      } else if (90 < score && score <= 100) {
+        styles = {"color": "#5cb85c"};
+      }
+
+      return (
+        <p><small className="score-display" style={styles}>{Math.round(score)}%</small></p>
+      )
+    }
+  },
+
   render(){
     let options = this.props.quizProblem.quiz_options.map((option) => {
       return (
@@ -54,6 +77,8 @@ let QuizProblem = React.createClass({
                   {options}
 
                   {this.lessonLink()}
+
+                  {this.score()}
                 </div>                
 
                 <p style={{"fontWeight": 600, "color": "white"}}>

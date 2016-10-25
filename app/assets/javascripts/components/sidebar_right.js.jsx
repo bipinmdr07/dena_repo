@@ -247,7 +247,15 @@ let SidebarRight = React.createClass({
   },
 
   handleRetakeQuiz(){
-    this.setState({currentPosition: 0, showAnswers: false, totalScore: 0, averageScore: 0})
+    $.ajax({
+      dataType: 'JSON',
+      url: '/quiz_problems.json',
+      data: {lesson_id: this.props.lesson_id, course_name: this.props.course_name},
+      context: this,
+      success(data) {
+        this.setState({quizProblems: data, currentPosition: 0, showAnswers: false, totalScore: 0, averageScore: 0});
+      }
+    });
   },
 
   render(){
