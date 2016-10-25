@@ -9,19 +9,18 @@
 
 <div class="row">
   <!-- sidebar -->
-  <div class="col-lg-3 visible-lg">
-    <div style="width: 100%">
-      <div id="sidebar_container" data-spy="affix" data-offset-bottom="40">
-        <%= render 'sidebar' %>
-      </div>
-    </div>
-  </div>
+  <ul class="nav nav-pills nav-stacked" id="sidebar-left-trigger">
+    <li onclick="sidebar.toggleNav()">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </li>
+  </ul>
+  <div class="sidebar_container sidebar_container_left" id="sidebar-reveal-container" data-spy="affix" data-offset-bottom="40">
+    <%= render 'sidebar' %>
+  </div>    
 
-  <div class="col-lg-9 col-md-12">
+  <div class="col-xs-11">
 
     <section class="lesson_content">
-
-      <%= render partial: '/cards/widget' %>
 
       <h1><%= title_for(controller_name.classify.constantize, params[:id].to_i) %></h1>
 
@@ -33,7 +32,27 @@
 
       <%= render partial: 'layouts/hints' if @hints %>
 
-      <%= render 'lesson_nav_section' %>
+      <% if @submission_form && @submission_by_current_user.nil? %>
+        <div class="well">
+          <%= render partial: 'shared/flash_messages' %>
+
+          <h2>Submit your work</h2>
+          <p>
+            Awesome work! Follow the directions on the lesson and submit your work. We'll get back to you soon and give you feedback or code review.
+          </p>
+
+          <p>
+            (P.S Give it an awesome title name just for fun :D )
+          </p>
+
+          <%= react_component 'SubmissionForm', { lesson_id: params[:id], course_name: controller_name.classify } %>
+
+        </div>
+      <% end %>
+
+      <div id="lesson_nav_container">
+        <%= render partial: 'lesson_nav_section', locals: {quiz_completed: @quiz_completed, current_lesson_progression: @current_lesson_progression} %>
+      </div>
 
       <%= render partial: '/submissions/for_lesson' if @submission_form %>
 
@@ -44,6 +63,15 @@
     </section>
 
   </div>
+
+  <%= react_component 'SidebarRight', { display_sm: false,
+                                        authenticity_token: form_authenticity_token, 
+                                        lesson_id: params[:id], 
+                                        course_name: controller_name.classify,
+                                        lesson_url: request.original_url,
+                                        quizCompleted: @quiz_completed,
+                                        user_is_admin: current_user.admin } %>
+
 
 </div>
 

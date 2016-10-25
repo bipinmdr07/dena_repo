@@ -82,12 +82,20 @@ Rails.application.routes.draw do
     collection do
       post :mark_as_read
     end
-  end	  
+  end	    
 
   namespace :admin do
     resources :decks
     resources :cards
+    resources :quiz_problems
+    resources :quiz_categories
+    resources :quiz_options, only: [:update, :destroy]
   end
+
+  resources :quiz_submissions
+  resources :quiz_problems
+  resources :quiz_completions
+  resources :quiz_category_ratings, only: :index
 
   post 'question_upvotes/:id(.:format)', to: 'question_upvotes#create', as: 'question_upvote'
 

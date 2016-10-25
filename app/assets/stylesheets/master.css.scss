@@ -1,12 +1,40 @@
+::-webkit-scrollbar { 
+  display: none; 
+}
+
 .logo {
   height: 60px;
   margin-top: 7px;
 }
 
-#preview {
+@mixin margin_transition {
+  transition: margin 700ms ease;
+  -webkit-transition: margin 700ms ease;
+  -moz-transition: margin 700ms ease;
+  -o-transition: margin 700ms ease;
+}
+
+@mixin preview {
   background: whitesmoke;
   padding: 20px;
   min-height: 200px;
+  color: #333;
+}
+
+body {
+  @include margin_transition;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.preview {
+  @include preview;
+}
+
+#preview {
+  @include preview;
 }
 
 .forum-forms {
@@ -409,6 +437,11 @@ span.radio.inline {
 
 .lesson_content {
   background-color: white;
+  padding: 60px 0px;
+  margin: 0px;
+  
+  @include margin_transition;
+
   h1 {
     border-left: 6px solid #ec6952;
     padding-left: 10px;

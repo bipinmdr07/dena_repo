@@ -59,6 +59,14 @@ a.btn-cta-primary,
   border: 2px solid #ec6952;
   color: #fff;
 }
+
+a.btn-cta-primary:focus,
+.btn-cta-primary:focus {
+  background: #ec6952;
+  border: 2px solid #ec6952;
+  color: #fff;
+}
+
 a.btn-cta-primary:hover,
 .btn-cta-primary:hover {
   background: #e9553b;
@@ -76,6 +84,13 @@ a.btn-cta-secondary:hover,
   background: #ec6952;
   border: 2px solid #ec6952;
   color: #fff;
+}
+
+a.btn-cta-secondary:focus,
+.btn-cta-secondary:focus {
+  background: none;
+  border: 2px solid #ec6952;
+  color: #ec6952;
 }
 
 .btn-cta-secondary .fa {
@@ -272,18 +287,19 @@ select {
   background: none;
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 22px;
 }
 .header .main-nav .navbar-toggle:focus {
   outline: none;
 }
 .header .main-nav .navbar-toggle .icon-bar {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: #253340;
   height: 3px;
 }
 .header .main-nav .navbar-toggle:hover .icon-bar {
-  background-color: #fff;
+  background-color: #ec6952;
 }
+
 .header .main-nav .nav .nav-item {
   font-weight: normal;
   text-transform: uppercase;
@@ -1839,7 +1855,6 @@ select {
   color: #ec6952;
 }
 /* Blog homepage */
-.
 .blog-list .post {
   padding: 0 15px;
   margin-bottom: 30px;
@@ -3121,7 +3136,7 @@ select {
     box-shadow: none;
     width: 100%;
     left: 0;
-    top: 90px;
+    top: 80px;
     position: absolute;
     background: #253340;
     z-index: 45;
@@ -3488,7 +3503,7 @@ select {
 /*    padding-top: 25px;*/
   }
   .header.scrolled .main-nav .nav .nav-item a {
-    color: #666666;
+    color: white;
     -webkit-opacity: 1;
     -moz-opacity: 1;
     opacity: 1;

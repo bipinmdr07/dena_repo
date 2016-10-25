@@ -24,11 +24,4 @@ class Admin::CardsController < ApplicationController
 	def card_params
 		params.require(:card).permit(:question, :answer, :tag_list).merge(deck_id: params[:deck_id], master: true)
 	end
-
-  def authenticate_admin!
-    unless current_user.admin
-      flash[:alert] = "Woops! You're unauthorized!"
-      redirect_to dashboard_path
-    end
-  end
 end

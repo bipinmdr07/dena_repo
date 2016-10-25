@@ -1,0 +1,12 @@
+.admin-quiz-problem {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  position: relative;
+  small {
+    top: 10px;
+    position: absolute;
+    right: 20px;
+  }
+}
