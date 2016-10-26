@@ -31,7 +31,23 @@ end
 </code></pre>
 
 <p>
-  Another thing we should test is that after the post is created, it should redirect the user to the home page. However, it should only do this when the attributes sent in for the post is valid. If the attributes aren't valid, it should render the <code>new</code> page so that the user can fix the invalid field.
+  Another thing we should test is that after the post is created, it should redirect the user to the home page. Let's add a spec for this condition as well:
+</p>
+
+<pre><code class="ruby">
+describe "POST #create" do
+  it "creates a new post" do
+
+  end
+
+  it "redirects to root_path" do
+
+  end
+end
+</code></pre>
+
+<p>
+  However, it should only do this when the attributes sent in for the post is valid. If the attributes aren't valid, it should render the <code>new</code> page so that the user can fix the invalid field.
 </p>
 
 <h3>Context Blocks in RSpec</h3>
@@ -55,17 +71,19 @@ end
 
 <pre><code class="ruby">
 describe "POST #create" do
-  it "creates a new post" do
-
-  end
-
   context "with valid attributes" do
+    it "creates a new post" do
+
+    end
     it "redirects to root_path" do
 
     end
   end
 
   context "with invalid attributes" do
+    it "doesn't create a new post" do
+
+    end
     it "renders the new template" do
 
     end
