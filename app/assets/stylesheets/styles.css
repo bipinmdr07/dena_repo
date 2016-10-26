@@ -443,7 +443,7 @@ select {
   height: 780px;
 }
 .bg-slider-wrapper .flexslider .slide.slide-1 {
-  background: #253340 url('background/bg-header-1.1.jpg') no-repeat 50% top;
+  background: url('https://static.pexels.com/photos/7114/laptop-mobile-large.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -580,12 +580,13 @@ select {
 /* ======= Why ======= */
 .why {
   padding-top: 80px;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 .why .title {
-  font-size: 36px;
-  font-weight: 300;
+  font-size: 36px;  
   margin-top: 0;
+  font-weight: 400;
+  font-family: 'Lato';
 }
 .why .intro {
   color: #999999;
@@ -593,7 +594,7 @@ select {
   font-size: 18px;
 }
 .why .item {
-  padding: 90px 0;
+  padding: 30px 0px;
   border-bottom: 1px solid #eeeeee;
 }
 .why .item.last-item {
@@ -604,6 +605,8 @@ select {
   color: #4a6781;
   margin-top: 0;
   margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 .why .item .desc {
   margin-bottom: 60px;
@@ -799,6 +802,11 @@ select {
   position: relative;
   left: 2px;
 }
+
+.why .feature-lead {
+  margin-top: 40px;
+}
+
 .why .feature-lead .title {
   font-weight: 300;
   font-size: 16px;
@@ -826,11 +834,21 @@ select {
   height: 10px;
   margin: 1px;
 }
-.testimonials .title {
+
+.testimonials-section .title {
   font-size: 36px;
-  font-weight: 300;
   margin-top: 0;
   margin-bottom: 60px;
+  font-family: 'Lato';
+  font-weight: 600;
+}
+
+.testimonials .title {
+  font-size: 36px;
+  margin-top: 0;
+  margin-bottom: 60px;
+  font-family: 'Lato';
+  font-weight: 400;
 }
 .testimonials .item .profile {
   position: absolute;
@@ -869,15 +887,12 @@ select {
 }
 /* ======= Press ======= */
 .press {
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding: 40px 0px;
 }
 .press .title {
   font-size: 36px;
   font-weight: 300;
   margin-top: 0;
-  margin-bottom: 60px;
-  padding-top: 80px;
 }
 .press .press-list {
   margin-bottom: 15px;
@@ -2350,6 +2365,7 @@ select {
   max-height: 265px;
   min-height: 265px;
   width: 100%;
+  border-radius: 0px;
 }
 .story-section .team .member .member-inner:hover img {
   -webkit-opacity: 0.8;
@@ -2683,7 +2699,7 @@ select {
   font-size: 14px;
   position: relative;
   z-index: 20;
-  margin-top: -100px;
+  margin-top: -70px;
 }
 .footer p {
   -webkit-opacity: 0.5;
@@ -3115,6 +3131,15 @@ select {
   #topcontrol {
     display: none !important;
   }
+
+  .header {
+    background: #253340;
+  }
+
+  .header .main-nav .navbar-toggle .icon-bar {
+    background: white;
+  }
+
   .header h1.logo {
     float: none;
     margin: inherit;
@@ -3193,6 +3218,7 @@ select {
   }
   .why .item .content {
     margin-bottom: 60px;
+    padding-bottom: 20px;
   }
   .why .control {
     top: 58px;
@@ -3342,6 +3368,8 @@ select {
     padding: 0;
   }
 }
+
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .config-wrapper {
@@ -3349,6 +3377,7 @@ select {
   }
   .header {
     height: inherit;
+    background: #253340;
   }
   .header.scrolled {
     height: auto;
@@ -3357,7 +3386,7 @@ select {
     box-shadow: none;
   }
   .header.scrolled .main-nav .nav .nav-item a {
-    color: #fff;
+/*    color: #fff;*/
     -webkit-opacity: 1;
     -moz-opacity: 1;
     opacity: 1;
@@ -3475,6 +3504,7 @@ select {
   }
   .header {
     height: 80px;
+    background: none;
   }
   .header.navbar-fixed-top {
     position: fixed;
@@ -3503,8 +3533,8 @@ select {
 /*    padding-top: 25px;*/
   }
   .header.scrolled .main-nav .nav .nav-item a {
-    color: white;
-    -webkit-opacity: 1;
+/*    color: white;
+*/    -webkit-opacity: 1;
     -moz-opacity: 1;
     opacity: 1;
   }
@@ -3532,8 +3562,8 @@ select {
     float: right !important;
   }
   .promo {
-    height: 100%;
-    padding-top: 150px;
+    height: 100vh;
+    padding-top: 180px;
   }
   .promo.section .intro {
     margin-bottom: 45px;
