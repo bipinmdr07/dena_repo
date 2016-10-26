@@ -1,8 +1,19 @@
+.founder-name {
+  color: #253340;
+  font-weight: 600;
+}
+
 .flaticon {
   height: 350px;
   // width: 350px;
   margin-top: 50px;
 }
+
+.break {
+    border-top: 1px solid #999;
+    width: 140px;
+    margin: 30px auto 60px;
+  }
 
 .profile img {
   height: 150px;
@@ -18,6 +29,7 @@
   }
   .content {
     padding-top: 20px;
+    padding-bottom: 20px; 
   }
   p {
     text-align: center;
@@ -79,6 +91,7 @@
   list-style: none;
   padding:0;
   margin:0;
+  font-family: 'Lato',sans-serif;
 }
 
 .skills_ul li:before {
@@ -120,6 +133,7 @@
   font-size: 36px;
   font-weight: 300;
   margin-top: 0;
+  font-family: 'Lato';
 }
 
 .header_container {

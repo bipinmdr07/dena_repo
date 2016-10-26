@@ -13,9 +13,9 @@
     <div class="container text-center">       
         <%= render "shared/flash_messages" %>
 
-        <h1 class="title">The Fast Track to Learning Web Development</h1>
+        <h1 class="title" style="margin-bottom: 5px">The Fast Track to Learning Web Development</h1>
         <h2>Coding Bootcamp in Nepal</h2>
-        <p class="intro">
+        <p class="intro" style="font-weight:600">
           Learn Ruby on Rails through our interactive platform combining 1 on 1 mentor sessions, project based learning, and a supportive online community. Whether you are a beginner, an entrepreneur, or an aspiring developer - we are there to support you every step of the way.
         </p>
         <p>
@@ -34,7 +34,7 @@
           <h2 class="title text-center">Why Choose TECHRISE</h2>
           <p class="intro text-center">Experience the New Way of Learning</p>
           <div class="row item">
-              <div class="content col-md-4 col-sm-12 col-xs-12">
+              <div class="col-md-4 col-sm-12 col-xs-12">
                   <h3 class="title">Learn By Building</h3>
                   <div class="desc">
                     <ul>
@@ -60,14 +60,14 @@
                       </div><!--//quote-content-->                                     
                   </div><!--//quote-->                        
               </div><!--//content-->
-              <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
+              <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0 hidden-xs">
                   <%= image_tag 'landing_page/techrise-lesson.png', class: 'img-responsive' %>
                   <figcaption class="figure-caption">Our Online Platform is optimized to Accelerate your Learning</figcaption>
               </figure>
           </div><!--//item-->
           
           <div class="row item">
-              <div class="content col-md-4 col-sm-12 col-xs-12 col-md-push-8 col-sm-push-0 col-xs-push-0">
+              <div class="col-md-4 col-sm-12 col-xs-12 col-md-push-8 col-sm-push-0 col-xs-push-0">
                   <h3 class="title">Learn With a Mentor</h3>
                   <div class="desc">
                     <ul>
@@ -93,14 +93,14 @@
                       </div><!--//quote-content-->         
                   </div><!--//quote-->                        
               </div><!--//content-->
-              <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-pull-4 col-sm-pull-0 col-xs-pull-0">
+              <figure class="figure col-md-4 col-sm-12 col-xs-12 col-md-pull-4 col-sm-pull-0 col-xs-pull-0 hidden-xs">
                   <%= image_tag 'background/mentor_image.jpg', class: 'img-responsive flaticon' %>                        
               </figure>
           </div><!--//item-->
           
           
           <div class="row item last-item">
-                <div class="content col-md-4 col-sm-12 col-xs-12">
+                <div class="col-md-4 col-sm-12 col-xs-12">
                   <h3 class="title">Real time support</h3>
                   <div class="desc">
                     <ul>
@@ -126,7 +126,7 @@
                       </div><!--//quote-content-->
                   </div><!--//quote-->
               </div><!--//content-->
-              <figure class="figure col-md-6 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
+              <figure class="figure col-md-6 col-sm-12 col-xs-12 col-md-offset-2 col-sm-offset-0 col-xs-offset-0 hidden-xs">
                   <%= image_tag 'landing_page/figure-4.png', class: 'img-responsive flaticon' %>                        
               </figure>
           </div><!--//item-->
@@ -139,36 +139,34 @@
       </div><!--//container-->
   </section><!--//why-->  
 
+  <%= render 'expert_testimonial' %>
+
   <!-- Skills Grid Section -->
   <section id="skills" class = "section">
     <a class = "anchor" id = "skills_you_will_learn"></a>
-      <div class="container">
-          <hr>
-          <div class="row" style="margin-bottom: 20px;padding-top: 80px;">
+      <div class="container">          
+          <div class="row" style="margin-bottom: 20px;">
               <div class="col-lg-12 text-center scroll">
-                  <h2 class = "title">Learn Practical, In-demand Skills</h2>
+                  <h2 class="title" style="font-weight: 600">Learn Practical, In-demand Skills</h2>
                   <p>
                     At TECHRISE, you will learn a set of marketable skills that will enable you to write robust web applications. We have designed the curriculum so that you will gain the experience of not only writing good code, but writing good code together with other people.
                   </p>
               </div>
           </div>
           <div class="row">
-            <% skills.each_with_index do |skill, i| %>
-              <% if i == 0 %>
-                <div class="col-sm-offset-1 col-sm-2 col-xs-6 portfolio-item text-center">
-              <% else %>
-                <div class="col-sm-2 col-xs-6 portfolio-item text-center">
-              <% end %>
-                  <%= image_tag skill[2], class: 'skill_logo' %>
-                  <h5><%= skill[0] %></h5>
-                  <!-- <p><%= skill[1] %></p> -->
+            <div class="col-xs-12">
+              <div class="row">
+                <% skills.each_with_index do |skill, i| %>
+                  <div class="col-sm-2 col-xs-4 portfolio-item text-center">
+                    <%= image_tag skill[2], class: 'skill_logo' %>
+                    <h5><strong><%= skill[0] %></strong></h5>
+                  </div>
+                <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
 
-          <div class="col-xs-12" style="margin-bottom: 35px; margin-top: 55px;">
-            <h3 class="text-center">During the program, you will:</h3>
-          </div>
+          <div class="break"></div>
 
           <div class="col-xs-12 col-md-6">
             <ul class="skills_ul">
@@ -190,7 +188,8 @@
           </div>
 
           <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <p><a class="btn btn-cta btn-cta-primary center-block" href="curriculum.html" style="margin: 30px auto;">Take a look at the TECHRISE Curriculum</a></p>
+            <p class="hidden-xs"><a class="btn btn-cta btn-cta-primary center-block" href="curriculum.html" style="margin: 30px auto;">Take a look at the TECHRISE Curriculum</a></p>
+            <p class="visible-xs"><a class="btn btn-cta btn-cta-primary center-block" href="curriculum.html" style="margin: 30px auto;">The TECHRISE Curriculum</a></p>
           </div>
 
       </div>
@@ -199,53 +198,16 @@
 
   <%= render 'comparison_chart' %>
 
+  <%= render 'founders' %>
+
+
   <!-- ******Testimonials Section****** -->
   <%= render 'testimonials' %>
-
-  <section class="section testimonials-section">
-    <div class="container text-center">
-        <div class="item" style="margin-top:40px;">
-          <div class="row">
-            <div class="col-xs-12 col-md-4">
-              <%= image_tag 'landing_page/lizanderson.jpg', class: 'prof_pic' %>
-            </div>
-            <div class="col-xs-12 col-md-8">
-                <blockquote>
-                <i class="fa fa-quote-left" style="float: left; margin-right: 5px;"></i>
-                <p style="text-align: justify;">
-                  TECHRISE is more than a coding camp - it's <strong>a vehicle</strong> for empowering the youth of Nepal with the knowledge and tools they need to <strong>unlock their true economic and personal potential.</strong> Because the TECHRISE model provides former students to also become teachers, the organization is creating a <strong>network effect for sustainable and long-term transformative change</strong>. One student at a time, <strong>TECHRISE is not only changing lives at an individual level, but is also building a highly skilled workforce that has the potential to grow Nepal's economic stability as a whole.</strong>
-                </p>
-
-                </blockquote>
-                <p class="source" style="color:#333;"> Liz Anderson<br /><small>Director of Engagement, Beeck Center for Social Impact + Innovation at Georgetown University</small></p>
-            </div><!--col-xs-12 col-md-8-->                         
-          </div>
-        </div><!--//item-->
-
-        <div class="item">
-          <div class="row">
-            <div class="col-xs-12 col-md-4">
-              <%= image_tag 'landing_page/ganesh.jpg', class: 'prof_pic' %>
-            </div>
-            <div class="col-xs-12 col-md-8">
-                <blockquote>
-                <i class="fa fa-quote-left" style="float: left; margin-right: 5px;"></i>
-                <p style="text-align: justify;">
-                  Its my great pleasure to know that TECHRISE is launching a special skill development IT program specially for Nepali youth. <strong>It will definitely help to develop skilled manpower and provide a great employment opportunity abroad.</strong> Since the education system of Nepal is being a theoretical base, even after graduation in concern faculty, could not fit for the international labour markets. As per present scenario, <strong>more than 6,000,000 Nepalese unskilled workers are working abroad as a labourer</strong>. If we could able to train them as skilled manpower, <strong>it will definitely help Nepal's national economy</strong>. I, therefore wish all the success of TECHRISE and would like to extend my sincere thanks to co-founders of TECHRISE.
-                </p>
-
-                </blockquote>
-                <p class="source" style="color:#333;">Ganesh Man Lama<br /><small>President, Air Asia X Nepal | Managing Director, Incentive Group of Companies</small></p>
-            </div><!--col-xs-12 col-md-8--> 
-          </div>                        
-        </div><!--//item-->
-    </div>
-  </section>
 
 
   <section class="section press">
     <div class="container text-center">
-        <hr>
+
         <h2 class="title">Partnerships</h2>
         <%= image_tag 'http://static1.squarespace.com/static/5390cc63e4b02566a5bb8bf0/t/539718f5e4b076c79e506193/1464376473863/?format=1500w', class: 'partnership_logo' %>        
     </div>

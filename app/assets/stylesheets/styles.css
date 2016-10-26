@@ -580,7 +580,7 @@ select {
 /* ======= Why ======= */
 .why {
   padding-top: 80px;
-  padding-bottom: 80px;
+  padding-bottom: 40px;
 }
 .why .title {
   font-size: 36px;  
@@ -802,6 +802,11 @@ select {
   position: relative;
   left: 2px;
 }
+
+.why .feature-lead {
+  margin-top: 40px;
+}
+
 .why .feature-lead .title {
   font-weight: 300;
   font-size: 16px;
@@ -829,11 +834,21 @@ select {
   height: 10px;
   margin: 1px;
 }
-.testimonials .title {
+
+.testimonials-section .title {
   font-size: 36px;
-  font-weight: 300;
   margin-top: 0;
   margin-bottom: 60px;
+  font-family: 'Lato';
+  font-weight: 600;
+}
+
+.testimonials .title {
+  font-size: 36px;
+  margin-top: 0;
+  margin-bottom: 60px;
+  font-family: 'Lato';
+  font-weight: 400;
 }
 .testimonials .item .profile {
   position: absolute;
@@ -872,8 +887,8 @@ select {
 }
 /* ======= Press ======= */
 .press {
-  padding-top: 80px;
-  padding-bottom: 80px;
+/*  padding-top: 80px;
+  padding-bottom: 80px;*/
 }
 .press .title {
   font-size: 36px;
@@ -2353,6 +2368,7 @@ select {
   max-height: 265px;
   min-height: 265px;
   width: 100%;
+  border-radius: 0px;
 }
 .story-section .team .member .member-inner:hover img {
   -webkit-opacity: 0.8;
@@ -2686,7 +2702,7 @@ select {
   font-size: 14px;
   position: relative;
   z-index: 20;
-  margin-top: -100px;
+  margin-top: -70px;
 }
 .footer p {
   -webkit-opacity: 0.5;
@@ -3118,6 +3134,14 @@ select {
   #topcontrol {
     display: none !important;
   }
+  .header {
+    background: #253340;
+  }
+
+  .header .main-nav .navbar-toggle .icon-bar {
+    background: white;
+  }
+
   .header h1.logo {
     float: none;
     margin: inherit;
@@ -3196,6 +3220,7 @@ select {
   }
   .why .item .content {
     margin-bottom: 60px;
+    padding-bottom: 20px;
   }
   .why .control {
     top: 58px;
@@ -3360,7 +3385,7 @@ select {
     box-shadow: none;
   }
   .header.scrolled .main-nav .nav .nav-item a {
-    color: #fff;
+/*    color: #fff;*/
     -webkit-opacity: 1;
     -moz-opacity: 1;
     opacity: 1;
@@ -3506,8 +3531,8 @@ select {
 /*    padding-top: 25px;*/
   }
   .header.scrolled .main-nav .nav .nav-item a {
-    color: white;
-    -webkit-opacity: 1;
+/*    color: white;
+*/    -webkit-opacity: 1;
     -moz-opacity: 1;
     opacity: 1;
   }
