@@ -25,14 +25,18 @@ class CardsController < ApplicationController
 
     if @card.save!
       @card.tag_list.add(card_params[:tag_list])
+      respond_to do |format|
+        format.json { render json: @card }
+      end    
+    else
+      flash[:alert] = "Invalid attributes, please try again."
+
+      respond_to do |format|
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end  
     end
 
     @due_cards = due_cards
-
-    respond_to do |format|
-      format.html {}
-      format.js {}
-    end
   end
 
   def edit

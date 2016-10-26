@@ -2,15 +2,13 @@ var show_page_trigger;
 show_page_trigger = function(){
   var scroll_sidebar, add_active_to_nav, ready, add_offset;  
 
-  scroll_sidebar = function() {
-    var sidebar, position_sidebar;
-    sidebar = $("#sidebar_container");
+  scroll_sidebar = function(element){    
 
-    position_sidebar = function(){
+    let position_sidebar = function(){
       if (76 - $(window).scrollTop() > 0) {        
-        sidebar.css("top", 76 - $(window).scrollTop());  
+        element.css("top", 76 - $(window).scrollTop());  
       } else {
-        sidebar.css("top", 0);
+        element.css("top", 0);
       }
     }
 
@@ -44,22 +42,12 @@ show_page_trigger = function(){
     var target;
 
     target = document.getElementsByClassName("active");
-    target[0].parentNode.scrollTop = target[0].offsetTop; 
+    // target[0].parentNode.scrollTop = target[0].offsetTop; 
   }
 
-  // scroll to current lesson
-  slider_init = function() {
-    $("#slider").slideReveal({
-      trigger: $(".trigger"), 
-      position: "right",
-      width: 350,
-      speed: 700,
-      top: 0
-    });
-  };  
-
-  scroll_sidebar();
+  scroll_sidebar($(".sidebar_container_right"));
+  scroll_sidebar($("#sidebar-left-trigger"));
   add_active_to_nav();
-  slider_init();
   add_offset();  
+
 }

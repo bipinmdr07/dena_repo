@@ -1,0 +1,82 @@
+.score-display {
+  position: absolute;
+  right: 20px;
+  font-weight: 600;
+  font-size: 22px; 
+}
+
+.quiz-options {
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  transition: 0.5s ease;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.quiz-container {
+  color: #333;  
+  min-height: 350px;
+  word-wrap: break-word;
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  left: 0px;
+}
+
+.quiz-container-inner {
+  background: white;
+  padding: 20px 20px 40px 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.score-enter {
+  opacity: 0.01;
+}
+
+.score-enter.score-enter-active {
+  opacity: 1;
+  transition: opacity 800ms ease-in;
+}
+
+.quiz-enter {
+  opacity: 0.01;
+}
+
+.quiz-enter.quiz-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.quiz-leave {
+  opacity: 0.01;
+}
+
+.option_form_container {
+  border-top: 2px solid #161616;
+  padding-top: 20px;
+  color: white;
+  position: relative;
+
+  .delete_option {
+    position: absolute;
+    top: 6px;
+    right: 0px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+}
+
+.btn-add-option {  
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.quiz-buttons {
+  border-top: 2px solid #161616;
+  padding-top: 20px;
+}

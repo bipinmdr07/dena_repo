@@ -65,8 +65,11 @@
                             <% end %>
 
                             <% if current_user.admin %>
-                                <li class="nav-item page-scroll">
-                                  <%= link_to 'ADMIN DASHBOARD', admin_dashboard_index_path if current_user.admin %>
+                                <li>
+                                  <%= link_to 'ADMIN DASHBOARD', admin_dashboard_index_path %>
+                                </li>
+                                <li>
+                                  <%= link_to 'QUIZ PROBLEMS', admin_quiz_problems_path %>
                                 </li>
                             <% end %>
 
@@ -84,7 +87,7 @@
                             <% end %>
 
                             <li><%= link_to 'SETTINGS', edit_user_registration_path %></li>
-                            <li><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete if user_signed_in? %></li>
+                            <li><%= link_to 'SIGN OUT', destroy_user_session_path, method: :delete %></li>
                         </ul>
 
                     </li><!--//dropdown-->

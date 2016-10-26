@@ -1,8 +1,8 @@
 class IntervalUpdater
 
   def initialize(args)
-    @card = args[:card]
-    @quality_response = args[:quality_response]
+    @card = args.fetch(:card)
+    @quality_response = args.fetch(:quality_response)
   end  
 
   def update_card!

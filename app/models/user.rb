@@ -14,9 +14,13 @@ class User < ApplicationRecord
   has_many :submission_replies, dependent: :destroy
   has_many :questions, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :mentor_sessions
-  has_many :student_sessions  
+  has_many :mentor_sessions, dependent: :destroy
+  has_many :student_sessions, dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id
+  has_many :quiz_submissions, dependent: :destroy
+  has_many :quiz_category_ratings, dependent: :destroy
+  has_many :quiz_completions, dependent: :destroy
+  has_many :quiz_problem_cards, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :package, presence: true, if: :is_student?
