@@ -2,7 +2,7 @@ module StaticPagesHelper
   def skills
 		items = []
     items << ['Ruby', "Learn how to create dynamic apps with Ruby on Rails.", 'Ruby_logo.png']
-		items << ['Ruby on Rails', "Learn how to create dynamic apps with Ruby on Rails.", 'landing_page/ruby_on_rails.png']
+		items << ['Rails', "Learn how to create dynamic apps with Ruby on Rails.", 'landing_page/ruby_on_rails.png']
 		items << ['HTML/CSS', "Craft beautiful front-end designs with HTML and CSS.", 'landing_page/html.png']
 		items << ['JavaScript', "Make your websites interactive with JavaScript and jQuery.", 'landing_page/javascript.png']
 		items << ['Git', "Learn what version control is and how you can use Git to collaborate with other awesome developers.", 'landing_page/github.png']

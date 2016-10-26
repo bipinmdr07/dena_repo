@@ -3134,6 +3134,7 @@ select {
   #topcontrol {
     display: none !important;
   }
+
   .header {
     background: #253340;
   }
@@ -3370,6 +3371,8 @@ select {
     padding: 0;
   }
 }
+
+
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .config-wrapper {
@@ -3377,6 +3380,7 @@ select {
   }
   .header {
     height: inherit;
+    background: #253340;
   }
   .header.scrolled {
     height: auto;
@@ -3503,6 +3507,7 @@ select {
   }
   .header {
     height: 80px;
+    background: none;
   }
   .header.navbar-fixed-top {
     position: fixed;
