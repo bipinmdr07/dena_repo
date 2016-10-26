@@ -443,7 +443,7 @@ select {
   height: 780px;
 }
 .bg-slider-wrapper .flexslider .slide.slide-1 {
-  background: #253340 url('background/bg-header-1.1.jpg') no-repeat 50% top;
+  background: url('https://static.pexels.com/photos/7114/laptop-mobile-large.jpg') no-repeat 50% top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -3560,8 +3560,8 @@ select {
     float: right !important;
   }
   .promo {
-    height: 100%;
-    padding-top: 150px;
+    height: 100vh;
+    padding-top: 180px;
   }
   .promo.section .intro {
     margin-bottom: 45px;
