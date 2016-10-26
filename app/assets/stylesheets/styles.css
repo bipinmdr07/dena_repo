@@ -887,15 +887,12 @@ select {
 }
 /* ======= Press ======= */
 .press {
-/*  padding-top: 80px;
-  padding-bottom: 80px;*/
+  padding: 40px 0px;
 }
 .press .title {
   font-size: 36px;
   font-weight: 300;
   margin-top: 0;
-  margin-bottom: 60px;
-  padding-top: 80px;
 }
 .press .press-list {
   margin-bottom: 15px;
