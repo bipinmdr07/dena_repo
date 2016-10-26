@@ -11,6 +11,7 @@ class QuizOption < ActiveRecord::Base
     return random if random.length <= 4
 
     correct = random.find{|option| option.correct }
-    return random.select{|option| option != correct }[0..3]
+    options = random.select{|option| option != correct }[0..2] << correct
+    options.shuffle
   end
 end

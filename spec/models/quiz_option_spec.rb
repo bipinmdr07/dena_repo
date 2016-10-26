@@ -13,12 +13,13 @@ RSpec.describe QuizOption, type: :model do
     end 
 
     context "there are more than 4 options" do
-      it "returns 4 random options with 1 correct answer" do
+      it "returns 4 random options with atleast 1 correct answer" do
         quiz_problem = FactoryGirl.create(:quiz_problem)
         quiz_options = FactoryGirl.create_list(:quiz_option, 6, quiz_problem: quiz_problem)
-        correct_options = FactoryGirl.create_list(:quiz_option, 2, quiz_problem: quiz_problem, correct: true)
+        correct_options = FactoryGirl.create(:quiz_option, quiz_problem: quiz_problem, correct: true)
 
         expect(quiz_problem.quiz_options.randomize.length).to eq(4)
+        expect(quiz_problem.quiz_options.randomize).to include(correct_options)
       end
     end
   end
