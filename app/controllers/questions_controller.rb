@@ -108,7 +108,7 @@ class QuestionsController < ApplicationController
   def send_slack_notification!
     post_type = @question.mentor_post ? "mentor post" : "question"
 
-    Slack.chat_postMessage(text: 'New ' + post_type + ': <' + question_url(@question) + '|' + @question.title + '> by ' + @question.user_name, 
+    Slack.chat_postMessage(text: 'New ' + post_type + ': <' + question_url(@question.id) + '|' + @question.title + '> by ' + @question.user_name, 
         username: 'TECHRISE Bot', 
         channel: "#forum_questions", 
         icon_emoji: ":smile_cat:") if Rails.env.production?

@@ -51,7 +51,7 @@
 
     <% @questions.each do |question| %>
       <ul class="question_list">
-        <% user = User.find(question.user_id) %>
+        <% user = question.user %>
 
         <% if question.mentor_post %>
           <li class="question_container mentor_post">
@@ -75,7 +75,7 @@
 
             <div class="col-xs-12 col-sm-8">
               <div class="question_content">
-                <h5 class="question_container_title"><%= link_to question.title, question_path(question) %></h5>
+                <h5 class="question_container_title"><%= link_to question.title, question_path(question.id) %></h5>
                 <div class="question_container_information">
                   <span class="question_container_time"><%= time_ago_in_words(question.created_at) %> ago</span> by <span class="question_container_user"><%= user.name %></span>
                 </div><!-- question_container_information -->
@@ -86,7 +86,7 @@
                   <label class="tag_label">MENTOR POST</label>
                 <% else %>
                   <a href="/<%= question.course_name.underscore %>s"><label class="tag_label"><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></label></a>
-                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= question.course_name.constantize::LESSONS[question.lesson_id.to_i - 1] %></label></a>
+                  <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>"><label class="tag_label"><%= question.course_name.constantize::LESSONS[question.lesson_id.to_i - 1].title %></label></a>
                 <% end %>
               </div><!-- question_tags -->
             </div><!-- col-xs-12 col-sm-2 -->
