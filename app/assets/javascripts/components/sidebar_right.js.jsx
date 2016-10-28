@@ -32,7 +32,28 @@ let SidebarRight = React.createClass({
         this.setState({quizProblems: data});
       }
     });
+
+    $(document).bind('click', this.clickDocument);
   },
+
+  componentWillUnmount() {
+    $(document).unbind('click', this.clickDocument);
+  },
+
+  clickDocument: function(e) {
+      let component = ReactDOM.findDOMNode(this.refs.component);
+      if (!(e.target == component || $(component).has(e.target).length)) {          
+        this.setState({showFlashcard: false, showQuestion: false, showQuiz: false, showAdminQuiz: false, showNav: false}, () => {
+          this.slide();
+        }); 
+      } 
+  },
+
+  // handleDocumentClick(){
+  //   this.setState({showFlashcard: false, showQuestion: false, showQuiz: false, showAdminQuiz: false, showNav: false}, () => {
+  //     this.slide();
+  //   });     
+  // },
 
   halfWindowWidth(){
     return $(window).width() / 2;
@@ -260,7 +281,7 @@ let SidebarRight = React.createClass({
 
   render(){
     return(
-      <div className="sidebar_container sidebar_container_right" data-spy="affix" data-offset-bottom="40" style={this.sidebarContainerStyles()}>
+      <div className="sidebar_container sidebar_container_right" data-spy="affix" data-offset-bottom="40" style={this.sidebarContainerStyles()} ref="component">
         <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-right" style={this.sidebarLiWidth()}>
           <li className={this.state.showFlashcard ? "sidebar-active" : "" } onClick={this.toggleFlashcard} style={this.sidebarLiWidth()}>
             <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
