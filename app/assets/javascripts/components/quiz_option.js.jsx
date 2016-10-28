@@ -5,6 +5,10 @@ let QuizOption = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    this.highlightSyntax();
+  },
+
   checked(){      
     return _.contains(this.props.checkedOptionIds, String(this.props.option.id)) || this.state.checked;
   },
@@ -15,6 +19,12 @@ let QuizOption = React.createClass({
       this.setState({checked: !this.state.checked});
       this.props.handleChange(id);
     }
+  },
+
+  highlightSyntax(){
+    $('pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
   },
 
   render(){
@@ -28,7 +38,7 @@ let QuizOption = React.createClass({
                      onClick={this.handleChange}    
                      checked={this.checked()}                     
                      />
-              {this.props.option.content}
+              <div dangerouslySetInnerHTML={{__html: this.props.option.content}} key={this.props.currentPosition}/>
         </label>
       </div>
     )

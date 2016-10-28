@@ -26,6 +26,8 @@ class QuizProblem < ActiveRecord::Base
 
       next if option["content"].blank? || option["correct"].blank?    
 
+      option["content"] = MarkdownParser.new(option["content"]).parsed
+
       self.quiz_options.create!(option)
 
       has_correct_answer = true if option["correct"] == "true"
