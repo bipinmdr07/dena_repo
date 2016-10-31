@@ -1,0 +1,2 @@
+class FilmsterLessonsController < LessonsController
+end
