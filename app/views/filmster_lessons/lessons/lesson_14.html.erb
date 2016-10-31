@@ -1,0 +1,192 @@
+<p>
+  Create a new Javascript file called <code>main.js</code> inside of the <code>app/javascripts</code> directory.
+</p>
+
+<p>
+  Inside of this file, add the following lines of code that we just used in the video above.
+</p>
+
+<pre><code class="javascript">
+$(function(){
+  $.ajax({
+    url: 'http://www.omdbapi.com/?',
+    data: "s=spiderman"
+  })
+  .done(function(data){
+    console.log(data);
+  });
+})
+</code></pre>
+
+<p>
+  Now everytime we load the page, the AJAX request is going to be performed. Save the file and refresh the page. Your Google Chrome Developer Tools console should now display some data with movies that include "Spiderman" in the title.
+</p>
+
+<p>
+  We've made our first AJAX request to an API, but how do we actually make use of this data that we received as a response from the server?
+</p>
+
+<h2>Displaying the data</h2>
+
+<p>
+  The first step is to create a <code>div</code> with an <code>id</code> of <code>movies</code> in <code>index.html.erb</code>. We are going to be dynamically appending new HTML elements to this element.
+</p>
+
+<p>
+  The next step is to create a Javascript variable that will hold a string containing HTML.
+</p>
+
+<p>
+  Create a new variable called <code>htmlString</code> and initialize it to an empty string:
+</p>
+
+<pre><code class="javascript">
+$(function(){
+  $.ajax({
+    url: 'http://www.omdbapi.com/?',
+    data: "s=superman"
+  })
+  .done(function(data){
+    let htmlString = "";
+  });
+})
+</code></pre>
+
+<p>
+  Our strategy is to add on to <code>htmlString</code> to build an HTML string, so that we can display it to the page.
+</p>
+
+<p>
+  Next, let's take the values in the <code>"Search"</code> key in the JSON data and loop through each one.
+</p>
+
+<p>
+  We can do this with the <code>forEach</code> method. The <code>forEach</code> method is much like <code>each</code> in Ruby - it allows us to iterate through objects.
+</p>
+
+<p>
+  Inside the <code>forEach</code> loop, we are going to add an HTML paragraph containing the movie title:
+</p>
+
+<pre><code class="javascript">
+$(function(){
+  $.ajax({
+    url: 'http://www.omdbapi.com/?',
+    data: "s=superman"
+  })
+  .done(function(data){
+    let htmlString = "";
+
+    data["Search"].forEach(function(movie){
+      htmlString += `&lt;p&gt;${movie["Title"]}&lt;/p&gt;`;
+    });
+
+  });
+})
+</code></pre>
+
+<p>
+  Finally, we are going to append the string inside of <code>htmlString</code> to the <code>#movies</code> div:
+</p>
+
+<pre><code class="javascript">
+$(function(){
+  $.ajax({
+    url: 'http://www.omdbapi.com/?',
+    data: "s=superman"
+  })
+  .done(function(data){
+    let htmlString = "";
+
+    data["Search"].forEach(function(movie){
+      htmlString += `&lt;p&gt;${movie["Title"]}&lt;/p&gt;`;
+    });
+
+    $("#movies").append(htmlString);
+  });
+})
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see all of the movie titles displayed on the page!
+</p>
+
+<p>
+  You can even try changing the <code>data</code> being passed in the AJAX request to see the title names change.
+</p>
+
+<h2>Overview</h2>
+
+<ul>
+  <li>We use AJAX to perform a GET request to the OMDb API</li>
+  <li>We receive data back and respond with <code>done</code></li>
+  <li>We create a Javascript variable called <code>htmlString</code> to hold a string of HTML</li>
+  <li>We loop through each movie in the search result and add the movie title to <code>htmlString</code></li>
+  <li>We append <code>htmlString</code> to the <code>#movies</code> element</li>
+</ul>
+
+<p>
+  Once you understand this flow, using AJAX to display elements on to the web page is fairly easy.
+</p>
+
+<h2>Refactoring</h2>
+
+<p>
+  Let's move the function after <code>.done</code> into a seperate function to make it a little bit cleaner:
+</p>
+
+
+<pre><code class="javascript">
+$(function(){
+  $.ajax({
+    url: 'http://www.omdbapi.com/?',
+    data: "s=superman"
+  })
+  .done(function(data){
+    displayMovies(data);
+  });
+
+  function displayMovies(data){
+    let htmlString = "";
+
+    data["Search"].forEach(function(movie){
+      htmlString += `&lt;p&gt;${movie["Title"]}&lt;/p&gt;`;
+    });
+
+    $("#movies").append(htmlString);
+  }
+});
+</code></pre>
+
+<p>
+  Next, let's not only display the title, but also the year and the poster image. Change your <code>displayMovies</code> function to look like this:
+</p>
+
+<pre><code class="javascript">
+function displayMovies(data){
+  let htmlString = "";
+
+  data["Search"].forEach(function(movie){
+    htmlString += `&lt;img src=${movie["Poster"]} /&gt;
+                   &lt;p&gt;${movie["Title"]}&lt;/p&gt;
+                   &lt;p&gt;${movie["Year"]}&lt;/p&gt;`;
+  });
+
+  $("#movies").append(htmlString);
+}
+</code></pre>
+
+<p>
+  You should now see the image, title, and year of each movie. Awesome! 
+</p>
+
+
+
+
+
+
+
+
+
+
+

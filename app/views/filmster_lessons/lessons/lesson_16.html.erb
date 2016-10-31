@@ -1,0 +1,175 @@
+<p>
+  Right now we are currently displaying all of the movies. This is cool, but what if we could display the details of a movie without refreshing the page?
+</p>
+
+<p>
+  If we look back at the API documentation, <strong>we can fetch data about a specific movie using the imdbID attribute.</strong> When we search for movies, the API gives us the imdbID, so we can use that imdbID to fetch information the movie.
+</p>
+
+<p>
+  Here's what the overall flow will look like:
+</p>   
+
+<ul>
+  <li>Search movie</li>
+  <li>API responds back with JSON data containing <code>"Title"</code>, <code>"Year"</code>, <code>"imdbID"</code>, <code>"Type"</code>, and <code>"Poster"</code></li>
+  <li>When the user clicks on the poster image, it will replace the HTML with details about the movie using the <code>imdbID</code></li>
+  <ul>
+    <li>Make an AJAX request sending the <code>imdbID</code> as a parameter</li>
+    <li>Use the response data to display information about the movie</li>
+  </ul> 
+</ul>
+
+<p>
+  Let's take it step by step.
+</p>
+
+<h2>Responding to a click on the image</h2>
+
+<p>
+  We can trigger a function call when the image is clicked with the <code>on</code> handler.
+</p>
+
+<p class="standard_git_workflow">
+Read <%= link_to 'this resource', 'http://www.w3schools.com/jquery/event_on.asp', target: '_blank' %> to understand more about the <code>on</code> handler.
+</p>
+
+<p>
+  Let's setup the click handler. Inside the function in <code>main.js</code>, add the following lines of code:
+</p>
+
+<pre><code class="javascript">
+$('#movies').on('click', 'img', function(e){
+  e.preventDefault();
+  alert("Hi");
+});
+</code></pre>
+
+<p>
+  Save the file and refresh the page. Search for a movie and click on one of the images. You should be alerted "Hi".
+</p>
+
+<p>
+  Instead of alerting our users, we should make AJAX request to the API instead.
+</p>
+
+<p>
+  If we look back at the documentation, we see that we can use the <code>i</code> parameter to fetch data using the <code>imdbID</code>.
+</p>
+
+<p>
+  Let's erase the <code>alert</code> and make an AJAX request, passing in the <code>imdbID</code>:
+</p>
+
+<pre><code class="javascript">
+$('#movies').on('click', 'img', function(e){
+  e.preventDefault();
+  
+  $.ajax({
+    url: `http://www.omdbapi.com/?`,
+    data: {i: id}
+  })
+  .done(function(data){
+    console.log(data)
+  })
+});
+</code></pre>
+
+<p>
+  However, this won't work, since we haven't defined <code>id</code> yet. What we need to do is assign <code>id</code> to the <code>imdbID</code>. <strong>How can we achieve this?</strong>
+</p>
+
+<h2>Data Attributes</h2>
+
+<p>
+  Data attributes are used to store data on the page or application, so that we can use that data to create a richer user experience.
+</p>
+
+<p class="standard_git_workflow">
+Read more about data attributes <%= link_to 'here', 'http://www.w3schools.com/tags/att_global_data.asp', target: '_blank' %>.
+</p>
+
+<p>
+  We can assign a <strong>data attribute</strong> to each of the poster images, and set it the <code>imdbID</code> for each movie. Then, we can use JavaScript to get the data attribute for the image that was clicked, and use that to make our AJAX request.
+</p>
+
+<p>
+  The first step is to set the data attribute for each image. In our <code>displayMovies</code> function, let's assign a <code>data-id</code> to each image:
+</p>
+
+
+<pre><code class="javascript">
+function displayMovies(data){
+  let container = $("#movies")
+  let htmlString = "";
+
+  container.empty();
+
+  if (data["Response"] == "False") {
+    htmlString = `&lt;div class="alert alert-danger text-center" role="alert"&gt;${data["Error"]}&lt;/div&gt;`
+  } 
+  else {
+
+    data["Search"].forEach(function(movie){
+      htmlString += `&lt;img src=${movie["Poster"] == "N/A" ? "/images/your_default_image.png" : movie["Poster"]} data-id="${movie['imdbID']}" /&gt;
+                     &lt;p&gt;${movie["Title"]}&lt;/p&gt;
+                     &lt;p&gt;${movie["Year"]}&lt;/p&gt;`;
+    });
+  }
+
+  container.append(htmlString);
+}
+</code></pre>
+
+<p>
+  Notice the change in the <code>img</code>. We simply assign <code>data-id</code> to the <code>imdbID</code> attribute for each movie.
+</p>
+
+<p>
+  Next, here's how we can fetch the <code>data-id</code> for each image: 
+</p>  
+
+<pre><code class="javascript">
+$('#movies').on('click', 'img', function(e){
+  e.preventDefault();
+  
+  let id = $(e.target).data('id');
+
+  $.ajax({
+    url: "http://www.omdbapi.com/?",
+    data: {i: id}   
+  })
+  .done(function(data){
+    console.log(data)
+  })
+});
+</code></pre>
+
+<p>
+  Now if we refresh the page, search for a movie, and click on an image, we will see that information about a movie is displayed in our console.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Create a <code>displayMovie</code> function</li>
+  <li>Replace the <code>console.log</code> with <code>displayMovie</code>. <code>displayMovie</code> should trigger once the AJAX request has been completed.</li>
+  <li>Implement a solution to display the information given in the response onto the webpage dynamically</li>
+  <ul>
+    <li>All relevant information about the movie should be displayed</li>
+    <li>Refer back to what we did in <code>displayMovies</code> to get a hint on how to display the information based on the API response</li>
+    <li>Feel free to design the UI how you want it</li>
+  </ul>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
