@@ -150,6 +150,9 @@ Rails.application.routes.draw do
   get 'mvc_lessons', to: 'mvc_lessons#index', as: 'mvc'
   get 'mvc_lessons/:id', to: 'mvc_lessons#show', as: 'mvc_lessons'
 
+  get 'filmster_lessons', to: 'filmster_lessons#index', as: 'filmster'
+  get 'filmster_lessons/:id', to: 'filmster_lessons#show', as: 'filmster_lessons'
+
   get 'skill_academy_lessons', to: 'skill_academy_lessons#index', as: 'skill_academy'
   get 'skill_academy_lessons/:id', to: 'skill_academy_lessons#show', as: 'skill_academy_lessons'
 
