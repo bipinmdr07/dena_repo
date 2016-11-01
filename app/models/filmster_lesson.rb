@@ -44,10 +44,10 @@ class FilmsterLesson < Lesson
     Lesson.new(16, "Displaying individual movie details", CHAPTERS[5]),
 
     Lesson.new(17, "Saving movies into the database", CHAPTERS[6]),
-    Lesson.new(18, "Setting up ratings", CHAPTERS[6]),
-    Lesson.new(19, "Service Objects", CHAPTERS[6]),
-    Lesson.new(20, "Building the movie show page", CHAPTERS[6]),
-    Lesson.new(21, "Setting up upvotes", CHAPTERS[6]),
+    Lesson.new(18, "Setting up reviews", CHAPTERS[6]),
+    Lesson.new(19, "Extracting logic into Service Objects", CHAPTERS[6]),
+    Lesson.new(20, "Self-Directed Lesson: Building the movie show page", CHAPTERS[6]),
+    Lesson.new(21, "Self-Directed Lesson: Setting up upvotes", CHAPTERS[6]),
 
     Lesson.new(22, "Masonry Plugin", CHAPTERS[7]),
 
@@ -59,8 +59,8 @@ class FilmsterLesson < Lesson
 
     Lesson.new(27, "ActionMailer", CHAPTERS[10]),
 
-    Lesson.new(28, "Querying for ratings by following users", CHAPTERS[11]),
-    Lesson.new(29, "Self-Directed Lesson: Displaying the ratings using AJAX", CHAPTERS[11]),
+    Lesson.new(28, "Querying for reviews by following users", CHAPTERS[11]),
+    Lesson.new(29, "Self-Directed Lesson: Displaying the reviews using AJAX", CHAPTERS[11]),
 
     Lesson.new(30, "Displaying most reviewed movies", CHAPTERS[12]),
     Lesson.new(31, "Displaying recently reviewed movies", CHAPTERS[12]),

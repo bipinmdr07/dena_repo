@@ -1,0 +1,328 @@
+<p>
+  In the previous lesson, we wrote the <code>create</code> action of the <code>reviews_controller.rb</code>. As you might have noticed, the code became really long.
+</p>
+
+<p>
+  <strong>When the code in your controller is really long, think of it as a warning sign - you're probably doing something wrong.</strong> For the most part, controllers should be short.
+</p>
+
+<p>
+  In our case, we are doing too many things in the controller; we're seeing if the movie exists, and if not, we communicate with an outside API, set the appropriate attributes, create a new review in the database, etc.
+</p>
+
+<p>
+  What we should do is extract some of the logic we have in the controller and place it in a <strong>service object</strong>.
+</p>  
+
+<div class="well">
+  <h2>Reading Assignment</h2>
+
+  <ul>
+    <li><%= link_to 'Keeping your classes small and maintainable with Service Objects', 'https://reinteractive.net/posts/268-keeping-your-classes-small-and-maintainable-with-service-objects', target: '_blank' %></li>
+  </ul>
+</div>
+
+<p>
+  Service objects are plain ruby objects that we can use inside of our Rails application to handle some of the business logic. Remember the Object Oriented Programming that you did way back in the course? We haven't used it much in any of our Rails apps yet, but they're actually quite important once your applications start becoming more advanced.
+</p>
+
+<p>
+  This is our super long controller code currently:
+</p>      
+
+<pre><code class="ruby">
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!  
+
+  def create
+    @movie = Movie.find_or_initialize_by(imdbid: params[:imdbid])
+
+    if @movie.new_record?
+      # fetch movie data from API using params[:imdbid]
+      @fetched_movie = Omdb::Api.find_by(id: params[:imdbid])
+
+      # create a new Movie based on the response data
+      @movie.title = @fetched_movie.title
+      @movie.year = @fetched_movie.year
+      @movie.rated = @fetched_movie.rated
+      @movie.released = @fetched_movie.released
+      @movie.runtime = @fetched_movie.runtime
+      @movie.genre = @fetched_movie.genre
+      @movie.director = @fetched_movie.director
+      @movie.writer = @fetched_movie.writer
+      @movie.actors = @fetched_movie.actors
+      @movie.plot = @fetched_movie.plot
+      @movie.language = @fetched_movie.language
+      @movie.country = @fetched_movie.country
+      @movie.awards = @fetched_movie.awards
+      @movie.poster = @fetched_movie.poster
+      @movie.metascore = @fetched_movie.metascore
+      @movie.imdbrating = @fetched_movie.imdbrating
+      @movie.imdbvotes = @fetched_movie.imdbvotes
+      @movie.imdbid = @fetched_movie.imdbid
+
+      @movie.save
+    end
+
+    # create a new review and connect it to the current_user and the movie
+    @review = current_user.reviews.new(review_params.merge(movie: @movie))
+
+    if @review.save
+      flash[:success] = "Review saved!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Woops! It seems there was an error."
+      redirect_to root_path
+    end
+    
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:comment)
+  end
+end
+</code></pre>  
+
+<p>
+  What we're going to do is extract everything above <code>@review = current_user.reviews.new(review_params.merge(movie: @movie))</code> and move it to a service object.
+</p>
+
+<H2>Creating a Service Object</H2>
+
+<p>
+  First, create a directory called <code>services</code> inside <code>app</code>.
+</p>
+
+<p>
+  In order for our Rails application to be able to start using the ruby files inside <code>app/services</code>, we need to include them. Inside <code>application.rb</code>, add the following line of code inside the <code>Application</code> class:
+</p>
+
+<pre><code class="ruby">
+# Load services
+config.autoload_paths &lt;&lt; Rails.root.join('services')
+</code></pre>
+
+<p>
+  Next, create a file called <code>movie_builder.rb</code> inside of <code>app/services</code>.
+</p>
+
+<p>
+  Open <code>movie_builder.rb</code> and create a new class called <code>MovieBuilder</code>:
+</p>
+
+<pre><code class="ruby">
+class MovieBuilder
+
+end
+</code></pre>
+
+<p>
+  Let's create a constructor method:
+</p>
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize
+
+  end
+end
+</code></pre>
+
+<p>
+  Let's add <code>imdbid</code> as the constructor argument:
+</p>
+
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize(imdbid)
+    @imdbid = imdbid
+  end
+end
+</code></pre>
+
+<p>
+  Ruby allows us to set required keyword arguments. 
+</p>  
+
+<p class="standard_git_workflow">
+  Read about keyword arguments in Ruby <%= link_to 'here', 'https://robots.thoughtbot.com/ruby-2-keyword-arguments', target: '_blank' %>.
+</p>
+
+<p>
+  Let's change our <code>initialize</code> method to require <code>imdbid</code>:
+</p>
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize(imdbid:)
+    @imdbid = imdbid
+  end
+end
+</code></pre>
+
+<p>
+  In the constructor, what we want to do is find a <code>Movie</code> based on the <code>imdbid</code> passed in as an argument, or initialize it. That means we can do the following:
+</p>  
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize(imdbid:)
+    @imdbid = imdbid
+    @movie = Movie.find_or_initialize_by(imdbid: @imdbid)
+  end
+end
+</code></pre>
+
+<p>
+  Next, let's create a <code>build!</code> method. Notice how we include a bang operator in the method name. This is a common convention - whenever we are changing something, put <code>!</code> at the end of the method name. This tells other developers that might work on the codebase that the method will change something in the application.
+</p>
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize(imdbid:)
+    @imdbid = imdbid
+    @movie = Movie.find_or_initialize_by(imdbid: @imdbid)
+  end
+
+  def build!
+
+  end
+end
+</code></pre>
+
+<p>
+  Inside this <code>build!</code> method, let's extract all of the logic we had in the controller and put it here.
+</p>
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize(imdbid:)
+    @imdbid = imdbid
+    @movie = Movie.find_or_initialize_by(imdbid: @imdbid)
+  end
+
+  def build!
+    if @movie.new_record?
+    
+      @fetched_movie = Omdb::Api.find_by(id: @imdbid)
+
+      @movie.title = @fetched_movie.title
+      @movie.year = @fetched_movie.year
+      @movie.rated = @fetched_movie.rated
+      @movie.released = @fetched_movie.released
+      @movie.runtime = @fetched_movie.runtime
+      @movie.genre = @fetched_movie.genre
+      @movie.director = @fetched_movie.director
+      @movie.writer = @fetched_movie.writer
+      @movie.actors = @fetched_movie.actors
+      @movie.plot = @fetched_movie.plot
+      @movie.language = @fetched_movie.language
+      @movie.country = @fetched_movie.country
+      @movie.awards = @fetched_movie.awards
+      @movie.poster = @fetched_movie.poster
+      @movie.metascore = @fetched_movie.metascore
+      @movie.imdbrating = @fetched_movie.imdbrating
+      @movie.imdbvotes = @fetched_movie.imdbvotes
+      @movie.imdbid = @fetched_movie.imdbid
+    
+    end
+
+    @movie.save! 
+
+    return @movie
+  end
+end
+</code></pre> 
+
+<p>
+  We can refactor this code by using a guard clause. 
+</p>
+
+<p class="standard_git_workflow">
+Read about gaurd clauses <%= link_to 'here', 'http://www.thechrisoshow.com/2009/02/16/using-guard-clauses-in-your-ruby-code/', target: '_blank' %>.
+</p>
+
+<pre><code class="ruby">
+class MovieBuilder
+  def initialize(imdbid:)
+    @imdbid = imdbid
+    @movie = Movie.find_or_initialize_by(imdbid: @imdbid)
+  end
+
+  def build!
+    return @movie unless @movie.new_record?
+    
+    @fetched_movie = Omdb::Api.find_by(id: @imdbid)
+
+    @movie.title = @fetched_movie.title
+    @movie.year = @fetched_movie.year
+    @movie.rated = @fetched_movie.rated
+    @movie.released = @fetched_movie.released
+    @movie.runtime = @fetched_movie.runtime
+    @movie.genre = @fetched_movie.genre
+    @movie.director = @fetched_movie.director
+    @movie.writer = @fetched_movie.writer
+    @movie.actors = @fetched_movie.actors
+    @movie.plot = @fetched_movie.plot
+    @movie.language = @fetched_movie.language
+    @movie.country = @fetched_movie.country
+    @movie.awards = @fetched_movie.awards
+    @movie.poster = @fetched_movie.poster
+    @movie.metascore = @fetched_movie.metascore
+    @movie.imdbrating = @fetched_movie.imdbrating
+    @movie.imdbvotes = @fetched_movie.imdbvotes
+    @movie.imdbid = @fetched_movie.imdbid
+    
+    @movie.save! 
+
+    return @movie
+  end
+end
+</code></pre> 
+
+<p>
+  Great, now that we've extracted the logic out of the controller, let's refactor our controller code:
+</p>
+
+<pre><code class="ruby">
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!  
+
+  def create
+    @movie = MovieBuilder.new(imdbid: params[:imdbid]).build!
+
+    # create a new review and connect it to the current_user and the movie
+    @review = current_user.reviews.new(review_params.merge(movie: @movie))
+
+    if @review.save
+      flash[:success] = "Review saved!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Woops! It seems there was an error."
+      redirect_to root_path
+    end
+    
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:comment)
+  end
+end
+</code></pre>  
+
+<p>   
+  Wow! This code is so much cleaner than what we had before. By extracting the logic outside of the controller, not only did we make it easier to read, we also made the logic reusable. If we wanted to use the <code>MovieBuilder</code> outside of the <code>ReviewsController</code> class, we could!
+</p>
+
+
+
+
+
+
+
+
