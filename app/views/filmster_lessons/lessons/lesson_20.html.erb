@@ -1,0 +1,37 @@
+<p>
+  Now that users can post reviews about movies, let's display them onto a page along with the movie information.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Display all movie information</li>
+  <li>Display all reviews for the movie</li>
+  <ul>
+    <li>If there are no reviews yet, display "No one has reviewed this movie yet"</li>
+  </ul>
+  <li>If the user has not reviewed the movie yet, display a form for posting a new review</li>
+</ul>
+
+<h2>Hints</h2>
+
+<p>
+  To check if the current user has reviewed the movie already, create a model method called <code>reviewed?</code> that takes in a parameter called <code>movie</code>, that checks if the user has reviewed the movie, and returns <code>true</code> or <code>false</code>. We can then call the model method like this:
+</p>
+
+<pre><code class="ruby">
+current_user.reviewed?(@movie)
+</code></pre>
+
+<h2>Check Points before you Submit</h2>
+
+<ul>
+  <li>Are you using delegation?</li>
+  <li>Are you using eager loading?</li>
+</ul>
+
+<p>
+  Submit your Github repository and link to your Heroku application before for a code review.
+</p>
+
+<% @submission_form = true %>
