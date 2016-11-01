@@ -1,0 +1,127 @@
+<p>
+  In Instapost, you might have implemented user following using a popular gem called <code>ActsAsFollower</code>. In this course, we are going to implement user following by ourselves!
+</p>
+
+<p>
+  <strong>Here's our strategy.</strong>
+</p>
+
+<p>
+  We are going to create a <code>relationships</code> table with two columns: <code>follower_id</code> and <code>followed_id</code>. These columns will store the <code>user_id</code> of the user being followed and the user that is following the user.
+</p>
+
+<p>
+  This is called a <strong>join table</strong>. Join tables are tables that store the <code>id</code> of two different tables. We can use the join table to fetch the users that a user follows, or the users that the user is followed by. We will get to this later on in the lesson.
+</p>
+
+<%= image_tag 'filmster/relationship_model.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's generate our <code>relationship</code> model.
+</p>
+
+<pre><code class="bash">
+rails g model relationship follower:references followed:references
+</code></pre>
+
+<p>
+  Check to see if the migration files were correctly generated and run <code>rake db:migrate</code>.
+</p>
+
+<p>
+  <strong>Next, let's setup the database relations.</strong> Inside <code>relationship.rb</code>, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+belongs_to :follower, class_name: "User"
+belongs_to :followed, class_name: "User"
+</code></pre>
+
+<p>
+  Until now, we never had to use <code>class_name</code> to specify the class of the database relationship. Rails automatically detects the class name of the relationship, but in our case we need to manually specify it since we don't have a <code>followers</code> table nor a <code>followed</code> table.
+</p>
+
+<p>
+  Next, let's add validations to make sure that there is always a <code>follower</code> and <code>followed</code> relationship:
+</p>
+
+<pre><code class="ruby">
+validates :follower, :followed, presence: true
+</code></pre>
+
+<p>
+  Lastly, let's make sure that no duplicate <code>Relationship</code> objects are saved in the database. In other words, we need to make sure that users can't follow a user more than once. Add the following line of code:
+</p>
+
+<pre><code class="ruby">
+validates :followed_id, uniqueness: {scope: :follower_id}
+</code></pre>
+
+<p>
+  <strong>Next, in your <code>user.rb</code>, let's define the database relationships.</strong>
+</p>
+
+<p>
+  <strong>A user should have many following relationships and followed relationships.</strong> If a user is followed by another user, then that goes into followed relationships. On the other hand, if a user follows another user, then that is a following relationship.
+</p>
+
+<p>
+  Inside your <code>user.rb</code> file, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+has_many :following_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
+has_many :followed_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent: :destroy
+</code></pre>
+
+<p>
+  Again, we are specifying the class name manually, since there are no <code>following_relationships</code> or <code>followed_relationships</code>.
+</p> 
+
+<p>
+  Since <code>following_relationships</code> refers to the relationships in which the user is follower, we set the foreign key to <code>follower_id</code>. Similarly, since <code>followed_relationships</code> refers to the relationships in which the user is followed, we set the foreign key to <code>followed_id</code>.
+</p>
+
+<p>
+  We've now setup the relationship between <code>Relationship</code> and <code>User</code>, but what if we want to fetch all of the following users or all of the followed users?
+</p>  
+
+<p>
+  For this situation, we can use the <strong>has_many :through</strong> association.
+</p>
+
+<p class="standard_git_workflow">
+Read more about the has_many :through association in this <%= link_to 'Rails Guides', 'http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association', target: '_blank' %>.
+</p>
+
+<%= image_tag 'filmster/has_many_through.png', class: 'img-responsive screenshot' %>
+
+<p>
+  In the <code>user.rb</code> file, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+has_many :following_users, through: :following_relationships, source: :followed
+has_many :followed_users, through: :followed_relationships, source: :follower
+</code></pre>
+
+<p class="standard_git_workflow">
+  Read about the <code>source</code> option in <%= link_to 'this StackOverflow post', 'http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails', target: '_blank' %>.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
