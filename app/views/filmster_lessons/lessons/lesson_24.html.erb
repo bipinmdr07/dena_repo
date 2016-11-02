@@ -1,115 +1,109 @@
 <p>
-  In Instapost, you might have implemented user following using a popular gem called <code>ActsAsFollower</code>. In this course, we are going to implement user following by ourselves!
+  Next, let's build a feature where users can view the users that follow the user and the users that the user is following.
 </p>
 
 <p>
   <strong>Here's our strategy.</strong>
 </p>
 
-<p>
-  We are going to create a <code>relationships</code> table with two columns: <code>follower_id</code> and <code>followed_id</code>. These columns will store the <code>user_id</code> of the user being followed and the user that is following the user.
-</p>
+<ul>
+  <li>When a user clicks on <code>#user-following</code></li>
+  <ul>
+    <li>Use Javascript to render a list of users that the user follows</li>
+  </ul> 
+  <li>When a user clicks on <code>#user-followers</code></li>
+  <ul>
+    <li>Use Javascript to render a list of followers that the user has</li>
+  </ul>
+</ul>
 
 <p>
-  This is called a <strong>join table</strong>. Join tables are tables that store the <code>id</code> of two different tables. We can use the join table to fetch the users that a user follows, or the users that the user is followed by. We will get to this later on in the lesson.
+  First, inside of the function we wrote inside the <code>script</code> tag inside <code>users/show.html.erb</code>, let's create an empty Javascript object:
 </p>
 
-<%= image_tag 'filmster/relationship_model.png', class: 'img-responsive screenshot' %>
-
-<p>
-  Let's generate our <code>relationship</code> model.
-</p>
-
-<pre><code class="bash">
-rails g model relationship follower:references followed:references
+<pre><code class="javascript">
+let userData = {};
 </code></pre>
 
 <p>
-  Check to see if the migration files were correctly generated and run <code>rake db:migrate</code>.
+  When the page is loaded, we wrote some code that makes an AJAX request to get information about the user. Let's store the data we get back from the server into <code>userData</code>, so we can use reuse it and prevent ourselves from having to make multple AJAX requests to get the same data.
 </p>
 
 <p>
-  <strong>Next, let's setup the database relations.</strong> Inside <code>relationship.rb</code>, add the following lines of code:
+  Next, let's add the <code>following_relationships</code> and <code>followed_relationships</code> for each user in our <code>show.json.jbuilder</code> file:
 </p>
 
-<pre><code class="ruby">
-belongs_to :follower, class_name: "User"
-belongs_to :followed, class_name: "User"
+<pre><code>
+json.id @user.id
+json.username @user.username
+json.introduction @user.introduction
+json.avatar_url @user.avatar_url
+json.reviews do
+  json.array! @user.reviews do |review|
+    json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
+    json.comment review.comment
+  end
+end
+json.following_relationships do
+  json.array! @user.following_relationships do |following_relationship|
+    json.user following_relationship.followed, :id, :username, :introduction, :avatar_url
+  end
+end
+json.followed_relationships do
+  json.array! @user.followed_relationships do |followed_relationship|
+    json.user followed_relationship.follower, :id, :username, :introduction, :avatar_url  
+  end
+end
 </code></pre>
 
 <p>
-  Until now, we never had to use <code>class_name</code> to specify the class of the database relationship. Rails automatically detects the class name of the relationship, but in our case we need to manually specify it since we don't have a <code>followers</code> table nor a <code>followed</code> table.
+  Now if we go to <code>/users/1.json</code>, we see that we have an array of <code>following_relationships</code> and <code>followed_relationships</code>.
 </p>
 
 <p>
-  Next, let's add validations to make sure that there is always a <code>follower</code> and <code>followed</code> relationship:
+  Inside our <code>script</code> tag, let's write some Javascript so that a list of users that the user is following is rendered when the user clicks on <code>#user-following</code>:
 </p>
 
-<pre><code class="ruby">
-validates :follower, :followed, presence: true
+<pre><code class="javascript">
+$('#user-following').on('click', function(e){  
+  getFollowing();
+});
 </code></pre>
 
 <p>
-  Lastly, let's make sure that no duplicate <code>Relationship</code> objects are saved in the database. In other words, we need to make sure that users can't follow a user more than once. Add the following line of code:
+  Next, let's implement the <code>getFollowing()</code> method that we are calling above:
 </p>
 
-<pre><code class="ruby">
-validates :followed_id, uniqueness: {scope: :follower_id}
+<pre><code class="javascript">
+function getFollowing(){
+  // your implementation here
+}
 </code></pre>
 
-<p>
-  <strong>Next, in your <code>user.rb</code>, let's define the database relationships.</strong>
-</p>
+<h2>Tasks</h2>
+
+<ul>
+  <li>Implement the <code>getFollowing()</code> method</li>
+  <ul>
+    <li>If there are no users that the user follows, then display a message saying "This user has not followed any users yet"</li>
+    <li>It should render the list of users that the user follows inside <code>#movie</code></li>
+  </ul>
+  
+  <li>Implement the same feature for followers. When a user clicks on <code>#user-followers</code>, it should render a list of followers inside <code>#movies</code></li>
+</ul>
+
+<h2>Hints</h2>
+
+<ul>
+  <li>You can access the <code>following_relationships</code> with <code>userData.following_relationships</code> and <code>followed_relationships</code> with <code>userData.followed_relationships</code></li>
+  <li>Use <code>forEach</code> to iterate through each relationship</li>
+</ul>
 
 <p>
-  <strong>A user should have many following relationships and followed relationships.</strong> If a user is followed by another user, then that goes into followed relationships. On the other hand, if a user follows another user, then that is a following relationship.
+  Submit your Github repository and your link to your Heroku application.
 </p>
 
-<p>
-  Inside your <code>user.rb</code> file, add the following lines of code:
-</p>
-
-<pre><code class="ruby">
-has_many :following_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
-has_many :followed_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent: :destroy
-</code></pre>
-
-<p>
-  Again, we are specifying the class name manually, since there are no <code>following_relationships</code> or <code>followed_relationships</code>.
-</p> 
-
-<p>
-  Since <code>following_relationships</code> refers to the relationships in which the user is follower, we set the foreign key to <code>follower_id</code>. Similarly, since <code>followed_relationships</code> refers to the relationships in which the user is followed, we set the foreign key to <code>followed_id</code>.
-</p>
-
-<p>
-  We've now setup the relationship between <code>Relationship</code> and <code>User</code>, but what if we want to fetch all of the following users or all of the followed users?
-</p>  
-
-<p>
-  For this situation, we can use the <strong>has_many :through</strong> association.
-</p>
-
-<p class="standard_git_workflow">
-Read more about the has_many :through association in this <%= link_to 'Rails Guides', 'http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association', target: '_blank' %>.
-</p>
-
-<%= image_tag 'filmster/has_many_through.png', class: 'img-responsive screenshot' %>
-
-<p>
-  In the <code>user.rb</code> file, add the following lines of code:
-</p>
-
-<pre><code class="ruby">
-has_many :following_users, through: :following_relationships, source: :followed
-has_many :followed_users, through: :followed_relationships, source: :follower
-</code></pre>
-
-<p class="standard_git_workflow">
-  Read about the <code>source</code> option in <%= link_to 'this StackOverflow post', 'http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails', target: '_blank' %>.
-</p>
-
-
+<% @submission_form = true %>
 
 
 

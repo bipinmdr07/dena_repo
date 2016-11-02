@@ -16,6 +16,7 @@ class FilmsterLesson < Lesson
     Chapter.new("Creating a Fluid UI"),
     Chapter.new("Building the User Profile Page"),
     Chapter.new("Building Follow Functionality"),
+    Chapter.new("Building Upvoting Functionality"),
     Chapter.new("Sending Emails"),
     Chapter.new("Building the Timeline Feature"),
     Chapter.new("Displaying Useful Information"),
@@ -47,26 +48,26 @@ class FilmsterLesson < Lesson
     Lesson.new(18, "Setting up reviews", CHAPTERS[6]),
     Lesson.new(19, "Extracting logic into Service Objects", CHAPTERS[6]),
     Lesson.new(20, "Self-Directed Lesson: Building the movie show page", CHAPTERS[6]),
-    Lesson.new(21, "Self-Directed Lesson: Setting up upvotes", CHAPTERS[6]),
 
-    Lesson.new(22, "Masonry Plugin", CHAPTERS[7]),
+    Lesson.new(21, "Masonry Plugin", CHAPTERS[7]),
 
-    Lesson.new(23, "Fetching movies reviewed by the user using AJAX", CHAPTERS[8]),
+    Lesson.new(22, "Fetching movies reviewed by the user using AJAX", CHAPTERS[8]),
 
-    Lesson.new(24, "Setting up relationships", CHAPTERS[9]),
-    Lesson.new(25, "Using AJAX to dynamically update following count", CHAPTERS[9]),
-    Lesson.new(26, "Fetching followers and following using AJAX", CHAPTERS[9]),
+    Lesson.new(23, "Setting up relationships", CHAPTERS[9]),
+    Lesson.new(24, "Fetching followers and following using AJAX", CHAPTERS[9]),
 
-    Lesson.new(27, "ActionMailer", CHAPTERS[10]),
+    Lesson.new(25, "Self-Directed Lesson: Setting up upvotes", CHAPTERS[10]),
 
-    Lesson.new(28, "Querying for reviews by following users", CHAPTERS[11]),
-    Lesson.new(29, "Self-Directed Lesson: Displaying the reviews using AJAX", CHAPTERS[11]),
+    Lesson.new(26, "Self-Direct Lesson: ActionMailer", CHAPTERS[11]),
 
-    Lesson.new(30, "Displaying most reviewed movies", CHAPTERS[12]),
-    Lesson.new(31, "Displaying recently reviewed movies", CHAPTERS[12]),
+    Lesson.new(27, "Querying for reviews by following users", CHAPTERS[12]),
+    Lesson.new(28, "Self-Directed Lesson: Displaying the reviews using AJAX", CHAPTERS[12]),
 
-    Lesson.new(32, "Self-Directed Lessons: Designing the Page", CHAPTERS[13]),
-    Lesson.new(33, "Next Steps", CHAPTERS[13])
+    Lesson.new(30, "Displaying most reviewed movies", CHAPTERS[13]),
+    Lesson.new(31, "Displaying recently reviewed movies", CHAPTERS[13]),
+
+    Lesson.new(32, "Self-Directed Lessons: Designing the Page", CHAPTERS[14]),
+    Lesson.new(33, "Next Steps", CHAPTERS[14])
   ]
 
 

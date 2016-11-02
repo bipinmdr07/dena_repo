@@ -1,0 +1,100 @@
+<p>
+  Now that we've added user following, let's build a timeline like Twitter, where we can see the recent reviews posted by the people the user follows. 
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Create a file inside <code>app/views/static_pages</code> called <code>timeline.html.erb</code>.</li>
+  <li>Configure the routes</li>
+  <li>Add the link to the navigation bar</li>
+</ul> 
+
+<p>
+  <strong>Here's our plan.</strong> We are going to build an API component that responds back with the reviews by the users that the current user follows in the order of newest to oldest. Then, we are going to use AJAX to communicate with the API endpoint to render the reviews.
+</p>
+
+<p>
+  Inside <code>timeline.html.erb</code>, add the following code:
+</p>
+
+<pre><code class="html">
+&lt;h1 class="text-center"&gt;Timeline&lt;/h1&gt;
+
+&lt;div id="movies"&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+  // we will implement this later
+&lt;/script&gt;
+</code></pre>
+
+<p>
+  Next, let's create a new API endpoint at <code>user/timeline.json</code>. To do this, let's create a new controller action called <code>timeline</code> inside <code>users_controller.rb</code>:
+</p>
+
+<pre><code class="ruby">
+def timeline
+
+end
+</code></pre>
+
+
+<p>
+  Inside this controller action, let's query for the <code>Review</code>s posted by the current user's following users.
+</p>
+
+<p>
+  We can accomplish this by using the <code>where</code> clause:
+</p>
+
+<pre><code class="ruby">
+def timeline
+  @reviews = Review.where(user: current_user.following_users)
+end
+</code></pre>
+
+<p>
+  The code above does exactly what you expect to - fetch the reviews where the user is the current user's following users.
+</p>
+
+<p class="standard_git_workflow">
+  Review ActiveRecord querying in <%= link_to 'this RailsGuide', 'http://guides.rubyonrails.org/active_record_querying.html#conditions', target: '_blank' %>.
+</p>
+
+<p>
+  Let's also order the reviews by <code>created_at</code>:
+</p>  
+
+<pre><code class="ruby">
+def timeline
+  @reviews = Review.where(user: current_user.following_users).order("created_at DESC")
+end
+</code></pre>
+
+
+<p>
+  Next, let's make a new file called <code>timeline.json.jbuilder</code> inside <code>app/views/users</code>. 
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Write the Jbuilder code to create the API endpoint</li>
+  <li>The endpoint should return:</li>
+  <ul>
+    <li>The user of the review</li>
+    <li>The movie of the review</li>
+    <li>The comment of the review</li>
+  </ul>
+  <li>Use AJAX to render the reviews inside the <code>#movies</code> div inside <code>timeline.index.html.erb</code></li>
+</ul>
+
+<p>
+  Submit your github repository and link to your Heroku application below.
+</p>
+
+<% @submission_form = true %>
+
+
+

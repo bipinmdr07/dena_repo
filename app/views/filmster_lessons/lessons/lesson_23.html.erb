@@ -1,232 +1,291 @@
 <p>
-  Let's work on building user profile pages, similar to how we built a user profile page in Instagram.
+  In Instapost, you might have implemented user following using a popular gem called <code>ActsAsFollower</code>. In this course, we are going to implement user following by ourselves!
 </p>
 
-<h2>Tasks</h2>
+<p>
+  <strong>Here's our strategy.</strong>
+</p>
+
+<p>
+  We are going to create a <code>relationships</code> table with two columns: <code>follower_id</code> and <code>followed_id</code>. These columns will store the <code>user_id</code> of the user being followed and the user that is following the user.
+</p>
+
+<p>
+  This is called a <strong>join table</strong>. Join tables are tables that store the <code>id</code> of two different tables. We can use the join table to fetch the users that a user follows, or the users that the user is followed by. We will get to this later on in the lesson.
+</p>
+
+<%= image_tag 'filmster/relationship_model.png', class: 'img-responsive screenshot' %>
+
+<p>
+  Let's generate our <code>relationship</code> model.
+</p>
+
+<pre><code class="bash">
+rails g model relationship follower:references followed:references
+</code></pre>
+
+<p>
+  Check to see if the migration files were correctly generated and run <code>rake db:migrate</code>.
+</p>
+
+<p>
+  <strong>Next, let's setup the database relations.</strong> Inside <code>relationship.rb</code>, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+belongs_to :follower, class_name: "User"
+belongs_to :followed, class_name: "User"
+</code></pre>
+
+<p>
+  Until now, we never had to use <code>class_name</code> to specify the class of the database relationship. Rails automatically detects the class name of the relationship, but in our case we need to manually specify it since we don't have a <code>followers</code> table nor a <code>followed</code> table.
+</p>
+
+<p>
+  Next, let's add validations to make sure that there is always a <code>follower</code> and <code>followed</code> relationship:
+</p>
+
+<pre><code class="ruby">
+validates :follower, :followed, presence: true
+</code></pre>
+
+<p>
+  Lastly, let's make sure that no duplicate <code>Relationship</code> objects are saved in the database. In other words, we need to make sure that users can't follow a user more than once. Add the following line of code:
+</p>
+
+<pre><code class="ruby">
+validates :followed_id, uniqueness: {scope: :follower_id}
+</code></pre>
+
+<p>
+  <strong>Next, in your <code>user.rb</code>, let's define the database relationships.</strong>
+</p>
+
+<p>
+  <strong>A user should have many following relationships and followed relationships.</strong> If a user is followed by another user, then that goes into followed relationships. On the other hand, if a user follows another user, then that is a following relationship.
+</p>
+
+<p>
+  Inside your <code>user.rb</code> file, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+has_many :following_relationships, class_name:  "Relationship", foreign_key: "follower_id", dependent: :destroy
+has_many :followed_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent: :destroy
+</code></pre>
+
+<p>
+  Again, we are specifying the class name manually, since there are no <code>following_relationships</code> or <code>followed_relationships</code>.
+</p> 
+
+<p>
+  Since <code>following_relationships</code> refers to the relationships in which the user is follower, we set the foreign key to <code>follower_id</code>. Similarly, since <code>followed_relationships</code> refers to the relationships in which the user is followed, we set the foreign key to <code>followed_id</code>.
+</p>
+
+<p>
+  We've now setup the relationship between <code>Relationship</code> and <code>User</code>, but what if we want to fetch all of the following users or all of the followed users?
+</p>  
+
+<p>
+  For this situation, we can use the <strong>has_many :through</strong> association.
+</p>
+
+<p class="standard_git_workflow">
+Read more about the has_many :through association in this <%= link_to 'Rails Guides', 'http://guides.rubyonrails.org/association_basics.html#the-has-many-through-association', target: '_blank' %>.
+</p>
+
+<%= image_tag 'filmster/has_many_through.png', class: 'img-responsive screenshot' %>
+
+<p>
+  In the <code>user.rb</code> file, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+has_many :following_users, through: :following_relationships, source: :followed
+has_many :followed_users, through: :followed_relationships, source: :follower
+</code></pre>
+
+<p class="standard_git_workflow">
+  Read about the <code>source</code> option in <%= link_to 'this StackOverflow post', 'http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails', target: '_blank' %>.
+</p>
+
+<h2>Following Users</h2>
+
+<p>
+  The next step is to write logic to follow users. <strong>Everytime someone follows a user, we are going to create a new <code>Relationship</code>.</strong> That means we need to write a <code>create</code> action.
+</p>
+
+<p>
+  Inside your <code>relationships_controller.rb</code>, add the following lines of code:
+</p>
+
+<pre><code class="relationships">
+class RelationshipsController &lt; ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @user = User.find(params[:id])
+    current_user.following_relationships.create(followed_id: @user.id)
+  end
+end
+</code></pre>
+
+<p>
+  First, we make sure we use <code>authenticate_user!</code>. Then, we create a <code>following_relationship</code> in relation to the <code>current_user</code>.
+</p>
+
+<p>
+  Let's refactor this a bit. This piece of code:
+</p>
+
+<pre><code class="ruby">
+current_user.following_relationships.create(followed_id: @user.id)
+</code></pre>
+
+<p>
+  can be extracted into a more readable model method. In your <code>user.rb</code>, add the following method:
+</p>
+
+<pre><code class="ruby">
+def follow(other_user)  
+  following_relationships.create(followed_id: other_user.id)
+end
+</code></pre>
+
+<p>
+  Now we can refactor the code in the controller that we had before to this:
+</p>
+
+<pre><code class="ruby">
+current_user.follow(@user)
+</code></pre>
+
+<p>
+  This makes much more sense and is more concise. We can also reuse the <code>follow</code> method in other parts of the code base if we want to.
+</p>
+
+<p>
+  We also need to check if the current user is trying to following him/herself. If so, we should redirect the user to the user show page with a flash error message.
+</p>
+
+<h2>Task</h2>
 
 <ul>
-  <li>Create a <code>UsersController</code></li>
-  <li>Create a <code>show</code> action</li>
-  <ul>
-    <li>Make sure you are using eager loading to prevent the N+1 problem</li>
-  </ul>
-  <li>Setup the routes for the <code>show</code> action</li>
+  <li>Implement the <code>check_user</code> method below</li>
 </ul>
+
+
+<pre><code class="relationships">
+class RelationshipsController &lt; ApplicationController
+  before_action :authenticate_user!
+  before_action :check_user
+
+  def create
+    current_user.follow(@user)
+  end
+
+  private
+
+  def check_user
+    # write your implementation here
+  end
+end
+</code></pre>
 
 <hr>
 
 <p>
-  In your user show page, let's start by displaying the user avatar. Add the following line of code:
-</p>
-
-<pre><code class="erb">
-&lt;%= image_tag @user.avatar, class: 'prof-pic-lg' %&gt;
-</code></pre>
-
-<p>
-  Create a <code>users.scss</code> file inside the <code>app/assets/stylesheets</code> directory. Inside this file, let's define our <code>prof-pic-lg</code> class.
-</p>
-
-<pre><code class="css">
-.prof-pic-lg {
-  border-radius: 100%;
-  border: 5px solid #fff;
-  box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
-  width: 120px;
-  margin: auto;
-  display: block;
-}
-</code></pre>
-
-<p>
-  This should give the profile picture a nice look.
-</p>  
-
-<p>
-  Next, let's display the <code>username</code> and <code>introduction</code> for the user. Below the profile picture, add the following lines of code:
-</p>
-
-<pre><code class="erb">
-&lt;h1 class="text-center"&gt;&lt;%= @user.username %&gt;&lt;/h1&gt;
-
-&lt;p class="text-center lead"&gt;&lt;%= @user.introduction %&gt;&lt;/p&gt;
-</code></pre>
-
-<p>
-  <code>lead</code> is a CSS class defined by Bootstrap by default.
+  Now let's create a button to follow users.
 </p>
 
 <p>
-  Next, let's display some user stats. For now, the only user stat we can display is the number of reviews the user has posted. In later lessons, we will add the number of followers and number of users that the user follows.
-</p>  
-
-<p>
-  Below the user introduction, add the following lines of code:
-</p>
-
-<pre><code class="erb">
-&lt;ul class="user-stats"&gt;
-  &lt;li&gt;
-    &lt;div class="number-label"&gt;Reviews&lt;/div&gt;
-    &lt;div class="number-value"&gt;&lt;%= @user.reviews.count %&gt;&lt;/div&gt;
-  &lt;/li&gt; 
-&lt;/ul&gt;
-</code></pre>
-
-<p>
-  Inside your <code>users.scss</code> file, let's define the CSS for the HTML above:
-</p>
-
-<pre><code class="css">
-.user-stats {
-  margin: 0 auto 10px;
-  padding: 0;
-  display: table;
-  li {
-    cursor: pointer;
-    width: 120px;
-    padding: 5px 0;
-    border-right: 1px solid #ddd;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    color: #777;
-    .number-label {
-      font-size: 12px;
-    }
-    .number-value {
-      font-size: 18px;
-    }
-    &:last-child {
-      border: none;
-    }
-    &:hover {
-      color: #1e1e1e;
-    }
-  }
-}
-</code></pre>
-
-<h2>Displaying the reviews posted by the user</h2>
-
-<p>
-  The next step is to display the reviews posted by the user. 
+  <strong>Here's what we want to do.</strong> We want to be able to follow users without refreshing the page. That means we are going to use AJAX to send requests to the server.
 </p>
 
 <p>
-  To do this, we are going to use AJAX to render the reviews again. We aren't going to use <code>erb</code> to render the reviews this time.
+  As we've seen in Instapost, Rails has built in support for AJAX. Let's use the built in feature to develop this feature.
 </p>
 
 <p>
-  <strong>What we are going to do is build an API by ourselves and use AJAX to communicate with it to render the reviews.</strong>
+  When we press the "Follow" button, three things should happen. <strong>First</strong>, a request to the backend should be sent, creating a new <code>Relationship</code> object. <strong>Next</strong>, the "Follow" button should change to an "Unfollow" button. <strong>Lastly</strong>, the number of followers the users has should be updated. Let's tackle these steps one by one.
 </p>
 
 <p>
-  By default, Rails is installed with a gem called Jbuilder. Jbuilder allows us to write APIs easily.
-</p>
-
-<p class="standard_git_workflow">
-Read the <%= link_to 'Jbuilder documentation', 'https://github.com/rails/jbuilder', target: '_blank' %>.
-</p>
-
-<p>
-  Inside the <code>app/views/users</code> directory, create a new file called <code>show.json.jbuilder</code>.
-</p>
-
-<p>
-  Inside this file, add the following lines of code:
-</p>
-
-<pre><code>
-json.id @user.id
-json.username @user.username
-json.introduction @user.introduction
-json.avatar_url @user.avatar_url
-</code></pre>
-
-<p>
-  Save the file and go to <code>/users/1.json</code>. You should see some JSON data with the user information displayed. Creating an API is as easy as that!
-</p>
-
-<p>
-  Next, what we want to do is add an array of reviews that the user has posted. To do this, we simply add the following code:
-</p>
-
-<pre><code>
-json.reviews do
-  json.array! @user.reviews do |review|
-    json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
-    json.comment review.comment
-  end
-end
-</code></pre>
-
-<p>
-  Your <code>show.json.jbuilder</code> should now look like this:
-</p>  
-
-<pre><code>
-json.id @user.id
-json.username @user.username
-json.introduction @user.introduction
-json.avatar_url @user.avatar_url
-json.reviews do
-  json.array! @user.reviews do |review|
-    json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
-    json.comment review.comment
-  end
-end
-</code></pre>
-
-<p>
-  Refresh the web browser. You should now see an array of reviews by the user.
-</p>
-
-<p>
-  Using this JSON data, we can now display the reviews by the user using AJAX.
-</p>
-
-<p>
-  Go back to your <code>show.html.erb</code> code and add a div with an <code>id</code> of <code>movies</code> under the user stats. We are going to be rendering the movies inside of this div.
-</p>
-
-<p>
-  Next, under the div we just created, create a new <code>script tag</code>:
-</p>
-
-<pre><code class="html">
-&lt;script type="text/javascript"&gt;
-&lt;/script&gt;
-</code></pre>
-
-<p>
-  Inside of this <code>script</code> tag, let's write some Javascript to render the movies using AJAX.
+  The first thing we are going to do is add two new stats to the <code>user_stats</code> list.
 </p>
 
 <h2>Tasks</h2>
 
 <ul>
-  <li>When the page loads, all of the reviews posted by the user should be displayed</li>
+  <li>In your list, add the number of followers</li>
   <ul>
-    <li>This should be done with AJAX</li>
+    <li>Set the <code>id</code> of the <code>li</code> element to <code>user-followers</code> (we will be using this later on)</li>
   </ul>
-
-  <li>Each movie image should be linked to the movie's show page</li>
+  <li>Add the number of users the user is following</li>
   <ul>
-    <li>In other words, when a user clicks on the movie image, the user should be redirected to the movie show page</li>
-  </ul> 
+    <li>Set the <code>id</code> of the <code>li</code> element to <code>user-following</code> (we will be using this later on)</li>
+  </ul>
+</ul>
 
-  <li>
-    Use Masonry to create a fluid UI
-  </li> 
-</ul> 
+<p>
+  Next, let's add the backend logic for unfollowing users. In your <code>user.rb</code>, add the following method:
+</p> 
+
+<pre><code class="ruby">
+def unfollow(other_user)
+  # your implementation here
+end
+</code></pre>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Implement the unfollow method</li>
+</ul>
+
+<p>
+  Next, in your <code>relationships_controller.rb</code>, create a <code>destroy</code> method. This method will handle unfollowing users.
+</p>
 
 
+<pre><code class="ruby">
+def destroy
+  current_user.unfollow(@user)
+end
+</code></pre>
+
+<p>
+  Since we define <code>@user</code> in our <code>check_user</code> before action, we don't need to define it again.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>If the user is already following the user, display a button that says "Following", which unfollows the user when clicked</li>
+  <li>If the user is not following the user yet, display a button that says "Follow" that follows the user when clicked</li>
+  <li>When the button is clicked, it should change these things:</li>
+  <ul>
+    <li>Number of followers the user has</li>
+    <li>The button should change to the opposite state ("Follow" to "Following", "Following" to "Follow")</li>
+  </ul>
+  <li>The above should be accomplished with AJAX (refer back to what you did in Instapost)</li>
+</ul>
+
+<h2>Things to check before submitting</h2>
+
+<ul>
+  <li>How are you checking if the current user is already following the user?</li>
+  <ul>
+    <li>Create a model method that checks if a user is following another user</li>
+  </ul>
+</ul>
 
 
+<p>
+  Submit your Github repository and your link to your Heroku application.
+</p>
 
-
-
+<% @submission_form = true %>
 
 
 
