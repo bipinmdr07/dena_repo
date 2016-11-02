@@ -1,0 +1,54 @@
+<p>
+  Currently on the front page, we aren't rendering any movies until a user searches for a movie. <strong>Instead, let's render the 20 most recently added movies by default.</strong>
+</p>
+
+<p>
+  Inside the <code>index</code> method of <code>static_pages_controller.rb</code>, let's define an instance variable to use in the views called <code>@movies</code>. Inside this variable, let's retrieve the 20 most recent added movies:
+</p>
+
+<pre><code class="ruby">
+def index
+  @movies = Movie.order("created_at DESC").limit(20)
+end
+</code></pre>
+
+<p>
+  Although this code makes sense, we can refactor this code by using <strong>scopes</strong>.
+</p>
+
+<p class="standard_git_workflow">
+  Read this <%= link_to 'Rails Guide', 'http://guides.rubyonrails.org/active_record_querying.html#scopes', target: '_blank' %> to understand the gist of scopes.
+</p>
+
+<p>
+  Let's define a scope called <code>recent</code> inside <code>reviews.rb</code>. Add the following line of code inside the <code>Review</code> class:
+</p>
+
+<pre><code class="ruby">
+scope :recent, -> { order("created_at DESC").limit(20) }
+</code></pre>
+
+<p>
+  Now we can simply call <code>Movie.recent</code>. Let's refactor our controller code:
+</p>
+
+<pre><code class="ruby">
+def index
+  @movies = Movie.recent
+end
+</code></pre>
+
+<p>
+  As you can see, it's much cleaner. We can now reuse the logic to fetch recent reviews in other parts of our codebase as well.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Render the movies inside the <code>#movies</code> div</li>
+  <li>The movies should have the same design as the movie elements in search results</li>
+  <li>Each movie's image should be linked to the movie show page</li>
+  <li>Use Masonry to create a fluid UI</li>
+</ul>
+
+

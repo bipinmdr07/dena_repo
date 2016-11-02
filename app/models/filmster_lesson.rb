@@ -60,14 +60,13 @@ class FilmsterLesson < Lesson
 
     Lesson.new(26, "Self-Direct Lesson: ActionMailer", CHAPTERS[11]),
 
-    Lesson.new(27, "Querying for reviews by following users", CHAPTERS[12]),
-    Lesson.new(28, "Self-Directed Lesson: Displaying the reviews using AJAX", CHAPTERS[12]),
+    Lesson.new(27, "Self-Directed Lesson: Displaying the reviews using AJAX", CHAPTERS[12]),
 
-    Lesson.new(30, "Displaying most reviewed movies", CHAPTERS[13]),
-    Lesson.new(31, "Displaying recently reviewed movies", CHAPTERS[13]),
+    Lesson.new(28, "Displaying most reviewed movies", CHAPTERS[13]),
+    Lesson.new(29, "Displaying recently reviewed movies", CHAPTERS[13]),
 
-    Lesson.new(32, "Self-Directed Lessons: Designing the Page", CHAPTERS[14]),
-    Lesson.new(33, "Next Steps", CHAPTERS[14])
+    Lesson.new(30, "Self-Directed Lessons: Designing the Page", CHAPTERS[14]),
+    Lesson.new(31, "Next Steps", CHAPTERS[14])
   ]
 
 

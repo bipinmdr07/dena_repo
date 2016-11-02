@@ -93,15 +93,15 @@
   
 
   <%= render partial: 'course', locals: {course: 'JavaScript/jQuery', course_name: 'Manipulate the DOM by using JavaScript. Learn the basics of JavaScript and jQuery.', available: true, course_link: javascript_path, course_access: 'javascript', controller_name: 'JavascriptLesson'} %>
+
+  <%= render partial: 'course', locals: {course: 'Filmster - An online movie reviewing app', course_name: '', available: true, controller_name: 'FilmsterLesson', course_link: filmster_path, course_access: 'filmster' } %>
   
   <%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'Team Collaboration', course_name: '', available: false, controller_name: 'CollaborationLesson', course_link: collaboration_path, course_access: 'collaboration' } %>
 </div>
 
 
 <div class="row">
-  <%= render partial: 'course', locals: {course: 'Filmster - An online movie reviewing app', course_name: '', available: true, controller_name: 'FilmsterLesson', course_link: filmster_path, course_access: 'filmster' } %>
+  <%= render partial: 'course', locals: {course: 'Team Collaboration', course_name: '', available: false, controller_name: 'CollaborationLesson', course_link: collaboration_path, course_access: 'collaboration' } %>
 
   
 
