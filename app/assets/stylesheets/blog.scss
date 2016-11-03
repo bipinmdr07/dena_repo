@@ -6,6 +6,9 @@
 }
 
 .blog-entry {
+  p {
+    color: #333;
+  }
   .left-wrap {
     word-wrap: break-word; float: left; margin-right: 30px;
   }
