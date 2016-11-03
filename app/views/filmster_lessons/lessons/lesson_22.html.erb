@@ -123,7 +123,7 @@
 </p>
 
 <p>
-  By default, Rails is installed with a gem called Jbuilder. Jbuilder allows us to write APIs easily.
+  By default, Rails is installed with a gem called Jbuilder. <strong>Jbuilder allows us to write APIs easily.</strong>
 </p>
 
 <p class="standard_git_workflow">
@@ -138,7 +138,7 @@ Read the <%= link_to 'Jbuilder documentation', 'https://github.com/rails/jbuilde
   Inside this file, add the following lines of code:
 </p>
 
-<pre><code>
+<pre><code class="ruby">
 json.id @user.id
 json.username @user.username
 json.introduction @user.introduction
@@ -153,7 +153,7 @@ json.avatar_url @user.avatar_url
   Next, what we want to do is add an array of reviews that the user has posted. To do this, we simply add the following code:
 </p>
 
-<pre><code>
+<pre><code class="ruby">
 json.reviews do
   json.array! @user.reviews do |review|
     json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
@@ -166,7 +166,7 @@ end
   Your <code>show.json.jbuilder</code> should now look like this:
 </p>  
 
-<pre><code>
+<pre><code class="ruby">
 json.id @user.id
 json.username @user.username
 json.introduction @user.introduction
@@ -184,7 +184,7 @@ end
 </p>
 
 <p>
-  Using this JSON data, we can now display the reviews by the user using AJAX.
+  <strong>Using this JSON data, we can now display the reviews by the user using AJAX.</strong>
 </p>
 
 <p>
