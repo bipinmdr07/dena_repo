@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :student_admissions, only: :create
   end
+
+  resources :tracks, only: :show
   
   resources 'contacts', only: [:new, :create]
 
