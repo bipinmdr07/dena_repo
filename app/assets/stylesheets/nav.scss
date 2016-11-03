@@ -54,7 +54,7 @@
 .nav-stacked > li.active > a:focus {
   background-color: rgb(41, 40, 41);
   font-weight: 600;
-  color: white;
+  color: white !important;
 }
 
 .nav-stacked {
@@ -202,4 +202,9 @@
   font-family: 'Lato';
   font-weight: 600;
   padding: 20px;
+}
+
+.lesson-li {
+  font-weight: 600 !important;
+  padding: 10px 30px !important;
 }

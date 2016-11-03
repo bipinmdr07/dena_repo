@@ -27,7 +27,7 @@ let SidebarLeftCourse = React.createClass({
         <div>   
           <li className="course-title">
             <a href="#" onClick={this.handleClick} style={{color: this.state.show ? "white" : "#5c5c5c" }}>
-              {this.props.course.course_name}
+              <i className="fa fa-file-code-o" style={{"marginRight": "10px"}} aria-hidden="true"></i> {this.props.course.course_name}
             </a>
           </li>
               

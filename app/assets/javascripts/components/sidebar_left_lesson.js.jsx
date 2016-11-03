@@ -8,7 +8,9 @@ let SidebarLeftLesson = React.createClass({
 
     return(        
       <li className={liClass}>
-        <a href={`${this.props.course.course_url}/${this.props.lesson.id}`}>{`${this.props.lesson.id}. ${this.props.lesson.title}`}</a>
+        <a href={`${this.props.course.course_url}/${this.props.lesson.id}`} className="lesson-li" style={{"color": "#5a5a5a"}}>
+          {`${this.props.lesson.id}. ${this.props.lesson.title}`}
+        </a>
       </li>
     )
   }
