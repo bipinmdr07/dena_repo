@@ -24,7 +24,7 @@
   The <code>Relationship</code> stores a <code>follower_id</code>, which is the <code>id</code> of the <code>User</code> that is a <em>follower</em>. It also stores a <code>followed_id</code>, which is the <code>id</code> of the <code>User</code> that is <em>being followed</em>.
 </p>
 
-<p>
+<p class="well">
   <strong>For example, if Mark Zuckerburg follows Steve Jobs, Mark's user id will be stored as <code>follower_id</code>, and Steve's user id will be stored as <code>followed_id</code>.</strong>
 </p>  
 
@@ -273,9 +273,10 @@ end
 <h2>Tasks</h2>
 
 <ul>
-  <li>If the user is already following the user, display a button that says "Following", which unfollows the user when clicked</li>
-  <li>If the user is not following the user yet, display a button that says "Follow" that follows the user when clicked</li>
-  <li>When the button is clicked, it should change these things:</li>
+  <li>Implement a model method called <code>following?</code> that takes in a <code>User</code> in <code>user.rb</code> that checks if the user is following a given user</li>
+  <li><strong>If the user is already following the user</strong>, display a button that says "Following", which unfollows the user when clicked</li>
+  <li><strong>If the user is not following the user yet</strong>, display a button that says "Follow" that follows the user when clicked</li>
+  <li>When the button is clicked, <strong>it should change these things:</strong></li>
   <ul>
     <li>Number of followers the user has</li>
     <li>The button should change to the opposite state ("Follow" to "Following", "Following" to "Follow")</li>
@@ -283,14 +284,6 @@ end
   <li>The above should be accomplished with AJAX (refer back to what you did in Instapost)</li>
 </ul>
 
-<h2>Things to check before submitting</h2>
-
-<ul>
-  <li>How are you checking if the current user is already following the user?</li>
-  <ul>
-    <li>Create a model method that checks if a user is following another user</li>
-  </ul>
-</ul>
 
 
 <p>
