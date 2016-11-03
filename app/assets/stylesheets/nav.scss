@@ -132,15 +132,6 @@
   }
 }
 
-.course-title {
-  text-align: center;
-  a {
-    color: white !important;
-    font-weight: 600;
-    font-family: 'Lato', sans-serif;
-  }
-}
-
 .lesson-nav {
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
@@ -163,4 +154,52 @@
     font-family: FontAwesome;
     content: "\f107";     /* adjust as needed, taken from bootstrap.css */
     color: white;
+}
+
+@mixin sidebar-elements {
+  font-size: 14px;
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+}
+
+.chapter-li {
+  @include sidebar-elements;
+
+  color: #5a5a5a;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.course-title {
+  @include sidebar-elements;
+  position: relative;
+  padding: 20px 20px;
+
+  a {
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+  }
+
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.track-title-nav {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 14px;
+  position: relative;
+  display: block;  
+  position: relative;
+  font-family: 'Lato';
+  font-weight: 600;
+  padding: 20px;
 }

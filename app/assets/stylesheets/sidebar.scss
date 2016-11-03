@@ -172,3 +172,16 @@ $sidebar-border: #323232;
     color: #333;
   }
 }
+
+.lesson-enter {
+  opacity: 0.01;
+}
+
+.lesson-enter.lesson-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.lesson-leave {
+  opacity: 0.01;
+}

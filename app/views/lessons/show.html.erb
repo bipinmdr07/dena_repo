@@ -15,14 +15,19 @@
     </li>
   </ul>
   <div class="sidebar_container sidebar_container_left" id="sidebar-reveal-container" data-spy="affix" data-offset-bottom="40">
-    <%= render 'sidebar' %>
+    <%= react_component 'SidebarLeft', { display_sm: false,
+                                        authenticity_token: form_authenticity_token, 
+                                        track: @track,
+                                        course_name: @course_name.to_s,
+                                        chapter_title: @chapter_title,
+                                        lesson_id: params[:id] } %>
   </div>    
 
   <div class="col-xs-11 col-md-7 col-md-offset-2">
 
     <section class="lesson_content">
 
-      <h1><%= title_for(controller_name.classify.constantize, params[:id].to_i) %></h1>
+      <h1><%= title_for(@course_name, params[:id].to_i) %></h1>
 
       <div id="lesson_text">
         <%= render file: "app/views/#{@current_course_link}/lessons/lesson_#{@current_lesson_id}" %>
