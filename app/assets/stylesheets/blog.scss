@@ -4,3 +4,12 @@
   padding: 50px;
   margin-top: 50px;
 }
+
+.blog-entry {
+  .left-wrap {
+    word-wrap: break-word; float: left; margin-right: 30px;
+  }
+  .right-wrap {
+    word-wrap: break-word; float: right; margin-left: 30px;
+  }
+}
