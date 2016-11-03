@@ -1,3 +1,8 @@
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/aTrdrvojhdU" frameborder="0" allowfullscreen></iframe>
+</div>
+
 <p>
   Create a new Javascript file called <code>main.js</code> inside of the <code>app/javascripts</code> directory.
 </p>
@@ -10,7 +15,7 @@
 $(function(){
   $.ajax({
     url: 'http://www.omdbapi.com/?',
-    data: "s=spiderman"
+    data: {"s": "superman"}
   })
   .done(function(data){
     console.log(data);
@@ -18,22 +23,62 @@ $(function(){
 })
 </code></pre>
 
+<div class="well">
+  <h3>Some New JavaScript Concepts</h3>
+
+  <p>
+    In the code above, you'll notice that everything is wrapped inside <code>$(function(){ })</code>. <strong>This is a way to execute the code only after the page has been fully loaded.</strong>
+  </p>
+
+  <%= image_tag 'filmster/curly_braces.png', class: 'img-responsive screenshot' %>
+
+  <p>
+    <code>$.ajax</code> is how you can make AJAX calls using jQuery. It has several parameters you can pass, but the most important ones are <code>url</code>, <code>data</code> and <code>type</code> (we don't use it here). 
+  </p>
+
+  <ul>
+    <li><code>url</code> - the URL you are making the AJAX request to</li>
+    <li><code>data</code> - the data you are passing in the AJAX request</li>
+    <li><code>type</code> - the HTTP request type. By default it is set to "GET", but you can set it to "POST", "PUT", "PATCH", "DELETE", etc.</li> For now, since we want to perform a GET request, we can leave this out.
+  </ul>
+
+  <p>
+    In our case, we have <code>data: {"s": "superman"}</code>. As you can see, we are passing a key value pair. When the request is sent, the data that we have here is parsed and sent like such:
+  </p> 
+
+<pre><code class="html">
+http://www.omdbapi.com/?s=superman
+</code></pre>
+
+  <p>
+    The code inside the <code>done</code> block is executed after the AJAX call has succeeded. The function inside <code>done</code> takes in an argument as a parameter, which represents the response data from the AJAX call.
+  </p>
+
+
+  <%= image_tag 'filmster/ajax_request.png', class: 'img-responsive screenshot' %>
+</div>
+
 <p>
   Now everytime we load the page, the AJAX request is going to be performed. Save the file and refresh the page. Your Google Chrome Developer Tools console should now display some data with movies that include "Spiderman" in the title.
 </p>
 
 <p>
-  We've made our first AJAX request to an API, but how do we actually make use of this data that we received as a response from the server?
+  We've made our first AJAX request to an API, but <strong>how do we actually make use of this data that we received as a response from the server?</strong>
 </p>
 
 <h2>Displaying the data</h2>
 
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/-TmQcHlh0pw" frameborder="0" allowfullscreen></iframe>
+</div>
+
 <p>
-  The first step is to create a <code>div</code> with an <code>id</code> of <code>movies</code> in <code>index.html.erb</code>. We are going to be dynamically appending new HTML elements to this element.
+  <strong>The first step</strong> is to create a <code>div</code> with an <code>id</code> of <code>movies</code> in <code>index.html.erb</code>. We are going to be dynamically appending new HTML elements to this element.
 </p>
 
 <p>
-  The next step is to create a Javascript variable that will hold a string containing HTML.
+  The next step is to <strong>create a Javascript variable that will hold a string containing HTML</strong>.
 </p>
 
 <p>
@@ -44,7 +89,7 @@ $(function(){
 $(function(){
   $.ajax({
     url: 'http://www.omdbapi.com/?',
-    data: "s=superman"
+    data: {"s": "superman"}
   })
   .done(function(data){
     let htmlString = "";
@@ -53,7 +98,7 @@ $(function(){
 </code></pre>
 
 <p>
-  Our strategy is to add on to <code>htmlString</code> to build an HTML string, so that we can display it to the page.
+  <strong>Our strategy is to add on to <code>htmlString</code> to build an HTML string, so that we can display it to the page.</strong>
 </p>
 
 <p>
@@ -61,7 +106,7 @@ $(function(){
 </p>
 
 <p>
-  We can do this with the <code>forEach</code> method. The <code>forEach</code> method is much like <code>each</code> in Ruby - it allows us to iterate through objects.
+  <strong>We can do this with the <code>forEach</code> method.</strong> The <code>forEach</code> method is much like <code>each</code> in Ruby - it allows us to iterate through objects.
 </p>
 
 <p>
@@ -140,7 +185,7 @@ $(function(){
 $(function(){
   $.ajax({
     url: 'http://www.omdbapi.com/?',
-    data: "s=superman"
+    data: {"s": "superman"}
   })
   .done(function(data){
     displayMovies(data);

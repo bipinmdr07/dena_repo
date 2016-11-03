@@ -23,7 +23,7 @@
 </div>
 
 <p>
-  Service objects are plain ruby objects that we can use inside of our Rails application to handle some of the business logic. Remember the Object Oriented Programming that you did way back in the course? We haven't used it much in any of our Rails apps yet, but they're actually quite important once your applications start becoming more advanced.
+  <strong>Service objects are plain ruby objects that we can use inside of our Rails application to handle some of the business logic.</strong> Remember the Object Oriented Programming that you did way back in the course? We haven't used it much in any of our Rails apps yet, but they're actually quite important once your applications start becoming more advanced.
 </p>
 
 <p>
@@ -92,7 +92,7 @@ end
 <H2>Creating a Service Object</H2>
 
 <p>
-  First, create a directory called <code>services</code> inside <code>app</code>.
+  <strong>First</strong>, create a directory called <code>services</code> inside <code>app</code>.
 </p>
 
 <p>
@@ -105,7 +105,7 @@ config.autoload_paths &lt;&lt; Rails.root.join('services')
 </code></pre>
 
 <p>
-  Next, create a file called <code>movie_builder.rb</code> inside of <code>app/services</code>.
+  <strong>Next</strong>, create a file called <code>movie_builder.rb</code> inside of <code>app/services</code>.
 </p>
 
 <p>
@@ -144,7 +144,7 @@ end
 </code></pre>
 
 <p>
-  Ruby allows us to set required keyword arguments. 
+  Ruby allows us to set required keyword arguments. This makes it so that the object can't be initialized without the argument. In this case, <code>MovieBuilder</code> can't be initialized without passing in <code>imdbid</code>.
 </p>  
 
 <p class="standard_git_workflow">
@@ -316,7 +316,7 @@ end
 </code></pre>  
 
 <p>   
-  Wow! This code is so much cleaner than what we had before. By extracting the logic outside of the controller, not only did we make it easier to read, we also made the logic reusable. If we wanted to use the <code>MovieBuilder</code> outside of the <code>ReviewsController</code> class, we could!
+  Wow! This code is so much cleaner than what we had before. By extracting the logic outside of the controller, not only did we make it easier to read, <strong>we also made the logic reusable</strong>. If we wanted to use the <code>MovieBuilder</code> outside of the <code>ReviewsController</code> class, we could!
 </p>
 
 

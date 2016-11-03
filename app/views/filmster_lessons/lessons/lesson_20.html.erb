@@ -16,7 +16,11 @@
 <h2>Hints</h2>
 
 <p>
-  To check if the current user has reviewed the movie already, create a model method called <code>reviewed?</code> that takes in a parameter called <code>movie</code>, that checks if the user has reviewed the movie, and returns <code>true</code> or <code>false</code>. We can then call the model method like this:
+  <strong>To check if the current user has reviewed the movie already, create a model method called <code>reviewed?</code> that takes in a parameter called <code>movie</code>, that checks if the user has reviewed the movie, and returns <code>true</code> or <code>false</code>.</strong> 
+</p>
+
+<p>
+  We can then call the model method like this:
 </p>
 
 <pre><code class="ruby">
@@ -26,8 +30,8 @@ current_user.reviewed?(@movie)
 <h2>Check Points before you Submit</h2>
 
 <ul>
-  <li>Are you using delegation?</li>
-  <li>Are you using eager loading?</li>
+  <li>Have you made sure you're not violating the law of demeter?</li>
+  <li>Have you made sure you're not causing the N+1 query problem?</li>
 </ul>
 
 <p>

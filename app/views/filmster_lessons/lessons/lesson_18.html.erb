@@ -70,13 +70,17 @@ end
   </p>
 
   <p>
-    References will do the following things:
+    <strong>References will do the following things:</strong>
   </p>  
 
   <ul>
-    <li>Create a foreign key. In this case, <code>t.references :user</code> will create a <code>user_id</code> column, and <code>t.references :movie</code> will create a <code>movie_id</code> column</li>
-    <li>Create a foreign key constraint by default (read more about foreign key constraints <%= link_to 'here', 'https://robots.thoughtbot.com/referential-integrity-with-foreign-keys', target: "_blank" %></li>
+    <li><strong>Creates a foreign key.</strong> In this case, <code>t.references :user</code> will create a <code>user_id</code> column, and <code>t.references :movie</code> will create a <code>movie_id</code> column</li>
+    <li><strong>Creates a foreign key constraint</strong> by default</li>
   </ul> 
+
+  <p class="standard_git_workflow">
+    Read more about foreign key constraints <%= link_to 'here', 'https://robots.thoughtbot.com/referential-integrity-with-foreign-keys', target: "_blank" %>
+  </p>
 
 </div>
 
@@ -91,7 +95,7 @@ end
   <li>Setup database relations so that <code>User</code> has many <code>Reviews</code> and <code>Review</code> belongs to <code>User</code></li>
   <li>Validate the presence of <code>:user, :movie, :comment</code></li> 
   <p>
-    One thing to note is that you can actually validate the presence of related models. In otherwords, instead of validating the presence of <code>:user_id</code> and <code>:movie_id</code>, we can validate <code>:user</code> and <code>:movie</code>.
+    <strong>One thing to note is that you can actually validate the presence of related models.</strong> In other words, instead of validating the presence of <code>:user_id</code> and <code>:movie_id</code>, we can validate <code>:user</code> and <code>:movie</code>.
   </p>
 </ul>
 
@@ -141,7 +145,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    # if a Movie with params[:imdbid] does not exist
+    # if a Movie with an imdbid of params[:imdbid] does not exist
     # fetch movie data from API using params[:imdbid] and create a new Movie based on the response data
 
     # otherwise, find Movie with an imdbid of params[:imdbid]
@@ -152,7 +156,11 @@ end
 </code></pre>
 
 <p>
-  Let's start with the first step. We can use the <code>find_or_initialize_by</code> method to accomplish this.
+  Let's start with the first step. What we want to accomplish is this: check if a Movie with an <code>imdbid</code> of <code>params[:imdbid]</code> exists, and if it doesn't initialize a new movie. 
+</p>
+
+<p>
+  <strong>We can use the <code>find_or_initialize_by</code> method to accomplish this.</strong>
 </p>
 
 <p class="standard_git_workflow">
@@ -191,7 +199,7 @@ end
 
 
 <p>
-  Go to the documentation page <%= link_to 'here', 'https://github.com/nikkypx/omdb-api', target: '_blank' %> and install the gem.
+  <strong>Go to the documentation page <%= link_to 'here', 'https://github.com/nikkypx/omdb-api', target: '_blank' %> and install the gem.</strong>
 </p>
 
 <p>
@@ -234,13 +242,30 @@ end
 </code></pre>  
 
 <p>
-  Let's go through what we just did. First, we fetched a movie based on the <code>imdbid</code> using the gem we just installed. Then, we used that data to assign all of the attributes for <code>@movie</code>. Lastly, we saved <code>@movie</code> into the database.
+  Let's go through what we just did. <strong>First</strong>, we fetched a movie based on the <code>imdbid</code> using the gem we just installed. <strong>Then</strong>, we used that data to assign all of the attributes for <code>@movie</code>. <strong>Lastly</strong>, we saved <code>@movie</code> into the database.
 </p>
 
 
 <p>
-  The final step is to create a review that is connected to the <code>current_user</code> and movie that we just created.
+  The final step is to create a review that is connected to the <code>current_user</code> and movie that we just created. Add the following lines of code inside of your <code>create action</code>:
 </p>  
+
+<pre><code class="ruby">
+# create a new review and connect it to the current_user and the movie
+@review = current_user.reviews.new(review_params.merge(movie: @movie))
+
+if @review.save
+  flash[:success] = "Review saved!"
+  redirect_to root_path
+else
+  flash[:alert] = "Woops! It seems there was an error."
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Your <code>reviews_controller.rb</code> should now like this:
+</p>
 
 <pre><code class="ruby">
 class ReviewsController < ApplicationController
@@ -318,7 +343,7 @@ resources :reviews
 <pre><code class="html">
 &lt;form id="rating-form" action="/reviews" method="POST"&gt;
   &lt;input type="hidden" name="imdbid" value=${movie["imdbID"]} /&gt;
-  &lt;textarea name= "review[comment]" class="form-control" placeholder="Your review in 140 characters"/&gt;
+  &lt;textarea name= "review[comment]" class="form-control" placeholder="Your movie review"/&gt;
   &lt;br /&gt;
   &lt;input type="submit" class="btn btn-success pull-right" /&gt;
 &lt;/form&gt;
@@ -329,21 +354,25 @@ resources :reviews
 </p>
 
 <p>
-  First, we gave the <code>form</code> an <code>id</code> so that we can reference it in our JavaScript. Next, we specified the <code>action</code> and set it to <code>/reviews</code>. The <code>action</code> is the target of where the form will be sent to. In our case, we want the form to be sent to <code>/reviews</code>, which is the URI for creating a new review.
+  <strong>First</strong>, we gave the <code>form</code> an <code>id</code> so that we can reference it in our JavaScript. <strong>Next</strong>, we specified the <code>action</code> and set it to <code>/reviews</code>.
 </p>
 
 <p>
-  Next, we created a hidden input field with the <code>name</code> of <code>imdbid</code> and set it to the movie's imdbID. 
+  The <code>action</code> is the target of where the form will be sent to. In our case, we want the form to be sent to <code>/reviews</code>, which is the URI for creating a new review.
 </p>
 
 <p>
-  Then we add a <code>textarea</code> with a <code>name</code> of <code>"review[comment]"</code>.
+  <strong>Next</strong>, we created a hidden input field with the <code>name</code> of <code>imdbid</code> and set it to the movie's imdbID. 
+</p>
+
+<p>
+  <strong>Lastly</strong>, we add a <code>textarea</code> with a <code>name</code> of <code>"review[comment]"</code>.
 </p>
 
 <div class="well">
   <h2>The <code>name</code> field</h2>
   <p>
-    The <code>name</code> field in forms is extremely important, since it is what determines how the parameters are sent.
+    The <code>name</code> field in forms is extremely important, since <strong>it is what determines how the parameters are sent.</strong>
   </p>  
 
   <p>
@@ -351,7 +380,7 @@ resources :reviews
   </p>
 
   <p>
-    This means that when we try to access these parameters from the controller, we can access <code>imdbid</code> with <code>params[:imdbid]</code> and <code>review[comment]</code> with <code>params[:review][:comment]</code>.
+    This means that <strong>when we try to access these parameters from the controller</strong>, we can access <code>imdbid</code> with <code>params[:imdbid]</code> and <code>review[comment]</code> with <code>params[:review][:comment]</code>.
   </p>
 </div>
 
@@ -360,7 +389,7 @@ resources :reviews
 </p>
 
 <p>
-  However, if you try to submit the form, it will give you an error that says "ActionController::InvalidAuthenticityToken".
+  However, if you try to submit the form, it will give you an error that says <code>"ActionController::InvalidAuthenticityToken"</code>.
 </p>
 
 <p class="standard_git_workflow">
@@ -380,7 +409,15 @@ resources :reviews
 </p>
 
 <p>
-  Inside of our form, let's embed the token:
+  Inside of our form, let's embed the token. Add this line of code into your form:
+</p>  
+
+<pre><code class="html">
+&lt;input type="hidden" name="authenticity_token" value=${window._token} /&gt;
+</code></pre>
+
+<p>
+  Your form should now look like this:
 </p>  
 
 <pre><code class="html">
@@ -399,11 +436,11 @@ resources :reviews
 </p>
 
 <p>
-  First, make sure you are logged into the application, or else you will be redirected to the sign in page.
+  <strong>First</strong>, make sure you are logged into the application, or else you will be redirected to the sign in page.
 </p>
 
 <p>
-  Next, add a review and submit the form. Look into your server logs and verify that a new <code>Review</code> has been created. If you haven't created a review for the movie, a new <code>Movie</code> should be created as well.
+  <strong>Next</strong>, add a review and submit the form. <strong>Look into your server logs and verify that a new <code>Review</code> has been created</strong>. If you haven't created a review for the movie, a new <code>Movie</code> should be created as well.
 </p>
 
 <p> 
@@ -412,7 +449,11 @@ resources :reviews
 
 <pre><code class="ruby">
 Review.last
+</code></pre>
+
+<pre><code class="ruby">
 Movie.last
+
 </code></pre>
 
 <p>
