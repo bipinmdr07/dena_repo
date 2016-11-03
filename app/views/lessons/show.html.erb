@@ -8,22 +8,17 @@
 
 
 <div class="row">
-  <!-- sidebar -->
-  <ul class="nav nav-pills nav-stacked" id="sidebar-left-trigger">
-    <li onclick="sidebar.toggleNav()">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-    </li>
-  </ul>
-  <div class="sidebar_container sidebar_container_left" id="sidebar-reveal-container" data-spy="affix" data-offset-bottom="40">
+
+  <div class="col-md-3">
     <%= react_component 'SidebarLeft', { display_sm: false,
                                         authenticity_token: form_authenticity_token, 
                                         track: @track,
                                         course_name: @course_name.to_s,
                                         chapter_title: @chapter_title,
                                         lesson_id: params[:id] } %>
-  </div>    
+  </div>
 
-  <div class="col-xs-11 col-md-7 col-md-offset-2">
+  <div class="col-xs-11 col-md-7">
 
     <section class="lesson_content">
 

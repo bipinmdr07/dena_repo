@@ -10,6 +10,7 @@ json.courses do
           json.array! course.constantize::LESSONS.select{|lesson| lesson.chapter == chapter} do |lesson|
             json.id lesson.id
             json.title lesson.title
+            json.completed current_user.progressions.where(course_name: course).pluck(:lesson_id).include?(lesson.id) 
           end
         end 
       end

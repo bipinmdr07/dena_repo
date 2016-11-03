@@ -27,13 +27,15 @@ let SidebarLeft = React.createClass({
     });
 
     return(
-      <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-left" id="sidebar-reveal-nav">
+      <div className="sidebar_container sidebar_container_left" data-spy="affix" data-offset-bottom="40">
+        <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-left" id="sidebar-reveal-nav">
 
-        <li><a href="/courses"><i className="fa fa-home" aria-hidden="true"></i> <span className="nav-text">All Courses</span></a></li>
+          <li><a href="/courses"><i className="fa fa-home" aria-hidden="true"></i> <span className="nav-text">All Courses</span></a></li>
 
-        <li className="track-title-nav">Track {this.props.track.number}: {this.props.track.title}</li>
-        {courses}        
-      </ul>
+          <li className="track-title-nav">Track {this.props.track.number}: {this.props.track.title}</li>
+          {courses}        
+        </ul>
+      </div>
     )
   }
 
