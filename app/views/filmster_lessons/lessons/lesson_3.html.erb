@@ -19,6 +19,13 @@
   For example, many popular applications have APIs. Twitter, Facebook, Instagram all have APIs. Using APIs, you can fetch data from a server or even post data to a server.
 </p>
 
+<ul>
+  <li><%= link_to 'Twitter API', 'https://dev.twitter.com/rest/public', target: '_blank' %></li>
+  <li><%= link_to 'Facebook API', 'https://developers.facebook.com/', target: '_blank' %></li>
+</ul> 
+
+<hr>
+
 <p>
   In this course, we are going to build an application that allow users to search movies and rate them. When we search for movies, we are going to communicate with an outside API to access a database of movies.
 </p>
@@ -32,19 +39,19 @@
 </p>
 
 <p>
-  Unfortunately, it is really hard to read this. We can install a Chrome plugin to make it easier to read. Google "JSONView" plugin and install it in your browser. If properly installed, your JSON should now look like this:
+  Unfortunately, it is really hard to read this. We can install a Chrome plugin to make it easier to read. <strong>Google "JSONView" plugin and install it in your browser.</strong> If properly installed, your JSON should now look like this:
 </p>
 
 <%= image_tag 'filmster/jsonview.png', class: 'screenshot-sm img-responsive' %>
 
 <p>
-  This is roughly what happens when we access http://www.omdbapi.com/?t=Spiderman.
+  So how does this all work? When we access <code>http://www.omdbapi.com/?t=Spiderman</code> this is roughly what happens:
 </p>
 
 <%= image_tag 'filmster/api.png', class: 'screenshot img-responsive' %>
 
 <p>
-  In our application, we are going to use AJAX to send requests to the OMDb API, use the JSON data sent back as a response from the OMDb server, and then use JavaScript to update the elements on the web page.
+  In our application, we are going to use <strong>AJAX</strong> to send requests to the OMDb API, use the <strong>JSON data</strong> sent back as a response from the OMDb server, and then use <strong>JavaScript</strong> to update the elements on the web page.
 </p>
 
 

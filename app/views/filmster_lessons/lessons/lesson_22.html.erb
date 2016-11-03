@@ -10,6 +10,7 @@
   <ul>
     <li>Make sure you are using eager loading to prevent the N+1 problem</li>
   </ul>
+  <li>Create a <code>show.html.erb</code> page</li>
   <li>Setup the routes for the <code>show</code> action</li>
 </ul>
 
@@ -52,7 +53,7 @@
 &lt;p class="text-center lead"&gt;&lt;%= @user.introduction %&gt;&lt;/p&gt;
 </code></pre>
 
-<p>
+<p class="alert alert-info">
   <code>lead</code> is a CSS class defined by Bootstrap by default.
 </p>
 
@@ -74,7 +75,7 @@
 </code></pre>
 
 <p>
-  Inside your <code>users.scss</code> file, let's define the CSS for the HTML above:
+  Inside your <code>users.scss</code> file, let's define the CSS for the HTML above using SASS:
 </p>
 
 <pre><code class="css">
@@ -110,7 +111,7 @@
 <h2>Displaying the reviews posted by the user</h2>
 
 <p>
-  The next step is to display the reviews posted by the user. 
+  <Strong>The next step is to display the reviews posted by the user.</strong>
 </p>
 
 <p>
@@ -122,7 +123,7 @@
 </p>
 
 <p>
-  By default, Rails is installed with a gem called Jbuilder. Jbuilder allows us to write APIs easily.
+  By default, Rails is installed with a gem called Jbuilder. <strong>Jbuilder allows us to write APIs easily.</strong>
 </p>
 
 <p class="standard_git_workflow">
@@ -137,7 +138,7 @@ Read the <%= link_to 'Jbuilder documentation', 'https://github.com/rails/jbuilde
   Inside this file, add the following lines of code:
 </p>
 
-<pre><code>
+<pre><code class="ruby">
 json.id @user.id
 json.username @user.username
 json.introduction @user.introduction
@@ -152,7 +153,7 @@ json.avatar_url @user.avatar_url
   Next, what we want to do is add an array of reviews that the user has posted. To do this, we simply add the following code:
 </p>
 
-<pre><code>
+<pre><code class="ruby">
 json.reviews do
   json.array! @user.reviews do |review|
     json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
@@ -165,7 +166,7 @@ end
   Your <code>show.json.jbuilder</code> should now look like this:
 </p>  
 
-<pre><code>
+<pre><code class="ruby">
 json.id @user.id
 json.username @user.username
 json.introduction @user.introduction
@@ -183,7 +184,7 @@ end
 </p>
 
 <p>
-  Using this JSON data, we can now display the reviews by the user using AJAX.
+  <strong>Using this JSON data, we can now display the reviews by the user using AJAX.</strong>
 </p>
 
 <p>

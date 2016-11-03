@@ -3,11 +3,11 @@
 </p>
 
 <p>
-  If we look back at the API documentation, <strong>we can fetch data about a specific movie using the imdbID attribute.</strong> When we search for movies, the API gives us the imdbID, so we can use that imdbID to fetch information the movie.
+  If we look back at the API documentation, <strong>we can fetch data about a specific movie using the imdbID attribute.</strong> When we search for movies, the API gives us the imdbID, so <strong>we can use that imdbID to fetch information about the movie</strong>.
 </p>
 
 <p>
-  Here's what the overall flow will look like:
+  <strong>Here's what the overall flow will look like:</strong>
 </p>   
 
 <ul>
@@ -45,12 +45,16 @@ $('#movies').on('click', 'img', function(e){
 });
 </code></pre>
 
+<p class="standard_git_workflow">
+  This piece of code is an example of <strong>Event Delegation</strong>. Learn about event delegation in <%= link_to 'this lesson', 'https://learn.jquery.com/events/event-delegation/', target: '_blank' %>.
+</p>
+
 <p>
   Save the file and refresh the page. Search for a movie and click on one of the images. You should be alerted "Hi".
 </p>
 
 <p>
-  Instead of alerting our users, we should make AJAX request to the API instead.
+  However, instead of alerting our users, we should make AJAX request to the API instead.
 </p>
 
 <p>
@@ -58,7 +62,7 @@ $('#movies').on('click', 'img', function(e){
 </p>
 
 <p>
-  Let's erase the <code>alert</code> and make an AJAX request, passing in the <code>imdbID</code>:
+  Let's erase the <code>alert</code> and make an AJAX request, setting <code>i</code> as the key and <code>id</code> as the value, which will be the <code>imdbID</code>:
 </p>
 
 <pre><code class="javascript">
@@ -76,7 +80,7 @@ $('#movies').on('click', 'img', function(e){
 </code></pre>
 
 <p>
-  However, this won't work, since we haven't defined <code>id</code> yet. What we need to do is assign <code>id</code> to the <code>imdbID</code>. <strong>How can we achieve this?</strong>
+  To get this to work, what we need to do is assign <code>id</code> to the <code>imdbID</code>. <strong>How can we achieve this?</strong>
 </p>
 
 <h2>Data Attributes</h2>
@@ -90,11 +94,19 @@ Read more about data attributes <%= link_to 'here', 'http://www.w3schools.com/ta
 </p>
 
 <p>
-  We can assign a <strong>data attribute</strong> to each of the poster images, and set it the <code>imdbID</code> for each movie. Then, we can use JavaScript to get the data attribute for the image that was clicked, and use that to make our AJAX request.
+  We can assign a <strong>data attribute</strong> to each of the poster images, and set it the <code>imdbID</code> for each movie. <strong>Then, we can use JavaScript to get the data attribute for the image that was clicked, and use that to make our AJAX request.</strong>
 </p>
 
 <p>
-  The first step is to set the data attribute for each image. In our <code>displayMovies</code> function, let's assign a <code>data-id</code> to each image:
+  The first step is to set the data attribute for each image. In our <code>displayMovies</code> function, let's assign a <code>data-id</code> to each image and set it to the imdbID of the movie:
+</p>
+
+<pre><code class="javascript">
+&lt;img src=${movie["Poster"] == "N/A" ? "/images/your_default_image.png" : movie["Poster"]} data-id="${movie['imdbID']}" /&gt;
+</code></pre>
+
+<p>
+  Your <code>displayMovies</code> function should now look like this:
 </p>
 
 
@@ -121,9 +133,6 @@ function displayMovies(data){
 }
 </code></pre>
 
-<p>
-  Notice the change in the <code>img</code>. We simply assign <code>data-id</code> to the <code>imdbID</code> attribute for each movie.
-</p>
 
 <p>
   Next, here's how we can fetch the <code>data-id</code> for each image: 
@@ -152,8 +161,7 @@ $('#movies').on('click', 'img', function(e){
 <h2>Tasks</h2>
 
 <ul>
-  <li>Create a <code>displayMovie</code> function</li>
-  <li>Replace the <code>console.log</code> with <code>displayMovie</code>. <code>displayMovie</code> should trigger once the AJAX request has been completed.</li>
+  <li>Replace the <code>console.log</code> with a new function called <code>displayMovie</code>. <code>displayMovie</code> should trigger once the AJAX request has been completed.</li>
   <li>Implement a solution to display the information given in the response onto the webpage dynamically</li>
   <ul>
     <li>All relevant information about the movie should be displayed</li>

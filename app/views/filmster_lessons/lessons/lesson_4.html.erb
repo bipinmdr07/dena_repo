@@ -4,19 +4,15 @@
 </p>
 
 <pre><code class="ruby">
-rails new filmster --skip-test-unit --database=postgresql --skip-turbolinks
+rails new filmster --database=postgresql --skip-turbolinks
 </code></pre>
 
 <p>
-  There a few things that you have probably never seen before. 
+  <strong>There a few things that you have probably never seen before. </strong>
 </p>
 
 <p>
-  Since we are going to use RSpec to test our application, we are not going to use test unit. We can disable it by creating our Rails app with the <code>--skip-test-unit</code> option.
-</p>
-
-<p>
-  Turbolinks makes our Rails applications quick and snappy. However, it introduces some difficulties when using JavaScript. A lot of developers are against using turbolinks in their applications because it causes a lot of unnecessary tradeoffs that make turbolinks not worth the hassle. In our app, we aren't going to need turbolinks since we are going to render a lot of things using Javascript, so let's turn it off. We can disable it with the <code>--skip-turbolinks</code> option.
+  <strong>Turbolinks makes our Rails applications quick and snappy.</strong> However, it introduces some difficulties when using JavaScript. A lot of developers are against using turbolinks in their applications because it causes a lot of unnecessary tradeoffs that make turbolinks not worth the hassle. In our app, we aren't going to need turbolinks since we are going to render a lot of things using Javascript, so let's turn it off. We can disable it with the <code>--skip-turbolinks</code> option.
 </p>
 
 <p class="standard_git_workflow">
@@ -26,11 +22,11 @@ rails new filmster --skip-test-unit --database=postgresql --skip-turbolinks
 <h2>Disabling Generators</h2>
 
 <p>
-  You might have noticed in Ideator and Instapost that everytime we generate a new model or controller, a bunch of files are generated automatically, including CSS, JavaScript, and helper files that we don't need.
+  You might have noticed in Ideator and Instapost that <strong>everytime we generate a new model or controller, a bunch of files are generated automatically, including CSS, JavaScript, and helper files that we don't need.</strong>
 </p>
 
 <p>
-  A lot of times, these CSS and JavaScript files indeed do stay unused, and we end up having to delete them. However, we can disable the generation of these files by default.
+  A lot of times, these CSS and JavaScript files indeed do stay unused, and we end up having to delete them. <strong>However, we can disable the generation of these files by default.</strong>
 </p>
 
 <p>

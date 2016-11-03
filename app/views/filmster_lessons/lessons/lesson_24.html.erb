@@ -22,12 +22,24 @@
 </p>
 
 <pre><code class="javascript">
-let userData = {};
+$(function(){
+  let userData = {};
+
+  ...
 </code></pre>
 
 <p>
-  When the page is loaded, we wrote some code that makes an AJAX request to get information about the user. Let's store the data we get back from the server into <code>userData</code>, so we can use reuse it and prevent ourselves from having to make multple AJAX requests to get the same data.
+  In previous lessons, you have written code that makes an AJAX request to get information about the user. Let's store the data we get back from the server into <code>userData</code>, so we can use reuse it and prevent ourselves from having to make multple AJAX requests to get the same data.
 </p>
+
+<pre><code class="javascript">
+$.ajax({
+  // you implemented this code in earlier lessons
+})
+.done(function(data){
+  userData = data;
+});
+</code></pre>
 
 <p>
   Next, let's add the <code>following_relationships</code> and <code>followed_relationships</code> for each user in our <code>show.json.jbuilder</code> file:
@@ -89,7 +101,7 @@ function getFollowing(){
     <li>It should render the list of users that the user follows inside <code>#movie</code></li>
   </ul>
   
-  <li>Implement the same feature for followers. When a user clicks on <code>#user-followers</code>, it should render a list of followers inside <code>#movies</code></li>
+  <li>Implement the same feature for followers. When a user clicks on <code>#user-followers</code>, it should render a list of followers inside the <code>#movies</code> div</li>
 </ul>
 
 <h2>Hints</h2>

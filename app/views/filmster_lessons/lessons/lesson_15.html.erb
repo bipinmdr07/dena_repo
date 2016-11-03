@@ -1,5 +1,5 @@
 <p>
-  The next step is to write some code so that users can search movies.
+  Let's write some code so that users can search movies.
 </p>
 
 <p>
@@ -41,8 +41,8 @@
 </p>  
 
 <ul>
-  <li>We gave the form an <code>id</code> so that we can use it later to get the element by its ID in our Javascript</li>
-  <li>We gave the input a <code>name</code> of <code>s</code>. This will become important later on, since the <code>name</code> we give to the input will be sent as a paramter to the server. The <code>name</code> is set to <code>s</code> since that is the parameter for searching in the OMDb API.</li>
+  <li>We gave the form an <code>id</code> so that we can use it later to <strong>get the element by its ID</strong> in our Javascript</li>
+  <li>We gave the input a <code>name</code> of <code>s</code>. This will become important later on, since the <code>name</code> we give to the input will be sent as a parameter to the server. The <code>name</code> is set to <code>s</code> since that is the parameter for searching in the OMDb API.</li>
 </ul>
 
 <p>
@@ -157,7 +157,7 @@ $(function(){
 </p>
 
 <p>
-  <strong>First</strong>, you might have noticed that when we search for items repeatedly, instead of all of the movies being replaced, they are just appended to the bottom. We want to make it so that it completely replace the movies with the movies of the search result.
+  <strong>First</strong>, you might have noticed that when we search for items repeatedly, instead of all of the movies being replaced, <strong>they are just appended to the bottom</strong>. We want to make it so that it completely <strong>replaces</strong> the movies with the movies of the search result.
 </p>
 
 <p>
@@ -210,26 +210,26 @@ function displayMovies(data){
 </p>
 
 <p>
-  The next bug you might encounter is that for movies with no poster image, it displays a broken image icon. Instead what we can do is check if a poster exists, and if it doesn't display a default image instead.
+  The next bug you might encounter is that for movies with no poster image, <strong>it displays a broken image icon</strong>. Instead, what we can do is check if a poster exists, and if it doesn't, display a default image instead.
 </p>
 
 <p>
-  If you take a look at the images with no poster, you will see that the value of the <code>"Poster"</code> attribute is set to <code>"N/A"</code>.
+  If you inspect the images with no poster, you will see that the value of the <code>"Poster"</code> attribute is set to <code>"N/A"</code>.
 </p>
 
 <p>
-  That means that we can check if the <code>"Poster"</code> attribute is set to <code>N/A</code>, and if so, assign the image <code>src</code> to a default image link.
+  That means that we can check if the <code>"Poster"</code> attribute is set to <code>"N/A"</code>, and if so, assign the image <code>src</code> to a default image link.
 </p>
 
 <p>
   We can do this with the following code:
 </p>
 
-<pre><code class="javascript">
+<pre><code class="html">
 &lt;img src=${movie["Poster"] == "N/A" ? "/images/your_default_image.png" : movie["Poster"]} /&gt;
 </code></pre>
 
-<p>
+<p class="standard_git_workflow">
   Select your own default image and replace the image path with your own.
 </p>
 
@@ -273,7 +273,7 @@ function displayMovies(data){
 </p>
 
 <p>
-  Awesome! Things are getting pretty interesting. As you can probably tell by now, using JavaScript to render instead of reloading the page offers a much snappier user experience.
+  Awesome! Things are getting pretty interesting. <strong>As you can probably tell by now, using JavaScript to render instead of reloading the page offers a much snappier user experience.</strong>
 </p>
 
 <p>

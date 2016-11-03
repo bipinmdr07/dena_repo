@@ -36,8 +36,8 @@ class FilmsterLesson < Lesson
     Lesson.new(8, "Self-Directed Lesson: Setting up the navigation bar", CHAPTERS[4]),
     Lesson.new(9, "Self-Directed Lesson: Setting up flash messages", CHAPTERS[4]),    
     Lesson.new(10, "Self-Directed Lesson: Setting up the User Model", CHAPTERS[4]),
-    Lesson.new(11, "Self-Direct Lesson: Installing Carrierwave", CHAPTERS[4]),
-    Lesson.new(12, "Setting up RSpec and FactoryGirl", CHAPTERS[4]),
+    Lesson.new(11, "Self-Directed Lesson: Installing Carrierwave", CHAPTERS[4]),
+    Lesson.new(12, "Self-Directed Lesson: Installing Fonts", CHAPTERS[4]),
 
     Lesson.new(13, "Taking a look at the API", CHAPTERS[5]),
     Lesson.new(14, "Your first AJAX GET Request", CHAPTERS[5]),

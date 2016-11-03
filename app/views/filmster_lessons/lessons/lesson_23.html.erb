@@ -14,7 +14,19 @@
   This is called a <strong>join table</strong>. Join tables are tables that store the <code>id</code> of two different tables. We can use the join table to fetch the users that a user follows, or the users that the user is followed by. We will get to this later on in the lesson.
 </p>
 
+<p>
+  <strong>Here's what the database relationship will look like:</strong>
+</p>
+
 <%= image_tag 'filmster/relationship_model.png', class: 'img-responsive screenshot' %>
+
+<p>
+  The <code>Relationship</code> stores a <code>follower_id</code>, which is the <code>id</code> of the <code>User</code> that is a <em>follower</em>. It also stores a <code>followed_id</code>, which is the <code>id</code> of the <code>User</code> that is <em>being followed</em>.
+</p>
+
+<p class="well">
+  <strong>For example, if Mark Zuckerburg follows Steve Jobs, Mark's user id will be stored as <code>follower_id</code>, and Steve's user id will be stored as <code>followed_id</code>.</strong>
+</p>  
 
 <p>
   Let's generate our <code>relationship</code> model.
@@ -261,9 +273,10 @@ end
 <h2>Tasks</h2>
 
 <ul>
-  <li>If the user is already following the user, display a button that says "Following", which unfollows the user when clicked</li>
-  <li>If the user is not following the user yet, display a button that says "Follow" that follows the user when clicked</li>
-  <li>When the button is clicked, it should change these things:</li>
+  <li>Implement a model method called <code>following?</code> that takes in a <code>User</code> in <code>user.rb</code> that checks if the user is following a given user</li>
+  <li><strong>If the user is already following the user</strong>, display a button that says "Following", which unfollows the user when clicked</li>
+  <li><strong>If the user is not following the user yet</strong>, display a button that says "Follow" that follows the user when clicked</li>
+  <li>When the button is clicked, <strong>it should change these things:</strong></li>
   <ul>
     <li>Number of followers the user has</li>
     <li>The button should change to the opposite state ("Follow" to "Following", "Following" to "Follow")</li>
@@ -271,14 +284,6 @@ end
   <li>The above should be accomplished with AJAX (refer back to what you did in Instapost)</li>
 </ul>
 
-<h2>Things to check before submitting</h2>
-
-<ul>
-  <li>How are you checking if the current user is already following the user?</li>
-  <ul>
-    <li>Create a model method that checks if a user is following another user</li>
-  </ul>
-</ul>
 
 
 <p>
