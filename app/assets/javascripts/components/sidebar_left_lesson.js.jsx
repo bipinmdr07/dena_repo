@@ -29,7 +29,7 @@ let SidebarLeftLesson = React.createClass({
     } else if (this.props.displaySm) {
       return {"color": "#5a5a5a", "textAlign": "center", "padding": "10px", "fontFamily": 'Lato, sans-serif'}
     } else {
-      return {"color": "#5a5a5a", "paddingLeft": "40px", "fontFamily": 'Lato, sans-serif'}
+      return {"color": "#5a5a5a", "paddingLeft": "40px", "paddingRight": "35px", "fontFamily": 'Lato, sans-serif'}
     }
   },
 
