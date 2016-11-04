@@ -37,10 +37,11 @@
     margin-bottom: 20px;
   }
 
-  .label-track {
-    border: 1px solid #666666;
-    color: #666666;
+  .btn-track {
     font-weight: 600;
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
   }
 
   &:hover {

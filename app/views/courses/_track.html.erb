@@ -14,7 +14,9 @@
         </div>
 
         <div class="track-progression">
-          
+          <% unless current_user.has_access_to?(track.courses.first.underscore.chomp("_lesson")) %>
+            <button class="btn btn-sm btn-cta-primary btn-track">Locked</button>
+          <% end %>
         </div>
       </div>
     <% end %>

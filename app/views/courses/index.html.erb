@@ -3,6 +3,12 @@
 <%= render "shared/flash_messages" %>
 
 <div class="row">
+  <div class="col-xs-12 col-md-6">
+    <%= render partial: 'courses/progress', locals: {last_lesson: @last_lesson} %>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-xs-12">
     <h3 class="course-track-title">Course Tracks</h3>
   </div>
@@ -13,56 +19,3 @@
   
 </div>
 
-
-<h2 class="curriculum_title">Main Curriculum</h2>
-
-<div class = "row">
-
-  <%= render partial: 'course', locals: {course: 'Intro', course_name: "An introduction to web development and why it's so cool.", available: true, course_link: intro_path, course_access: 'intro', controller_name: 'IntroLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'HTML/CSS', course_name: "HTML and CSS are the tools developers use to structure web pages. Learning the basics of HTML and CSS to start building your own web pages.", available: true, course_link: html_css_path, course_access: 'html_css', controller_name: 'HtmlCssLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'Introduction to Bootstrap', course_name: "", available: true, course_link: bootstrap_path, course_access: 'bootstrap', controller_name: 'BootstrapLesson'} %>
-
-</div>
-
-<div class = "row">
-
-  <%= render partial: 'course', locals: {course: 'Ruby Fundamentals', course_name: 'Ruby is a beautiful programming language that makes programming so much easier for beginners. Master the fundamentals of programming while learning Ruby.', available: true, course_link: ruby_path, course_access: 'ruby', controller_name: 'RubyLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'Ideator - An idea sharing app', course_name: 'Create your first Ruby on Rails application. You\'ll be building an idea sharing/discovery app where anyone can post their ideas and share them with the world.', available: true, course_link: ideator_path, course_access: 'ideator', controller_name: 'IdeatorLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'MVC', course_name: '', available: true, course_link: mvc_path, course_access: 'mvc', controller_name: 'MvcLesson'} %>
-
-</div>
-
-<div class = "row">
-
-  
-
-  <%= render partial: 'course', locals: {course: 'Ruby Core Training', course_name: 'Strengthen your Ruby skills by going through various coding challenges. Sharpen your thinking skills and become a more proficient web developer.', available: true, course_link: ruby_core_path, course_access: 'ruby_core', controller_name: 'RubyCoreLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'Instapost - Share your photos', course_name: 'Create a clone of the popular Instagram application. You are going to be creating a more complex app than before! Get excited!', available: true, course_link: instapost_path, course_access: 'instapost', controller_name: 'InstapostLesson' } %>
-
-  <%= render partial: 'course', locals: {course: 'RSpec and Testing', course_name: 'If you want to become a valuable software developer, you need to learn how to test your applications.', available: true, course_link: rspec_blog_path, course_access: 'rspec_blog', controller_name: 'RspecBlogLesson' } %>
-
-</div>
-
-<div class = "row">
-  
-
-  <%= render partial: 'course', locals: {course: 'JavaScript/jQuery', course_name: 'Manipulate the DOM by using JavaScript. Learn the basics of JavaScript and jQuery.', available: true, course_link: javascript_path, course_access: 'javascript', controller_name: 'JavascriptLesson'} %>
-
-  <%= render partial: 'course', locals: {course: 'Filmster - An online movie reviewing app', course_name: '', available: true, controller_name: 'FilmsterLesson', course_link: filmster_path, course_access: 'filmster' } %>
-  
-  <%= render partial: 'course', locals: {course: 'Git/GitHub', course_name: 'Git and GitHub is used by the majority of web developers. Learn what it is and how you can utilize it to collaborate and implement version control.', available: true, course_link: github_path, course_access: 'github', controller_name: 'GithubLesson'} %>
-</div>
-
-
-<div class="row">
-  <%= render partial: 'course', locals: {course: 'Team Collaboration', course_name: '', available: false, controller_name: 'CollaborationLesson', course_link: collaboration_path, course_access: 'collaboration' } %>
-
-  
-
-  
-</div>

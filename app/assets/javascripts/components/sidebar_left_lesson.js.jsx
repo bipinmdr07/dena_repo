@@ -16,7 +16,7 @@ let SidebarLeftLesson = React.createClass({
   lessonProgress(){
     if (!this.props.displaySm && this.props.lesson.completed) {
       return (
-        <span style={{"position": "absolute", "right": "10px"}}>
+        <span style={{"position": "absolute", "right": "15px"}}>
           <i className="fa fa-check-square-o progression_check" aria-hidden="true"></i>
         </span>
       )
@@ -25,11 +25,11 @@ let SidebarLeftLesson = React.createClass({
 
   lessonStyles(){
     if (this.props.displaySm && this.props.lesson.completed) {
-      return {"color": "#5cb85c", "textAlign": "center", "padding": "10px"}
+      return {"color": "#5cb85c", "textAlign": "center", "padding": "10px", "fontFamily": 'Lato, sans-serif'}
     } else if (this.props.displaySm) {
-      return {"color": "#5a5a5a", "textAlign": "center", "padding": "10px"}
+      return {"color": "#5a5a5a", "textAlign": "center", "padding": "10px", "fontFamily": 'Lato, sans-serif'}
     } else {
-      return {"color": "#5a5a5a", "paddingLeft": "40px"}
+      return {"color": "#5a5a5a", "paddingLeft": "40px", "fontFamily": 'Lato, sans-serif'}
     }
   },
 

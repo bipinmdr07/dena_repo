@@ -110,6 +110,7 @@ $sidebar-border: #323232;
 }
 
 .sidebar_container_left {
+  @include slide_transition(left);
   @include sidebar_container;
 
   left: 0px;
