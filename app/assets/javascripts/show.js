@@ -46,7 +46,7 @@ show_page_trigger = function(){
   }
 
   scroll_sidebar($(".sidebar_container_right"));
-  scroll_sidebar($("#sidebar-left-trigger"));
+  scroll_sidebar($(".sidebar_container_left"));
   add_active_to_nav();
   add_offset();  
 
