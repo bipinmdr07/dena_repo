@@ -7,14 +7,6 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
-  #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
-  # end
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
   get 'apply', to: 'apply#index', as: 'apply'

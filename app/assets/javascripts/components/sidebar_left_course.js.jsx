@@ -10,6 +10,12 @@ let SidebarLeftCourse = React.createClass({
     this.setState({show: !this.state.show});
   },
 
+  courseNameText(){
+    if (!this.props.displaySm) {
+      return this.props.course.course_name;
+    }
+  },
+
   render(){
 
     let chapters = [];
@@ -19,7 +25,8 @@ let SidebarLeftCourse = React.createClass({
                                    chapter={chapter} 
                                    course={this.props.course} 
                                    chapter_title={this.props.chapter_title}
-                                   lesson_id={this.props.lesson_id}/>
+                                   lesson_id={this.props.lesson_id}
+                                   displaySm={this.props.displaySm}/>
       });
     }
 
@@ -27,7 +34,7 @@ let SidebarLeftCourse = React.createClass({
         <div>   
           <li className="course-title">
             <a href="#" onClick={this.handleClick} style={{color: this.state.show ? "white" : "#5c5c5c" }}>
-              <i className="fa fa-file-code-o" style={{"marginRight": "10px"}} aria-hidden="true"></i> {this.props.course.course_name}
+              <i className="fa fa-file-code-o" style={{"marginRight": "10px"}} aria-hidden="true"></i> {this.courseNameText()}
             </a>
           </li>
               

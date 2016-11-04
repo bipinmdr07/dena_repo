@@ -35,9 +35,6 @@ $sidebar-border: #323232;
   }
 }
 
-.sidebar .nav {
-  max-width: 95% !important;
-}
 
 .sidebar-active {
   background: #161616;
@@ -62,7 +59,7 @@ $sidebar-border: #323232;
 }
 
 .sidebar-left {
-  width: 300px;  
+  width: 100%;
 }
 
 #sidebar-left-trigger {
@@ -133,7 +130,7 @@ $sidebar-border: #323232;
   border-left: 2px solid $sidebar-border;
 
   li {
-    padding: 20px;
+    padding: 15px;
     font-size: 12px;
     font-family: 'Lato', sans-serif;
     text-align: center;
@@ -148,7 +145,7 @@ $sidebar-border: #323232;
     }
 
     .fa {
-      font-size: 30px;
+      font-size: 20px;
       margin-bottom: 5px;
     }  
   }

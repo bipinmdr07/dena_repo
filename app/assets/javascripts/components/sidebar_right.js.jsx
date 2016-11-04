@@ -62,7 +62,7 @@ let SidebarRight = React.createClass({
   },
 
   initialDisplayWidth() {
-    return $(window).width() / 8.88 - 30;
+    return 55;
   },
 
   sidebarLeftWidth(){
@@ -211,7 +211,7 @@ let SidebarRight = React.createClass({
   },
 
   flashcardText(){
-    if (this.state.initialDisplayWidth > 70) {
+    if (this.state.initialDisplayWidth > 80) {
       return (
         <div>
           Create New Flashcard
@@ -221,7 +221,7 @@ let SidebarRight = React.createClass({
   },
 
   questionText(){
-    if (this.state.initialDisplayWidth > 70) {
+    if (this.state.initialDisplayWidth > 80) {
       return (
         <div>
           Ask Question
@@ -231,7 +231,7 @@ let SidebarRight = React.createClass({
   },
 
   quizText(){
-    if (this.state.initialDisplayWidth > 70) {
+    if (this.state.initialDisplayWidth > 80) {
       return (
         <div>
           Quizzes
@@ -241,7 +241,7 @@ let SidebarRight = React.createClass({
   },
 
   adminQuizText(){
-    if (this.state.initialDisplayWidth > 70) {
+    if (this.state.initialDisplayWidth > 80) {
       return (
         <div>
           Add Quiz
@@ -301,21 +301,21 @@ let SidebarRight = React.createClass({
 
   render(){
     return(
-      <div className="sidebar_container sidebar_container_right" data-spy="affix" data-offset-bottom="40" style={this.sidebarContainerStyles()} ref="component">
+      <div className="sidebar_container sidebar_container_right" style={this.sidebarContainerStyles()} ref="component">
         <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-right" style={this.sidebarLiWidth()}>
           <li className={this.state.showFlashcard ? "sidebar-sm-icon sidebar-active" : "sidebar-sm-icon" } onClick={this.toggleFlashcard} style={this.sidebarLiWidth()}>
             <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-            {this.flashcardText()}
+            
           </li>
 
           <li className={this.state.showQuestion ? "sidebar-sm-icon sidebar-active" : "sidebar-sm-icon" }  onClick={this.toggleQuestion} style={this.sidebarLiWidth()}>
             <i className="fa fa-question-circle" aria-hidden="true"></i>
-            {this.questionText()}
+            
           </li>
 
           <li className={this.state.showQuiz ? "sidebar-sm-icon sidebar-active" : "sidebar-sm-icon" } onClick={this.toggleQuiz} style={Object.assign(this.sidebarLiWidth(), {color: this.state.quizCompleted ? "#ffffff" : "#ec6952"})}>
             <i className="fa fa-check-square" aria-hidden="true"></i>
-            {this.quizText()}
+            
           </li>
 
           {this.adminQuiz()}
