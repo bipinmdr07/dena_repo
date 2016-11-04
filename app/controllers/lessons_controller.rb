@@ -58,6 +58,10 @@ class LessonsController < ApplicationController
 
     @quiz_completed = !current_user.quiz_completions.find_by(course_name: current_controller, lesson_id: @current_lesson_id).nil? || QuizProblem.where(course_name: current_controller, lesson_id: @current_lesson_id).empty?
 
+    @track = TrackFinder.new(course_name: current_controller).track
+    
+    @chapter_title = controller_name.classify.constantize::LESSONS.detect{|lesson| lesson.id == params[:id].to_i}.chapter.title
+
     render layout: "layouts/lesson"
   end
 

@@ -1,0 +1,133 @@
+<p>
+  Next, let's build a feature where users can view the users that follow the user and the users that the user is following.
+</p>
+
+<p>
+  <strong>Here's our strategy.</strong>
+</p>
+
+<ul>
+  <li>When a user clicks on <code>#user-following</code></li>
+  <ul>
+    <li>Use Javascript to render a list of users that the user follows</li>
+  </ul> 
+  <li>When a user clicks on <code>#user-followers</code></li>
+  <ul>
+    <li>Use Javascript to render a list of followers that the user has</li>
+  </ul>
+</ul>
+
+<p>
+  First, inside of the function we wrote inside the <code>script</code> tag inside <code>users/show.html.erb</code>, let's create an empty Javascript object:
+</p>
+
+<pre><code class="javascript">
+$(function(){
+  let userData = {};
+
+  ...
+</code></pre>
+
+<p>
+  In previous lessons, you have written code that makes an AJAX request to get information about the user. Let's store the data we get back from the server into <code>userData</code>, so we can use reuse it and prevent ourselves from having to make multple AJAX requests to get the same data.
+</p>
+
+<pre><code class="javascript">
+$.ajax({
+  // you implemented this code in earlier lessons
+})
+.done(function(data){
+  userData = data;
+});
+</code></pre>
+
+<p>
+  Next, let's add the <code>following_relationships</code> and <code>followed_relationships</code> for each user in our <code>show.json.jbuilder</code> file:
+</p>
+
+<pre><code>
+json.id @user.id
+json.username @user.username
+json.introduction @user.introduction
+json.avatar_url @user.avatar_url
+json.reviews do
+  json.array! @user.reviews do |review|
+    json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
+    json.comment review.comment
+  end
+end
+json.following_relationships do
+  json.array! @user.following_relationships do |following_relationship|
+    json.user following_relationship.followed, :id, :username, :introduction, :avatar_url
+  end
+end
+json.followed_relationships do
+  json.array! @user.followed_relationships do |followed_relationship|
+    json.user followed_relationship.follower, :id, :username, :introduction, :avatar_url  
+  end
+end
+</code></pre>
+
+<p>
+  Now if we go to <code>/users/1.json</code>, we see that we have an array of <code>following_relationships</code> and <code>followed_relationships</code>.
+</p>
+
+<p>
+  Inside our <code>script</code> tag, let's write some Javascript so that a list of users that the user is following is rendered when the user clicks on <code>#user-following</code>:
+</p>
+
+<pre><code class="javascript">
+$('#user-following').on('click', function(e){  
+  getFollowing();
+});
+</code></pre>
+
+<p>
+  Next, let's implement the <code>getFollowing()</code> method that we are calling above:
+</p>
+
+<pre><code class="javascript">
+function getFollowing(){
+  // your implementation here
+}
+</code></pre>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Implement the <code>getFollowing()</code> method</li>
+  <ul>
+    <li>If there are no users that the user follows, then display a message saying "This user has not followed any users yet"</li>
+    <li>It should render the list of users that the user follows inside <code>#movie</code></li>
+  </ul>
+  
+  <li>Implement the same feature for followers. When a user clicks on <code>#user-followers</code>, it should render a list of followers inside the <code>#movies</code> div</li>
+</ul>
+
+<h2>Hints</h2>
+
+<ul>
+  <li>You can access the <code>following_relationships</code> with <code>userData.following_relationships</code> and <code>followed_relationships</code> with <code>userData.followed_relationships</code></li>
+  <li>Use <code>forEach</code> to iterate through each relationship</li>
+</ul>
+
+<p>
+  Submit your Github repository and your link to your Heroku application.
+</p>
+
+<% @submission_form = true %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,8 @@
+.progress-bar {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+}
+
 .desc {
   ul {
     padding-left: 15px;
@@ -88,7 +93,7 @@ tr {
     line-height: 1.8;
 }
 
-.dropdown-toggle .fa-bell {
+.dropdown-toggle .fa-bell-o {
   font-size: 18px;
 }
 
@@ -465,8 +470,8 @@ span.radio.inline {
     border-bottom: 2px solid #ec6952;
   }
   li {
-    font-size: 16px;
     margin: 5px 0px;
+    font-family: 'Lato', sans-serif;
   }
   p {
     font-size: 17px;

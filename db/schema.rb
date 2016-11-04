@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019085241) do
+ActiveRecord::Schema.define(version: 20161031064655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,6 +187,11 @@ ActiveRecord::Schema.define(version: 20161019085241) do
     t.index ["user_id"], name: "index_mentor_sessions_on_user_id", using: :btree
   end
 
+  create_table "microposts_lessons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
     t.integer  "actor_id"
@@ -258,7 +263,9 @@ ActiveRecord::Schema.define(version: 20161019085241) do
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
     t.integer  "quiz_submissions_count", default: 0
+    t.integer  "quiz_submission_id"
     t.index ["quiz_category_id"], name: "index_quiz_category_ratings_on_quiz_category_id", using: :btree
+    t.index ["quiz_submission_id"], name: "index_quiz_category_ratings_on_quiz_submission_id", using: :btree
     t.index ["score"], name: "index_quiz_category_ratings_on_score", using: :btree
     t.index ["user_id", "quiz_category_id"], name: "index_quiz_category_ratings_on_user_id_and_quiz_category_id", using: :btree
     t.index ["user_id"], name: "index_quiz_category_ratings_on_user_id", using: :btree
@@ -472,6 +479,8 @@ ActiveRecord::Schema.define(version: 20161019085241) do
     t.integer  "package"
     t.boolean  "collaboration_access",      default: false, null: false
     t.boolean  "skill_academy_access",      default: false, null: false
+    t.boolean  "microposts_access",         default: false
+    t.boolean  "filmster_access",           default: false, null: false
     t.index ["admitted"], name: "index_users_on_admitted", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

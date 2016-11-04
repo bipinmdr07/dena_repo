@@ -1,0 +1,281 @@
+<p>
+  Let's write some code so that users can search movies.
+</p>
+
+<p>
+  The first step is to create a form that prompts the user for a movie name.
+</p>
+
+<p>
+  In your <code>index.html.erb</code>, above your <code>#movies</code> div, let's create a form. Add the following lines of code:
+</p>
+
+<pre><code class="erb">
+&lt;div class="row"&gt;
+  &lt;div class="col-xs-12 col-md-4"&gt;
+    &lt;h1 class="text-center"&gt;Find Movies&lt;/h1&gt;
+
+    &lt;div class="row"&gt;
+      &lt;form id="movie-search"&gt;
+        &lt;div class="col-xs-8"&gt;
+          &lt;input type="text" name="s" class="form-control" placeholder="Enter Movie Name"&gt;
+        &lt;/div&gt;
+        &lt;div class="col-xs-4"&gt;
+          &lt;button type="submit" class="btn btn-success"&gt;Submit&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+
+  &lt;div class="col-xs-12 col-md-8"&gt;
+    &lt;div id="movies"&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+<p>
+  Let's go over some important things here:
+</p>  
+
+<ul>
+  <li>We gave the form an <code>id</code> so that we can use it later to <strong>get the element by its ID</strong> in our Javascript</li>
+  <li>We gave the input a <code>name</code> of <code>s</code>. This will become important later on, since the <code>name</code> we give to the input will be sent as a parameter to the server. The <code>name</code> is set to <code>s</code> since that is the parameter for searching in the OMDb API.</li>
+</ul>
+
+<p>
+  Now that we've built our form, let's write some JavaScript so that an AJAX request to the API is made when a user submits the form.
+</p>
+
+<p>
+  First, let's add the following code inside of our <code>main.js</code> function:
+</p>
+
+<pre><code class="javascript">
+let form = $('#movie-search');
+form.submit(function(e){
+  e.preventDefault();
+
+
+});
+</code></pre>
+
+<p>
+  Let's go through what each piece of this code is doing.
+</p>
+
+<p><strong>First</strong>, we are assigning the form we just created to a variable called <code>form</code>.</p>
+
+<p>
+  <strong>Next</strong>, the <code>.submit</code> function allows us to trigger a function when a form is submitted. In this case, when <code>form</code> is submitted, the function passed in is triggered.
+</p>
+
+<p>
+  Lastly, we have the <code>e.preventDefault();</code> code. <strong>This code prevents the browser from refreshing the page.</strong>
+</p>
+
+<p>
+  What we want to do is trigger an AJAX request to the API when the form is submitted, using the user input of the form.
+</p>
+
+<p>
+  Here's how we can do that:
+</p>
+
+
+<pre><code class="javascript">
+let form = $('#movie-search');
+form.submit(function(e){
+  e.preventDefault();
+
+  $.ajax({
+    url: 'http://www.omdbapi.com/?',
+    data: form.serialize()
+  })
+  .done(function(data){
+    displayMovies(data);
+  });
+});
+</code></pre>
+
+<p>
+  As you can see, we are making the same AJAX call as we did before, except we are passing it different data.
+</p>
+
+<p>
+  The <code>serialize()</code> method in jQuery creates a text string in standard URL-encoded notation. By calling <code>serialize</code> on our form, we are able to take the user input and send it as a parameter in the AJAX request.
+</p>
+
+<p class="standard_git_workflow">
+  Read more about the <code>serialize</code> method <%= link_to 'here', 'http://api.jquery.com/serialize/', target: '_blank' %>.
+</p>
+
+<p>
+  Your <code>main.js</code> should now look like this:
+</p>
+
+
+<pre><code class="javascript">
+$(function(){
+  let form = $('#movie-search');
+  form.submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+      url: 'http://www.omdbapi.com/?',
+      data: form.serialize()
+    })
+    .done(function(data){
+      displayMovies(data);
+    });
+  });
+
+  function displayMovies(data){
+    let htmlString = "";
+
+    data["Search"].forEach(function(movie){
+      htmlString += `&lt;img src=${movie["Poster"]} /&gt;
+                     &lt;p&gt;${movie["Title"]}&lt;/p&gt;
+                     &lt;p&gt;${movie["Year"]}&lt;/p&gt;`;
+    });
+
+    $("#movies").append(htmlString);
+  }
+});
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see that your page will display movies according to what you input in the form.
+</p>
+
+<h2>Fixing a few errors</h2>
+
+<p>
+  You might have noticed a few errors when trying out the new form.
+</p>
+
+<p>
+  <strong>First</strong>, you might have noticed that when we search for items repeatedly, instead of all of the movies being replaced, <strong>they are just appended to the bottom</strong>. We want to make it so that it completely <strong>replaces</strong> the movies with the movies of the search result.
+</p>
+
+<p>
+  Let's change our <code>displayMovies</code> function so that it empties the <code>#movies</code> div before appending new movies.
+</p>  
+
+<p>
+  We can use the <code>empty()</code> method to empty the inside of the element.
+</p>  
+
+<pre><code class="javascript">
+function displayMovies(data){
+  $("#movies").empty();
+
+  let htmlString = "";
+
+  data["Search"].forEach(function(movie){
+    htmlString += `&lt;img src=${movie["Poster"]} /&gt;
+                   &lt;p&gt;${movie["Title"]}&lt;/p&gt;
+                   &lt;p&gt;${movie["Year"]}&lt;/p&gt;`;
+  });
+
+  $("#movies").append(htmlString);
+}
+</code></pre>
+
+<p>
+  Notice how we are repeating <code>$("#movies")</code> twice. In order to make the code DRY, let's assign the DOM element to a variable so we can reuse it elsewhere in the code if needed:
+</p>
+
+<pre><code class="javascript">
+function displayMovies(data){
+  let container = $("#movies")
+  let htmlString = "";
+
+  container.empty();
+
+  data["Search"].forEach(function(movie){
+    htmlString += `&lt;img src=${movie["Poster"]} /&gt;
+                   &lt;p&gt;${movie["Title"]}&lt;/p&gt;
+                   &lt;p&gt;${movie["Year"]}&lt;/p&gt;`;
+  });
+
+  container.append(htmlString);
+}
+</code></pre>
+
+<p>
+  Save the file and refresh the page. You should now see all of the movies are replaced instead of being simply appended to the bottom.
+</p>
+
+<p>
+  The next bug you might encounter is that for movies with no poster image, <strong>it displays a broken image icon</strong>. Instead, what we can do is check if a poster exists, and if it doesn't, display a default image instead.
+</p>
+
+<p>
+  If you inspect the images with no poster, you will see that the value of the <code>"Poster"</code> attribute is set to <code>"N/A"</code>.
+</p>
+
+<p>
+  That means that we can check if the <code>"Poster"</code> attribute is set to <code>"N/A"</code>, and if so, assign the image <code>src</code> to a default image link.
+</p>
+
+<p>
+  We can do this with the following code:
+</p>
+
+<pre><code class="html">
+&lt;img src=${movie["Poster"] == "N/A" ? "/images/your_default_image.png" : movie["Poster"]} /&gt;
+</code></pre>
+
+<p class="standard_git_workflow">
+  Select your own default image and replace the image path with your own.
+</p>
+
+<p>
+  <strong>The last thing</strong> we want to do is to check if the API responds back with an error.
+</p>
+
+<p>
+  In the API we are using in this application, the <code>"Response"</code> will return <code>"False"</code> if there is an error, and we can read the error by accessing the value of <code>"Error"</code>.
+</p>
+
+<p>
+  We can check if there is an error, and if there is, display an alert, otherwise display the movies:
+</p>
+
+<pre><code class="javascript">
+function displayMovies(data){
+  let container = $("#movies")
+  let htmlString = "";
+
+  container.empty();
+
+  if (data["Response"] == "False") {
+    htmlString = `&lt;div class="alert alert-danger text-center" role="alert"&gt;${data["Error"]}&lt;/div&gt;`
+  } 
+  else {
+
+    data["Search"].forEach(function(movie){
+      htmlString += `&lt;img src=${movie["Poster"] == "N/A" ? "/images/your_default_image.png" : movie["Poster"]} /&gt;
+                     &lt;p&gt;${movie["Title"]}&lt;/p&gt;
+                     &lt;p&gt;${movie["Year"]}&lt;/p&gt;`;
+    });
+  }
+
+  container.append(htmlString);
+}
+</code></pre>
+
+<p>
+  Now if you search an invalid term, you will see an error message appear.
+</p>
+
+<p>
+  Awesome! Things are getting pretty interesting. <strong>As you can probably tell by now, using JavaScript to render instead of reloading the page offers a much snappier user experience.</strong>
+</p>
+
+<p>
+  In the next lesson, you will learn how to display detailed information about individual posts using more AJAX calls.
+</p>

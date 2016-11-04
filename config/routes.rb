@@ -7,14 +7,6 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  # devise_for :immersive_students, class_name: 'User', controllers: {registrations: "immersive_applicants", :sessions => 'main' } do
-  #   get   "apply/remote" => "apply#remote", as: 'apply_remote'
-  # end
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
   root 'static_pages#index'
 
   get 'apply', to: 'apply#index', as: 'apply'
@@ -32,6 +24,8 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     resources :student_admissions, only: :create
   end
+
+  resources :tracks, only: :show
   
   resources 'contacts', only: [:new, :create]
 
@@ -149,6 +143,9 @@ Rails.application.routes.draw do
 
   get 'mvc_lessons', to: 'mvc_lessons#index', as: 'mvc'
   get 'mvc_lessons/:id', to: 'mvc_lessons#show', as: 'mvc_lessons'
+
+  get 'filmster_lessons', to: 'filmster_lessons#index', as: 'filmster'
+  get 'filmster_lessons/:id', to: 'filmster_lessons#show', as: 'filmster_lessons'
 
   get 'skill_academy_lessons', to: 'skill_academy_lessons#index', as: 'skill_academy'
   get 'skill_academy_lessons/:id', to: 'skill_academy_lessons#show', as: 'skill_academy_lessons'

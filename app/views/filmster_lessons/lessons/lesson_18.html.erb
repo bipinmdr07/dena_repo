@@ -1,0 +1,465 @@
+<p>
+  The next step is to setup logic for reviews.
+</p>
+
+<p>
+  First, let's create a <code>Review</code> model.
+</p>
+
+<p>
+  In the terminal, run the following command:
+</p>
+
+<pre><code class="ruby">
+rails g model reviews users:references movies:references comment:text
+</code></pre>
+
+<div class="well">
+  <h3>Generating Contents of Migration Files Dynamically</h3>
+
+  <p>
+    Until now, everytime we generated a model, we went into our migration file and manually added in the columns necessary.
+  </p>
+
+  <p>
+    With Rails, you can actually automatically add in the columns when you generate the model.
+  </p>
+
+  <p>
+    In the case above:
+  </p>  
+
+
+<pre><code class="ruby">
+rails g model reviews users:references movies:references comment:text
+</code></pre>
+
+  <p>
+    Automatically generates a migration file like this:
+  </p>
+
+<pre><code class="ruby">
+class CreateReviews &lt; ActiveRecord::Migration[5.0]
+  def change
+    create_table :reviews do |t|
+      t.references :user, foreign_key: true
+      t.references :movie, foreign_key: true
+      t.text :comment
+
+      t.timestamps
+    end
+  end
+end
+</code></pre>
+  
+  <p>
+    Using this command can be extremely handy.
+  </p>
+
+  <p class="standard_git_workflow">
+    Read the <%= link_to 'Rails Guide', 'http://edgeguides.rubyonrails.org/active_record_migrations.html#model-generators', target: '_blank' %> for more detail about creating these migrations.
+  </p>
+
+</div>
+
+<div class="well">
+  <h3>References and Foreign Key Constraints</h3>
+
+  <p>
+    In the migration file above, we see <code>t.references</code> - something we've never seen before.
+  </p>
+
+  <p>
+    <strong>References will do the following things:</strong>
+  </p>  
+
+  <ul>
+    <li><strong>Creates a foreign key.</strong> In this case, <code>t.references :user</code> will create a <code>user_id</code> column, and <code>t.references :movie</code> will create a <code>movie_id</code> column</li>
+    <li><strong>Creates a foreign key constraint</strong> by default</li>
+  </ul> 
+
+  <p class="standard_git_workflow">
+    Read more about foreign key constraints <%= link_to 'here', 'https://robots.thoughtbot.com/referential-integrity-with-foreign-keys', target: "_blank" %>
+  </p>
+
+</div>
+
+
+<p>
+  Run <code>rake db:migrate</code> to perform a database migration.
+</p>
+
+<h2>Task</h2>
+
+<ul>
+  <li>Setup database relations so that <code>User</code> has many <code>Reviews</code> and <code>Review</code> belongs to <code>User</code></li>
+  <li>Validate the presence of <code>:user, :movie, :comment</code></li> 
+  <p>
+    <strong>One thing to note is that you can actually validate the presence of related models.</strong> In other words, instead of validating the presence of <code>:user_id</code> and <code>:movie_id</code>, we can validate <code>:user</code> and <code>:movie</code>.
+  </p>
+</ul>
+
+<p>
+  Now that we have a database table to store our reviews, let's create a controller to handle the backend logic.
+</p>
+
+<p>
+  In your terminal, run the following command:
+</p>
+
+<pre><code class="bash">
+rails g controller reviews
+</code></pre>
+
+<p>
+  The first thing we are going to do is make sure that users have to be signed in before they can create reviews. We can do this with <code>authenticate_user!</code>. Change your <code>reviews_controller.rb</code> to look like this:
+</p>
+
+<pre><code class="ruby">
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!
+
+end
+</code></pre>
+
+<p>
+  Next, let's add a <code>create</code> method.
+</p>
+
+<pre><code class="ruby">
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!
+
+  def create
+
+  end
+end
+</code></pre>
+
+<p>
+  Inside this <code>create</code> method, let's write some pseudo code to make sure we know exactly what we want to accomplish.
+</p>
+
+<pre><code class="ruby">
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    # if a Movie with an imdbid of params[:imdbid] does not exist
+    # fetch movie data from API using params[:imdbid] and create a new Movie based on the response data
+
+    # otherwise, find Movie with an imdbid of params[:imdbid]
+
+    # create a new review and connect it to the current_user and the movie
+  end
+end
+</code></pre>
+
+<p>
+  Let's start with the first step. What we want to accomplish is this: check if a Movie with an <code>imdbid</code> of <code>params[:imdbid]</code> exists, and if it doesn't initialize a new movie. 
+</p>
+
+<p>
+  <strong>We can use the <code>find_or_initialize_by</code> method to accomplish this.</strong>
+</p>
+
+<p class="standard_git_workflow">
+  Google the <code>find_or_initialize_by</code> method and research what it does.
+</p>
+
+<p>
+  Change your <code>create</code> method to look like this:
+</p>
+
+<pre><code class="ruby">
+def create
+  @movie = Movie.find_or_initialize_by(imdbid: params[:imdbid])
+
+  if @movie.new_record?
+    # fetch movie data from API using params[:imdbid] and create a new Movie based on the response data
+  end
+
+  # create a new review and connect it to the current_user and the movie
+end
+</code></pre>  
+
+<p>
+  Here, we are finding a <code>Movie</code> with an <code>imdbid</code> of <code>params[:imdbid]</code> and initializing a new <code>Movie</code> if it doesn't exist.
+</p>
+
+<p>
+  Then, we're checking if the movie is a new record. If it is, we are going to fetch data from the API and assign the movie attributes to the data we get back.
+</p>  
+
+<h3>Making an API call from the controller</h3>
+
+<p>
+  To make an API call from the controller, we're going to use a gem that allows us to communicate with the OMDb API from the controller.
+</p>
+
+
+<p>
+  <strong>Go to the documentation page <%= link_to 'here', 'https://github.com/nikkypx/omdb-api', target: '_blank' %> and install the gem.</strong>
+</p>
+
+<p>
+  As it says in the documentation, we can fetch movie data by <code>id</code> using <code>Omdb::Api.find_by(id: id)</code>. In our controller, we're going to use this method to fetch our movie data.
+</p>
+
+<pre><code class="ruby">
+def create
+  @movie = Movie.find_or_initialize_by(imdbid: params[:imdbid])
+
+  if @movie.new_record?
+    # fetch movie data from API using params[:imdbid]
+    @fetched_movie = Omdb::Api.find_by(id: params[:imdbid])
+
+    # create a new Movie based on the response data
+    @movie.title = @fetched_movie.title
+    @movie.year = @fetched_movie.year
+    @movie.rated = @fetched_movie.rated
+    @movie.released = @fetched_movie.released
+    @movie.runtime = @fetched_movie.runtime
+    @movie.genre = @fetched_movie.genre
+    @movie.director = @fetched_movie.director
+    @movie.writer = @fetched_movie.writer
+    @movie.actors = @fetched_movie.actors
+    @movie.plot = @fetched_movie.plot
+    @movie.language = @fetched_movie.language
+    @movie.country = @fetched_movie.country
+    @movie.awards = @fetched_movie.awards
+    @movie.poster = @fetched_movie.poster
+    @movie.metascore = @fetched_movie.metascore
+    @movie.imdbrating = @fetched_movie.imdbrating
+    @movie.imdbvotes = @fetched_movie.imdbvotes
+    @movie.imdbid = @fetched_movie.imdbid
+
+    @movie.save
+  end
+
+  # create a new review and connect it to the current_user and the movie
+end
+</code></pre>  
+
+<p>
+  Let's go through what we just did. <strong>First</strong>, we fetched a movie based on the <code>imdbid</code> using the gem we just installed. <strong>Then</strong>, we used that data to assign all of the attributes for <code>@movie</code>. <strong>Lastly</strong>, we saved <code>@movie</code> into the database.
+</p>
+
+
+<p>
+  The final step is to create a review that is connected to the <code>current_user</code> and movie that we just created. Add the following lines of code inside of your <code>create action</code>:
+</p>  
+
+<pre><code class="ruby">
+# create a new review and connect it to the current_user and the movie
+@review = current_user.reviews.new(review_params.merge(movie: @movie))
+
+if @review.save
+  flash[:success] = "Review saved!"
+  redirect_to root_path
+else
+  flash[:alert] = "Woops! It seems there was an error."
+  redirect_to root_path
+end
+</code></pre>
+
+<p>
+  Your <code>reviews_controller.rb</code> should now like this:
+</p>
+
+<pre><code class="ruby">
+class ReviewsController < ApplicationController
+  before_action :authenticate_user!  
+
+  def create
+    @movie = Movie.find_or_initialize_by(imdbid: params[:imdbid])
+
+    if @movie.new_record?
+      # fetch movie data from API using params[:imdbid]
+      @fetched_movie = Omdb::Api.find_by(id: params[:imdbid])
+
+      # create a new Movie based on the response data
+      @movie.title = @fetched_movie.title
+      @movie.year = @fetched_movie.year
+      @movie.rated = @fetched_movie.rated
+      @movie.released = @fetched_movie.released
+      @movie.runtime = @fetched_movie.runtime
+      @movie.genre = @fetched_movie.genre
+      @movie.director = @fetched_movie.director
+      @movie.writer = @fetched_movie.writer
+      @movie.actors = @fetched_movie.actors
+      @movie.plot = @fetched_movie.plot
+      @movie.language = @fetched_movie.language
+      @movie.country = @fetched_movie.country
+      @movie.awards = @fetched_movie.awards
+      @movie.poster = @fetched_movie.poster
+      @movie.metascore = @fetched_movie.metascore
+      @movie.imdbrating = @fetched_movie.imdbrating
+      @movie.imdbvotes = @fetched_movie.imdbvotes
+      @movie.imdbid = @fetched_movie.imdbid
+
+      @movie.save
+    end
+
+    # create a new review and connect it to the current_user and the movie
+    @review = current_user.reviews.new(review_params.merge(movie: @movie))
+
+    if @review.save
+      flash[:success] = "Review saved!"
+      redirect_to root_path
+    else
+      flash[:alert] = "Woops! It seems there was an error."
+      redirect_to root_path
+    end
+    
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:comment)
+  end
+end
+</code></pre>  
+
+<p>
+  To trigger this controller action, we also need to setup the routes. In your <code>routes.rb</code> file, add the following line of code:
+</p>  
+
+<pre><code class="ruby">
+resources :reviews
+</code></pre>
+
+<h2>Adding the Review Form</h2>
+
+<p>
+  Now that we have the backend setup, let's create a form that will send a request to the controller action that we just wrote.
+</p>
+
+<p>
+  What we want to do is display a form when an individual movie is displayed. Inside of our <code>displayMovie</code> function that we wrote in our <code>main.js</code> file, let's create a form:
+</p>
+
+<pre><code class="html">
+&lt;form id="rating-form" action="/reviews" method="POST"&gt;
+  &lt;input type="hidden" name="imdbid" value=${movie["imdbID"]} /&gt;
+  &lt;textarea name= "review[comment]" class="form-control" placeholder="Your movie review"/&gt;
+  &lt;br /&gt;
+  &lt;input type="submit" class="btn btn-success pull-right" /&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>
+  <strong>Let's go through each line of code.</strong>
+</p>
+
+<p>
+  <strong>First</strong>, we gave the <code>form</code> an <code>id</code> so that we can reference it in our JavaScript. <strong>Next</strong>, we specified the <code>action</code> and set it to <code>/reviews</code>.
+</p>
+
+<p>
+  The <code>action</code> is the target of where the form will be sent to. In our case, we want the form to be sent to <code>/reviews</code>, which is the URI for creating a new review.
+</p>
+
+<p>
+  <strong>Next</strong>, we created a hidden input field with the <code>name</code> of <code>imdbid</code> and set it to the movie's imdbID. 
+</p>
+
+<p>
+  <strong>Lastly</strong>, we add a <code>textarea</code> with a <code>name</code> of <code>"review[comment]"</code>.
+</p>
+
+<div class="well">
+  <h2>The <code>name</code> field</h2>
+  <p>
+    The <code>name</code> field in forms is extremely important, since <strong>it is what determines how the parameters are sent.</strong>
+  </p>  
+
+  <p>
+    For example, <code>name=["imdbid"]</code> will produce a parameter that looks like <code>Parameters: {"imdbid"=>"51245"}</code>, while <code>name="review[comment]"</code> will produce a paramter that looks like <code>Parameters: {"review"=>{"comment"=>"This is a comment"}}</code>. Notice how <code>comment</code> is now nested inside of the <code>review</code> key value hash.
+  </p>
+
+  <p>
+    This means that <strong>when we try to access these parameters from the controller</strong>, we can access <code>imdbid</code> with <code>params[:imdbid]</code> and <code>review[comment]</code> with <code>params[:review][:comment]</code>.
+  </p>
+</div>
+
+<p>
+  Save the file and refresh the page. Search for a movie and click on an image. You should now see a form to submit a review. Awesome!
+</p>
+
+<p>
+  However, if you try to submit the form, it will give you an error that says <code>"ActionController::InvalidAuthenticityToken"</code>.
+</p>
+
+<p class="standard_git_workflow">
+  Read more about authenticity tokens <%= link_to 'in this StackOverflow post', 'http://stackoverflow.com/a/1571900/5456016', target: '_blank' %>.
+</p>
+
+<p>
+  In order to solve this problem, inside our <code>head</code> section of <code>application.html.erb</code>, add the following line of code:
+</p>
+
+<pre><code class="erb">
+&lt;%= javascript_tag "window._token = '#{form_authenticity_token}'" %&gt;
+</code></pre>
+
+<p>
+  Rails has a view helper method called <code>form_authenticity_token</code> that generates an authenticity token. We are then assigning it to a Javascript variable <code>window._token</code>. This makes it so that we can access <code>window._token</code> anywhere in the application, whenever we need to use the authenticity token.
+</p>
+
+<p>
+  Inside of our form, let's embed the token. Add this line of code into your form:
+</p>  
+
+<pre><code class="html">
+&lt;input type="hidden" name="authenticity_token" value=${window._token} /&gt;
+</code></pre>
+
+<p>
+  Your form should now look like this:
+</p>  
+
+<pre><code class="html">
+&lt;form id="rating-form" action="/reviews" method="POST"&gt;
+  &lt;input type="hidden" name="authenticity_token" value=${window._token} /&gt;
+  &lt;input type="hidden" name="imdbid" value=${movie["imdbID"]} /&gt;
+  &lt;textarea name= "review[comment]" class="form-control" placeholder="Your review in 140 characters"/&gt;
+  &lt;br /&gt;
+  &lt;input type="submit" class="btn btn-success pull-right" /&gt;
+&lt;/form&gt;
+</code></pre>
+
+
+<p>
+  Now if you refresh the page, everything should be working correctly. Now it's time to test the feature out.
+</p>
+
+<p>
+  <strong>First</strong>, make sure you are logged into the application, or else you will be redirected to the sign in page.
+</p>
+
+<p>
+  <strong>Next</strong>, add a review and submit the form. <strong>Look into your server logs and verify that a new <code>Review</code> has been created</strong>. If you haven't created a review for the movie, a new <code>Movie</code> should be created as well.
+</p>
+
+<p> 
+  Open your Rails console and verify that they have indeed been created:
+</p>
+
+<pre><code class="ruby">
+Review.last
+</code></pre>
+
+<pre><code class="ruby">
+Movie.last
+
+</code></pre>
+
+<p>
+  You should see your movie and review saved into the database.
+</p>
+
+
+
+

@@ -11,12 +11,7 @@
         </div><!--//navbar-header-->
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <% if user_signed_in? %>
-
-
-                    <li class="nav-item page-scroll">
-                      <%= link_to 'ADMIN', admin_root_path if current_user.admin %>
-                    </li>
+                <% if user_signed_in? %>                    
 
                     <li class="nav-item page-scroll">
                       <%= link_to 'DASHBOARD', dashboard_path %>
@@ -24,11 +19,7 @@
 
                     <li class="nav-item page-scroll">
                       <%= link_to 'ALL COURSES', courses_path %>
-                    </li>
-
-                    <li class="nav-item page-scroll">
-                      <%= link_to 'COMMUNITY', community_index_path %>
-                    </li>
+                    </li>                    
 
                     <li class="nav-item page-scroll">
                       <%
@@ -38,7 +29,7 @@
                     </li>
 
                     <li class="nav-item dropdown" data-behavior="notifications">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  data-delay="0" data-close-others="true" data-behavior="notifications-link"> <i class="fa fa-bell"></i> <span data-behavior="unread-count"></span></a>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"  data-delay="0" data-close-others="true" data-behavior="notifications-link"> <i class="fa fa-bell-o"></i> <span data-behavior="unread-count"></span></a>
                       <ul class="dropdown-menu notification-menu" id="notifications" data-behavior="notification-items">
                         <li><span id="notification-header"><strong>Notifications</strong></span></li>
                       </ul>
@@ -66,6 +57,9 @@
 
                             <% if current_user.admin %>
                                 <li>
+                                  <%= link_to 'ADMIN', admin_root_path if current_user.admin %>
+                                </li>
+                                <li>
                                   <%= link_to 'ADMIN DASHBOARD', admin_dashboard_index_path %>
                                 </li>
                                 <li>
@@ -79,6 +73,8 @@
                             <% else %>
                                 <li><%= link_to 'MENTOR LOGS', student_sessions_path %></li>
                             <% end %>
+
+                            <li><%= link_to 'COMMUNITY', community_index_path %></li>
 
                             <li><%= link_to 'GUIDELINES', guidelines_path %></li>
 
