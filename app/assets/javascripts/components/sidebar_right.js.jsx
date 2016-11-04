@@ -20,6 +20,10 @@ let SidebarRight = React.createClass({
       };
   },
 
+  componentWillMount() {
+    this.calculateLessonContentWidth();
+  },
+
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
 
@@ -49,12 +53,6 @@ let SidebarRight = React.createClass({
       } 
   },
 
-  // handleDocumentClick(){
-  //   this.setState({showFlashcard: false, showQuestion: false, showQuiz: false, showAdminQuiz: false, showNav: false}, () => {
-  //     this.slide();
-  //   });     
-  // },
-
   halfWindowWidth(){
     return $(window).width() / 2;
   },
@@ -65,6 +63,10 @@ let SidebarRight = React.createClass({
 
   initialDisplayWidth() {
     return $(window).width() / 8.88 - 30;
+  },
+
+  sidebarLeftWidth(){
+    return $(".sidebar_container_left").width();
   },
 
   sidebarFormWidth() {
@@ -89,7 +91,7 @@ let SidebarRight = React.createClass({
         initialDisplayWidth: this.initialDisplayWidth(),
         sidebarFormWidth: this.sidebarFormWidth()
       });
-      $('.lesson_content').css('margin-right', this.sidebarFormWidth() + "px"); 
+
     } else {
       this.setState({
         containerWidth: this.halfWindowWidth(),
@@ -98,15 +100,33 @@ let SidebarRight = React.createClass({
         sidebarFormWidth: this.sidebarFormWidth()
       });
     }
+
+    this.calculateLessonContentWidth();
+  },
+
+  lessonContentPadding(){
+    return 20;
+  },
+
+  calculateLessonContentWidth(){
+    $(".lesson_content").css("position", "absolute");
+    $(".lesson_content").css("left", this.sidebarLeftWidth() + this.lessonContentPadding());
+    $(".lesson_content").css("right", this.sidebarLiWidth().width + this.lessonContentPadding());
   },
 
   slide(){
     if (this.sidebarDisplayed()) {
-      $('.lesson_content').css('margin-right', this.sidebarFormWidth() + "px"); 
+      $('.lesson_content').css('left', "20px"); 
+      $('.lesson_content').css('width', this.halfWindowWidth() - 40); 
+
       $('.sidebar_container_right').css('right', '0px');
+      $('.sidebar_container_left').css('left', -this.sidebarFormWidth() + "px"); 
     } else {
-      $('.lesson_content').css('margin-right', "0px");
+
+      this.calculateLessonContentWidth();
+      $('.lesson_content').css('width', "initial"); 
       $('.sidebar_container_right').css('right', this.positionRight() + "px");
+      $('.sidebar_container_left').css('left', "0px");
     }
 
   },
@@ -283,17 +303,17 @@ let SidebarRight = React.createClass({
     return(
       <div className="sidebar_container sidebar_container_right" data-spy="affix" data-offset-bottom="40" style={this.sidebarContainerStyles()} ref="component">
         <ul className="nav nav-pills nav-stacked left-menu sidebar sidebar-right" style={this.sidebarLiWidth()}>
-          <li className={this.state.showFlashcard ? "sidebar-active" : "" } onClick={this.toggleFlashcard} style={this.sidebarLiWidth()}>
+          <li className={this.state.showFlashcard ? "sidebar-sm-icon sidebar-active" : "sidebar-sm-icon" } onClick={this.toggleFlashcard} style={this.sidebarLiWidth()}>
             <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
             {this.flashcardText()}
           </li>
 
-          <li className={this.state.showQuestion ? "sidebar-active" : "" }  onClick={this.toggleQuestion} style={this.sidebarLiWidth()}>
+          <li className={this.state.showQuestion ? "sidebar-sm-icon sidebar-active" : "sidebar-sm-icon" }  onClick={this.toggleQuestion} style={this.sidebarLiWidth()}>
             <i className="fa fa-question-circle" aria-hidden="true"></i>
             {this.questionText()}
           </li>
 
-          <li className={this.state.showQuiz ? "sidebar-active" : "" } onClick={this.toggleQuiz} style={Object.assign(this.sidebarLiWidth(), {color: this.state.quizCompleted ? "#ffffff" : "#ec6952"})}>
+          <li className={this.state.showQuiz ? "sidebar-sm-icon sidebar-active" : "sidebar-sm-icon" } onClick={this.toggleQuiz} style={Object.assign(this.sidebarLiWidth(), {color: this.state.quizCompleted ? "#ffffff" : "#ec6952"})}>
             <i className="fa fa-check-square" aria-hidden="true"></i>
             {this.quizText()}
           </li>
