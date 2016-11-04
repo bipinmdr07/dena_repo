@@ -2,19 +2,14 @@
 
 <%= render "shared/flash_messages" %>
 
-<div class="row">
-  <div class="col-xs-12 col-md-6">
-    <%= render partial: 'courses/progress', locals: {last_lesson: @last_lesson} %>
-  </div>
-</div>
 
 <div class="row">
   <div class="col-xs-12">
-    <h3 class="course-track-title">Course Tracks</h3>
+    <h2 class="course-track-title">Course Tracks</h2>
   </div>
 
   <% Course::TRACKS.each do |track| %>
-    <%= render partial: 'track', locals: {track: track} %>
+    <%= render partial: 'track', locals: {track: track, progress: TrackProgressCalculator.new(user: current_user, track: track).calculate} %>
   <% end %>
   
 </div>
