@@ -1,7 +1,7 @@
 class TrackProgressCalculator
-  def initialize(args)
-    @user = args.fetch(:user)
-    @track = args.fetch(:track)
+  def initialize(user:, track:)
+    @user = user
+    @track = track
   end
 
   def calculate
