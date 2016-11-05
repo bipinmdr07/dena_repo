@@ -11,4 +11,22 @@ class Submission < ApplicationRecord
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
 
+  after_create :send_notifications
+
+  private
+
+  def send_notifications
+    send_email_notification
+    send_slack_notification
+  end
+
+  def send_email_notification
+    UserMailer.new_submission(self).deliver_later
+  end
+
+  def send_slack_notification
+    Slack.chat_postMessage(text: 'New submission by ' + user_name + '! View it <' + Rails.application.routes.url_helpers.submission_url(self) + '|here>.', 
+                           username: 'TECHRISE Bot', channel: "#forum_questions", 
+                           icon_emoji: ":smile_cat:") if Rails.env.production?
+  end
 end

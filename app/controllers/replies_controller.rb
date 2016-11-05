@@ -6,7 +6,6 @@ class RepliesController < ApplicationController
 	  @reply = current_user.replies.new(reply_params)
 
 		if @reply.save
-
       respond_to do |format|
         format.json { render json: {reply: @reply, 
                                     user_is_mentor: @reply.user_mentor, 
