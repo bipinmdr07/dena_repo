@@ -83,8 +83,7 @@ class Post &lt; ActiveRecord::Base
   def user_name
   	user.name
   end
-
-  delegate :photo, :name, to: :user, prefix: true  
+ 
 end	
 </code></pre>
 

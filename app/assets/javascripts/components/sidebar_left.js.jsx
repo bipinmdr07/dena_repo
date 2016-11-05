@@ -10,7 +10,6 @@ let SidebarLeft = React.createClass({
   componentDidMount() {
     
     window.addEventListener('resize', () => {
-      console.log($(window).width());
       let resizeWidth;
       clearTimeout(resizeWidth);
       resizeWidth = setTimeout(this.handleResize(), 100);
