@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
   def index
-    @questions = current_user.questions.all.order("created_at DESC")
+    @questions = current_user.questions.all
   end
 
   def show
@@ -20,12 +20,8 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
-    set_mentor_post        
 
-    if @question.save      
-      send_email_notification!      
-      send_slack_notification!
-
+    if @question.save
       respond_to do |format|
         format.json { render json: { redirect: question_url(@question.id) } }
         format.html { redirect_to question_path(@question.id) }
@@ -95,23 +91,6 @@ class QuestionsController < ApplicationController
                    display_post_links: current_user == reply.user || current_user.admin,
                    content: MarkdownParser.new(reply.content).parsed}
     end
-  end
-
-  def set_mentor_post
-    @question.mentor_post = true if current_user.mentor
-  end
-
-  def send_email_notification!
-    UserMailer.new_question(@question).deliver_later
-  end
-
-  def send_slack_notification!
-    post_type = @question.mentor_post ? "mentor post" : "question"
-
-    Slack.chat_postMessage(text: 'New ' + post_type + ': <' + question_url(@question.id) + '|' + @question.title + '> by ' + @question.user_name, 
-        username: 'TECHRISE Bot', 
-        channel: "#forum_questions", 
-        icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
   def check_permissions
