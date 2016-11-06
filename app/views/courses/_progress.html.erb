@@ -13,7 +13,9 @@
   </div>
 
   <div class="row">
-              
+    <div class="col-xs-12 text-center">
+      <h3><%= lesson_name %></h3>
+    </div>          
     <div class="col-xs-12">
       <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress(last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
