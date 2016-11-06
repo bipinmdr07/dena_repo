@@ -114,7 +114,7 @@ $sidebar-border: #323232;
 .sidebar_container_right {
   @include sidebar_container;
 
-  @include slide_transition(right);
+  @include slide_transition(all);
 
   border-left: 2px solid $sidebar-border;
 
