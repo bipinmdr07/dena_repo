@@ -1,3 +1,5 @@
+@import "mixins";
+
 .progress-bar {
   font-family: 'Lato', sans-serif;
   font-size: 14px;
@@ -454,7 +456,7 @@ span.radio.inline {
   padding: 20px 0px;
   margin: 0px;
   
-  @include margin_transition;
+  @include slide_transition(left);
 
   h1 {
     font-weight: 900;

@@ -1,18 +1,6 @@
+@import "mixins";
+
 $sidebar-border: #323232;
-
-@mixin color_hover {
-  transition: color 700ms ease;
-  -webkit-transition: color 700ms ease;
-  -moz-transition: color 700ms ease;
-  -o-transition: color 700ms ease;
-}
-
-@mixin slide_transition($property) {
-  transition: $property 700ms ease;
-  -webkit-transition: $property 700ms ease;
-  -moz-transition: $property 700ms ease;
-  -o-transition: $property 700ms ease;
-} 
 
 .sidebar-form {
   position: absolute;
@@ -102,7 +90,7 @@ $sidebar-border: #323232;
   height: 100%;
   overflow: scroll;
   border-top: 2px solid $sidebar-border;
-  transition: width 700ms ease;
+
 
   li {
     color: white;
@@ -110,7 +98,7 @@ $sidebar-border: #323232;
 }
 
 .sidebar_container_left {
-  @include slide_transition(left);
+  @include slide_transition(all);
   @include sidebar_container;
 
   left: 0px;

@@ -101,7 +101,9 @@ let SidebarRight = React.createClass({
       });
     }
 
-    this.calculateLessonContentWidth();
+    setTimeout(this.calculateLessonContentWidth, 500);
+    
+
   },
 
   lessonContentPadding(){
@@ -109,6 +111,7 @@ let SidebarRight = React.createClass({
   },
 
   calculateLessonContentWidth(){
+    console.log($(".sidebar_container_left").width());
     $(".lesson_content").css("position", "absolute");
     $(".lesson_content").css("left", this.sidebarLeftWidth() + this.lessonContentPadding());
     $(".lesson_content").css("right", this.sidebarLiWidth().width + this.lessonContentPadding());
