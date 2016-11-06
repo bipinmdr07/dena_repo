@@ -9,7 +9,9 @@ class DashboardController < ApplicationController
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
-    @quote = Quote::ARRAY.sample
+    
+    @community_questions = Question.recent.includes(:user)
+    
 
     @questions = current_user.questions.student_post.order("created_at DESC").limit(5).includes(:user)
     @submissions = current_user.submissions.order("created_at DESC").limit(5).includes(:user)

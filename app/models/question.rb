@@ -20,7 +20,8 @@ class Question < ApplicationRecord
 
   default_scope { order("created_at DESC") }
   scope :unresolved, -> { where(resolved: false) }
-  scope :student_post, -> { where(mentor_post: false) } 
+  scope :student_post, -> { where(mentor_post: false) }
+  scope :recent, -> { limit(10) } 
 
   before_create :set_mentor_post
   after_create :send_notifications 

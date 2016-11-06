@@ -83,65 +83,57 @@
               </div>
             </div>
 
-            <div class="row community">
-              <div class="col-xs-1"></div>
-              <div class="col-xs-1">
-                <div class="profile-pic-community-pannel">
-                </div>
-              </div>
-
-              <div class="col-xs-1"></div>
-
-              <div class="col-xs-6 community-pannel-question-detail">
+            <div class="community" style="overflow:scroll; height:345px;">
+              <% @community_questions.each do |question| %>
                 <div class="row">
-                  <p class="col-xs-12 title-community-question">
-                    <strong>links</strong>
-                  </p>
-                  <p class="col-xs-12 time-community-question">
-                    6 days ago by Rabin Gaire
-                  </p>
-                  <p class="col-xs-12 tags-community-question">
-                    <span>MVC</span>
-                    <span>Overview of HTTP Methods</span>
-                  </p>
-                </div> 
-              </div>
+                  <div class="col-xs-2 text-center">
+                    <%= image_tag question.user.avatar, class: 'profile-pic-community-pannel' %>
+                  </div>
 
-              <div class="col-xs-3 text-center user-interaction-info">
-                <p>2</p>
-                <p>Replies</p>
-                <p class="glyphicon glyphicon-ok"></p>
-              </div>
+                  <div class="col-xs-8 community-pannel-question-detail">
+                    <div class="row">
+                      <p class="col-xs-12 title-community-question">
+                        <strong><%= link_to question.title, question_path(question.id) %></strong>
+                      </p>
+                      <p class="col-xs-12 time-community-question">
+                        <%= time_ago_in_words(question.created_at) %> ago by <%= question.user.name %>
+                      </p>
+                      <p class="col-xs-12 tags-community-question">
+                        <% if question.mentor_post %>
+                          <span>MENTOR POST</span>
+                        <% else %>
+                          <a href="/<%= question.course_name.underscore %>s">
+                            <span><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></span>
+                          </a>
+                          <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>">
+                            <span><%= question.course_name.constantize::LESSONS[question.lesson_id.to_i - 1].title %></span>
+                          </a>
+                        <% end %> 
+                      </p>
+                    </div> 
+                  </div>
+
+                  <div class="col-xs-2 text-center user-interaction-info">
+                    <p><%= question.replies.count %></p>
+                    <p>Replies</p>
+                    <% if question.resolved %>
+                      <p class="reply_resolved">
+                        <i class="fa fa-check reply_resolved" aria-hidden="true"></i>
+                      </p>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
             </div>
 
-            <div class="row community">
-              <div class="col-xs-1"></div>
-              <div class="col-xs-1">
-                <div class="profile-pic-community-pannel">
-                </div>
-              </div>
-
-              <div class="col-xs-1"></div>
-
-              <div class="col-xs-6 community-pannel-question-detail">
-                <div class="row">
-                  <p class="col-xs-12 title-community-question">
-                    <strong>remainders output</strong>
-                  </p>
-                  <p class="col-xs-12 time-community-question">
-                    9 days ago by Rabin Gaire
-                  </p>
-                  <p class="col-xs-12 tags-community-question">
-                    <span>Ruby</span>
-                    <span>Math is easy</span>
-                  </p>
-                </div> 
-              </div>
-
-              <div class="col-xs-3 text-center user-interaction-info">
-                <p>2</p>
-                <p>Replies</p>
-                <p class="glyphicon glyphicon-ok"></p>
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <h5>
+                  <a href="/community">
+                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    View all
+                  </a>
+                </h5>
               </div>
             </div>
           </div>
