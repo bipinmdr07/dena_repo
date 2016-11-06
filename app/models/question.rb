@@ -17,6 +17,7 @@ class Question < ApplicationRecord
   validates :lesson_id, :course_name, presence: true, unless: :is_mentor_post?
 
   delegate :name, :email, :avatar, :admitted, :mentor, to: :user, prefix: true
+  delegate :url_helpers, to: 'Rails.application.routes' 
 
   default_scope { order("created_at DESC") }
   scope :unresolved, -> { where(resolved: false) }
@@ -53,7 +54,7 @@ class Question < ApplicationRecord
   def send_slack_notification
     post_type = mentor_post ? "mentor post" : "question"
 
-    Slack.chat_postMessage(text: "New #{post_type}: < #{Rails.application.routes.url_helpers.question_url(id)} | #{title} > by #{user_name}", 
+    Slack.chat_postMessage(text: "New #{post_type}: < #{url_helpers.question_url(id)} | #{title} > by #{user_name}", 
         username: 'TECHRISE Bot', 
         channel: "#forum_questions", 
         icon_emoji: ":smile_cat:") if Rails.env.production?

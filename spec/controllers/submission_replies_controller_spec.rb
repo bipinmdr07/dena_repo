@@ -25,7 +25,7 @@ RSpec.describe SubmissionRepliesController, type: :controller do
       it "sends an email" do
         message_delivery = instance_double(ActionMailer::MessageDelivery)
         allow(UserMailer).to receive(:new_submission_reply).and_return(message_delivery)
-        allow(message_delivery).to receive(:deliver_later)
+        allow(message_delivery).to receive(:deliver_later)        
         setup_submission_by_current_user
 
         sign_in @user

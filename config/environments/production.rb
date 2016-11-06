@@ -12,7 +12,7 @@ Rails.application.configure do
   }
   ActionMailer::Base.delivery_method = :smtp
 
-  config.action_mailer.default_url_options = { :host => 'www.techrise.me' }
+  config.action_mailer.default_url_options = { host: 'www.techrise.me' }  
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -117,3 +117,5 @@ Rails.application.configure do
   config.web_socket_server_url = "wss://techrise.me/cable" 
   config.action_cable.allowed_request_origins = ['http://www.techrise.me', 'http://techrise.herokuapp.com/']
 end
+
+Rails.application.routes.default_url_options = { host: "www.techrise.me" }

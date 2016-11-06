@@ -5,6 +5,7 @@ class Reply < ApplicationRecord
   validates :question_id, :user_id, :content, presence: true
 
   delegate :name, :email, :avatar, :mentor, to: :user, prefix: true
+  delegate :url_helpers, to: 'Rails.application.routes' 
 
   after_create :create_notifications
   after_create :send_notifications
@@ -23,7 +24,7 @@ class Reply < ApplicationRecord
   end
 
   def send_slack_notifications
-    Slack.chat_postMessage(text: 'New reply by ' + user_name + '. View it <' + Rails.application.routes.url_helpers.question_url(question.id) + '|here >.', 
+    Slack.chat_postMessage(text: 'New reply by ' + user_name + '. View it <' + url_helpers.question_url(question.id) + '|here >.', 
         username: 'TECHRISE Bot', 
         channel: "#forum_questions", 
         icon_emoji: ":smile_cat:") if Rails.env.production?

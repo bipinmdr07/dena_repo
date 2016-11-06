@@ -7,6 +7,7 @@ class Submission < ApplicationRecord
   validates :course_name, uniqueness: { scope: [:lesson_id, :user_id] }
 
   delegate :name, :email, :avatar, :admitted, :mentor, to: :user, prefix: true
+  delegate :url_helpers, to: 'Rails.application.routes' 
 
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
@@ -25,7 +26,7 @@ class Submission < ApplicationRecord
   end
 
   def send_slack_notification
-    Slack.chat_postMessage(text: 'New submission by ' + user_name + '! View it <' + Rails.application.routes.url_helpers.submission_url(self) + '|here>.', 
+    Slack.chat_postMessage(text: 'New submission by ' + user_name + '! View it <' + url_helpers.submission_url(self) + '|here>.', 
                            username: 'TECHRISE Bot', channel: "#forum_questions", 
                            icon_emoji: ":smile_cat:") if Rails.env.production?
   end
