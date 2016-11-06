@@ -105,7 +105,7 @@ let SidebarRight = React.createClass({
   },
 
   lessonContentPadding(){
-    return 20;
+    return 40;
   },
 
   calculateLessonContentWidth(){
