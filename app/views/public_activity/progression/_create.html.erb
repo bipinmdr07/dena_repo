@@ -1,14 +1,24 @@
 <% lesson = activity.parameters[:course_name].split(/(?=[A-Z])/) %>
 <% lesson_name = lesson.join(" ").chomp("Lesson") %>
 
-<div class="row">
-  <div class="col-xs-1">
-    <i class="fa fa-check activity_icon" aria-hidden="true"></i> 
-  </div>
 
-  <div class="col-xs-11">
-    <span class="activity_time"><small><%= time_ago_in_words(activity.created_at) %> ago</small></span><br>
-    <strong><%= activity.owner.name %> completed a lesson</strong><br>
-    <%= image_tag activity.owner.avatar, class: 'prof_pic_xs' %><span class="activity_description">Lesson <%= activity.parameters[:lesson_id] %> in <%= lesson_name %></span>
+<div class="row">
+  <div class="col-xs-2">
+    <%= image_tag activity.owner.avatar, class: 'profile-pic-activity-log' %>
+  </div>
+  <div class="col-xs-10">
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="message-title-activity-log">
+          <strong><%= activity.owner.name %> completed a lesson</strong>
+        </p>
+        <p class="message-body-activity-log">
+          Lesson <%= activity.parameters[:lesson_id] %> in <%= lesson_name %>
+        </p>
+        <p class="message-time-activity-log">
+          <%= time_ago_in_words(activity.created_at) %> ago
+        </p> 
+      </div>
+    </div>
   </div>
 </div>

@@ -1,47 +1,31 @@
 <% if last_lesson %>
 
   <% lesson_name = get_lesson_title(last_lesson.parameters[:course_name], last_lesson.parameters[:lesson_id]) %>
-  <div class="panel">
-    <div class="panel-body text-center">
-      <div class="row">
-        <div class="col-xs-12">
-          <h5>In Progress</h5>
 
-          <div class="row">
-            <div class="col-sm-4 col-xs-12">
-              <div class="lesson_well">
-                <small>Lesson <%= last_lesson.parameters[:lesson_id] %></small>
-                <h4 style="margin-top: 0px;"><%= last_lesson.parameters[:course_name].split(/(?=[A-Z])/).join(" ").chomp("Lesson") %></h4>
-              </div>
-            </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4 class="in-progress-text">In progress</h4>
+    </div>
 
-            <div class="col-sm-8 col-xs-12">
-                <h3 style="text-align: left;"><%= lesson_name %></h3>
-            </div>
-          </div><!-- row -->
+    <div class="col-xs-6 text-center">
+      <h6 class="progress-lesson-info">Lesson <%= last_lesson.parameters[:lesson_id] %>: <%= last_lesson.parameters[:course_name].split(/(?=[A-Z])/).join(" ").chomp("Lesson") %></h6>
+    </div>
+  </div>
 
+  <div class="row">
+              
+    <div class="col-xs-12">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress(last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
+          <%= progress(last_lesson.parameters[:course_name]) %>% completed
+        </div>
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="progress_bar" style="border-top: none;">
-                <div class="progress">
-                  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= progress(last_lesson.parameters[:course_name]) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress(last_lesson.parameters[:course_name]) %>%; min-width: 4em;">
-                    <%= progress(last_lesson.parameters[:course_name]) %>% completed
-                  </div>
-                </div>
-              </div><!-- progress_bar -->
-            </div><!-- col-xs-12 -->
-          </div><!-- row -->
+    <div class="col-xs-12 text-center">
+      <%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, get_lesson_url_string(last_lesson.parameters[:course_name], last_lesson.parameters[:lesson_id]), class: 'btn btn-cta-primary' %>
+    </div>
 
+  </div>
 
-          <div class="row" style="margin-top:20px;">
-            <div class="col-xs-12">
-              <h3><%= link_to '<i class="fa fa-caret-right" style="margin-left: 5px;" aria-hidden="true"></i> Continue Lesson'.html_safe, get_lesson_url_string(last_lesson.parameters[:course_name], last_lesson.parameters[:lesson_id]), class: 'btn btn-cta-primary btn-block' %></h3>
-            </div>
-          </div><!-- row -->
-        </div><!-- col-xs-12 col-md-6 col-md-offset-3 -->
-      </div><!-- row -->
-
-    </div><!-- panel-body -->
-  </div><!-- panel -->
 <% end %>

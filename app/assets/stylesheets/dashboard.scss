@@ -1,0 +1,134 @@
+.progress-panel {
+  height: 250px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  border:2px solid #E8E2E2;
+  padding: 20px;
+}
+
+.in-progress-text {
+  padding: 10px;
+}
+
+.progress-lesson-info {
+  border:2px solid #E8E2E2;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.progress {
+  margin-top: 40px;
+}
+
+.activities-log {
+  height: 365px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  border:2px solid #E8E2E2;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.title-activity-log {
+  padding: 5px;
+}
+
+.body-activity-log {
+  border-top: 2px solid #E8E2E2;
+  padding: 5%;
+}
+
+.profile-pic-activity-log {
+  border-radius: 100%;
+  margin-top: 5px;
+}
+
+.message-title-activity-log, .message-body-activity-log {
+  font-size: 0.75em;
+  margin:0px;
+}
+
+.message-time-activity-log {
+  color: #E84A5F;
+  font-size: 0.5em;
+}
+
+.community-panel {
+  height: 400px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  border:2px solid #E8E2E2;
+}
+
+.community {
+  padding-top: 10px;
+}
+
+.profile-pic-community-pannel {
+  height: 40px;
+  width: 40px;
+  background-color: #2E94B9;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+
+.community-pannel-question-detail {
+}
+
+.title-community-question {
+  margin: 0px;
+  color: #E84A5F;
+}
+
+.time-community-question, .tags-community-question {
+  font-size: 0.75em;
+}
+
+.tags-community-question span {
+  border:2px solid #E8E2E2; 
+  padding:3px;
+  border-radius: 4px;
+}
+
+.user-interaction-info p {
+  margin: 0px;
+}
+
+.user-interaction-info p:nth-child(2) {
+  font-size: 0.75em;
+}
+
+.my-question-pannel {
+  height: 215px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  border:2px solid #E8E2E2;
+  margin-top: 25px;
+}
+
+.title-question-panel, .title-submissions-panel, .title-community-panel{
+  padding: 5px;
+  border-bottom: 2px solid #E8E2E2;
+} 
+
+.my-submissions-pannel {
+  height: 215px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  border:2px solid #E8E2E2;
+  margin-top: 25px;
+}
+
+.data-submissions-pannel, .data-question-pannel {
+  padding-top: 5px;
+}
+
+.submissions-data, .question-data {
+  font-size: 0.85em;
+  padding: 0 10px;
+  margin:0px;
+}
+
+.right-pannel {
+  margin-bottom: 25px;
+}
