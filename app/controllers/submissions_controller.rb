@@ -8,7 +8,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @submission = Submission.includes(:user, submission_replies: :user).find(params[:id])
+    @submission = Submission.includes(:user).find(params[:id])
 
     create_replies_array
 

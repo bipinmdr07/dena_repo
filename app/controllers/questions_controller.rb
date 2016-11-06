@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:user, replies: :user).find(params[:id])  
+    @question = Question.includes(:user).find(params[:id])  
     
     create_replies_array
     
