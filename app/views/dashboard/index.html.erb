@@ -32,7 +32,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <h2>Hello <%= current_user.name %></h2>
+      <h2 style="font-weight: 900;">Hello <%= current_user.name %>!</h2>
     </div>
   </div> <!--hello user pannel-->
 
@@ -87,7 +87,7 @@
               <% @community_questions.each do |question| %>
                 <div class="row">
                   <div class="col-xs-2 text-center">
-                    <%= image_tag question.user.avatar, class: 'profile-pic-community-pannel' %>
+                    <%= image_tag question.user_avatar, class: 'profile-pic-community-pannel' %>
                   </div>
 
                   <div class="col-xs-8 community-pannel-question-detail">
@@ -96,7 +96,7 @@
                         <strong><%= link_to question.title, question_path(question.id) %></strong>
                       </p>
                       <p class="col-xs-12 time-community-question">
-                        <%= time_ago_in_words(question.created_at) %> ago by <%= question.user.name %>
+                        <%= time_ago_in_words(question.created_at) %> ago by <%= question.user_name %>
                       </p>
                       <p class="col-xs-12 tags-community-question">
                         <% if question.mentor_post %>
