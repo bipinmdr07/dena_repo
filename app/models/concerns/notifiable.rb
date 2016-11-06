@@ -21,7 +21,7 @@ module Notifiable
   end
 
   def send_slack_notifications    
-    Slack.chat_postMessage(text: "New #{self.class.name.underscore.humanize.downcase} by #{user_name}. View it < #{url_helpers.send notifiable+'_url', notifiable.id} |here >.", 
+    Slack.chat_postMessage(text: "New #{self.class.name.underscore.humanize.downcase} by #{user_name}. View it < #{url_helpers.send notifiable.class.name.underscore.humanize.downcase+'_url', notifiable.id} |here >.", 
         username: 'TECHRISE Bot', 
         channel: "#forum_questions", 
         icon_emoji: ":smile_cat:") if Rails.env.production?
