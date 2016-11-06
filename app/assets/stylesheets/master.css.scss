@@ -451,23 +451,23 @@ span.radio.inline {
 
 .lesson_content {
   background-color: white;
-  padding: 60px 0px;
+  padding: 20px 0px;
   margin: 0px;
   
   @include margin_transition;
 
   h1 {
-    border-left: 6px solid #ec6952;
-    padding-left: 10px;
+    font-weight: 900;
   }
   h2 {
     border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
+    font-weight: 900;
   }
   h3 {
     font-family: 'Lato', open-sans;
-    font-size: 30px;
-    border-bottom: 2px solid #ec6952;
+    font-weight: 900;
+    font-size: 28px;
   }
   li {
     margin: 5px 0px;
@@ -500,11 +500,6 @@ span.radio.inline {
   margin-bottom: 200px;
   min-height: 65vh;
 }
-
-// label {
-//   font-weight: 300 !important;
-//   letter-spacing: 3px;
-// }
 
 .details {
   margin: 60px 0px;
