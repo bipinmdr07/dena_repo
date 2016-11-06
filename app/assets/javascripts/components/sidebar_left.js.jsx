@@ -27,7 +27,7 @@ let SidebarLeft = React.createClass({
   },
 
   containerWidth(){
-    return 25;
+    return 20;
   },
 
   handleResize(){

@@ -1,6 +1,6 @@
 @import "mixins";
 
-$sidebar-border: #323232;
+$sidebar-border: #161616;
 
 .sidebar-form {
   position: absolute;
@@ -101,6 +101,8 @@ $sidebar-border: #323232;
   @include slide_transition(all);
   @include sidebar_container;
 
+  border-right: 3px solid $sidebar-border;
+
   left: 0px;
 
   li {
@@ -116,7 +118,7 @@ $sidebar-border: #323232;
 
   @include slide_transition(all);
 
-  border-left: 2px solid $sidebar-border;
+  border-left: 3px solid $sidebar-border;
 
   li {
     padding: 15px;
