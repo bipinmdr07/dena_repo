@@ -590,10 +590,12 @@ pre {
 }
 
 .screenshot {
-	width: 100%;
+  width: 90%;
+  margin: 60px auto;
   border: 1px solid whitesmoke;
   border-radius: 3px;
   box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
+  display: block;
 }
 
 .unindented_ul {
