@@ -22,13 +22,13 @@ class UserMailer < ApplicationMailer
 		end
 	end
 
-	def new_question(question)
-		@question = question
+	def new_question(args)
+		@question = args.fetch(:question)
 		mail(to: "techrisecoding@gmail.com", subject: 'New Question')
 	end
 
-	def new_submission(submission)
-		@submission = submission
+	def new_submission(args)
+		@submission = args.fetch(:submission)
 		mail(to: "techrisecoding@gmail.com", subject: 'New Submission')
 	end
 
