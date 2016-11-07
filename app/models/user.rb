@@ -22,7 +22,7 @@ class User < ApplicationRecord
   has_many :quiz_completions, dependent: :destroy
   has_many :quiz_problem_cards, dependent: :destroy
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :phone, presence: true
   validates :package, presence: true, if: :is_student?
 
   before_save :update_name!

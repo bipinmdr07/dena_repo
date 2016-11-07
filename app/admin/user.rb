@@ -1,11 +1,12 @@
 ActiveAdmin.register User do
-  permit_params :email, :intro_access, :html_css_access, :ruby_access, :ideator_access,
+  permit_params :email, :phone, :intro_access, :html_css_access, :ruby_access, :ideator_access,
   :ruby_core_access, :bootstrap_access, :instapost_access, :github_access, :javascript_access, :admin, :command_line_access,
   :rspec_blog_access, :mvc_access, :filmster_access, :mentor, :start_date, :graduation_date, :remaining_mentor_sessions, :mentor_id,
   :facebook_handle, :twitter_handle, :github_handle, :personal_website, :prework_start_time, :prework_end_date, :admitted 
 
   index do
     column :name
+    column :phone
     column :first_name
     column :last_name
     column :email
