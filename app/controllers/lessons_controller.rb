@@ -88,8 +88,6 @@ class LessonsController < ApplicationController
   end
 
   def check_access!
-    lesson_locked_redirect unless current_user.has_access?
-
     return if current_user.has_access_to?(controller_name.chomp("_lessons")) 
     lesson_locked_redirect
   end

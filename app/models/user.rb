@@ -90,37 +90,15 @@ class User < ApplicationRecord
     end
   end
 
-  def send_prework_finished_message
-    return if admitted
-    UserMailer.prework_finished(self).deliver_now
-  end
-
   def self.declined_today
     where("prework_end_date <= ? AND prework_end_date > ?", 
                       DateTime.now, DateTime.now - 1.day)
     .where(admitted: false)
   end
-
-  def send_prework_reminders
-    return if admitted || prework_end_date.nil?
-    UserMailer.prework_reminder(self, (self.prework_end_date - DateTime.now).to_i / 86400).deliver_now
-  end  
-
-  def has_started_prework?
-    prework_start_time.present? && prework_end_date.present?
-  end
-
+  
   def has_access_to?(lesson)
     self[lesson + "_access"]
   end
-
-  def has_access?
-    mentor || admin || admitted || ( prework_end_date && prework_end_date > DateTime.now )
-  end
-
-  def start_prework!
-    update(prework_start_time: DateTime.now, prework_end_date: DateTime.now + 4.days)
-  end  
 
   def last_lesson
     self.progressions.order('created_at DESC').first
