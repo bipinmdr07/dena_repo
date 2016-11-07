@@ -454,38 +454,6 @@ span.radio.inline {
   overflow-y: scroll;
 }
 
-
-.lesson_content {
-  background-color: white;
-  padding: 20px 0px;
-  margin: 0px;
-  
-  @include slide_transition(left);
-
-  h1 {
-    font-weight: 900;
-  }
-  h2 {
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 10px;
-    font-weight: 900;
-  }
-  h3 {
-    font-family: 'Lato', open-sans;
-    font-weight: 900;
-    font-size: 28px;
-  }
-  li {
-    margin: 5px 0px;
-    font-family: 'Lato', sans-serif;
-  }
-  p {
-    font-size: 17px;
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-  }
-}
-
 .item .content p {
   margin: 0 0 10px;
 }
