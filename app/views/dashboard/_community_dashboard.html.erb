@@ -1,0 +1,62 @@
+<div class="community-panel">
+    
+  <div class="title-community-panel text-center">
+    <h4>Community</h4>
+  </div>
+    
+  
+    
+  <div class="community" style="overflow:auto; height:345px; overflow-x:hidden">
+    <% @community_questions.each do |question| %>
+      <div class="row">
+        <div class="col-xs-2 text-center">
+          <%= image_tag question.user_avatar, class: 'profile-pic-community-pannel' %>
+        </div>
+
+        <div class="col-xs-8 community-pannel-question-detail">
+          
+          <p class="title-community-question">
+            <strong><%= link_to question.title, question_path(question.id) %></strong>
+          </p>
+          <p class="time-community-question">
+            <%= time_ago_in_words(question.created_at) %> ago by <%= question.user_name %>
+          </p>
+          <p class="tags-community-question">
+            <% if question.mentor_post %>
+              <span>MENTOR POST</span>
+            <% else %>
+              <a href="/<%= question.course_name.underscore %>s">
+                <span><%= question.course_name.split(/(?=[A-Z])/).join(" ").chomp("Lesson").upcase %></span>
+              </a>
+              <a href="/<%= question.course_name.underscore %>s/<%= question.lesson_id %>">
+                <span><%= question.course_name.constantize::LESSONS[question.lesson_id.to_i - 1].title %></span>
+              </a>
+            <% end %> 
+          </p>
+          
+        </div>
+
+        <div class="col-xs-2 text-center user-interaction-info">
+          <p><%= question.replies.count %></p>
+          <p>Replies</p>
+          <% if question.resolved %>
+            <p class="reply_resolved">
+              <i class="fa fa-check reply_resolved" aria-hidden="true"></i>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+    
+  
+  <div class="text-center">
+    <h5>
+      <a href="/community">
+        <i class="fa fa-caret-right" aria-hidden="true"></i>
+        View all
+      </a>
+    </h5>
+  </div>
+  
+</div>
