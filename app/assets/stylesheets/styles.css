@@ -3125,7 +3125,7 @@ select {
   color: #253340;
 }
 /* Extra small devices (phones, less than 768px) */
-@media (max-width: 767px) {
+@media (max-width: 991px) {
   .config-wrapper {
     display: none;
   }
