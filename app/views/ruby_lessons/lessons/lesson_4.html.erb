@@ -27,7 +27,7 @@ puts "Hello world"
 <%= image_tag 'ruby_lessons/hello_world.png', class: 'screenshot' %>
 
 <p>
-  <code>"Hello world"</code> is a <strong>String</strong> object, otherwise called a <code>string</code>. <strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong>
+  <code>"Hello world"</code> is a <strong>String</strong> object, otherwise called a <em>string</em>. <strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong>
 </p>
 
 <p>
@@ -38,7 +38,7 @@ puts "Hello world"
   Save the file. In the command line, let's type in the following:
 </p>  
 
-<pre><code class="ruby">
+<pre><code class="bash">
 ruby hello.rb
 </code></pre>
 
@@ -50,6 +50,34 @@ ruby hello.rb
 
 <p>
   As you can see above, we can run ruby programs with the <code>ruby</code> command.
+</p>
+
+<p>
+  Let's print out some more code. Inside <code>hello.rb</code>, let's add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+puts "I'm learning Ruby right now"
+puts "This is easier than I thought"
+puts "What a wonderful day"
+</code></pre>
+
+<p>
+  Save the file. Let's run the program. Type in the following code in the command line:
+</p>
+
+<pre><code class="bash">
+ruby hello.rb
+</code></pre>
+
+<p>
+  Your output should now look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/hello_world_multiple.png', class: 'screenshot' %>
+
+<p>
+  Notice how every line is printed on a new line. Remember with <code>puts</code>, it creates a new line after each output.
 </p>
 
 <h3>Error Messages</h3>
