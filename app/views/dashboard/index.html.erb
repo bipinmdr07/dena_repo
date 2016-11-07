@@ -49,21 +49,21 @@
         <div class="col-xs-12">
           <div class="activities-log">
 
-            <div class="row">
-              <div class="col-xs-12 text-center">
-                <div class="title-activity-log">
-                  <h4>Activity Log</h4>
-                </div>
-              </div>
-
-              <div class="col-xs-12">
-                <div class="body-activity-log" style="overflow:scroll; height:305px;">
-                  <% @activities.each do |activity| %>
-                    <%= render_activity activity %>
-                  <% end %>
-                </div>
-              </div>
+            
+              
+            <div class="title-activity-log text-center">
+              <h4>Activity Log</h4>
             </div>
+              
+
+              
+            <div class="body-activity-log" style="overflow:auto; height:310px; overflow-x:hidden">
+              <% @activities.each do |activity| %>
+                <%= render_activity activity %>
+              <% end %>
+            </div>
+              
+            
           </div>
         </div> <!-- end of activity log -->  
 

@@ -40,8 +40,9 @@
 
 .profile-pic-activity-log {
   height:30px;
-  width:40px;
+  width:30px;
   border-radius: 100%;
+  margin-left:10px;
   margin-top: 5px;
 }
 
@@ -95,6 +96,10 @@
   border-radius: 4px;
   color: #444444;
   margin-left:5px;
+}
+
+.user-interaction-info {
+  margin-left:-20px;
 }
 
 .user-interaction-info p {
