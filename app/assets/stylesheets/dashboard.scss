@@ -114,7 +114,7 @@
 }
 
 .title-question-panel, .title-submissions-panel, .title-community-panel{
-  padding: 5px;
+  padding: 0px;
   border-bottom: 2px solid #E8E2E2;
 } 
 
@@ -126,14 +126,11 @@
   margin-top: 25px;
 }
 
-.data-submissions-pannel, .data-question-pannel {
-  padding-top: 5px;
-}
 
 .submissions-data, .question-data {
   font-size: 0.85em;
   padding: 0 10px;
-  margin:0px;
+  margin-top:10px;
 }
 
 .right-pannel {
