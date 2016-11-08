@@ -1,11 +1,36 @@
-
-
 <p>
-  <strong>Hashes are objects with that contain a pair of <em>keys</em> and <em>values</em>.</strong>
+  In this lesson, we are going to learn about <strong>hashmaps</strong> (otherwise called a "hash").
 </p>
 
 <p>
-  Below is a hash that contain the name of a person and the age.
+  Hashes are just another way to store data, just like arrays. The main difference is that we can access elements without using indexes (<code>array[0]</code>). 
+</p>
+
+<p>
+  For example, in an array, you can store a list of items and access them using <strong><em>numbers</em></strong>:
+</p>
+
+<pre><code class="irb">
+food = ["Pizza", "Pasta", "Noodles", "Rice", "Vegetable"]
+
+puts food[1]
+=> "Pasta"
+
+puts food[4]
+=> "Vegetable"
+
+food[4] = "Sushi"
+
+puts food[4]
+=> "Sushi"
+</code></pre>
+
+<p>
+  The important thing to note is that in arrays, we access elements using <strong><em>numbers</em></strong> or in otherwords, the index.
+</p>
+
+<p>
+  With hashes, you can access the elements using <strong><em>anything</em></strong>. For example, here is a hash representing people's name and age:
 </p>
 
 <pre><code class="irb">
@@ -14,19 +39,97 @@ people = {
   "Adam" => 31,
   "Mike" => 25
 }
+
+puts people["Jake"]
+=> 30
+
+puts people["Mike"]
+=> 25
+
+people["Mike"] = 27
+
+puts people["Mike"]
+=> 27
 </code></pre>
 
 <p>
-  As you can see, hashes can be created with the <code>{}</code> syntax.
+  As you can see, <strong>we aren't using numbers to access elements, we're using strings to access them</strong>.
+</p>  
+
+<p>
+  It's not limited to strings - we can use any data type you want:
 </p>
+
+<pre><code class="ruby">
+things = {
+  1 => "This is one",
+  10.0 => "This is a float",
+  true => "Booleans work too?!"
+}
+
+puts things[1]
+=> "This is one"
+
+puts things[10.0]
+=> "This is a float"
+
+puts things[true]
+=> "Booleans work too?!"
+</code></pre>
+
+<p>
+  We call the element that we use to access an element a <strong>key</strong>, and the element being accessed a <strong>value</strong>.
+</p>
+
+<pre><code class="ruby">
+hash = {
+  "this side is the key" => "this side is the value"
+}
+</code></pre>
+
+<p>
+  We call a pair of keys and values a <strong><em>key value pair</em></strong>. 
+</p>
+
 
 <p>
   In the <code>people</code> hash above, <code>"Jake"</code> is the <strong><em>key</em></strong>, and <code>30</code> is the <strong><em>value</em></strong>. <code>"Jake"</code> and <code>30</code> are paired, thus they are called <strong>key value pairs</strong>. 
 </p>  
 
+
 <p>
   Next, <code>"Adam"</code> is the <strong><em>key</em></strong>, and <code>31</code> is the <strong><em>value</em></strong>. Again, <code>"Adam"</code> and <code>31</code> are a <strong>key value pair</strong>.
 </p>
+
+<hr>
+
+<h3>Overview</h3>
+
+<p>
+  As we have seen above, hashes can be created with the <code>{}</code> syntax.
+</p>
+
+<p>
+  An empty hash can be created with <code>{}</code> or <code>Hash.new</code>:
+</p>
+
+<pre><code class="ruby">
+new_hash = {}
+
+another_new_hash = Hash.new
+</code></pre>
+
+<p>
+  Let's go back to our <code>people</code> hash:
+</p>
+
+<pre><code class="ruby">
+people = {
+  "Jake" => 30,
+  "Adam" => 31,
+  "Mike" => 25
+}
+</code></pre>
 
 <p>
   Let's say we want to get the age of <code>"Jake"</code>. We can simply write the following code:
@@ -135,12 +238,89 @@ people
 => {"Jake"=>100, "Adam"=>31, "Mike"=>25, "Bob"=>21}
 </code></pre>
 
+
+<h3>In a nutshell, how are hashes useful?</h3>
+
 <p>
-  <strong>Hashes are useful when storing data that is a pair.</strong> In the example above, we are storing a name and the age as a pair. 
+  Hashes are like a dictionary. In fact, dictionaries can be somewhat represented by hashes.
 </p>
 
+<pre><code class="ruby">
+dictionary = {
+  "a" => {
+    "ape" => "a large primate that lacks a tail, including the gorilla, chimpanzees, orang-utan, and gibbons.",
+    "apple" => "the round fruit of a tree of the rose family, which typically has thin green or red skin and crisp flesh.",
+    ...etc...
+  },
+  "b" => {
+    "banana" => "a long curved fruit which grows in clusters and has soft pulpy flesh and yellow skin when ripe.",
+    ...etc...
+  }
+}
+
+dictionary["a"]["ape"]
+=> a large primate that lacks a tail, including the gorilla, chimpanzees, orang-utan, and gibbons.
+</code></pre>
+
+<p>
+  When you find a word in a dictionary (no Google), this is what you would do:
+</p>
+
+<ol>
+  <li>We open the dictionary</li>
+  <li>Look up the first letter of the word</li>
+  <li>Go to the section in the dictionary with that letter</li>
+  <li>Find the word in that section</li>
+  <li>Read the definition</li>
+</ol> 
+
+<p>
+  Let's look at the example of the hash representing a dictionary that we created above:
+</p>
+
+<ol>
+  <li>We first access the <code>dictionary</code></li>
+  <li>We access the first letter of <code>"ape"</code>, which is "a"</li>
+  <li>Then we look for the string <code>"ape"</code> inside the hash</li>
+  <li>We get the definition of <code>"ape"</code></li>
+</ol>
 
 
+<p>
+  Notice the similarity?
+</p>  
+
+<div class="well">
+
+  <h3>What is the difference between an array and a hash?</h3>
+  <p>
+    An array is an <strong>ordered list</strong> of items which allow you to <strong>access elements using indexes</strong>. A hash allows you store data and <strong>access them using the key</strong>.
+  </p>
+
+  <h3>When to use a hash?</h3>
+
+  <p>
+    When you have to take a value and look up another value based on it (taking "ape" and looking up the definition for it). 
+  </p>
+
+  <h3>When to use an array?</h3>
+
+  <p>
+    When you want to store things that need to be <strong>ordered</strong>, and you only need to be able to look them up by a <strong>numeric index</strong>.
+  </p>
+
+</div>
+
+<h2>Assignment</h2>
+
+<ol>
+  <li>Create a hash consisting of 5 countries</li>
+  <ul>
+    <li>For each country, store the <strong>population</strong>, <strong>GDP per capita</strong>, and <strong>capital</strong></li>
+  </ul>
+</ol> 
+
+<% @submission_form = true %>
 
 
 

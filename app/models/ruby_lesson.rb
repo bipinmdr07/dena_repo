@@ -21,7 +21,7 @@ class RubyLesson < Lesson
     Lesson.new(3, "Super Basic Command Line Crash Course", chapter_1),
     Lesson.new(4, "Your First Ruby Program", chapter_1),
     Lesson.new(5, "Math is easy", chapter_1),
-    Lesson.new(6, "Objects and Methods", chapter_1),
+    Lesson.new(6, "Strings", chapter_1),
     Lesson.new(7, "Variables", chapter_1),
     Lesson.new(8, "Arrays", chapter_1),
     Lesson.new(9, "Hashes", chapter_1),
