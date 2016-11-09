@@ -1,165 +1,33 @@
 
 
 <p>
-	Let's go back to the bill generator program. Right now, our code looks like this:
+	Let's go back to the <code>Cat</code> class that we wrote.
 </p>
 
 <pre><code class="ruby">
-class Order
-	def initialize(item, price)
-		@item = item
-		@price = price
-	end
+class Cat
+	attr_accessor :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end	
 end
 </code></pre>
 
 <p>
-	As we discussed before, our program consists of two objects:
+	As we discussed before, cats can do these things:
 </p>
-
 <ul>
-	<li>Orders</li>
-	<li>A Bill Calculator that inputs the orders</li>
-</ul>
+	<li>Walk forward</li>
+	<li>Run</li>
+	<li>Jump</li>
+	<li>Eat</li>
+</ul>	
 
 <p>
-	We've created the class that represents orders. Next, <strong>let's build a class that represents the bill calculator</strong>.
+	And as we talked about before, the things that objects can <strong><em>do</em></strong> are methods in object oriented programming. What we are going to do is create <strong><em>instance methods</em></strong> for each of these actions.
 </p>
-
-<p>
-	First, let's create a new class called <code>BillCalculator</code>:
-</p>
-
-<pre><code class="ruby">
-class BillCalculator
-	
-end
-</code></pre>
-
-<p>
-	Our bill calculator should store two pieces of information - the <strong>total cost</strong> and all of the <code>orders</code> that need to be calculated. When we create a new instance of the <code>BillCalculator</code>, let's initialize the object with a <code>@total_cost</code> instance variable with the value <code>0</code>, and also an empty array called <code>@orders</code> that will represent an array of all of the orders.
-</p>
-
-
-<pre><code class="ruby">
-class BillCalculator
-	def initialize
-		@total_cost = 0
-		@orders = []
-	end
-end
-</code></pre>
-
-<p>
-	Let's take a step back and look at our original code that we wrote in previous lessons:
-</p>
-
-<pre><code class="ruby">
-orders = Hash.new(0)
-
-puts "Enter the food menu you have ordered:" 
-while(true) do
-    order = gets.chomp
-    if order.downcase == "exit"
-      break
-    end
-    
-    puts "Enter the price of the order:"
-    price = gets.chomp.to_i
-    
-    orders[order] += price
-    
-    puts "Enter another food item or type exit to generate a bill:"
-end
-
-
-price_sum = 0
-orders.each do |order, price|
-    puts "#{order}: #{price}"
-    price_sum += price
-end
-
-puts "Enter the tax rate:"
-tax_rate = gets.chomp.to_i
-
-puts "Calculating tax..."
-tax = price_sum * tax_rate.to_f/100
-
-total_price = price_sum + tax
-puts "Total: #{total_price}"
-</code></pre>
-
-<p>
-	We can <em>refactor</em> this code to be object oriented. The code above is not object oriented, it is instead <em>procedural programming</em>.
-</p>
-
-<p>
-	Let's first divide the program into steps (read the comments added to the program):
-</p>
-
-
-<pre><code class="ruby">
-orders = Hash.new(0)
-
-# Input the order
-puts "Enter the food menu you have ordered:" 
-while(true) do
-    order = gets.chomp
-    if order.downcase == "exit"
-      break
-    end
-    
-    puts "Enter the price of the order:"
-    price = gets.chomp.to_i
-    
-    orders[order] += price
-    
-    puts "Enter another food item or type exit to generate a bill:"
-end
-
-
-# Calculate the bill
-price_sum = 0
-orders.each do |order, price|
-    puts "#{order}: #{price}"
-    price_sum += price
-end
-
-puts "Enter the tax rate:"
-tax_rate = gets.chomp.to_i
-
-puts "Calculating tax..."
-tax = price_sum * tax_rate.to_f/100
-
-total_price = price_sum + tax
-puts "Total: #{total_price}"
-</code></pre>
-
-
-<p>
-	As you can see above, we can break down the program into two steps; <strong>inputting the orders</strong> and <strong>calculating the bill</strong>. When we have different steps within a program, often times we can put them into seperate methods. Each method should have a different responsibility.
-</p>
-
-<p>
-	In our <code>BillCalculator</code> class, let's add two <em>instance methods</em>; <code>input_orders</code> and <code>calculate_total_price</code> (we'll talk about what instance methods are next):
-</p>
-
-<pre><code class="ruby">
-class BillCalculator
-	def initialize
-		@total_cost = 0
-		@orders = []
-	end
-
-	def input_orders
-
-	end
-
-	def calculate_total_price
-
-	end
-end
-</code></pre>
 
 <div class="well">
 	<h3>Instance Methods</h3>
@@ -191,251 +59,454 @@ Cat.meow
 
 </div>
 
-<div class="well">
-	<h3>Class Methods and Class Variables</h3>		
-
-	<p>
-		Class methods are methods that can be called on the class itself. Class methods are usually created like this:
-	</p>
+<p>
+	Let's create <strong>instance methods</strong> for these four actions in our <code>Cat</code> class. Edit your <code>Cat</code> class to look like this:
+</p>
 
 <pre><code class="ruby">
 class Cat
+	attr_accessor :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end	
+
+	def walk_forward
+		puts "Meow! I'm walking forward!"
+	end
+
+	def run
+		puts "Meow! I'm running!"
+	end
+
+	def jump
+		puts "Meow! I'm jumping!"
+	end
+
+	def eat
+	 puts "Meow! This stuff is yummy."
+	end
+end
+
+cat = Cat.new("Beth", 6)
+
+cat.walk_forward
+cat.run
+cat.jump
+cat.eat
+</code></pre>
+
+<p>
+	Save the file and run the program:
+</p>
+
+<pre><code class="bash">
+ruby cat.rb
+</code></pre>
+
+<p>
+	You can see that the instance methods executed correctly. Let's also add another method called <code>say_introduction</code> that prints out the cat's name and age. Change your <code>Cat</code> class to look like below:
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_accessor :name, :age
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+	end	
+
+	def walk_forward
+		puts "Meow! I'm walking forward!"
+	end
+
+	def run
+		puts "Meow! I'm running!"
+	end
+
+	def jump
+		puts "Meow! I'm jumping!"
+	end
+
+	def eat
+	 puts "Meow! This stuff is yummy."
+	end
+
+	def say_introduction
+		puts "Meow! My name is #{@name} and I'm #{@age}!"
+	end
+end
+
+cat = Cat.new("Beth", 6)
+
+cat.walk_forward
+cat.run
+cat.jump
+cat.eat
+
+cat.say_introduction
+</code></pre>
+
+<p>
+	If the program ran correctly, you should see the following output:
+</p>	
+
+<pre><code class="bash">
+Meow! I'm walking forward!
+Meow! I'm running!
+Meow! I'm jumping!
+Meow! This stuff is yummy!
+Meow! My name is Beth and I'm 6!
+</code></pre>
+
+<p>
+	As you can see, <strong>you can use instance variables inside instance methods</strong>. In the example above, we are calling <code>@name</code> and <code>@age</code> inside <code>say_introduction</code>.
+</p>
+
+<h3>Class Methods and Class Variables</h3>		
+
+<p>
+	Let's say we want to count the number of <code>Cat</code> objects we have. In this case, we will use <strong>class methods</strong> and <strong>class variables</strong>.
+</p>
+
+<ol>
+	<li><strong>Class Methods</strong> - methods that are declared with <code>self.method_name</code>. Class methods work for the class, and not for instances of classes.</li>
+	<li><strong>Class Variables</strong> - variables prefixed with <code>@@</code>. Class variables can be used by the entire class, but aren't specific to the instance of the class.</li>
+	<ul>
+		<li>It differs from instance variables because instance variables are values stored within <em>specific instances</em> of the class.</li>
+	</ul>
+</ol>
+
+<p>
+	Let's take a look at an example. In our <code>Cat</code> class, let's add a <strong>class variable</strong> called <code>@@count</code>. This variable will hold the number of <code>Cat</code> objects that exist. We will also increment <code>@@count</code> by 1 in the <code>initialize</code> method, so that every time a <code>Cat</code> object is created, the <code>@@count</code> is updated.
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_accessor :name, :age
 	@@count = 0
 
-	def initialize(name)
+	def initialize(name, age)
 		@name = name
+		@age = age
 		@@count += 1
+	end	
+
+	def walk_forward
+		puts "Meow! I'm walking forward!"
 	end
 
-	def meow
-		puts "Meow"
+	def run
+		puts "Meow! I'm running!"
 	end
 
-	# Class methods are declared with self.method_name
+	def jump
+		puts "Meow! I'm jumping!"
+	end
+
+	def eat
+	 puts "Meow! This stuff is yummy."
+	end
+
+	def say_introduction
+		puts "Meow! My name is #{@name} and I'm #{@age}!"
+	end
+end
+</code></pre>
+
+<p>
+	Next, let's add a <strong>class method</strong> called <code>count</code>. This method will output the number of <code>Cat</code> objects that exist.
+</p>
+
+<pre><code class="ruby">
+class Cat
+	attr_accessor :name, :age
+	@@count = 0
+
+	def initialize(name, age)
+		@name = name
+		@age = age
+		@@count += 1
+	end	
+
+	def walk_forward
+		puts "Meow! I'm walking forward!"
+	end
+
+	def run
+		puts "Meow! I'm running!"
+	end
+
+	def jump
+		puts "Meow! I'm jumping!"
+	end
+
+	def eat
+	 puts "Meow! This stuff is yummy."
+	end
+
+	def say_introduction
+		puts "Meow! My name is #{@name} and I'm #{@age}!"
+	end
+
 	def self.count
-		@@count
+		puts "Number of cats: #{@@count}"
 	end
 end
+</code></pre>
 
-cathy = Cat.new("Cathy")
-beth = Cat.new("Beth")
+<p>
 
-# This works, since count is a class method
+</p>
+
+<p>
+	Let's now call the <code>count</code> method. <strong>When we call a class method, we have to call it on the class, and not on an instance of a class.</strong> 
+</p>
+
+<p>
+	For example this works:
+</p>
+
+<pre><code class="ruby">
 Cat.count
-=> 2
+=> Number of cats: 1
+</code></pre>
 
-# This won't work, since cathy is an instance of the class
+<p>This <strong>won't</strong> work, since class methods don't work on instances:</p>
+
+<pre><code class="ruby">
+cathy = Cat.new("Cathy", 6)
+
 cathy.count
-=> undefined method `count' for #&lt;Cat:0x0000000138c330 @name="Cathy"&gt; (NoMethodError)
+=> undefined method `count' for #&lt;Cat:0x0000000138c330 @name="Cathy" @age=6&gt; (NoMethodError)
 </code></pre>
-	
-	<p>
-		We also see some new syntax - <code>@@count</code>. Variables prefixed with <CODE>@@</CODE> are <strong><em>class variables</em></strong>. Class variables are variables that can be used by the entire class. It differs from instance variables because instance variables are values stored within <em>specific instances</em> of the class. 
-	</p>
-
-</div>
-
 
 <p>
-	Next, let's take the following code and refactor it so that we can put it inside of our <code>BillCalculator</code> class. Take a look at the newly added comments:
+	In our <code>cat.rb</code> file, let's create two cats and see if the count is correctly updated. Update your file to look like this:
 </p>
 
 <pre><code class="ruby">
-# We no longer need this hash, since we are storing all of our orders in @orders
-orders = Hash.new(0)
+class Cat
+	attr_accessor :name, :age
+	@@count = 0
 
-# Input the order
-puts "Enter the food menu you have ordered:" 
-while(true) do
-    order = gets.chomp
-    break if order.downcase == "exit"
-    
-    puts "Enter the price of the order:"
-    price = gets.chomp.to_i
-    
-    # Instead of storing the order information in a hash
-    # We can create a new Order object and push the object inside of @orders
-    orders[order] += price
-    
-    puts "Enter another food item or type exit to generate a bill:"
-end	
+	def initialize(name, age)
+		@name = name
+		@age = age
+		@@count += 1
+	end	
+
+	def walk_forward
+		puts "Meow! I'm walking forward!"
+	end
+
+	def run
+		puts "Meow! I'm running!"
+	end
+
+	def jump
+		puts "Meow! I'm jumping!"
+	end
+
+	def eat
+	 puts "Meow! This stuff is yummy."
+	end
+
+	def say_introduction
+		puts "Meow! My name is #{@name} and I'm #{@age}!"
+	end
+
+	def self.count
+		puts "Number of cats: #{@@count}"
+	end
+end
+
+cathy = Cat.new("Cathy", 6)
+beth = Cat.new("Beth", 5)
+
+Cat.count
 </code></pre>
 
 <p>
-	Let's see what this looks like:
+	If you coded it correctly, you see this output:
+</p>
+
+<pre><code class="bash">
+Number of cats: 2
+</code></pre>
+
+
+<hr>
+
+<p>
+	Let's add a new instance method called <code>say_human_age</code> that will output the cat's age in human years! 
+</p>
+
+<p>
+	This is the algorithm to convert a cat's age to human years (probably not 100% accurate):
+</p>
+
+<ol>
+	<li>Allow 15 human years for the first year of your cat's life.</li>
+	<li>Add nine years for the second year. A two-year old cat will approximate 24 human years.</li>
+	<li>Add four human years each for successive years of his life.</li>
+</ol>
+
+<p>
+	Let's put this into code and print out the human age in our <code>say_human_age</code> method:
 </p>
 
 <pre><code class="ruby">
-class BillCalculator
-	def initialize
-		@total_cost = 0
-		@orders = []
-	end
-
-	def input_orders
-		puts "Enter the food menu you have ordered:" 
-		while(true) do
-			order = gets.chomp
-			break if order.downcase == "exit"
-
-			puts "Enter the price of the order:"
-			price = gets.chomp.to_i
-
-			@orders << Order.new(order, price)
-
-			puts "Enter another food item or type exit to generate a bill:"
-		end
-	end
-
-	def calculate
-
-	end
+def say_human_age
+  human_years
+  if @age == 1
+    human_years = 15
+  elsif @age == 2
+    # add 15 + 9
+    human_years == 24
+  else
+    # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
+  	human_years 24 + (@age - 2) * 4
+  end
+  
+  puts "I'm #{human_years} in human years!"
 end
 </code></pre>
 
-<p class="alert alert-info">
-	In case you were wondering, <code><<</code> is another syntax for the <code>.push</code> method.
-</p>
-
 <p>
-	As you can see, already we are starting to see some more organized code. Let's move on to the <code>calculate_total_price</code> method.
-</p>
-
-<p>
-	Let's refactor the original code:
+	Let's now add this to our <code>Cat</code> class, if you haven't done so already. Make your <code>Cat</code> class look like this:
 </p>
 
 <pre><code class="ruby">
-# We don't need this price_sum variable since we have an instance variable called @total_price
-price_sum = 0
+class Cat
+	attr_accessor :name, :age
+	@@count = 0
 
-# @orders is no longer a hash, it's instead an array
-orders.each do |order, price|
-    puts "#{order}: #{price}"
-    price_sum += price
-end
+	def initialize(name, age)
+		@name = name
+		@age = age
+		@@count += 1
+	end	
 
-puts "Enter the tax rate:"
-tax_rate = gets.chomp.to_i
-
-puts "Calculating tax..."
-tax = price_sum * tax_rate.to_f/100
-
-total_price = price_sum + tax
-puts "Total: #{total_price}"	
-</code></pre>
-
-<p>
-	If we refactor it, the code will look something like this:
-</p>
-
-<pre><code class="ruby">
-def calculate
-	@orders.each do |order|
-		puts "#{order.item}: #{order.price}"
-		@total_price += order.price
+	def walk_forward
+		puts "Meow! I'm walking forward!"
 	end
-		    
-	puts "Enter the tax rate:"
-	tax_rate = gets.chomp.to_i
 
-	puts "Calculating tax..."
-	tax_amount = @total_price * tax_rate.to_f/100
+	def run
+		puts "Meow! I'm running!"
+	end
 
-	@total_price += tax_amount
-	puts "Total: #{@total_price}"
-end
-</code></pre>
+	def jump
+		puts "Meow! I'm jumping!"
+	end
 
-<p>
-	Since we are referencing the <code>item</code> and <CODE>price</CODE> of the <code>order</code> (<code>puts "#{order.item}: #{order.price}"</code>), we have to set the <CODE>attr_reader</CODE> for the <code>Order</code> class or else it will give us an error. If you haven't already, let's add <code>attr_reader</code> to the <code>Order</code> class.
-</p>
+	def eat
+	 puts "Meow! This stuff is yummy."
+	end
 
-<pre><code class="ruby">
-class Order
-	attr_reader :item, :price
+	def say_introduction
+		puts "Meow! My name is #{@name} and I'm #{@age}!"
+	end
 
-	def initialize(item, price)
-		@item = item
-		@price = price
+	def self.count
+		puts "Number of cats: #{@@count}"
+	end
+
+	def say_human_age
+	  human_years
+	  if @age == 1
+	    human_years = 15
+	  elsif @age == 2
+	    # add 15 + 9
+	    human_years == 24
+	  else
+	    # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
+	  	human_years 24 + (@age - 2) * 4
+	  end
+	  
+	  puts "I'm #{human_years} in human years!"
 	end
 end
 </code></pre>
 
 <p>
-	We can still refactor our <code>calculate</code> method. We can break the method into seperate steps:
+	Let's now create a couple of <code>Cat</code> objects with different ages and test if the <code>say_human_age</code> is working. Add the following lines of code to the end of the <code>cat.rb</code> file:
 </p>
 
 <pre><code class="ruby">
-def calculate_total_price	
-	# Calculate the sum of the prices before tax
-	@orders.each do |order|
-		puts "#{order.item}: #{order.price}"
-		@total_price += order.price
-	end
+cat_1 = Cat.new("Beth", 1)
+cat_2 = Cat.new("Beth", 2)
+cat_3 = Cat.new("Beth", 6)
 
-	# Calculate tax rate    	    
-	puts "Enter the tax rate:"
-	tax_rate = gets.chomp.to_i
+cat_1.say_human_years
+cat_2.say_human_years
+cat_3.say_human_years
+</code></pre>
 
-	puts "Calculating tax..."
-	tax_amount = @total_price * tax_rate.to_f/100
+<p>
+	Save the file and run the program. The results should be this:
+</p>
 
-	# Calculate after tax
-	@total_price += tax_amount
-	puts "Total: #{@total_price}"
+<ol>
+	<li>1 Year Old Cat = 15 years old in human years</li>
+	<li>2 Year Old Cat = 24 years old in human years</li>
+	<li>6 Year Old Cat = 40 years old in human years</li>
+</ol>
+
+<p>
+	This is pretty awesome, but we can write our code in better ways. Let's <strong>refactor</strong> our code.
+</p>
+
+<p>
+	Right now inside the <code>say_human_age</code> method, we are doing two things:
+</p>
+
+<ol>
+	<li><strong>Calculating</strong> the cat's age in human years</li>
+	<li><strong>Outputting</strong> the cat's age in human years</li>
+</ol>
+
+<p>
+	In general, methods should be responsible for doing only one thing. This is often called the <strong>Single Responsibility Principle</strong>. When you introduce too many responsibilities for a method or a class, it often leads to unmaintainable code. You don't need to worry too much about this just yet, but just keep in mind that in general, <strong>a method should only do one single thing</strong>.
+</p>
+
+<p>
+	Since our <code>say_human_age</code> method should only be responsible for outputting the cat's age in human years, let's move the calculation part to another method.
+</p>
+
+<p>
+	Let's add a new method called <code>calculate_human_age</code>, and move the calculation in that method. Change your code to look like this:
+</p>
+
+<pre><code class="ruby">
+def say_human_age
+  puts "I'm #{calculate_human_age} in human years!"
+end
+
+def calculate_human_age
+  if @age == 1
+    return 15
+  elsif @age == 2
+    return 24
+  else
+    return 24 + (@age - 2) * 4
+  end
 end
 </code></pre>
 
 <p>
-	Let's move these steps into seperate methods:
-</p>
+	As you can see, now we have two methods that are each responsible for only one thing.
+</p>	
 
-<pre><code class="ruby">
-def calculate_total_price
-	calculate_before_tax
-	calculate_tax
-	calculate_after_tax   
+<hr >
 
-	puts "Total: #{@total_price}"
-end
-
-private
-
-def calculate_before_tax
-	@orders.each do |order|
-		puts "#{order.item}: #{order.price}"
-		@total_price += order.price
-	end
-end
-
-def calculate_tax
-	puts "Enter the tax rate:"
-	tax_rate = gets.chomp.to_i
-
-	puts "Calculating tax..."
-	@tax_amount = @total_price * tax_rate.to_f/100
-end
-
-def calculate_after_tax
-	@total_price += @tax_amount
-end
-</code></pre>
+<h3>Private Methods and Encapsulation</h3>
 
 <p>
-	I've also added <code>puts</code> to the end of each method to print out more details.
+	Private methods are methods that cannot be called from outside of the class. Everything below <code>private</code> will be a private method:
 </p>
-
-<p>
-	Notice how I have put the methods under <code>private</code>. Methods that are defined under <code>private</code> are <strong><em>private methods</em></strong>.
-</p>
-
-<div class="well">
-	<h3>Private Methods and Encapsulation</h3>
-
-	<p>
-		Private methods are methods that cannot be called from outside of the class:
-	</p>
 
 <pre><code class="ruby">
 class Test
@@ -448,6 +519,7 @@ class Test
 	end
 
 	private
+	# everything below here is private
 
 	def test_private
 		puts "This is private"
@@ -463,104 +535,45 @@ test.test_public
 test.test_private
 </code></pre>
 	
-	<p>
-		<strong>Private methods are useful because they can hide some methods that should be hidden from the outside world.</strong> For example, in our <code>BillCalculator</code>, the outside world simply only needs to know that we are calculating the tax, or that we are calculating the price after the tax. It shouldn't need to know about <em>how</em> we are actually calculating it.
-	</p>
-
-	<p>
-		This is broadly a computer science concept called <strong>encapsulation</strong>. The basic idea is that by hiding <em>how</em> we are doing things, or in other words by hiding the implementation of the code, we allow whoever is using the method to just implement it without caring about how it's actually implemented.
-	</p>
-
-</div>
-
 <p>
-	Your entire code should now look like this:
-</p>
-
-<pre><code class="ruby">
-class Order
-	attr_accessor :item, :price
-
-	def initialize(item, price)
-		@item = item
-		@price = price
-	end
-end
-
-class BillCalculator
-    attr_accessor :total_price, :orders
-    
-	def initialize
-		@total_price = 0
-		@orders = []
-	end
-
-	def input_orders
-		puts "Enter the food menu you have ordered:" 
-		while(true) do
-			order = gets.chomp
-			break if order.downcase == "exit"
-
-			puts "Enter the price of the order:"
-			price = gets.chomp.to_i
-
-			@orders << Order.new(order, price)
-
-			puts "Enter another food item or type exit to generate a bill:"
-		end
-	end
-
-	def calculate_total_price
-		calculate_before_tax
-		calculate_tax
-		calculate_after_tax 
-
-		puts "Total: #{@total_price}"  
-	end
-
-	private
-
-	def calculate_before_tax
-		@orders.each do |order|
-			puts "#{order.item}: #{order.price}"
-			@total_price += order.price
-		end
-	end
-	
-	def calculate_tax
-		puts "Enter the tax rate:"
-		tax_rate = gets.chomp.to_i
-
-		puts "Calculating tax..."
-		@tax_amount = @total_price * tax_rate.to_f/100
-	end
-	
-	def calculate_after_tax
-		@total_price += @tax_amount		
-	end
-end	
-</code></pre>
-
-
-<p>
-	Now that we've refactored our procedural code into objected oriented code, we have a much more organized codebase. We've also split methods into seperate methods. 
+	<strong>Private methods are useful because they can hide some methods that should be hidden from the outside world.</strong> For example, in our <code>Cat</code> class, the outside world simply only needs to know that there is a method to output the cat's age in human years. It shouldn't need to know about <em>how</em> we are actually calculating it.
 </p>
 
 <p>
-	Now to run the code, we can add the following lines of code:
+	This is broadly a computer science concept called <strong>encapsulation</strong>. The basic idea is that by hiding <em>how</em> we are doing things, or in other words by hiding the implementation of the code, we allow whoever is using the method to just implement it without caring about how it's actually implemented.
 </p>
-
-<pre><code class="ruby">
-bill_calculator = BillCalculator.new
-bill_calculator.input_orders
-bill_calculator.calculate_total_price
-</code></pre>
 
 <p>
-	Notice how our code makes a lot more sense now, and we have methods that even a person who knows nothing about programming can understand.
+	It's similar to a restaurant kitchens. Customers order food off of a menu. The orders then come to the customer without the customer interfering with how the food is made in the kitchen. The menu is exposed to the customer, but what happens inside the kitchen is completely private.
 </p>
 
+<h3>Public Interfaces and Private Interfaces</h3>
 
+<p>
+	Continuing with the example of a restaurant kitchen, there are things the customer should know about, and there are things that should be hidden from the customer. 
+</p>
+
+<p>
+	In object oriented programming, the things that the outside world should know about are called <strong>public interfaces</strong> and the things that should be hidden from the outside world are called <strong>private interfaces</strong>.
+</p>
+
+<ul>
+	<li>Public Interface</li>
+	<ul>
+		<li>The food menu - customers order food off of this menu.</li>
+	</ul>
+	<li>Private Interface</li>
+	<ul>
+		<li>What happens inside the kitchen - the customer is not welcome to stir the soup inside the kitchen</li>
+	</ul>
+</ul>	
+
+<p>
+	By seperating the kitchen (or the code) in public and private interfaces, it let's the user ask for <em>what</em> they want without knowing anything about <em>how</em> the kitchen makes it.
+</p>	
+
+
+<hr>
 
 <p>
 	Congratulations! We've successfully refactored our code with OOP (Object Oriented Programming)!

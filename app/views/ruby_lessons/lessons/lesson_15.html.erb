@@ -1,20 +1,19 @@
+<p>
+	Instance variables are variables prefixed with <code>@</code>. Instance variables are variables that have different values for each instance of the class. 
+</p>
+
+<p>
+	For example, in real life, every cat has a different name and is a different breed. Similarly, in classes, each <em>instance</em> of a class will have different values for various attributes.
+</p> 
 
 
+<%= image_tag 'ruby_lessons/instance_variables.png', class: 'screenshot img-responsive' %>
 
+<p>
+	<strong>Instance variables can be used throughout the instance of the class.</strong> <strong>Local variables (variables without <code>@</code>) can only be used within the method that it was created in:</strong>
+</p>
 
-	<p>
-		Instance variables are variables prefixed with <code>@</code>. Instance variables are variables that have different values for each instance of the class. 
-	</p>
-
-	<p>
-		For example, in real life, each order consists of different food items and different prices. Similarly, in classes, each <em>instance</em> of a class will have different values for various attributes.
-	</p> 
-
-	<p>
-		<strong>Instance variables can be used throughout the class.</strong> <strong>Local variables (variables without <code>@</code>) can only be used within the method that it was created in:</strong>
-	</p>
-
-	<p>For example:</p>
+<p>For example:</p>
 
 <pre><code class="ruby">
 class Person
@@ -25,7 +24,7 @@ class Person
 
 	# We can use @name in methods outside of the initialize method as well
 	def say_name
-		puts "My name is #{name}"
+		puts "My name is #{@name}"
 	end
 
 	# This will give us an error!! Local variables can only be used in the method it was declared in!
@@ -40,17 +39,17 @@ end
 </p>
 
 <pre><code class="ruby">
-class Order
-	def initialize(item, price)
-		@item = item
-		@price = price
+class Dog
+	def initialize(name, breed)
+		@name = name
+		@breed = breed
 	end
 end
 
 # Let's add parameters so that our initialize method works
-order = Order.new("Pizza", 200)
+barnie = Dog.new("Barnie", "Golden Retriever")
 
-puts order.inspect
+puts barnie.inspect
 </code></pre>
 
 <p>
@@ -58,29 +57,29 @@ puts order.inspect
 </p>
 
 <pre><code class="bash">
-#&lt;Order:0x000000024f0d60 @item="Pizza", @price=240&gt;
+#&lt;Dog:0x000000024f0d60 @name="Barnie", @breed="Golden Retriever"&gt;
 </code></pre>
 
 <p>
-	As you can see, <code>"Pizza"</code> has been stored in <code>@item</code> and <code>240</code> has been stored in <code>@price</code>. These instance variables are now stored inside of this instance of the <code>Order</code> object. What if we create another order? Let's make the file look like this:
+	As you can see, <code>"Barnie"</code> has been stored in <code>@name</code> and <code>"Golden Retriever"</code> has been stored in <code>@breed</code>. These instance variables are now stored inside of this instance of the <code>Dog</code> object. What if we create another <code>Dog</code> object? Let's make the file look like this:
 </p>
 
 <pre><code class="ruby">
-class Order
-	def initialize(item, price)
-		@item = item
-		@price = price
+class Dog
+	def initialize(name, breed)
+		@name = name
+		@breed = breed
 	end
 end
 
 # Let's add parameters so that our initialize method works
-order = Order.new("Pizza", 200)
+barnie = Dog.new("Barnie", "Golden Retriever")
 
-puts order.inspect
+puts barnie.inspect
 
-order_2 = Order.new("Tea", 20)
+cynthia = Dog.new("Cynthia", "Bulldog")
 
-puts order_2.inspect
+puts cynthia.inspect
 </code></pre>
 
 <p>
@@ -88,8 +87,8 @@ puts order_2.inspect
 </p>
 
 <pre><code class="bash">
-#&lt;Order:0x000000012d8920 @item="Pizza", @price=240&gt;
-#&lt;Order:0x000000012d8768 @item="Tea", @price=20&gt;
+#&lt;Dog:0x000000024f0d60 @name="Barnie", @breed="Golden Retriever"&gt;
+#&lt;Dog:0x000000024f0d60 @name="Cynthia", @breed="Bulldog"&gt;
 </code></pre>
 
 <p>
@@ -97,6 +96,19 @@ puts order_2.inspect
 </p>
 
 
+<h2>Assignment</h2>
+
+<ol>
+	<li>Write a <code>Car</code> class with the following attributes</li>
+	<ul>
+		<li>Brand</li>
+		<li>Color</li>
+		<li>Maximum Passenger</li>
+		<li>Max Speed</li>
+	</ul>
+</ol>
+
+<% @submission_form = true %>
 
 
 

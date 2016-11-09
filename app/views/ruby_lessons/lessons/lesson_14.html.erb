@@ -1,54 +1,33 @@
-
-
 <p>
-	In the last lesson, we talked about what a set of orders might look like:
-</p>
-
-<ul>
-	<li><strong>Order 1</strong></li>
-	<ul>
-		<li>Item: Pizza</li>
-		<li>Price: 200</li>
-	</ul>
-
-	<li><strong>Order 2</strong></li>
-	<ul>
-		<li>Item: Milk Tea</li>
-		<li>Price: 40</li>
-	</ul>
-
-	<li><strong>Order 1</strong></li>
-	<ul>
-		<li>Item: Coffee</li>
-		<li>Price: 60</li>
-	</ul>
-</ul>
-
-<p>
-	How can we organize this data into understandable pieces of code?
+	Now that we understand the difference between classes and instances, let's code a class.
 </p>
 
 <p>
-	<strong>Introducing classes</strong>. Classes in programming represent the type of object. For example, orders can be represented as an <code>Order</code> class.
+	Let's think about dogs. All dogs have a <strong>name</strong> and a <strong>breed</strong>. This means that these are <strong>attributes</strong> of dogs.
+</p>
+
+<p>
+	First, let's create a Dog class. Create a new file called <code>dog.rb</code> and enter the following information:
 </p>
 
 <pre><code class="ruby">
-class Order
-	
+class Dog
+
 end
 </code></pre>
 
+
 <p>
-	Congratulations! You've written your first Ruby class! Let's now create a new <code>Order</code> and print it out to the console. Change your file to look like this:
+	Congratulations! You've written your first Ruby class! Let's now create a new <code>Dog</code> and print it out to the console. Change your file to look like this:
 </p>
 
 <pre><code class="ruby">
-class Order
+class Dog
 end
 
-order = Order.new
+barnie = Dog.new
 
-puts order.inspect
+puts barnie.inspect
 </code></pre>
 
 <p>
@@ -56,7 +35,7 @@ puts order.inspect
 </p>
 
 <pre><code class="ruby">
-#&lt;Order:0x000000008052c8&gt;
+#&lt;Dog:0x000000008052c8&gt;
 </code></pre>
 
 <p class="alert alert-info">
@@ -64,31 +43,35 @@ puts order.inspect
 </p>
 
 <p>
-	We just created our first <code>Order</code> object. Let's go through what we just did.
+	We just created our first <code>Dog</code> object. <code>Dog</code> is the <strong><em>class</em></strong>, and <code>barnie</code> is an <strong><em>instance</em></strong> of the <code>Dog</code> class.
+</p>
+
+<p>
+	Let's go through what we just did.
 </p>
 
 <ul>
-	<li>We created an <code>Order</code> class (it doesn't do anything yet)</li>
-	<li>We created a new <code>Order</code> with the <code>new</code> method</li>
-	<li>We stored the new <code>Order</code> into a variable called <code>order</code></li>
-	<li>We printed the <code>order</code></li>
+	<li>We created a <code>Dog</code> class (it doesn't do anything yet)</li>
+	<li>We created a new instance of the <code>Dog</code> class with the <code>new</code> method</li>
+	<li>We stored the new <code>Dog</code> into a variable called <code>barnie</code></li>
+	<li>We printed <code>barnie</code></li>
 </ul>
 
 <p>
-	Let's add some code to store information inside each <code>Order</code> object. Change the file to look like this:
+	Let's add some code to store information inside each <code>Dog</code> object. Change the file to look like this:
 </p>
 
 <pre><code class="ruby">
-class Order
-	def initialize(item, price)
-		@item = item
-		@price = price
+class Dog
+	def initialize(name, breed)
+		@name = name
+		@breed = breed
 	end
 end
 
-order = Order.new
+dog = Dog.new
 
-puts order.inspect
+puts dog.inspect
 </code></pre>
 
 <p>
@@ -99,7 +82,11 @@ puts order.inspect
 	Woops! Looks like we got an error.
 </p>
 
-<%= image_tag 'ruby_lessons/order_error.png', class: 'screenshot img-responsive' %>
+<pre><code class="bash">
+dog.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (ArgumentError)
+        from dog.rb:8:in `new'
+        from dog.rb:8:in `&lt;main&gt;'
+</code></pre>
 
 <br>
 
@@ -111,7 +98,7 @@ puts order.inspect
 	</p>
 
 <pre><code class="bash">
-order.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (ArgumentError)	
+dog.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (ArgumentError)	
 </code></pre>
 	
 	<p>
@@ -119,11 +106,11 @@ order.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (Arg
 	</p>
 
 	<p>
-		<strong>First</strong>, it says that the error is on line 2 of <code>order.rb</code> (<code>order.rb:2</code>).
+		<strong>First</strong>, it says that the error is on line 2 of <code>dog.rb</code> (<code>dog.rb:2</code>).
 	</p>
 
 	<p>
-		<strong>Then</strong> it says that the error is in <code>initialize</code> (<code>order.rb:2:in `initialize'</code>).
+		<strong>Then</strong> it says that the error is in <code>initialize</code> (<code>dog.rb:2:in `initialize'</code>).
 	</p>
 
 	<p>
@@ -137,6 +124,10 @@ order.rb:2:in `initialize': wrong number of arguments (given 0, expected 2) (Arg
 
 <div class="well">
 	<h3>initialize</h3>
+
+	<p>
+		For those with experience with other programming languages, the <code>initialize</code> method is a <strong>constructor</strong>. A constructor in programming is a special method that initializes the object of the class.
+	</p>
 
 	<p>
 		Whenever a new object is created, Ruby looks for a method called <code>initialize</code> and runs the method. In other words, when the <code>new</code> method is triggered, Ruby looks for a method called <code>initialize</code> in the class and executes it.
@@ -159,12 +150,6 @@ end
 	</p>
 
 <pre><code class="ruby">
-class Test
-  def initialize
-  	puts "I've been initialized!"
-  end
-end
-
 Test.new
 </code></pre>
 
@@ -181,11 +166,11 @@ I've been initialized!
 	</p>
 
 	<p>
-		<strong>Let's go back to our order program.</strong> When we run <code>Order.new</code>, Ruby finds the <code>initialize</code> method and runs the method. In the <code>initialize</code> method, we have two parameters: <code>item</code> and <code>price</code>. 
+		<strong>Let's go back to our order program.</strong> When we run <code>Dog.new</code>, Ruby finds the <code>initialize</code> method and runs the method. In the <code>initialize</code> method, we have two parameters: <code>name</code> and <code>breed</code>. 
 	</p>
 
 	<p>
-		The initialize method here <strong><em>expects</em></strong> two parameters - if it doesn't receive two parameters, then the program will return an error.
+		The initialize method here <strong><em>expects</em></strong> two parameters - <strong>if it doesn't receive two parameters, then the program will return an error.</strong>
 	</p>
 
 	<p>
@@ -193,14 +178,14 @@ I've been initialized!
 	</p>
 
 <pre><code class="ruby">
-Order.new(item, price)
+Dog.new(name, breed)
 </code></pre>
 
 	<p>
 		The parameters passed in through the <code>new</code> method are now passed into the <code>initialize method.</code>
 	</p>
 
-	<p>The parameter values are then stored into two variables, <code>@item</code> and <code>@price</code>. These variables that have a <code>@</code> attached to the back of the name are called <strong><em>instance variables</em></strong>.
+	<p>The parameter values are then stored into two variables, <code>@name</code> and <code>@breed</code>. These variables that have a <code>@</code> attached to the back of the name are called <strong><em>instance variables</em></strong>.
 	</p>
 </div>
 
