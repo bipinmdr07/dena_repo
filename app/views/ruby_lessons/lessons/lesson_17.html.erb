@@ -365,10 +365,10 @@ def say_human_age
     human_years = 15
   elsif @age == 2
     # add 15 + 9
-    human_years == 24
+		human_years == 24
   else
     # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
-  	human_years 24 + (@age - 2) * 4
+    human_years 24 + (@age - 2) * 4
   end
   
   puts "I'm #{human_years} in human years!"
@@ -415,18 +415,18 @@ class Cat
 	end
 
 	def say_human_age
-	  human_years
-	  if @age == 1
-	    human_years = 15
-	  elsif @age == 2
-	    # add 15 + 9
-	    human_years == 24
-	  else
-	    # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
-	  	human_years 24 + (@age - 2) * 4
-	  end
-	  
-	  puts "I'm #{human_years} in human years!"
+		human_years
+		if @age == 1
+		    human_years = 15
+		elsif @age == 2
+		    # add 15 + 9
+		  human_years == 24
+		else
+		    # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
+		    human_years 24 + (@age - 2) * 4
+		end
+
+		puts "I'm #{human_years} in human years!"
 	end
 end
 </code></pre>
@@ -500,6 +500,45 @@ end
 	As you can see, now we have two methods that are each responsible for only one thing.
 </p>	
 
+<hr>
+
+<h3>self</h3>
+
+<p>
+	<code>self</code> is a concept in Ruby that is quite hard to grasp at first.
+</p>
+
+<p>
+  Simply put, <code>self</code> refers to the current object:
+</p>
+
+<pre><code class="ruby">
+class WhatIsSelf
+  def test
+    puts "At the instance level, self is #{self}"
+  end
+
+  def self.test
+    puts "At the class level, self is #{self}"
+  end
+end
+
+WhatIsSelf.test 
+ #=&gt; At the class level, self is WhatIsSelf
+
+WhatIsSelf.new.test 
+ #=&gt; At the instance level, self is #&lt;WhatIsSelf:0x28190&gt;
+</code></pre>
+
+<p>
+	<strong>The example above indicates two things</strong>:
+</p>	
+
+<ol>
+	<li>at the class level, <code>self</code> is the class, in this case <code>WhatIsSelf</code>.</li>
+	<li>at the instance level, <code>self</code> is the instance in context, in this case the instance of <code>WhatIsSelf</code> at memory location <code>0x28190</code>.</li>
+</ol>
+
 <hr >
 
 <h3>Private Methods and Encapsulation</h3>
@@ -560,23 +599,55 @@ test.test_private
 <ul>
 	<li>Public Interface</li>
 	<ul>
-		<li>The food menu - customers order food off of this menu.</li>
+		<li><strong>The food menu</strong> - customers order food off of this menu.</li>
 	</ul>
 	<li>Private Interface</li>
 	<ul>
-		<li>What happens inside the kitchen - the customer is not welcome to stir the soup inside the kitchen</li>
+		<li><strong>What happens inside the kitchen</strong> - the customer is not welcome to stir the soup inside the kitchen</li>
 	</ul>
 </ul>	
 
 <p>
-	By seperating the kitchen (or the code) in public and private interfaces, it let's the user ask for <em>what</em> they want without knowing anything about <em>how</em> the kitchen makes it.
+	By seperating the kitchen (or the code) in public and private interfaces, it lets the user ask for <strong><em>what</em></strong> they want without knowing anything about <strong><em>how</em></strong> the kitchen makes it.
 </p>	
 
-
-<hr>
+<p>
+	In programming, <strong>public methods inside a class make up the public interface, and the private methods inside a class make up the private interface.</strong>
+</p>
 
 <p>
-	Congratulations! We've successfully refactored our code with OOP (Object Oriented Programming)!
+	Let's take a look at a simple program that calculates a "Lucky Number" based on the name:
+</p>
+
+<pre><code class="ruby">
+class LuckyNumberGenerator
+  def initialize(name)
+  	@name = name
+  end
+
+  def display_lucky_number
+  	number = calculate_lucky_number
+  	puts "My lucky number is #{number}!"
+  end
+
+  private
+
+  def calculate_lucky_number
+  	(@name.length * 15 / 0.3 + 5).round
+  end
+end
+</code></pre>
+
+<p>
+	In this case, the public interface consists of the <code>display_lucky_number</code> method, and then private interface consists of the <code>calculate_lucky_number</code> method.
+</p>
+
+<p>
+	In this case, the <code>calculate_lucky_number</code> method is made private, since the implementation details shouldn't be exposed to the user. Instead, it should be kept hidden, just like a kitchen doesn't expose what exactly is happening in the kitchen.
+</p>
+
+<p>
+	Another thing to note is that <strong>how the lucky number is calculated might change in the future</strong>. <strong>the public interface should only consist of methods that are unlikely to change</strong>. <strong>The private interface can consist of methods are allowed to change</strong>, like the <code>calculate_lucky_number</code> method.
 </p>
 
 <h2>Overview</h2>
@@ -586,7 +657,49 @@ test.test_private
 	<li>Class methods are declared with <code>def self.method_name</code></li>
 	<li>Variables prefixed with <CODE>@@</CODE> are <strong><em>class variables</em></strong></li>
 	<li>Class variables are variables that can be used by the entire class</li>
+	<li><code>self</code> refers to the current object in context</li>
 	<li>Private methods allow developers to hide the implementation of methods (encapsulation)</li>
+
 </ul>
+
+
+<h2>Assignment</h2>
+
+<p>
+	Let's build a <code>Quote</code> class that represents a single quote with a <code>content</code> and <code>author</code> attribute. 
+</p>
+
+<ul>
+	<li><strong>The public interface should consist of:</strong></li>
+	<ol>
+		<li>Getter and setter methods for <code>content</code> and <code>author</code></li>	
+		<li>An <strong><em>instance method</em></strong> called <code>display_quote</code> that prints out <code>#{quote} by #{author}</code></li>
+		<li>A <strong><em>class method</em></strong> called <code>random</code> that will print out the <code>content</code> of a random quote</li>
+	</ol>
+</ul>
+
+<p>
+	The program should work like this:
+</p>
+
+<pre><code class="ruby">
+Quote.new("Stay hungry, stay foolish", "Steve Jobs")
+Quote.new("Your most unhappy customers are your greatest source of learning.", "Bill Gates")
+Quote.new("By giving people the power to share, we're making the world more transparent.", "Mark Zuckerberg")
+
+Quote.random
+=> #&lt;Quote:0x007fa420835d30 @content="Your most unhappy customers are your greatest source of learning.", @author="Bill Gates"&gt;
+
+linus_quote = Quote.new("Talk is cheap. Show me the code.", "Linus Torvalds")
+linus_quote.display_quote
+=> Talk is cheap. Show me the code. by Linus Torvalds
+</code></pre>
+
+<p>
+	<strong>Hint:</strong> Create a class variable that will hold all of the quotes. Every time a <code>Quote</code> object is instantiated, it should be added to this class variable.
+</p>
+
+
+<% @submission_form = true %>
 
 
