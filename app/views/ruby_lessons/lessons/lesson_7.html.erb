@@ -1,6 +1,10 @@
 <p>
-  <strong>Variables</strong> are where you can store data in a program. In our interactive ruby console, let's type in the following and press enter:
+  <strong>Variables</strong> are where you can store data in a program. Let's start our interactive ruby console by typing in <code>irb</code> in the terminal.
 </p>
+
+<p>
+  In our interactive ruby console, let's type in the following and press enter:
+</p>  
 
 <pre><code class="irb">
 name = "Bob"
@@ -12,11 +16,10 @@ name = "Bob"
 
 <pre><code class="irb">
 name
-=> "Bob"
 </code></pre>
 
 <p>
-  As we can see, typing <code>name</code> outputs <code>"Bob"</code>.
+  As we can see, entering <code>name</code> outputs <code>"Bob"</code>. This is because we stored <code>"Bob"</code> into a <strong><em>variable</em></strong> called <code>name</code>.
 </p>  
 
 <p>
@@ -38,7 +41,11 @@ pieces_of_cake = 10
 </code></pre>
 
 <p>
-  Let's say we are having a party and we need to figure out how many pieces of cake in total we need. We can calculate this using <code>number_of_people</code> and multiplying that by <code>pieces_of_cake</code> and store the information into a variable:
+  Let's say we are having a party and we need to figure out how many pieces of cake in total we need.
+</p>
+
+<p>
+  We can calculate this by using <code>number_of_people</code> and then multiplying that by <code>pieces_of_cake</code> and store the information into a variable:
 </p>
 
 <pre><code class="irb"> 
@@ -51,29 +58,42 @@ total_cakes_necessary = number_of_people * cakes
 </p>
 
 <pre><code class="irb">
-name = "Takehiro Mouri"
-name
-=> "Takehiro Mouri"
+name = "Mark Zuckerburg"
 </code></pre>
 
 <p>
-  We can see that <code>name</code> is currently assigned to <code>"Takehiro Mouri"</code>. We can override the value inside <code>name</code> by assigning it another value:
+  Let's check what is inside <code>name</code>:
 </p>
 
 <pre><code class="irb">
-name = "Natsuko Robyn Shinozaki"
-name
-=> "Natsuko Robyn Shinozaki"
+puts name
 </code></pre>
 
 <p>
-  Now <code>name</code> holds the value <code>"Natsuko Robyn Shinozaki"</code>.
+  We have now assigned <code>name</code> to <code>"Mark Zuckerburg"</code>. We can override the value inside <code>name</code> by assigning it another value:
+</p>
+
+<pre><code class="irb">
+name = "Steve Jobs"
+</code></pre>
+
+<p>
+  Let's check what is inside <code>name</code>:
+</p>
+
+<pre><code class="irb">
+puts name
+</code></pre>
+
+
+<p>
+  Now <code>name</code> holds the value <code>"Steve Jobs"</code>.
 </p>
 
 <h3>String Interpolation</h3>
 
 <p>
-  We can insert the value of a variable into a string. This is called <strong>string interpolation</strong>.
+  As we've seen in the previous lessons, we can insert the value of a variable into a string. This is called <strong>string interpolation</strong>.
 </p>  
 
 <p>
@@ -82,39 +102,48 @@ name
 
 <pre><code class="irb">
 name = "Bob"
-"Hello #{name}!"
-=> "Hello Bob!"
+puts "Hello #{name}!"
 </code></pre>
 
 <p>
   As you can see, by putting the variable name inside of <code>#{ }</code>, we can insert the value of the variable inside the string.
 </p>
 
-<p class="alert alert-warning">
-  Strings can be declared with either a single quote <code>''</code> or double quote <code>""</code>, but <code>#{}</code> only works if the string is declared with <strong>double quotes (<code>""</code>)</strong>.
+<p>
+  To remind you again, strings can be declared with either a single quotes or double quotes, but <code>#{}</code> only works if the string is declared with <strong>double quotes (<code>""</code>)</strong>.
 </p>
 
 <h3>String concatenation</h3>
 
 <p>
-  We can also attach two strings together. This is called <strong>string concatenation</strong>. We can <em>concatenate</em> (attach) two strings together by adding them with the <code>+</code> operator:
+  We can also attach two strings together. This is called <strong>string concatenation</strong>. We can <strong><em>concatenate</em></strong> (attach) two strings together by adding them with the <code>+</code> operator. 
+</p>
+
+<p>
+  Inside <code>irb</code>, enter the following lines of code:
 </p>
 
 <pre><code class="irb">
-first_name = "Robert"
-last_name = "Walters"
-first_name + last_name
-=> "RobertWalters"
+first_name = "Mark"
+last_name = "Zuckerburg"
+puts first_name + last_name
 </code></pre>
 
 <p>
-  As you can see here, the two strings were attached, but we need a space between <code>"Robert"</code> and <code>"Walters"</code>. What we can do is add a blank space in between <code>first_name</code> and <code>last_name</code>:
+  As you can see here, the two strings were attached, but we need a space between <code>"Mark"</code> and <code>"Zuckerburg"</code>. What we can do is add a <strong>blank space</strong> in between <code>first_name</code> and <code>last_name</code>.
+</p>
+
+<p>
+  Inside <code>irb</code>, enter the following lines of code:
 </p>
 
 <pre><code class="irb">
-first_name + " " + last_name
-=> "Robert Walters"
+puts first_name + " " + last_name
 </code></pre>
+
+<p>
+  Now the name "Mark Zuckerburg" is properly outputted.
+</p>
 
 <h3>Getting User Input</h3>
 
@@ -159,6 +188,10 @@ cd ruby_fundamentals
 <pre><code class="bash">
 touch user_input.rb
 </code></pre>
+
+<p>
+  The <code>touch</code> command creates a new file inside the current directory.
+</p>
 
 <p>
   Let's open up the <code>user_input.rb</code> file. Inside this file, let's add the following lines of code:
@@ -209,7 +242,7 @@ puts "Hi #{name}! You're a future Ruby developer!"
 </p>
 
 <p>
-  It turns out that the <code>gets</code> method attaches a new line after the user input. To fix this, we can use the <code>chomp</code> method.
+  <strong>It turns out that the <code>gets</code> method attaches a new line after the user input.</strong> To fix this, we can use the <code>chomp</code> method.
 </p>
 
 <p>

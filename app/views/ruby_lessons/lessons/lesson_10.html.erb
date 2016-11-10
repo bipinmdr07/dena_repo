@@ -63,7 +63,7 @@ numbers.each {|i| puts i}
   </p>
 
   <p>
-    The <code>i</code> inbetween the <code>||</code>s is a <em>block argument</em>. <em>Block arguments</em> are basically variables that can be used within the block. The arguments can be named anything. The <code>||</code> characters are called pipe characters, and the variable inbetween them are the block arguments.
+    The <code>i</code> inbetween the <code>|</code>s is a <em>block argument</em>. <em>Block arguments</em> are basically variables that can be used within the block. The arguments can be named anything. The <code>|</code> characters are called pipe characters, and the variable inbetween them are the block arguments.
   </p>
 </div>
 
@@ -105,7 +105,7 @@ end
 </code></pre>
 
 <p>
-  <strong>However, it is good practice to name variables in a way that it makes sense.</strong> In otherwords, instead of <code>random_name</code>, naming the variable something like <code>i</code> or <code>n</code> or <code>number</code> is more appropriate.
+  <strong>However, it is good practice to name variables in a way that it makes sense.</strong> In other words, instead of <code>random_name</code>, naming the variable something like <code>i</code> or <code>n</code> or <code>number</code> is more appropriate.
 </p>
 
 <p class="alert alert-info">
@@ -183,13 +183,13 @@ Malaysia is awesome!
   Let's go over each step of this program.
 </p>
 
-<ul>
+<ol>
   <li>First, we are iterating through each country in the <code>countries</code> array with the <code>each</code> method</li>
   <li>Next, we are calling the block argument <code>country</code>. This way we can reference <code>country</code> inside the block</li>
   <li>In the first iteration, <code>country</code> is equal to <code>"Nepal"</code></li>
   <li>In the next iteration, <code>country</code> is equal to <code>"America"</code></li>
   <li>In the final iteration, <code>country</code> is equal to <code>"Malaysia"</code></li>
-</ul>
+</ol>
 
 
 
@@ -259,6 +259,10 @@ end
 </code></pre>
 
 <p>
+  As you can see, the placeholder variable <code>i</code> starts at <code>0</code> and increments each time it loops.
+</p>
+
+<p>
   Another example:
 </p>
 
@@ -280,7 +284,7 @@ this is spam
 </code></pre>
 
 <p>
-  Again, the code inbetween <code>do</code> and <code>end</code> are blocks.
+  Again, the code inbetween <code>do</code> and <code>end</code> is executed.
 </p>  
 
 <h3>upto loop</h3>
@@ -364,7 +368,7 @@ end
 <div class="well">
   <h3>Hint</h3>
   <p>
-    In this challenge, you will have to utilize a hash. To initialize a hash with a default value, you can initialize the hash with <code>Hash.new</code> and pass in the default value as such:
+    In this challenge, you will have to utilize a hash with a <strong><em>default value</em></strong>. To initialize a hash with a default value, you can initialize the hash with <code>Hash.new</code> and pass in the default value as such:
   </p>
 
 <pre><code class="irb">
@@ -382,13 +386,16 @@ new_hash["key"]
 new_hash = Hash.new(0)
 
 # Since the default value for every key is 0, we can add 10 to it
-new_hash["key"] += 10
+new_hash["new key"] += 10
+puts new_hash["new key"]
 => 10
 
 # Set the default value of each key to 100
 another_hash = Hash.new(100)
 
 another_hash["another_key"] += 20
+
+puts another_hash["another_key"]
 => 120
 
 

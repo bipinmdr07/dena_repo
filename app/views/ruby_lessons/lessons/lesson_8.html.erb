@@ -24,14 +24,27 @@ colors = ["red", "blue", "green"]
 empty_array = []
 </code></pre>
 
-<p class="alert alert-success">
+<p>
   Another way to declare an empty array is with <code>Array.new</code>.
 </p>
+
+<pre><code class="irb">
+empty_array = Array.new
+</code></pre>
+
 
 <h3>Accessing Elements</h3>
 
 <p>
-  In the <code>colors</code> array we have created, let's say we want to access the second item, <code>"blue"</code>. In order to do this, we simply enter the following code:
+  Let's take a look at the <code>colors</code> array we have just created:
+</p>
+
+<pre><code class="irb">
+colors = ["red", "blue", "green"]
+</code></pre>
+
+<p>
+  In the <code>colors</code> array, let's say we want to access the second item, <code>"blue"</code>. In order to do this, we simply enter the following code:
 </p>
 
 <pre><code class="irb">
@@ -50,7 +63,7 @@ colors[1]
   </p>  
 
   <p>
-    Well it turns out that in Computer Science, arrays are indexed from 0. That means that the first item would be referenced like <code>colors[0]</code>.
+    Well it turns out that in computer science, arrays are indexed from 0. That means that the first item would be referenced like <code>colors[0]</code>.
   </p>
 </div>
 
@@ -76,110 +89,163 @@ people = ["Jack", "Adam", "Mike"]
 </code></pre>
 
 <p>
-  Here, we have created a <code>people</code> array with the names of 3 people inside of it. Let's go over some common array methods.
+  Here, we have created a <code>people</code> array with the names of 3 people inside of it. Let's access the first element in the <code>people</code> array. In <code>irb</code>, enter the following:
 </p>
-
-<h2>Array Methods</h2>
-
-<p>
-  In Ruby, there are a lot of array methods that we can use. Many of them read like English, so they are fairly easy to understand.</p>
-
-<p class="alert alert-info">
-  <strong>Don't worry about trying to memorize everything</strong> - the goal here is to simply introduce you to some of the methods that Ruby has. You will remember and internalize these methods once you use them a couple of times - but they are impossible to remember at once, so don't worry.
-</p>
-
-<p>
-  Let's retrieve the first person in the list. To do this, we can simply type the following:
-</p>  
 
 <pre><code class="irb">
-people.first
-=> "Jack"
+people[0]
 </code></pre>
 
 <p>
-  To retrieve the last person in the list, simply type the following:
+  At first, zero based indexing can be a little confusing, but you'll get used to it in no time.
+</p>
+
+<p>Let's go over some common array methods.</p>
+
+<h2>Manipulating the Array</h2>
+
+<p>
+  In Ruby, there are a lot of array methods that we can use to manipulate them. Many of them read like English, so they are fairly easy to understand.
+</p>
+
+<p class="alert alert-info">
+  <strong>Don't worry about trying to memorize everything</strong> - the goal here is to simply introduce you to some of the methods that Ruby has. You will remember and internalize these methods once you use them a couple of times - but they are impossible to remember at once.
+</p>
+
+<hr>
+
+<p>
+  Let's retrieve the first person in the list. We <em>could</em> access the first person like we just did using indexes:
+</p>  
+
+<pre><code class="irb">
+people[0]
+</code></pre>
+
+<p>
+  <em>Or</em>, we can use the <code>first</code> method. In <code>irb</code>, type in the following:
+</p>
+
+<pre><code class="irb">
+people.first
+</code></pre>
+
+<hr>
+
+<p>
+  Similarly, to retrieve the last person in the list, simply type the following:
 </p>  
 
 <pre><code class="irb">
 people.last
-=> "Mike"
 </code></pre>
 
+<hr>
+
 <p>
-  What if we want to find the size of the array? 
+  What if we want to find the size of the array? We can either use <code>count</code>, <code>length</code>, or <code>size</code>. Type the following in <code>irb</code>:
 </p>
 
 <pre><code class="irb">
 people.count
-=> 3
 
 people.length
-=> 3
+
+people.size
 </code></pre>
 
 <p>
-  What if we wanted to see if a person was included in the list?
+  These three methods do the same thing.
+</p>
+
+<hr>
+
+<p>
+  To see if an element is inside of an array, we can use the <code>include?</code> method. In <code>irb</code>, type the following code:
 </p>
 
 <pre><code class="irb">
 people.include?("Jack")
-=> true
 
 people.include?("Bob")
-=> false
 </code></pre>
 
+<hr>
+
 <p>
-  To get the index of a person:
+  To get the array index of a certain element, you can use the <code>index</code> method. For example, in our <code>people</code> array, <code>"Jack"</code> is the first element, so the index is <code>0</code>. In <code>irb</code>, type in the following code:
 </p>
 
 <pre><code class="irb">
 people.index("Jack")
-=> 0
 </code></pre>
 
+<hr>
+
 <p>
-  To join all of the names into one string:
+  Sometimes we want to join all elements inside of the array into one whole string. We can use <code>join</code> to accomplish this. Enter the following in <code>irb</code> and see the results:
 </p>
 
 <pre><code class="irb">
 people.join
-=> "JackAdamMike"
 </code></pre>
 
 <p>
-  To join all of the names into one string, but put a space between each name:
+  As you have probably noticed, the string doesn't look too pretty! All of the names are mushed together. Instead, we want to join all of the names into one string, but put a space between each name. In <code>irb</code>, type in the following code:
 </p>
 
 <pre><code class="irb">
 people.join(" ")
-=> "Jack Adam Mike"
 </code></pre>
 
 <p>
-  To remove the last element from an array:
+  By passing in a blank space as an argument, we can join the array elements while placing a space in between the elements.
+</p>
+
+<hr>
+
+<p>
+  Sometimes we want to remove the last element from the array. For this, we can use the <code>pop</code> method. In <code>irb</code>, type in the following code:
 </p>
 
 <pre><code class="irb">
 people.pop
-=> "Mike"
-
-people
-=> ["Jack", "Adam"]
 </code></pre>
 
 <p>
-  To add an element to the end of the array:
+  If you print out the <code>people</code> array, you will see that the array now only consists of 2 people.
+</p>  
+
+<hr />
+
+<p>
+  One of the most common operations with arrays is to add a new element into the array. To do this, we can use the <code>push</code> method. In <code>irb</code>, type in the following:
 </p>
 
 <pre><code class="irb">
 people.push("Bob")
-=> ["Jack", "Adam", "Bob"]
 </code></pre>
 
 <p>
-  To reverse the order of an array:
+  The <code>push</code> method adds the element given in the parameter in the end of the array.
+</p>
+
+<p>
+  Another way to do the same thing is to use the <code>&lt;&lt;</code> syntax.
+</p>
+
+<pre><code class="irb">
+people &lt;&lt; ("Bob")
+</code></pre>
+
+<p>
+  Which syntax you use is a matter of preference.
+</p>
+
+<hr>
+
+<p>
+  To reverse the order of an array, you can use the <code>reverse</code> method:
 </p>
 
 <pre><code class="irb">
@@ -187,29 +253,36 @@ people.reverse
 => ["Bob", "Adam", "Jack"]
 </code></pre>
 
+<hr>
+
 <p>
-  Get a random element from an array:
+  To get a random element form the array, you can use <code>sample</code>:
 </p>
 
 <pre><code class="irb">
 people.sample
 </code></pre>
 
+<hr>
+
 <p>
-  To get only unique elements:
+  To get only unique elements, you can use <code>uniq</code>:
 </p>
 
 <pre><code class="irb">
 people = ["Jake", "Jake", "Adam", "Mike", "Mike", "Mike"]
-people
-=> ["Jake", "Jake", "Adam", "Mike", "Mike", "Mike"]
 
 people.uniq
-=> ["Jake", "Adam", "Mike"]
 </code></pre>
+
+<hr>
 
 <p>
   There are a bunch of other array methods that would be great to take a look at. You can take a look at them <%= link_to 'here', 'https://ruby-doc.org/core-2.2.0/Array.html', target: '_blank' %>.
+</p>
+
+<p>
+  <strong>The important thing to remember is that you don't need to memorize all of these methods.</strong> In the exercises throughout the course, we will make sure you are reviewing these concepts. You will review these concepts again in the Ruby Core Challenges which you will do before creating your Instagram clone.
 </p>
 
 <h3>Arrays can contain multiple data types</h3>
@@ -273,17 +346,87 @@ people[0][1]
   <li>Arrays can store arrays within itself (<em>multidimensional arrays</em>)</li>
 </ul>
 
+<h2>Exercise: Super Simple Random Quote Generator</h2>
 
+<p>
+  Let's create a super simple random quote generator using arrays in Ruby to get used to working with arrays! Create a new file called <code>quotes.rb</code>.
+</p>
 
+<p>
+  Inside this file, add the following lines of code:
+</p>
 
+<pre><code class="ruby">
+quotes = Array.new
+puts "There are #{quotes.length} quotes now."
 
+quote = "I like Ramen"
+puts "Adding #{quote}..."
+quotes.push(quote)
+puts "There are #{quotes.length} quotes now."
 
+quote = "Momo is good too"
+puts "Adding #{quote}..."
+quotes.push(quote)
+puts "There are #{quotes.length} quotes now."
 
+quote = "I love Ruby"
+puts "Adding #{quote}..."
+quotes.push(quote)
+puts "There are #{quotes.length} quotes now."
 
+quote = "I want to Ruby on Rails"
+puts "Adding #{quote}..."
+quotes.push(quote)
+puts "There are #{quotes.length} quotes now."
 
+quote = "I want to become a web developer"
+puts "Adding #{quote}..."
+quotes.push(quote)
+puts "There are #{quotes.length} quotes now."
 
+puts "....."
+puts "Generating random quote......"
+puts "....."
 
+puts "Random quote at index #{quotes.index(random_quote)}: #{random_quote}"
+</code></pre>
 
+<p>
+  Save the file and run the program.
+</p>
 
+<p>
+  Your output should look like this:
+</p>
 
+<pre><code class="bash">
+There are 0 quotes now.
+Adding I like Ramen...
+There are 1 quotes now.
+Adding Momo is good too...
+There are 2 quotes now.
+Adding I love Ruby...
+There are 3 quotes now.
+Adding I want to Ruby on Rails...
+There are 4 quotes now.
+Adding I want to become a web developer...
+There are 5 quotes now.
+.....
+Generating random quote......
+.....
+Random quote at index 4: I want to become a web developer
+</code></pre>
+
+<p>
+  You will notice that every time you run the code, the quote generated will be random.
+</p>
+
+<h2>Assignment</h2>
+
+<ol>
+  <li>List 10 things that could be represented with arrays</li>
+</ol>
+
+<% @submission_form = true %>
 

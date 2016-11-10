@@ -1,0 +1,37 @@
+<p>
+	To wrap up the introductory Ruby lessons, let's create a deck of cards using Object Oriented Programming. This is a common interview question that tests the applicants knowledge about object oriented programming. This one is quite challenging. Good luck!
+</p>
+
+<h3><strong>Specifications</strong></h3>
+<ol>
+	<li>A deck should have 52 cards</li> 
+	<li>We should be able to shuffle the deck</li>
+	<li>We should be able to deal the deck</li>
+	<ul>
+		<li>Deal means to take one card from the top of the deck</li>
+	</ul>
+</ol>
+
+<h3><strong>How to do it</strong></h3>
+<ol>
+	<li>Create a <code>Card</code> class and a <code>Deck</code> class</li>
+	<li>In the <code>initialize</code> method for the <code>Deck</code> class, build all 52 cards and store it in an instance variable array</li>
+	<li>Create a <code>shuffle</code> method for your <code>Deck</code> class</li>
+	<li>Create a <code>deal</code> method for your <code>Deck</code> class</li>
+</ol>
+
+<h2>Hints</h2>
+
+<ol>
+	<li>To shuffle the deck, you can use the <%= link_to 'shuffle', 'http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-shuffle-21', target: '_blank' %> method</li>
+	<li>To deal the deck (take the first card and remove it from the deck), you can use the <%= link_to 'shift', 'http://ruby-doc.org/core-2.2.0/Array.html#method-i-shift', target: '_blank' %> method.</li>
+	<li><strong>An array can store any type of object</strong>, including any classes that you create</li>
+	<li>Think about the attributes of a card in real-life. What does every card have?</li>
+	<li>Think about the attributes of a deck in real-life. What is a deck made up of?</li>
+</ol>
+
+<p class="alert alert-success">
+	Remember, this challenge is supposed to be difficult! Don't hesitate to reach out to the community for help!
+</p>
+
+<% @submission_form = true %>

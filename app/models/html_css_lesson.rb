@@ -8,6 +8,7 @@ class HtmlCssLesson < Lesson
 	CHAPTERS = [
 		Chapter.new("Building Your first HTML/CSS Projects"),
 		Chapter.new("Build a Personal Resume Page"),
+		Chapter.new("Launch a Portfolio Page"),
 		Chapter.new("Next Steps")
 	]
 
@@ -27,7 +28,16 @@ class HtmlCssLesson < Lesson
 		Lesson.new(12, "Making everything look nice", CHAPTERS[1]),
 		Lesson.new(13, "Adding Social Buttons", CHAPTERS[1]),
 		Lesson.new(14, "Final Touches", CHAPTERS[1]),
-		
-		Lesson.new(15, "Congratulations", CHAPTERS[2])
+
+		Lesson.new(15, "Setting Up the Environment", CHAPTERS[2]),
+		Lesson.new(16, "Adding a Perfect Background Image", CHAPTERS[2]),
+		Lesson.new(17, "Creating a Navbar", CHAPTERS[2]),
+		Lesson.new(18, "Adding an About Section", CHAPTERS[2]),
+		Lesson.new(19, "Adding a Code Snippet section", CHAPTERS[2]),
+		Lesson.new(20, "Adding a Projects section", CHAPTERS[2]),
+		Lesson.new(21, "Adding a Contact Me section", CHAPTERS[2]),
+		Lesson.new(22, "Adding a Footer", CHAPTERS[2]),
+		Lesson.new(23, "Overview", CHAPTERS[2]),	
+		Lesson.new(24, "Congratulations", CHAPTERS[3])
 	]
 end
