@@ -1,38 +1,77 @@
+<p>
+  Define a method called <code>ordinal</code> that will return the <strong><em>ordinal</em></strong> of a number.
+</p>
+
+<p>
+  <strong>An Ordinal Number is a number that tells the position of something in a list</strong>. The ordinal of 1 is 1st, 2 is 2nd, 3 is 3rd, 4 is 4th, and so on.
+</p>
+
+<p>
+  The program should work as such:
+</p>
+
+<pre><code class="ruby">
+ordinal(1)
+=> "1st"
+
+ordinal(2)
+=> "2nd"
+
+ordinal(3)
+=> "3rd"
+
+ordinal(4)
+=> "4th"
+
+ordinal(105)
+=> "105th"
+</code></pre>
+
+<h3>Getting Started</h3>
+
+<p>
+  In your C9 workspace you have created in the previous lesson, let's navigate to the <code>ordinal</code> directory. In the workspace terminal, type in the following command and press enter:
+</p>
+
+<pre><code class="bash">
+cd ordinal
+</code></pre>
+
+<p>
+  Next, type in the following command and press enter:
+</p>
+
+<pre><code class="bash">
+bundle install
+</code></pre>
 
 
 <p>
-	To wrap up the OOP lessons, let's create a deck of cards using Object Oriented Programming. This is a common interview question that tests the applicants knowledge about object oriented programming. This one is quite challenging. Good luck!
+  This should install a bunch of packages and dependencies.
 </p>
 
-<p><strong>Specifications</strong></p>
-<ul>
-	<li>A deck should have 52 cards</li> 
-	<li>We should be able to shuffle the deck</li>
-	<li>We should be able to deal the deck</li>
-</ul>
 
-<p><strong>How to do it</strong></p>
-<ul>
-	<li>Create a <code>Card</code> class and a <code>Deck</code> class</li>
-	<li>In the <code>initialize</code> method for the <code>Deck</code> class, build all 52 cards and store it in an instance variable array</li>
-	<li>Create a <code>shuffle</code> method for your <code>Deck</code> class</li>
-	<li>Create a <code>deal</code> method for your <code>Deck</code> class</li>
-</ul>
+<p>
+  Next, let's run the following command to run the test suites:
+</p>
 
-<div class="well">
-	<h3>Hints</h3>
+<pre><code class="ruby">
+  rspec</code></pre>
 
-	<p>
-		To shuffle the deck, you can use the <%= link_to 'shuffle', 'http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-shuffle-21', target: '_blank' %> method
-	</p>
+<p>
+  Since you haven't written any code yet, you will see that all the tests fail.
+</p>
 
-	<p>
-		To deal the deck (take the first card and remove it from the deck), you can use the <%= link_to 'shift', 'http://ruby-doc.org/core-2.2.0/Array.html#method-i-shift', target: '_blank' %> method.
-	</p>
-</div>
+<p>
+  Open <code>ordinal.rb</code>. Inside this file, you need to write a method that will return the ordinal of the number that is passed in as an argument.
+</p>
 
-<p class="alert alert-success">
-	Remember, this challenge is supposed to be difficult! Don't hesitate to reach out to the community for help!
+<p>
+  <strong>Your goal is to make every one of these tests pass.</strong> Once you finish writing the code, run the <code>rspec</code> command. Keep rewriting your code until all of the tests pass when you run the <code>rspec</code> command.
+</p>
+
+<p>
+  Once all of the tests have passed, submit your code down below.
 </p>
 
 <% @submission_form = true %>

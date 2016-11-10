@@ -34,10 +34,11 @@ class RubyLesson < Lesson
     Lesson.new(16, "attr_reader and attr_writer", chapter_2),
     Lesson.new(17, "Instance Methods, Class Methods, and Encapsulation", chapter_2),
     Lesson.new(18, "Inheritance", chapter_2),
-    Lesson.new(19, "Foobar Challenge", chapter_3),
+    Lesson.new(19, "FizzBuzz Challenge", chapter_3),
     Lesson.new(20, "Test-First Ruby: Hello", chapter_3),
     Lesson.new(21, "Challenge: Temperature Conversion", chapter_3),
-    Lesson.new(22, "Challenge: Building a Deck of Cards", chapter_3)
+    Lesson.new(22, "Challenge: Ordinal", chapter_3),
+    Lesson.new(23, "Challenge: Building a Deck of Cards", chapter_3)
   ]
 
 
