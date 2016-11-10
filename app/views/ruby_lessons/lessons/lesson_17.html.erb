@@ -33,7 +33,7 @@ end
 	<h3>Instance Methods</h3>
 
 	<p>
-		Instance methods are methods that can only be called on an <em>instance</em> of a class. In other words, the object has to first be created in order to execute the method:
+		Instance methods are methods that can only be called on an <strong><em>instance</em></strong> of a class. In other words, the object has to first be created in order to execute the method:
 	</p>
 
 <pre><code class="ruby">
@@ -85,7 +85,7 @@ class Cat
 	end
 
 	def eat
-	 puts "Meow! This stuff is yummy."
+		puts "Meow! This stuff is yummy."
 	end
 end
 
@@ -131,7 +131,7 @@ class Cat
 	end
 
 	def eat
-	 puts "Meow! This stuff is yummy."
+		puts "Meow! This stuff is yummy."
 	end
 
 	def say_introduction
@@ -207,7 +207,7 @@ class Cat
 	end
 
 	def eat
-	 puts "Meow! This stuff is yummy."
+		puts "Meow! This stuff is yummy."
 	end
 
 	def say_introduction
@@ -244,7 +244,7 @@ class Cat
 	end
 
 	def eat
-	 puts "Meow! This stuff is yummy."
+		puts "Meow! This stuff is yummy."
 	end
 
 	def say_introduction
@@ -274,7 +274,7 @@ Cat.count
 => Number of cats: 1
 </code></pre>
 
-<p>This <strong>won't</strong> work, since class methods don't work on instances:</p>
+<p>The example below <strong>won't</strong> work, since class methods don't work on instances:</p>
 
 <pre><code class="ruby">
 cathy = Cat.new("Cathy", 6)
@@ -311,7 +311,7 @@ class Cat
 	end
 
 	def eat
-	 puts "Meow! This stuff is yummy."
+		puts "Meow! This stuff is yummy."
 	end
 
 	def say_introduction
@@ -403,7 +403,7 @@ class Cat
 	end
 
 	def eat
-	 puts "Meow! This stuff is yummy."
+		puts "Meow! This stuff is yummy."
 	end
 
 	def say_introduction
@@ -456,7 +456,7 @@ cat_3.say_human_years
 </ol>
 
 <p>
-	This is pretty awesome, but we can write our code in better ways. Let's <strong>refactor</strong> our code.
+	This is pretty awesome, but we can write our code in better ways. Let's <strong>refactor</strong> our code. Refactoring means to rewrite our code to improve the quality of the code, to make it more cleaner, more understandable, maintainable, etc.
 </p>
 
 <p>
@@ -469,7 +469,7 @@ cat_3.say_human_years
 </ol>
 
 <p>
-	In general, methods should be responsible for doing only one thing. This is often called the <strong>Single Responsibility Principle</strong>. When you introduce too many responsibilities for a method or a class, it often leads to unmaintainable code. You don't need to worry too much about this just yet, but just keep in mind that in general, <strong>a method should only do one single thing</strong>.
+	<strong>In general, methods should be responsible for doing only one thing.</strong> This is often called the <strong>Single Responsibility Principle</strong>. When you introduce too many responsibilities for a method or a class, it often leads to unmaintainable code. You don't need to worry too much about this just yet, but just keep in mind that in general, <strong>a method should only do one single thing</strong>.
 </p>
 
 <p>
@@ -538,6 +538,7 @@ WhatIsSelf.new.test
 	<li>at the class level, <code>self</code> is the class, in this case <code>WhatIsSelf</code>.</li>
 	<li>at the instance level, <code>self</code> is the instance in context, in this case the instance of <code>WhatIsSelf</code> at memory location <code>0x28190</code>.</li>
 </ol>
+
 
 <hr >
 

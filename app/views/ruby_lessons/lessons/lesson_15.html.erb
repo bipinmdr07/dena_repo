@@ -17,9 +17,9 @@
 
 <pre><code class="ruby">
 class Person
-	def initialize(name)
+	def initialize(name, age)
 		@name = name
-		age = 21
+		age = age
 	end
 
 	# We can use @name in methods outside of the initialize method as well
@@ -50,6 +50,14 @@ end
 barnie = Dog.new("Barnie", "Golden Retriever")
 
 puts barnie.inspect
+</code></pre>
+
+<p>
+	Save the file and run the program:
+</p>
+
+<pre><code class="bash">
+ruby dog.rb
 </code></pre>
 
 <p>
@@ -99,7 +107,7 @@ puts cynthia.inspect
 <h2>Assignment</h2>
 
 <ol>
-	<li>Write a <code>Car</code> class with the following attributes</li>
+	<li>Write a <code>Car</code> class with the following attributes:</li>
 	<ul>
 		<li>Brand</li>
 		<li>Color</li>

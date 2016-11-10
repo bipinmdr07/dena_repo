@@ -37,13 +37,7 @@ class HtmlCssLesson < Lesson
 		Lesson.new(20, "Adding a Projects section", CHAPTERS[2]),
 		Lesson.new(21, "Adding a Contact Me section", CHAPTERS[2]),
 		Lesson.new(22, "Adding a Footer", CHAPTERS[2]),
-		Lesson.new(23, "Overview", CHAPTERS[2]),
-
-		
-
-
-
-		
-		Lesson.new(30, "Congratulations", CHAPTERS[3])
+		Lesson.new(23, "Overview", CHAPTERS[2]),	
+		Lesson.new(24, "Congratulations", CHAPTERS[3])
 	]
 end
