@@ -18,7 +18,8 @@
   }
 
   .track-description {
-    height: 170px;
+    margin-top: 20px;
+    min-height: 170px;
     color: #333;
   }
 
@@ -31,7 +32,6 @@
 
   .track-progression {
     border-top: 1px solid #ddd;
-    padding-top: 15px;
   }
 
   .track-number {
@@ -63,7 +63,7 @@
 }
 
 .track {
-  height: 350px;
+  min-height: 350px;
   background: white;
   padding: 20px;
   margin-bottom: 30px;
