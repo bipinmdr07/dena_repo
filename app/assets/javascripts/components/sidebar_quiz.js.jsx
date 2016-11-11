@@ -129,7 +129,8 @@ let SidebarQuiz = React.createClass({
     } 
     else if (this.props.quizProblems.length == this.props.currentPosition) {
       return (
-        <FinishQuiz averageScore={this.props.averageScore} 
+        <FinishQuiz passingGrade={this.passingGrade}
+                    averageScore={this.props.averageScore} 
                     handleToggleStats={this.handleToggleStats} 
                     handleRetakeQuiz={this.handleRetakeQuiz} />
       )

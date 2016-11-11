@@ -22,7 +22,7 @@ let FinishQuiz = React.createClass({
           <hr />
 
           <p key={"message_" + this.props.averageScore}>
-            {this.props.averageScore >= this.passingGrade ? "Congratulations! You've passed the quizzes." : `You must score at least ${this.passingGrade} to pass. Take the quiz again to mark this lesson as completed!`}
+            {this.props.averageScore >= this.props.passingGrade ? "Congratulations! You've passed the quizzes." : `You must score at least ${this.props.passingGrade} to pass. Take the quiz again to mark this lesson as completed!`}
           </p>
 
           <br />
