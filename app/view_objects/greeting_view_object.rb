@@ -16,22 +16,22 @@ class GreetingViewObject
   private
 
   def current_time
-    Time.now.to_i
+    Time.current.to_i
   end
 
   def midnight
-    Time.now.beginning_of_day.to_i
+    Time.current.beginning_of_day.to_i
   end
 
   def noon
-    Time.now.middle_of_day.to_i
+    Time.current.middle_of_day.to_i
   end
 
   def five_pm
-    Time.now.change(hour: 17).to_i
+    Time.current.change(hour: 17).to_i
   end
 
   def eight_pm
-    Time.now.change(hour: 20).to_i     
+    Time.current.change(hour: 20).to_i     
   end
 end
