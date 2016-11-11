@@ -22,6 +22,8 @@ class DashboardController < ApplicationController
   
     @stats = DashboardStatsDecorator.new(lessons: @lessons, flashcards: @flashcards).build_stats
 
+    @greeting_message = GreetingViewObject.new.display
+
     if current_user.admin
       @unresolved_questions = Question.unresolved.includes(:user)
       @unapproved_submissions = Submission.unapproved.includes(:user)
