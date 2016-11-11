@@ -12,11 +12,11 @@
 
   <div class="row">
     <div class="col-md-1 col-xs-12">
-      <%= image_tag @greeting_message[1], class: 'img-responsive img-circle timely_icon' %>
+      <%= image_tag @greeting_message.icon, class: 'img-responsive img-circle timely_icon' %>
     </div>
     <div class="col-md-11 col-xs-12">
         <h2 style="font-weight: 900;">
-          Good <%= @greeting_message[0] %> <%= current_user.name %>!
+          Good <%= @greeting_message.time_of_day %> <%= current_user.name %>!
         </h2>
     </div>
   </div> <!--hello user pannel-->
