@@ -45,6 +45,7 @@ module Techrise
 
     # Load services
     config.autoload_paths << Rails.root.join('services')
+    config.autoload_paths << Rails.root.join('view_objects')
 
     config.action_cable.disable_request_forgery_protection = true
   end
