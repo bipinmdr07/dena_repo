@@ -22,29 +22,11 @@ class DashboardController < ApplicationController
   
     @stats = DashboardStatsDecorator.new(lessons: @lessons, flashcards: @flashcards).build_stats
 
-    @greeting_message = greeting_message
+    @greeting_message = GreetingViewObject.new.display
 
     if current_user.admin
       @unresolved_questions = Question.unresolved.includes(:user)
       @unapproved_submissions = Submission.unapproved.includes(:user)
-    end
-  end
-
-  def greeting_message  
-    @current_time = Time.now.to_i
-    @midnight = Time.now.beginning_of_day.to_i
-    @noon = Time.now.middle_of_day.to_i
-    @five_pm = Time.now.change(:hour => 17 ).to_i
-    @eight_pm = Time.now.change(:hour => 20 ).to_i 
-
-    if @midnight.upto(@noon).include?(@current_time)
-      @data = ["Morning","dashboard/sunrise.png"]
-    elsif @noon.upto(@five_pm).include?(@current_time)
-      @data = ["Afternoon","dashboard/afternoon.png"]
-    elsif @five_pm.upto(@eight_pm).include?(@current_time)
-      @data = ["Evening","dashboard/evening.png"]
-    elsif @eight_pm.upto(@midnight + 1.day).include?(@current_time)
-      @data = ["Night","dashboard/night.png"]
     end
   end
 
