@@ -10,3 +10,13 @@
     right: 20px;
   }
 }
+
+.admin_quiz_options {
+  list-style-type: none;
+  padding-left: 0px;
+  li {
+    padding: 20px 0px;
+    min-height: 70px;
+    border-bottom: 2px solid #eee;
+  }
+}

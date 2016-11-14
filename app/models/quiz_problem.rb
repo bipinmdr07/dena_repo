@@ -9,6 +9,8 @@ class QuizProblem < ActiveRecord::Base
 
   scope :randomize, -> { order('random()') }
 
+  delegate :name, to: :quiz_category, prefix: true
+
   def save_and_create_quiz_options!(quiz_problem_params)
     self.transaction do
       self.save!

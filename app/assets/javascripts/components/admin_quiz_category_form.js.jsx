@@ -1,4 +1,4 @@
-let QuizCategoryForm = React.createClass({
+let AdminQuizCategoryForm = React.createClass({
   getInitialState() {
       return {
         editing: false,
@@ -8,12 +8,10 @@ let QuizCategoryForm = React.createClass({
       };
   },
 
-  componentDidMount() {
-    $.getJSON('/admin/quiz_categories', (result) => {      
-      this.setState({quizCategories: result});
-    });
+  quizCategories() {
+    
   },
-  
+
   handleSubmit(e){
     e.preventDefault();
     $.ajax({
@@ -24,8 +22,7 @@ let QuizCategoryForm = React.createClass({
       context: this,
       success(data) {
         this.setState({editing: false, name: '', category: ''});
-        let quizCategories = React.addons.update(this.state.quizCategories, {$push: [data]});
-        this.setState({quizCategories: quizCategories});
+        this.props.handleCategorySubmit(data);        
       }
     });
   },
@@ -39,7 +36,7 @@ let QuizCategoryForm = React.createClass({
   },
 
   render(){
-    let quizCategories = this.state.quizCategories.map((category) => {
+    let quizCategories = this.props.quizCategories.map((category) => {
       return (
         <option key={category.id} value={category.id}>{category.name}</option>
       )
@@ -51,7 +48,6 @@ let QuizCategoryForm = React.createClass({
           <div className="form-group" onChange={this.handleCategoryChange}>
             <label>Select category</label>
             <select className="form-control" id="quiz_category">
-              <option></option>
               {quizCategories}
             </select>
           </div>

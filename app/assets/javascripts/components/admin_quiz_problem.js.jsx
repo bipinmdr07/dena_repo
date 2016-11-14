@@ -7,6 +7,10 @@ let AdminQuizProblem = React.createClass({
     };
   },
 
+  handleCategorySubmit(data){
+    this.props.handleCategorySubmit(data);
+  },  
+
   handleToggle(e){
     e.preventDefault();
     this.setState({edit: !this.state.edit});
@@ -31,8 +35,12 @@ let AdminQuizProblem = React.createClass({
   quizProblem(){
     if (this.state.edit) {
       return (
-        <form>
+        <form className="form-group">
           <textarea defaultValue={this.state.question} ref="question" className="form-control" rows="10" />
+
+          <AdminQuizCategoryForm quizCategories={this.props.quizCategories} handleCategorySubmit={this.handleCategorySubmit}/>
+
+          <br />
 
           <div className="btn-group">
             <button className="btn btn-cta-primary" onClick={this.handleEdit}>Submit</button>
@@ -42,7 +50,10 @@ let AdminQuizProblem = React.createClass({
       )
     } else {
       return (
-        <div onClick={this.handleToggle} style={{"marginTop": "30px"}} dangerouslySetInnerHTML={{__html: this.state.question}} />
+        <div style={{"marginBottom": "30px"}}>
+          <div onClick={this.handleToggle} style={{"marginTop": "30px"}} dangerouslySetInnerHTML={{__html: this.state.question}} />
+          <label className="label label-success">{this.props.quizProblem.quiz_category.name}</label>
+        </div>
       )
     }
   },
@@ -60,7 +71,7 @@ let AdminQuizProblem = React.createClass({
   quizProblemOptions(){
     if (!this.state.edit) {
       return (
-        <div className="btn-group">
+        <div className="btn-group" style={{"position": "absolute", "right": "20px", "bottom": "0px"}}>
           <button className="btn btn-sm btn-cta-primary" onClick={this.toggleShowOptions}>Options</button>
           <a className="btn btn-sm btn-cta-secondary" href={`/admin/quiz_problems/${this.props.quizProblem.id}`} data-method="delete" data-confirm="Are you sure?">Delete</a>
         </div>
@@ -74,17 +85,17 @@ let AdminQuizProblem = React.createClass({
   },
 
   render(){
-    
-
     return (
-
         <div className="admin-quiz-problem">
-          <p className="pull-right"><small>Lesson {this.props.quizProblem.lesson_id}</small></p>
-          {this.quizProblem()}
+          <div style={{"position": "relative", "minHeight": "100px"}}>
+            <p className="pull-right"><small>Lesson {this.props.quizProblem.lesson_id}</small></p>
+            {this.quizProblem()}
+                    
+            {this.quizProblemOptions()}
+          </div>
 
-          {this.quizProblemOptions()}
           <hr />
-          <ul>
+          <ul className="admin_quiz_options">
             {this.options()}
           </ul>
         </div>
