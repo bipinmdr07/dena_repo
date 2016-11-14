@@ -3,7 +3,7 @@ let AdminQuizProblem = React.createClass({
     return {
       edit: false,
       question: this.props.quizProblem.question,
-      showOptions: false
+      showOptions: true
     };
   },
 
@@ -42,7 +42,7 @@ let AdminQuizProblem = React.createClass({
       )
     } else {
       return (
-        <div onClick={this.handleToggle} dangerouslySetInnerHTML={{__html: this.state.question}} />
+        <div onClick={this.handleToggle} style={{"marginTop": "30px"}} dangerouslySetInnerHTML={{__html: this.state.question}} />
       )
     }
   },
@@ -57,6 +57,17 @@ let AdminQuizProblem = React.createClass({
     }
   },
 
+  quizProblemOptions(){
+    if (!this.state.edit) {
+      return (
+        <div className="btn-group">
+          <button className="btn btn-sm btn-cta-primary" onClick={this.toggleShowOptions}>Options</button>
+          <a className="btn btn-sm btn-cta-secondary" href={`/admin/quiz_problems/${this.props.quizProblem.id}`} data-method="delete" data-confirm="Are you sure?">Delete</a>
+        </div>
+      )
+    }
+  },
+
   toggleShowOptions(e){
     e.preventDefault();
     this.setState({showOptions: !this.state.showOptions});
@@ -66,19 +77,18 @@ let AdminQuizProblem = React.createClass({
     
 
     return (
-      <div className="col-xs-12 col-md-4">
+
         <div className="admin-quiz-problem">
           <p className="pull-right"><small>Lesson {this.props.quizProblem.lesson_id}</small></p>
           {this.quizProblem()}
 
-          <button className="btn btn-sm btn-cta-primary" onClick={this.toggleShowOptions}>Options</button>
-          <a className="btn btn-sm btn-cta-secondary" href={`/admin/quiz_problems/${this.props.quizProblem.id}`} data-method="delete" data-confirm="Are you sure?">Delete</a>
+          {this.quizProblemOptions()}
           <hr />
           <ul>
             {this.options()}
           </ul>
         </div>
-      </div>
+
     )
   }
 })
