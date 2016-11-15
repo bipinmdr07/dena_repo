@@ -52,8 +52,9 @@ let AdminQuizOption = React.createClass({
       )
     } else {
       return (
-        <li onClick={this.handleToggle}>
-          <label className="label label-default">{this.state.correct ? "True" : "False"}</label> {this.state.content}
+        <li onClick={this.handleToggle} style={{"position": "relative"}}>          
+          <div dangerouslySetInnerHTML={{__html: this.state.content}} />
+          <label className="label label-default" style={{"position": "absolute", "right": "10px", "bottom": "10px"}}>{this.state.correct ? "True" : "False"}</label> 
         </li>
       )
     }

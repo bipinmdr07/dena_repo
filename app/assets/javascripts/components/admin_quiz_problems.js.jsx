@@ -31,7 +31,7 @@ let AdminQuizProblems = React.createClass({
     let topNavHtml = [];
 
     quizProblems.forEach((quizProblem) => {
-      topNavHtml.push(<li key={`li-${quizProblem.course_name}`}><a onClick={this.handleCourseChange} data-course-name={quizProblem.course_name}>{quizProblem.course_name}</a></li>)
+      topNavHtml.push(<li key={`li-${quizProblem.course_name}`}><a href="#" onClick={this.handleCourseChange} data-course-name={quizProblem.course_name} style={{"background": "white", "margin": "5px", "color": "#ec6952"}}>{quizProblem.course_name}</a></li>)
     });
 
     this.setState({topNavHtml: topNavHtml});    
@@ -58,6 +58,7 @@ let AdminQuizProblems = React.createClass({
 
   handleChangeLesson(e){ 
     e.preventDefault();   
+    
     let lessonId = $(e.target).data('lesson-id');    
     let quiz_problems = [];
 
@@ -107,7 +108,7 @@ let AdminQuizProblems = React.createClass({
     }
 
     let lessons = _.uniq(lessonIds).map((id) => {
-      return <li><a onClick={this.handleChangeLesson} data-lesson-id={id}>Lesson {id}</a></li>
+      return <li role="presentation"><a href="#" onClick={this.handleChangeLesson} data-lesson-id={id} style={{"background": "white", "margin": "5px"}}>Lesson {id}</a></li>
     })
 
     return (
