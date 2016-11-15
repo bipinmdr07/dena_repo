@@ -44,12 +44,17 @@
   padding: 5%;
 }
 
-.profile-pic-activity-log {
+@mixin profile-pic-dashboard {
   height:30px;
   width:30px;
   border-radius: 100%;
   margin-left:10px;
   margin-top: 5px;
+  border: 2px solid #eee;
+}
+
+.profile-pic-activity-log {
+  @include profile-pic-dashboard;
 }
 
 .message-title-activity-log, .message-body-activity-log {
@@ -74,10 +79,7 @@
 }
 
 .profile-pic-community-pannel {
-  height:30px;
-  width: 30px;
-  border-radius: 50%;
-  margin-top: 15px;
+  @include profile-pic-dashboard;
 }
 
 

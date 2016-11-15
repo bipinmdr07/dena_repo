@@ -16,7 +16,7 @@
         <div class="col-xs-8 community-pannel-question-detail">
           
           <p class="title-community-question">
-            <strong><%= link_to question.title, question_path(question.id) %></strong>
+            <strong><%= link_to truncate(question.title, length: 80, omission: '...'), question_path(question.id) %></strong>
           </p>
           <p class="time-community-question">
             <%= time_ago_in_words(question.created_at) %> ago by <%= question.user_name %>
