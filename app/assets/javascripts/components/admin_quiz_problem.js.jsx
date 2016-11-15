@@ -3,13 +3,18 @@ let AdminQuizProblem = React.createClass({
     return {
       edit: false,
       question: this.props.quizProblem.question,
-      showOptions: true
+      showOptions: true,
+      quizCategoryId: this.props.quizProblem.quiz_category_id
     };
   },
 
   handleCategorySubmit(data){
     this.props.handleCategorySubmit(data);
   },  
+
+  handleCategoryChange(id){
+    this.setState({quizCategoryId: id});
+  },
 
   handleToggle(e){
     e.preventDefault();
@@ -24,7 +29,7 @@ let AdminQuizProblem = React.createClass({
       type: 'PATCH',
       context: this,
       data: {
-        quiz_problem: { question: this.refs.question.value }
+        quiz_problem: { question: this.refs.question.value, quiz_category_id: this.state.quizCategoryId }
       },
       success: function(data) {
         this.setState({edit: false, question: data});   
@@ -38,7 +43,7 @@ let AdminQuizProblem = React.createClass({
         <form className="form-group">
           <textarea defaultValue={this.state.question} ref="question" className="form-control" rows="10" />
 
-          <AdminQuizCategoryForm quizCategories={this.props.quizCategories} handleCategorySubmit={this.handleCategorySubmit}/>
+          <AdminQuizCategoryForm quizCategories={this.props.quizCategories} quizCategoryId={this.state.quizCategoryId} handleCategorySubmit={this.handleCategorySubmit} handleCategoryChange={this.handleCategoryChange}/>
 
           <br />
 

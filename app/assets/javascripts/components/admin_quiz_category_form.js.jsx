@@ -47,7 +47,7 @@ let AdminQuizCategoryForm = React.createClass({
         <div className="col-xs-12 col-md-6"> 
           <div className="form-group" onChange={this.handleCategoryChange}>
             <label>Select category</label>
-            <select className="form-control" id="quiz_category">
+            <select value={this.props.quizCategoryId} className="form-control" id="quiz_category">
               {quizCategories}
             </select>
           </div>
