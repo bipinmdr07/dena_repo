@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 720px) {
   .header.scrolled_nav .main-nav .nav .nav-item a {
-    color: white;
+    color: white !important;
   }
 }
 
@@ -54,7 +54,7 @@
 .nav-stacked > li.active > a:focus {
   background-color: rgb(41, 40, 41);
   font-weight: 600;
-  color: white;
+  color: white !important;
 }
 
 .nav-stacked {
@@ -132,19 +132,14 @@
   }
 }
 
-.course-title {
-  text-align: center;
-  a {
-    color: white !important;
-    font-weight: 600;
-    font-family: 'Lato', sans-serif;
-  }
-}
-
 .lesson-nav {
   -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+
+  .icon-bar {
+    background: #ec6952 !important;
+  }
 }
 
 .chapter-nav:after {
@@ -163,4 +158,66 @@
     font-family: FontAwesome;
     content: "\f107";     /* adjust as needed, taken from bootstrap.css */
     color: white;
+}
+
+@mixin sidebar-elements {
+  font-size: 14px;
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+}
+
+.chapter-li {
+  @include sidebar-elements;
+
+  color: #5a5a5a;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Lato';
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.course-title {
+  @include sidebar-elements;
+  position: relative;
+  padding: 20px 20px;
+
+  a {
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+  }
+
+  a:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.track-title-nav {
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 14px;
+  position: relative;
+  display: block;  
+  position: relative;
+  font-family: 'Lato';
+  font-weight: 600;
+  padding: 20px;
+}
+
+.lesson-li {
+  font-weight: 600 !important;
+  padding: 10px 30px !important;
+}
+
+
+// breakpoint
+@media (max-width: 991px) {
+  .header.scrolled_nav .main-nav .nav .nav-item a {
+    color: white !important;
+  }
 }

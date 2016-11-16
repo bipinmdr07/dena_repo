@@ -17,6 +17,7 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: "localhost:3000" }
 
+
   config.web_console.whitelisted_ips = '10.0.2.2'
 
   # Do not eager load code on boot.
@@ -80,3 +81,5 @@ Rails.application.configure do
 
   config.action_cable.allowed_request_origins = ['http://localhost:3000']
 end
+
+Rails.application.routes.default_url_options = { host: "localhost:3000" }

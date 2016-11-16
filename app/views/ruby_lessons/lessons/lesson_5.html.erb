@@ -102,7 +102,7 @@ irb
 </code></pre>
 
   <p>
-    This won't work since <code>"100"</code> is a string. The result of this would be the following:
+    This won't work since <code>"100"</code> is a <strong>string</strong>. The result of this would be the following:
   </p>
 
 <pre><code class="irb">
@@ -110,17 +110,17 @@ irb
 </code></pre>
 
   <p>
-    Notice how this resulted in three <code>"100"</code>s and which is not what we wanted.
+    Notice how this resulted in three <code>"100"</code>s, which is not what we wanted.
   </p>
 
   <p>
-    This brings us to a topic of <code>types</code>. We saw that there were three different ways to represent numbers.
+    This brings us to a topic of <strong><em>data types</em></strong>. We saw that there were <strong>three different ways</strong> to represent numbers.
   </p>  
 
   <ul>
-    <li><code>"10"</code> - String</li>
-    <li><code>10</code> - Fixnum (Integer)</li>
-    <li><code>10.0</code> - Float</li>
+    <li><code>"10"</code> - <strong>String</strong></li>
+    <li><code>10</code> - <strong>Fixnum (Integer</strong>)</li>
+    <li><code>10.0</code> - <strong>Float</strong></li>
   </ul>
 
   <p>
@@ -136,6 +136,52 @@ irb
 => Float
 </code></pre>
 </div>
+
+<p>
+  Let's create a new file and name it <code>math.rb</code>.
+</p>  
+
+<%= image_tag 'ruby_lessons/hello.png', class: 'screenshot' %>
+
+<p>
+  Inside this file, let's type in the following:
+</p>
+
+<pre><code class="ruby">
+puts "2 + 3 is #{2 + 3}"
+
+puts "5 * 10 is #{5 * 10}"
+
+puts "0.4 * 12 is #{0.4 * 12}"
+
+puts "10.0 / 3 is #{10.0 / 3}"
+
+puts "10 / 3 is #{10/3}"
+</code></pre>
+
+<p>
+  Save the file and run the file:
+</p>
+
+<pre><code class="bash">
+ruby math.rb
+</code></pre>
+
+<p>
+  Your output should look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/math.png', class: 'screenshot' %>
+
+<p>
+  As you can see, the math equations inside <code>#{}</code> were evaluated and displayed.
+</p>
+
+<p>
+  You can embed Ruby code inside the hashtag and bracket (<code>#{}</code>), and Ruby will run it and display the results there. <strong>Note that you can only do this when using double quotes (<code>""</code>). This will not work with single quotes (<code>''</code>).
+</p>
+
+
 
 <h3>Remainders</h3>
 
@@ -178,6 +224,7 @@ irb
     <li><code>10</code> - <strong>Fixnum</strong> (Integer)</li>
     <li><code>10.0</code> - <strong>Float</strong></li>
   </ul>
+  <li>You can embed Ruby inside a string with <code>#{}</code></li>
   <li>You can calculate the remainder of two numbers that are divided by each other with the modulo <code>%</code> operator</li>
 </ul>
 

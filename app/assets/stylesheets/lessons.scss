@@ -1,0 +1,71 @@
+@import "mixins";
+
+.lesson_content {
+  background-color: white;
+  padding: 20px 0px;
+  margin: 0px;
+  
+  @include slide_transition(left);
+
+  h1 {
+    font-weight: 900;
+  }
+  h2 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    font-weight: 900;
+  }
+  h3 {
+    font-family: 'Lato', open-sans;
+    font-weight: 900;
+    font-size: 28px;
+  }
+  li {
+    margin: 5px 0px;
+    font-family: 'Lato', sans-serif;
+  }
+  p {
+    font-size: 17px;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  ol {
+    position: relative;
+    padding-left: 0px;
+    list-style-type: none;
+
+    li {
+      position: relative;
+      counter-increment: step-counter;
+      margin-left: 27px;
+      margin-bottom: 13.5px;
+      padding-left: 13.5px;
+    }
+    li:before {
+      content: counter(step-counter);
+      margin: 0 10px 0 -40px;
+      font-size: 14px;
+      color: #777;
+      padding: 2px;
+      border: 2px solid #dddddd;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      display: inline-block;
+      text-align: center;
+      position: absolute;
+      top: -3px;
+    }
+
+    ul {
+      li {
+        counter-increment: none;
+
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
+}

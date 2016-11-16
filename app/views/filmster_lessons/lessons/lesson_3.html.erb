@@ -1,0 +1,69 @@
+<p>
+  As a developer, you'll also hear the term <strong>API</strong> a lot. 
+</p>
+
+<p>
+  First, watch this video to get the gist of what an API is.
+</p>
+
+<!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/s7wmiS2mSXY" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<p>
+  API stands for <strong>Application Programming Interface</strong>. With APIs, software can interact with each other.
+</p>
+
+<p>
+  For example, many popular applications have APIs. Twitter, Facebook, Instagram all have APIs. Using APIs, you can fetch data from a server or even post data to a server.
+</p>
+
+<ul>
+  <li><%= link_to 'Twitter API', 'https://dev.twitter.com/rest/public', target: '_blank' %></li>
+  <li><%= link_to 'Facebook API', 'https://developers.facebook.com/', target: '_blank' %></li>
+</ul> 
+
+<hr>
+
+<p>
+  In this course, we are going to build an application that allow users to search movies and rate them. When we search for movies, we are going to communicate with an outside API to access a database of movies.
+</p>
+
+<p>
+  The API we are going to use is <%= link_to 'OMBDb API', 'https://www.omdbapi.com/', target: '_blank' %>. Go to the website.
+</p>
+
+<p>
+  If you go to the <strong>Examples</strong> section, you can try out different queries. For example, if you go to <%= link_to 'this URL', 'http://www.omdbapi.com/?t=Spiderman', target: '_blank' %>, you'll see that data for "Spiderman" will be displayed in JSON format. 
+</p>
+
+<p>
+  Unfortunately, it is really hard to read this. We can install a Chrome plugin to make it easier to read. <strong>Google "JSONView" plugin and install it in your browser.</strong> If properly installed, your JSON should now look like this:
+</p>
+
+<%= image_tag 'filmster/jsonview.png', class: 'screenshot-sm img-responsive' %>
+
+<p>
+  So how does this all work? When we access <code>http://www.omdbapi.com/?t=Spiderman</code> this is roughly what happens:
+</p>
+
+<%= image_tag 'filmster/api.png', class: 'screenshot img-responsive' %>
+
+<p>
+  In our application, we are going to use <strong>AJAX</strong> to send requests to the OMDb API, use the <strong>JSON data</strong> sent back as a response from the OMDb server, and then use <strong>JavaScript</strong> to update the elements on the web page.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

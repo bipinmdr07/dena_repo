@@ -24,13 +24,15 @@ RSpec.describe SubmissionRepliesController, type: :controller do
 
       it "sends an email" do
         message_delivery = instance_double(ActionMailer::MessageDelivery)
+        allow(UserMailer).to receive(:new_submission_reply).and_return(message_delivery)
+        allow(message_delivery).to receive(:deliver_later)        
         setup_submission_by_current_user
 
         sign_in @user
-
-        expect(UserMailer).to receive(:new_submission_reply).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_later)
         post :create, submission_id: @submission.id, submission_reply: FactoryGirl.attributes_for(:submission_reply)
+
+        expect(UserMailer).to have_received(:new_submission_reply)
+        expect(message_delivery).to have_received(:deliver_later)
       end
 
       it "creates notification for involved users" do

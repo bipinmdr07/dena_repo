@@ -27,7 +27,7 @@ puts "Hello world"
 <%= image_tag 'ruby_lessons/hello_world.png', class: 'screenshot' %>
 
 <p>
-  <code>"Hello world"</code> is a <strong>String</strong> object, otherwise called a <code>string</code>. <strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong>
+  <code>"Hello world"</code> is a <strong>String</strong> object, otherwise called a <em>string</em>. <strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong>
 </p>
 
 <p>
@@ -38,7 +38,7 @@ puts "Hello world"
   Save the file. In the command line, let's type in the following:
 </p>  
 
-<pre><code class="ruby">
+<pre><code class="bash">
 ruby hello.rb
 </code></pre>
 
@@ -52,6 +52,34 @@ ruby hello.rb
   As you can see above, we can run ruby programs with the <code>ruby</code> command.
 </p>
 
+<p>
+  Let's print out some more code. Inside <code>hello.rb</code>, let's add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+puts "I'm learning Ruby right now"
+puts "This is easier than I thought"
+puts "What a wonderful day"
+</code></pre>
+
+<p>
+  Save the file. Let's run the program. Type in the following code in the command line:
+</p>
+
+<pre><code class="bash">
+ruby hello.rb
+</code></pre>
+
+<p>
+  Your output should now look like this:
+</p>
+
+<%= image_tag 'ruby_lessons/hello_world_multiple.png', class: 'screenshot' %>
+
+<p>
+  Notice how every line is printed on a new line. Remember with <code>puts</code>, it creates a new line after each output.
+</p>
+
 <h3>Error Messages</h3>
 
 <p>
@@ -63,7 +91,7 @@ put "Today's an awesome day for coding!"
 </code></pre>
 
 <p>
-  Your file should now look like this:
+  Change your file to look like this:
 </p>
 
 <pre><code class="ruby">
@@ -99,7 +127,7 @@ hello.rb:2:in `&lt;main&gt;': undefined method `put' for main:Object (NoMethodEr
 </ul>
 
 <p>
-  With this information, we can start debugging the program. The bug here is the <code>put</code> isn't a command in Ruby - instead it should be <code>puts</code>.
+  With this information, we can start debugging the program. The bug here is that <code>put</code> isn't a command in Ruby - instead it should be <code>puts</code>.
 </p>
 
 <pre><code class="ruby">
@@ -139,14 +167,14 @@ put "Today's an awesome day for coding!"
 
 <h2>Conclusion</h2>
 
-<ul>
+<ol>
   <li>Ruby files are saved with a <code>.rb</code> extension</li>
   <li><code>puts</code> is a command that prints out a string with a line break</li>
   <li><strong>Strings are a set of characters, that are declared inside <code>" "</code>s or <code>' '</code>s.</strong></li>
   <li>You can run a Ruby program with the <code>ruby</code> command</li>
   <li>Error messages tell us what we are doing wrong</li>
   <li>As a programmer, you will face many error messages every day - the key is to be calm and tackle the problem</li>
-</ul>
+</ol>
 
 <h2>Coding Challenge</h2>
 

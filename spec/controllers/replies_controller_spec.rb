@@ -23,25 +23,26 @@ RSpec.describe RepliesController, type: :controller do
       end
 
       it "sends an email" do
-        message_delivery = instance_double(ActionMailer::MessageDelivery)
+        message_delivery = instance_double(ActionMailer::MessageDelivery)        
+        allow(UserMailer).to receive(:new_reply).and_return(message_delivery)
+        allow(message_delivery).to receive(:deliver_later)
         setup_question_by_current_user
 
-        sign_in @user
-
-        expect(UserMailer).to receive(:new_reply).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_later)
+        sign_in @user        
         post :create, question_id: @question.id, reply: FactoryGirl.attributes_for(:reply)
+
+        expect(UserMailer).to have_received(:new_reply)
+        expect(message_delivery).to have_received(:deliver_later)
       end
 
       it "creates notification for involved users" do
         setup_question_by_current_user
         user_1 = FactoryGirl.create(:user)
         user_2 = FactoryGirl.create(:user)
-
-        sign_in @user
-
         FactoryGirl.create(:reply, question_id: @question.id, user_id: user_1.id)
         FactoryGirl.create(:reply, question_id: @question.id, user_id: user_2.id)
+
+        sign_in @user        
 
         expect {
           post :create, question_id: @question.id, reply: FactoryGirl.attributes_for(:reply)

@@ -1,0 +1,27 @@
+.section-press {
+  background: whitesmoke;
+  padding: 20px;
+
+  h3 {
+    color: #888;
+    font-weight: 900;
+  }
+
+  .press-images {
+    margin: 30px auto 0px;
+    width: 50%;
+  }
+
+  span {
+    font-family: 'Lato';
+    font-weight: 900;
+  }
+
+  img {
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 10px; 
+    margin-bottom: 30px;
+  }
+}

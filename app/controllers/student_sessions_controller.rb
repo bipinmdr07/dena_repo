@@ -12,8 +12,8 @@ class StudentSessionsController < ApplicationController
   end
 
   def create
-    @student_session = StudentSession.create(student_session_params)
-    if @student_session.valid?
+    @student_session = StudentSession.new(student_session_params)
+    if @student_session.save
       flash[:success] = "Mentor session logged!"
       redirect_to student_sessions_path
     else

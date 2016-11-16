@@ -9,7 +9,9 @@ class DashboardController < ApplicationController
     @lessons = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create')
     @flashcards = PublicActivity::Activity.where(owner_id: current_user.id, key: 'flashcard.complete')
     @last_lesson = PublicActivity::Activity.where(owner_id: current_user.id, key: 'progression.create').order('created_at DESC').first
-    @quote = Quote::ARRAY.sample
+    
+    @community_questions = Question.recent.includes(:user)
+    
 
     @questions = current_user.questions.student_post.order("created_at DESC").limit(5).includes(:user)
     @submissions = current_user.submissions.order("created_at DESC").limit(5).includes(:user)
@@ -19,6 +21,8 @@ class DashboardController < ApplicationController
     @activities = PublicActivity::Activity.order('created_at DESC').limit(20).includes(:owner)
   
     @stats = DashboardStatsDecorator.new(lessons: @lessons, flashcards: @flashcards).build_stats
+
+    @greeting_message = GreetingViewObject.new.display
 
     if current_user.admin
       @unresolved_questions = Question.unresolved.includes(:user)

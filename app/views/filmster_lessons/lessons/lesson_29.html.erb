@@ -1,0 +1,51 @@
+<p>
+  On the front page, let's display the most recent reviews.
+</p>
+
+<p>
+  Inside the <code>index</code> method of <code>static_pages_controller.rb</code>, let's define an instance variable to use in the views called <code>@recent_reviews</code>. Let's set the variable to the 5 most recent reviews.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Create a scope called <code>recent</code> inside <code>review.rb</code></li>
+</ul>
+
+<p>
+  Let's write the controller action:
+</p>
+
+<pre><code class="ruby">
+def index
+  @recent_reviews = Review.recent
+end
+</code></pre>
+
+<p>
+  Next, let's display the recent reviews in our views.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Display each recent review in <code>static_pages/index.html.erb</code></li>
+  <ul>
+    <li><strong>Comment</strong></li>
+    <li><strong>Username</strong> of the user that reviewed</li>
+    <ul>
+      <li>The username should be a link to the user's profile page</li>
+    </ul>
+    <li><strong>Title</strong> of the movie</li>
+    <ul>
+      <li>The title should link to the movie's show page</li>
+    </ul>
+  </ul>
+</ul>
+
+<h2>Things to be careful of before submitting</h2>
+
+<ul>
+  <li>Have you made sure you are following the law of demeter?</li>
+</ul>
+

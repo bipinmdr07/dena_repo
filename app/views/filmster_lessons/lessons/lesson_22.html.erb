@@ -1,0 +1,245 @@
+<p>
+  Let's work on building user profile pages, similar to how we built a user profile page in Instagram.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Create a <code>UsersController</code></li>
+  <li>Create a <code>show</code> action</li>
+  <ul>
+    <li>Make sure you are using eager loading to prevent the N+1 problem</li>
+  </ul>
+  <li>Create a <code>show.html.erb</code> page</li>
+  <li>Setup the routes for the <code>show</code> action</li>
+</ul>
+
+<hr>
+
+<p>
+  In your user show page, let's start by displaying the user avatar. Add the following line of code:
+</p>
+
+<pre><code class="erb">
+&lt;%= image_tag @user.avatar, class: 'prof-pic-lg' %&gt;
+</code></pre>
+
+<p>
+  Create a <code>users.scss</code> file inside the <code>app/assets/stylesheets</code> directory. Inside this file, let's define our <code>prof-pic-lg</code> class.
+</p>
+
+<pre><code class="css">
+.prof-pic-lg {
+  border-radius: 100%;
+  border: 5px solid #fff;
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+  width: 120px;
+  margin: auto;
+  display: block;
+}
+</code></pre>
+
+<p>
+  This should give the profile picture a nice look.
+</p>  
+
+<p>
+  Next, let's display the <code>username</code> and <code>introduction</code> for the user. Below the profile picture, add the following lines of code:
+</p>
+
+<pre><code class="erb">
+&lt;h1 class="text-center"&gt;&lt;%= @user.username %&gt;&lt;/h1&gt;
+
+&lt;p class="text-center lead"&gt;&lt;%= @user.introduction %&gt;&lt;/p&gt;
+</code></pre>
+
+<p class="alert alert-info">
+  <code>lead</code> is a CSS class defined by Bootstrap by default.
+</p>
+
+<p>
+  Next, let's display some user stats. For now, the only user stat we can display is the number of reviews the user has posted. In later lessons, we will add the number of followers and number of users that the user follows.
+</p>  
+
+<p>
+  Below the user introduction, add the following lines of code:
+</p>
+
+<pre><code class="erb">
+&lt;ul class="user-stats"&gt;
+  &lt;li&gt;
+    &lt;div class="number-label"&gt;Reviews&lt;/div&gt;
+    &lt;div class="number-value"&gt;&lt;%= @user.reviews.count %&gt;&lt;/div&gt;
+  &lt;/li&gt; 
+&lt;/ul&gt;
+</code></pre>
+
+<p>
+  Inside your <code>users.scss</code> file, let's define the CSS for the HTML above using SASS:
+</p>
+
+<pre><code class="css">
+.user-stats {
+  margin: 0 auto 10px;
+  padding: 0;
+  display: table;
+  li {
+    cursor: pointer;
+    width: 120px;
+    padding: 5px 0;
+    border-right: 1px solid #ddd;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #777;
+    .number-label {
+      font-size: 12px;
+    }
+    .number-value {
+      font-size: 18px;
+    }
+    &:last-child {
+      border: none;
+    }
+    &:hover {
+      color: #1e1e1e;
+    }
+  }
+}
+</code></pre>
+
+<h2>Displaying the reviews posted by the user</h2>
+
+<p>
+  <Strong>The next step is to display the reviews posted by the user.</strong>
+</p>
+
+<p>
+  To do this, we are going to use AJAX to render the reviews again. We aren't going to use <code>erb</code> to render the reviews this time.
+</p>
+
+<p>
+  <strong>What we are going to do is build an API by ourselves and use AJAX to communicate with it to render the reviews.</strong>
+</p>
+
+<p>
+  By default, Rails is installed with a gem called Jbuilder. <strong>Jbuilder allows us to write APIs easily.</strong>
+</p>
+
+<p class="standard_git_workflow">
+Read the <%= link_to 'Jbuilder documentation', 'https://github.com/rails/jbuilder', target: '_blank' %>.
+</p>
+
+<p>
+  Inside the <code>app/views/users</code> directory, create a new file called <code>show.json.jbuilder</code>.
+</p>
+
+<p>
+  Inside this file, add the following lines of code:
+</p>
+
+<pre><code class="ruby">
+json.id @user.id
+json.username @user.username
+json.introduction @user.introduction
+json.avatar_url @user.avatar_url
+</code></pre>
+
+<p>
+  Save the file and go to <code>/users/1.json</code>. You should see some JSON data with the user information displayed. Creating an API is as easy as that!
+</p>
+
+<p>
+  Next, what we want to do is add an array of reviews that the user has posted. To do this, we simply add the following code:
+</p>
+
+<pre><code class="ruby">
+json.reviews do
+  json.array! @user.reviews do |review|
+    json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
+    json.comment review.comment
+  end
+end
+</code></pre>
+
+<p>
+  Your <code>show.json.jbuilder</code> should now look like this:
+</p>  
+
+<pre><code class="ruby">
+json.id @user.id
+json.username @user.username
+json.introduction @user.introduction
+json.avatar_url @user.avatar_url
+json.reviews do
+  json.array! @user.reviews do |review|
+    json.movie review.movie, :title, :id, :year, :imdbrating, :imdbid, :image_url
+    json.comment review.comment
+  end
+end
+</code></pre>
+
+<p>
+  Refresh the web browser. You should now see an array of reviews by the user.
+</p>
+
+<p>
+  <strong>Using this JSON data, we can now display the reviews by the user using AJAX.</strong>
+</p>
+
+<p>
+  Go back to your <code>show.html.erb</code> code and add a div with an <code>id</code> of <code>movies</code> under the user stats. We are going to be rendering the movies inside of this div.
+</p>
+
+<p>
+  Next, under the div we just created, create a new <code>script tag</code>:
+</p>
+
+<pre><code class="html">
+&lt;script type="text/javascript"&gt;
+&lt;/script&gt;
+</code></pre>
+
+<p>
+  Inside of this <code>script</code> tag, let's write some Javascript to render the movies using AJAX.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>When the page loads, all of the reviews posted by the user should be displayed</li>
+  <ul>
+    <li>This should be done with AJAX</li>
+  </ul>
+
+  <li>Each movie image should be linked to the movie's show page</li>
+  <ul>
+    <li>In other words, when a user clicks on the movie image, the user should be redirected to the movie show page</li>
+  </ul> 
+
+  <li>
+    Use Masonry to create a fluid UI
+  </li> 
+</ul> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,13 +1,50 @@
 <p>
-  In Ruby, every data type such as strings, integers, and dates are <strong>objects</strong>. For now, <strong>we can think of objects as things that receive commands to execute.</strong> Once we go into object oriented programming (OOP), we will talk more about objects.
+  As we talked about before, <strong>a string is basically just a piece of text</strong>. Ruby knows what is a string when you wrap text in between <code>"</code> or <code>'</code> (<strong>double quotes</strong> or <strong>single quotes</strong>).
 </p>
 
 <p>
-  <strong>Methods</strong> on the other hand, are the commands we tell the objects to execute.
+  The difference in double quotes and single quotes is that double quotes allow you to embed Ruby code with <code>#{}</code> and single quotes don't.
+</p>
+
+<p>
+  In your C9 workspace, create a new file called <code>strings.rb</code>. 
+</p>
+
+<%= image_tag 'ruby_lessons/hello.png', class: 'screenshot' %>
+
+<p>
+  Inside this file, let's type in the following:
+</p>
+
+<pre><code class="ruby">
+puts "10 times 3.14 is #{10 * 3.14}"
+puts '10 times 3.14 is #{10 * 3.14}"
+</code></pre>
+
+<p>
+  Save the file and run the program:
+</p>
+
+<pre><code class="bash">
+ruby string.rb
+</code></pre>
+
+<p>
+  The first line of code is using double quotes, and the second line of code is using single quotes. Notice how the second line didn't evaluate the math equation.
+</p>
+
+<h3>Methods</h3>
+
+<p>
+  In Ruby, every data type such as strings, integers, and dates are <strong>objects</strong>. For now, let's think of objects as <strong><em>things that receive commands to execute.</em></strong> Once we go into object oriented programming (OOP), we will talk more about objects.
+</p>
+
+<p>
+  <strong>Methods</strong> on the other hand, are the <strong><em>commands we tell the objects to execute</em></strong>.
 </p>  
 
 <p> 
-  For example <code>"This is a string"</code> is a <code>String</code> object. We can command it to reverse itself with the <code>.reverse</code> method:
+  For example <code>"This is a string"</code> is a String object. We can <strong><em>command</em></strong> it to reverse itself with the <code>.reverse</code> method:
 </p>
 
 <pre><code class="irb">
@@ -16,61 +53,127 @@
 </code></pre>
 
 <p>
-  Again, in this case <code>"This is a string"</code> is a <code>String</code> object, and <code>.reverse</code> is the method. <code>"This is a string"</code> is receiving the command to be <code>reverse</code>d.
+  Again, in this case <code>"This is a string"</code> is a String <strong>object</strong>, and <code>.reverse</code> is the <strong>method</strong>. <code>"This is a string"</code> is <strong><em>receiving</em></strong> the command to be <code>reverse</code>d.
 </p>  
 
-<p>An easy way to remember: <strong>Objects are nouns, methods are verbs</strong>.</p>
+<p>An easy way to remember: <strong>Objects are nouns, methods are verbs</strong>. (String is a noun, reverse is a verb)</p>
 
 <h3>String Methods</h3>
 
 <p>
-  There are many string methods, which can be seen <%= link_to 'here', 'https://ruby-doc.org/core-2.2.0/String.html', target: '_blank' %> if you are interested. Let's go through some of the most commonly used ones.
+  There are many string methods in Ruby, which you can view <%= link_to 'here', 'https://ruby-doc.org/core-2.2.0/String.html', target: '_blank' %> if you are really interested. For now, let's just go through some of the more commonly used ones.
+</p>
+
+<p>
+  Create a new file called <code>string_methods.rb</code>. Inside this file write the following lines of code (don't copy and paste! <strong>Muscle memory is important</strong>):
 </p>
 
 <pre><code class="irb">
 # Makes all letters uppercase
 "this is a string".upcase
-=> "THIS IS A STRING"
 
 # Makes all letters lowercase
 "THIS IS A STRING".downcase
-=> "this is a string"
 
 # Get length of string
 "this is a string".length
-=> 16
 
 # Reverse string
 "this is a string".reverse
-=> "gnirts a si siht"
 
 # Capitalize first letter
 "this is a string".capitalize
-=> "This is a string"
 
 # Check if string exists within string
 "this is a string".include?("ri")
-=> true
 
 "this is a string".include?("jy")
-=> false
 
 # Split string into an array of individual characters
 "this is a string".split("")
-=> ["t", "h", "i", "s", " ", "i", "s", " ", "a", " ", "s", "t", "r", "i", "n", "g"]
 
 # Convert string into integer
 "10".to_i
-=> 10
 
 # Convert string into float
 "10".to_f
-=> 10.0
 </code></pre>
 
+<p>
+  Save the file and run the program.
+</p>  
+
+<pre><code class="bash">
+ruby string_methods.rb
+</code></pre>
+
+<p>
+  As you can see, Ruby provides us with really convenient methods to do different things with strings.
+</p>  
+
+<div class="well">
+  <h3>Parameters and Arguments</h3>
+
+  <p>
+    Let's take a look at the following line of code that you just wrote:
+  </p>
+
+<pre><code class="ruby">
+"this is a string".include?("jy")
+</code></pre>
+
+  <p>
+    Notice the <code>("jy")</code> after <code>include?</code>. Everything in between the parenthesis is called a <strong>parameter</strong>, or an <strong>argument</strong>. Both words mean the same thing.
+  </p>
+
+  <p>
+    Arguments are data that we pass into the method. The method takes the data and uses it to execute the method.
+  </p>
+
+  <p>
+    For example, the <code>include?</code> method takes in an argument and uses it to determine if the element passed in as the argument exists inside the string.
+  </p>
+  
+  <p>
+    We also pass in an argument for the <code>split</code> method:
+  </p>
+
+<pre><code class="ruby">
+"this is a string".split("")
+</code></pre> 
+
+  <p>
+    In this case, the <code>split</code> method uses the parameter to split the string. If we pass in another parameter, the method will split the string in a different way:
+  </p>
+
+<pre><code class="ruby">
+"this is a string".split("i")
+=> ["th", "s ", "s a str", "ng"]
+</code></pre> 
+
+  <p>
+    As you can see, the <code>split</code> method is splitting the string by the letter <code>i</code>.
+  </p>
+
+</div>
+
+<p>
+  In case you were wondering, for the most part, <strong>you don't need to memorize these methods</strong>. Instead of memorizing, even professional programmers Google for the correct method to use all of the time.
+</p>
+
+<h2>Assignment</h2>
+
+<p>
+  Write a Ruby program that does the following:
+</p>
+
+<ul>  
+  <li>Check if the characters <code>code</code> exists inside the string <code>"I love coding"</code></li>
+  <li>Find the length of the following string: <code>"How long is this string?"</code></li>
+</ul>
 
 
-
+<% @submission_form = true %>
 
 
 

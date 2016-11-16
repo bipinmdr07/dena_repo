@@ -13,11 +13,7 @@ let QuizCategoryForm = React.createClass({
       this.setState({quizCategories: result});
     });
   },
-
-  quizCategories() {
-    
-  },
-
+  
   handleSubmit(e){
     e.preventDefault();
     $.ajax({

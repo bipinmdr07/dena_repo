@@ -11,4 +11,6 @@ class QuizProblemCard < ApplicationRecord
                     
   delegate :question, to: :quiz_problem
   delegate :quiz_options, to: :quiz_problem
+  delegate :course_name, to: :quiz_problem
+  delegate :lesson_id, to: :quiz_problem
 end

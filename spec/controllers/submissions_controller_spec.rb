@@ -24,13 +24,15 @@ RSpec.describe SubmissionsController, type: :controller do
 
       it "sends an email to the user" do
         message_delivery = instance_double(ActionMailer::MessageDelivery)
+        allow(UserMailer).to receive(:new_submission).and_return(message_delivery)
+        allow(message_delivery).to receive(:deliver_later)
         user = FactoryGirl.create(:user)
 
         sign_in user
-
-        expect(UserMailer).to receive(:new_submission).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_later)
         post :create, submission: FactoryGirl.attributes_for(:submission)
+
+        expect(UserMailer).to have_received(:new_submission)
+        expect(message_delivery).to have_received(:deliver_later)
       end
     end
 
@@ -76,7 +78,8 @@ RSpec.describe SubmissionsController, type: :controller do
     context "when the user isn't the person who created the post" do
       it "should redirect to the submission path" do
         user = FactoryGirl.create(:user)
-        submission = FactoryGirl.create(:submission, user_id: user.id + 1)
+        user_2 = FactoryGirl.create(:user)
+        submission = FactoryGirl.create(:submission, user_id: user_2.id)
 
         sign_in user
         get :edit, id: submission.id
@@ -138,7 +141,8 @@ RSpec.describe SubmissionsController, type: :controller do
     context "when the user isn't person who created the post" do
       it "should redirect them to the submission path" do
         user = FactoryGirl.create(:user)
-        submission = FactoryGirl.create(:submission, user_id: user.id + 1)
+        user_2 = FactoryGirl.create(:user)
+        submission = FactoryGirl.create(:submission, user_id: user_2.id)
 
         sign_in user
         put :update, id: submission.id, submission:FactoryGirl.attributes_for(:submission, content: "New content")
@@ -175,7 +179,8 @@ RSpec.describe SubmissionsController, type: :controller do
     context "when the user isn't person who created the postsetup_user" do
       it "should redirect them to the submission path" do
         user = FactoryGirl.create(:user)
-        submission = FactoryGirl.create(:submission, user_id: user.id + 1)
+        user_2 = FactoryGirl.create(:user)
+        submission = FactoryGirl.create(:submission, user_id: user_2.id)
 
         sign_in user
         delete :destroy, id: submission.id

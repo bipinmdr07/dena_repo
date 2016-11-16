@@ -1,4 +1,6 @@
 class Submission < ApplicationRecord
+  include Notifiable
+
   belongs_to :user
 	has_many :submission_replies, dependent: :destroy
   has_many :users, through: :submission_replies
@@ -11,4 +13,10 @@ class Submission < ApplicationRecord
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }
 
+
+  private
+
+  def notifiable
+    self
+  end
 end

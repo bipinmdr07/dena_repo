@@ -1,7 +1,7 @@
 
 
 <p>
-	Let's take a break from our Bill Generator program. In this lesson, let's build a Cat class. 
+	Let's take a break from our dogs. In this lesson, let's build a Cat class. 
 </p>
 
 <p>
@@ -61,7 +61,7 @@ cat = Cat.new("Cathy", 4)
 	<strong>What if we want to change the <code>name</code> or the <code>age</code>?</strong> Right now, there's no way to change the attributes for the cat. Let's create <em>setter methods</em> that will allow us to do this.
 </p>
 
-<p class="alert alert-info">
+<p class="well">
 	<strong>Setter methods</strong> are methods that allow you to set the values of instance variables for the object. On the other hand, <strong>getter methods</strong> are methods that return the value of an instance variable. As we'll see in this lesson, Ruby doesn't require that you create these methods for the most part, but in languages like Java, creating these setter and getter methods can be seen quite often.
 </p>
 
@@ -191,8 +191,8 @@ cat.age = 5
 
 puts "After: " + cat.inspect
 
-puts "Name: " + cat.name
-puts "Age: " + cat.age
+puts "Name: #{cat.name}"
+puts "Age: #{cat.age}"
 </code></pre>
 
 <p>
@@ -346,10 +346,19 @@ end
 <ul>
 	<li>To change the values in objects, we need to create <strong><em>setter methods</em></strong></li>
 	<li>To retrieve the values in objects, we need to create <strong><em>getter methods</em></strong></li>
-	<li>Getter methods can be defined with <code>attr_writer</code></li>
-	<li>Setter methods can be defined with <code>attr_reader</code></li>
+	<li>Setter methods can be defined with <code>attr_writer</code></li>
+	<li>Getter methods can be defined with <code>attr_reader</code></li>
 	<li><code>attr_accessor</code> combines <code>attr_reader</code> and <code>attr_writer</code></li>
 </ul>
+
+<h2>Assignment</h2>
+
+<ol>
+	<li>Add both a getter method and setter method to each of the attributes in the <code>Car</code> class that you wrote in the last assignment</li>
+</ol>
+
+<% @submission_form = true %>
+
 
 
 

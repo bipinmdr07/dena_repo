@@ -1,38 +1,236 @@
+<p>
+  The last topic we will talk about in Object Oriented Programming is the topic of <strong>inheritance</strong>.
+</p>
+
+<p>
+  Let's think about the following question. Are police cars and trucks the same?
+</p>  
+
+<p>
+  It's a difficult question, because police cars and trucks are both cars, yet they both have unique features. In this case, we can say that <strong>a police car is a car</strong>, and <strong>a truck is a car</strong>.
+</p>
+
+<p>
+  Let's say we were going to code a <code>Truck</code> class and a <code>PoliceCar</code> class. We <em>could</em> define them like this:
+</p>
+
+<pre><code class="ruby">
+class Truck
+  def speed_up
+    puts "I'm speeding up!"
+  end
+
+  def speed_down
+    puts "I'm slowing down!"
+  end
+
+  def print_type
+    puts "I'm a truck!"
+  end
+end
+
+class PoliceCar
+  def speed_up
+    puts "I'm speeding up!"
+  end
+
+  def speed_down
+    puts "I'm slowing down!"
+  end
+
+  def print_type
+    puts "I'm a police car!"
+  end
+end
+</code></pre> 
 
 
 <p>
-	To wrap up the OOP lessons, let's create a deck of cards using Object Oriented Programming. This is a common interview question that tests the applicants knowledge about object oriented programming. This one is quite challenging. Good luck!
+  Notice how we have repeating code. We are violating a software engineering principle - <strong>DRY, Don't Repeat Yourself</strong>. To reduce the repetition, we can create a <code>Car</code> class, and make the <code>Truck</code> and <code>Police</code> classes <strong><em>inherit</em></strong> from <code>Car</code>.
 </p>
 
-<p><strong>Specifications</strong></p>
-<ul>
-	<li>A deck should have 52 cards</li> 
-	<li>We should be able to shuffle the deck</li>
-	<li>We should be able to deal the deck</li>
-</ul>
-
-<p><strong>How to do it</strong></p>
-<ul>
-	<li>Create a <code>Card</code> class and a <code>Deck</code> class</li>
-	<li>In the <code>initialize</code> method for the <code>Deck</code> class, build all 52 cards and store it in an instance variable array</li>
-	<li>Create a <code>shuffle</code> method for your <code>Deck</code> class</li>
-	<li>Create a <code>deal</code> method for your <code>Deck</code> class</li>
-</ul>
-
-<div class="well">
-	<h3>Hints</h3>
-
-	<p>
-		To shuffle the deck, you can use the <%= link_to 'shuffle', 'http://www.ruby-doc.org/core-2.2.0/Array.html#method-i-shuffle-21', target: '_blank' %> method
-	</p>
-
-	<p>
-		To deal the deck (take the first card and remove it from the deck), you can use the <%= link_to 'shift', 'http://ruby-doc.org/core-2.2.0/Array.html#method-i-shift', target: '_blank' %> method.
-	</p>
-</div>
-
-<p class="alert alert-success">
-	Remember, this challenge is supposed to be difficult! Don't hesitate to reach out to the community for help!
+<p>
+  We can make a class inherit from another class like this:
 </p>
 
-<% @submission_form = true %>
+<pre><code class="ruby">
+class Child &lt; Parent
+  # code here
+end
+</code></pre>
+
+<p>
+  In our car example, we can organize our code like this:
+</p>
+
+<pre><code class="ruby">
+class Car
+  def speed_up
+    puts "I'm speeding up!"
+  end
+
+  def speed_down
+    puts "I'm slowing down!"
+  end
+
+  def print_type
+    "I'm a car!"
+  end
+end
+
+class Truck &lt; Car
+  def print_type
+    puts "I'm a truck!"
+  end
+end
+
+class PoliceCar &lt; Car
+  def print_type
+    puts "I'm a police car!"
+  end
+end
+
+Truck.new.speed_up
+=> I'm speeding up!
+
+Truck.new.speed_down
+=> I'm slowing down!
+
+Truck.new.print_type
+=> I'm a truck!
+
+PoliceCar.new.print_type
+=> I'm a police car!
+
+PoliceCar.new.speed_up
+=> I'm speeding up!
+
+PoliceCar.new.speed_down
+=> I'm slowing down!
+</code></pre> 
+
+<p>
+  <strong>Notice two things here:</strong>
+</p>
+
+<ol>
+  <li>We no longer have to define <code>speed_up</code> and <code>speed_down</code> inside the child classes (<code>Truck</code> and <code>PoliceCar</code>)</li>
+  <li>The <code>print_type</code> method defined in each of the child classes <strong>override</strong> the <code>print_type</code> method defined in <code>Car</code></li>
+</ol>
+
+
+<p>
+  When a method is called, <strong>it first looks into the class that the method was called upon to find the method</strong>. If the program finds the method, then the program will return from the method. If it cannot find the method in the class that the method was called upon, <strong>then the program will look to the parent class to find the method.</strong>
+</p>
+
+<p>
+  In the example above, the <code>print_type</code> method is declared inside <code>Truck</code> and also in <code>Car</code>. When we call <code>print_type</code> on an instance of a <code>Truck</code> class, it finds the <code>print_type</code> method inside of the <code>Truck</code> class and returns from the method, preventing the program from running the <code>print_type</code> method inside of the <code>Car</code> class.
+</p>
+
+<h3>All Ruby Objects inherit from BasicObject</h3>
+
+<p>
+  Now that we've talked about inheritance, let's talk about how all objects in the Ruby language inherit from the <code>BasicObject</code> class.
+</p>  
+
+<p>
+  Strings, arrays, integers, hashes - everything inherits from <code>BasicObject</code>. Don't believe me?
+</p>
+
+<p>
+  Let's open up <code>irb</code> and see for ourselves. We can use the <code>superclass</code> method to see the parent class:
+</p>
+
+<pre><code class="ruby">
+String.superclass
+</code></pre>
+
+<p>
+  The output will show <code>Object</code>. Then what is the parent class of <code>Object</code>?
+</p>
+
+<pre><code class="ruby">
+Object.superclass
+=> BasicObject
+</code></pre>
+
+<p>
+  Still don't believe me? Try the same procedure with <code>Array</code>, <code>Hash</code>, <code>Integer</code>, or any other class. Even the <code>Cat</code> class we created ultimately inherits from <code>BasicObject</code>.
+</p>  
+
+<p>
+  <strong>This means that we actually have access to all of the methods inside the <code>Object</code> class and the <code>BasicObject</code> class.</strong> You can take a look at all of the methods that all classes have <%= link_to 'in the documentation', 'http://ruby-doc.org/core-2.3.1/Object.html', target: '_blank' %>.
+</p>
+
+<p>
+  For example, we can use methods like <code>to_s</code> or <code>inspect</code> for any class, because these are methods of <code>Object</code>.
+</p>
+
+<p>
+  We can also use methods like <code>new</code> for every class, since those are methods of <code>BasicObject</code>. If you're curious, you can take a look at the methods that <code>BasicObject</code> has <%= link_to 'here', 'http://ruby-doc.org/core-2.3.1/BasicObject.html#method-c-new', target: '_blank' %>.
+</p>
+
+<h3>Having some fun</h3>
+
+<p>
+  In Ruby, we are actually allowed to rewrite the methods inside any of the default Ruby classes such as <code>Object</code>, <code>String</code>, <code>Array</code>, etc. Let's say we want to convert <code>"10"</code> into an integer with the <code>to_i</code> method:
+</p>
+
+<pre><code class="ruby">
+"10".to_i
+=> 10
+</code></pre>
+
+<p>
+  The <code>to_i</code> method is defined inside the <code>String</code> class. What we can do is rewrite the <code>to_i</code> method inside the <code>String</code> class to make it do something else. Open up <code>irb</code> and type in the following:
+</p>
+
+<pre><code class="ruby">
+class String
+  def to_i
+    puts "lol, you can't convert it into an integer now!"
+  end
+end
+</code></pre>
+
+<p>
+  Now let's try to run <code>"10".to_i</code>:
+</p>  
+
+<pre><code class="ruby">
+"10".to_s
+=> lol, you can't convert it into an integer now!
+</code></pre>
+
+<p>
+  Just like that, we've completely rewritten the Ruby language! (Don't worry, once you exit out of <code>irb</code>, things will be back to normal).
+</p>
+
+<h2>Overview</h2>
+
+<ol>
+  <li>Classes can inherit from other classes</li>
+  <li>Child classes can override methods in the parent class</li>
+  <li>The program will try to find the method inside the current class first, then try to find it in the parent class, until it reaches the <code>BasicObject</code> class</li>
+  <li>All objects in Ruby inherit from <code>BasicObject</code></li>
+  <li>Ruby allows developers to redefine the predefined classes and modules</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

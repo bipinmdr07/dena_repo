@@ -1,0 +1,86 @@
+<p>
+  Our application right now is pretty cool - users can search the title of a movie and get the details of the movie instantly. However, there's not much more to it at the current state.
+</p>
+
+<p>
+  <strong>Let's build a feature so that users can post reviews to the movies they've watched.</strong>
+</p>
+
+<h2>Our Strategy</h2>
+
+<p>
+  <strong>In order to save the reviews the users post and tie them with a movie, we need to store the movie in the database as well.</strong> Here's what we are going to do:
+</p>  
+
+<ul>
+  <li>User posts a review for a movie</li>
+  <li>If the movie for the review exists in the database, connect the review with that movie</li>
+  <li>Otherwise, create a new movie and save connect it with the review</li> 
+</ul>
+
+<p>
+  Our first step is to create a <code>Movie</code> model and a <code>movies</code> database table so we can store our movies into our database.
+</p>
+
+<h2>Tasks</h2>
+
+<ul>
+  <li>Generate a <code>Movie</code> model</li>
+  <li>Include the following columns in the database migration:</li>
+
+<pre><code class="ruby">
+create_table :movies do |t|
+  t.string :title
+  t.string :year
+  t.string :rated
+  t.string :released
+  t.string :runtime
+  t.string :genre
+  t.string :director
+  t.string :writer
+  t.string :actors
+  t.string :plot
+  t.string :language
+  t.string :country
+  t.string :awards
+  t.string :poster
+  t.string :metascore
+  t.string :imdbrating
+  t.string :imdbvotes
+  t.string :imdbid
+  t.timestamps
+end
+</code></pre>
+
+  <li>Add an index to the <code>imdbid</code> column since we are going to be querying movies using this a lot</li>
+
+  <li>Validate the presence of each of these columns</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

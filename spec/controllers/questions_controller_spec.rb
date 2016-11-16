@@ -23,14 +23,17 @@ RSpec.describe QuestionsController, type: :controller do
         expect(response).to redirect_to question_path(Question.last.id)
       end
 
-      it "sends an email to the user" do
+      it "sends an email to the user and a slack notification" do
         user = FactoryGirl.create(:user)
-        message_delivery = instance_double(ActionMailer::MessageDelivery)
+        message_delivery = instance_double(ActionMailer::MessageDelivery)        
+        allow(UserMailer).to receive(:new_question).and_return(message_delivery)
+        allow(message_delivery).to receive(:deliver_later)
 
-        sign_in user
-        expect(UserMailer).to receive(:new_question).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_later)
-        post :create, question: FactoryGirl.attributes_for(:question)        
+        sign_in user        
+        post :create, question: FactoryGirl.attributes_for(:question) 
+
+        expect(UserMailer).to have_received(:new_question)
+        expect(message_delivery).to have_received(:deliver_later)
       end
     end
 
@@ -80,11 +83,14 @@ RSpec.describe QuestionsController, type: :controller do
       it "sends an email to the user" do
         message_delivery = instance_double(ActionMailer::MessageDelivery)
         mentor = FactoryGirl.create(:user, mentor: true)
+        allow(UserMailer).to receive(:new_question).and_return(message_delivery)
+        allow(message_delivery).to receive(:deliver_later)
 
-        sign_in mentor
-        expect(UserMailer).to receive(:new_question).and_return(message_delivery)
-        expect(message_delivery).to receive(:deliver_later)
+        sign_in mentor        
         post :create, question: FactoryGirl.attributes_for(:question) 
+        
+        expect(UserMailer).to have_received(:new_question)
+        expect(message_delivery).to have_received(:deliver_later)
       end
     end
   end

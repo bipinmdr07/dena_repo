@@ -9,6 +9,8 @@ class QuizProblem < ActiveRecord::Base
 
   scope :randomize, -> { order('random()') }
 
+  delegate :name, to: :quiz_category, prefix: true
+
   def save_and_create_quiz_options!(quiz_problem_params)
     self.transaction do
       self.save!
@@ -25,6 +27,8 @@ class QuizProblem < ActiveRecord::Base
     JSON.parse(quiz_problem_params[:options]).each do |option|   
 
       next if option["content"].blank? || option["correct"].blank?    
+
+      option["content"] = MarkdownParser.new(option["content"]).parsed
 
       self.quiz_options.create!(option)
 

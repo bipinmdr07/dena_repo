@@ -1,11 +1,49 @@
 
-
 <p>
 	Welcome to the world of <strong>Object Oriented Programming</strong>.
 </p>
 
 <p>
 	In these next few lessons, we will give you a basic overview of what object oriented programming is.
+</p>
+
+<h3>What are objects?</h3>
+
+<p>
+	In the real world, <strong>objects are anything where the characteristics are well defined</strong> - a cup, a table, a bag, etc. <strong>Each object has different characteristcs that make them easy to distinguish between.</strong> You know that a cup is different than a table, because they both have different characteristics.
+</p>
+
+<p>
+	<strong>Let's take an example of a restaurant.</strong>
+</p>
+
+<ol>
+	<li>Go to a restaurant</li>
+	<li>Look at the menu</li>
+	<li>Tell the waiter your order</li>
+	<li>Eat the food that is delivered</li>
+</ol>
+
+<p>
+	Can you identify the objects involved in this scenario?
+</p>
+
+<p>
+	The objects involved are a restaurant, menu, waiter, order, food, and yourself. <strong>You can see that each of these objects are interacting with each other.</strong> Each object has its attributes, as well as functions that other objects can use to interact with each other.
+</p>
+
+<h3>What is Object Oriented Programming?</h3>
+
+<p>
+	Object oriented programming is a paradigm, or a mental model. <strong>It's not a programming language, but rather a way to design your software.</strong>
+</p>
+
+<p>
+	<strong>"Object oriented" means that you think of your software as a collection of objects and the interactions that happen between them.</strong> As we saw in the example of a restaurant, in real life, we can think of scenarios as objects interacting with each other.
+</p>
+
+<p>
+	By organizing our code in such a way, <strong>we can build code that can be easily reused</strong>. When we can reuse code, then we are keeping our code <strong>DRY (Don't Repeat Yourself)</strong> and maintainable. We are also forced to visualize what objects are involved in our program, and what the attributes, functions, and responsibilities are for each object, and how they should interact with each other.
 </p>
 
 <h3>Classes and Instances</h3>
@@ -50,9 +88,52 @@
 <%= image_tag 'ruby_lessons/class_vs_instance.png', class: 'screenshot img-responsive' %>
 
 <p>
-	With this brief introduction of Object Oriented Programming in mind, let's go back to our bill generator program and turn it into an object oriented program.
-</p>	
+	Let's take another example - cars.
+</p>
 
+<p>
+	All cars have:
+</p>
+
+<ul>
+	<li>Color</li>
+	<li>Brand</li>
+	<li>Max Speed</li>
+</ul>
+
+<p>
+	All cars can:
+</p>
+
+<ul>
+	<li>Drive forward</li>
+	<li>Drive backward</li>
+	<li>Stop</li>
+	<li>Turn right</li>
+	<li>Turn left</li>
+</ul>
+
+<p>
+	The things that all cars have are the <strong><em>attributes</em></strong>. The things that all cars can do are the <code>methods</code>.
+</p>
+
+
+
+<p>
+	Every car is an <strong><em>instance</em></strong> of a <code>Car</code> class. The <code>Car</code> class simply serves as a <em>blueprint</em> for creating new instances of cars.
+</p>
+<p>
+	In other words, the <code>Car</code> class provides a blueprint: every car has a color, brand, max speed, and so on. However, every car also has different colors, brand, and max speeds. These individual attributes are different for each <strong>instance</strong> of the <code>Car</code> class.
+</p>
+
+
+<h2>Things to Think About</h2>
+
+<ol>
+	<li>Try to think of real life objects and try to model them as classes and instances</li>
+</ol>
+
+<!-- 
 
 <h3>Objects</h3>
 
@@ -114,3 +195,5 @@
 </p>
 
 
+
+ -->

@@ -8,7 +8,7 @@ class SubmissionsController < ApplicationController
   end
 
   def show
-    @submission = Submission.includes(:user, submission_replies: :user).find(params[:id])
+    @submission = Submission.includes(:user).find(params[:id])
 
     create_replies_array
 
@@ -22,9 +22,7 @@ class SubmissionsController < ApplicationController
   def create
     @submission = current_user.submissions.create(submission_params)
 
-    if @submission.valid?      
-      send_email_notification!
-      send_slack_notification!      
+    if @submission.valid?           
       respond_to do |format|
         format.json { render json: { redirect: submission_url(@submission.id) } }
         format.html { redirect_to submission_path(@submission.id) }
@@ -88,16 +86,6 @@ class SubmissionsController < ApplicationController
                    display_post_links: current_user == reply.user || current_user.admin,
                    content: MarkdownParser.new(reply.content).parsed}
     end
-  end
-
-  def send_email_notification!
-    UserMailer.new_submission(@submission).deliver_later
-  end
-
-  def send_slack_notification!
-    Slack.chat_postMessage(text: 'New submission by ' + @submission.user_name + '! View it <' + submission_url(@submission) + '|here>.', 
-                           username: 'TECHRISE Bot', channel: "#forum_questions", 
-                           icon_emoji: ":smile_cat:") if Rails.env.production?
   end
 
   def check_duplicate

@@ -8,7 +8,8 @@ class Admin::QuizProblemsController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :exception_handler
 
   def index
-    @quiz_problems = QuizProblem.order(:lesson_id).group_by(&:course_name)
+    @quiz_problems = QuizProblem.includes(:quiz_options, :quiz_category).order(:lesson_id).group_by(&:course_name)
+    @quiz_categories = QuizCategory.all
   end
 
   def create

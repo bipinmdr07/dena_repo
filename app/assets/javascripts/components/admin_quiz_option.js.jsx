@@ -36,7 +36,7 @@ let AdminQuizOption = React.createClass({
   quizOption(){
     if (this.state.edit) {
       return (
-        <form>
+        <form style={{"paddingBottom": "20px", "marginTop": "20px", "borderBottom": "2px solid #eee"}}>
           <input type="text" defaultValue={this.state.content} ref="content" className="form-control" />
 
           <div className="radio" onChange={this.handleToggleCorrect}>
@@ -52,7 +52,10 @@ let AdminQuizOption = React.createClass({
       )
     } else {
       return (
-        <li onClick={this.handleToggle}>{this.state.content} {this.state.correct}</li>
+        <li onClick={this.handleToggle} style={{"position": "relative"}}>          
+          <div dangerouslySetInnerHTML={{__html: this.state.content}} />
+          <label className="label label-default" style={{"position": "absolute", "right": "10px", "bottom": "10px"}}>{this.state.correct ? "True" : "False"}</label> 
+        </li>
       )
     }
   },

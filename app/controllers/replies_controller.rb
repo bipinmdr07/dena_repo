@@ -3,13 +3,9 @@ class RepliesController < ApplicationController
   before_action :check_permissions, only: [:edit, :update, :destroy]
 
 	def create    
-	  @reply = current_user.replies.create(reply_params)
+	  @reply = current_user.replies.new(reply_params)
 
-		if @reply.valid?			
-      create_notifications!			
-      send_email_notifications!			
-			send_slack_notifications!
-
+		if @reply.save
       respond_to do |format|
         format.json { render json: {reply: @reply, 
                                     user_is_mentor: @reply.user_mentor, 
@@ -17,14 +13,14 @@ class RepliesController < ApplicationController
                                     user_name: @reply.user_name,
                                     display_post_links: current_user == @reply.user || current_user.admin,
                                     content: MarkdownParser.new(@reply.content).parsed}.to_json }
-        format.html { redirect_to question_path(current_question) }
+        format.html { redirect_to question_path(@reply.question) }
       end
 		else
 			flash[:alert] = "Invalid attributes, please try again."
       
       respond_to do |format|
         format.json { render json: @reply.errors, status: :unprocessable_entity }
-        format.html { redirect_to question_path(current_question) }
+        format.html { redirect_to question_path(@reply.question) }
       end
 		end
 		
@@ -62,27 +58,6 @@ class RepliesController < ApplicationController
   end
 
 	private
-
-  def send_slack_notifications!
-    Slack.chat_postMessage(text: 'New reply by ' + @reply.user_name + '. View it <' + question_url(current_question.id) + '|here >.', 
-        username: 'TECHRISE Bot', 
-        channel: "#forum_questions", 
-        icon_emoji: ":smile_cat:") if Rails.env.production?
-  end
-
-  def send_email_notifications!
-    UserMailer.new_reply(question: current_question, email: current_question.user_email).deliver_later
-  end
-
-  def create_notifications!
-    (current_question.users.uniq + [current_question.user] - [current_user]).each do |user|
-      Notification.create(recipient: user, actor: current_user, action: "replied to", notifiable: current_question)
-    end
-  end
-
-  def current_question
-    @current_question ||= Question.find(params[:question_id])
-  end
 
   helper_method :current_reply
   def current_reply
