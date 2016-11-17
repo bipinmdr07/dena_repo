@@ -360,18 +360,18 @@ Number of cats: 2
 
 <pre><code class="ruby">
 def say_human_age
-  human_years
-  if @age == 1
-    human_years = 15
-  elsif @age == 2
-	  # add 15 + 9
-	  human_years = 24
-  else
-    # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
-    human_years = 24 + (@age - 2) * 4
-  end
+	human_years
+	if @age == 1
+		human_years = 15
+	elsif @age == 2
+		# add 15 + 9
+		human_years = 24
+	else
+		# add the first 2 years plus the age subtracted by the first two years, multiplied by 4
+		human_years = 24 + (@age - 2) * 4
+	end
   
-  puts "I'm #{human_years} in human years!"
+	puts "I'm #{human_years} in human years!"
 end
 </code></pre>
 
@@ -415,18 +415,18 @@ class Cat
 	end
 
 	def say_human_age
-	  human_years
-	  if @age == 1
-	    human_years = 15
-	  elsif @age == 2
-		  # add 15 + 9
-		  human_years = 24
-	  else
-	    # add the first 2 years plus the age subtracted by the first two years, multiplied by 4
-	    human_years = 24 + (@age - 2) * 4
-	  end
+		human_years
+		if @age == 1
+			human_years = 15
+		elsif @age == 2
+			# add 15 + 9
+			human_years = 24
+		else
+			# add the first 2 years plus the age subtracted by the first two years, multiplied by 4
+			human_years = 24 + (@age - 2) * 4
+		end
 	  
-	  puts "I'm #{human_years} in human years!"
+		puts "I'm #{human_years} in human years!"
 	end
 end
 </code></pre>
