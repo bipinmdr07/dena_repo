@@ -1,5 +1,5 @@
 <p>
-  Binary trees are another core data structure that every computer science student learns about. Binary trees contain nodes, that contain a <strong>value</strong> and <strong>children</strong> nodes. Here is an example of a binary tree:
+  Trees are another core data structure that every computer science student learns about. Trees contain nodes, that contain a <strong>value</strong> and <strong>children</strong> nodes. Here is an example of a tree:
 </p>
 
 <%= image_tag 'algorithms/binary_tree.png', class: 'img-responsive screenshot_min' %>
@@ -20,8 +20,20 @@ end
 </code></pre>
 
 <p>
-  Binary trees are often used to search elements. We can search for elements in the tree in two ways - <strong>Depth First Search</strong> and <strong>Breadth First Search</strong>. Watch <%= link_to 'this video', 'https://www.youtube.com/watch?v=9RHO6jU--GU', target: '_blank' %> on these two methods.
+  Trees are often used to search elements. We can search for elements in the tree in two ways - <strong>Depth First Search</strong> and <strong>Breadth First Search</strong>. Watch <%= link_to 'this video', 'https://www.youtube.com/watch?v=9RHO6jU--GU', target: '_blank' %> on these two methods.
 </p>
+
+<h2>Questions</h2>
+
+<p><strong>What would be the order of the nodes traversed with depth first traversal in the graph below? What about for breadth first traversal?</strong></p>
+
+<%= image_tag 'algorithms/binary_tree.png', class: 'img-responsive screenshot_min' %>
+
+<ul>
+  <li><strong>Depth First</strong> - 8, 3, 1, 6, 4, 7, 10, 14, 13</li>
+  <li><strong>Breadth First</strong> - 8, 3, 10, 1, 6, 14, 4, 7, 13</li>
+</ul> 
+
 
 <h2>Challenge</h2>
 
@@ -36,3 +48,5 @@ end
 <p>
   For implementing breadth first search, you will need to use a queue.
 </p>
+
+<% @submission_form = true %>

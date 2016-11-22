@@ -1,6 +1,6 @@
 class AlgorithmLesson < Lesson
 
-  COURSE_TITLE = "Understanding Data Structures and Algorithms"
+  COURSE_TITLE = "Implementing Data Structures and Algorithms"
 
   DURATION = 30
 
@@ -25,12 +25,12 @@ class AlgorithmLesson < Lesson
     Lesson.new(6, "Create a Stack", CHAPTERS[3]),
     Lesson.new(7, "Create a Queue", CHAPTERS[3]),
     Lesson.new(8, "Reversing a Linked List and Cycle Detection", CHAPTERS[4]),
-    Lesson.new(9, "Traversing a Binary Tree", CHAPTERS[5]),
-    Lesson.new(12, "Sorting a Binary Tree", CHAPTERS[5]),
-    Lesson.new(13, "Bubble Sort", CHAPTERS[6]),
-    Lesson.new(14, "Selection Sort", CHAPTERS[6]),
-    Lesson.new(15, "Insertion Sort", CHAPTERS[6]),
-    Lesson.new(16, "Quick Sort", CHAPTERS[6]),
-    Lesson.new(17, "Merge Sort", CHAPTERS[6])
+    Lesson.new(9, "Traversing a Tree", CHAPTERS[5]),
+    Lesson.new(10, "Sorting a Binary Tree", CHAPTERS[5]),
+    Lesson.new(11, "Bubble Sort", CHAPTERS[6]),
+    Lesson.new(12, "Selection Sort", CHAPTERS[6]),
+    Lesson.new(13, "Insertion Sort", CHAPTERS[6]),
+    Lesson.new(14, "Quick Sort", CHAPTERS[6]),
+    Lesson.new(15, "Merge Sort", CHAPTERS[6])
   ]
 end

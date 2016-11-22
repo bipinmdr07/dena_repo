@@ -1,0 +1,26 @@
+<p>
+  A binary tree is a tree that can only have a maximum of two child nodes. For example, the diagram we saw before is an example of a binary tree.
+</p>
+
+<%= image_tag 'algorithms/binary_tree.png', class: 'img-responsive screenshot_min' %>
+
+<p>
+  Trees are often used to <strong>sort</strong> elements. There are many ways to sort, but we'll get into that in the following lessons.
+</p>
+
+<p class="standard_git_workflow">
+  Watch <%= link_to 'this video', 'https://youtu.be/pYT9F8_LFTM', target: '_blank' %> for a great overview of the binary search tree.
+</p>
+
+<h2>Assignment</h2>
+
+<ol>
+  <li>Implement a <code>sort</code> method that takes in an array as an argument and sorts it in the correct order.</li>
+  <li>Make all tests pass</li>
+</ol>
+
+<h2>Hints</h2>
+
+<p>
+  Once you have managed to place the tree nodes in the correct position, you will have to return an array for the tests to pass. To create an array of sorted elements, you can traverse the tree using depth first search and build an array of sorted elements.
+</p>
