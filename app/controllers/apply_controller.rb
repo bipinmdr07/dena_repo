@@ -13,6 +13,10 @@ class ApplyController < ApplicationController
     build_resource
   end
 
+  def school
+    build_resource
+  end
+
   def remote_next_steps
 
   end

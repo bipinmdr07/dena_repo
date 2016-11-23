@@ -12,12 +12,14 @@ Rails.application.routes.draw do
   get 'apply', to: 'apply#index', as: 'apply'
   get 'apply/remote', to: 'apply#remote', as: 'apply_remote'
   get 'apply/immersive', to: 'apply#immersive', as: 'apply_immersive'
+  get 'apply/school', to: 'apply#school', as: 'apply_school'
 
   get 'remote', to: 'static_pages#remote'
   get 'immersive', to: 'static_pages#immersive'
 
   get 'apply/remote/next-steps', to: 'apply#remote_next_steps'
   get 'apply/immersive/next-steps', to: 'apply#immersive_next_steps'
+  get 'apply/school/next-steps', to: 'apply#school_next_steps'
 
   resources :applicants, only: :index
 
