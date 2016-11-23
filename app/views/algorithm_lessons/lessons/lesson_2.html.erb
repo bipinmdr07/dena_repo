@@ -21,3 +21,144 @@ def add(a, b)
   a + b
 end
 </code></pre>
+
+<p>
+  This method will take the same amount of time to compute, regardless of what numbers are passed into <code>a</code> or <code>b</code>. For example, <code>add(1,2)</code> will take the same amount of time as <code>add(20000, 20000)</code>. 
+</p>
+
+<p>
+  This means that even if we provide a larger input, this simple algorithm will take the same amount of time.
+</p>
+
+<p>
+  We call algorithms that take a constant time to execute regardless of their input to have <strong>constant time</strong> or <strong>Big-O of O(1)</strong>.
+</p>  
+
+<p>
+  Multiplication also has a Big-O of O(1):
+</p>
+
+<pre><code class="ruby">
+def multiply(a, b)
+  a * b
+end
+</code></pre>
+
+<p>
+  Regardless of what input we give it, the time that it takes to execute the method is <strong>constant</strong>.
+</p>  
+
+
+
+<h2>Linear Time</h2>
+
+<p>
+  Let's take an example of a <strong>linear algorithm</strong>:
+</p>
+
+<pre><code class="ruby">
+sum = 0
+numbers = [1,2,3,4,5]
+
+numbers.each do |n|
+  sum += n
+end
+</code></pre>
+
+<p>
+  For this algorithm, the amount of time it will take to run will depend on the size of the <code>numbers</code> array.
+</p>
+
+<ol>
+  <li>If it takes 5 seconds to run when <code>numbers</code> has 5 elements</li>
+  <li>It will take 10 seconds to run when <code>numbers</code> has 10 elements</li>
+  <li>It will take 15 seconds to run when <code>numbers</code> has 15 elements</li>
+  <li>It will take 10000 seconds to run when <code>numbers</code> has 10000 elements</li>
+</ol>
+
+<p>
+  These kind of algorithms run in <strong>linear time</strong>, or <code>Big-O of O(N)</code>, where N is the number of elements in the algorithm.
+</p>
+
+<h2>Polynomial Time</h2>
+
+<p>
+  Let's take a look at the following code:
+</p>
+
+<pre><code class="ruby">
+sum = 0
+numbers = [1,2,3,4,5]
+
+numbers.each do |n|
+  numbers.each do |m|
+    sum += n + m
+  end
+end
+</code></pre>
+
+<p>
+  This code will take N to the squared time to run:
+</p>
+
+<ol>
+  <li>If it takes 25 seconds to run when <code>numbers</code> has 5 elements</li>
+  <li>It will take 100 seconds to run when <code>numbers</code> has 10 elements</li>
+  <li>It will take 225 seconds to run when <code>numbers</code> has 15 elements</li>
+</ol>
+
+<p>
+  As you can see, it takes N squared time to run the code. That means the code runs in <strong>Big-O of O(N^2) time</strong>.
+</p>
+
+<p>
+  Any algorithm that has a complexity of O(N^a) is said to have <strong>polynomial complexity</strong> or is solvable in <strong>polynomial time</strong>. When you are looping <strong>within</strong> a loop, you are likely to be in <strong><em>polynomial time</em></strong>.
+</p>
+
+<h2>Logarithmic Time Algorithms</h2>
+
+<p>
+  Let's take an example of a phone book. If were to look for the phone number of <strong>John Smith</strong> in a phone book that contains 1,000,000 names, how would we do it?
+</p>
+
+<p>
+  One way to do it would be to open up to the middle, take the 500,000th name, and compare it to "Smith". If the name happens to be "Smith, John", then we were super lucky and found the name we were looking for. However, most likely we won't be lucky, in which case we will determine if "John Smith" is before or fater that name.
+</p>  
+
+<p>
+  If it's after that name, then we can rip out the first half of the phone book, and take the second half of the phone book, go to the middle, and repeat what we just did. If it's before, then we can rip out the second half of the phone book, divide the first half of the phone book in half, and repeat. We do this until we find "John Smith".
+</p>
+
+<p>
+  The cool thing is, if we try to find any name by repeating this procecss, we can find it within 20 iterations. This way of searching is often called <strong>binary search</strong>.
+</p>
+
+<p>
+  These kind of algorithms that take log calculations are in <strong>Big-O of O(log N)</strong> or <strong>logarithmic time</strong>.
+</p>
+
+<h2>Big-O Comparison</h2>
+
+<p>
+  Let's take a look at the graph below. It represents the amount of operations an algorithm will perform relative to the amount of elements the algorithm handles.
+</p>
+
+<%= image_tag 'algorithms/big-o.png', class: 'screenshot image-responsive' %>
+
+<p>
+  As you can see, <strong>O(log N) performs the best</strong>. As we saw with the phone book example, O(log N) algorithms scale really well. On the other hand, O(n!) performs the worst. This is called <strong>factorial time</strong>, which means if N is 5, then it will take 120 operations.
+</p>
+
+<p>
+  In coding interviews, candidates will often be asked to analyze the time complexity of an algorithm. In the next lesson, we'll have you practice analysis.
+</p>  
+
+
+
+
+
+
+
+
+
+
