@@ -1,0 +1,114 @@
+<p>
+  A linked list is a data structure that contains elements that contains a <strong>value</strong> and a <strong>link to the next connecting element</strong>. 
+</p>
+
+<%= image_tag 'algorithms/linked_list.png', class: 'img-responsive screenshot' %>
+
+<p>
+  In the diagram above, you can see that <code>12</code> is connected to <code>99</code>, which is connected to <code>37</code>. The linked list ends at <code>37</code>, since it points to nothing.
+</p>
+
+<p>
+  Each element is often called a <strong>node</strong>. Each node contains a <strong>value</strong> and a <code>next</code> node.
+</p>
+
+<p>
+  A linked list node in Ruby can be represented as such:
+</p>
+
+<pre><code class="ruby">
+class LinkedListNode
+  attr_accessor :value, :next_node
+
+  def initialize(value, next_node)
+    @value = value
+    @next_node = next_node
+  end
+end
+</code></pre>
+
+<p>
+  Connecting linked list nodes can be done as such:
+</p>
+
+<pre><code class="ruby">
+node1 = LinkedListNode.new(37)
+node2 = LinkedListNode.new(99, node1)
+node3 = LinkedListNode.new(12, node2)
+</code></pre>
+
+<h2>Reversing a Linked List</h2>
+
+<p>
+  In this challenge, you are going to implement a method called <code>reverse_linked_list</code> that will reverse the order of the linked list.
+</p>
+
+<p>
+  In other words, a linked list that is connected like this:
+</p>
+
+<pre><code>
+12 -> 99 -> 37
+</code></pre>
+
+<p>
+  Should be ordered like this after the method is run:
+</p>
+
+<pre><code>
+37 -> 99 -> 12
+</code></pre>
+
+<p>
+  This is a common technical interview problem that is quite tricky!
+</p>
+
+<h2>Detecting a Cycle</h2>
+
+<p>
+  In the example above, the node with a value of <code>37</code> is not connected to any node, so the list stops there. However, some linked lists have <strong>cycles</strong>.
+</p>
+
+<pre><code class="ruby">
+node1 = LinkedListNode.new(37)
+node2 = LinkedListNode.new(99, node1)
+node3 = LinkedListNode.new(12, node2)
+node1.next_node = node2
+</code></pre>
+
+<p>
+  Notice how we set the <code>next_node</code> to <code>node2</code>. This means that this linked list has a cycle and will loop infinitely.
+</p>
+
+<p>
+  Once you have figured out how to reverse a linked list, the next step is to write a method called <code>detect_cycle</code> that returns <code>true</code> if there is a cycle in the linked list, and <code>false</code> if there are no cycles.
+</p>
+
+<p>
+  This can be done by implementing Floyd's Cycle Detection algorithm, otherwise known as the tortoise and hare algorithm. Google around to get a gist of the algorithm - it's a fun one to implement!
+</p>  
+
+<h2>Challenge</h2>
+
+<ol>
+  <li>Implement the <code>reverse_linked_list</code> method that reverses the order of the linked list</li>
+  <li>Implement the <code>reverse_linked_list_in_place</code> method that reverses the order of the linked list in place. This means reversing the linked list without creating any new instance of any data structure.</li>
+  <li>Implement the <code>detect_cycle</code> method</li>
+  <li>Make all tests pass</li>
+</ol> 
+
+<h2>Hint</h2>
+
+<p>
+  For the <code>reverse_linked_list</code> method, think about which data structure can be used for <strong>reversing the order</strong> of things (it is covered in a previous lesson).
+</p>
+
+<p>
+  For the <code>reverse_linked_list_in_place</code> method, try drawing out the solution on paper, then convert it into code.
+</p>
+
+<% @submission_form = true %>
+
+
+
+

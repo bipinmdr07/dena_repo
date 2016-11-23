@@ -1,0 +1,68 @@
+<ol>
+  <li>What is the runtime of the below code?</li> 
+<pre><code class="ruby">
+array = [1,2,3,4,5]
+
+sum = 0
+
+array.each do |i|
+  sum += i
+end
+
+puts sum
+</code></pre>
+  
+  <li>What is the runtime of the below code?</li>
+
+<pre><code class="ruby">
+array = [1,2,3,4,5]
+
+array.each do |i|
+  array.each do |j|
+    puts i + j
+  end
+end
+</code></pre>
+
+  <li>What is the runtime of the below code?</li>
+
+<pre><code class="ruby">
+array_1 = [1,2,3,4,5]
+
+array_2 = [100, 101, 102, 103, 104, 105, 106, 107]
+
+array_1.each do |i|
+  array_2.each do |j|
+    puts i + j
+  end
+end
+</code></pre>
+
+
+  <li>What is the runtime of the below code?</li>
+
+<pre><code class="ruby">
+array_1 = [1,2,3,4,5]
+
+array_2 = [100, 101, 102, 103, 104, 105, 106, 107]
+
+array_1.each do |i|
+  array_2.each do |j|
+    1000.times do |l|
+      puts i + j + l
+    end
+  end
+end
+</code></pre>
+
+  <li>Which of the following are equivalent to O(N)?</li>
+
+  <ul>
+    <li>O(N + P) where P < N/2</li>
+    <li>O(2N)</li>
+    <li>O(N + log N)</li>
+    <li>O(N + M)</li>    
+  </ul>
+
+
+</ol>

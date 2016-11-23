@@ -12,14 +12,7 @@
         <div class="track-description">
           <p><%= track.description %></p>
         </div>
-
         
-          <% unless current_user.has_access_to?(track.courses.first.underscore.chomp("_lesson")) %>
-            <button class="btn btn-sm btn-cta-primary btn-track">Locked</button>
-          <% end %>
-        
-
-
         <div class="track-progression">
           <div class="progress">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress %>%; min-width: 4em;">
