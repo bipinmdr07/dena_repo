@@ -109,7 +109,7 @@ class User < ApplicationRecord
 
   def update_access_for_school!
     return unless school?
-    update(admitted: true, ideator_access: true)
+    update(admitted: true)
   end
 
   def send_slack
