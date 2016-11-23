@@ -23,6 +23,8 @@ class RegistrationsController < Devise::RegistrationsController
         redirect_to apply_remote_path && return
       elsif resource.immersive?
         redirect_to apply_immersive_path && return
+      elsif resource.school?
+        redirect_to apply_school_path && return
       end
     end
   end
