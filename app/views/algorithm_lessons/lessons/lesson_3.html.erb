@@ -1,5 +1,5 @@
 <p>
-  To get used to analyzing the time complexities of algorithms, try solving the problems below and submit the answers.
+  To get used to analyzing the time complexities of algorithms, let's try solving some problems together.
 </p>
 
 <ol>
@@ -15,6 +15,10 @@ end
 
 puts sum
 </code></pre>
+
+<p>
+  This is a <strong>O(N)</strong> algorithm, where <code>N</code> is the number of elements in the array. <code>sum += i</code> is a O(1) operation, and since we are performing this <code>N</code> times, the final solution is O(N).
+</p>
   
   <li>What is the runtime of the below code?</li>
 
@@ -27,6 +31,10 @@ array.each do |i|
   end
 end
 </code></pre>
+
+<p>
+  This is a <strong>O(N^2)</strong> algorithm, where <code>N</code> is the number of elements in the array. <code>puts i + j</code> is a O(1) operation, and since we are performing this <code>N^2</code> times, the final solution is O(N^2).
+</p>
 
   <li>What is the runtime of the below code?</li>
 
@@ -42,6 +50,21 @@ array_1.each do |i|
 end
 </code></pre>
 
+<p>
+  This is a <strong>O(ab)</strong> algorithm, where <code>a</code> is the number of elements in <code>array_1</code> and <code>b</code> is the number of elements in <code>array_2</code>. <code>puts i + j</code> is a O(1) operation, and since we are performing this <code>a</code> multiplied by <code>b</code> times, the final solution is O(ab).
+</p>
+
+<h2>Dropping the Constants</h2>
+
+<p>
+  When working with Big-O, <strong>we can drop the constants.</strong> That means that O(N) and O(2N) are considered the same - we can drop the 2. Similarly, O(200 + 3N) is considered the same as O(N), since we can drop 100 and 3.
+</p>
+
+<p>
+  This is because Big-O is mainly concerned about how the algorithm scales as the input increases. <strong>As N gets really big, adding 200 or multiplying by 2 has a decreasingly significant effect.</strong>
+</p>
+
+<hr>
 
   <li>What is the runtime of the below code?</li>
 
@@ -59,6 +82,10 @@ array_1.each do |i|
 end
 </code></pre>
 
+<p>
+  This is a <strong>O(ab)</strong> algorithm, where <code>a</code> is the number of elements in <code>array_1</code> and <code>b</code> is the number of elements in <code>array_2</code>. This is no different than the algorithm we looked at before, since <code>1000</code> units of work is constant.
+</p>
+
   <li>What is the runtime of the below code?</li> 
 <pre><code class="ruby">
 array = [1,2,3,4,5]
@@ -72,6 +99,27 @@ array.each do |i|
 end
 </code></pre>
 
+<p>
+  This is a <strong>O(N)</strong> algorithm, where <code>N</code> is the number of elements in <code>array_</code>. Since we are looping through <code>array</code> two times, it is O(2N). However, we can drop the constants (<code>2</code> in this case), therefore the final solution is O(N).
+</p>
+
+<h2>Drop the Less Significant Terms</h2>
+
+<p>
+  <strong>When working with Big-O, we can drop the less significant terms.</strong> For example, O(N + N^2) is considered to be O(N^2). <strong>This is because less significant terms (in this case N) become even more less significant as N gets bigger.</strong>
+</p>
+
+<p>
+  That means that for example:
+</p>
+
+<ul>
+  <li>O(N^3 + N^2) is O(N^3)</li>
+  <li>O(N log N + log N) is O(N log N)</li>
+</ul>
+
+<hr>
+
   <li>Which of the following are equivalent to O(N)?</li>
 
   <ul>
@@ -80,6 +128,30 @@ end
     <li>O(N + log N)</li>
     <li>O(N + M)</li>    
   </ul>
+
+<p>
+  <strong>Everything except for O(N + M) is equivalent to O(N).</strong>
+</p>
+
+<ul>
+  <li>
+    <strong>O(N + P) where P < N/2</strong> - since <code>P</code> is less than <code>N/2</code>, <code>P</code> is the dominant term. Therefore, we can drop <code>P</code>.
+  </li>
+
+  <li>
+    O(2N) is O(N), since we can drop the constants.
+  </li>
+
+  <li>
+    O(N + log N) is O(N), since O(N) dominates O(log N).
+  </li>
+
+  <li>
+    O(N + M) is not O(N), since N and M are different constants.
+  </li>
+</ul>
+
+<br>
 
   <li>What is the runtime of the below code?</li>
 
@@ -94,6 +166,10 @@ def factorial(n)
   end
 end
 </code></pre>
+
+<p>
+  The time complexity of this algorithm is <strong>O(N)</strong>. If you draw out a tree of the procedures of this algorithm, you will see that the algorithm will run N times.
+</p>
 
   <li>What is the runtime of the below code?</li>
 
@@ -112,6 +188,69 @@ def prime?(n)
   return true
 end
 </code></pre>
+
+
+</ol>
+
+<h2>Challenges</h2>
+
+<p>
+Now that we've taken a look at some sample problems, let's try solving some yourself. Submit the solutions below.
+</p>
+
+<ol>
+  <li>What is the runtime of the below code?</li> 
+<pre><code class="ruby">
+def product(a, b)
+  sum = 0
+
+  0.upto(b) do |i|
+    sum += a
+  end
+
+  return sum
+end
+</code></pre>
+
+  <li>What is the runtime of the below code (let's say <code>a</code> and <code>b</code> are both positive numbers)?</li>
+
+<pre><code class="ruby">
+def div(a, b)
+  count = 0
+  sum = b
+
+  while (sum <= a) do
+    sum += b
+    count += 1
+  end
+
+  return count
+end
+</code></pre>
+
+<li>What is the runtime of the below code?</li> 
+<pre><code class="ruby">
+def mod(a, b)
+  return -1 if b <= 0
+
+  div = a / b
+  return a - div * b
+end
+</code></pre>
+
+<li>What is the runtime of the below code?</li> 
+<pre><code class="ruby">
+def pow(a, b)
+  if b < 0
+    return 0
+  elsif b == 0
+    return 1
+  else
+    return a * pow(a, b - 1)
+  end
+end
+</code></pre>
+
 
 
 </ol>
