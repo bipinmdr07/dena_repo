@@ -1,3 +1,7 @@
+<p>
+  To get used to analyzing the time complexities of algorithms, try solving the problems below and submit the answers.
+</p>
+
 <ol>
   <li>What is the runtime of the below code?</li> 
 <pre><code class="ruby">
@@ -55,6 +59,19 @@ array_1.each do |i|
 end
 </code></pre>
 
+  <li>What is the runtime of the below code?</li> 
+<pre><code class="ruby">
+array = [1,2,3,4,5]
+
+array.each do |i|
+  puts i
+end
+
+array.each do |i|
+  puts i
+end
+</code></pre>
+
   <li>Which of the following are equivalent to O(N)?</li>
 
   <ul>
@@ -64,5 +81,39 @@ end
     <li>O(N + M)</li>    
   </ul>
 
+  <li>What is the runtime of the below code?</li>
+
+<pre><code class="ruby">
+def factorial(n)
+  if n < 0
+    return -1
+  elsif n == 0
+    return 1;
+  else
+    return n * factorial(n - 1)
+  end
+end
+</code></pre>
+
+  <li>What is the runtime of the below code?</li>
+
+<pre><code class="ruby">
+def prime?(n)
+  x = 2
+
+  while x <= Math.sqrt(n) do
+    if (n % x == 0)
+      return false
+    end
+
+    x += 1
+  end
+
+  return true
+end
+</code></pre>
+
 
 </ol>
+
+<% @submission_form = true %>
