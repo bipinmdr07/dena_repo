@@ -163,7 +163,6 @@ validates :photo, :description, :user_id, presence: true
 <pre><code class="ruby">
 class Post &lt; ActiveRecord::Base
   belongs_to :user
-  has_many :comments, dependent: :destroy
   
   mount_uploader :photo, PhotoUploader
 
