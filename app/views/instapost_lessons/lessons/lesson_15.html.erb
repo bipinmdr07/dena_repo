@@ -55,7 +55,7 @@ end
   <code>Post.all</code> will give us all of the posts in the database. In Rails, you can attach <code>.all</code> to a model to get all instances of the object.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   Now, we can use <code>@posts</code> in our <code>index.html.erb</code>, which will give us all instances of the <code>Post</code> object.
@@ -114,7 +114,7 @@ end
   </p>  
 </div>
 
-<%= create_flashcard %>
+
 
 <p>
   Awesome! If you notice though, the oldest post is shown first. In the original Instagram app, newest posts come first. Let's change our app so it behaves like this.
@@ -138,7 +138,7 @@ end
   We can also do the opposite by adding <code>.order('created_at ASC')</code> instead as well.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   If we refresh the page, we see that our posts are ordered from newest to oldest.

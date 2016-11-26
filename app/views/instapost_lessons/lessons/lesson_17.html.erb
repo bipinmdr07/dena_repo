@@ -8,7 +8,7 @@
   In order to prevent this, we're going to use something called <strong>filters</strong>. Take 10 minutes to read <%= link_to 'this article', 'http://guides.rubyonrails.org/action_controller_overview.html#filters' %> on filters, as it explains the topic really well.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   Let's go ahead and implement a <code>before_action</code> filter in our app. What we want to do is to check if the post is owned by the <code>current_user</code>, and if it isn't, we want to redirect them to the <code>root_path</code> so they can't access the <code>edit</code> page.
@@ -45,7 +45,7 @@ end
   We first set a <code>before_action</code> filter in our <code>posts_controller.rb</code>. Using <code>before_action</code> will trigger the method we specified will be run (in this case the <code>is_owner?</code> method) before any of the actions (methods) are triggered.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   The <code>is_owner?</code> method just checks if the post's <code>user</code> and the <code>current_user</code> do not match, and if so, it redirects the user to the <code>root_path</code>.
@@ -67,7 +67,7 @@ before_action :is_owner?, only: [:edit, :update]
   Now if we try to visit an edit page that we aren't supposed to be able to visit, then we will be redirected automatically to the root page.
 </p>
 
-<%= create_flashcard %>
+
 
 <p> 
   Awesome. Now that the code is working, we can work on refactoring the code. Let's take a look at the <code>is_owner?</code> method once again.
@@ -182,7 +182,7 @@ if_this_is_a_true_value ? then_the_result_is_this : else_it_is_this
     Pretty cool right? :)
   </p>
 
-  <%= create_flashcard %>
+  
 
 </div>
 

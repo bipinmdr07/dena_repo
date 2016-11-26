@@ -69,7 +69,7 @@ end
   <strong>Lastly, we need <code>text</code> because we need to store the contents of the comment.</strong>
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   We're still missing something in the migration. Take a second to try and see if you can figure out what it is. 
@@ -104,7 +104,7 @@ current_user.comments.where(post_id: 322)
   In case you might be wondering, <code>current_user.comments</code> automatically queries for <code>Comment</code>s with the <code>user_id</code> of <code>current_user</code>.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   We also need the second line (<code>add_index :comments, :post_id</code>) because we might want to do something like this:
