@@ -100,7 +100,7 @@ end
 </code></pre>
 
 <p>
-  This is a <strong>O(N)</strong> algorithm, where <code>N</code> is the number of elements in <code>array_</code>. Since we are looping through <code>array</code> two times, it is O(2N). However, we can drop the constants (<code>2</code> in this case), therefore the final solution is O(N).
+  This is a <strong>O(N)</strong> algorithm, where <code>N</code> is the number of elements in <code>array</code>. Since we are looping through <code>array</code> two times, it is O(2N). However, we can drop the constants (<code>2</code> in this case), therefore the final solution is O(N).
 </p>
 
 <h2>Drop the Less Significant Terms</h2>
@@ -171,25 +171,6 @@ end
   The time complexity of this algorithm is <strong>O(N)</strong>. If you draw out a tree of the procedures of this algorithm, you will see that the algorithm will run N times.
 </p>
 
-  <li>What is the runtime of the below code?</li>
-
-<pre><code class="ruby">
-def prime?(n)
-  x = 2
-
-  while x <= Math.sqrt(n) do
-    if (n % x == 0)
-      return false
-    end
-
-    x += 1
-  end
-
-  return true
-end
-</code></pre>
-
-
 </ol>
 
 <h2>Challenges</h2>
@@ -248,6 +229,24 @@ def pow(a, b)
   else
     return a * pow(a, b - 1)
   end
+end
+</code></pre>
+
+<li>What is the runtime of the below code?</li>
+
+<pre><code class="ruby">
+def prime?(n)
+  x = 2
+
+  while x <= Math.sqrt(n) do
+    if (n % x == 0)
+      return false
+    end
+
+    x += 1
+  end
+
+  return true
 end
 </code></pre>
 
