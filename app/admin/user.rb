@@ -44,6 +44,7 @@ ActiveAdmin.register User do
       f.input :command_line_access
       f.input :rspec_blog_access  
       f.input :filmster_access
+      f.input :algorithm_access
       f.input :start_date, :as => :datepicker
       f.input :graduation_date, :as => :datepicker
       f.input :remaining_mentor_sessions
