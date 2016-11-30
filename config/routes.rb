@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'apply/school/next-steps', to: 'apply#school_next_steps'
 
   resources :applicants, only: :index
+  get 'admitted_students', to: 'admin_dashboard#admitted_students'
 
   resources :users, only: [] do
     resources :student_admissions, only: :create
