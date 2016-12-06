@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise', git: 'https://github.com/plataformatec/devise.git'
 
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.3.7'
 
 gem 'simple_form'
 gem 'mail_form'

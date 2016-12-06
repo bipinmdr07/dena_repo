@@ -562,7 +562,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
   acts_as_votable (~> 0.10.0)
   bonsai-elasticsearch-rails
-  bootstrap-sass (~> 3.3.6)
+  bootstrap-sass (~> 3.3.7)
   bootstrap-social-rails
   bourbon
   bullet
@@ -623,4 +623,4 @@ DEPENDENCIES
   will_paginate-bootstrap
 
 BUNDLED WITH
-   1.12.5
+   1.13.6
