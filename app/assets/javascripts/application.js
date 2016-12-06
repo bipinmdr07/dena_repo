@@ -21,5 +21,3 @@
 //= require components
 //= require_tree .
 
-
-$('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
