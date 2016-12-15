@@ -26,9 +26,10 @@ class User < ApplicationRecord
   validates :package, presence: true, if: :is_student?
 
   before_save :update_name!
+  after_create :update_access_for_school!
   after_create :send_slack
 
-  enum package: [:remote, :immersive]
+  enum package: [:remote, :immersive, :school]
 
   scope :admitted, -> { where(admitted: true) }
   scope :unadmitted, -> { where(admitted: false) }
@@ -105,6 +106,11 @@ class User < ApplicationRecord
   end
 
   protected
+
+  def update_access_for_school!
+    return unless school?
+    update(admitted: true)
+  end
 
   def send_slack
     Slack.chat_postMessage(text: 'New user ' + first_name + " " + last_name + " has signed up for " + package + "!",

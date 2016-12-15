@@ -1,0 +1,51 @@
+<p>
+	When trying to solve difficult coding challenges, here are some steps that you can follow to logically pursue the solution.
+</p>
+
+<ol>
+	<li><strong>Draw it out</strong></li>
+	<p>
+		The first thing you should do is draw out the problem and visualize it. Once you have visualized the problem, try solving the problem by hand. Don't write any code - just try to see how you would solve it using pen and paper.
+	</p>
+
+	<p>
+		When people hear the sentence "develop an algorithm", <strong>a lot of people tend to derive solutions that are extremely slow</strong>. On the other hand, a lot of people can think of much faster solutions when solving them by hand.
+	</p>
+
+	<p>
+		For example, if we were to create an algorithm to find "Mark Zuckerburg" in a phone book full of a million names, we might think of algorithm that goes through each name in the phone book and compares the first letter with "M", if it is equal, then compare the next letter with "a", and so on and so forth. However, this is an extremely slow algorithm!
+	</p>
+
+	<p>
+		On the other hand, if we were to give a 10 year old the same problem - to find "Mark Zuckerbug" in a phone book - they would find a really efficient way of doing so. They would open up a random page in the phone book, see if the names on that page is earlier or after "Mark Zuckerburg", and repeat until they find "Mark Zuckerburg". This is also called a Binary Search in computer science, which turns out to be a O(log N) algorithm.
+	</p>
+
+	<p>
+		First try to solve the algorithm with your hand, then try to analyze what you did and convert it into code.
+	</p>
+
+	<li><strong>Solve the problem using Brute Force</strong></li>
+	<p>
+		Brute force means solving the problem without thinking about optimizing the performance. Even if the brute force solution is obvious, you should still try to solve it using brute force first. You can then refactor from brute force to a more optimal solution.
+	</p>
+
+	<li><strong>Optimize</strong></li>
+
+	<p>
+		Once you figure out the brute force way to solve the problem, the next step is to optimize it. You can analyze the algorithm using Big-O notation and try to derive a solution that has a better time complexity.
+	</p>
+
+	<p>
+		When you are optimizing, here are some techniques you can follow:
+	</p>
+
+	<ul>
+		<li><strong>Use a hash table</strong> - hash tables are extremely quick when trying to access elements (the time complexity of accessing an element is O(1)). Therefore, you should always try to see if you can incorporate a hash table.</li>
+		<li><strong>Precompute information</strong> - think about ways you can organize the data first to save time later on.</li>
+		<li><strong>Try different examples</strong> - sometimes you can derive a new approach by using a different example.</li>
+		<li><strong>Look for duplications</strong> - try to find code duplication and see how you can eliminate them</li>
+		<li><strong>Look for bottlenecks</strong> - bottlenecks are places where the algorithm is slow. Find them and try to find ways in which you can make them faster.</li>
+	</ul>
+
+
+</ol>

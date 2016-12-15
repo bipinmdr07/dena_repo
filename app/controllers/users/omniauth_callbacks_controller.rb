@@ -23,6 +23,8 @@ class Users::OmniauthCallbacksController < ApplicationController
         redirect_to apply_remote_url
       elsif omniauth_params["immersive"] == "true"
         redirect_to apply_immersive_url
+      elsif omniauth_params["school"] == "true"
+        redirect_to apply_school_url
       end
     end
 

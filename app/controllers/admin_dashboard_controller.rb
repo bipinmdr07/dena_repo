@@ -26,4 +26,9 @@ class AdminDashboardController < ApplicationController
 
   end
 
+  def admitted_students
+    @users = User.admitted.where.not(start_date: nil).order("graduation_date DESC")
+                                 .paginate(page: params[:page], per_page: 50)
+  end
+
 end

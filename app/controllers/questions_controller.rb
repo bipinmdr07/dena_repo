@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(question_params)      
+    if @question.update(question_params)    
       respond_to do |format|        
         format.json { render json: MarkdownParser.new(@question.content).parsed.to_json }
         format.html do

@@ -23,6 +23,8 @@ class RegistrationsController < Devise::RegistrationsController
         redirect_to apply_remote_path && return
       elsif resource.immersive?
         redirect_to apply_immersive_path && return
+      elsif resource.school?
+        redirect_to apply_school_path && return
       end
     end
   end
@@ -32,8 +34,12 @@ class RegistrationsController < Devise::RegistrationsController
   def after_inactive_sign_up_path_for(resource)  
     if resource.remote?      
       apply_remote_next_steps_path
-    else
+    elsif resource.immersive?
       apply_immersive_next_steps_path
+    elsif resource.school?
+      apply_school_next_steps_path
+    else
+      root_path
     end
   end
 

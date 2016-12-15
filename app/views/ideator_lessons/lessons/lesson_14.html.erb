@@ -30,7 +30,7 @@ end
     For example, when the <code>edit</code> method in <code>ideas_controller.rb</code> is triggered, Rails will try to find a file called <code>edit.html.erb</code> inside <code>app/views/ideas</code>. Review <%= link_to 'this lesson', '/ideator_lessons/12#controller_action' %> for more information.
   </p>
 
-  <%= create_flashcard %>
+  
 </div>
 
 <p>
@@ -111,7 +111,7 @@ Idea.find(1)
 Modelname.find(id)
 </code></pre>
 
-  <%= create_flashcard %>
+  
 
   <p>
     Let's go back to this piece of code:
@@ -257,7 +257,7 @@ edit_idea GET    /ideas/:id/edit(.:format) ideas#edit
     For example, when a user makes a <code>GET</code> request to a URL like <code>https://www.techrise-ideator.herokuapp.com/ideas/1/edit</code>, the <code>edit</code> action of the <code>ideas</code> controller is triggered. <code>id</code> is sent to the server as a parameter as well.
   </p>
 
-  <%= create_flashcard %>
+  
 
   <h3>Overview</h3>
 
@@ -275,7 +275,7 @@ end
     Now we know what this means. We are telling Rails to <code>find</code> the <code>Idea</code> with the <code>id</code> of <code>params[:id]</code>, which is a value that is passed in as a parameter, and store it in <code>@idea</code>.
   </p>
 
-  <%= create_flashcard %>
+  
 
 </div>
 

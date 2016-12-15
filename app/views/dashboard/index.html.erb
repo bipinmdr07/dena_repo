@@ -6,6 +6,12 @@
   </p>
 <% end %>
 
+<% unless current_user.admitted || current_user.school? %>
+  <p class="alert alert-success alert-dismissible text-center"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%= link_to 'Click here', 'https://goo.gl/forms/px1Qdlwmx2XmQ5MT2', target: '_blank' %> to join the next batch of the TECHRISE Core Program.
+  </p>
+<% end %>
+
 <%= render "shared/flash_messages" %>
 
 <div class="container">

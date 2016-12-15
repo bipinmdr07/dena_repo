@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require bootstrap-sprockets
 //= require turbolinks
 //= require summernote
 //= require RRSSB
@@ -21,3 +20,4 @@
 //= require react_ujs
 //= require components
 //= require_tree .
+

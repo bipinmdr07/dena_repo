@@ -54,7 +54,7 @@ edit_user_registration GET        /users/edit(.:format)                       de
   Notice how I specified the method in the 'Log Out' link to be <code>:delete</code>. We need to specify that it is performing a <code>DELETE</code> action for it to work properly. By default, links perform a <code>GET</code> request. If we don't specify another HTTP verb, it will perform a <code>GET</code> request by default. Review <%= link_to 'Overview of HTTP Methods', '/mvc_lessons/3' %>.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   If you refresh the page, you'll see the links on the page. Try clicking on them, and they should work. Awesome!
@@ -89,7 +89,7 @@ edit_user_registration GET        /users/edit(.:format)                       de
   Confused about how <code>&lt;%</code> and <code>%&gt;</code> work? Review the Embedded Ruby section of <%= link_to 'this lesson', '/ideator_lessons/12' %>.
 </p>
 
-<%= create_flashcard %>
+
 
 <p>
   There are other devise helper methods that we'll be using throughout this app. If you want to, you can take a look at all of them <%= link_to 'here', 'https://github.com/plataformatec/devise#controller-filters-and-helpers' %>, but we'll go over them together when they do appear.

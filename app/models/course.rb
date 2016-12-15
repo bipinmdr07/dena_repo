@@ -34,6 +34,13 @@ class Course
               description: "Test Driven Development is an industry standard - learn about how to write and run automated software tests and release high quality code.",
               icons: ["landing_page/html.png"],
               timeline: "7 ~ 8",
-              courses: ["RspecBlogLesson"])
+              courses: ["RspecBlogLesson"]),
+
+    Track.new(number: 6,
+              title: "Data Structures and Algorithms", 
+              description: "Data structures and algorithms are a core part of a top engineering team's interview process. Learn and implement the main data structures and algorithms to conquer the screening process.",
+              icons: ["landing_page/html.png"],
+              timeline: "7 ~ 8",
+              courses: ["AlgorithmLesson"]),
   ]
 end

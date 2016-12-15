@@ -93,7 +93,7 @@ puts user
     you will notice that the user does not have the <code>name</code> or <code>photo</code>. Instead, it will just save as a <code>nil</code> value. This is a security measure so that other people can't input false information that will mess up the database. <strong>Unless we whitelist the database columns <code>name</code> and <code>photo</code>, it won't allow us to save it.</strong> You can read more on this topic <%= link_to 'here', 'http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters' %>.
   </p>
 
-  <%= create_flashcard %>
+  
 </div>
 
 <p>
@@ -118,7 +118,7 @@ protected
 def configure_permitted_parameters
   devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :name, :photo) }
   devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:email, :password, :remember_me) }
-  devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :name, :photo) }
+  devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password, :name, :photo) }
 end
 </code></pre>
 

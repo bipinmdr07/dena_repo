@@ -25,3 +25,55 @@
     margin-bottom: 30px;
   }
 }
+
+.explore-programs {
+  .table {
+    background: #fff;    
+    box-shadow: 1px 8px 17px #999999;
+
+    tr:nth-child(odd) {
+       background-color: #f5f5f5;
+    }
+
+    th {
+      font-weight: 400;
+      font-size: 22px;
+      color: #253340;
+    }
+
+    td, th {
+      border: 1px solid #ccc;
+    }
+
+    tr, th {
+      text-align: center;
+    }
+
+    tr td:first-child {
+      text-align: left;
+      color: #253340;
+    }
+
+    tr td:not(:first-child) {
+      font-size: 18px;
+    }
+
+    .fa {
+      color: #ec6952;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .explore-programs {
+    .table {
+      th {
+        font-size: 16px;
+      }
+
+      tr td:not(:first-child) {
+      font-size: 16px;
+    }
+    }
+  }
+}

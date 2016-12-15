@@ -1,6 +1,6 @@
 class AddCourseNameToComment < ActiveRecord::Migration
   def change
-    add_column :comments, :course_name, :string
+    add_column :comments, :course_name, :string if table_exists? :comments
     add_column :submissions, :course_name, :string
     add_column :submissions, :title, :string
     add_column :submissions, :description, :string

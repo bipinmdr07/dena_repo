@@ -1,5 +1,4 @@
 #= require jquery
-#= require bootstrap-sprockets
 #= require summernote
 #= require active_admin/base
 # $(document).ready ->
