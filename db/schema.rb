@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 20161118173819) do
     t.text     "body"
     t.string   "resource_id",   null: false
     t.string   "resource_type", null: false
-    t.integer  "author_id"
     t.string   "author_type"
+    t.integer  "author_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
@@ -30,14 +30,14 @@ ActiveRecord::Schema.define(version: 20161118173819) do
   end
 
   create_table "activities", force: :cascade do |t|
-    t.integer  "trackable_id"
     t.string   "trackable_type"
-    t.integer  "owner_id"
+    t.integer  "trackable_id"
     t.string   "owner_type"
+    t.integer  "owner_id"
     t.string   "key"
     t.text     "parameters"
-    t.integer  "recipient_id"
     t.string   "recipient_type"
+    t.integer  "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
@@ -100,20 +100,6 @@ ActiveRecord::Schema.define(version: 20161118173819) do
     t.index ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.integer  "forum_id"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "lesson"
-    t.integer  "user_id"
-    t.boolean  "resolved",    default: false
-    t.string   "course_name"
-    t.index ["forum_id"], name: "index_comments_on_forum_id", using: :btree
-    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
-  end
-
   create_table "contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -139,12 +125,6 @@ ActiveRecord::Schema.define(version: 20161118173819) do
     t.datetime "updated_at",     null: false
     t.string   "featured_image"
     t.string   "signup_link"
-  end
-
-  create_table "forums", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "name"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -352,26 +332,12 @@ ActiveRecord::Schema.define(version: 20161118173819) do
     t.index ["user_id"], name: "index_student_sessions_on_user_id", using: :btree
   end
 
-  create_table "submission_comments", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "lesson"
-    t.integer  "user_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "submission_id"
-    t.boolean  "approved",      default: false
-    t.index ["submission_id"], name: "index_submission_comments_on_submission_id", using: :btree
-  end
-
   create_table "submission_replies", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "comment_id"
     t.string   "content"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "submission_id"
-    t.index ["submission_id"], name: "index_submission_replies_on_submission_id", using: :btree
-    t.index ["user_id", "submission_id"], name: "index_submission_replies_on_user_id_and_submission_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -392,10 +358,10 @@ ActiveRecord::Schema.define(version: 20161118173819) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
-    t.integer  "taggable_id"
     t.string   "taggable_type"
-    t.integer  "tagger_id"
+    t.integer  "taggable_id"
     t.string   "tagger_type"
+    t.integer  "tagger_id"
     t.string   "context",       limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context", using: :btree
@@ -461,12 +427,12 @@ ActiveRecord::Schema.define(version: 20161118173819) do
     t.datetime "confirmation_sent_at"
     t.string   "mobile_number"
     t.boolean  "bootstrap_access",          default: false
+    t.boolean  "collaboration_access",      default: false,  null: false
+    t.boolean  "skill_academy_access",      default: false,  null: false
     t.string   "provider"
     t.string   "uid"
     t.text     "application_reasons"
     t.integer  "package"
-    t.boolean  "collaboration_access",      default: false,  null: false
-    t.boolean  "skill_academy_access",      default: false,  null: false
     t.boolean  "filmster_access",           default: false,  null: false
     t.string   "phone",                     default: "Null"
     t.boolean  "algorithm_access",          default: false,  null: false
@@ -478,10 +444,10 @@ ActiveRecord::Schema.define(version: 20161118173819) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "votable_id"
     t.string   "votable_type"
-    t.integer  "voter_id"
+    t.integer  "votable_id"
     t.string   "voter_type"
+    t.integer  "voter_id"
     t.boolean  "vote_flag"
     t.string   "vote_scope"
     t.integer  "vote_weight"
