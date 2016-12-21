@@ -162,6 +162,15 @@ ActiveRecord::Schema.define(version: 20161118173819) do
     t.index ["user_id"], name: "index_mentor_sessions_on_user_id", using: :btree
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "lesson_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id", "user_id"], name: "index_notes_on_lesson_id_and_user_id", using: :btree
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer  "recipient_id"
     t.integer  "actor_id"

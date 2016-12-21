@@ -11,7 +11,7 @@
         </div><!--//navbar-header-->
         <div id="navbar-collapse" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <% if user_signed_in? %>                    
+                <% if user_signed_in? %>
 
                     <li class="nav-item page-scroll">
                       <%= link_to 'DASHBOARD', dashboard_path %>
@@ -19,11 +19,11 @@
 
                     <li class="nav-item page-scroll">
                       <%= link_to 'ALL COURSES', courses_path %>
-                    </li>                    
+                    </li>
 
                     <li class="nav-item page-scroll">
                       <%
-                        @due_cards ||= current_user.cards.due                        
+                        @due_cards ||= current_user.cards.due
                       %>
                       <%= link_to "STUDY CARDS <span class='badge nav-badge'>#{@due_cards.count}</span>".html_safe, study_path %>
                     </li>
@@ -42,7 +42,7 @@
                             <% if current_user.start_date && current_user.graduation_date %>
 
                                 <li><a style="text-transform: uppercase;"><%= pluralize ((current_user.graduation_date - DateTime.now)/1.day).to_i, 'DAY' %> UNTIL GRADUATION</a></li>
-                    
+
                             <% elsif !current_user.mentor || !current_user.admin %>
 
                                 <li><a style="text-transform: uppercase;">- DAYS UNTIL GRADUATION</a></li>
@@ -83,7 +83,7 @@
                     </li><!--//dropdown-->
 
 
-                <% else %>                                        
+                <% else %>
 
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Programs <i class="fa fa-angle-down"></i></a>
@@ -94,7 +94,7 @@
 
                             <li>
                               <a href="/remote"><i class="fa fa-code" aria-hidden="true"></i> TECHRISE Core Remote</a>
-                            </li>   
+                            </li>
                         </ul>
                     </li>
 
@@ -111,7 +111,7 @@
 
                             <li>
                               <a href="/support">Support Us</a>
-                            </li>                            
+                            </li>
 
                             <li>
                               <a href="/events">Events</a>
@@ -134,7 +134,7 @@
                 </li>
 
                 <% unless user_signed_in? %>
-                    <li class="nav-item nav-item-cta last"><%= link_to 'APPLY', 'https://goo.gl/forms/px1Qdlwmx2XmQ5MT2', target: '_blank', class: 'btn btn-cta btn-cta-secondary' %></li>
+                    <li class="nav-item nav-item-cta last"><%= link_to 'APPLY', 'https://goo.gl/forms/FnehdNfSaJazYist2', target: '_blank', class: 'btn btn-cta btn-cta-secondary' %></li>
                 <% end %>
 
             </ul><!--//nav-->
